@@ -1,14 +1,15 @@
 import { BsArrowUpRight } from "react-icons/bs";
-import PropertyCard from "./PropertyCard";
 import "swiper/css";
 import "swiper/css/pagination";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 
-const DiscoverSection = () => {
+import PropertyCard from "./cards/PropertyCard";
+
+const Discover = () => {
   return (
-    <div className="bg-whiteLilac h-screen py-[6.5rem]">
+    <div className="bg-whiteLilac h-screen flex justify-center items-center relative">
       <div className="w-[65%] mx-auto flex flex-col gap-14">
         <div className="flex justify-between items-center">
           <div className="space-y-2">
@@ -52,4 +53,4 @@ const DiscoverSection = () => {
   );
 };
 
-export default DiscoverSection;
+export default Discover;

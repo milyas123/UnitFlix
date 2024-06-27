@@ -1,6 +1,4 @@
-import Filters from "./Filters";
-
-const HeroSection = () => {
+const Hero = () => {
   return (
     <>
       <div className="h-screen relative overflow-hidden">
@@ -21,4 +19,4 @@ const HeroSection = () => {
   );
 };
 
-export default HeroSection;
+export default Hero;

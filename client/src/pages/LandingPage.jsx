@@ -1,21 +1,63 @@
+import { useEffect, useState } from "react";
 import Navbar from "@/components/common/Navbar";
-import DiscoverSection from "@/components/landingPage/DiscoverSection";
+import Hero from "@/components/landingPage/Hero";
 import Filters from "@/components/landingPage/Filters";
-import HeroSection from "@/components/landingPage/HeroSection";
-import { Button } from "@/components/ui/button";
+import Discover from "@/components/landingPage/Discover";
+import Help from "@/components/landingPage/Help";
+import AboutUs from "@/components/landingPage/AboutUs";
+import ContactUs from "@/components/landingPage/ContactUs";
+import CTA from "@/components/landingPage/CTA";
+import ExperienceAndFeedback from "@/components/landingPage/ExperienceAndFeedback";
+import Footer from "@/components/common/Footer";
 
 const LandingPage = () => {
+  const [showIcons, setShowIcons] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const discoverElement = document.getElementById("discover-section");
+      if (discoverElement) {
+        const { top } = discoverElement.getBoundingClientRect();
+        setShowIcons(top <= 0);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <>
       <Navbar />
-      <HeroSection />
+      <Hero />
       <div className="absolute w-full z-[100] -bottom-12">
         <Filters />
       </div>
-      <DiscoverSection />
+      <div id="discover-section">
+        <Discover />
+      </div>
+      <Help />
+      <AboutUs />
+      <ContactUs />
+      <CTA />
+      <ExperienceAndFeedback />
+      <Footer />
 
-
-
+      {/* Sticky Icons */}
+      {showIcons && (
+        <div className="fixed top-1/2 right-5 transform -translate-y-1/2 flex flex-col items-center space-y-2">
+          <img
+            src="/assets/imgs/call-vector.png"
+            className="w-[55px] h-[55px]"
+            alt="callcenter-vector"
+          />
+          <img
+            src="/assets/imgs/whatsapp-icon.png"
+            className="w-[50px] h-[50px]"
+            alt="callcenter-vector"
+          />
+        </div>
+      )}
     </>
   );
 };

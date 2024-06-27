@@ -1,6 +1,5 @@
 import { Button } from "../ui/button";
 import { RxDash } from "react-icons/rx";
-
 import { GrPhone } from "react-icons/gr";
 
 const Navbar = () => {
