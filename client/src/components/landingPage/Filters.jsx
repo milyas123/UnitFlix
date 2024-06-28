@@ -143,7 +143,7 @@ const Filters = () => {
         </div>
 
         <div>
-          <Button className="rounded-xl py-7">
+          <Button className="rounded-xl py-7 hover:bg-transparent hover:border-2 hover:border-mirage hover:text-mirage">
             <IoIosSearch size={20} /> Search
           </Button>
         </div>

@@ -115,7 +115,7 @@ const Footer = () => {
                   size={20}
                 />
               </div>
-              <Button className="rounded-md bg-sunriseOrange">Submit</Button>
+              <Button className="rounded-md bg-sunriseOrange hover:border-2 hover:border-sunriseOrange hover:text-sunriseOrange hover:bg-transparent">Submit</Button>
             </form>
           </div>
         </div>
