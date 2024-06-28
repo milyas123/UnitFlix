@@ -18,7 +18,7 @@ const Discover = () => {
               Discover Trending Projects
             </h1>
             <p className="text-[16px] text-smokeyGrey">
-              Aliquam lacinia diam quis lacus euismod
+              Aliquam lacinia diam quis lacus euismod 
             </p>
           </div>
 

@@ -29,7 +29,7 @@ const ContactForm = () => {
           size={20}
         />
       </div>
-      <Button className="rounded-md">Submit</Button>
+      <Button className="rounded-md hover:bg-transparent hover:border-2 hover:border-mirage hover:text-mirage">Submit</Button>
     </form>
   );
 };
