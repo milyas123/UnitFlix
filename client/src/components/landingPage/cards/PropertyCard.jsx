@@ -20,7 +20,7 @@ const PropertyCard = () => {
             Starting From <br /> AED 2,000,000
           </p>
           <div className="flex justify-center mt-4">
-            <Button className="bg-mirage text-white font-semibold py-2 px-4 rounded-lg">
+            <Button className="font-semibold py-2 px-4 rounded-lg">
               Register Your Interest
             </Button>
           </div>

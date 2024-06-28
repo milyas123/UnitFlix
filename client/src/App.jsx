@@ -7,6 +7,7 @@ import Layout from "./Layout";
 
 // Website Pages
 import LandingPage from "./pages/LandingPage";
+import PropertiesForSale from "./pages/PropertiesForSale";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
+          <Route exact path="/properties-for-sale" element={<PropertiesForSale />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer

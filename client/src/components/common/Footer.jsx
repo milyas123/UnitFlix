@@ -29,7 +29,7 @@ const Footer = () => {
 
             <div className="flex items-center gap-10 px-2.5">
               <div className="space-y-1.5">
-                <p className="text-[14px] text-slate font-regular">
+                <p className="text-[14px] text-slate font-regular whitespace-nowrap">
                   Total Free Customer Care
                 </p>
                 <p className="font-semibold text-[15px]">+(088) 123 456 789</p>
@@ -48,24 +48,24 @@ const Footer = () => {
                 Follow us on social media
               </p>
               <div className="flex items-center gap-8">
-                <FaFacebookF size={15} />
-                <FaTwitter size={15} />
-                <FaInstagram size={15} />
-                <FaLinkedinIn size={15} />
+                <FaFacebookF size={15} className="cursor-pointer" />
+                <FaTwitter size={15} className="cursor-pointer" />
+                <FaInstagram size={15} className="cursor-pointer" />
+                <FaLinkedinIn size={15} className="cursor-pointer" />
               </div>
             </div>
           </div>
 
           <div className="w-full flex flex-col items-center">
-            <h4 className="font-semibold text-[15px] mb-4">Quick Links</h4>
             <div className="space-y-4">
-              <p className="text-[14px] text-slate">Terms of Use</p>
-              <p className="text-[14px] text-slate">Privacy Policy</p>
-              <p className="text-[14px] text-slate">Pricing Plans</p>
-              <p className="text-[14px] text-slate">Our Services</p>
-              <p className="text-[14px] text-slate">Contact</p>
-              <p className="text-[14px] text-slate">Careers</p>
-              <p className="text-[14px] text-slate">FAQs</p>
+              <h4 className="font-semibold text-[15px]">Quick Links</h4>
+              <p className="text-[14px] text-slate cursor-pointer">Terms of Use</p>
+              <p className="text-[14px] text-slate cursor-pointer">Privacy Policy</p>
+              <p className="text-[14px] text-slate cursor-pointer">Pricing Plans</p>
+              <p className="text-[14px] text-slate cursor-pointer">Our Services</p>
+              <p className="text-[14px] text-slate cursor-pointer">Contact</p>
+              <p className="text-[14px] text-slate cursor-pointer">Careers</p>
+              <p className="text-[14px] text-slate cursor-pointer">FAQs</p>
             </div>
           </div>
 
@@ -115,7 +115,7 @@ const Footer = () => {
                   size={20}
                 />
               </div>
-              <Button className="rounded-md bg-sunriseOrange text-white">Submit</Button>
+              <Button className="rounded-md bg-sunriseOrange">Submit</Button>
             </form>
           </div>
         </div>

@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 
 import PropertyCard from "./cards/PropertyCard";
+import { Link } from "react-router-dom";
 
 const Discover = () => {
   return (
@@ -21,12 +22,12 @@ const Discover = () => {
             </p>
           </div>
 
-          <div className="flex items-center gap-1.5">
+          <Link to="/properties-for-sale" className="flex items-center gap-1.5">
             <p className="text-mirage font-semibold text-[15px]">
               See All Properties
             </p>
             <BsArrowUpRight size={20} />
-          </div>
+          </Link>
         </div>
 
         <div>
@@ -40,6 +41,9 @@ const Discover = () => {
             modules={[Pagination]}
             pagination={{ clickable: true }}
             className="h-[500px]"
+            style={{
+              "--swiper-pagination-color": "#181a20"
+            }}
           >
             {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => (
               <SwiperSlide key={item}>

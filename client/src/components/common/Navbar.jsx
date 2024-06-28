@@ -13,19 +13,19 @@ const Navbar = () => {
             alt="company-logo"
           />
           <div className="flex flex-row gap-x-5">
-            <Button className="bg-white text-white bg-opacity-10 hover:bg-white hover:text-black">
+            <Button className="bg-white text-white bg-opacity-10 hover:bg-white hover:text-mirage">
               Buy <RxDash size={25} />
             </Button>
-            <Button className="bg-white text-white bg-opacity-10 hover:bg-white hover:text-black">
+            <Button className="bg-white text-white bg-opacity-10 hover:bg-white hover:text-mirage">
               Sell <RxDash size={25} />
             </Button>
-            <Button className="bg-white text-white bg-opacity-10 hover:bg-white hover:text-black">
+            <Button className="bg-white text-white bg-opacity-10 hover:bg-white hover:text-mirage">
               Rent <RxDash size={25} />
             </Button>
-            <Button className="bg-white text-white bg-opacity-10 hover:bg-white hover:text-black">
+            <Button className="bg-white text-white bg-opacity-10 hover:bg-white hover:text-mirage">
               Manage <RxDash size={25} />
             </Button>
-            <Button className="bg-white text-white bg-opacity-10 hover:bg-white hover:text-black">
+            <Button className="bg-white text-white bg-opacity-10 hover:bg-white hover:text-mirage">
               About Us <RxDash size={25} />
             </Button>
           </div>

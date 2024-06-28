@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "../ui/button";
 import { BsArrowUpRight } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const CTA = () => {
   return (
@@ -19,12 +20,14 @@ const CTA = () => {
           Homez provides an awesome solution!
         </h2>
         <div className="flex items-center gap-5">
-          <Button className="rounded-lg bg-mirage text-white gap-2 py-6">
+          <Button className="rounded-lg gap-2 py-6">
             Submit Property <BsArrowUpRight size={20} />
           </Button>
-          <Button className="rounded-lg bg-white text-mirage hover:text-white gap-2 py-6">
-            Browse Properties <BsArrowUpRight size={20} />
-          </Button>
+          <Link to="/properties-for-sale">
+            <Button className="rounded-lg bg-white text-mirage hover:text-white gap-2 py-6">
+              Browse Properties <BsArrowUpRight size={20} />
+            </Button>
+          </Link>
         </div>
       </div>
     </div>
