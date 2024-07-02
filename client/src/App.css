@@ -32,3 +32,9 @@ input[type="range"]::-ms-thumb {
 .animated-icon {
   animation: scaleIn 0.5s ease-in-out;
 }
+
+.custom-swiper-pagination .swiper-pagination {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 20px;
+}

@@ -22,6 +22,7 @@ module.exports = {
       },
       colors: {
         mirage: "#181A20",
+        mirageLight: "#23262E",
         btnHoverColor: "#121418",
         smokeyGrey: "#717171",
         whiteLilac: "#F7F7F7",
