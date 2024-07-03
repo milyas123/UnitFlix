@@ -38,3 +38,7 @@ input[type="range"]::-ms-thumb {
   justify-content: flex-end;
   padding-right: 20px;
 }
+
+.shadow-right {
+  box-shadow: 5px 0px 15px rgba(0, 0, 0, 0.1);
+}

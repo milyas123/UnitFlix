@@ -8,7 +8,7 @@ const buttonItems = [
   { name: "Sell", link: "/sell" },
   { name: "Rent", link: "/rent" },
   { name: "Manage", link: "/manage-properties" },
-  { name: "About Us", link: "/about" },
+  { name: "About Us", link: "/about-us" },
 ];
 
 const Navbar = () => {

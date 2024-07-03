@@ -11,6 +11,7 @@ import PropertiesForSale from "./pages/PropertiesForSale";
 import ManageProperties from "./pages/ManageProperties";
 import ContactUs from "./pages/ContactUs";
 import PropertyDetails from "./pages/PropertyDetails";
+import AboutUs from "./pages/AboutUs";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/manage-properties" element={<ManageProperties />} />
           <Route path="/property-details" element={<PropertyDetails />} />
           <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/about-us" element={<AboutUs />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer
