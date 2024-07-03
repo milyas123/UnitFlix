@@ -1,6 +1,6 @@
 import { Button } from "../../ui/button";
 
-const PropertyCard = () => {
+const ProjectCard = () => {
   return (
     <div className="max-w-sm rounded-xl shadow-lg">
       <div className="relative">
@@ -30,4 +30,4 @@ const PropertyCard = () => {
   );
 };
 
-export default PropertyCard;
+export default ProjectCard;

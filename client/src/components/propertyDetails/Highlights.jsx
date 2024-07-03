@@ -35,7 +35,7 @@ const highlights = [
 
 const Highlights = () => {
   return (
-    <div className="mt-12 w-[75%]">
+    <div className="mt-12">
       <h1 className="font-semibold text-[24px] mb-4">Key Highlights</h1>
       <div className="flex flex-wrap gap-4">
         {highlights.map((highlight, index) => (

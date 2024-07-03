@@ -41,7 +41,7 @@ const amenitiesData = [
 
 const FeaturesAndAmenities = () => {
   return (
-    <div className="mt-24 w-[75%]">
+    <div className="mt-24">
       <h1 className="font-semibold text-[24px]">Features & Amenities</h1>
       <div className="flex flex-wrap gap-6 mt-4">
         {amenitiesData.map((amenity, index) => (

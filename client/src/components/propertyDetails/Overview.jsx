@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 
 const Overview = () => {
   return (
-    <div className="w-[75%] mt-16">
+    <div className="mt-16">
       <div className="pb-3 border-b-2 w-full mb-4">
         <h1 className="font-semibold text-[24px]">Overview</h1>
       </div>

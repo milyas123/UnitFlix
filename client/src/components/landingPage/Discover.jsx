@@ -5,7 +5,7 @@ import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 
-import PropertyCard from "./cards/PropertyCard";
+import ProjectCard from "./cards/ProjectCard";
 import { Link } from "react-router-dom";
 
 const Discover = () => {
@@ -18,7 +18,7 @@ const Discover = () => {
               Discover Trending Projects
             </h1>
             <p className="text-[16px] text-smokeyGrey">
-              Aliquam lacinia diam quis lacus euismod 
+              Aliquam lacinia diam quis lacus euismod
             </p>
           </div>
 
@@ -42,12 +42,12 @@ const Discover = () => {
             pagination={{ clickable: true }}
             className="h-[500px]"
             style={{
-              "--swiper-pagination-color": "#181a20"
+              "--swiper-pagination-color": "#181a20",
             }}
           >
             {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => (
               <SwiperSlide key={item}>
-                <PropertyCard />
+                <ProjectCard />
               </SwiperSlide>
             ))}
           </Swiper>

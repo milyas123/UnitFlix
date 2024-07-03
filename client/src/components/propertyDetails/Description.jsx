@@ -10,7 +10,7 @@ import { GiResize } from "react-icons/gi";
 
 const Description = () => {
   return (
-    <div className="w-[75%] mt-16 flex flex-col gap-y-5">
+    <div className="flex flex-col gap-y-5">
       <div className="flex justify-between items-end">
         <div>
           <div className="flex items-center gap-x-2.5">
