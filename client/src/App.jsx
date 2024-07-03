@@ -10,6 +10,7 @@ import LandingPage from "./pages/LandingPage";
 import PropertiesForSale from "./pages/PropertiesForSale";
 import ManageProperties from "./pages/ManageProperties";
 import ContactUs from "./pages/ContactUs";
+import PropertyDetails from "./pages/PropertyDetails";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route exact path="/" element={<LandingPage />} />
           <Route path="/properties-for-sale" element={<PropertiesForSale />} />
           <Route path="/manage-properties" element={<ManageProperties />} />
+          <Route path="/property-details" element={<PropertyDetails />} />
           <Route path="/contact-us" element={<ContactUs />} />
         </Routes>
       </BrowserRouter>
