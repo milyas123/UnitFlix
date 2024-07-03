@@ -6,8 +6,8 @@ const SimilarProjects = () => {
       <h1 className="font-semibold text-[24px]">
         Similar Projects from Developer
       </h1>
-      <div className="mt-5 grid grid-cols-4 gap-4">
-        {[1, 2, 3, 4].map((item) => (
+      <div className="mt-5 flex justify-between">
+        {[1, 2, 3].map((item) => (
           <ProjectCard key={item} />
         ))}
       </div>

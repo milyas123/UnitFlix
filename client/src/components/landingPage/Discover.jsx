@@ -22,7 +22,7 @@ const Discover = () => {
             </p>
           </div>
 
-          <Link to="/properties-for-sale" className="flex items-center gap-1.5">
+          <Link to="/properties-for-sale" className="flex items-center gap-1.5 border-b-2 border-transparent hover:border-mirage transition duration-200 ease-in-out">
             <p className="text-mirage font-semibold text-[15px]">
               See All Properties
             </p>

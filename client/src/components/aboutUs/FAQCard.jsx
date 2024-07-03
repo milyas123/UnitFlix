@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IoChevronDown, IoChevronUp } from "react-icons/io5";
+import { IoChevronDown } from "react-icons/io5";
 
 const FAQCard = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,11 +15,11 @@ const FAQCard = () => {
         onClick={toggleOpen}
       >
         How do you guys handle the property management?
-        <IoChevronUp size={23} className={`transition duration-300 ease-in-out ${isOpen && "rotate-180"}`} /> 
+        <IoChevronDown size={23} className={`transition duration-300 ease-in-out ${isOpen && "rotate-180"}`} /> 
       </h1>
 
       <div 
-        className={`text-[16px] overflow-hidden transition-max-height duration-500 ease-in-out ${
+        className={`text-[16px] overflow-hidden transition-max-height duration-300 ease-in-out ${
           isOpen ? "max-h-screen" : "max-h-0"
         }`}
       >

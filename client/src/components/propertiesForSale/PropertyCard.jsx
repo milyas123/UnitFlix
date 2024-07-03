@@ -12,7 +12,7 @@ import { GiResize } from "react-icons/gi";
 
 const PropertyCard = () => {
   return (
-    <div className="w-[350px] h-[460px] rounded-lg overflow-hidden border border-slate">
+    <div className="w-[340px] h-[460px] rounded-lg overflow-hidden border border-slate">
       <div>
         <Swiper
           slidesPerView={1}

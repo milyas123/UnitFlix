@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button } from "../ui/button";
 import { IoIosSearch } from "react-icons/io";
 import { formatCurrency } from "@/lib/utils";
-import Dropdown from "../common/Dropdown"; 
+import Dropdown from "../common/Dropdown";
 
 const tabs = ["All", "For Sale", "For Rent"];
 const lookingForOptions = ["House", "Apartment", "Condo"];
@@ -25,8 +25,7 @@ const Filters = () => {
     const onMouseMove = (e) => {
       const slider = e.target.closest(".slider-container");
       const rect = slider.getBoundingClientRect();
-      const newValue =
-        ((e.clientX - rect.left) / rect.width) * 100;
+      const newValue = ((e.clientX - rect.left) / rect.width) * 100;
       if (index === 0 && newValue >= 0 && newValue <= value[1]) {
         handleSliderChange(0, Math.round(newValue));
       } else if (index === 1 && newValue >= value[0] && newValue <= 100) {
@@ -65,7 +64,11 @@ const Filters = () => {
       <div className="bg-white p-5 flex justify-between rounded-b-xl rounded-r-xl shadow">
         <div className="text-[16px] space-y-2.5">
           <p className="font-semibold text-mirage">Search</p>
-          <input type="text" placeholder="Enter Keywords" className="w-full border border-gray-300 rounded-md p-2" />
+          <input
+            type="text"
+            placeholder="Enter Keywords"
+            className="w-full border-b-2 border-transparent focus:border-b-[#ABABAB] focus:outline-none"
+          />
         </div>
         <div className="text-[16px] space-y-2.5">
           <p className="font-semibold text-mirage">Looking For</p>
@@ -127,7 +130,9 @@ const Filters = () => {
                 zIndex: "1",
               }}
             >
-              {formatCurrency(minValue + (value[0] / 100) * (maxValue - minValue))}
+              {formatCurrency(
+                minValue + (value[0] / 100) * (maxValue - minValue)
+              )}
             </div>
             <div
               className="mt-9 absolute bg-white text-black rounded-md shadow-md p-2 text-sm whitespace-nowrap"
@@ -137,7 +142,9 @@ const Filters = () => {
                 zIndex: "1",
               }}
             >
-              {formatCurrency(minValue + (value[1] / 100) * (maxValue - minValue))}
+              {formatCurrency(
+                minValue + (value[1] / 100) * (maxValue - minValue)
+              )}
             </div>
           </div>
         </div>

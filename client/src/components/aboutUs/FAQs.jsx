@@ -2,7 +2,7 @@ import FAQCard from "./FAQCard";
 
 const FAQs = () => {
   return (
-    <div className="h-screen flex items-center justify-center">
+    <div className="mt-5 mb-64 flex items-center justify-center">
       <div>
         <div className="text-center space-y-2">
           <h1 className="font-semibold text-[40px]">

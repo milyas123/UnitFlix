@@ -29,16 +29,46 @@ input[type="range"]::-ms-thumb {
   }
 }
 
-.animated-icon {
-  animation: scaleIn 0.5s ease-in-out;
+@keyframes scaleOut {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0);
+  }
 }
 
+.animated-icon {
+  transition: transform 0.5s ease-in-out;
+}
+
+.show-icons {
+  animation: scaleIn 0.5s ease-in-out forwards;
+}
+
+.hide-icons {
+  animation: scaleOut 0.5s ease-in-out forwards;
+}
+/* Defining dots position on the Manage properties page */
 .custom-swiper-pagination .swiper-pagination {
   display: flex;
   justify-content: flex-end;
   padding-right: 20px;
 }
 
+/* Applying shadow on the card in About us page */
 .shadow-right {
   box-shadow: 5px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Removing arrows when input type is number */
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
 }

@@ -2,14 +2,14 @@ import { Button } from "../../ui/button";
 
 const ProjectCard = () => {
   return (
-    <div className="max-w-sm rounded-xl shadow-lg">
+    <div className="w-[320px] rounded-xl shadow-lg">
       <div className="relative">
         <img
           className="w-full h-[310px] rounded-xl object-cover"
           src="/assets/imgs/discover.jpg"
           alt="Dubai South"
         />
-        <div className="absolute z-[300] -bottom-24 left-7 right-7 bg-white p-4 rounded-xl shadow-lg">
+        <div className="absolute z-[300] -bottom-24 left-6 right-6 bg-white p-3.5 rounded-xl shadow-lg">
           <h2 className="text-center font-semibold text-xl mb-2">
             Azizi Venice at Dubai South
           </h2>

@@ -43,6 +43,9 @@ const ExperienceAndFeedback = () => {
             modules={[Pagination]}
             pagination={{ clickable: true }}
             className="h-[400px] w-[400px]"
+            style={{
+              "--swiper-pagination-color": "#181a20",
+            }}
           >
             {[1, 2, 3, 4, 5, 6].map((item) => (
               <SwiperSlide key={item}>
@@ -51,7 +54,7 @@ const ExperienceAndFeedback = () => {
             ))}
           </Swiper>
         </div>
-      </div>
+      </div> 
     </div>
   );
 };

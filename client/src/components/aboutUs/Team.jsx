@@ -12,7 +12,7 @@ const Team = () => {
           </p>
         </div>
 
-        <div className="mt-8 flex flex-wrap justify-between gap-12">
+        <div className="mt-8 grid grid-cols-4 gap-6">
           {[1, 2, 3, 4].map((item) => (
             <MemberCard key={item} number={item} />
           ))}

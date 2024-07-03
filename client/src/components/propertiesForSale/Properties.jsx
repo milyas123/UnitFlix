@@ -52,7 +52,7 @@ const Properties = () => {
             <span className="text-slate text-[16px] font-light">(308)</span>
           </p>
 
-          <div className="mt-3 flex flex-wrap justify-between gap-y-7">
+          <div className="mt-3 flex flex-wrap justify-between gap-y-8">
             <PropertyCard />
             <PropertyCard />
             <PropertyCard />

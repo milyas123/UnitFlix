@@ -12,13 +12,20 @@ import Footer from "@/components/common/Footer";
 
 const LandingPage = () => {
   const [showIcons, setShowIcons] = useState(false);
+  const [iconsClass, setIconsClass] = useState("hide-icons");
 
   useEffect(() => {
     const handleScroll = () => {
       const discoverElement = document.getElementById("discover-section");
       if (discoverElement) {
         const { top } = discoverElement.getBoundingClientRect();
-        setShowIcons(top <= 0);
+        if (top <= 0) {
+          setIconsClass("show-icons");
+          setShowIcons(true);
+        } else {
+          setIconsClass("hide-icons");
+          setShowIcons(false);
+        }
       }
     };
 
@@ -52,22 +59,24 @@ const LandingPage = () => {
       <Footer />
 
       {/* Sticky Icons */}
-      {showIcons && (
-        <div className="fixed top-1/2 right-5 transform -translate-y-1/2 flex flex-col items-center space-y-2">
-          <img
-            src="/assets/imgs/call-vector.png"
-            className="w-[55px] h-[55px] animated-icon cursor-pointer"
-            alt="callcenter-vector"
-            onClick={handleCallClick}
-          />
-          <img
-            src="/assets/imgs/whatsapp-icon.png"
-            className="w-[50px] h-[50px] animated-icon cursor-pointer"
-            alt="whatsapp-icon"
-            onClick={handleWhatsappClick}
-          />
-        </div>
-      )}
+      <div
+        className={`fixed top-1/2 right-5 transform -translate-y-1/2 flex flex-col items-center space-y-2 ${
+          showIcons ? "show-icons" : "hide-icons"
+        }`}
+      >
+        <img
+          src="/assets/imgs/call-vector.png"
+          className={`w-[55px] h-[55px] animated-icon cursor-pointer`}
+          alt="callcenter-vector"
+          onClick={handleCallClick}
+        />
+        <img
+          src="/assets/imgs/whatsapp-icon.png"
+          className={`w-[50px] h-[50px] animated-icon cursor-pointer`}
+          alt="whatsapp-icon"
+          onClick={handleWhatsappClick}
+        />
+      </div>
     </>
   );
 };

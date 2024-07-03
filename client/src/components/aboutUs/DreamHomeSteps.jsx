@@ -2,7 +2,7 @@ import StepCard from "./StepCard";
 
 const DreamHomeSteps = () => {
   return (
-    <div className="">
+    <div className="my-14">
       <h1 className="font-semibold text-[40px] text-center">
         Stress Free Steps to <br />
         Your Dream Home
