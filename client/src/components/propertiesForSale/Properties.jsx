@@ -2,6 +2,7 @@ import { BsArrowUpRight } from "react-icons/bs";
 import { Button } from "../ui/button";
 import InfoList from "./InfoList";
 import PropertyCard from "./PropertyCard";
+import { FiChevronDown } from "react-icons/fi";
 
 const locationData = [
   { name: "Al Reem Island", count: "10,635" },
@@ -47,18 +48,20 @@ const Properties = () => {
         </div>
 
         <div className="w-[80%] ms-auto overflow-hidden">
-          <p className="bg-whiteLilac font-semibold text-[20px] whitespace-nowrap py-7 px-6 rounded-xl border border-slate">
-            Showing Property Results
-            <span className="text-slate text-[16px] font-light">(308)</span>
-          </p>
+          <div className="bg-whiteLilac whitespace-nowrap py-7 px-6 rounded-xl border border-slate flex justify-between items-center">
+            <p className="font-semibold text-[20px]">
+              Showing Property Results
+              <span className="text-slate text-[16px] font-light">(308)</span>
+            </p>
+            <p className="w-[200px] bg-white px-3 py-2.5 rounded-md border-2 text-mirage flex justify-between items-center">
+              Sort By <FiChevronDown />
+            </p>
+          </div>
 
-          <div className="mt-3 flex flex-wrap justify-between gap-y-8">
-            <PropertyCard />
-            <PropertyCard />
-            <PropertyCard />
-            <PropertyCard />
-            <PropertyCard />
-            <PropertyCard />
+          <div className="mt-3 flex flex-wrap justify-center gap-5">
+            {[1, 2, 3, 4, 5, 6].map((item) => (
+              <PropertyCard key={item} />
+            ))}
           </div>
         </div>
       </div>

@@ -11,6 +11,15 @@ import { Textarea } from "../ui/textarea";
 import { UserRound, Mail, Phone } from "lucide-react";
 import { BiMessageSquareDetail } from "react-icons/bi";
 
+const quickLinks = [
+  "Terms of Use",
+  "Privacy Policy",
+  "Our Services",
+  "Contact",
+  "Careers",
+  "FAQs",
+];
+
 const Footer = () => {
   return (
     <footer>
@@ -48,10 +57,18 @@ const Footer = () => {
                 Follow us on social media
               </p>
               <div className="flex items-center gap-8">
-                <FaFacebookF size={15} className="cursor-pointer" />
-                <FaTwitter size={15} className="cursor-pointer" />
-                <FaInstagram size={15} className="cursor-pointer" />
-                <FaLinkedinIn size={15} className="cursor-pointer" />
+                <div className="bg-mirageLight hover:bg-white hover:text-mirage rounded-full p-2 cursor-pointer transition-all duration-300 ease-in-out">
+                  <FaFacebookF size={15} className="cursor-pointer" />
+                </div>
+                <div className="bg-mirageLight hover:bg-white hover:text-mirage rounded-full p-2 cursor-pointer transition-all duration-300 ease-in-out">
+                  <FaTwitter size={15} className="cursor-pointer" />
+                </div>
+                <div className="bg-mirageLight hover:bg-white hover:text-mirage rounded-full p-2 cursor-pointer transition-all duration-300 ease-in-out">
+                  <FaInstagram size={15} className="cursor-pointer" />
+                </div>
+                <div className="bg-mirageLight hover:bg-white hover:text-mirage rounded-full p-2 cursor-pointer transition-all duration-300 ease-in-out">
+                  <FaLinkedinIn size={15} className="cursor-pointer" />
+                </div>
               </div>
             </div>
           </div>
@@ -59,13 +76,14 @@ const Footer = () => {
           <div className="w-full flex flex-col items-center">
             <div className="space-y-4">
               <h4 className="font-semibold text-[15px]">Quick Links</h4>
-              <p className="text-[14px] text-slate cursor-pointer">Terms of Use</p>
-              <p className="text-[14px] text-slate cursor-pointer">Privacy Policy</p>
-              <p className="text-[14px] text-slate cursor-pointer">Pricing Plans</p>
-              <p className="text-[14px] text-slate cursor-pointer">Our Services</p>
-              <p className="text-[14px] text-slate cursor-pointer">Contact</p>
-              <p className="text-[14px] text-slate cursor-pointer">Careers</p>
-              <p className="text-[14px] text-slate cursor-pointer">FAQs</p>
+              {quickLinks.map((quickLink, index) => (
+                <p
+                  key={index}
+                  className="text-[14px] text-slate cursor-pointer hover:text-white transition-all duration-200 ease-in-out"
+                >
+                  {quickLink}
+                </p>
+              ))}
             </div>
           </div>
 
@@ -79,10 +97,7 @@ const Footer = () => {
                   placeholder="Enter your name"
                   className="bg-white bg-opacity-10 text-grey placeholder:text-grey"
                 />
-                <UserRound
-                  className="absolute left-3 text-grey"
-                  size={20}
-                />
+                <UserRound className="absolute left-3 text-grey" size={20} />
               </div>
               <div className="relative flex items-center">
                 <Input
@@ -91,10 +106,7 @@ const Footer = () => {
                   placeholder="example@domain.com"
                   className="bg-white bg-opacity-10 text-grey placeholder:text-grey"
                 />
-                <Mail
-                  className="absolute left-3 text-grey"
-                  size={20}
-                />
+                <Mail className="absolute left-3 text-grey" size={20} />
               </div>
               <div className="relative flex items-center">
                 <Input
@@ -103,19 +115,21 @@ const Footer = () => {
                   placeholder="(+92) 311 7995274"
                   className="bg-white bg-opacity-10 text-grey placeholder:text-grey"
                 />
-                <Phone
-                  className="absolute left-3 text-grey"
-                  size={20}
-                />
+                <Phone className="absolute left-3 text-grey" size={20} />
               </div>
               <div className="relative flex items-center">
-                <Textarea placeholder="I want to buy/rent..." className="bg-white bg-opacity-10 text-grey placeholder:text-grey" />
+                <Textarea
+                  placeholder="I want to buy/rent..."
+                  className="bg-white bg-opacity-10 text-grey placeholder:text-grey"
+                />
                 <BiMessageSquareDetail
                   className="absolute top-3 left-3 text-grey"
                   size={20}
                 />
               </div>
-              <Button className="rounded-md bg-sunriseOrange hover:border-2 hover:border-sunriseOrange hover:text-sunriseOrange hover:bg-transparent">Submit</Button>
+              <Button className="rounded-md bg-sunriseOrange hover:border-2 hover:border-sunriseOrange hover:text-sunriseOrange hover:bg-transparent">
+                Submit
+              </Button>
             </form>
           </div>
         </div>

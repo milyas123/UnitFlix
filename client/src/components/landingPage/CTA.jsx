@@ -20,9 +20,11 @@ const CTA = () => {
           Homez provides an awesome solution!
         </h2>
         <div className="flex items-center gap-5">
-          <Button className="rounded-lg gap-2 py-6">
-            Submit Property <BsArrowUpRight size={20} />
-          </Button>
+          <Link to="/add-property">
+            <Button className="rounded-lg gap-2 py-6">
+              Submit Property <BsArrowUpRight size={20} />
+            </Button>
+          </Link>
           <Link to="/properties-for-sale">
             <Button className="rounded-lg bg-white text-mirage hover:text-white border-white hover:bg-transparent gap-2 py-6">
               Browse Properties <BsArrowUpRight size={20} />

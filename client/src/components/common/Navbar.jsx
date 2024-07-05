@@ -16,11 +16,13 @@ const Navbar = () => {
     <div className="h-[5.5rem] bg-black bg-opacity-20 absolute z-[100] top-0 w-full">
       <div className="w-[80%] mx-auto flex justify-between items-center">
         <div className="flex items-center gap-24">
-          <img
-            src="/assets/imgs/Logo.png"
-            className="w-[82px] h-[80px]"
-            alt="company-logo"
-          />
+          <Link to="/">
+            <img
+              src="/assets/imgs/Logo.png"
+              className="w-[82px] h-[80px]"
+              alt="company-logo"
+            />
+          </Link>
           <div className="flex flex-row gap-x-5">
             {buttonItems.map((item, index) => (
               <Link to={item.link} key={index}>
