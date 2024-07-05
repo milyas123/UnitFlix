@@ -29,6 +29,8 @@ module.exports = {
         sunriseOrange: "#EB6753",
         dark: "#2B2B2B",
         grey: "#989898",
+        lightGrey: "#DBDBDB",
+        hitGrey: "#ABABAB",
         slate: "#BEBDBD",
         oceanBlue: "#186B97",
         border: "hsl(var(--border))",

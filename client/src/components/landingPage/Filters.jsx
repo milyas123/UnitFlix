@@ -67,7 +67,7 @@ const Filters = () => {
           <input
             type="text"
             placeholder="Enter Keywords"
-            className="w-full border-b-2 border-transparent focus:border-b-[#ABABAB] focus:outline-none"
+            className="w-full border-b-2 border-transparent focus:border-b-hitGrey focus:outline-none"
           />
         </div>
         <div className="text-[16px] space-y-2.5">

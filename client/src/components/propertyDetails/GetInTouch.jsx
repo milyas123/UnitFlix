@@ -51,16 +51,16 @@ const GetInTouch = () => {
         </form>
       </div>
 
-      <div className="rounded-lg border-2 px-4 py-6 flex justify-center gap-1">
+      <div className="rounded-lg border-2 px-4 py-6 flex justify-center gap-1.5">
         <div className="flex flex-col items-center justify-center gap-3">
-          <FiPhone size={40} />
+          <FiPhone size={28} />
           <Button className="rounded-lg bg-transparent text-mirage hover:bg-mirage hover:text-white">
             +971 4 248 3400
           </Button>
         </div>
 
         <div className="flex flex-col items-center justify-center gap-3">
-          <BsWhatsapp size={40} />
+          <BsWhatsapp size={28} />
           <Button className="rounded-lg bg-transparent text-mirage hover:bg-mirage hover:text-white">
             +971 55 162 3236
           </Button>

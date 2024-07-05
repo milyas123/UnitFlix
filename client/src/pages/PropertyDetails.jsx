@@ -28,7 +28,7 @@ const PropertyDetails = () => {
           <SimilarProperties />
         </div>
         <div className="w-[25.5%] ms-auto">
-          <div className="sticky top-0">
+          <div className="sticky top-5">
             <GetInTouch />
           </div>
         </div>

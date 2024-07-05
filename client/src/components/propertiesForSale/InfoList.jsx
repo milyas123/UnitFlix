@@ -2,8 +2,8 @@ import { Button } from "../ui/button";
 
 const InfoList = ({ heading, count, items }) => {
   return (
-    <div className="rounded-xl border border-slate p-1">
-      <p className="bg-whiteLilac font-semibold text-[20px] whitespace-nowrap py-4 px-6 rounded-xl">
+    <div className="rounded-lg border border-lightGrey p-1">
+      <p className="bg-whiteLilac font-semibold text-[20px] whitespace-nowrap py-4 px-6 rounded-lg border border-lightGrey">
         {heading}
         <span className="text-slate text-[16px] font-light">{` (${count})`}</span>
       </p>

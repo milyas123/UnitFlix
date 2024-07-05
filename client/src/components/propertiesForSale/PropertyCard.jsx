@@ -6,14 +6,25 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
 
 import { MdOutlineLocationOn } from "react-icons/md";
-import { LiaBedSolid } from "react-icons/lia";
-import { FaShower } from "react-icons/fa";
-import { GiResize } from "react-icons/gi";
+import Bed from "../svgs/Bed";
+import Shower from "../svgs/Shower";
+import Area from "../svgs/Area";
 
 const PropertyCard = () => {
   return (
-    <div className="w-[340px] h-[460px] rounded-lg overflow-hidden border border-slate">
-      <div>
+    <div className="w-[340px] h-[460px] rounded-lg overflow-hidden border border-lightGrey">
+      <style jsx>{`
+        .property-card .swiper-pagination-bullet {
+          background-color: #ffffff;
+          opacity: 0.4;
+        }
+
+        .property-card .swiper-pagination-bullet-active {
+          background-color: #ffffff;
+          opacity: 1;
+        }
+      `}</style>
+      <div className="property-card">
         <Swiper
           slidesPerView={1}
           spaceBetween={30}
@@ -42,9 +53,9 @@ const PropertyCard = () => {
 
       <div className="p-3 flex flex-col gap-y-3.5">
         <div className="font-semibold text-[13px] flex flex-row justify-between whitespace-nowrap">
-          <span className="border-r border-slate pe-1">Single Row Middle</span>
-          <span className="border-r border-slate px-1">2BHK</span>
-          <span className="border-r border-slate px-1">Vacant</span>
+          <span className="border-r border-lightGrey pe-1">Single Row Middle</span>
+          <span className="border-r border-lightGrey px-1">2BHK</span>
+          <span className="border-r border-lightGrey px-1">Vacant</span>
           <span className="ps-1">Study Room</span>
         </div>
 
@@ -54,17 +65,17 @@ const PropertyCard = () => {
         </div>
 
         <div className="font-semibold text-[11px] flex flex-row justify-between whitespace-nowrap">
-          <span className="border-r border-slate pe-1 font-bold text-mirage text-[13px]">
+          <span className="border-r border-lightGrey pe-1 font-bold text-mirage text-[13px]">
             Townhouse
           </span>
-          <span className="border-r border-slate px-1 flex items-center gap-x-1">
-            <LiaBedSolid size={20} /> 10 Beds
+          <span className="border-r border-lightGrey px-1 flex items-center gap-x-1">
+            <Bed size={20} /> 10 Beds
           </span>
-          <span className="border-r border-slate px-1 flex items-center gap-x-1">
-            <FaShower size={20} /> 2 Baths
+          <span className="border-r border-lightGrey px-1 flex items-center gap-x-1">
+            <Shower size={20} /> 2 Baths
           </span>
           <span className="ps-1 flex items-center gap-x-1">
-            <GiResize size={20} /> 500 sqft
+            <Area size={20} /> 500 sqft
           </span>
         </div>
 

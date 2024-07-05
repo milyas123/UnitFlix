@@ -48,7 +48,7 @@ const Properties = () => {
         </div>
 
         <div className="w-[80%] ms-auto overflow-hidden">
-          <div className="bg-whiteLilac whitespace-nowrap py-7 px-6 rounded-xl border border-slate flex justify-between items-center">
+          <div className="bg-whiteLilac whitespace-nowrap py-7 px-6 rounded-xl border border-lightGrey flex justify-between items-center">
             <p className="font-semibold text-[20px]">
               Showing Property Results
               <span className="text-slate text-[16px] font-light">(308)</span>

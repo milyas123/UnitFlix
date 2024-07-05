@@ -57,7 +57,7 @@ const Overview = () => {
       </p>
       <div className="mt-4 flex flex-col gap-2 items-start">
         <h1 className="font-semibold text-[24px]"> Floor Plan</h1>
-        <Button className="rounded-md items-center gap-x-1">
+        <Button className="rounded-md bg-transparent text-mirage hover:text-white items-center gap-x-1">
           <FileDown />
           Download Floor Plan
         </Button>

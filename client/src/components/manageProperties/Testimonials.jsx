@@ -24,7 +24,18 @@ const Testimonials = () => {
         </div>
 
         <div className="w-[68%] ms-auto">
-          <div>
+        <style jsx>{`
+        .property-card .swiper-pagination-bullet {
+          background-color: #ffffff;
+          opacity: 0.4;
+        }
+
+        .property-card .swiper-pagination-bullet-active {
+          background-color: #ffffff;
+          opacity: 1;
+        }
+      `}</style>
+          <div className="property-card">
             <Swiper
               slidesPerView={1}
               breakpoints={{
@@ -34,7 +45,7 @@ const Testimonials = () => {
               spaceBetween={16}
               modules={[Pagination]}
               pagination={{ clickable: true }}
-              className="h-[250px] custom-swiper-pagination"
+              className="h-[275px] custom-swiper-pagination"
               style={{
                 "--swiper-pagination-color": "#FFFFFF",
               }}
