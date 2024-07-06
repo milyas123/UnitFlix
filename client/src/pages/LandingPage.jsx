@@ -9,10 +9,13 @@ import ContactUs from "@/components/landingPage/ContactUs";
 import CTA from "@/components/landingPage/CTA";
 import ExperienceAndFeedback from "@/components/landingPage/ExperienceAndFeedback";
 import Footer from "@/components/common/Footer";
+import ScrollToTop from "@/components/common/ScrollToTop";
+
+import useScrollProgress from "@/hooks/useScrollProgress";
 
 const LandingPage = () => {
   const [showIcons, setShowIcons] = useState(false);
-  const [iconsClass, setIconsClass] = useState("hide-icons");
+  const showTopButton = useScrollProgress("discover-section");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,10 +23,8 @@ const LandingPage = () => {
       if (discoverElement) {
         const { top } = discoverElement.getBoundingClientRect();
         if (top <= 0) {
-          setIconsClass("show-icons");
           setShowIcons(true);
         } else {
-          setIconsClass("hide-icons");
           setShowIcons(false);
         }
       }
@@ -77,6 +78,7 @@ const LandingPage = () => {
           onClick={handleWhatsappClick}
         />
       </div>
+      {showTopButton && <ScrollToTop />}
     </>
   );
 };

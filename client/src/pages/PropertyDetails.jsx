@@ -10,8 +10,13 @@ import Overview from "@/components/propertyDetails/Overview";
 import PaymentPlan from "@/components/propertyDetails/PaymentPlan";
 import SimilarProjects from "@/components/propertyDetails/SimilarProjects";
 import SimilarProperties from "@/components/propertyDetails/SimilarProperties";
+import ScrollToTop from "@/components/common/ScrollToTop";
+
+import useScrollProgress from "@/hooks/useScrollProgress";
 
 const PropertyDetails = () => {
+  const showTopButton = useScrollProgress("highlights-section");
+
   return (
     <>
       <Navbar />
@@ -19,7 +24,9 @@ const PropertyDetails = () => {
       <div className="w-[90%] mx-auto flex mt-16">
         <div className="w-[73%]">
           <Description />
-          <Highlights />
+          <div id="highlights-section">
+            <Highlights />
+          </div>
           <Overview />
           <FeaturesAndAmenities />
           <PaymentPlan />
@@ -34,6 +41,7 @@ const PropertyDetails = () => {
         </div>
       </div>
       <Footer />
+      {showTopButton && <ScrollToTop />}
     </>
   );
 };
