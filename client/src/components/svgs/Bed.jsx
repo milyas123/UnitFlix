@@ -1,7 +1,7 @@
 const Bed = ({ size, className }) => {
   return (
     <svg
-      className={`stroke-current ${className}`}
+      className={`${className}`}
       width={size}
       height={size}
       viewBox="0 0 18 17"
