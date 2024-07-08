@@ -9,10 +9,10 @@ const InfoList = ({ heading, count, items }) => {
       </p>
       <div className="px-6 space-y-1.5 my-2 font-regular">
         {items.map((item, index) => (
-          <p key={index} className="text-[14px] text-oceanBlue">
-            {item.name}
+          <div key={index} className="text-[14px] text-oceanBlue">
+            <span className="cursor-pointer hover:underline transition-all duration-300 ease-in-out">{item.name}</span>
             <span className="text-[16px] text-slate">{` (${item.count})`}</span>
-          </p>
+          </div>
         ))}
       </div>
       <Button className="rounded-lg w-full">View All {heading}</Button>

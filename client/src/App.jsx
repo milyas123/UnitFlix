@@ -1,8 +1,11 @@
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
+import React, { Suspense, lazy } from "react";
 import { ToastContainer, Slide } from "react-toastify";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import React, { Suspense, lazy } from "react";
+
+import Lottie from "lottie-react";
+import RealEstateAnimation from "./lotties/RealEstateAnimation.json";
 
 const LandingPage = lazy(() => import("./pages/LandingPage"));
 const PropertiesForSale = lazy(() => import("./pages/PropertiesForSale"));
@@ -16,10 +19,21 @@ function App() {
   return (
     <div className="font-poppins">
       <BrowserRouter>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense
+          fallback={
+            <Lottie
+              animationData={RealEstateAnimation}
+              loop={true}
+              rendererSettings={{ preserveAspectRatio: "xMidYMid slice" }}
+            />
+          }
+        >
           <Routes>
             <Route exact path="/" element={<LandingPage />} />
-            <Route path="/properties-for-sale" element={<PropertiesForSale />} />
+            <Route
+              path="/properties-for-sale"
+              element={<PropertiesForSale />}
+            />
             <Route path="/manage-properties" element={<ManageProperties />} />
             <Route path="/property-details" element={<PropertyDetails />} />
             <Route path="/contact-us" element={<ContactUs />} />

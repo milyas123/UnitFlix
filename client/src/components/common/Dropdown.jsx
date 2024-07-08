@@ -39,7 +39,7 @@ const Dropdown = ({ options, placeholder }) => {
         {selectedOption || placeholder}
       </button>
       <ul
-        className={`absolute w-[15rem] bg-white rounded-md mt-1 z-10 shadow-lg transform origin-top transition-all duration-300 ${
+        className={`absolute max-w-[15rem] bg-white rounded-md mt-1 z-10 shadow-lg transform origin-top transition-all duration-300 ${
           isOpen ? 'max-h-[15rem] opacity-100 scale-y-100' : 'max-h-0 opacity-0 scale-y-0'
         }`}
       >

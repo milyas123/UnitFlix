@@ -22,7 +22,10 @@ const Gallery = () => {
         <div className="space-y-2">
           <div className="flex justify-between items-center">
             <p className="font-semibold text-[16px]">Name.png</p>
-            <MdOutlineDeleteForever size={25} />
+            <MdOutlineDeleteForever
+              size={25}
+              className="cursor-pointer hover:text-red-600 transition-all duration-200 ease-in-out"
+            />
           </div>
           <div className="overflow-hidden">
             <img

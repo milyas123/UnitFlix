@@ -24,8 +24,14 @@ const AddFeaturesAndAmenities = () => {
             <RiParkingBoxLine />
             <p className="text-14px">Parking Spaces: 1</p>
             <div className="flex items-center justify-center gap-x-1 text-smokeyGrey">
-              <TbEditCircle size={25} />
-              <MdOutlineDeleteForever size={25} />
+              <TbEditCircle
+                size={25}
+                className="cursor-pointer hover:text-blue-500 transition-all duration-200 ease-in-out"
+              />
+              <MdOutlineDeleteForever
+                size={25}
+                className="cursor-pointer hover:text-red-600 transition-all duration-200 ease-in-out"
+              />
             </div>
           </div>
         </div>
