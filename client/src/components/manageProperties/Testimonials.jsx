@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import "swiper/css";
 import "swiper/css/pagination";
 
@@ -6,10 +7,12 @@ import { Pagination, Navigation } from "swiper/modules";
 
 import TestimonialCard from "./TestimonialCard";
 import { MoveLeft, MoveRight } from "lucide-react";
-import { useRef } from "react";
+
+import useSwiperNavigation from "@/hooks/useSwiperNavigation";
 
 const Testimonials = () => {
   const swiperRef = useRef(null);
+  const { isBeginning, isEnd } = useSwiperNavigation(swiperRef);
 
   return (
     <div className="w-[90%] mx-auto rounded-md bg-mirage text-white relative mb-[9rem]">
@@ -64,13 +67,15 @@ const Testimonials = () => {
             <div className="-mt-[1.4rem] relative z-50 flex gap-3">
               <MoveLeft
                 size={30}
-                className="cursor-pointer"
+                className={`cursor-pointer ${isBeginning && 'opacity-40 cursor-default'}`}
                 onClick={() => swiperRef.current.swiper.slidePrev()}
+                disabled={isBeginning}
               />
               <MoveRight
                 size={30}
-                className="cursor-pointer"
+                className={`cursor-pointer ${isEnd && 'opacity-40 cursor-default'}`}
                 onClick={() => swiperRef.current.swiper.slideNext()}
+                disabled={isEnd}
               />
             </div>
           </div>

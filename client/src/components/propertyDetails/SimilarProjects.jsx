@@ -8,8 +8,11 @@ import { Navigation } from "swiper/modules";
 import { MoveLeft, MoveRight } from "lucide-react";
 import ProjectCard from "../landingPage/cards/ProjectCard";
 
+import useSwiperNavigation from "@/hooks/useSwiperNavigation";
+
 const SimilarProjects = () => {
   const projectsSwiperRef = useRef(null);
+  const { isBeginning, isEnd } = useSwiperNavigation(projectsSwiperRef);
   
   return (
     <div className="mt-24">
@@ -20,13 +23,15 @@ const SimilarProjects = () => {
         <div className="flex items-center gap-3">
           <MoveLeft
             size={30}
-            className="cursor-pointer"
+            className={`cursor-pointer ${isBeginning && 'opacity-40 cursor-default'}`}
             onClick={() => projectsSwiperRef.current.swiper.slidePrev()}
+            disabled={isBeginning}
           />
           <MoveRight
             size={30}
-            className="cursor-pointer"
+            className={`cursor-pointer ${isEnd && 'opacity-40 cursor-default'}`}
             onClick={() => projectsSwiperRef.current.swiper.slideNext()}
+            disabled={isEnd}
           />
         </div>
       </div>

@@ -8,8 +8,11 @@ import { Navigation } from "swiper/modules";
 import { MoveLeft, MoveRight } from "lucide-react";
 import PropertyCard from "../propertiesForSale/PropertyCard";
 
+import useSwiperNavigation from "@/hooks/useSwiperNavigation";
+
 const SimilarProperties = () => {
   const propertiesSwiperRef = useRef(null);
+  const { isBeginning, isEnd } = useSwiperNavigation(propertiesSwiperRef);
 
   return (
     <div className="my-48">
@@ -20,13 +23,15 @@ const SimilarProperties = () => {
         <div className="flex items-center gap-3">
           <MoveLeft
             size={30}
-            className="cursor-pointer"
+            className={`cursor-pointer ${isBeginning && 'opacity-40 cursor-default'}`}
             onClick={() => propertiesSwiperRef.current.swiper.slidePrev()}
+            disabled={isBeginning}
           />
           <MoveRight
             size={30}
-            className="cursor-pointer"
+            className={`cursor-pointer ${isEnd && 'opacity-40 cursor-default'}`}
             onClick={() => propertiesSwiperRef.current.swiper.slideNext()}
+            disabled={isEnd}
           />
         </div>
       </div>
