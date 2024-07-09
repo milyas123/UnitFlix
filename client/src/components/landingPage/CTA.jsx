@@ -16,19 +16,19 @@ const CTA = () => {
         <p className="font-regular md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]">
           BUY OR SELL
         </p>
-        <h2 className="font-semibold md:text-[22px] lg:text-[26px] xl:text-[32px] 2xl:text-[36px]">
+        <h2 className="font-semibold text-[24px] md:text-[22px] lg:text-[26px] xl:text-[32px] 2xl:text-[36px]">
           Looking to Buy a new property or sell an existing one?
           <br />
           Homez provides an awesome solution!
         </h2>
-        <div className="flex items-center md:text-[9px] md:gap-1.5 lg:text-[11px] lg:gap-2 xl:text-[13px] xl:gap-3.5 2xl:text-[15px] 2xl:gap-5">
+        <div className="flex flex-col md:flex-row gap-4 items-center md:text-[9px] md:gap-1.5 lg:text-[11px] lg:gap-2 xl:text-[13px] xl:gap-3.5 2xl:text-[15px] 2xl:gap-5">
           <Link to="/add-property">
-            <Button className="rounded-lg md:h-7 lg:h-8 xl:h-9 2xl:gap-2 2xl:py-6">
+            <Button className="rounded-lg h-10 md:h-7 lg:h-8 xl:h-9 2xl:gap-2 2xl:py-6">
               Submit Property <BsArrowUpRight size={20} />
             </Button>
           </Link>
           <Link to="/properties-for-sale">
-            <Button className="rounded-lg bg-white text-mirage hover:text-white border-white hover:bg-transparent md:h-7 lg:h-8 xl:h-9 2xl:gap-2 2xl:py-6">
+            <Button className="rounded-lg bg-white text-mirage hover:text-white border-white hover:bg-transparent h-10 md:h-7 lg:h-8 xl:h-9 2xl:gap-2 2xl:py-6">
               Browse Properties <BsArrowUpRight size={20} />
             </Button>
           </Link>

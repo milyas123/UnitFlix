@@ -54,14 +54,14 @@ const Help = () => {
   );
 
   return (
-    <div className="bg-white h-[70vh] flex justify-center items-center">
-      <div className="w-[65%] mx-auto flex flex-col gap-4">
-        <h1 className="font-semibold text-center md:text-[14px] lg:text-[18px] xl:text-[24px] 2xl:text-[30px]">
+    <div className="bg-white h-[98vh] md:h-[70vh] flex justify-center items-center">
+      <div className="w-full px-2.5 md:px-0 md:w-[65%] mx-auto flex flex-col gap-4">
+        <h1 className="font-semibold text-center text-[30px] md:text-[14px] lg:text-[18px] xl:text-[24px] 2xl:text-[30px]">
           How can We Help
         </h1>
 
-        <div className="flex flex-col justify-center items-center md:gap-3 lg:gap-5 xl:gap-7 2xl:gap-8">
-          <div className="flex md:gap-x-2 lg:gap-x-3 xl:gap-x-3.5 2xl:gap-x-4">
+        <div className="flex flex-col justify-center items-center gap-8 md:gap-3 lg:gap-5 xl:gap-7 2xl:gap-8">
+          <div className="flex gap-x-4 md:gap-x-2 lg:gap-x-3 xl:gap-x-3.5 2xl:gap-x-4">
             {options.map((option) => ( 
               <Button
                 key={option}
@@ -73,7 +73,7 @@ const Help = () => {
             ))}
           </div>
 
-          <div className="flex gap-x-5">
+          <div className="flex flex-col md:flex-row gap-5">
             {Array(3)
               .fill()
               .map((_, index) => (

@@ -29,10 +29,10 @@ const AboutUs = () => {
   ];
 
   return (
-    <div className="bg-mirage text-white h-[70vh] flex justify-center items-center">
-      <div className="w-[60%] mx-auto flex flex-col md:gap-[1.5rem] lg:gap-[3.5rem] xl:gap-[5rem] 2xl:gap-[6rem]">
+    <div className="bg-mirage text-white py-[3rem] md:h-[70vh] flex justify-center items-center">
+      <div className="w-full px-2.5 md:px-0 md:w-[60%] mx-auto flex flex-col gap-10 md:gap-[1.5rem] lg:gap-[3.5rem] xl:gap-[5rem] 2xl:gap-[6rem]">
         <div className="flex flex-col gap-4 text-center">
-          <h1 className="font-semibold text-center md:text-[14px] lg:text-[18px] xl:text-[24px] 2xl:text-[30px]">
+          <h1 className="font-semibold text-center text-[20px] md:text-[14px] lg:text-[18px] xl:text-[24px] 2xl:text-[30px]">
             Who are we & Why Choose Us?
           </h1>
           <p className="font-regular md:text-[8px] lg:text-[10px] xl:text-[13px] 2xl:text-[16px] 2xl:px-10">
@@ -43,7 +43,7 @@ const AboutUs = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-4 2xl:gap-x-12 2xl:px-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-4 2xl:gap-x-12 2xl:px-6">
           {cardsData.map((card, index) => (
             <AboutCard
               key={index}
