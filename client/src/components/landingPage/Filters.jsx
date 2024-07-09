@@ -44,11 +44,11 @@ const Filters = () => {
 
   return (
     <div className="w-[70%] mx-auto">
-      <div className="w-[30%] p-5 flex justify-between items-center font-semibold bg-whiteLilac rounded-t-xl">
+      <div className="w-[30%] flex justify-between items-center font-semibold bg-whiteLilac md:py-2.5 md:px-3.5 md:rounded-t-md lg:py-3 lg:px-5 lg:rounded-t-lg xl:py-4 2xl:p-5 2xl:rounded-t-xl">
         {tabs.map((tab, index) => (
-          <div key={index} className="text-[16px] w-auto cursor-pointer">
+          <div key={index} className="w-auto cursor-pointer flex justify-center">
             <p
-              className={`inline-block transition-all duration-300 ${
+              className={`inline-block text-center transition-all duration-300 md:text-[8px] lg:text-[10px] xl:text-[13px] 2xl:text-[16px] ${
                 selectedTab === tab
                   ? "border-b-2 border-black text-black"
                   : "border-b-2 border-transparent text-smokeyGrey"
@@ -61,8 +61,8 @@ const Filters = () => {
         ))}
       </div>
 
-      <div className="bg-white p-5 flex justify-between rounded-b-xl rounded-r-xl shadow">
-        <div className="text-[16px] space-y-2.5">
+      <div className="bg-white p-5 flex justify-between shadow md:py-2.5 md:px-3.5 md:rounded-b-md md:rounded-r-md lg:py-3 lg:px-5 lg:rounded-b-lg lg:rounded-r-lg xl:py-4 2xl:p-5 2xl:rounded-b-xl 2xl:rounded-r-xl">
+        <div className="md:text-[8px] md:space-y-0.5 lg:text-[10px] lg:space-y-1.5 xl:text-[13px] space-y-2 2xl:text-[16px] xl:space-y-2.5">
           <p className="font-semibold text-mirage">Search</p>
           <input
             type="text"
@@ -70,20 +70,20 @@ const Filters = () => {
             className="w-full border-b-2 border-transparent focus:border-b-hitGrey focus:outline-none"
           />
         </div>
-        <div className="text-[16px] space-y-2.5">
+        <div className="md:text-[8px] md:space-y-0.5 lg:text-[10px] lg:space-y-1.5 xl:text-[13px] space-y-2 2xl:text-[16px] xl:space-y-2.5">
           <p className="font-semibold text-mirage">Looking For</p>
           <Dropdown options={lookingForOptions} placeholder="Type" />
         </div>
-        <div className="text-[16px] space-y-2.5">
+        <div className="md:text-[8px] md:space-y-0.5 lg:text-[10px] lg:space-y-1.5 xl:text-[13px] space-y-2 2xl:text-[16px] xl:space-y-2.5">
           <p className="font-semibold text-mirage">Location</p>
           <Dropdown options={locationOptions} placeholder="Location" />
         </div>
-        <div className="text-[16px] space-y-2.5">
+        <div className="md:text-[8px] md:space-y-0.5 lg:text-[10px] lg:space-y-1.5 xl:text-[13px] space-y-2 2xl:text-[16px] xl:space-y-2.5">
           <p className="font-semibold text-mirage">Developer</p>
           <Dropdown options={developerOptions} placeholder="All" />
         </div>
 
-        <div className="text-[16px] space-y-2.5">
+        <div className="md:text-[8px] md:space-y-2 lg:text-[10px] lg:space-y-3 xl:text-[13px] xl:space-y-4 2xl:text-[16px] 2xl:space-y-4">
           <p className="font-semibold text-mirage">Price</p>
           <div className="relative flex items-center slider-container">
             <input
@@ -92,7 +92,7 @@ const Filters = () => {
               max="100"
               value={value[0]}
               onChange={(e) => handleSliderChange(0, Number(e.target.value))}
-              className="w-full h-1 bg-black appearance-none pointer-events-none slider-thumb"
+              className="md:w-[4rem] lg:w-[5rem] xl:w-[7rem] 2xl:w-full 2xl:h-1 bg-black appearance-none pointer-events-none slider-thumb"
             />
             <input
               type="range"
@@ -100,11 +100,11 @@ const Filters = () => {
               max="100"
               value={value[1]}
               onChange={(e) => handleSliderChange(1, Number(e.target.value))}
-              className="w-full h-1 bg-black appearance-none pointer-events-none slider-thumb"
+              className="md:w-[4rem] lg:w-[5rem] xl:w-[7rem] 2xl:w-full 2xl:h-1 bg-black appearance-none pointer-events-none slider-thumb"
             />
             <div className="absolute w-full h-1 bg-black flex justify-between items-center">
               <div
-                className="absolute bg-white border border-black rounded-full h-6 w-6 cursor-pointer"
+                className="absolute bg-white border border-black rounded-full cursor-pointer md:size-3 lg:size-4 xl:size-5 2xl:size-6"
                 style={{
                   left: `${(value[0] / 100) * 100}%`,
                   transform: "translateX(-50%)",
@@ -113,7 +113,7 @@ const Filters = () => {
                 onMouseDown={handleMouseDown(0)}
               />
               <div
-                className="absolute bg-white border border-black rounded-full h-6 w-6 cursor-pointer"
+                className="absolute bg-white border border-black rounded-full cursor-pointer md:size-3 lg:size-4 xl:size-5 2xl:size-6"
                 style={{
                   left: `${(value[1] / 100) * 100}%`,
                   transform: "translateX(-50%)",
@@ -123,7 +123,7 @@ const Filters = () => {
               />
             </div>
             <div
-              className="mt-9 absolute bg-white text-black rounded-md shadow-md p-2 text-sm whitespace-nowrap"
+              className="absolute bg-white text-black rounded-md shadow-md text-sm whitespace-nowrap md:mt-3 md:text-[8px] md:px-1 md:py-0.5 lg:text-[10px] lg:px-1.5 lg:py-1 xl:text-[13px] xl:px-2 xl:py-1.5 xl:mt-6 2xl:mt-9 2xl:text-[16px] 2xl:p-2"
               style={{
                 left: `${(value[0] / 100) * 100}%`,
                 transform: "translateX(-50%) translateY(50%)",
@@ -135,7 +135,7 @@ const Filters = () => {
               )}
             </div>
             <div
-              className="mt-9 absolute bg-white text-black rounded-md shadow-md p-2 text-sm whitespace-nowrap"
+              className="absolute bg-white text-black rounded-md shadow-md text-sm whitespace-nowrap md:mt-3 md:text-[8px] md:px-1 md:py-0.5 lg:text-[10px] lg:px-1.5 lg:py-1 xl:text-[13px] xl:px-2 xl:py-1.5 xl:mt-6 2xl:mt-9 2xl:text-[16px] 2xl:p-2"
               style={{
                 left: `${(value[1] / 100) * 100}%`,
                 transform: "translateX(-50%) translateY(50%)",
@@ -150,8 +150,8 @@ const Filters = () => {
         </div>
 
         <div>
-          <Button className="rounded-xl py-7 hover:bg-transparent hover:border-2 hover:border-mirage hover:text-mirage">
-            <IoIosSearch size={20} /> Search
+          <Button className="hover:bg-transparent hover:text-mirage md:text-[8px] md:h-7 md:px-2 lg:text-[10px] lg:h-8 lg:px-3 xl:text-[13px] xl:h-9 xl:px-4 2xl:text-[16px] 2xl:px-5 2xl:py-6">
+            <IoIosSearch size={18} /> Search
           </Button>
         </div>
       </div>

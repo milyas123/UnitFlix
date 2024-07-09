@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Navbar from "@/components/common/Navbar";
 import Hero from "@/components/landingPage/Hero";
-import Filters from "@/components/landingPage/Filters";
 import Discover from "@/components/landingPage/Discover";
 import Help from "@/components/landingPage/Help";
 import AboutUs from "@/components/landingPage/AboutUs";
@@ -46,9 +45,6 @@ const LandingPage = () => {
     <>
       <Navbar />
       <Hero />
-      <div className="absolute w-full z-[100] -bottom-12">
-        <Filters />
-      </div>
       <div id="discover-section">
         <Discover />
       </div>
@@ -67,13 +63,13 @@ const LandingPage = () => {
       >
         <img
           src="/assets/imgs/call-vector.png"
-          className={`w-[55px] h-[55px] animated-icon cursor-pointer`}
+          className={`size-[55px] animated-icon cursor-pointer`}
           alt="callcenter-vector"
           onClick={handleCallClick}
         />
         <img
           src="/assets/imgs/whatsapp-icon.png"
-          className={`w-[50px] h-[50px] animated-icon cursor-pointer`}
+          className={`size-[50px] animated-icon cursor-pointer`}
           alt="whatsapp-icon"
           onClick={handleWhatsappClick}
         />

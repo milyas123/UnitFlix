@@ -17,14 +17,14 @@ const Discover = () => {
   const { isBeginning, isEnd } = useSwiperNavigation(projectsRef);
 
   return (
-    <div className="bg-whiteLilac h-screen flex justify-center items-center relative">
-      <div className="w-[65%] mx-auto flex flex-col gap-14">
+    <div className="bg-whiteLilac h-[90vh] flex justify-center items-center relative">
+      <div className="w-[65%] mx-auto flex flex-col md:gap-8 lg:gap-12 2xl:gap-14">
         <div className="flex justify-between items-center">
-          <div className="space-y-2">
-            <h1 className="font-semibold text-[30px]">
+          <div className="md:space-y-0.5 2xl:space-y-2">
+            <h1 className="font-semibold md:text-[14px] lg:text-[18px] xl:text-[24px] 2xl:text-[30px]">
               Discover Trending Projects
             </h1>
-            <p className="text-[16px] text-smokeyGrey">
+            <p className="text-smokeyGrey md:text-[8px] lg:text-[10px] xl:text-[13px] 2xl:text-[16px]">
               Aliquam lacinia diam quis lacus euismod
             </p>
           </div>
@@ -33,23 +33,21 @@ const Discover = () => {
             to="/properties-for-sale"
             className="flex items-center gap-1.5 border-b-2 border-transparent hover:border-mirage transition duration-200 ease-in-out"
           >
-            <p className="text-mirage font-semibold text-[15px]">
+            <p className="text-mirage font-semibold md:text-[8px] lg:text-[10px] xl:text-[13px] 2xl:text-[16px]">
               See All Properties
             </p>
-            <BsArrowUpRight size={20} />
+            <BsArrowUpRight className='md:text-sm 2xl:text-xl' />
           </Link>
         </div>
 
-        <div className="flex items-center justify-end gap-x-3 -my-10">
+        <div className="flex items-center justify-end gap-x-3 md:-my-8 lg:-my-9 2xl:-my-10">
           <MoveLeft
-            size={30}
-            className={`cursor-pointer ${isBeginning && 'opacity-40 cursor-default'}`}
+            className={`md:text-xs 2xl:text-xl cursor-pointer ${isBeginning && 'opacity-40 cursor-default'}`}
             onClick={() => projectsRef.current.swiper.slidePrev()}
             disabled={isBeginning}
           />
           <MoveRight
-            size={30}
-            className={`cursor-pointer ${isEnd && 'opacity-40 cursor-default'}`}
+            className={`md:text-xs 2xl:text-xl cursor-pointer ${isEnd && 'opacity-40 cursor-default'}`}
             onClick={() => projectsRef.current.swiper.slideNext()}
             disabled={isEnd}
           />
@@ -60,13 +58,14 @@ const Discover = () => {
             ref={projectsRef}
             slidesPerView={1}
             breakpoints={{
-              640: { slidesPerView: 2 },
-              1400: { slidesPerView: 3 },
+              640: { slidesPerView: 3, spaceBetween: 10 },
+              768: { slidesPerView: 3, spaceBetween: 15 },
+              1024: { slidesPerView: 3, spaceBetween: 30 },
             }}
-            spaceBetween={30}
+
             modules={[Pagination]}
             pagination={{ clickable: true }}
-            className="h-[500px]"
+            className="md:h-[250px] lg:h-[310px] xl:h-[390px] 2xl:h-[500px]"
             style={{
               "--swiper-pagination-color": "#181a20",
             }}
