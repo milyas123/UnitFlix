@@ -57,7 +57,7 @@ const LandingPage = () => {
 
       {/* Sticky Icons */}
       <div
-        className={`fixed top-1/2 right-5 transform -translate-y-1/2 flex flex-col items-center space-y-2 ${
+        className={`hidden md:flex fixed top-1/2 right-5 transform -translate-y-1/2 flex-col items-center space-y-2 ${
           showIcons ? "show-icons" : "hide-icons"
         }`}
       >

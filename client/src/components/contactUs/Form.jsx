@@ -10,29 +10,29 @@ import { Button } from "../ui/button";
 
 const Form = () => {
   return (
-    <section className="bg-whiteLilac h-screen flex items-center justify-center">
-      <div className="w-[60%] mx-auto bg-white rounded-lg p-4 flex justify-between items-center">
-        <div className="w-[40%] bg-mirage text-white rounded-lg px-8 py-10 flex flex-col justify-between gap-16">
-          <div>
-            <h1 className="font-semibold text-[28px]">Contact Information</h1>
-            <p className="text-[18px] text-slate">
+    <section className="bg-whiteLilac py-[5rem] md:h-screen flex items-center justify-center">
+      <div className="w-full px-2.5 md:w-[65%] mx-auto bg-white md:rounded-md lg:rounded-lg 2xl:rounded-xl p-4 flex flex-col gap-10 md:gap-0 md:flex-row justify-between items-center">
+        <div className="w-full md:w-[45%] bg-mirage text-white px-4 pt-8 pb-14 rounded-xl gap-8 md:rounded-md lg:rounded-lg 2xl:rounded-xl flex flex-col justify-between md:gap-9 md:p-4 lg:gap-11 lg:p-5 xl:gap-14 xl:p-6 2xl:gap-16 2xl:px-8 2xl:py-10">
+          <div className="whitespace-nowrap">
+            <h1 className="font-semibold text-[28px] md:text-[14px] lg:text-[18px] xl:text-[22px] 2xl:text-[26px]">Contact Information</h1>
+            <p className="text-[18px] md:text-[9px] lg:text-[11px] xl:text-[13px] 2xl:text-[16px] text-slate">
               Say something to start a live chat!
             </p>
           </div>
 
-          <div className="flex flex-col gap-6">
-            <div className="flex items-center gap-x-4">
-              <CgPhone size={22} />
+          <div className="flex flex-col text-[16px] gap-5 md:gap-4 lg:gap-5 xl:gap-6 2xl:gap-7 md:text-[8px] lg:text-[10px] xl:text-[13px] 2xl:text-[16px]">
+            <div className="flex items-center justify-start gap-x-2 md:gap-x-2 2xl:gap-x-4">
+              <CgPhone size={18} />
               <p>+1012 3456 789</p>
             </div>
 
-            <div className="flex items-center gap-x-4">
-              <MdEmail size={22} />
+            <div className="flex items-center justify-start gap-x-2 md:gap-x-2 2xl:gap-x-4">
+              <MdEmail size={18} />
               <p>demo@gmail.com</p>
             </div>
 
-            <div className="flex items-center gap-x-4">
-              <FaLocationDot size={22} />
+            <div className="flex items-start md:items-center justify-start gap-x-2 md:gap-x-2 2xl:gap-x-4">
+              <FaLocationDot size={18} />
               <p>
                 132 Dartmouth Street Boston, Massachusetts 02156 United States
               </p>
@@ -59,31 +59,31 @@ const Form = () => {
             </div>
           </div>
         </div>
-        <div className="w-[55%] ms-auto">
-          <div className="flex flex-col gap-8">
+        <div className="w-full md:w-[50%] ms-auto">
+          <div className="flex flex-col gap-7 md:gap-6 lg:gap-7 2xl:gap-8">
             <div className="space-y-1">
-              <h1 className="font-semibold text-[30px]">
+              <h1 className="font-semibold text-[24px] md:text-[14px] lg:text-[18px] xl:text-[24px] 2xl:text-[30px]">
                 Real Estate Inquiry Form
               </h1>
-              <p className="text-[15px]">
+              <p className="text-[15px] md:text-[8px] lg:text-[10px] xl:text-[13px] 2xl:text-[16px]">
                 As the complexity of buildings to increase
               </p>
             </div>
 
-            <form action="" className="flex flex-col gap-6">
-              <div className="flex flex-col gap-y-3">
-                <label className="font-semibold text-[14px]">Your Name</label>
+            <form action="" className="flex flex-col gap-4 md:gap-5 lg:gap-6 xl:gap-7 2xl:gap-8">
+              <div className="flex flex-col gap-2.5 md:gap-y-0.5 lg:gap-y-1.5 xl:gap-y-2.5 2xl:gap-y-3">
+                <label className="font-semibold md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]">Your Name</label>
                 <div className="relative flex items-center">
                   <Input type="text" id="name" placeholder="Enter your name" />
                   <UserRound
-                    className="absolute left-3 text-muted-foreground"
-                    size={20}
+                    className="absolute left-1.5 md:left-2 2xl:left-3 text-muted-foreground"
+                    size={17}
                   />
                 </div>
               </div>
 
-              <div className="flex flex-col gap-y-3">
-                <label className="font-semibold text-[14px]">Email</label>
+              <div className="flex flex-col gap-2.5 md:gap-y-0.5 lg:gap-y-1.5 xl:gap-y-2.5 2xl:gap-y-3">
+                <label className="font-semibold md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]">Email</label>
                 <div className="relative flex items-center">
                   <Input
                     type="email"
@@ -91,14 +91,14 @@ const Form = () => {
                     placeholder="example@domain.com"
                   />
                   <Mail
-                    className="absolute left-3 text-muted-foreground"
-                    size={20}
+                    className="absolute left-1.5 md:left-2 2xl:left-3 text-muted-foreground"
+                    size={17}
                   />
                 </div>
               </div>
 
-              <div className="flex flex-col gap-y-3">
-                <label className="font-semibold text-[14px]">
+              <div className="flex flex-col gap-2.5 md:gap-y-0.5 lg:gap-y-1.5 xl:gap-y-2.5 2xl:gap-y-3">
+                <label className="font-semibold md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]">
                   Phone Number
                 </label>
                 <div className="relative flex items-center">
@@ -108,25 +108,25 @@ const Form = () => {
                     placeholder="(+92) 311 7995274"
                   />
                   <Phone
-                    className="absolute left-3 text-muted-foreground"
-                    size={20}
+                    className="absolute left-1.5 md:left-2 2xl:left-3 text-muted-foreground"
+                    size={17}
                   />
                 </div>
               </div>
 
-              <div className="flex flex-col gap-y-3">
-                <label className="font-semibold text-[14px]">Message</label>
+              <div className="flex flex-col gap-2.5 md:gap-y-0.5 lg:gap-y-1.5 xl:gap-y-2.5 2xl:gap-y-3">
+                <label className="font-semibold md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]">Message</label>
                 <div className="relative flex items-center">
                   <Textarea placeholder="I want to buy/rent..." />
                   <BiMessageSquareDetail
-                    className="absolute top-3 left-3 text-muted-foreground"
-                    size={20}
+                    className="absolute left-1.5 top-4 md:top-2 2xl:top-2.5 md:left-2 2xl:left-3 text-muted-foreground"
+                    size={19}
                   />
                 </div>
               </div>
 
               <div className="ms-auto">
-                <Button className="rounded-md hover:bg-transparent hover:border-2 hover:border-mirage hover:text-mirage w-[200px] py-6">
+                <Button className="rounded-md hover:bg-transparent hover:text-mirage md:w-[100px] lg:w-[120px] xl:w-[150px] 2xl:w-[200px]">
                   Submit
                 </Button>
               </div>
