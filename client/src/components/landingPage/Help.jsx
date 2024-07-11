@@ -50,22 +50,22 @@ const Help = () => {
     "bg-white border border-mirage text-mirage hover:text-white";
 
   const selectedContent = contentArray.find(
-    (content) => content.option === selectedOption
+    (content) => content.option === selectedOption,
   );
 
   return (
-    <div className="bg-white h-[98vh] md:h-[70vh] flex justify-center items-center">
-      <div className="w-full px-2.5 md:px-0 md:w-[65%] mx-auto flex flex-col gap-4">
-        <h1 className="font-semibold text-center text-[30px] md:text-[14px] lg:text-[18px] xl:text-[24px] 2xl:text-[30px]">
+    <div className="flex h-[98vh] items-center justify-center bg-white md:h-[70vh]">
+      <div className="mx-auto flex w-full flex-col gap-2.5 px-2.5 md:w-[65%] md:gap-2 md:px-0 lg:gap-2.5 xl:gap-3.5 2xl:gap-4">
+        <h1 className="text-center text-[30px] font-semibold md:text-[14px] lg:text-[18px] xl:text-[24px] 2xl:text-[30px]">
           How can We Help
         </h1>
 
-        <div className="flex flex-col justify-center items-center gap-8 md:gap-3 lg:gap-5 xl:gap-7 2xl:gap-8">
+        <div className="flex flex-col items-center justify-center gap-8 md:gap-3 lg:gap-5 xl:gap-7 2xl:gap-8">
           <div className="flex gap-x-4 md:gap-x-2 lg:gap-x-3 xl:gap-x-3.5 2xl:gap-x-4">
-            {options.map((option) => ( 
+            {options.map((option) => (
               <Button
                 key={option}
-                className={`md:text-[10px] md:h-6 lg:text-[12px] lg:h-7 xl:text-[14px] xl:h-8 2xl:text-[16px] 2xl:h-9 rounded-full ${buttonStyles(option)}`}
+                className={`rounded-full md:h-5 md:px-2 md:text-[8px] lg:h-7 lg:px-3.5 lg:text-[10px] xl:h-8 xl:px-4 xl:text-[12px] 2xl:h-9 2xl:px-5 2xl:text-[14px] ${buttonStyles(option)}`}
                 onClick={() => handleButtonClick(option)}
               >
                 {option}
@@ -73,7 +73,7 @@ const Help = () => {
             ))}
           </div>
 
-          <div className="flex flex-col md:flex-row gap-5">
+          <div className="flex flex-col gap-5 md:flex-row">
             {Array(3)
               .fill()
               .map((_, index) => (

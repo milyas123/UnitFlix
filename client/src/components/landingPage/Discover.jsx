@@ -17,41 +17,41 @@ const Discover = () => {
   const { isBeginning, isEnd } = useSwiperNavigation(projectsRef);
 
   return (
-    <div className="mt-[22rem] md:mt-0 bg-whiteLilac h-[90vh] flex justify-center items-center relative">
-      <div className="py-[6rem] md:py-0 w-full px-2.5 md:px-0 md:w-[65%] mx-auto flex flex-col md:gap-8 lg:gap-12 2xl:gap-14">
-        <div className="flex flex-col md:flex-row justify-between md:items-center">
-          <div className="space-y-2 md:space-y-0.5 2xl:space-y-2">
-            <h1 className="font-semibold text-[22px] md:text-[14px] lg:text-[18px] xl:text-[24px] 2xl:text-[30px]">
+    <div className="relative mt-[22rem] flex h-[90vh] items-center justify-center bg-whiteLilac md:mt-0 md:pt-14 lg:pt-0">
+      <div className="mx-auto flex w-full flex-col px-2.5 py-[6rem] md:w-[65%] md:gap-8 md:px-0 md:py-0 lg:mt-0 lg:gap-12 2xl:-mt-2 2xl:gap-14">
+        <div className="flex flex-col justify-between md:flex-row md:items-center">
+          <div className="space-y-2 md:space-y-0.5 xl:space-y-1 2xl:space-y-1.5">
+            <h1 className="text-[22px] font-semibold md:text-[14px] lg:text-[18px] xl:text-[22px] 2xl:text-[28px]">
               Discover Trending Projects
             </h1>
-            <p className="text-smokeyGrey text-[14px] md:text-[8px] lg:text-[10px] xl:text-[13px] 2xl:text-[16px]">
+            <p className="text-[14px] text-smokeyGrey md:text-[8px] lg:text-[10px] xl:text-[11px] 2xl:text-[13px]">
               Aliquam lacinia diam quis lacus euismod
             </p>
           </div>
 
           <Link
             to="/properties-for-sale"
-            className="hidden md:flex items-center gap-1.5 border-b-2 border-transparent hover:border-mirage transition duration-200 ease-in-out"
+            className="hidden items-center gap-1.5 border-b-2 border-transparent transition duration-200 ease-in-out hover:border-mirage md:flex"
           >
-            <p className="text-mirage font-semibold md:text-[8px] lg:text-[10px] xl:text-[13px] 2xl:text-[16px]">
+            <p className="font-semibold text-mirage md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]">
               See All Properties
             </p>
             <BsArrowUpRight className="md:text-sm 2xl:text-xl" />
           </Link>
         </div>
 
-        <div className="mt-9 mb-1 md:mt-0 md:mb-1 flex justify-between md:justify-end items-center md:-my-8 lg:-my-9 2xl:-my-10">
+        <div className="mb-1 mt-9 flex items-center justify-between md:-my-8 md:justify-end lg:-my-11 2xl:-my-12">
           <div className="flex items-center justify-end gap-x-3">
             <MoveLeft
-              className={`md:text-xs 2xl:text-xl cursor-pointer ${
-                isBeginning && "opacity-40 cursor-default"
+              className={`cursor-pointer md:text-xs 2xl:text-xl ${
+                isBeginning && "cursor-default opacity-40"
               }`}
               onClick={() => projectsRef.current.swiper.slidePrev()}
               disabled={isBeginning}
             />
             <MoveRight
-              className={`md:text-xs 2xl:text-xl cursor-pointer ${
-                isEnd && "opacity-40 cursor-default"
+              className={`cursor-pointer md:text-xs 2xl:text-xl ${
+                isEnd && "cursor-default opacity-40"
               }`}
               onClick={() => projectsRef.current.swiper.slideNext()}
               disabled={isEnd}
@@ -59,9 +59,9 @@ const Discover = () => {
           </div>
           <Link
             to="/properties-for-sale"
-            className="md:hidden flex items-center gap-1.5 border-b-2 border-transparent hover:border-mirage transition duration-200 ease-in-out"
+            className="flex items-center gap-1.5 border-b-2 border-transparent transition duration-200 ease-in-out hover:border-mirage md:hidden"
           >
-            <p className="text-mirage font-semibold md:text-[8px] lg:text-[10px] xl:text-[13px] 2xl:text-[16px]">
+            <p className="font-semibold text-mirage md:text-[8px] lg:text-[10px] xl:text-[13px] 2xl:text-[16px]">
               See All Properties
             </p>
             <BsArrowUpRight className="md:text-sm 2xl:text-xl" />

@@ -11,19 +11,19 @@ const StickyIcons = ({ showIcons }) => {
   return (
     <>
       <div
-        className={`hidden md:flex fixed top-1/2 right-5 transform -translate-y-1/2 flex-col items-center space-y-2 ${
+        className={`fixed right-5 top-1/2 hidden -translate-y-1/2 transform flex-col items-center space-y-2 md:flex ${
           showIcons ? "show-icons" : "hide-icons"
         }`}
       >
         <img
           src="/assets/imgs/call-vector.png"
-          className="size-[55px] animated-icon cursor-pointer"
+          className="animated-icon size-[55px] cursor-pointer"
           alt="callcenter-vector"
           onClick={() => setShowInquiryModal(true)}
         />
         <img
           src="/assets/imgs/whatsapp-icon.png"
-          className="size-[50px] animated-icon cursor-pointer"
+          className="animated-icon size-[50px] cursor-pointer"
           alt="whatsapp-icon"
           onClick={handleWhatsappClick}
         />

@@ -13,7 +13,7 @@ const buttonItems = [
 const Navbar = () => {
   return (
     <>
-      <div className="hidden md:flex items-center md:h-[3.5rem] lg:h-[4.5rem] xl:h-[5rem] 2xl:h-[5.5rem] bg-black bg-opacity-20 absolute z-[100] top-0 w-full">
+      <div className="hidden md:flex items-center md:h-[3rem] lg:h-[4rem] xl:h-[5rem] 2xl:h-[5.5rem] bg-black bg-opacity-20 absolute z-[100] top-0 w-full">
         <div className="w-[80%] xl:w-[75%] mx-auto flex justify-between items-center">
           <div className="flex items-center md:gap-5 lg:gap-12 xl:gap-16 2xl:gap-24">
             <Link to="/">
@@ -41,7 +41,7 @@ const Navbar = () => {
             <Link to="/contact-us">
               <Button
                 variant="outline"
-                className="bg-transparent rounded-full border-white md:h-7 md:px-2.5 md:text-[8px] lg:h-8 lg:px-3 lg:text-[10px] xl:h-9 2xl:h-10 2xl:px-4 xl:text-[13px] 2xl:text-[16px]"
+                className="bg-transparent rounded-full border-white md:h-6 md:px-3.5 md:text-[8px] lg:h-8 lg:px-3 lg:text-[10px] xl:h-9 2xl:h-10 2xl:px-4 xl:text-[13px] 2xl:text-[16px]"
               >
                 Contact Us
               </Button>

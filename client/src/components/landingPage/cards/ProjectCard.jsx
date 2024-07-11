@@ -4,7 +4,7 @@ const ProjectCard = () => {
   const textSizes = "text-[16px] md:text-[7px] lg:text-[10px] xl:text-[12px] 2xl:text-[15px]";
 
   return (
-    <div className="md:w-[170px] md:rounded-md lg:w-[220px] xl:w-[270px] 2xl:w-[320px] 2xl:rounded-xl shadow-lg">
+    <div className="md:w-[170px] md:rounded-md lg:w-[200px] xl:w-[270px] 2xl:w-[320px] 2xl:rounded-xl shadow-lg">
       <div className="relative">
         <img
           className="w-full rounded-xl h-[310px] md:h-[140px] md:rounded-md lg:h-[190px] lg:rounded-lg xl:h-[250px] 2xl:h-[310px] 2xl:rounded-xl object-cover"
@@ -18,11 +18,11 @@ const ProjectCard = () => {
           <p className={`text-center ${textSizes}`}>
             Luxurious 1-3 Bedroom Waterfront Apartments & Villas
           </p>
-          <p className={`text-center text-smokeyGrey font-semibold md:mt-0.5 lg:mt-1 xl:mt-1.5 2xl:mt-2 ${textSizes}`}>
+          <p className={`text-center text-gray-700 font-semibold md:mt-0.5 lg:mt-1 xl:mt-1.5 2xl:mt-2 ${textSizes}`}>
             Starting From <br /> AED 2,000,000
           </p>
           <div className="flex justify-center md:mt-1.5 lg:mt-2 xl:mt-3 2xl:mt-4">
-            <Button className={`font-semibold md:h-5 md:px-2 lg:h-6 lg:px-3 xl:h-7 xl:px-4 2xl:px-5 2xl:py-6 ${textSizes}`}>
+            <Button className={`font-semibold md:h-2 md:px-2 lg:h-6 lg:px-3 xl:h-7 xl:px-4 2xl:h-8 ${textSizes}`}>
               Register Your Interest
             </Button>
           </div>
