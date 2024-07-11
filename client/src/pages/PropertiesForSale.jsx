@@ -3,6 +3,7 @@ import Navbar from "@/components/common/Navbar";
 import Header from "@/components/propertiesForSale/Header";
 import Properties from "@/components/propertiesForSale/Properties";
 import ScrollToTop from "@/components/common/ScrollToTop";
+import StickyIcons from "@/components/common/StickyIcons";
 
 import useScrollProgress from "@/hooks/useScrollProgress";
 
@@ -17,6 +18,7 @@ const PropertiesForSale = () => {
         <Properties />
       </div>
       <Footer />
+      <StickyIcons showIcons={showTopButton} />
       {showTopButton && <ScrollToTop />}
     </>
   );

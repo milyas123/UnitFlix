@@ -34,10 +34,10 @@ const Navbar = () => {
             </div>
           </div>
           <div className="text-white flex items-center md:gap-x-3 xl:gap-x-6 2xl:gap-x-10">
-            <p className="flex items-center gap-x-1.5 md:text-[8px] lg:text-[10px] xl:text-[13px] 2xl:text-[16px]">
+            <a href="tel:+(088) 123 456 789" className="flex items-center gap-x-1.5 md:text-[8px] lg:text-[10px] xl:text-[13px] 2xl:text-[16px]">
               <GrPhone size={20} />
               +(088) 123 456 789
-            </p>
+            </a>
             <Link to="/contact-us">
               <Button
                 variant="outline"

@@ -11,6 +11,7 @@ import PaymentPlan from "@/components/propertyDetails/PaymentPlan";
 import SimilarProjects from "@/components/propertyDetails/SimilarProjects";
 import SimilarProperties from "@/components/propertyDetails/SimilarProperties";
 import ScrollToTop from "@/components/common/ScrollToTop";
+import StickyIcons from "@/components/common/StickyIcons";
 
 import useScrollProgress from "@/hooks/useScrollProgress";
 
@@ -41,6 +42,7 @@ const PropertyDetails = () => {
         </div>
       </div>
       <Footer />
+      <StickyIcons showIcons={showTopButton} />
       {showTopButton && <ScrollToTop />}
     </>
   );

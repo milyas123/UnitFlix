@@ -6,23 +6,25 @@ import PropertyActivities from "@/components/manageProperties/PropertyActivities
 import PropertyIntro from "@/components/manageProperties/PropertyIntro";
 import Testimonials from "@/components/manageProperties/Testimonials";
 import ScrollToTop from "@/components/common/ScrollToTop";
+import StickyIcons from "@/components/common/StickyIcons";
 
 import useScrollProgress from "@/hooks/useScrollProgress";
 
 const ManageProperties = () => {
-  const showTopButton = useScrollProgress("activities-section");
+  const showTopButton = useScrollProgress("intro-section");
 
   return (
     <>
       <Navbar />
       <Hero />
-      <PropertyIntro />
-      <div id="activities-section">
-        <PropertyActivities />
+      <div id="intro-section">
+        <PropertyIntro />
       </div>
+      <PropertyActivities />
       <Testimonials />
       <CTA />
       <Footer />
+      <StickyIcons showIcons={showTopButton} />
       {showTopButton && <ScrollToTop />}
     </>
   );

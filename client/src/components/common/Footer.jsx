@@ -47,18 +47,25 @@ const Footer = () => {
                 <p className="text-[14px] md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px] text-slate font-regular whitespace-nowrap">
                   Total Free Customer Care
                 </p>
-                <p className="font-semibold text-[15px] md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:text-[15px]">
+                <a
+                  href="tel:+(088) 123 456 789"
+                  className="font-semibold text-[15px] md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:text-[15px]"
+                >
                   +(088) 123 456 789
-                </p>
+                </a>
               </div>
 
               <div className="space-y-1.5">
                 <p className="text-[14px] md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px] text-slate font-regular">
                   Live Support?
                 </p>
-                <p className="font-semibold text-[15px] md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:text-[15px]">
+                <a
+                  href="mailto:hi@homez.com"
+                  target="_top"
+                  className="font-semibold text-[15px] md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:text-[15px]"
+                >
                   hi@homez.com
-                </p>
+                </a>
               </div>
             </div>
 

@@ -10,7 +10,7 @@ const ScrollToTop = () => {
 
   return (
     <div
-      className="fixed right-5 bottom-14 z-100 cursor-pointer"
+      className="fixed right-5 bottom-14 z-[1000] cursor-pointer"
       onClick={onGoUp}
     >
       <div

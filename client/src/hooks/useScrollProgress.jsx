@@ -8,8 +8,7 @@ const useScrollProgress = (id) => {
       const section = document.getElementById(id);
       if (section) {
         const sectionPosition = section.getBoundingClientRect().top;
-        const windowHeight = window.innerHeight;
-        setIsVisible(sectionPosition < windowHeight);
+        sectionPosition <= 0 ? setIsVisible(true) : setIsVisible(false);
       }
     };
 

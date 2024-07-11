@@ -1,6 +1,9 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import Slider from "react-slick";
 import { BsArrowUpRight, BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { X } from "lucide-react";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const images = [
   "/assets/imgs/p1.jpg",
@@ -13,9 +16,32 @@ const images = [
   "/assets/imgs/p8.jpg",
 ];
 
+const SampleNextArrow = (props) => {
+  const { onClick } = props;
+  return (
+    <div
+      className="absolute top-1/2 transform -translate-y-1/2 -right-10 z-10 cursor-pointer"
+      onClick={onClick}
+    >
+      <BsChevronRight size={20} className="text-white" />
+    </div>
+  );
+};
+
+const SamplePrevArrow = (props) => {
+  const { onClick } = props;
+  return (
+    <div
+      className="absolute top-1/2 transform -translate-y-1/2 -left-10 z-10 cursor-pointer"
+      onClick={onClick}
+    >
+      <BsChevronLeft size={20} className="text-white" />
+    </div>
+  );
+};
+
 const ImageGallery = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -25,14 +51,13 @@ const ImageGallery = () => {
     setModalIsOpen(false);
   };
 
-  const nextImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-  };
-
-  const prevImage = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
-    );
+  const settings = {
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
   };
 
   return (
@@ -44,9 +69,7 @@ const ImageGallery = () => {
           onClick={openModal}
           className="cursor-pointer flex items-center gap-1.5 border-b-2 border-transparent hover:border-mirage transition duration-200 ease-in-out"
         >
-          <p className="text-mirage font-semibold text-[15px]">
-            See All Images
-          </p>
+          <p className="text-mirage font-semibold text-[15px]">See All Images</p>
           <BsArrowUpRight size={20} />
         </div>
       </div>
@@ -124,29 +147,17 @@ const ImageGallery = () => {
         <div className="fixed z-[600] inset-0 bg-black bg-opacity-70 flex justify-center items-center">
           <div className="w-full max-w-5xl rounded-lg">
             <X
-              className="text-white opacity-60 hover:opacity-100 absolute top-6 right-5 cursor-pointer transition-all duration-200 ease-in-out"
+              className="text-white opacity-60 hover:opacity-100 absolute top-6 right-5 z-20 cursor-pointer transition-all duration-200 ease-in-out"
               size={35}
               onClick={closeModal}
             />
-            <div className="flex justify-between items-center">
-              <BsChevronLeft
-                size={50}
-                onClick={prevImage}
-                className="pe-6 text-white cursor-pointer"
-              />
-              <div className="w-full h-[500px] overflow-hidden rounded-lg">
-                <img
-                  src={images[currentImageIndex]}
-                  className="object-cover w-full h-full"
-                  alt=""
-                />
-              </div>
-              <BsChevronRight
-                size={47}
-                onClick={nextImage}
-                className="ps-5 text-white cursor-pointer"
-              />
-            </div>
+            <Slider {...settings}>
+              {images.map((image, index) => (
+                <div key={index} className="w-full h-[500px] overflow-hidden rounded-lg">
+                  <img src={image} className="object-cover w-full h-full" alt="" />
+                </div>
+              ))}
+            </Slider>
           </div>
         </div>
       )}
