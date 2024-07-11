@@ -1,8 +1,8 @@
-import React from "react";
-import { MdOutlineDeleteForever } from "react-icons/md";
 import { RiParkingBoxLine } from "react-icons/ri";
-import { TbEditCircle } from "react-icons/tb";
 import { Button } from "../ui/button";
+
+import Edit from "../svgs/Edit";
+import Delete from "../svgs/Delete";
 
 const AddFeaturesAndAmenities = () => {
   return (
@@ -23,15 +23,9 @@ const AddFeaturesAndAmenities = () => {
           <div className="flex flex-col items-center text-center space-y-3">
             <RiParkingBoxLine />
             <p className="text-14px">Parking Spaces: 1</p>
-            <div className="flex items-center justify-center gap-x-1 text-smokeyGrey">
-              <TbEditCircle
-                size={25}
-                className="cursor-pointer hover:text-blue-500 transition-all duration-200 ease-in-out"
-              />
-              <MdOutlineDeleteForever
-                size={25}
-                className="cursor-pointer hover:text-red-600 transition-all duration-200 ease-in-out"
-              />
+            <div className="flex items-center justify-center gap-x-1.5 text-smokeyGrey">
+              <Edit size={22} />
+              <Delete size={22} />
             </div>
           </div>
         </div>

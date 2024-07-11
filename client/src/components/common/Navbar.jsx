@@ -4,8 +4,8 @@ import { GrPhone } from "react-icons/gr";
 import { Link } from "react-router-dom";
 
 const buttonItems = [
-  { name: "Buy", link: "/buy" },
-  { name: "Rent", link: "/rent" },
+  { name: "Buy", link: "/properties-for-sale" },
+  { name: "Rent", link: "/properties-for-sale" },
   { name: "Manage", link: "/manage-properties" },
   { name: "About Us", link: "/about-us" },
 ];

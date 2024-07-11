@@ -5,6 +5,7 @@ import InfoList from "./InfoList";
 import PropertyCard from "./PropertyCard";
 import { FiChevronDown } from "react-icons/fi";
 import { IoMdCheckmark } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 const locationData = [
   { name: "Al Reem Island", count: "10,635" },
@@ -15,12 +16,7 @@ const locationData = [
   { name: "Saadiyat Island", count: "5,635" },
 ];
 
-const sortOptions = [
-  "Price Ascending ↑",
-  "Price Descending ↓",
-  "Date Added Asc ↑",
-  "Date Added Desc ↓",
-];
+const sortOptions = ["Price ↑", "Price ↓", "Date Added ↑", "Date Added ↓"];
 
 const Properties = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -56,18 +52,28 @@ const Properties = () => {
         <h3 className="font-medium text-[20px] md:text-[14px] lg:text-[16px] xl:text-[20px] 2xl:text-[24px]">
           Properties for sale in Abu Dhabi
         </h3>
-        <Button className="rounded-lg gap-x-1.5">
-          Sell My Property <BsArrowUpRight size={17} />
-        </Button>
+        <Link to="/add-property">
+          <Button className="rounded-lg gap-x-1.5">
+            Sell My Property <BsArrowUpRight size={17} />
+          </Button>
+        </Link>
       </div>
 
-      <div className="mt-5 border px-4 py-2.5 rounded-md flex justify-between items-center md:hidden" onClick={toggleFilters}>
+      <div
+        className="mt-5 border px-4 py-2.5 rounded-md flex justify-between items-center md:hidden"
+        onClick={toggleFilters}
+      >
         <h2 className="font-semibold text-[20px]">Filters</h2>
         <FiChevronDown />
       </div>
 
       <div className="mt-4 flex flex-col md:flex-row">
-        <div className={`w-full md:w-[19%] flex flex-col gap-y-3 ${showFilters ? "" : "hidden md:flex"}`} id="filters">
+        <div
+          className={`w-full md:w-[19%] flex flex-col gap-y-3 ${
+            showFilters ? "" : "hidden md:flex"
+          }`}
+          id="filters"
+        >
           <InfoList
             heading="Locations"
             count={locationData.length}

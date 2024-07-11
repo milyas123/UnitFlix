@@ -58,7 +58,7 @@ const PropertyInformation = () => {
 
         <div className="space-y-2.5 w-full">
           <label className="font-semibold text-[16px]">Select Property Type</label>
-          <div className="bg-whiteLilac rounded-lg p-1.5 flex">
+          <div className="bg-[#F1F1F1] rounded-lg p-1.5 flex">
             {propertyTypes.map((type) => (
               <div
                 key={type}

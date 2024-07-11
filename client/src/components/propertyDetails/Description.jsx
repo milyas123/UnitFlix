@@ -17,7 +17,7 @@ const Description = () => {
             <h1 className="font-semibold text-[32px]">
               One by Bingati Summary
             </h1>
-            <Button className="rounded-md bg-sunriseOrange text-white border-sunriseOrange hover:border-sunriseOrange hover:text-sunriseOrange hover:bg-transparent">
+            <Button className="rounded-md bg-sunriseOrange text-white border-sunriseOrange hover:bg-sunriseOrange hover:cursor-default">
               New Launch
             </Button>
           </div>

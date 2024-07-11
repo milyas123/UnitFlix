@@ -39,13 +39,13 @@ const Dropdown = ({ options, placeholder }) => {
         {selectedOption || placeholder}
       </button>
       <ul
-        className={`absolute max-w-[15rem] bg-white rounded-md mt-1 z-10 shadow-lg transform origin-top transition-all duration-300 ${
+        className={`absolute md:w-[6rem] lg:w-[8rem] xl:w-[10rem] 2xl:w-[12rem] bg-white rounded-md mt-1 z-10 shadow-lg transform origin-top transition-all duration-300 ${
           isOpen ? 'max-h-[15rem] opacity-100 scale-y-100' : 'max-h-0 opacity-0 scale-y-0'
         }`}
       >
         {isOpen && (
           <>
-            <li className="p-2">
+            <li className="md:p-0.5 xl:p-2">
               <input
                 type="text"
                 placeholder="Search..."
@@ -57,7 +57,7 @@ const Dropdown = ({ options, placeholder }) => {
             {filteredOptions.map((option, index) => (
               <li
                 key={index}
-                className="p-2 cursor-pointer whitespace-nowrap hover:bg-gray-100 flex justify-between items-center"
+                className="md:px-1.5 md:py-1 lg:p-2 cursor-pointer whitespace-nowrap hover:bg-gray-100 flex justify-between items-center"
                 onClick={() => handleOptionClick(option)}
               >
                 {option}

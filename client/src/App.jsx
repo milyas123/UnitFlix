@@ -21,19 +21,20 @@ function App() {
       <BrowserRouter>
         <Suspense
           fallback={
-            <Lottie
-              animationData={RealEstateAnimation}
-              loop={true}
-              rendererSettings={{ preserveAspectRatio: "xMidYMid slice" }}
-            />
+            <div className="fixed inset-0 flex justify-center items-center">
+              <div className="w-[100vw] h-screen">
+                <Lottie
+                  animationData={RealEstateAnimation}
+                  loop={true}
+                  rendererSettings={{ preserveAspectRatio: "xMidYMid slice" }}
+                />
+              </div>
+            </div>
           }
         >
           <Routes>
             <Route exact path="/" element={<LandingPage />} />
-            <Route
-              path="/properties-for-sale"
-              element={<PropertiesForSale />}
-            />
+            <Route path="/properties-for-sale" element={<PropertiesForSale />} />
             <Route path="/manage-properties" element={<ManageProperties />} />
             <Route path="/property-details" element={<PropertyDetails />} />
             <Route path="/contact-us" element={<ContactUs />} />

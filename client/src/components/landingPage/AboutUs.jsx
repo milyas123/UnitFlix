@@ -29,8 +29,9 @@ const AboutUs = () => {
   ];
 
   return (
-    <div className="bg-mirage text-white py-[3rem] md:h-[70vh] flex justify-center items-center">
-      <div className="w-full px-2.5 md:px-0 md:w-[60%] mx-auto flex flex-col gap-10 md:gap-[1.5rem] lg:gap-[3.5rem] xl:gap-[5rem] 2xl:gap-[6rem]">
+    <div className="bg-mirage text-white py-[3rem] md:h-[70vh] flex justify-center items-center relative">
+      <img src="/assets/imgs/about-bg.png" className="object-cover absolute inset-0" alt="" />
+      <div className="relative z-10 w-full px-2.5 md:px-0 md:w-[60%] mx-auto flex flex-col gap-10 md:gap-[1.5rem] lg:gap-[3.5rem] xl:gap-[5rem] 2xl:gap-[6rem]">
         <div className="flex flex-col gap-4 text-center">
           <h1 className="font-semibold text-center text-[20px] md:text-[14px] lg:text-[18px] xl:text-[24px] 2xl:text-[30px]">
             Who are we & Why Choose Us?

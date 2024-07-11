@@ -41,15 +41,6 @@ const Discover = () => {
         </div>
 
         <div className="mt-9 mb-1 md:mt-0 md:mb-1 flex justify-between md:justify-end items-center md:-my-8 lg:-my-9 2xl:-my-10">
-          <Link
-            to="/properties-for-sale"
-            className="md:hidden flex items-center gap-1.5 border-b-2 border-transparent hover:border-mirage transition duration-200 ease-in-out"
-          >
-            <p className="text-mirage font-semibold md:text-[8px] lg:text-[10px] xl:text-[13px] 2xl:text-[16px]">
-              See All Properties
-            </p>
-            <BsArrowUpRight className="md:text-sm 2xl:text-xl" />
-          </Link>
           <div className="flex items-center justify-end gap-x-3">
             <MoveLeft
               className={`md:text-xs 2xl:text-xl cursor-pointer ${
@@ -66,6 +57,15 @@ const Discover = () => {
               disabled={isEnd}
             />
           </div>
+          <Link
+            to="/properties-for-sale"
+            className="md:hidden flex items-center gap-1.5 border-b-2 border-transparent hover:border-mirage transition duration-200 ease-in-out"
+          >
+            <p className="text-mirage font-semibold md:text-[8px] lg:text-[10px] xl:text-[13px] 2xl:text-[16px]">
+              See All Properties
+            </p>
+            <BsArrowUpRight className="md:text-sm 2xl:text-xl" />
+          </Link>
         </div>
 
         <div>

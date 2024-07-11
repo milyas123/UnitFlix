@@ -2,6 +2,8 @@ import { PiListStar } from "react-icons/pi";
 import { Button } from "../ui/button";
 import { TbEditCircle } from "react-icons/tb";
 import { MdOutlineDeleteForever } from "react-icons/md";
+import Edit from "../svgs/Edit";
+import Delete from "../svgs/Delete";
 
 const AddKeyHighlights = () => {
   return (
@@ -29,9 +31,9 @@ const AddKeyHighlights = () => {
               4-bedroom royal penthouses with private pools.
             </p>
 
-            <div className="flex items-center justify-center gap-x-1 text-smokeyGrey">
-              <TbEditCircle size={25} className="cursor-pointer hover:text-blue-500 transition-all duration-200 ease-in-out" />
-              <MdOutlineDeleteForever size={25} className="cursor-pointer hover:text-red-600 transition-all duration-200 ease-in-out" />
+            <div className="flex items-center justify-center gap-x-1.5 text-smokeyGrey">
+              <Edit size={22} />
+              <Delete size={22} />
             </div>
           </div>
         </div>

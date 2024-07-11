@@ -21,25 +21,30 @@ const Filters = () => {
     setValue(updatedValue);
   };
 
-  const handleMouseDown = (index) => (e) => {
-    const onMouseMove = (e) => {
-      const slider = e.target.closest(".slider-container");
-      const rect = slider.getBoundingClientRect();
-      const newValue = ((e.clientX - rect.left) / rect.width) * 100;
-      if (index === 0 && newValue >= 0 && newValue <= value[1]) {
-        handleSliderChange(0, Math.round(newValue));
-      } else if (index === 1 && newValue >= value[0] && newValue <= 100) {
-        handleSliderChange(1, Math.round(newValue));
-      }
+  const handleMove = (index, e) => {
+    const isTouch = e.type.includes("touch");
+    const clientX = isTouch ? e.touches[0].clientX : e.clientX;
+    const slider = e.target.closest(".slider-container");
+    const rect = slider.getBoundingClientRect();
+    const newValue = ((clientX - rect.left) / rect.width) * 100;
+    if (index === 0 && newValue >= 0 && newValue <= value[1]) {
+      handleSliderChange(0, Math.round(newValue));
+    } else if (index === 1 && newValue >= value[0] && newValue <= 100) {
+      handleSliderChange(1, Math.round(newValue));
+    }
+  };
+
+  const handleDown = (index) => (e) => {
+    const isTouch = e.type.includes("touch");
+
+    const moveHandler = (e) => handleMove(index, e);
+    const upHandler = () => {
+      document.removeEventListener(isTouch ? "touchmove" : "mousemove", moveHandler);
+      document.removeEventListener(isTouch ? "touchend" : "mouseup", upHandler);
     };
 
-    const onMouseUp = () => {
-      document.removeEventListener("mousemove", onMouseMove);
-      document.removeEventListener("mouseup", onMouseUp);
-    };
-
-    document.addEventListener("mousemove", onMouseMove);
-    document.addEventListener("mouseup", onMouseUp);
+    document.addEventListener(isTouch ? "touchmove" : "mousemove", moveHandler);
+    document.addEventListener(isTouch ? "touchend" : "mouseup", upHandler);
   };
 
   return (
@@ -113,7 +118,8 @@ const Filters = () => {
                   transform: "translateX(-50%)",
                   zIndex: "2",
                 }}
-                onMouseDown={handleMouseDown(0)}
+                onMouseDown={handleDown(0)}
+                onTouchStart={handleDown(0)}
               />
               <div
                 className="absolute bg-white border border-black rounded-full cursor-pointer size-5 md:size-3 lg:size-4 xl:size-5 2xl:size-6"
@@ -122,7 +128,8 @@ const Filters = () => {
                   transform: "translateX(-50%)",
                   zIndex: "2",
                 }}
-                onMouseDown={handleMouseDown(1)}
+                onMouseDown={handleDown(1)}
+                onTouchStart={handleDown(1)}
               />
             </div>
             <div
