@@ -3,13 +3,13 @@ import { Button } from "../ui/button";
 
 const Overview = () => {
   return (
-    <div className="md:mt-7 lg:mt-9 xl:mt-12 2xl:mt-14">
-      <div className="w-full border-b pb-3 md:mb-2 lg:mb-3 2xl:mb-4">
-        <h1 className="font-medium md:text-[12px] lg:text-[15px] xl:text-[18px] 2xl:text-[24px]">
+    <div className="mt-5 md:mt-7 lg:mt-9 xl:mt-12 2xl:mt-14">
+      <div className="w-full pb-3 md:mb-2 md:border-b lg:mb-3 2xl:mb-4">
+        <h1 className="text-[24px] font-medium md:text-[12px] lg:text-[15px] xl:text-[18px] 2xl:text-[24px]">
           Overview
         </h1>
       </div>
-      <p className="md:text-[8px] lg:text-[10px] xl:text-[13px] 2xl:text-[16px]">
+      <p className="text-[14px] md:text-[8px] lg:text-[10px] xl:text-[13px] 2xl:text-[16px]">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a efficitur
         sapien. In non urna consectetur, rhoncus nulla ut, vulputate neque.
         Praesent vel sollicitudin dolor. Donec pulvinar risus vitae condimentum
@@ -57,12 +57,12 @@ const Overview = () => {
         porttitor nulla. Proin dolor orci, congue eu mauris quis, tempor
         convallis arcu.
       </p>
-      <div className="flex flex-col items-start gap-2 md:mt-2 lg:mt-3 2xl:mt-4">
-        <h1 className="font-medium md:text-[12px] lg:text-[15px] xl:text-[18px] 2xl:text-[24px]">
+      <div className="my-4 flex flex-row items-center justify-between gap-2 md:mb-0 md:mt-2 md:flex-col md:items-start md:justify-start lg:mt-3 2xl:mt-4">
+        <h1 className="text-[24px] font-medium md:text-[12px] lg:text-[15px] xl:text-[18px] 2xl:text-[24px]">
           Floor Plan
         </h1>
 
-        <Button className="items-center gap-x-1 rounded-md border bg-transparent text-mirage hover:text-white md:px-1 md:text-[7px] lg:h-6 lg:text-[9px]">
+        <Button className="h-8 items-center gap-x-1 rounded-md border bg-transparent text-mirage hover:text-white md:px-1 md:text-[7px] lg:h-6 lg:text-[9px]">
           <FileDown size={15} />
           Download Floor Plan
         </Button>

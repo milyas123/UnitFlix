@@ -22,8 +22,8 @@ const PropertyDetails = () => {
     <>
       <Navbar />
       <Hero />
-      <div className="mx-auto md:mt-7 lg:mt-9 xl:mt-12 2xl:mt-16 flex w-[91%]">
-        <div className="w-[75%]">
+      <div className="w-[95%] mx-auto flex mt-7 md:mt-7 md:w-[91%] lg:mt-9 xl:mt-12 2xl:mt-16">
+        <div className="w-full md:w-[75%]">
           <Description />
           <div id="highlights-section">
             <Highlights />
@@ -35,10 +35,10 @@ const PropertyDetails = () => {
           <SimilarProjects />
           <SimilarProperties />
         </div>
-        <div className="ms-auto w-[23.5%]">
-          {/* <div className="sticky top-5">
+        <div className="ms-auto hidden w-[23.5%] md:flex">
+          <div className="sticky top-5">
             <GetInTouch />
-          </div> */}
+          </div>
         </div>
       </div>
       <Footer />

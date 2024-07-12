@@ -17,7 +17,7 @@ const SimilarProperties = () => {
   return (
     <div className="md:mt-5 lg:mt-8 xl:mt-14 2xl:mt-16">
       <div className="flex items-center justify-between">
-        <h1 className="font-medium md:text-[12px] lg:text-[15px] xl:text-[18px] 2xl:text-[24px]">
+        <h1 className="text-[16px] font-medium md:text-[12px] lg:text-[15px] xl:text-[18px] 2xl:text-[24px]">
           Similar Properties in Area
         </h1>
         <div className="flex items-center gap-3">
@@ -35,7 +35,7 @@ const SimilarProperties = () => {
           />
         </div>
       </div>
-      <div className="md:mt-2 lg:mt-3 xl:mt-4 2xl:mt-5">
+      <div className="mt-4 md:mt-2 lg:mt-3 xl:mt-4 2xl:mt-5">
         <Swiper
           ref={propertiesSwiperRef}
           slidesPerView={1}
@@ -45,7 +45,7 @@ const SimilarProperties = () => {
           }}
           spaceBetween={16}
           modules={[Navigation]}
-          className="md:h-[370px] lg:h-[390px] xl:h-[430px] 2xl:h-[550px]"
+          className="h-[600px] md:h-[370px] lg:h-[390px] xl:h-[430px] 2xl:h-[550px]"
         >
           {[1, 2, 3, 4, 5, 6].map((item) => (
             <SwiperSlide key={item}>

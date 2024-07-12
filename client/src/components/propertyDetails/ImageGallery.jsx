@@ -61,9 +61,9 @@ const ImageGallery = () => {
   };
 
   return (
-    <div className="xl:12 md:mt-8 lg:mt-10 2xl:mt-16">
+    <div className="mt-12 md:mt-8 lg:mt-10 xl:mt-12 2xl:mt-16">
       <div className="flex items-center justify-between">
-        <h1 className="font-medium md:text-[12px] lg:text-[15px] xl:text-[18px] 2xl:text-[24px]">
+        <h1 className="text-[24px] font-medium md:text-[12px] lg:text-[15px] xl:text-[18px] 2xl:text-[24px]">
           Image Gallery
         </h1>
 
@@ -71,24 +71,24 @@ const ImageGallery = () => {
           onClick={openModal}
           className="flex cursor-pointer items-center gap-1.5 border-b-2 border-transparent transition duration-200 ease-in-out hover:border-mirage"
         >
-          <p className="font-semibold text-mirage md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:text-[15px]">
+          <p className="text-[14px] font-semibold text-mirage md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:text-[15px]">
             See All Images
           </p>
           <BsArrowUpRight size={18} />
         </div>
       </div>
 
-      <div className="flex md:mt-2 lg:mt-3 xl:mt-5 2xl:mt-6">
-        <div className="w-[69.5%] md:space-y-2.5 lg:space-y-3 2xl:space-y-5">
-          <div className="flex">
-            <div className="w-[32%] overflow-hidden md:h-[120px] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]">
+      <div className="mt-4 flex flex-col gap-5 md:mt-2 md:flex-row md:gap-0 lg:mt-3 xl:mt-5 2xl:mt-6">
+        <div className="w-full space-y-5 md:w-[69.5%] md:space-y-2.5 lg:space-y-3 2xl:space-y-5">
+          <div className="flex flex-col justify-between gap-5 md:flex-row md:gap-0">
+            <div className="h-[300px] overflow-hidden rounded-lg md:h-[120px] md:w-[32%] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]">
               <img
                 src="/assets/imgs/p2.jpg"
                 className="h-full w-full transform object-cover transition-transform duration-300 hover:scale-105"
                 alt=""
               />
             </div>
-            <div className="ms-auto w-[66%] overflow-hidden md:h-[120px] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]">
+            <div className="h-[300px] overflow-hidden rounded-lg md:ms-auto md:h-[120px] md:w-[66%] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]">
               <img
                 src="/assets/imgs/p3.jpg"
                 className="h-full w-full transform object-cover transition-transform duration-300 hover:scale-105"
@@ -97,22 +97,22 @@ const ImageGallery = () => {
             </div>
           </div>
 
-          <div className="flex justify-between">
-            <div className="w-[32%] overflow-hidden md:h-[120px] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]">
+          <div className="flex flex-col justify-between gap-5 md:flex-row md:gap-0">
+            <div className="h-[300px] w-full overflow-hidden rounded-lg md:h-[120px] md:w-[32%] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]">
               <img
                 src="/assets/imgs/p4.jpg"
                 className="h-full w-full transform object-cover transition-transform duration-300 hover:scale-105"
                 alt=""
               />
             </div>
-            <div className="w-[32%] overflow-hidden md:h-[120px] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]">
+            <div className="h-[300px] w-full overflow-hidden rounded-lg md:h-[120px] md:w-[32%] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]">
               <img
                 src="/assets/imgs/p6.jpg"
                 className="h-full w-full transform object-cover transition-transform duration-300 hover:scale-105"
                 alt=""
               />
             </div>
-            <div className="w-[32%] overflow-hidden md:h-[120px] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]">
+            <div className="h-[300px] w-full overflow-hidden rounded-lg md:h-[120px] md:w-[32%] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]">
               <img
                 src="/assets/imgs/p7.jpg"
                 className="h-full w-full transform object-cover transition-transform duration-300 hover:scale-105"
@@ -120,15 +120,15 @@ const ImageGallery = () => {
               />
             </div>
           </div>
-          <div className="flex">
-            <div className="w-[66%] overflow-hidden md:h-[120px] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]">
+          <div className="flex flex-col justify-between gap-5 md:flex-row md:gap-0">
+            <div className="h-[300px] w-full overflow-hidden rounded-lg md:h-[120px] md:w-[66%] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]">
               <img
                 src="/assets/imgs/p8.jpg"
                 className="h-full w-full transform object-cover transition-transform duration-300 hover:scale-105"
                 alt=""
               />
             </div>
-            <div className="ms-auto w-[32%] overflow-hidden md:h-[120px] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]">
+            <div className="h-[300px] w-full overflow-hidden rounded-lg md:ms-auto md:h-[120px] md:w-[32%] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]">
               <img
                 src="/assets/imgs/p5.jpg"
                 className="h-full w-full transform object-cover transition-transform duration-300 hover:scale-105"
@@ -138,7 +138,7 @@ const ImageGallery = () => {
           </div>
         </div>
 
-        <div className="ms-auto w-[29%] overflow-hidden md:rounded-sm xl:rounded-lg">
+        <div className="h-[300px] w-full overflow-hidden md:ms-auto md:h-auto md:w-[29%] md:rounded-sm xl:rounded-lg">
           <img
             src="/assets/imgs/p1.jpg"
             className="h-full w-full transform object-cover transition-transform duration-300 hover:scale-105"

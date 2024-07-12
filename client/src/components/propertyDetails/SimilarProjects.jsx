@@ -15,9 +15,9 @@ const SimilarProjects = () => {
   const { isBeginning, isEnd } = useSwiperNavigation(projectsSwiperRef);
 
   return (
-    <div className="md:mt-10 lg:mt-12 xl:mt-16 2xl:mt-24">
+    <div className="mt-8 md:mt-10 lg:mt-12 xl:mt-16 2xl:mt-24">
       <div className="flex items-center justify-between">
-        <h1 className="font-medium md:text-[12px] lg:text-[15px] xl:text-[18px] 2xl:text-[24px]">
+        <h1 className="text-[16px] font-medium md:text-[12px] lg:text-[15px] xl:text-[18px] 2xl:text-[24px]">
           Similar Projects from Developer
         </h1>
         <div className="flex items-center gap-3">
@@ -35,7 +35,7 @@ const SimilarProjects = () => {
           />
         </div>
       </div>
-      <div className="md:mt-2 lg:mt-3 xl:mt-4 2xl:mt-5">
+      <div className="mt-4 md:mt-2 lg:mt-3 xl:mt-4 2xl:mt-5">
         <Swiper
           ref={projectsSwiperRef}
           slidesPerView={1}
@@ -45,7 +45,7 @@ const SimilarProjects = () => {
           }}
           spaceBetween={16}
           modules={[Navigation]}
-          className="md:h-[220px] lg:h-[260px] xl:h-[330px] 2xl:h-[420px]"
+          className="h-[450px] md:h-[220px] lg:h-[260px] xl:h-[330px] 2xl:h-[420px]"
         >
           {[1, 2, 3, 4, 5, 6].map((item) => (
             <SwiperSlide key={item}>
