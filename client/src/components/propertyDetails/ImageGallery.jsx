@@ -20,7 +20,7 @@ const SampleNextArrow = (props) => {
   const { onClick } = props;
   return (
     <div
-      className="absolute top-1/2 transform -translate-y-1/2 -right-10 z-10 cursor-pointer"
+      className="absolute -right-10 top-1/2 z-10 -translate-y-1/2 transform cursor-pointer"
       onClick={onClick}
     >
       <BsChevronRight size={20} className="text-white" />
@@ -32,7 +32,7 @@ const SamplePrevArrow = (props) => {
   const { onClick } = props;
   return (
     <div
-      className="absolute top-1/2 transform -translate-y-1/2 -left-10 z-10 cursor-pointer"
+      className="absolute -left-10 top-1/2 z-10 -translate-y-1/2 transform cursor-pointer"
       onClick={onClick}
     >
       <BsChevronLeft size={20} className="text-white" />
@@ -61,100 +61,111 @@ const ImageGallery = () => {
   };
 
   return (
-    <div className="mt-24">
-      <div className="flex justify-between items-center">
-        <h1 className="font-semibold text-[24px]">Image Gallery</h1>
+    <div className="xl:12 md:mt-8 lg:mt-10 2xl:mt-16">
+      <div className="flex items-center justify-between">
+        <h1 className="font-medium md:text-[12px] lg:text-[15px] xl:text-[18px] 2xl:text-[24px]">
+          Image Gallery
+        </h1>
 
         <div
           onClick={openModal}
-          className="cursor-pointer flex items-center gap-1.5 border-b-2 border-transparent hover:border-mirage transition duration-200 ease-in-out"
+          className="flex cursor-pointer items-center gap-1.5 border-b-2 border-transparent transition duration-200 ease-in-out hover:border-mirage"
         >
-          <p className="text-mirage font-semibold text-[15px]">See All Images</p>
-          <BsArrowUpRight size={20} />
+          <p className="font-semibold text-mirage md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:text-[15px]">
+            See All Images
+          </p>
+          <BsArrowUpRight size={18} />
         </div>
       </div>
 
-      <div className="mt-6 flex">
-        <div className="w-[69.5%] space-y-5">
+      <div className="flex md:mt-2 lg:mt-3 xl:mt-5 2xl:mt-6">
+        <div className="w-[69.5%] md:space-y-2.5 lg:space-y-3 2xl:space-y-5">
           <div className="flex">
-            <div className="w-[32%] h-[250px] overflow-hidden rounded-lg">
+            <div className="w-[32%] overflow-hidden md:h-[120px] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]">
               <img
                 src="/assets/imgs/p2.jpg"
-                className="w-full h-full object-cover transform transition-transform duration-300 hover:scale-105"
+                className="h-full w-full transform object-cover transition-transform duration-300 hover:scale-105"
                 alt=""
               />
             </div>
-            <div className="w-[66%] h-[250px] ms-auto overflow-hidden rounded-lg">
+            <div className="ms-auto w-[66%] overflow-hidden md:h-[120px] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]">
               <img
                 src="/assets/imgs/p3.jpg"
-                className="w-full h-full object-cover transform transition-transform duration-300 hover:scale-105"
+                className="h-full w-full transform object-cover transition-transform duration-300 hover:scale-105"
                 alt=""
               />
             </div>
           </div>
 
           <div className="flex justify-between">
-            <div className="w-[32%] h-[250px] overflow-hidden rounded-lg">
+            <div className="w-[32%] overflow-hidden md:h-[120px] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]">
               <img
                 src="/assets/imgs/p4.jpg"
-                className="w-full h-full object-cover transform transition-transform duration-300 hover:scale-105"
+                className="h-full w-full transform object-cover transition-transform duration-300 hover:scale-105"
                 alt=""
               />
             </div>
-            <div className="w-[32%] h-[250px] overflow-hidden rounded-lg">
+            <div className="w-[32%] overflow-hidden md:h-[120px] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]">
               <img
                 src="/assets/imgs/p6.jpg"
-                className="w-full h-full object-cover transform transition-transform duration-300 hover:scale-105"
+                className="h-full w-full transform object-cover transition-transform duration-300 hover:scale-105"
                 alt=""
               />
             </div>
-            <div className="w-[32%] h-[250px] overflow-hidden rounded-lg">
+            <div className="w-[32%] overflow-hidden md:h-[120px] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]">
               <img
                 src="/assets/imgs/p7.jpg"
-                className="w-full h-full object-cover transform transition-transform duration-300 hover:scale-105"
+                className="h-full w-full transform object-cover transition-transform duration-300 hover:scale-105"
                 alt=""
               />
             </div>
           </div>
           <div className="flex">
-            <div className="w-[66%] h-[250px] overflow-hidden rounded-lg">
+            <div className="w-[66%] overflow-hidden md:h-[120px] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]">
               <img
                 src="/assets/imgs/p8.jpg"
-                className="w-full h-full object-cover transform transition-transform duration-300 hover:scale-105"
+                className="h-full w-full transform object-cover transition-transform duration-300 hover:scale-105"
                 alt=""
               />
             </div>
-            <div className="w-[32%] h-[250px] ms-auto overflow-hidden rounded-lg">
+            <div className="ms-auto w-[32%] overflow-hidden md:h-[120px] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]">
               <img
                 src="/assets/imgs/p5.jpg"
-                className="w-full h-full object-cover transform transition-transform duration-300 hover:scale-105"
+                className="h-full w-full transform object-cover transition-transform duration-300 hover:scale-105"
                 alt=""
               />
             </div>
           </div>
         </div>
 
-        <div className="w-[29%] ms-auto overflow-hidden rounded-lg">
+        <div className="ms-auto w-[29%] overflow-hidden md:rounded-sm xl:rounded-lg">
           <img
             src="/assets/imgs/p1.jpg"
-            className="object-cover w-full h-full transform transition-transform duration-300 hover:scale-105"
+            className="h-full w-full transform object-cover transition-transform duration-300 hover:scale-105"
             alt=""
           />
         </div>
       </div>
 
       {modalIsOpen && (
-        <div className="fixed z-[600] inset-0 bg-black bg-opacity-70 flex justify-center items-center">
-          <div className="w-full max-w-5xl rounded-lg">
+        <div className="fixed inset-0 z-[600] flex items-center justify-center bg-black bg-opacity-70">
+          <div className="w-full max-w-5xl md:rounded-sm xl:rounded-lg">
             <X
-              className="text-white opacity-60 hover:opacity-100 absolute top-6 right-5 z-20 cursor-pointer transition-all duration-200 ease-in-out"
+              className="absolute right-5 top-6 z-20 cursor-pointer text-white opacity-60 transition-all duration-200 ease-in-out hover:opacity-100"
               size={35}
               onClick={closeModal}
             />
             <Slider {...settings}>
               {images.map((image, index) => (
-                <div key={index} className="w-full h-[500px] overflow-hidden rounded-lg">
-                  <img src={image} className="object-cover w-full h-full" alt="" />
+                <div
+                  key={index}
+                  className="h-[500px] w-full overflow-hidden md:rounded-sm xl:rounded-lg"
+                >
+                  <img
+                    src={image}
+                    className="h-full w-full object-cover"
+                    alt=""
+                  />
                 </div>
               ))}
             </Slider>

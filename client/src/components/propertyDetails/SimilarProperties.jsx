@@ -15,37 +15,37 @@ const SimilarProperties = () => {
   const { isBeginning, isEnd } = useSwiperNavigation(propertiesSwiperRef);
 
   return (
-    <div className="my-48">
-      <div className="flex justify-between items-center">
-        <h1 className="font-semibold text-[24px]">
+    <div className="md:mt-5 lg:mt-8 xl:mt-14 2xl:mt-16">
+      <div className="flex items-center justify-between">
+        <h1 className="font-medium md:text-[12px] lg:text-[15px] xl:text-[18px] 2xl:text-[24px]">
           Similar Properties in Area
         </h1>
         <div className="flex items-center gap-3">
           <MoveLeft
-            size={30}
-            className={`cursor-pointer ${isBeginning && 'opacity-40 cursor-default'}`}
+            size={20}
+            className={`cursor-pointer ${isBeginning && "cursor-default opacity-40"}`}
             onClick={() => propertiesSwiperRef.current.swiper.slidePrev()}
             disabled={isBeginning}
           />
           <MoveRight
-            size={30}
-            className={`cursor-pointer ${isEnd && 'opacity-40 cursor-default'}`}
+            size={20}
+            className={`cursor-pointer ${isEnd && "cursor-default opacity-40"}`}
             onClick={() => propertiesSwiperRef.current.swiper.slideNext()}
             disabled={isEnd}
           />
         </div>
       </div>
-      <div className="mt-5">
+      <div className="md:mt-2 lg:mt-3 xl:mt-4 2xl:mt-5">
         <Swiper
           ref={propertiesSwiperRef}
           slidesPerView={1}
           breakpoints={{
-            640: { slidesPerView: 1 },
+            640: { slidesPerView: 3 },
             1024: { slidesPerView: 3 },
           }}
           spaceBetween={16}
           modules={[Navigation]}
-          className="h-[465px]"
+          className="md:h-[370px] lg:h-[390px] xl:h-[430px] 2xl:h-[550px]"
         >
           {[1, 2, 3, 4, 5, 6].map((item) => (
             <SwiperSlide key={item}>

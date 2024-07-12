@@ -2,9 +2,9 @@ import { PiListStar } from "react-icons/pi";
 
 const HighlightCard = ({ title, description }) => {
   return (
-    <div className="w-[300px] h-[270px] bg-whiteLilac rounded-md border text-center p-4 flex items-center justify-center hover:scale-105 transition-all duration-300 ease-in-out">
-      <div className="text-[16px] space-y-2">
-        <h1 className="font-semibold flex items-center justify-center gap-1">
+    <div className="flex items-center justify-center rounded-md border bg-whiteLilac text-center transition-all duration-300 ease-in-out hover:scale-105 md:h-[135px] md:w-[145px] md:p-1 lg:h-[175px] lg:w-[160px] lg:p-1.5 xl:h-[210px] xl:w-[220px] xl:p-3 2xl:h-[270px] 2xl:w-[280px] 2xl:p-4">
+      <div className="space-y-2 md:text-[8px] lg:text-[9px] xl:text-[12px] 2xl:text-[15px]">
+        <h1 className="flex items-center justify-center gap-1 font-semibold">
           <PiListStar size={23} /> {title}
         </h1>
         <p className="text-smokeyGrey">{description}</p>

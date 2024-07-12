@@ -35,9 +35,11 @@ const highlights = [
 
 const Highlights = () => {
   return (
-    <div className="mt-12">
-      <h1 className="font-semibold text-[24px] mb-4">Key Highlights</h1>
-      <div className="flex flex-wrap gap-4">
+    <div className="md:mt-7 lg:mt-8 xl:mt-10 2xl:mt-12">
+      <h1 className="font-medium md:mb-2 md:text-[12px] lg:mb-3 lg:text-[15px] xl:text-[18px] 2xl:mb-4 2xl:text-[24px]">
+        Key Highlights
+      </h1>
+      <div className="flex flex-wrap md:gap-2 lg:gap-2.5 xl:gap-3 2xl:gap-4">
         {highlights.map((highlight, index) => (
           <HighlightCard
             key={index}

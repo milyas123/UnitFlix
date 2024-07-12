@@ -9,7 +9,7 @@ const Hero = () => {
         alt=""
       />
       <div className="absolute inset-0 z-50 bg-black bg-opacity-50"></div>
-      <div className="absolute z-[200] flex size-full items-center justify-center">
+      <div className="absolute z-50 flex size-full items-center justify-center">
         <div className="space-y-4 text-center text-white md:space-y-2 lg:space-y-3.5 2xl:space-y-4">
           <h1 className="mx-7 text-[44px] font-semibold md:text-[23px] lg:text-[28px] xl:text-[36px] 2xl:text-[44px]">
             Find Your Perfect Place

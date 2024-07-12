@@ -1,9 +1,9 @@
 const Delete = ({ className, size = 16 }) => {
   return (
     <svg
-    className={`cursor-pointer hover:text-red-600 transition-all duration-200 ease-in-out ${className}`}
-    width={size}
-    height={size}
+      className={`cursor-pointer transition-all duration-200 ease-in-out hover:text-red-600 ${className}`}
+      width={size}
+      height={size}
       viewBox="0 0 21 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
