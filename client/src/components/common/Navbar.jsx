@@ -27,7 +27,7 @@ const Navbar = () => {
   return (
     <>
       <div className="absolute top-0 z-[100] hidden w-full items-center bg-black bg-opacity-20 md:flex md:h-[3rem] lg:h-[4rem] xl:h-[5rem] 2xl:h-[5.5rem]">
-        <div className="mx-auto flex w-[80%] items-center justify-between xl:w-[75%]">
+        <div className="mx-auto flex w-[80%] md:w-[78%] items-center justify-between xl:w-[75%]">
           <div className="flex items-center md:gap-5 lg:gap-12 xl:gap-16 2xl:gap-24">
             <Link to="/">
               <img

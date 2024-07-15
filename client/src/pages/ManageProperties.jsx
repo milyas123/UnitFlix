@@ -17,12 +17,14 @@ const ManageProperties = () => {
     <>
       <Navbar />
       <Hero />
-      <div id="intro-section">
-        <PropertyIntro />
-      </div>
-      <PropertyActivities />
-      <Testimonials />
+      <div className="mx-auto w-[80%]">
+        <div id="intro-section">
+          <PropertyIntro />
+        </div>
+        <PropertyActivities />
+        <Testimonials />
       <CTA />
+      </div>
       <Footer />
       <StickyIcons showIcons={showTopButton} />
       {showTopButton && <ScrollToTop />}

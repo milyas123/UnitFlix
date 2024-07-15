@@ -1,6 +1,6 @@
 const TestimonialCard = () => {
   return (
-    <div className="bg-mirageLight text-white rounded-md p-7 text-[16px] space-y-2.5">
+    <div className="space-y-2.5 rounded-md bg-mirageLight text-white md:p-4 md:text-[7px] lg:p-5 lg:text-[9px] xl:text-[12px] 2xl:p-7 2xl:text-[14px]">
       <p>
         Unitflix has been an absolute pleasure to work with. Their property
         management services are top-notch, and their team is incredibly
