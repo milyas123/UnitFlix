@@ -1,18 +1,14 @@
+import ContentCard from "./ContentCard";
+
 const MissionVisionSection = () => {
   return (
-    <div className="h-screen flex flex-col justify-center items-center gap-y-32">
-      <div className="flex justify-between items-center gap-6">
+    <div className="flex h-screen flex-col items-center justify-center md:gap-y-[4.2rem] lg:gap-y-[4.6rem] xl:gap-y-[6.5rem] 2xl:gap-y-32">
+      <div className="flex items-center justify-between md:gap-x-3.5 lg:gap-x-4 xl:gap-x-5 2xl:gap-x-6">
         <div className="w-1/2">
-          <div className="rounded-lg border-2 p-4">
-            <h3 className="ps-1 font-medium text-[20px] text-sunriseOrange">
-              How it Started
-            </h3>
-            <div className="space-y-6">
-              <h2 className="text-[48px] font-medium leading-none">
-                Our Dream is Making Real Estate Earn for You
-              </h2>
-              <p className="text-[16px]">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
+          <ContentCard
+            header="How it Started"
+            title="Our Dream is Making Real Estate Earn for You"
+            description="Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Lorem Ipsum has been the industry's standard dummy
                 text ever since the 1500s, when an unknown printer took a galley
                 of type and scrambled it to make a type specimen book. It has
@@ -21,57 +17,39 @@ const MissionVisionSection = () => {
                 popularised in the 1960s with the release of Letraset sheets
                 containing Lorem Ipsum passages, and more recently with desktop
                 publishing software like Aldus PageMaker including versions of
-                Lorem Ipsum.
-              </p>
-            </div>
-          </div>
+                Lorem Ipsum."
+          />
         </div>
         <div className="w-1/2">
           <img
             src="/assets/imgs/about.jpg"
-            className="rounded-lg object-cover w-full h-[360px]"
+            className="md:h-[200px] lg:h-[245px] xl:h-[320px] 2xl:h-[360px] w-full rounded-lg object-cover"
             alt=""
           />
         </div>
       </div>
 
-      <div className="flex gap-6 items-center">
+      <div className="flex items-center md:gap-x-3.5 lg:gap-x-4 xl:gap-x-5 2xl:gap-x-6">
         <div className="w-1/2">
-          <div className="rounded-lg border-2 p-4">
-            <h3 className="ps-1 font-medium text-[20px] text-sunriseOrange">
-              Our Vision
-            </h3>
-            <div className="space-y-6">
-              <h2 className="text-[48px] font-medium leading-none">
-                Making Real Estate Stress Free
-              </h2>
-              <p className="text-[16px]">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
+          <ContentCard
+            header="Our Vision"
+            title="Making Real Estate Stress Free"
+            description="Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Lorem Ipsum has been the industry's standard dummy
                 text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it
-              </p>
-            </div>
-          </div>
+                of type and scrambled it."
+          />
         </div>
 
         <div className="w-1/2">
-          <div className="rounded-lg border-2 p-4">
-            <h3 className="ps-1 font-medium text-[20px] text-sunriseOrange">
-              Our MIssion
-            </h3>
-            <div className="space-y-6">
-              <h2 className="text-[48px] font-medium leading-none">
-                Making Real Estate Stress Free
-              </h2>
-              <p className="text-[16px]">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
+          <ContentCard
+            header="Our MIssion"
+            title="Making Real Estate Stress Free"
+            description="Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Lorem Ipsum has been the industry's standard dummy
                 text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it
-              </p>
-            </div>
-          </div>
+                of type and scrambled it."
+          />
         </div>
       </div>
     </div>

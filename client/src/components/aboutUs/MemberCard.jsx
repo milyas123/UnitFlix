@@ -1,15 +1,26 @@
 const MemberCard = () => {
   return (
-    <div className="w-[310px] rounded-lg border-2">
+    <div className="rounded-lg border 2xl:w-[310px]">
       <img
         src="/assets/imgs/team.jpg"
-        className="object-cover h-[355px] rounded-lg"
+        className="rounded-lg object-cover md:h-[175px] lg:h-[220px] xl:h-[270px] 2xl:h-[355px]"
         alt=""
       />
-      <div className="p-3 py-5 space-y-2 text-center">
-        <h1 className="font-medium text-[24px]">John Doe</h1>
-        <p className="text-[14px] text-smokeyGrey">External Contractor</p>
-        <p className="text-[15px]">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it </p>
+      <div className="text-center md:space-y-1 md:p-[6px] lg:space-y-1.5 lg:p-2.5 xl:space-y-2 2xl:p-3 2xl:py-4">
+        <div>
+          <h1 className="text-[20px] font-medium md:text-[14px] lg:text-[16px] xl:text-[20px] 2xl:text-[24px]">
+            John Doe
+          </h1>
+          <p className="text-smokeyGrey md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]">
+            External Contractor
+          </p>
+        </div>
+        <p className="text-[12px] md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]">
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry. Lorem Ipsum has been the industry's standard dummy text ever
+          since the 1500s, when an unknown printer took a galley of type and
+          scrambled it{" "}
+        </p>
       </div>
     </div>
   );

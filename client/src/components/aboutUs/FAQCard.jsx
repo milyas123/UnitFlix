@@ -15,19 +15,22 @@ const FAQCard = () => {
   }, [isOpen]);
 
   return (
-    <div className="border-t-2 p-2 space-y-2.5">
+    <div className="border-t px-2 md:space-y-1 md:py-0.5 lg:space-y-1.5 lg:py-1 xl:space-y-2 xl:py-1.5 2xl:space-y-2.5 2xl:py-2">
       <h1
-        className="font-medium text-[24px] flex justify-between items-center cursor-pointer"
+        className="flex cursor-pointer items-center justify-between text-[20px] font-medium md:text-[12px] lg:text-[14px] xl:text-[17px] 2xl:text-[20px]"
         onClick={toggleOpen}
       >
         How do you guys handle the property management?
-        <IoChevronDown size={23} className={`transition duration-300 ease-in-out ${isOpen && "rotate-180"}`} />
+        <IoChevronDown
+          size={23}
+          className={`transition duration-300 ease-in-out ${isOpen && "rotate-180"}`}
+        />
       </h1>
 
       <div
         ref={contentRef}
         style={{ maxHeight: height }}
-        className={`text-[16px] overflow-hidden transition-max-height duration-300 ease-in-out`}
+        className={`transition-max-height overflow-hidden duration-300 ease-in-out md:text-[8px] lg:text-[10px] xl:text-[13px] 2xl:text-[16px]`}
       >
         <p>
           Lorem Ipsum is simply dummy text of the printing and typesetting
