@@ -56,6 +56,13 @@ input[type="range"]::-ms-thumb {
   padding-right: 20px;
 }
 
+@media (max-width: 640px) {
+  .custom-swiper-pagination .swiper-pagination { 
+    justify-content: flex-start;
+    padding-right: 20px;
+  }
+}
+
 /* Applying shadow on the card in About us page */
 .shadow-right {
   box-shadow: 5px 0px 15px rgba(0, 0, 0, 0.1);

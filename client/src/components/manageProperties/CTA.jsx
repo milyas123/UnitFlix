@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const CTA = () => {
   return (
-    <div className="relative md:mb-[4rem] md:h-[210px] lg:mb-[6rem] lg:h-[250px] xl:mb-[7rem] xl:h-[330px] 2xl:mb-[9rem] 2xl:h-[400px]">
+    <div className="relative m-2 sm:m-0 mb-[2.5rem] md:mb-[4rem] h-[436px] md:h-[210px] lg:mb-[6rem] lg:h-[250px] xl:mb-[7rem] xl:h-[330px] 2xl:mb-[9rem] 2xl:h-[400px]">
       <img
         src="/assets/imgs/cta.webp"
         className="size-full object-cover"
