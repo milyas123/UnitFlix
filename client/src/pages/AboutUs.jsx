@@ -17,7 +17,7 @@ const AboutUs = () => {
     <>
       <Navbar />
       <Hero />
-      <div className="mx-auto w-[80%]">
+      <div className="p-2 md:mx-auto md:w-[80%]">
         <div id="mission-section">
           <MissionVisionSection />
         </div>

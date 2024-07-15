@@ -17,7 +17,7 @@ const Hero = () => {
             </h1>
             <p className="text-[16px] font-medium md:text-[11px] md:leading-tight lg:text-[14px] xl:text-[19px] 2xl:text-[23px]">
               We understand buying a home is more than just a transaction.
-              <br />
+              <br className="hidden md:flex" />
               Its about building a future, creating memories and finding a place
               to belong
             </p>

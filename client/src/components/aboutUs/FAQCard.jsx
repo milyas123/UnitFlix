@@ -15,9 +15,9 @@ const FAQCard = () => {
   }, [isOpen]);
 
   return (
-    <div className="border-t px-2 md:space-y-1 md:py-0.5 lg:space-y-1.5 lg:py-1 xl:space-y-2 xl:py-1.5 2xl:space-y-2.5 2xl:py-2">
+    <div className="space-y-3.5 border-t px-2 py-3 md:space-y-1 md:py-0.5 lg:space-y-1.5 lg:py-1 xl:space-y-2 xl:py-1.5 2xl:space-y-2.5 2xl:py-2">
       <h1
-        className="flex cursor-pointer items-center justify-between text-[20px] font-medium md:text-[12px] lg:text-[14px] xl:text-[17px] 2xl:text-[20px]"
+        className="flex cursor-pointer items-center justify-between text-[16px] font-medium md:text-[12px] lg:text-[14px] xl:text-[17px] 2xl:text-[20px]"
         onClick={toggleOpen}
       >
         How do you guys handle the property management?
@@ -30,7 +30,7 @@ const FAQCard = () => {
       <div
         ref={contentRef}
         style={{ maxHeight: height }}
-        className={`transition-max-height overflow-hidden duration-300 ease-in-out md:text-[8px] lg:text-[10px] xl:text-[13px] 2xl:text-[16px]`}
+        className={`transition-max-height overflow-hidden text-[11.5px] duration-300 ease-in-out md:text-[8px] lg:text-[10px] xl:text-[13px] 2xl:text-[16px]`}
       >
         <p>
           Lorem Ipsum is simply dummy text of the printing and typesetting
