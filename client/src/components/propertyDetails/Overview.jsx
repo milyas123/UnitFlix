@@ -1,5 +1,5 @@
-import { FileDown } from "lucide-react";
 import { Button } from "../ui/button";
+import Download from "../svgs/Download";
 
 const Overview = () => {
   return (
@@ -62,8 +62,8 @@ const Overview = () => {
           Floor Plan
         </h1>
 
-        <Button className="h-8 items-center gap-x-1 rounded-md border bg-transparent text-mirage hover:text-white md:px-1 md:text-[7px] lg:h-6 lg:text-[9px]">
-          <FileDown size={15} />
+        <Button className="h-8 items-center gap-x-1 rounded-md border bg-transparent text-mirage hover:text-white md:px-1 md:text-[7px] lg:h-6 lg:text-[9px] group">
+          <Download className="text-black group-hover:text-white" />
           Download Floor Plan
         </Button>
       </div>

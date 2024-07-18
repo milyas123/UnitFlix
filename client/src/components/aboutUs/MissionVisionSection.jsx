@@ -34,6 +34,7 @@ const MissionVisionSection = () => {
           <ContentCard
             header="Our Vision"
             title="Making Real Estate Stress Free"
+            titleSize="text-[24px] md:text-[18px] lg:text-[24px] xl:text-[30px] 2xl:text-[36px]"
             description="Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Lorem Ipsum has been the industry's standard dummy
                 text ever since the 1500s, when an unknown printer took a galley
@@ -43,8 +44,9 @@ const MissionVisionSection = () => {
 
         <div className="w-full md:w-1/2">
           <ContentCard
-            header="Our MIssion"
+            header="Our Mission"
             title="Making Real Estate Stress Free"
+            titleSize="text-[24px] md:text-[18px] lg:text-[24px] xl:text-[30px] 2xl:text-[36px]"
             description="Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Lorem Ipsum has been the industry's standard dummy
                 text ever since the 1500s, when an unknown printer took a galley

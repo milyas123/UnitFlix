@@ -5,19 +5,18 @@ import { BiMessageSquareDetail } from "react-icons/bi";
 import { Textarea } from "../ui/textarea";
 
 const InquiryModal = ({ onClose }) => {
-
   return (
-    <div className="fixed z-[800] inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="relative w-[64rem] rounded-xl bg-white p-6 flex justify-between items-center gap-x-7">
+    <div className="fixed inset-0 z-[800] flex items-center justify-center bg-black bg-opacity-50">
+      <div className="relative flex items-center justify-between bg-white md:h-[21.5rem] md:w-[35rem] md:gap-x-4 md:rounded-md md:p-3 lg:h-auto lg:w-[40rem] lg:gap-x-5 lg:p-4 xl:w-[54rem] xl:gap-x-6 xl:p-5 2xl:w-[64rem] 2xl:gap-x-7 2xl:rounded-xl 2xl:p-6">
         <SquareX
-          size={30}
-          className="cursor-pointer absolute top-8 right-8 text-2xl font-bold text-gray-800 hover:text-gray-800"
+          size={25}
+          className="absolute cursor-pointer text-2xl font-bold text-gray-800 hover:text-gray-800 md:right-4 md:top-4 lg:right-5 lg:top-6 xl:right-7 xl:top-7 2xl:right-8 2xl:top-8"
           onClick={onClose}
         />
 
-        <div className="w-[50%] flex flex-col gap-7 md:gap-6 lg:gap-7 2xl:gap-8">
+        <div className="flex w-[50%] flex-col gap-7 md:gap-6 lg:gap-7 2xl:gap-8">
           <div className="space-y-1">
-            <h1 className="font-semibold text-[24px] md:text-[14px] lg:text-[18px] xl:text-[24px] 2xl:text-[30px]">
+            <h1 className="text-[24px] font-semibold md:text-[14px] lg:text-[18px] xl:text-[24px] 2xl:text-[30px]">
               Real Estate Inquiry Form
             </h1>
             <p className="text-[15px] md:text-[8px] lg:text-[10px] xl:text-[13px] 2xl:text-[16px]">
@@ -27,17 +26,22 @@ const InquiryModal = ({ onClose }) => {
 
           <form
             action=""
-            className="flex flex-col gap-4 md:gap-5 lg:gap-6 xl:gap-7 2xl:gap-8"
+            className="flex flex-col gap-4 md:gap-3.5 lg:gap-5 xl:gap-6 2xl:gap-7"
           >
             <div className="flex flex-col gap-2.5 md:gap-y-0.5 lg:gap-y-1.5 xl:gap-y-2.5 2xl:gap-y-3">
               <label className="font-semibold md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]">
                 Your Name
               </label>
               <div className="relative flex items-center">
-                <Input type="text" id="name" placeholder="Enter your name" />
+                <Input
+                  type="text"
+                  id="name"
+                  placeholder="Enter your name"
+                  className="md:ps-7 lg:ps-7 xl:ps-8 2xl:ps-9"
+                />
                 <UserRound
-                  className="absolute left-1.5 md:left-2 2xl:left-3 text-muted-foreground"
-                  size={17}
+                  className="absolute left-1.5 text-muted-foreground md:left-1.5 xl:left-2 2xl:left-3"
+                  size={19}
                 />
               </div>
             </div>
@@ -51,10 +55,11 @@ const InquiryModal = ({ onClose }) => {
                   type="email"
                   id="email"
                   placeholder="example@domain.com"
+                  className="md:ps-7 lg:ps-7 xl:ps-8 2xl:ps-9"
                 />
                 <Mail
-                  className="absolute left-1.5 md:left-2 2xl:left-3 text-muted-foreground"
-                  size={17}
+                  className="absolute left-1.5 text-muted-foreground md:left-1.5 xl:left-2 2xl:left-3"
+                  size={19}
                 />
               </div>
             </div>
@@ -68,10 +73,11 @@ const InquiryModal = ({ onClose }) => {
                   type="number"
                   id="phone"
                   placeholder="(+92) 311 7995274"
+                  className="md:ps-7 lg:ps-7 xl:ps-8 2xl:ps-9"
                 />
                 <Phone
-                  className="absolute left-1.5 md:left-2 2xl:left-3 text-muted-foreground"
-                  size={17}
+                  className="absolute left-1.5 text-muted-foreground md:left-1.5 xl:left-2 2xl:left-3"
+                  size={19}
                 />
               </div>
             </div>
@@ -81,15 +87,19 @@ const InquiryModal = ({ onClose }) => {
                 Message
               </label>
               <div className="relative flex items-center">
-                <Textarea placeholder="I want to buy/rent..." />
+                <Textarea
+                  rows={4}
+                  placeholder="I want to buy/rent..."
+                  className="md:ps-7 lg:ps-7 xl:ps-8 2xl:ps-9"
+                />
                 <BiMessageSquareDetail
-                  className="absolute left-1.5 top-4 md:top-2 2xl:top-2.5 md:left-2 2xl:left-3 text-muted-foreground"
+                  className="absolute left-1.5 top-4 text-muted-foreground md:left-1.5 md:top-1 lg:top-1.5 xl:left-2 xl:top-[11px] 2xl:left-3 2xl:top-4"
                   size={19}
                 />
               </div>
             </div>
 
-            <Button className="w-full rounded-md hover:bg-transparent hover:text-mirage ">
+            <Button className="w-full rounded-md hover:bg-transparent hover:text-mirage md:h-7 lg:h-8 xl:h-9 2xl:h-10">
               Submit
             </Button>
           </form>
@@ -97,7 +107,7 @@ const InquiryModal = ({ onClose }) => {
 
         <img
           src="/assets/imgs/otp.png"
-          className="w-1/2 h-[640px] object-cover object-center rounded-xl"
+          className="w-[48%] object-cover object-center md:h-[320px] md:rounded-md lg:h-[400px] xl:h-[510px] 2xl:h-[640px] 2xl:rounded-xl"
           alt="OTP Verification"
         />
       </div>

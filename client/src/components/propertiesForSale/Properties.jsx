@@ -94,7 +94,7 @@ const Properties = () => {
         </div>
 
         <div className="w-full md:w-[80%] md:ms-auto">
-          <div className="bg-whiteLilac whitespace-nowrap rounded-xl border border-lightGrey flex flex-col items-start md:flex-row md:justify-between md:items-center p-3 md:p-2.5 lg:p-3.5 xl:p-5 2xl:p-6">
+          <div className="bg-whiteLilac whitespace-nowrap rounded-xl border border-lightGrey flex flex-col items-start md:flex-row md:justify-between md:items-center p-3 md:p-2 lg:p-3 xl:p-3.5 2xl:p-4">
             <p className="font-semibold text-[20px] md:text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[20px]">
               Showing Property Results
               <span className="text-slate text-[16px] md:text-[9px] lg:text-[11px] xl:text-[13px] 2xl:text-[16px] font-light">

@@ -17,8 +17,8 @@ const Discover = () => {
   const { isBeginning, isEnd } = useSwiperNavigation(projectsRef);
 
   return (
-    <div className="relative mt-[22rem] flex items-center justify-center bg-whiteLilac sm:mt-0 md:h-[90vh] md:pt-14 lg:pt-0">
-      <div className="mx-auto flex w-full flex-col px-2.5 py-[5rem] md:w-[65%] md:gap-8 md:px-0 md:py-0 lg:mt-0 lg:gap-12 2xl:-mt-2 2xl:gap-14">
+    <div className="relative mt-[22rem] flex h-[90vh] items-center justify-center bg-whiteLilac md:mt-0 md:pt-14 lg:pt-0">
+      <div className="mx-auto flex w-full flex-col px-2.5 py-[6rem] md:w-[65%] md:gap-8 md:px-0 md:py-0 lg:mt-0 lg:gap-12 2xl:-mt-2 2xl:gap-14">
         <div className="flex flex-col justify-between md:flex-row md:items-center">
           <div className="space-y-2 md:space-y-0.5 xl:space-y-1 2xl:space-y-1.5">
             <h1 className="text-[22px] font-semibold md:text-[14px] lg:text-[18px] xl:text-[22px] 2xl:text-[28px]">

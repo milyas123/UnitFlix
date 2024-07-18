@@ -23,7 +23,7 @@ const Testimonials = () => {
           alt="quote-image"
         />
       </div>
-      <div className="flex flex-col items-center p-6 md:flex-row md:p-3.5 lg:p-4 xl:p-5 2xl:p-6">
+      <div className="flex flex-col items-center p-6 md:flex-row md:px-3.5 md:pb-0.5 md:pt-3.5 lg:px-4 lg:pb-1 lg:pt-4 xl:px-5 xl:pb-1.5 xl:pt-5 2xl:px-6 2xl:pb-3 2xl:pt-6">
         <div className="mb-9 text-center sm:mb-0 md:w-[28%]">
           <h1 className="text-[24px] font-bold md:text-[18px] lg:text-[21px] xl:text-[28px] 2xl:text-[32px]">
             What Our <br className="hidden md:flex" /> Clients Say?
@@ -47,12 +47,12 @@ const Testimonials = () => {
               ref={swiperRef}
               slidesPerView={1}
               breakpoints={{
-                640: { slidesPerView: 1, spaceBetween: 5 },
+                640: { slidesPerView: 2, spaceBetween: 5 },
                 1024: { slidesPerView: 2, spaceBetween: 12 },
               }}
               modules={[Pagination, Navigation]}
               pagination={{ clickable: true }}
-              className="custom-swiper-pagination h-[320px] w-[345px] md:h-[130px] md:w-auto lg:max-h-[180px] lg:min-h-[160px] xl:h-[210px] xl:max-h-[400px] 2xl:h-[250px]"
+              className="custom-swiper-pagination h-[320px] w-[345px] md:h-[135px] md:w-auto lg:h-[175px] xl:h-[195px] 2xl:h-[240px]"
               style={{
                 "--swiper-pagination-color": "#FFFFFF",
               }}

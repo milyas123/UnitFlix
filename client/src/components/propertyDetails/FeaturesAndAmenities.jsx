@@ -1,20 +1,21 @@
-import { RiParkingBoxLine } from "react-icons/ri";
-import { TbSwimming } from "react-icons/tb";
-import { Snowflake, Heater } from "lucide-react";
-import { FaWindowRestore } from "react-icons/fa";
+import Heater from "../svgs/Heater";
 import AmenityCard from "./AmenityCard";
+import Parking from "../svgs/Parking";
+import Swimming from "../svgs/Swimming";
+import AirConditioned from "../svgs/AirConditioned";
+import DoubleGlazedWindow from "../svgs/DoubleGlazedWindow";
 
 const amenitiesData = [
   {
-    icon: <RiParkingBoxLine />,
+    icon: <Parking />,
     text: "Parking Spaces: 1",
   },
   {
-    icon: <TbSwimming />,
+    icon: <Swimming />,
     text: "Swimming Pool",
   },
   {
-    icon: <Snowflake />,
+    icon: <AirConditioned />,
     text: "Centrally Air-Conditioned",
   },
   {
@@ -22,19 +23,19 @@ const amenitiesData = [
     text: "Central Heating",
   },
   {
-    icon: <FaWindowRestore />,
+    icon: <DoubleGlazedWindow />,
     text: "Double Glazed Windows",
   },
   {
-    icon: <FaWindowRestore />,
+    icon: <DoubleGlazedWindow />,
     text: "Double Glazed Windows",
   },
   {
-    icon: <FaWindowRestore />,
+    icon: <DoubleGlazedWindow />,
     text: "Double Glazed Windows",
   },
   {
-    icon: <FaWindowRestore />,
+    icon: <DoubleGlazedWindow />,
     text: "Double Glazed Windows",
   },
 ];

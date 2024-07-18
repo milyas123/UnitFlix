@@ -73,7 +73,7 @@ const Footer = () => {
               <p className="text-[15px] font-semibold md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:text-[15px]">
                 Follow us on social media
               </p>
-              <div className="flex items-center gap-2 md:gap-2 lg:gap-4 xl:gap-6 2xl:gap-8">
+              <div className="flex items-center gap-x-2 lg:gap-x-3 xl:gap-x-3.5 2xl:gap-x-4">
                 <div className="cursor-pointer rounded-full bg-mirageLight p-2 transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage">
                   <FaFacebookF size={15} className="cursor-pointer" />
                 </div>
@@ -108,17 +108,17 @@ const Footer = () => {
             <h4 className="mb-6 text-[15px] font-semibold md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:text-[15px]">
               Get In Touch
             </h4>
-            <form className="flex flex-col gap-y-2.5 md:gap-y-1.5 lg:gap-y-2 xl:gap-y-3 2xl:gap-y-4">
+            <form className="flex flex-col gap-y-2.5 md:gap-y-1 lg:gap-y-1.5 xl:gap-y-2 2xl:gap-y-2.5">
               <div className="relative flex items-center">
                 <Input
                   type="text"
                   id="name"
                   placeholder="Enter your name"
-                  className="bg-white bg-opacity-10 text-grey placeholder:text-grey"
+                  className="bg-white bg-opacity-10 text-grey placeholder:text-grey md:ps-7 lg:ps-7 xl:ps-8 2xl:ps-9"
                 />
                 <UserRound
-                  className="absolute left-1.5 text-grey md:left-2 2xl:left-3"
-                  size={17}
+                  className="absolute left-1.5 text-grey md:left-1.5 xl:left-2 2xl:left-3"
+                  size={18}
                 />
               </div>
               <div className="relative flex items-center">
@@ -126,11 +126,11 @@ const Footer = () => {
                   type="email"
                   id="email"
                   placeholder="example@domain.com"
-                  className="bg-white bg-opacity-10 text-grey placeholder:text-grey"
+                  className="bg-white bg-opacity-10 text-grey placeholder:text-grey md:ps-7 lg:ps-7 xl:ps-8 2xl:ps-9"
                 />
                 <Mail
-                  className="absolute left-1.5 text-grey md:left-2 2xl:left-3"
-                  size={17}
+                  className="absolute left-1.5 text-grey md:left-1.5 xl:left-2 2xl:left-3"
+                  size={18}
                 />
               </div>
               <div className="relative flex items-center">
@@ -138,24 +138,25 @@ const Footer = () => {
                   type="number"
                   id="phone"
                   placeholder="(+92) 311 7995274"
-                  className="bg-white bg-opacity-10 text-grey placeholder:text-grey"
+                  className="bg-white bg-opacity-10 text-grey placeholder:text-grey md:ps-7 lg:ps-7 xl:ps-8 2xl:ps-9"
                 />
                 <Phone
-                  className="absolute left-1.5 text-grey md:left-2 2xl:left-3"
-                  size={17}
+                  className="absolute left-1.5 text-grey md:left-1.5 xl:left-2 2xl:left-3"
+                  size={18}
                 />
               </div>
               <div className="relative flex items-center">
                 <Textarea
+                  rows={4}
                   placeholder="I want to buy/rent..."
-                  className="bg-white bg-opacity-10 text-grey placeholder:text-grey"
+                  className="bg-white bg-opacity-10 text-grey placeholder:text-grey md:ps-7 lg:ps-7 xl:ps-8 2xl:ps-9"
                 />
                 <BiMessageSquareDetail
-                  className="absolute left-1.5 top-4 text-grey md:left-2 md:top-1 lg:top-2 xl:top-3 2xl:left-3 2xl:top-4"
-                  size={20}
+                  className="absolute left-1.5 top-4 text-grey md:left-1.5 md:top-1 lg:top-1.5 xl:left-2 xl:top-[11px] 2xl:left-3 2xl:top-4"
+                  size={18}
                 />
               </div>
-              <Button className="rounded-md bg-sunriseOrange hover:border-2 hover:border-sunriseOrange hover:bg-transparent hover:text-sunriseOrange md:h-6 md:text-[8px] lg:h-7 lg:text-[10px] xl:h-8 xl:text-[12px] 2xl:h-9 2xl:py-3 2xl:text-[14px]">
+              <Button className="rounded-md bg-sunriseOrange hover:border-2 hover:border-sunriseOrange hover:bg-transparent hover:text-sunriseOrange md:h-6 md:text-[8px] lg:h-7 lg:text-[10px] xl:h-8 xl:text-[12px] 2xl:h-9 2xl:py-5 2xl:text-[14px]">
                 Submit
               </Button>
             </form>

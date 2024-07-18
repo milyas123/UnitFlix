@@ -1,4 +1,17 @@
+import React, { useState, useEffect } from "react";
+
 const PaymentPlan = () => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <div className="mt-5 md:mt-7 lg:mt-10 xl:mt-12 2xl:mt-14">
       <h1 className="text-[24px] font-medium md:text-[12px] lg:text-[15px] xl:text-[18px] 2xl:text-[24px]">
@@ -10,7 +23,9 @@ const PaymentPlan = () => {
           <div className="flex h-[8.5rem] flex-col items-center text-center md:h-auto md:w-[24%]">
             <div className="xl:border-b-5 2xl:border-b-6 flex h-full w-full items-center justify-center border-r-4 border-mirage pe-2 md:border-b-2 md:border-r-0 md:pb-2 md:pe-0 lg:border-b-4 xl:pb-4">
               <img
-                src="/assets/imgs/20.png"
+                src={
+                  isMobile ? "/assets/imgs/mob-20.png" : "/assets/imgs/20.png"
+                }
                 className="size-[80px] object-contain md:size-[50px] lg:size-[60px] xl:size-[80px] 2xl:size-[100px]"
                 alt=""
               />
@@ -31,7 +46,9 @@ const PaymentPlan = () => {
           <div className="mt-auto h-[8.5rem] md:ms-auto md:h-auto md:w-[24%]">
             <div className="xl:border-b-5 2xl:border-b-6 flex h-full w-full items-center justify-center border-r-4 border-mirage pe-2 md:border-b-2 md:border-r-0 md:pb-2 md:pe-0 lg:border-b-4 xl:pb-4">
               <img
-                src="/assets/imgs/30.png"
+                src={
+                  isMobile ? "/assets/imgs/mob-30.png" : "/assets/imgs/30.png"
+                }
                 className="size-[80px] object-contain md:size-[50px] lg:size-[60px] xl:size-[80px] 2xl:size-[100px]"
                 alt=""
               />
@@ -54,7 +71,9 @@ const PaymentPlan = () => {
           <div className="mt-auto h-[18rem] md:ms-auto md:h-auto md:w-[50%]">
             <div className="flex h-full w-full items-center justify-center">
               <img
-                src="/assets/imgs/50.png"
+                src={
+                  isMobile ? "/assets/imgs/mob-50.png" : "/assets/imgs/50.png"
+                }
                 className="size-[80px] object-contain md:size-[50px] lg:size-[60px] xl:size-[80px] 2xl:size-[100px]"
                 alt=""
               />
