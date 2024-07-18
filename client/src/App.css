@@ -81,7 +81,7 @@ input[type='number'] {
   -moz-appearance: textfield;
 }
 
-
+/* Animation for mobile nav */
 @keyframes slideIn {
   from {
     transform: translateX(-100%);
@@ -108,3 +108,21 @@ input[type='number'] {
   animation: slideOut 0.3s forwards;
 }
 
+
+/* Image gallery carousel */
+.slider-container {
+  border-radius: 0.7rem;
+}
+
+.slick-slide div {
+  border-radius: 0.7rem;
+}
+
+.slick-list,
+.slick-track {
+  border-radius: 0.7rem;
+}
+
+.slick-slide img {
+  border-radius: 0.7rem;
+}

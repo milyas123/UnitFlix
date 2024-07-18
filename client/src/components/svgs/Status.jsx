@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Status = ({ className, size = 16 }) => {
   return (
     <svg

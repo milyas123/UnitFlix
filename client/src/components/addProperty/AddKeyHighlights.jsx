@@ -1,15 +1,13 @@
 import { PiListStar } from "react-icons/pi";
 import { Button } from "../ui/button";
-import { TbEditCircle } from "react-icons/tb";
-import { MdOutlineDeleteForever } from "react-icons/md";
 import Edit from "../svgs/Edit";
 import Delete from "../svgs/Delete";
 
 const AddKeyHighlights = () => {
   return (
-    <div className="rounded-xl bg-white px-8 py-4 flex items-start gap-14">
-      <div className="space-y-2">
-        <h2 className="font-semibold text-[20px] whitespace-nowrap">
+    <div className="flex items-start rounded-xl bg-white px-8 py-4">
+      <div className="w-[23%] space-y-2">
+        <h2 className="whitespace-nowrap text-[20px] font-semibold">
           Key Highlights
         </h2>
         <Button
@@ -19,10 +17,10 @@ const AddKeyHighlights = () => {
           Add Highlight
         </Button>
       </div>
-      <div className="p-1 w-full flex flex-col gap-y-8">
-        <div className="w-[300px] h-[270px] bg-whiteLilac rounded-md border text-center p-4 flex items-center justify-center">
-          <div className="text-[16px] space-y-2">
-            <h1 className="font-semibold flex items-center justify-center gap-1">
+      <div className="ms-auto flex w-[72%] flex-col gap-y-8 p-1">
+        <div className="flex h-[270px] w-[300px] items-center justify-center rounded-md border bg-whiteLilac p-4 text-center">
+          <div className="space-y-2 text-[16px]">
+            <h1 className="flex items-center justify-center gap-1 font-semibold">
               <PiListStar size={23} /> Features
             </h1>
             <p className="text-smokeyGrey">

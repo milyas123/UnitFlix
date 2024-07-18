@@ -3,9 +3,12 @@ import { FiMapPin } from "react-icons/fi";
 import { FileDown } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
 
-import Property from "../svgs/Property";
 import Bed from "../svgs/Bed";
 import Area from "../svgs/Area";
+import HandOver from "../svgs/HandOver";
+import Property from "../svgs/Property";
+import DownPayment from "../svgs/DownPayment";
+import PaymentPlan from "../svgs/PaymentPlan";
 
 const Description = () => {
   const titleSizes =
@@ -62,101 +65,93 @@ const Description = () => {
         </div>
       </div>
 
-      <div className="flex flex-col justify-between rounded border p-2 md:flex-row md:p-2 lg:p-2.5 xl:p-3 2xl:rounded-md 2xl:p-4">
-        <div className="flex w-full flex-col gap-y-2.5 border-b pb-2 md:w-[33%] md:gap-y-1.5 md:border-b-0 md:pb-0 lg:gap-y-2.5 xl:gap-y-3.5 2xl:gap-y-5">
-          <div className={`flex items-center justify-between ${titleSizes}`}>
+      <div className="flex flex-col rounded border p-3.5 md:gap-y-1.5 md:p-2 lg:gap-y-2.5 lg:p-2.5 xl:gap-y-3.5 xl:p-3 2xl:gap-y-5 2xl:rounded-md 2xl:p-4">
+        <div className="flex w-full flex-col justify-between gap-y-4 border-b pb-4 md:flex-row md:gap-y-1.5 md:border-b-0 md:pb-0 lg:gap-y-2.5 xl:gap-y-3.5 2xl:gap-y-5">
+          <div
+            className={`flex w-full items-center justify-between md:border-e md:pe-2 lg:pe-3 xl:pe-3.5 2xl:pe-4 ${titleSizes}`}
+          >
             <p className="flex items-center gap-1.5 text-grey md:gap-1 lg:gap-1.5">
               <Property size={18} /> Property Type
             </p>
-            <p
-              className={`font-semibold md:border-e md:pe-2 lg:pe-3 xl:pe-3.5 2xl:pe-4 ${valueSizes}`}
-            >
-              Villa
-            </p>
+            <p className={`font-semibold ${valueSizes}`}>Villa</p>
           </div>
 
-          <div className={`flex items-center justify-between ${titleSizes}`}>
+          <div
+            className={`flex w-full items-center justify-between md:border-e md:px-2 lg:px-3 xl:px-3.5 2xl:px-4 ${titleSizes}`}
+          >
             <p className="flex items-center gap-1.5 text-grey md:gap-1 lg:gap-1.5">
-              <Property size={18} /> Property Type
+              <Bed size={18} /> Unit Type
             </p>
-            <p
-              className={`font-semibold md:border-e md:pe-2 lg:pe-3 xl:pe-3.5 2xl:pe-4 ${valueSizes}`}
-            >
-              Penthouse
-            </p>
+            <p className={`font-semibold ${valueSizes}`}>3 Bedrooms</p>
           </div>
 
-          <div className={`flex items-center justify-between ${titleSizes}`}>
+          <div
+            className={`flex w-full items-center justify-between md:ps-2 lg:ps-3 xl:ps-3.5 2xl:ps-4 ${titleSizes}`}
+          >
             <p className="flex items-center gap-1.5 text-grey md:gap-1 lg:gap-1.5">
-              <Property size={18} /> Property Type
+              <Area size={18} /> Size
             </p>
-            <p
-              className={`font-semibold md:border-e md:pe-2 lg:pe-3 xl:pe-3.5 2xl:pe-4 ${valueSizes}`}
-            >
-              Appartment
-            </p>
-          </div>
-
-          <div className={`flex items-center justify-between ${titleSizes}`}>
-            <p className="flex items-center gap-1.5 text-grey md:gap-1 lg:gap-1.5">
-              <Property size={18} /> Property Type
-            </p>
-            <p
-              className={`font-semibold md:border-e md:pe-2 lg:pe-3 xl:pe-3.5 2xl:pe-4 ${valueSizes}`}
-            >
-              20%
+            <p className={`font-semibold ${valueSizes}`}>
+              Various Sizes Available
             </p>
           </div>
         </div>
 
-        <div className="flex w-full flex-col gap-y-2.5 border-b py-2 md:w-[33%] md:gap-y-1.5 md:border-b-0 md:py-0 md:ps-2 lg:gap-y-2.5 lg:ps-3 xl:gap-y-3.5 xl:ps-3.5 2xl:gap-y-5 2xl:ps-4">
-          <div className={`flex items-center justify-between ${titleSizes}`}>
+        <div className="flex w-full flex-col justify-between gap-y-4 border-b py-4 md:flex-row md:gap-y-1.5 md:border-b-0 md:py-0 lg:gap-y-2.5 xl:gap-y-3.5 2xl:gap-y-5">
+          <div
+            className={`flex w-full items-center justify-between md:border-e md:pe-2 lg:pe-3 xl:pe-3.5 2xl:pe-4 ${titleSizes}`}
+          >
+            <p className="flex items-center gap-1.5 text-grey md:gap-1 lg:gap-1.5">
+              <Property size={18} /> Property Type
+            </p>
+            <p className={`font-semibold ${valueSizes}`}>Penthouse</p>
+          </div>
+
+          <div
+            className={`flex w-full items-center justify-between md:border-e md:px-2 lg:px-3 xl:px-3.5 2xl:px-4 ${titleSizes}`}
+          >
             <p className="flex items-center gap-1.5 text-grey md:gap-1 lg:gap-1.5">
               <Bed size={18} /> Unit Type
             </p>
-            <p
-              className={`border-grey font-semibold md:border-e md:pe-2 lg:pe-3 xl:pe-3.5 2xl:pe-4 ${valueSizes}`}
-            >
-              3 Bedrooms
-            </p>
+            <p className={`font-semibold ${valueSizes}`}>2 Bedrooms</p>
           </div>
 
-          <div className={`flex items-center justify-between ${titleSizes}`}>
+          <div
+            className={`flex w-full items-center justify-between md:ps-2 lg:ps-3 xl:ps-3.5 2xl:ps-4 ${titleSizes}`}
+          >
             <p className="flex items-center gap-1.5 text-grey md:gap-1 lg:gap-1.5">
-              <Bed size={18} /> Unit Type
+              <Area size={18} /> Size
             </p>
-            <p
-              className={`font-semibold md:border-e md:pe-2 lg:pe-3 xl:pe-3.5 2xl:pe-4 ${valueSizes}`}
-            >
-              2 Bedrooms
-            </p>
-          </div>
-
-          <div className={`flex items-center justify-between ${titleSizes}`}>
-            <p className="flex items-center gap-1.5 text-grey md:gap-1 lg:gap-1.5">
-              <Bed size={18} /> Unit Type
-            </p>
-            <p
-              className={`font-semibold md:border-e md:pe-2 lg:pe-3 xl:pe-3.5 2xl:pe-4 ${valueSizes}`}
-            >
-              Studio, 1, 2 & 3 Bedrooms
-            </p>
-          </div>
-
-          <div className={`flex items-center justify-between ${titleSizes}`}>
-            <p className="flex items-center gap-1.5 text-grey md:gap-1 lg:gap-1.5">
-              <Bed size={18} /> Payment Plan
-            </p>
-            <p
-              className={`font-semibold md:border-e md:pe-2 lg:pe-3 xl:pe-3.5 2xl:pe-4 ${valueSizes}`}
-            >
-              70/30
+            <p className={`font-semibold ${valueSizes}`}>
+              Various Sizes Available
             </p>
           </div>
         </div>
 
-        <div className="flex w-full flex-col gap-y-2.5 pt-2 md:w-[33%] md:gap-y-1.5 md:ps-2 md:pt-0 lg:gap-y-2.5 lg:ps-3 xl:gap-y-3.5 xl:ps-3.5 2xl:gap-y-5 2xl:ps-4">
-          <div className={`flex items-center justify-between ${titleSizes}`}>
+        <div className="flex w-full flex-col justify-between gap-y-4 border-b py-4 md:flex-row md:gap-y-1.5 md:border-b-0 md:py-0 lg:gap-y-2.5 xl:gap-y-3.5 2xl:gap-y-5">
+          <div
+            className={`flex w-full items-center justify-between md:border-e md:pe-2 lg:pe-3 xl:pe-3.5 2xl:pe-4 ${titleSizes}`}
+          >
+            <p className="flex items-center gap-1.5 text-grey md:gap-1 lg:gap-1.5">
+              <Property size={18} /> Property Type
+            </p>
+            <p className={`font-semibold ${valueSizes}`}>Appartment</p>
+          </div>
+
+          <div
+            className={`flex w-full items-center justify-between md:border-e md:px-2 lg:px-3 xl:px-3.5 2xl:px-4 ${titleSizes}`}
+          >
+            <p className="flex items-center gap-1.5 text-grey md:gap-1 lg:gap-1.5">
+              <Bed size={18} /> Unit Type
+            </p>
+            <p className={`font-semibold ${valueSizes}`}>
+              Studio, 1, 2, 3 Bedrooms
+            </p>
+          </div>
+
+          <div
+            className={`flex w-full items-center justify-between md:ps-2 lg:ps-3 xl:ps-3.5 2xl:ps-4 ${titleSizes}`}
+          >
             <p className="flex items-center gap-1.5 text-grey md:gap-1 lg:gap-1.5">
               <Area size={18} /> Size
             </p>
@@ -164,28 +159,32 @@ const Description = () => {
               Various Sizes Available
             </p>
           </div>
+        </div>
 
-          <div className={`flex items-center justify-between ${titleSizes}`}>
+        <div className="flex w-full flex-col justify-between gap-y-4 pt-4 md:flex-row md:gap-y-1.5 md:pt-0 lg:gap-y-2.5 xl:gap-y-3.5 2xl:gap-y-5">
+          <div
+            className={`flex w-full items-center justify-between md:border-e md:pe-2 lg:pe-3 xl:pe-3.5 2xl:pe-4 ${titleSizes}`}
+          >
             <p className="flex items-center gap-1.5 text-grey md:gap-1 lg:gap-1.5">
-              <Area size={18} /> Size
+              <DownPayment size={18} /> Down Payment
             </p>
-            <p className={`font-semibold ${valueSizes}`}>
-              Various Sizes Available
-            </p>
+            <p className={`font-semibold ${valueSizes}`}>20%</p>
           </div>
 
-          <div className={`flex items-center justify-between ${titleSizes}`}>
+          <div
+            className={`flex w-full items-center justify-between md:border-e md:px-2 lg:px-3 xl:px-3.5 2xl:px-4 ${titleSizes}`}
+          >
             <p className="flex items-center gap-1.5 text-grey md:gap-1 lg:gap-1.5">
-              <Area size={18} /> Size
+              <PaymentPlan size={18} /> Payment Plan
             </p>
-            <p className={`font-semibold ${valueSizes}`}>
-              Various Sizes Available
-            </p>
+            <p className={`font-semibold ${valueSizes}`}>70/30</p>
           </div>
 
-          <div className={`flex items-center justify-between ${titleSizes}`}>
+          <div
+            className={`flex w-full items-center justify-between md:ps-2 lg:ps-3 xl:ps-3.5 2xl:ps-4 ${titleSizes}`}
+          >
             <p className="flex items-center gap-1.5 text-grey md:gap-1 lg:gap-1.5">
-              <Area size={18} /> Hand Over
+              <HandOver size={18} /> Hand Over
             </p>
             <p className={`font-semibold ${valueSizes}`}>Q4 - 2026</p>
           </div>

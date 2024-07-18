@@ -95,7 +95,22 @@ const Filters = () => {
         </div>
 
         <div className="space-y-3.5 md:space-y-2 md:border-r md:border-r-[#F1F1F1] md:px-3.5 md:text-[7px] lg:space-y-3 lg:pe-4 lg:text-[9px] xl:space-y-4 xl:pe-5 xl:text-[11px] 2xl:space-y-4 2xl:text-[14px]">
-          <p className="font-semibold text-mirage">Price</p>
+          <div className="flex items-center justify-between">
+            <p className="font-semibold text-mirage">Price</p>
+            <div className="flex items-center text-[12px] md:hidden">
+              <p>
+                {formatCurrency(
+                  minValue + (value[0] / 100) * (maxValue - minValue),
+                )}
+              </p>
+              <p className="mx-1">-</p>
+              <p>
+                {formatCurrency(
+                  minValue + (value[1] / 100) * (maxValue - minValue),
+                )}
+              </p>
+            </div>
+          </div>
           <div className="slider-container relative flex items-center">
             <input
               type="range"
@@ -163,7 +178,7 @@ const Filters = () => {
         </div>
 
         <div className="ms-2 mt-3 md:mt-0">
-          <Button className="h-10 py-5 hover:bg-transparent hover:text-mirage md:h-7 md:px-2 md:py-0 md:text-[8px] lg:h-8 lg:px-3 lg:text-[10px] xl:h-9 xl:px-4 xl:text-[13px] 2xl:px-5 2xl:py-6 2xl:text-[16px]">
+          <Button className="h-10 py-5 hover:bg-transparent hover:text-mirage md:h-7 md:gap-x-0.5 md:rounded-md md:px-2 md:py-0 md:text-[8px] lg:h-8 lg:px-3 lg:text-[10px] xl:h-9 xl:gap-x-1 xl:rounded-lg xl:px-4 xl:text-[13px] 2xl:px-5 2xl:py-6 2xl:text-[16px]">
             <IoIosSearch size={18} /> Search
           </Button>
         </div>

@@ -84,14 +84,14 @@ const ImageGallery = () => {
             <div className="h-[300px] overflow-hidden rounded-lg md:h-[120px] md:w-[32%] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]">
               <img
                 src="/assets/imgs/p2.jpg"
-                className="h-full w-full transform object-cover transition-transform duration-300 hover:scale-105"
+                className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
                 alt=""
               />
             </div>
             <div className="h-[300px] overflow-hidden rounded-lg md:ms-auto md:h-[120px] md:w-[66%] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]">
               <img
                 src="/assets/imgs/p3.jpg"
-                className="h-full w-full transform object-cover transition-transform duration-300 hover:scale-105"
+                className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
                 alt=""
               />
             </div>
@@ -101,21 +101,21 @@ const ImageGallery = () => {
             <div className="h-[300px] w-full overflow-hidden rounded-lg md:h-[120px] md:w-[32%] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]">
               <img
                 src="/assets/imgs/p4.jpg"
-                className="h-full w-full transform object-cover transition-transform duration-300 hover:scale-105"
+                className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
                 alt=""
               />
             </div>
             <div className="h-[300px] w-full overflow-hidden rounded-lg md:h-[120px] md:w-[32%] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]">
               <img
                 src="/assets/imgs/p6.jpg"
-                className="h-full w-full transform object-cover transition-transform duration-300 hover:scale-105"
+                className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
                 alt=""
               />
             </div>
             <div className="h-[300px] w-full overflow-hidden rounded-lg md:h-[120px] md:w-[32%] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]">
               <img
                 src="/assets/imgs/p7.jpg"
-                className="h-full w-full transform object-cover transition-transform duration-300 hover:scale-105"
+                className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
                 alt=""
               />
             </div>
@@ -124,32 +124,32 @@ const ImageGallery = () => {
             <div className="h-[300px] w-full overflow-hidden rounded-lg md:h-[120px] md:w-[66%] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]">
               <img
                 src="/assets/imgs/p8.jpg"
-                className="h-full w-full transform object-cover transition-transform duration-300 hover:scale-105"
+                className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
                 alt=""
               />
             </div>
             <div className="h-[300px] w-full overflow-hidden rounded-lg md:ms-auto md:h-[120px] md:w-[32%] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]">
               <img
                 src="/assets/imgs/p5.jpg"
-                className="h-full w-full transform object-cover transition-transform duration-300 hover:scale-105"
+                className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
                 alt=""
               />
             </div>
           </div>
         </div>
 
-        <div className="h-[300px] w-full overflow-hidden md:ms-auto md:h-auto md:w-[29%] md:rounded-sm xl:rounded-lg">
+        <div className="h-[300px] w-full overflow-hidden rounded-lg md:ms-auto md:h-auto md:w-[29%] md:rounded-sm xl:rounded-lg">
           <img
             src="/assets/imgs/p1.jpg"
-            className="h-full w-full transform object-cover transition-transform duration-300 hover:scale-105"
+            className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
             alt=""
           />
         </div>
       </div>
 
       {modalIsOpen && (
-        <div className="fixed inset-0 z-[600] flex items-center justify-center bg-black bg-opacity-70">
-          <div className="w-full max-w-5xl md:rounded-sm xl:rounded-lg">
+        <div className="fixed inset-0 z-[600] flex size-full items-center justify-center bg-black bg-opacity-70">
+          <div className="slider-container max-w-5xl rounded-sm xl:rounded-lg">
             <X
               className="absolute right-5 top-6 z-20 cursor-pointer text-white opacity-60 transition-all duration-200 ease-in-out hover:opacity-100"
               size={35}
@@ -159,11 +159,11 @@ const ImageGallery = () => {
               {images.map((image, index) => (
                 <div
                   key={index}
-                  className="h-[500px] w-full overflow-hidden md:rounded-sm xl:rounded-lg"
+                  className="h-[500px] w-full rounded-sm lg:rounded-lg"
                 >
                   <img
                     src={image}
-                    className="h-full w-full object-cover"
+                    className="size-full transform rounded-sm object-cover lg:rounded-lg"
                     alt=""
                   />
                 </div>

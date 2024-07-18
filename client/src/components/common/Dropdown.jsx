@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import { IoMdCheckmark } from "react-icons/io";
+import { FiChevronDown } from "react-icons/fi";
 
 const Dropdown = ({ options, placeholder }) => {
+  const dropdownRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const dropdownRef = useRef(null);
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
@@ -35,11 +36,12 @@ const Dropdown = ({ options, placeholder }) => {
 
   return (
     <div className="relative" ref={dropdownRef}>
-      <button className="w-full text-left bg-white" onClick={toggleDropdown}>
+      <button className="w-full text-left bg-white flex items-center gap-x-2" onClick={toggleDropdown}>
         {selectedOption || placeholder}
+        <FiChevronDown className={`transition-all duration-300 ease-in-out ${isOpen && "rotate-180"}`} />
       </button>
       <ul
-        className={`absolute md:w-[6rem] lg:w-[8rem] xl:w-[10rem] 2xl:w-[12rem] bg-white rounded-md mt-1 z-10 shadow-lg transform origin-top transition-all duration-300 ${
+        className={`absolute md:w-[6rem] lg:w-[7rem] xl:w-[8rem] 2xl:w-[9rem] bg-white rounded-md mt-1 z-10 shadow-lg transform origin-top transition-all duration-300 ${
           isOpen ? 'max-h-[15rem] opacity-100 scale-y-100' : 'max-h-0 opacity-0 scale-y-0'
         }`}
       >

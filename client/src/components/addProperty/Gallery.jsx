@@ -1,19 +1,20 @@
 import { ImageUp } from "lucide-react";
-import { MdOutlineDeleteForever } from "react-icons/md";
 import Delete from "../svgs/Delete";
 
 const Gallery = () => {
   return (
-    <div className="rounded-xl bg-white px-8 py-4 flex items-start gap-14">
-      <h2 className="font-semibold text-[20px] whitespace-nowrap">Gallery</h2>
+    <div className="flex items-start rounded-xl bg-white px-8 py-4">
+      <h2 className="w-[23%] whitespace-nowrap text-[20px] font-semibold">
+        Gallery
+      </h2>
 
-      <div className="p-1 w-full flex gap-x-8">
+      <div className="ms-auto flex w-[72%] gap-x-8 p-1">
         <div className="space-y-2">
-          <p className="font-semibold text-[16px]">
+          <p className="text-[16px] font-semibold">
             Upload Image of your Property
           </p>
-          <div className="h-[185px] w-[288px] rounded-2xl border-2 border-dashed bg-whiteLilac flex items-center justify-center">
-            <div className="flex flex-col justify-center items-center text-smokeyGrey gap-y-2">
+          <div className="flex h-[185px] w-[288px] items-center justify-center rounded-2xl border-2 border-dashed bg-whiteLilac">
+            <div className="flex flex-col items-center justify-center gap-y-2 text-smokeyGrey">
               <ImageUp size={35} />
               Upload Image
             </div>
@@ -21,14 +22,14 @@ const Gallery = () => {
         </div>
 
         <div className="space-y-2">
-          <div className="flex justify-between items-center">
-            <p className="font-semibold text-[16px]">Name.png</p>
+          <div className="flex items-center justify-between">
+            <p className="text-[16px] font-semibold">Name.png</p>
             <Delete size={22} />
           </div>
           <div className="overflow-hidden">
             <img
               src="/assets/imgs/building-img.jpg"
-              className="object-cover h-[185px] w-[288px] rounded-2xl"
+              className="h-[185px] w-[288px] rounded-2xl object-cover"
               alt=""
             />
           </div>

@@ -25,7 +25,7 @@ const Footer = () => {
     <footer>
       <img
         src="/assets/imgs/footer-vector.png"
-        className="size-full"
+        className="-mb-[0.1px] size-full object-cover"
         alt="footer-vector"
       />
       <div className="bg-mirage text-white">

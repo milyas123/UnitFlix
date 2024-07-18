@@ -17,7 +17,7 @@ const ManageProperties = () => {
     <>
       <Navbar />
       <Hero />
-      <div className="mx-auto md:w-[80%]">
+      <div className="md:mx-auto md:w-[80%]">
         <div id="intro-section">
           <PropertyIntro />
         </div>

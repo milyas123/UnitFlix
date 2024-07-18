@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import Status from '../svgs/Status';
-import { Input } from '../ui/input';
-import { Textarea } from '../ui/textarea';
+import React, { useState } from "react";
+import Status from "../svgs/Status";
+import { Input } from "../ui/input";
+import { Textarea } from "../ui/textarea";
 
-const statuses = ['Pre Launch', 'Secondary', 'Ready to Move In'];
+const statuses = ["Pre Launch", "Secondary", "Ready to Move In"];
 
 const GeneralInformation = () => {
   const [selectedStatus, setSelectedStatus] = useState(statuses[0]);
@@ -13,11 +13,13 @@ const GeneralInformation = () => {
   };
 
   return (
-    <div className="rounded-xl bg-white px-8 py-4 flex items-start gap-14">
-      <h2 className="font-semibold text-[20px] whitespace-nowrap">General Information</h2>
-      <div className="p-1 w-full flex flex-col gap-y-8">
-        <div className="space-y-2.5 w-full">
-          <label className="font-semibold text-[16px]">Title</label>
+    <div className="flex items-start rounded-xl bg-white px-8 py-4">
+      <h2 className="w-[23%] whitespace-nowrap text-[20px] font-semibold">
+        General Information
+      </h2>
+      <div className="ms-auto flex w-[72%] flex-col gap-y-8 p-1">
+        <div className="w-full space-y-2.5">
+          <label className="text-[16px] font-semibold">Title</label>
           <Input
             type="text"
             id="title"
@@ -26,35 +28,38 @@ const GeneralInformation = () => {
           />
         </div>
 
-        <div className="space-y-2.5 w-full">
-          <label className="font-semibold text-[16px]">Overview</label>
+        <div className="w-full space-y-2.5">
+          <label className="text-[16px] font-semibold">Overview</label>
           <Textarea
             id="overview"
-            className="ps-3 h-[300px]"
+            className="h-[300px] ps-3"
             placeholder="Dubai Best Home under 1.5 kanal"
           />
         </div>
 
-        <div className="space-y-2.5 w-full">
-          <label className="font-semibold text-[16px]">Status</label>
-          <div className="flex justify-between items-center">
+        <div className="w-full space-y-2.5">
+          <label className="text-[16px] font-semibold">Status</label>
+          <div className="flex items-center justify-between">
             {statuses.map((status) => (
               <div
                 key={status}
-                className={`cursor-pointer flex items-center gap-x-1.5 px-3 py-2 rounded-md border-2 border-mirage border-opacity-0 hover:border-opacity-100 transition-all duration-300 ease-in-out ${
-                  selectedStatus === status && 'bg-mirage text-white'
+                className={`flex cursor-pointer items-center gap-x-1.5 rounded-md border-2 border-mirage border-opacity-0 px-3 py-2 transition-all duration-300 ease-in-out hover:border-opacity-100 ${
+                  selectedStatus === status && "bg-mirage text-white"
                 }`}
                 onClick={() => handleStatusSelect(status)}
               >
-                <Status className={`${selectedStatus === status ? 'text-white' : 'text-black'}`} size={25} />
+                <Status
+                  className={`${selectedStatus === status ? "text-white" : "text-black"}`}
+                  size={25}
+                />
                 <p className="text-[14px]">{status}</p>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="space-y-2.5 w-full">
-          <label className="font-semibold text-[16px]">Price</label>
+        <div className="w-full space-y-2.5">
+          <label className="text-[16px] font-semibold">Price</label>
           <Input
             type="number"
             id="price"

@@ -47,12 +47,12 @@ const Testimonials = () => {
               ref={swiperRef}
               slidesPerView={1}
               breakpoints={{
-                640: { slidesPerView: 2, spaceBetween: 5 },
+                640: { slidesPerView: 1, spaceBetween: 5 },
                 1024: { slidesPerView: 2, spaceBetween: 12 },
               }}
               modules={[Pagination, Navigation]}
               pagination={{ clickable: true }}
-              className="custom-swiper-pagination h-[320px] w-[345px] md:w-auto md:h-[130px] lg:max-h-[180px] lg:min-h-[160px] xl:h-[210px] xl:max-h-[400px] 2xl:h-[250px]"
+              className="custom-swiper-pagination h-[320px] w-[345px] md:h-[130px] md:w-auto lg:max-h-[180px] lg:min-h-[160px] xl:h-[210px] xl:max-h-[400px] 2xl:h-[250px]"
               style={{
                 "--swiper-pagination-color": "#FFFFFF",
               }}
@@ -63,7 +63,7 @@ const Testimonials = () => {
                 </SwiperSlide>
               ))}
             </Swiper>
-            <div className="relative z-50 -mt-[1.5rem] flex justify-end md:justify-start gap-3">
+            <div className="relative z-50 -mt-[1.5rem] flex justify-end gap-3 md:justify-start">
               <MoveLeft
                 size={30}
                 className={`cursor-pointer ${isBeginning && "cursor-default opacity-40"}`}

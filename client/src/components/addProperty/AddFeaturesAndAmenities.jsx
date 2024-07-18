@@ -6,9 +6,9 @@ import Delete from "../svgs/Delete";
 
 const AddFeaturesAndAmenities = () => {
   return (
-    <div className="rounded-xl bg-white px-8 py-4 flex items-start gap-14">
-      <div className="space-y-2">
-        <h2 className="font-semibold text-[20px] whitespace-nowrap">
+    <div className="flex items-start rounded-xl bg-white px-8 py-4">
+      <div className="w-[23%] space-y-2">
+        <h2 className="whitespace-nowrap text-[20px] font-semibold">
           Features & Amenities
         </h2>
         <Button
@@ -18,9 +18,9 @@ const AddFeaturesAndAmenities = () => {
           Add Amenities
         </Button>
       </div>
-      <div className="p-1 w-full flex flex-col gap-y-8">
-        <div className="w-[230px] h-[130px] bg-whiteLilac rounded-md border flex justify-center items-center p-6">
-          <div className="flex flex-col items-center text-center space-y-3">
+      <div className="ms-auto flex w-[72%] flex-col gap-y-8 p-1">
+        <div className="flex h-[130px] w-[230px] items-center justify-center rounded-md border bg-whiteLilac p-6">
+          <div className="flex flex-col items-center space-y-3 text-center">
             <RiParkingBoxLine />
             <p className="text-14px">Parking Spaces: 1</p>
             <div className="flex items-center justify-center gap-x-1.5 text-smokeyGrey">
