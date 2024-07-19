@@ -14,7 +14,7 @@ const Team = () => {
           </p>
         </div>
 
-        <div className="mt-8 grid grid-cols-1 gap-6 px-3 md:mt-3 md:grid-cols-4 lg:mt-5 xl:mt-7 2xl:mt-8">
+        <div className="mt-8 grid grid-cols-1 place-content-between gap-6 md:gap-x-10 lg:gap-x-12 px-3 md:mt-3 md:grid-cols-4 lg:mt-5 xl:mt-7 2xl:mt-8">
           {[1, 2, 3, 4].map((item) => (
             <MemberCard key={item} number={item} />
           ))}

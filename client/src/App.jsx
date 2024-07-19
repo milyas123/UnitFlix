@@ -21,7 +21,7 @@ function App() {
       <BrowserRouter>
         <Suspense
           fallback={
-            <div className="fixed inset-0 flex justify-center items-center">
+            <div className="fixed size-full inset-0 flex justify-center items-center">
               <div className="w-[100vw] h-screen">
                 <Lottie
                   animationData={RealEstateAnimation}
