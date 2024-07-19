@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 const PropertyCard = () => {
   return (
     <Link to="/property-details" className="contents">
-      <div className="w-full overflow-hidden rounded-lg border border-lightGrey md:w-[195px] lg:w-[95%] lg:min-w-[225px] lg:max-w-[270px] xl:w-[315px] xl:max-w-[400px] 2xl:h-[450px] 2xl:w-[95%] 2xl:min-w-[365px]">
+      <div className="w-full overflow-hidden rounded-lg border border-lightGrey md:w-[195px] lg:w-[95%] lg:min-w-[225px] lg:max-w-[270px] xl:w-[315px] xl:max-w-[400px] 2xl:h-[450px] 2xl:w-[95%] 2xl:min-w-[362px]">
         <style jsx>{`
           .property-card .swiper-pagination-bullet {
             background-color: #ffffff;
@@ -53,7 +53,7 @@ const PropertyCard = () => {
           </Swiper>
         </div>
 
-        <div className="flex flex-col gap-y-3.5 p-2 md:gap-y-1.5 md:px-2 md:py-1.5 lg:gap-y-2 lg:p-2.5 xl:gap-y-2.5 xl:p-3">
+        <div className="flex flex-col gap-y-3.5 p-2 md:gap-y-1.5 md:px-2 md:py-1.5 lg:gap-y-2 lg:p-2.5 xl:gap-y-2.5 xl:p-3 2xl:p-[12px]">
           <div className="flex flex-row flex-wrap font-semibold md:whitespace-nowrap md:text-[6.5px] lg:text-[8px] xl:text-[12px] 2xl:text-[14px]">
             <span className="border-r border-lightGrey pe-1">
               Single Row Middle

@@ -11,7 +11,7 @@ const StickyIcons = ({ showIcons }) => {
   return (
     <>
       <div
-        className={`fixed right-5 top-1/2 hidden -translate-y-1/2 transform flex-col items-center space-y-2 md:flex ${
+        className={`fixed right-5 top-1/2 z-[1000] hidden -translate-y-1/2 transform flex-col items-center space-y-2 md:flex ${
           showIcons ? "show-icons" : "hide-icons"
         }`}
       >

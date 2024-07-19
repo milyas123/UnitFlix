@@ -1,4 +1,4 @@
-import Navbar from "@/components/common/Navbar";
+import Layout from "@/Layout";
 import Hero from "@/components/landingPage/Hero";
 import Discover from "@/components/landingPage/Discover";
 import Help from "@/components/landingPage/Help";
@@ -6,7 +6,6 @@ import AboutUs from "@/components/landingPage/AboutUs";
 import ContactUs from "@/components/landingPage/ContactUs";
 import CTA from "@/components/landingPage/CTA";
 import ExperienceAndFeedback from "@/components/landingPage/ExperienceAndFeedback";
-import Footer from "@/components/common/Footer";
 import ScrollToTop from "@/components/common/ScrollToTop";
 import StickyIcons from "@/components/common/StickyIcons";
 
@@ -16,8 +15,7 @@ const LandingPage = () => {
   const showButtons = useScrollProgress("discover-section");
 
   return (
-    <>
-      <Navbar />
+    <Layout>
       <Hero />
       <div id="discover-section">
         <Discover />
@@ -27,11 +25,11 @@ const LandingPage = () => {
       <ContactUs />
       <CTA />
       <ExperienceAndFeedback />
-      <Footer />
+
       <StickyIcons showIcons={showButtons} />
-      
+
       {showButtons && <ScrollToTop />}
-    </>
+    </Layout>
   );
 };
 

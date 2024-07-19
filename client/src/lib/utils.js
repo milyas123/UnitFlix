@@ -9,6 +9,6 @@ export const formatCurrency = (amount) => {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "AED",
-    maximumFractionDigits: 1
+    maximumFractionDigits: 0
   }).format(amount);
 };

@@ -8,8 +8,9 @@ import {
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
-import { UserRound, Mail, Phone } from "lucide-react";
+import { UserRound, Phone } from "lucide-react";
 import { BiMessageSquareDetail } from "react-icons/bi";
+import Email from "../svgs/Email";
 
 const quickLinks = [
   "Terms of Use",
@@ -29,8 +30,8 @@ const Footer = () => {
         alt="footer-vector"
       />
       <div className="bg-mirage text-white">
-        <div className="mx-auto flex w-full flex-col items-center justify-between gap-10 px-2 py-16 md:w-[65%] md:flex-row md:px-0 md:py-24">
-          <div className="flex w-[30%] flex-col gap-8 md:gap-7 lg:gap-9 xl:gap-12 2xl:gap-14">
+        <div className="mx-auto flex w-full flex-col items-center justify-between gap-10 px-2 py-16 md:w-[65%] md:flex-row md:px-0 md:pt-24">
+          <div className="flex w-full flex-col gap-8 md:w-[30%] md:gap-7 lg:gap-9 xl:gap-12 2xl:gap-14">
             <div className="flex items-center gap-1.5">
               <img
                 src="/assets/imgs/Logo.png"
@@ -90,7 +91,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="flex w-[30%] flex-col items-start md:items-center">
+          <div className="flex w-full flex-col items-start md:w-[30%] md:items-center">
             <div className="space-y-3.5 md:space-y-2 lg:space-y-2.5 xl:space-y-3.5 2xl:space-y-4">
               <h4 className="text-[15px] font-semibold">Quick Links</h4>
               {quickLinks.map((quickLink, index) => (
@@ -104,7 +105,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="w-[40%]">
+          <div className="w-full md:w-[40%]">
             <h4 className="mb-6 text-[15px] font-semibold md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:text-[15px]">
               Get In Touch
             </h4>
@@ -114,52 +115,51 @@ const Footer = () => {
                   type="text"
                   id="name"
                   placeholder="Enter your name"
-                  className="bg-white bg-opacity-10 text-grey placeholder:text-grey md:ps-7 lg:ps-7 xl:ps-8 2xl:ps-9"
+                  className="border-transparent bg-white bg-opacity-10 ps-9 text-grey md:ps-5 lg:ps-[22px] xl:ps-8 2xl:ps-[38px]"
                 />
-                <UserRound
-                  className="absolute left-1.5 text-grey md:left-1.5 xl:left-2 2xl:left-3"
-                  size={18}
-                />
+                <UserRound className="absolute left-2 size-5 text-grey md:left-1.5 md:size-2.5 lg:size-3 xl:left-[9px] xl:size-4 2xl:left-3 2xl:size-5" />
               </div>
               <div className="relative flex items-center">
                 <Input
                   type="email"
                   id="email"
                   placeholder="example@domain.com"
-                  className="bg-white bg-opacity-10 text-grey placeholder:text-grey md:ps-7 lg:ps-7 xl:ps-8 2xl:ps-9"
+                  className="border-transparent bg-white bg-opacity-10 ps-9 text-grey md:ps-5 lg:ps-[22px] xl:ps-8 2xl:ps-[38px]"
                 />
-                <Mail
-                  className="absolute left-1.5 text-grey md:left-1.5 xl:left-2 2xl:left-3"
-                  size={18}
-                />
+                <Email className="absolute left-2 text-grey md:left-1.5 xl:left-2 2xl:left-3" />
               </div>
               <div className="relative flex items-center">
                 <Input
                   type="number"
                   id="phone"
                   placeholder="(+92) 311 7995274"
-                  className="bg-white bg-opacity-10 text-grey placeholder:text-grey md:ps-7 lg:ps-7 xl:ps-8 2xl:ps-9"
+                  className="border-transparent bg-white bg-opacity-10 ps-9 text-grey md:ps-5 lg:ps-[22px] xl:ps-8 2xl:ps-[38px]"
                 />
-                <Phone
-                  className="absolute left-1.5 text-grey md:left-1.5 xl:left-2 2xl:left-3"
-                  size={18}
-                />
+                <Phone className="absolute left-2 size-5 text-grey md:left-1.5 md:size-2.5 lg:size-3 xl:left-[9px] xl:size-4 2xl:left-3 2xl:size-5" />
               </div>
               <div className="relative flex items-center">
                 <Textarea
                   rows={4}
                   placeholder="I want to buy/rent..."
-                  className="bg-white bg-opacity-10 text-grey placeholder:text-grey md:ps-7 lg:ps-7 xl:ps-8 2xl:ps-9"
+                  className="border-transparent bg-white bg-opacity-10 ps-9 text-grey md:ps-5 lg:ps-[22px] xl:ps-8 2xl:ps-[38px]"
                 />
-                <BiMessageSquareDetail
-                  className="absolute left-1.5 top-4 text-grey md:left-1.5 md:top-1 lg:top-1.5 xl:left-2 xl:top-[11px] 2xl:left-3 2xl:top-4"
-                  size={18}
-                />
+                <BiMessageSquareDetail className="absolute left-2 top-3 size-5 text-grey md:left-1.5 md:top-2 md:size-2.5 lg:top-2.5 lg:size-3 xl:left-[9px] xl:top-[12.5px] xl:size-4 2xl:left-3 2xl:top-3.5 2xl:size-5" />
               </div>
               <Button className="rounded-md bg-sunriseOrange hover:border-2 hover:border-sunriseOrange hover:bg-transparent hover:text-sunriseOrange md:h-6 md:text-[8px] lg:h-7 lg:text-[10px] xl:h-8 xl:text-[12px] 2xl:h-9 2xl:py-5 2xl:text-[14px]">
                 Submit
               </Button>
             </form>
+          </div>
+        </div>
+
+        <div className="mx-auto flex flex-col items-center justify-between gap-y-5 border-t border-white border-opacity-10 py-5 text-[14px] text-slate md:w-[65%] md:flex-row md:gap-y-0 md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]">
+          <p>&copy; Unitflix - All rights reserved</p>
+          <div className="flex items-center gap-x-3">
+            <p>Privacy</p>
+            <p>.</p>
+            <p>Terms</p>
+            <p>.</p>
+            <p>Sitemap</p>
           </div>
         </div>
       </div>

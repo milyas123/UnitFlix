@@ -1,5 +1,4 @@
-import Footer from "@/components/common/Footer";
-import Navbar from "@/components/common/Navbar";
+import Layout from "@/Layout";
 import Description from "@/components/propertyDetails/Description";
 import FeaturesAndAmenities from "@/components/propertyDetails/FeaturesAndAmenities";
 import GetInTouch from "@/components/propertyDetails/GetInTouch";
@@ -19,10 +18,9 @@ const PropertyDetails = () => {
   const showTopButton = useScrollProgress("highlights-section");
 
   return (
-    <>
-      <Navbar />
+    <Layout>
       <Hero />
-      <div className="w-[95%] mx-auto flex mt-7 md:mt-7 md:w-[91%] lg:mt-9 xl:mt-12 2xl:mt-16">
+      <div className="mx-auto mt-7 flex w-[95%] md:mt-7 md:w-[91%] lg:mt-9 xl:mt-12 2xl:mt-16">
         <div className="w-full md:w-[74%]">
           <Description />
           <div id="highlights-section">
@@ -35,16 +33,16 @@ const PropertyDetails = () => {
           <SimilarProjects />
           <SimilarProperties />
         </div>
-        <div className="ms-auto hidden w-[23.5%] md:flex">
-          <div className="sticky top-5">
+        <div className="ms-auto hidden w-[23.5%] md:block">
+          <div className="sticky top-7">
             <GetInTouch />
           </div>
         </div>
       </div>
-      <Footer />
+
       <StickyIcons showIcons={showTopButton} />
       {showTopButton && <ScrollToTop />}
-    </>
+    </Layout>
   );
 };
 

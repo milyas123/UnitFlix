@@ -1,5 +1,4 @@
-import Footer from "@/components/common/Footer";
-import Navbar from "@/components/common/Navbar";
+import Layout from "@/Layout";
 import Header from "@/components/propertiesForSale/Header";
 import Properties from "@/components/propertiesForSale/Properties";
 import ScrollToTop from "@/components/common/ScrollToTop";
@@ -11,16 +10,15 @@ const PropertiesForSale = () => {
   const showTopButton = useScrollProgress("properties-section");
 
   return (
-    <>
-      <Navbar />
+    <Layout>
       <Header />
       <div id="properties-section">
         <Properties />
       </div>
-      <Footer />
+
       <StickyIcons showIcons={showTopButton} />
       {showTopButton && <ScrollToTop />}
-    </>
+    </Layout>
   );
 };
 

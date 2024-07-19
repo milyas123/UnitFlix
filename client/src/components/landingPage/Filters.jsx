@@ -72,7 +72,7 @@ const Filters = () => {
         ))}
       </div>
 
-      <div className="flex flex-grow flex-col justify-between gap-3 rounded-lg bg-white p-5 shadow md:flex-row md:gap-0 md:rounded-none md:rounded-b-md md:rounded-r-md md:px-3 md:py-2 lg:rounded-b-lg lg:rounded-r-lg lg:py-2.5 xl:py-3.5 2xl:rounded-b-xl 2xl:rounded-r-xl 2xl:p-4">
+      <div className="flex flex-grow flex-col justify-between gap-y-6 rounded-lg bg-white p-5 shadow md:flex-row md:gap-y-0 md:rounded-none md:rounded-b-md md:rounded-r-md md:px-3 md:py-2 lg:rounded-b-lg lg:rounded-r-lg lg:py-2.5 xl:py-3.5 2xl:rounded-b-xl 2xl:rounded-r-xl 2xl:p-4">
         <div className="space-y-2 border-b-2 md:w-[85px] md:space-y-1.5 md:border-b-0 md:border-r md:border-r-[#F1F1F1] md:text-[7px] lg:w-[100px] lg:space-y-1.5 lg:ps-0 lg:text-[9px] xl:w-[120px] xl:space-y-2.5 xl:text-[11px] 2xl:w-[145px] 2xl:text-[14px]">
           <p className="font-semibold text-mirage">Search</p>
           <input
@@ -178,8 +178,9 @@ const Filters = () => {
         </div>
 
         <div className="ms-2 mt-3 md:mt-0">
-          <Button className="h-10 py-5 hover:bg-transparent hover:text-mirage md:h-7 md:gap-x-0.5 md:rounded-md md:px-2 md:py-0 md:text-[8px] lg:h-8 lg:px-3 lg:text-[10px] xl:h-9 xl:gap-x-1 xl:rounded-lg xl:px-4 xl:text-[13px] 2xl:px-5 2xl:py-6 2xl:text-[16px]">
-            <IoIosSearch size={18} /> Search
+          <Button className="h-10 gap-x-0.5 py-5 hover:bg-transparent hover:text-mirage md:h-7 md:rounded-md md:px-2 md:py-0 md:text-[8px] lg:h-8 lg:px-3 lg:text-[10px] xl:h-9 xl:rounded-lg xl:px-4 xl:text-[13px] 2xl:px-5 2xl:py-6 2xl:text-[16px]">
+            <IoIosSearch className="size-6 md:size-4 lg:size-5 xl:size-6 2xl:size-7" />{" "}
+            Search
           </Button>
         </div>
       </div>

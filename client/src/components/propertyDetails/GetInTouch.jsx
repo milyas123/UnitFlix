@@ -55,17 +55,17 @@ const GetInTouch = () => {
           <Input type="text" id="name" placeholder="Name*" />
           <Input type="email" id="email" placeholder="Email*" />
 
-          <div className="flex items-center">
+          <div className="flex items-center justify-between md:gap-1.5 xl:gap-2 w-full">
             <CountryCodeDropdown
               options={countryCodes}
               placeholder="Code"
-              className="w-[25%]"
+              className="w-[20%]"
             />
             <Input
               type="number"
               id="contact"
               placeholder="Contact No*"
-              className="ms-auto w-[73%]"
+              className="w-[75%]"
             />
           </div>
           <Input type="text" id="bio" placeholder="I am " />

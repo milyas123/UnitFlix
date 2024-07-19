@@ -48,13 +48,17 @@ const MobileNav = ({ onClose, isVisible }) => {
                 alt="company-logo"
               />
             </Link>
-            <X size={30} className="text-white" onClick={() => setAnimationClass("slide-out")} />
+            <X
+              size={30}
+              className="text-white"
+              onClick={() => setAnimationClass("slide-out")}
+            />
           </div>
 
           <div className="flex flex-col gap-3 p-3">
             {buttonItems.map((item, index) => (
               <Link to={item.link} key={index}>
-                <Button className="h-[3rem] w-full justify-start rounded-lg bg-white bg-opacity-20 px-2 text-[14px] text-white hover:bg-white hover:text-mirage">
+                <Button className="h-[3rem] w-full justify-start rounded-lg border-transparent bg-white bg-opacity-20 px-2 text-[14px] text-white hover:bg-white hover:text-mirage">
                   <RxDash size={25} /> {item.name}
                 </Button>
               </Link>

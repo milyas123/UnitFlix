@@ -134,7 +134,7 @@ const Properties = () => {
             </div>
           </div>
 
-          <div className="my-3 grid grid-cols-1 place-items-center gap-y-7 md:grid-cols-3 md:gap-y-3 lg:gap-y-4 xl:gap-y-5">
+          <div className="my-3 grid grid-cols-1 place-items-center gap-y-7 md:grid-cols-3 md:gap-y-4 lg:gap-y-5 xl:gap-y-5 2xl:gap-y-6">
             {[1, 2, 3, 4, 5, 6].map((item) => (
               <PropertyCard key={item} />
             ))}

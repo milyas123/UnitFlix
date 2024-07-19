@@ -1,5 +1,4 @@
-import Footer from "@/components/common/Footer";
-import Navbar from "@/components/common/Navbar";
+import Layout from "@/Layout";
 import Form from "@/components/contactUs/Form";
 import Header from "@/components/contactUs/Header";
 import ScrollToTop from "@/components/common/ScrollToTop";
@@ -11,16 +10,14 @@ const ContactUs = () => {
   const showTopButton = useScrollProgress("form-section");
 
   return (
-    <>
-      <Navbar />
+    <Layout>
       <Header />
       <div id="form-section">
         <Form />
       </div>
-      <Footer />
       <StickyIcons showIcons={showTopButton} />
       {showTopButton && <ScrollToTop />}
-    </>
+    </Layout>
   );
 };
 

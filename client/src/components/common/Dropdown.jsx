@@ -18,7 +18,7 @@ const Dropdown = ({ options, placeholder }) => {
   const handleSearchChange = (e) => setSearchTerm(e.target.value);
 
   const filteredOptions = options.filter((option) =>
-    option.toLowerCase().includes(searchTerm.toLowerCase())
+    option.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   const handleClickOutside = (event) => {
@@ -36,18 +36,25 @@ const Dropdown = ({ options, placeholder }) => {
 
   return (
     <div className="relative" ref={dropdownRef}>
-      <button className="w-full text-left bg-white flex items-center gap-x-2" onClick={toggleDropdown}>
+      <button
+        className="flex w-full items-center justify-between bg-white text-left md:w-[80%]"
+        onClick={toggleDropdown}
+      >
         {selectedOption || placeholder}
-        <FiChevronDown className={`transition-all duration-300 ease-in-out ${isOpen && "rotate-180"}`} />
+        <FiChevronDown
+          className={`transition-all duration-300 ease-in-out ${isOpen && "rotate-180"}`}
+        />
       </button>
       <ul
-        className={`absolute md:w-[6rem] lg:w-[7rem] xl:w-[8rem] 2xl:w-[9rem] bg-white rounded-md mt-1 z-10 shadow-lg transform origin-top transition-all duration-300 ${
-          isOpen ? 'max-h-[15rem] opacity-100 scale-y-100' : 'max-h-0 opacity-0 scale-y-0'
+        className={`absolute z-10 mt-1 w-full origin-top transform rounded-md bg-white shadow-lg transition-all duration-300 md:w-[6rem] lg:w-[7rem] xl:w-[8rem] 2xl:w-[9rem] ${
+          isOpen
+            ? "max-h-[15rem] scale-y-100 opacity-100"
+            : "max-h-0 scale-y-0 opacity-0"
         }`}
       >
         {isOpen && (
           <>
-            <li className="md:p-0.5 xl:p-2">
+            <li className="p-2 md:p-0.5 xl:p-2">
               <input
                 type="text"
                 placeholder="Search..."
@@ -59,7 +66,7 @@ const Dropdown = ({ options, placeholder }) => {
             {filteredOptions.map((option, index) => (
               <li
                 key={index}
-                className="md:px-1.5 md:py-1 lg:p-2 cursor-pointer whitespace-nowrap hover:bg-gray-100 flex justify-between items-center"
+                className="flex cursor-pointer items-center justify-between whitespace-nowrap p-2 hover:bg-gray-100 md:px-1.5 md:py-1 lg:p-2"
                 onClick={() => handleOptionClick(option)}
               >
                 {option}

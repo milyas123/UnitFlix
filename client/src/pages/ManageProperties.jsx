@@ -1,5 +1,4 @@
-import Footer from "@/components/common/Footer";
-import Navbar from "@/components/common/Navbar";
+import Layout from "@/Layout";
 import CTA from "@/components/manageProperties/CTA";
 import Hero from "@/components/manageProperties/Hero";
 import PropertyActivities from "@/components/manageProperties/PropertyActivities";
@@ -14,8 +13,7 @@ const ManageProperties = () => {
   const showTopButton = useScrollProgress("intro-section");
 
   return (
-    <>
-      <Navbar />
+    <Layout>
       <Hero />
       <div className="md:mx-auto md:w-[75%]">
         <div id="intro-section">
@@ -25,10 +23,9 @@ const ManageProperties = () => {
         <Testimonials />
         <CTA />
       </div>
-      <Footer />
       <StickyIcons showIcons={showTopButton} />
       {showTopButton && <ScrollToTop />}
-    </>
+    </Layout>
   );
 };
 

@@ -3,6 +3,8 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { BiMessageSquareDetail } from "react-icons/bi";
 import { Textarea } from "../ui/textarea";
+import Email from "../svgs/Email";
+import InquiryForm from "./InquiryForm";
 
 const InquiryModal = ({ onClose }) => {
   return (
@@ -24,85 +26,7 @@ const InquiryModal = ({ onClose }) => {
             </p>
           </div>
 
-          <form
-            action=""
-            className="flex flex-col gap-4 md:gap-3.5 lg:gap-5 xl:gap-6 2xl:gap-7"
-          >
-            <div className="flex flex-col gap-2.5 md:gap-y-0.5 lg:gap-y-1.5 xl:gap-y-2.5 2xl:gap-y-3">
-              <label className="font-semibold md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]">
-                Your Name
-              </label>
-              <div className="relative flex items-center">
-                <Input
-                  type="text"
-                  id="name"
-                  placeholder="Enter your name"
-                  className="md:ps-7 lg:ps-7 xl:ps-8 2xl:ps-9"
-                />
-                <UserRound
-                  className="absolute left-1.5 text-muted-foreground md:left-1.5 xl:left-2 2xl:left-3"
-                  size={19}
-                />
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-2.5 md:gap-y-0.5 lg:gap-y-1.5 xl:gap-y-2.5 2xl:gap-y-3">
-              <label className="font-semibold md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]">
-                Email
-              </label>
-              <div className="relative flex items-center">
-                <Input
-                  type="email"
-                  id="email"
-                  placeholder="example@domain.com"
-                  className="md:ps-7 lg:ps-7 xl:ps-8 2xl:ps-9"
-                />
-                <Mail
-                  className="absolute left-1.5 text-muted-foreground md:left-1.5 xl:left-2 2xl:left-3"
-                  size={19}
-                />
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-2.5 md:gap-y-0.5 lg:gap-y-1.5 xl:gap-y-2.5 2xl:gap-y-3">
-              <label className="font-semibold md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]">
-                Phone Number
-              </label>
-              <div className="relative flex items-center">
-                <Input
-                  type="number"
-                  id="phone"
-                  placeholder="(+92) 311 7995274"
-                  className="md:ps-7 lg:ps-7 xl:ps-8 2xl:ps-9"
-                />
-                <Phone
-                  className="absolute left-1.5 text-muted-foreground md:left-1.5 xl:left-2 2xl:left-3"
-                  size={19}
-                />
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-2.5 md:gap-y-0.5 lg:gap-y-1.5 xl:gap-y-2.5 2xl:gap-y-3">
-              <label className="font-semibold md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]">
-                Message
-              </label>
-              <div className="relative flex items-center">
-                <Textarea
-                  rows={4}
-                  placeholder="I want to buy/rent..."
-                  className="md:ps-7 lg:ps-7 xl:ps-8 2xl:ps-9"
-                />
-                <BiMessageSquareDetail
-                  className="absolute left-1.5 top-4 text-muted-foreground md:left-1.5 md:top-1 lg:top-1.5 xl:left-2 xl:top-[11px] 2xl:left-3 2xl:top-4"
-                  size={19}
-                />
-              </div>
-            </div>
-
-            <Button className="w-full rounded-md hover:bg-transparent hover:text-mirage md:h-7 lg:h-8 xl:h-9 2xl:h-10">
-              Submit
-            </Button>
-          </form>
+          <InquiryForm />
         </div>
 
         <img
