@@ -1,9 +1,7 @@
-const Area = ({ size, className }) => {
+const Area = ({ className }) => {
   return (
     <svg
-      className={`${className}`}
-      width={size}
-      height={size}
+      className={`${className} size-5 md:size-2 lg:size-3 xl:size-4 2xl:size-5`}
       viewBox="0 0 21 21"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

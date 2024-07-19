@@ -47,29 +47,29 @@ const Properties = () => {
   }, []);
 
   return (
-    <section className="w-full px-2.5 md:px-0 md:w-[86%] mx-auto mt-[28rem] md:my-[6rem] lg:my-[7.5rem] xl:my-[8.5rem] 2xl:my-[10rem]">
-      <div className="flex flex-col items-start md:flex-row md:items-center justify-between gap-y-1">
-        <h3 className="font-medium text-[20px] md:text-[14px] lg:text-[16px] xl:text-[20px] 2xl:text-[24px]">
+    <section className="mx-auto mt-[28rem] w-full px-2.5 md:my-[6rem] md:w-[86%] md:px-0 lg:my-[7.5rem] xl:my-[8.5rem] 2xl:my-[10rem]">
+      <div className="flex flex-col items-start justify-between gap-y-1 md:flex-row md:items-center">
+        <h3 className="text-[20px] font-medium md:text-[14px] lg:text-[16px] xl:text-[20px] 2xl:text-[24px]">
           Properties for sale in Abu Dhabi
         </h3>
         <Link to="/add-property">
-          <Button className="rounded-lg gap-x-1.5">
+          <Button className="gap-x-1.5 rounded-lg">
             Sell My Property <BsArrowUpRight size={17} />
           </Button>
         </Link>
       </div>
 
       <div
-        className="mt-5 border px-4 py-2.5 rounded-md flex justify-between items-center md:hidden"
+        className="mt-5 flex items-center justify-between rounded-md border px-4 py-2.5 md:hidden"
         onClick={toggleFilters}
       >
-        <h2 className="font-semibold text-[20px]">Filters</h2>
+        <h2 className="text-[20px] font-semibold">Filters</h2>
         <FiChevronDown />
       </div>
 
       <div className="mt-4 flex flex-col md:flex-row">
         <div
-          className={`w-full md:w-[19%] flex flex-col gap-y-3 ${
+          className={`flex w-full flex-col gap-y-3 md:w-[19%] ${
             showFilters ? "" : "hidden md:flex"
           }`}
           id="filters"
@@ -93,16 +93,16 @@ const Properties = () => {
           />
         </div>
 
-        <div className="w-full md:w-[80%] md:ms-auto">
-          <div className="bg-whiteLilac whitespace-nowrap rounded-xl border border-lightGrey flex flex-col items-start md:flex-row md:justify-between md:items-center p-3 md:p-2 lg:p-3 xl:p-3.5 2xl:p-4">
-            <p className="font-semibold text-[20px] md:text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[20px]">
+        <div className="w-full md:ms-auto md:w-[80%]">
+          <div className="flex flex-col items-start whitespace-nowrap rounded-xl border border-lightGrey bg-whiteLilac p-3 md:flex-row md:items-center md:justify-between md:p-2 lg:p-3 xl:p-3.5 2xl:p-4">
+            <p className="text-[20px] font-semibold md:text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[20px]">
               Showing Property Results
-              <span className="text-slate text-[16px] md:text-[9px] lg:text-[11px] xl:text-[13px] 2xl:text-[16px] font-light">
+              <span className="text-[16px] font-light text-slate md:text-[9px] lg:text-[11px] xl:text-[13px] 2xl:text-[16px]">
                 (308)
               </span>
             </p>
             <div
-              className="w-[140px] p-2 md:w-[100px] lg:w-[130px] 2xl:w-[200px] md:px-2 md:py-1.5 2xl:px-3 2xl:py-2.5 bg-white rounded-md border-2 text-mirage flex justify-between items-center relative"
+              className="relative flex w-[140px] items-center justify-between rounded-md border-2 bg-white p-2 text-mirage md:w-[100px] md:px-2 md:py-1.5 lg:w-[130px] 2xl:w-[200px] 2xl:px-3 2xl:py-2.5"
               ref={dropdownRef}
               onClick={toggleDropdown}
             >
@@ -111,17 +111,17 @@ const Properties = () => {
               </button>
               <FiChevronDown />
               <ul
-                className={`text-[18px] md:text-[9px] lg:text-[11px] xl:text-[13px] 2xl:text-[16px] absolute top-10 max-w-[15rem] bg-white rounded-md mt-1 z-10 shadow-lg transform origin-top transition-all duration-300 ${
+                className={`absolute top-10 z-10 mt-1 max-w-[15rem] origin-top transform rounded-md bg-white text-[18px] shadow-lg transition-all duration-300 md:text-[9px] lg:text-[11px] xl:text-[13px] 2xl:text-[16px] ${
                   isOpen
-                    ? "max-h-[15rem] opacity-100 scale-y-100"
-                    : "max-h-0 opacity-0 scale-y-0"
+                    ? "max-h-[15rem] scale-y-100 opacity-100"
+                    : "max-h-0 scale-y-0 opacity-0"
                 }`}
               >
                 {isOpen &&
                   sortOptions.map((option, index) => (
                     <li
                       key={index}
-                      className="p-2 cursor-pointer whitespace-nowrap hover:bg-gray-100 flex justify-between items-center"
+                      className="flex cursor-pointer items-center justify-between whitespace-nowrap p-2 hover:bg-gray-100"
                       onClick={() => handleOptionClick(option)}
                     >
                       {option}
@@ -134,8 +134,8 @@ const Properties = () => {
             </div>
           </div>
 
-          <div className="my-3 grid grid-cols-1 md:grid-cols-3 place-items-center gap-y-7 md:gap-y-2.5 lg:gap-y-4 2xl:gap-y-8">
-            {[1, 2, 3, 4].map((item) => (
+          <div className="my-3 grid grid-cols-1 place-items-center gap-y-7 md:grid-cols-3 md:gap-y-3 lg:gap-y-4 xl:gap-y-5">
+            {[1, 2, 3, 4, 5, 6].map((item) => (
               <PropertyCard key={item} />
             ))}
           </div>

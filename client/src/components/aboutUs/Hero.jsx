@@ -21,7 +21,7 @@ const Hero = () => {
               Its about building a future, creating memories and finding a place
               to belong
             </p>
-            <Button className="rounded-md bg-white px-2 text-mirage hover:border-white hover:text-white md:h-7 md:px-3 lg:h-8 lg:px-4 xl:h-9 xl:px-5 2xl:h-10 2xl:px-6">
+            <Button className="rounded-md border-transparent bg-white px-2 text-mirage hover:border-white hover:text-white md:h-7 md:px-3 lg:h-8 lg:px-4 xl:h-9 xl:px-5 2xl:h-10 2xl:px-6">
               Learn More
             </Button>
           </div>

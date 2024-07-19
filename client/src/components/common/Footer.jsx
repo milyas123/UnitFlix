@@ -25,12 +25,12 @@ const Footer = () => {
     <footer>
       <img
         src="/assets/imgs/footer-vector.png"
-        className="-mb-[0.1px] size-full object-cover"
+        className="-mb-[1px] size-full object-cover"
         alt="footer-vector"
       />
       <div className="bg-mirage text-white">
         <div className="mx-auto flex w-full flex-col items-center justify-between gap-10 px-2 py-16 md:w-[65%] md:flex-row md:px-0 md:py-24">
-          <div className="flex w-full flex-col gap-8 md:gap-7 lg:gap-9 xl:gap-12 2xl:gap-14">
+          <div className="flex w-[30%] flex-col gap-8 md:gap-7 lg:gap-9 xl:gap-12 2xl:gap-14">
             <div className="flex items-center gap-1.5">
               <img
                 src="/assets/imgs/Logo.png"
@@ -73,24 +73,24 @@ const Footer = () => {
               <p className="text-[15px] font-semibold md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:text-[15px]">
                 Follow us on social media
               </p>
-              <div className="flex items-center gap-x-2 lg:gap-x-3 xl:gap-x-3.5 2xl:gap-x-4">
-                <div className="cursor-pointer rounded-full bg-mirageLight p-2 transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage">
-                  <FaFacebookF size={15} className="cursor-pointer" />
+              <div className="flex items-center gap-x-1.5 text-pastelGrey lg:gap-x-2 xl:gap-x-2.5 2xl:gap-x-3">
+                <div className="cursor-pointer rounded-full bg-mirageLight transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage md:p-1 2xl:p-2">
+                  <FaFacebookF className="size-5 cursor-pointer md:size-2 lg:size-3 xl:size-4" />
                 </div>
-                <div className="cursor-pointer rounded-full bg-mirageLight p-2 transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage">
-                  <FaTwitter size={15} className="cursor-pointer" />
+                <div className="cursor-pointer rounded-full bg-mirageLight transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage md:p-1 2xl:p-2">
+                  <FaTwitter className="size-5 cursor-pointer md:size-2 lg:size-3 xl:size-4" />
                 </div>
-                <div className="cursor-pointer rounded-full bg-mirageLight p-2 transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage">
-                  <FaInstagram size={15} className="cursor-pointer" />
+                <div className="cursor-pointer rounded-full bg-mirageLight transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage md:p-1 2xl:p-2">
+                  <FaInstagram className="size-5 cursor-pointer md:size-2 lg:size-3 xl:size-4" />
                 </div>
-                <div className="cursor-pointer rounded-full bg-mirageLight p-2 transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage">
-                  <FaLinkedinIn size={15} className="cursor-pointer" />
+                <div className="cursor-pointer rounded-full bg-mirageLight transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage md:p-1 2xl:p-2">
+                  <FaLinkedinIn className="size-5 cursor-pointer md:size-2 lg:size-3 xl:size-4" />
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="flex w-full flex-col items-start md:items-center">
+          <div className="flex w-[30%] flex-col items-start md:items-center">
             <div className="space-y-3.5 md:space-y-2 lg:space-y-2.5 xl:space-y-3.5 2xl:space-y-4">
               <h4 className="text-[15px] font-semibold">Quick Links</h4>
               {quickLinks.map((quickLink, index) => (
@@ -104,7 +104,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="w-full">
+          <div className="w-[40%]">
             <h4 className="mb-6 text-[15px] font-semibold md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:text-[15px]">
               Get In Touch
             </h4>

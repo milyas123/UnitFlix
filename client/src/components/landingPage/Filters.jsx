@@ -24,7 +24,7 @@ const Filters = () => {
   const handleMove = (index, e) => {
     const isTouch = e.type.includes("touch");
     const clientX = isTouch ? e.touches[0].clientX : e.clientX;
-    const slider = e.target.closest(".slider-container");
+    const slider = document.querySelector(".slider-container");
     const rect = slider.getBoundingClientRect();
     const newValue = ((clientX - rect.left) / rect.width) * 100;
     if (index === 0 && newValue >= 0 && newValue <= value[1]) {

@@ -23,7 +23,7 @@ const PropertyDetails = () => {
       <Navbar />
       <Hero />
       <div className="w-[95%] mx-auto flex mt-7 md:mt-7 md:w-[91%] lg:mt-9 xl:mt-12 2xl:mt-16">
-        <div className="w-full md:w-[75%]">
+        <div className="w-full md:w-[74%]">
           <Description />
           <div id="highlights-section">
             <Highlights />

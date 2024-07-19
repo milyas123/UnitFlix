@@ -9,6 +9,8 @@ import { MoveLeft, MoveRight } from "lucide-react";
 import ProjectCard from "../landingPage/cards/ProjectCard";
 
 import useSwiperNavigation from "@/hooks/useSwiperNavigation";
+import ArrowLeft from "../svgs/ArrowLeft";
+import ArrowRight from "../svgs/ArrowRight";
 
 const SimilarProjects = () => {
   const projectsSwiperRef = useRef(null);
@@ -20,16 +22,18 @@ const SimilarProjects = () => {
         <h1 className="text-[16px] font-medium md:text-[12px] lg:text-[15px] xl:text-[18px] 2xl:text-[24px]">
           Similar Projects from Developer
         </h1>
-        <div className="flex items-center gap-3">
-          <MoveLeft
-            size={20}
-            className={`cursor-pointer ${isBeginning && "cursor-default opacity-40"}`}
+        <div className="flex items-center justify-end gap-x-1.5">
+          <ArrowLeft
+            className={`cursor-pointer md:text-xs lg:text-lg ${
+              isBeginning && "cursor-default opacity-40"
+            }`}
             onClick={() => projectsSwiperRef.current.swiper.slidePrev()}
             disabled={isBeginning}
           />
-          <MoveRight
-            size={20}
-            className={`cursor-pointer ${isEnd && "cursor-default opacity-40"}`}
+          <ArrowRight
+            className={`cursor-pointer md:text-xs lg:text-lg ${
+              isEnd && "cursor-default opacity-40"
+            }`}
             onClick={() => projectsSwiperRef.current.swiper.slideNext()}
             disabled={isEnd}
           />

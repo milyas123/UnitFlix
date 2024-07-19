@@ -13,8 +13,8 @@ import { Link } from "react-router-dom";
 
 const PropertyCard = () => {
   return (
-    <Link to="/property-details">
-      <div className="w-[360px] md:w-[175px] lg:w-[230px] xl:w-[280px] 2xl:w-[340px] 2xl:h-[460px] rounded-lg overflow-hidden border border-lightGrey">
+    <Link to="/property-details" className="contents">
+      <div className="w-full overflow-hidden rounded-lg border border-lightGrey md:w-[195px] lg:w-[95%] lg:min-w-[225px] lg:max-w-[270px] xl:w-[315px] xl:max-w-[400px] 2xl:h-[450px] 2xl:w-[95%] 2xl:min-w-[365px]">
         <style jsx>{`
           .property-card .swiper-pagination-bullet {
             background-color: #ffffff;
@@ -33,7 +33,7 @@ const PropertyCard = () => {
             modules={[Pagination, Navigation]}
             pagination={{ clickable: true }}
             navigation={true}
-            className="md:h-[180px] 2xl:h-[300px]"
+            className="md:h-[160px] lg:h-[180px] xl:h-[200px] 2xl:h-[300px]"
             style={{
               "--swiper-navigation-size": "16px",
               "--swiper-navigation-color": "#FFFFFF",
@@ -45,7 +45,7 @@ const PropertyCard = () => {
                 <img
                   src="/assets/imgs/building-img.jpg"
                   alt=""
-                  className="w-full h-full object-cover"
+                  className="size-full object-cover"
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-50"></div>
               </SwiperSlide>
@@ -53,8 +53,8 @@ const PropertyCard = () => {
           </Swiper>
         </div>
 
-        <div className="p-2 md:p-1 lg:p-1.5 xl:p-2 2xl:p-3 flex flex-col gap-y-3.5 md:gap-y-1.5 2xl:gap-y-3.5">
-          <div className="font-semibold md:text-[6px] lg:text-[9px] xl:text-[11px] 2xl:text-[13px] flex flex-row flex-wrap md:justify-between md:whitespace-nowrap">
+        <div className="flex flex-col gap-y-3.5 p-2 md:gap-y-1.5 md:px-2 md:py-1.5 lg:gap-y-2 lg:p-2.5 xl:gap-y-2.5 xl:p-3">
+          <div className="flex flex-row flex-wrap font-semibold md:whitespace-nowrap md:text-[6.5px] lg:text-[8px] xl:text-[12px] 2xl:text-[14px]">
             <span className="border-r border-lightGrey pe-1">
               Single Row Middle
             </span>
@@ -63,28 +63,34 @@ const PropertyCard = () => {
             <span className="md:ps-1">Study Room</span>
           </div>
 
-          <div className="flex items-center justify-start gap-x-0.5 text-[14px] md:text-[6px] lg:text-[9px] xl:text-[11px] 2xl:text-[13px]">
-            <MdOutlineLocationOn size={17} className="-ms-1" />
+          <div className="flex items-center justify-start gap-x-0.5 text-[14px] md:text-[6.5px] lg:text-[8px] xl:text-[12px] 2xl:text-[14px]">
+            <MdOutlineLocationOn
+              size={17}
+              className="-ms-0.5 size-5 md:size-2 lg:size-3 xl:size-4 2xl:size-5"
+            />
             The Cedars, Yas Acres, Yas Island, Abu Dhabi
           </div>
 
-          <div className="font-semibold text-[12px] md:text-[5px] lg:text-[7px] xl:text-[9px] 2xl:text-[11px] flex flex-row justify-between whitespace-nowrap">
-            <span className="border-r border-lightGrey pe-1 font-bold text-mirage text-[16px] md:text-[6px] lg:text-[9px] xl:text-[11px] 2xl:text-[13px]">
+          <div className="flex flex-row whitespace-nowrap text-[12px] font-semibold md:text-[6px] lg:text-[7px] xl:gap-x-1 xl:text-[10px] 2xl:gap-x-2 2xl:text-[12px]">
+            <span className="border-r border-lightGrey pe-1 text-[16px] font-bold text-mirage md:text-[7px] lg:text-[8px] xl:pe-1.5 xl:text-[12px] 2xl:text-[14px]">
               Townhouse
             </span>
-            <span className="border-r border-lightGrey px-1 flex items-center gap-x-1">
-              <Bed size={17} /> 10 Beds
+            <span className="flex items-center gap-x-1 border-r border-lightGrey px-1">
+              <Bed /> 10 Beds
             </span>
-            <span className="border-r border-lightGrey px-1 flex items-center gap-x-1">
-              <Shower size={17} /> 2 Baths
+            <span className="flex items-center gap-x-1 border-r border-lightGrey px-1">
+              <Shower /> 2 Baths
             </span>
-            <span className="ps-1 flex items-center gap-x-1">
-              <Area size={17} /> 500 sqft
+            <span className="flex items-center gap-x-1 ps-1">
+              <Area /> 500 sqft
             </span>
           </div>
 
-          <p className="font-bold text-[20px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[22px]">
-            <span className="text-[14px] md:text-[6px] lg:text-[9px] xl:text-[11px] 2xl:text-[13px]">AED</span> 3,500,000
+          <p className="text-[20px] font-bold md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[22px]">
+            <span className="text-[14px] md:text-[6px] lg:text-[9px] xl:text-[11px] 2xl:text-[13px]">
+              AED
+            </span>{" "}
+            3,500,000
           </p>
         </div>
       </div>

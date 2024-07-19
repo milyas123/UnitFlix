@@ -11,6 +11,8 @@ import { BsArrowUpRight } from "react-icons/bs";
 import { MoveLeft, MoveRight } from "lucide-react";
 
 import useSwiperNavigation from "@/hooks/useSwiperNavigation";
+import ArrowLeft from "../svgs/ArrowLeft";
+import ArrowRight from "../svgs/ArrowRight";
 
 const Discover = () => {
   const projectsRef = useRef(null);
@@ -41,16 +43,16 @@ const Discover = () => {
         </div>
 
         <div className="mb-1 mt-9 flex items-center justify-between md:-my-8 md:justify-end lg:-my-11 2xl:-my-12">
-          <div className="flex items-center justify-end gap-x-3">
-            <MoveLeft
-              className={`cursor-pointer md:text-xs 2xl:text-xl ${
+          <div className="flex items-center justify-end gap-x-1.5">
+            <ArrowLeft
+              className={`cursor-pointer md:text-xs lg:text-lg ${
                 isBeginning && "cursor-default opacity-40"
               }`}
               onClick={() => projectsRef.current.swiper.slidePrev()}
               disabled={isBeginning}
             />
-            <MoveRight
-              className={`cursor-pointer md:text-xs 2xl:text-xl ${
+            <ArrowRight
+              className={`cursor-pointer md:text-xs lg:text-lg ${
                 isEnd && "cursor-default opacity-40"
               }`}
               onClick={() => projectsRef.current.swiper.slideNext()}
