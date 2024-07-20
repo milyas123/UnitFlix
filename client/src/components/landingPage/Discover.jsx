@@ -8,7 +8,6 @@ import ProjectCard from "./cards/ProjectCard";
 
 import { Link } from "react-router-dom";
 import { BsArrowUpRight } from "react-icons/bs";
-import { MoveLeft, MoveRight } from "lucide-react";
 
 import useSwiperNavigation from "@/hooks/useSwiperNavigation";
 import ArrowLeft from "../svgs/ArrowLeft";
@@ -19,7 +18,7 @@ const Discover = () => {
   const { isBeginning, isEnd } = useSwiperNavigation(projectsRef);
 
   return (
-    <div className="relative mt-[22rem] flex h-[90vh] items-center justify-center bg-whiteLilac md:mt-0 md:pt-14 lg:pt-0">
+    <div className="relative mt-[22rem] flex max-h-[90vh] items-center justify-center bg-whiteLilac md:mt-0 md:pt-14 lg:h-[100vh] lg:pt-0">
       <div className="mx-auto flex w-full flex-col px-2.5 py-[6rem] md:w-[65%] md:gap-8 md:px-0 md:py-0 lg:mt-0 lg:gap-12 2xl:-mt-2 2xl:gap-14">
         <div className="flex flex-col justify-between md:flex-row md:items-center">
           <div className="space-y-2 md:space-y-0.5 xl:space-y-1 2xl:space-y-1.5">
@@ -75,7 +74,7 @@ const Discover = () => {
             ref={projectsRef}
             slidesPerView={1}
             breakpoints={{
-              640: { slidesPerView: 1, spaceBetween: 10 },
+              640: { slidesPerView: 1, spaceBetween: 40 },
               768: { slidesPerView: 3, spaceBetween: 15 },
               1024: { slidesPerView: 3, spaceBetween: 30 },
             }}

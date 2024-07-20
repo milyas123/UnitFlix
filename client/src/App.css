@@ -128,3 +128,11 @@ input[type='number'] {
 .slick-slide img {
   border-radius: 0.7rem;
 }
+
+.rounded-border::after {
+  content: " ";
+  display: block;
+  border-top: 2px solid skyblue;
+  border-bottom: 2px solid skyblue;
+  border-radius: 2px;
+}

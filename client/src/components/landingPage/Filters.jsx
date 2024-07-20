@@ -111,7 +111,7 @@ const Filters = () => {
               </p>
             </div>
           </div>
-          <div className="slider-container relative flex items-center">
+          <div className="w-[95%] mx-auto sm:mx-0 sm:w-full slider-container relative flex items-center">
             <input
               type="range"
               min="0"
@@ -130,7 +130,7 @@ const Filters = () => {
             />
             <div className="absolute flex h-1 w-full items-center justify-between bg-black">
               <div
-                className="absolute size-5 cursor-pointer rounded-full border border-black bg-white md:size-3 lg:size-4 xl:size-5 2xl:size-6"
+                className="absolute size-8 cursor-pointer rounded-full border border-black bg-white md:size-3 lg:size-4 xl:size-5 2xl:size-6"
                 style={{
                   left: `${(value[0] / 100) * 100}%`,
                   transform: "translateX(-50%)",
@@ -140,7 +140,7 @@ const Filters = () => {
                 onTouchStart={handleDown(0)}
               />
               <div
-                className="absolute size-5 cursor-pointer rounded-full border border-black bg-white md:size-3 lg:size-4 xl:size-5 2xl:size-6"
+                className="absolute size-8 cursor-pointer rounded-full border border-black bg-white md:size-3 lg:size-4 xl:size-5 2xl:size-6"
                 style={{
                   left: `${(value[1] / 100) * 100}%`,
                   transform: "translateX(-50%)",

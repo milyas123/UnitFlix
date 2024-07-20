@@ -178,7 +178,7 @@ const ImageGallery = () => {
         <div className="fixed inset-0 z-[600] flex size-full items-center justify-center bg-black bg-opacity-70">
           <div className="slider-container md:min-w-auto w-[85%] min-w-[330px] max-w-[370px] rounded-sm md:max-w-5xl xl:rounded-lg">
             <X
-              className="absolute right-5 top-6 z-20 cursor-pointer text-white opacity-60 transition-all duration-200 ease-in-out hover:opacity-100"
+              className="absolute right-5 top-24 z-20 cursor-pointer text-white opacity-60 transition-all duration-200 ease-in-out hover:opacity-100"
               size={35}
               onClick={closeModal}
             />

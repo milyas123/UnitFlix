@@ -11,6 +11,7 @@ import { Textarea } from "../ui/textarea";
 import { UserRound, Phone } from "lucide-react";
 import { BiMessageSquareDetail } from "react-icons/bi";
 import Email from "../svgs/Email";
+import { BsDot } from "react-icons/bs";
 
 const quickLinks = [
   "Terms of Use",
@@ -74,18 +75,18 @@ const Footer = () => {
               <p className="text-[15px] font-semibold md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:text-[15px]">
                 Follow us on social media
               </p>
-              <div className="flex items-center gap-x-1.5 text-pastelGrey lg:gap-x-2 xl:gap-x-2.5 2xl:gap-x-3">
+              <div className="flex items-center gap-x-5 text-pastelGrey md:gap-x-1.5 lg:gap-x-2 xl:gap-x-2.5 2xl:gap-x-3">
                 <div className="cursor-pointer rounded-full bg-mirageLight transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage md:p-1 2xl:p-2">
-                  <FaFacebookF className="size-5 cursor-pointer md:size-2 lg:size-3 xl:size-4" />
+                  <FaFacebookF className="size-4 cursor-pointer md:size-2 lg:size-3 xl:size-4" />
                 </div>
                 <div className="cursor-pointer rounded-full bg-mirageLight transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage md:p-1 2xl:p-2">
-                  <FaTwitter className="size-5 cursor-pointer md:size-2 lg:size-3 xl:size-4" />
+                  <FaTwitter className="size-4 cursor-pointer md:size-2 lg:size-3 xl:size-4" />
                 </div>
                 <div className="cursor-pointer rounded-full bg-mirageLight transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage md:p-1 2xl:p-2">
-                  <FaInstagram className="size-5 cursor-pointer md:size-2 lg:size-3 xl:size-4" />
+                  <FaInstagram className="size-4 cursor-pointer md:size-2 lg:size-3 xl:size-4" />
                 </div>
                 <div className="cursor-pointer rounded-full bg-mirageLight transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage md:p-1 2xl:p-2">
-                  <FaLinkedinIn className="size-5 cursor-pointer md:size-2 lg:size-3 xl:size-4" />
+                  <FaLinkedinIn className="size-4 cursor-pointer md:size-2 lg:size-3 xl:size-4" />
                 </div>
               </div>
             </div>
@@ -154,11 +155,11 @@ const Footer = () => {
 
         <div className="mx-auto flex flex-col items-center justify-between gap-y-5 border-t border-white border-opacity-10 py-5 text-[14px] text-slate md:w-[65%] md:flex-row md:gap-y-0 md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]">
           <p>&copy; Unitflix - All rights reserved</p>
-          <div className="flex items-center gap-x-3">
+          <div className="flex items-center gap-x-3 md:gap-x-1 lg:gap-x-1.5 xl:gap-x-2 2xl:gap-x-2.5">
             <p>Privacy</p>
-            <p>.</p>
+            <BsDot />
             <p>Terms</p>
-            <p>.</p>
+            <BsDot />
             <p>Sitemap</p>
           </div>
         </div>

@@ -34,7 +34,7 @@ const PropertyDetails = () => {
           <SimilarProperties />
         </div>
         <div className="ms-auto hidden w-[23.5%] md:block">
-          <div className="sticky top-7">
+          <div className="sticky top-24">
             <GetInTouch />
           </div>
         </div>

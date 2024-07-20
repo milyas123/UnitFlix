@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 const PropertyCard = () => {
   return (
     <Link to="/property-details" className="contents">
-      <div className="w-full overflow-hidden rounded-lg border border-lightGrey md:w-[195px] lg:w-[95%] lg:min-w-[225px] lg:max-w-[270px] xl:w-[315px] xl:max-w-[400px] 2xl:h-[450px] 2xl:w-[95%] 2xl:min-w-[362px]">
+      <div className="w-full overflow-hidden rounded-lg border border-lightGrey md:w-[90%] md:min-w-[150px] md:max-w-[200px] lg:w-[95%] lg:min-w-[225px] lg:max-w-[270px] xl:min-w-[290px] xl:w-[92%] xl:max-w-[320px] 2xl:w-[95%] 2xl:min-w-[345px] 2xl:max-w-[400px]">
         <style jsx>{`
           .property-card .swiper-pagination-bullet {
             background-color: #ffffff;
@@ -54,7 +54,7 @@ const PropertyCard = () => {
         </div>
 
         <div className="flex flex-col gap-y-3.5 p-2 md:gap-y-1.5 md:px-2 md:py-1.5 lg:gap-y-2 lg:p-2.5 xl:gap-y-2.5 xl:p-3 2xl:p-[12px]">
-          <div className="flex flex-row flex-wrap font-semibold md:whitespace-nowrap md:text-[6.5px] lg:text-[8px] xl:text-[12px] 2xl:text-[14px]">
+          <div className="flex flex-row flex-wrap font-semibold md:whitespace-nowrap md:text-[6px] lg:text-[8px] xl:text-[11px] 2xl:text-[13.5px]">
             <span className="border-r border-lightGrey pe-1">
               Single Row Middle
             </span>
@@ -63,7 +63,7 @@ const PropertyCard = () => {
             <span className="md:ps-1">Study Room</span>
           </div>
 
-          <div className="flex items-center justify-start gap-x-0.5 text-[14px] md:text-[6.5px] lg:text-[8px] xl:text-[12px] 2xl:text-[14px]">
+          <div className="flex items-center justify-start gap-x-0.5 text-[14px] md:text-[6px] lg:text-[8px] xl:text-[11px] 2xl:text-[13.5px]">
             <MdOutlineLocationOn
               size={17}
               className="-ms-0.5 size-5 md:size-2 lg:size-3 xl:size-4 2xl:size-5"
@@ -71,23 +71,23 @@ const PropertyCard = () => {
             The Cedars, Yas Acres, Yas Island, Abu Dhabi
           </div>
 
-          <div className="flex flex-row whitespace-nowrap text-[12px] font-semibold md:text-[6px] lg:text-[7px] xl:gap-x-1 xl:text-[10px] 2xl:gap-x-2 2xl:text-[12px]">
-            <span className="border-r border-lightGrey pe-1 text-[16px] font-bold text-mirage md:text-[7px] lg:text-[8px] xl:pe-1.5 xl:text-[12px] 2xl:text-[14px]">
+          <div className="flex flex-row whitespace-nowrap text-[12px] font-semibold md:text-[5px] lg:text-[7.5px] xl:gap-x-1 xl:text-[9px] 2xl:gap-x-2 2xl:text-[11.5px]">
+            <span className="border-r border-lightGrey pe-1 text-[16px] font-bold text-mirage md:pe-0.5 md:text-[6px] lg:pe-1 lg:text-[8px] xl:pe-1.5 xl:text-[11px] 2xl:text-[13px]">
               Townhouse
             </span>
-            <span className="flex items-center gap-x-1 border-r border-lightGrey px-1">
+            <span className="flex items-center gap-x-1 border-r border-lightGrey px-1 md:px-0.5 lg:px-1">
               <Bed /> 10 Beds
             </span>
-            <span className="flex items-center gap-x-1 border-r border-lightGrey px-1">
+            <span className="flex items-center gap-x-1 border-r border-lightGrey px-1 md:px-0.5 lg:px-1">
               <Shower /> 2 Baths
             </span>
-            <span className="flex items-center gap-x-1 ps-1">
+            <span className="flex items-center gap-x-1 ps-1 md:ps-0.5 lg:ps-1">
               <Area /> 500 sqft
             </span>
           </div>
 
           <p className="text-[20px] font-bold md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[22px]">
-            <span className="text-[14px] md:text-[6px] lg:text-[9px] xl:text-[11px] 2xl:text-[13px]">
+            <span className="text-[14px] md:text-[5px] lg:text-[9px] xl:text-[10.5px] 2xl:text-[13px]">
               AED
             </span>{" "}
             3,500,000
