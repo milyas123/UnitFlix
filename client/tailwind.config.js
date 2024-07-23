@@ -40,6 +40,7 @@ module.exports = {
         hitGrey: "#ABABAB",
         davyGrey: "#565656",
         pastelGrey: "#CDCDCD",
+        midGrey: "#606270",
         slate: "#BEBDBD",
         oceanBlue: "#186B97",
         mercury: "#E9E9E9",

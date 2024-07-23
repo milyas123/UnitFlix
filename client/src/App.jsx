@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Lottie from "lottie-react";
 import RealEstateAnimation from "@/lotties/RealEstateAnimation.json";
 
+// Website pages
 const LandingPage = lazy(() => import("@/website/pages/LandingPage"));
 const PropertiesForSale = lazy(() => import("@/website/pages/PropertiesForSale"));
 const ManageProperties = lazy(() => import("@/website/pages/ManageProperties"));
@@ -14,6 +15,9 @@ const PropertyDetails = lazy(() => import("@/website/pages/PropertyDetails"));
 const ContactUs = lazy(() => import("@/website/pages/ContactUs"));
 const AboutUs = lazy(() => import("@/website/pages/AboutUs"));
 const AddProperty = lazy(() => import("@/website/pages/AddProperty"));
+
+// Admin panel pages
+const AdminLogin = lazy(() => import("@/admin/pages/AdminLogin"));
 
 function App() {
   return (
@@ -34,15 +38,16 @@ function App() {
         >
           <Routes>
             <Route exact path="/" element={<LandingPage />} />
-            <Route
-              path="/properties-for-sale"
-              element={<PropertiesForSale />}
-            />
+            <Route path="/properties-for-sale" element={<PropertiesForSale />} />
             <Route path="/manage-properties" element={<ManageProperties />} />
             <Route path="/property-details" element={<PropertyDetails />} />
             <Route path="/contact-us" element={<ContactUs />} />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/add-property" element={<AddProperty />} />
+
+            {/* Admin Login */}
+            <Route path="/admin/login" element={<AdminLogin />} />
+
           </Routes>
         </Suspense>
       </BrowserRouter>
