@@ -29,7 +29,7 @@ const AboutUs = () => {
   ];
 
   return (
-    <div className="bg-mirage text-white py-[3rem] md:h-[70vh] flex justify-center items-center relative">
+    <div className="bg-mirage text-white py-[3rem] md:h-[370px] lg:max-h-[520px] lg:h-[50vh] lg:min-h-[440px] xl:min-h-[540px] xl:h-[100vh] 2xl:min-h-[600px] 2xl:h-[70vh] 2xl:max-h-[680px] flex justify-center items-center relative">
       <img src="/assets/imgs/about-bg.png" className="object-cover size-full absolute inset-0" alt="" />
       <div className="relative z-10 w-full px-2.5 md:px-0 md:w-[60%] mx-auto flex flex-col gap-10 md:gap-[1.5rem] lg:gap-[3.5rem] xl:gap-[5rem] 2xl:gap-[6rem]">
         <div className="flex flex-col gap-4 text-center">

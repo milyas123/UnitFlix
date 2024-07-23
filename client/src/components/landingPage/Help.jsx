@@ -54,7 +54,7 @@ const Help = () => {
   );
 
   return (
-    <div className="flex h-[98vh] items-center justify-center bg-white md:h-[70vh]">
+    <div className="flex h-auto py-[4.5rem] sm:py-0 items-center justify-center bg-white md:h-[370px] lg:max-h-[520px] lg:h-[50vh] lg:min-h-[440px] xl:min-h-[610px] xl:h-[100vh] 2xl:min-h-[680px] 2xl:h-[80vh] 2xl:max-h-[760px]">
       <div className="mx-auto flex w-full flex-col gap-2.5 px-2.5 md:w-[65%] md:gap-2 md:px-0 lg:gap-2.5 xl:gap-3.5 2xl:gap-4">
         <h1 className="text-center text-[30px] font-semibold md:text-[14px] lg:text-[18px] xl:text-[24px] 2xl:text-[30px]">
           How can We Help

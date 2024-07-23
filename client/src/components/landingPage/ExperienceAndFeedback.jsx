@@ -7,8 +7,8 @@ import FeedbackCard from "./cards/FeedbackCard";
 
 const ExperienceAndFeedback = () => {
   return (
-    <div className="flex items-center justify-center bg-white md:h-[70vh]">
-      <div className="mx-auto my-[2rem] flex w-full flex-col items-center justify-between gap-14 px-2.5 md:w-[65%] md:flex-row md:px-0">
+    <div className="flex items-center justify-center bg-white md:h-[370px] lg:h-[50vh] lg:max-h-[520px] lg:min-h-[440px] xl:min-h-[540px] xl:h-[100vh] 2xl:min-h-[600px] 2xl:h-[70vh] 2xl:max-h-[680px]">
+      <div className="mx-auto my-[3rem] flex w-full flex-col items-center justify-between gap-14 px-4 md:w-[65%] md:flex-row md:px-0">
         <div className="flex flex-col gap-4 md:gap-5 lg:gap-7 xl:gap-10 2xl:gap-14">
           <div className="space-y-1.5">
             <h1 className="text-[30px] font-semibold md:whitespace-nowrap md:text-[14px] lg:text-[18px] xl:text-[24px] 2xl:text-[30px]">

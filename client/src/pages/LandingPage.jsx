@@ -16,7 +16,10 @@ const LandingPage = () => {
 
   return (
     <Layout>
-      <Hero />
+      <div className="flex flex-col size-full">
+        <Hero />
+
+      </div>
       <div id="discover-section">
         <Discover />
       </div>

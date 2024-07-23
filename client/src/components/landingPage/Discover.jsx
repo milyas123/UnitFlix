@@ -18,9 +18,9 @@ const Discover = () => {
   const { isBeginning, isEnd } = useSwiperNavigation(projectsRef);
 
   return (
-    <div className="relative mt-[22rem] flex max-h-[90vh] items-center justify-center bg-whiteLilac md:mt-0 md:pt-14 lg:h-[100vh] lg:pt-0">
-      <div className="mx-auto flex w-full flex-col px-2.5 py-[6rem] md:w-[65%] md:gap-8 md:px-0 md:py-0 lg:mt-0 lg:gap-12 2xl:-mt-2 2xl:gap-14">
-        <div className="flex flex-col justify-between md:flex-row md:items-center">
+    <div className="relative mt-[22rem] flex items-center justify-center bg-whiteLilac md:mt-0 md:h-[430px] md:pt-0 lg:h-[95vh] lg:max-h-[530px] lg:min-h-[500px] xl:min-h-[655px] xl:h-[100vh] 2xl:min-h-[825px] 2xl:h-[860px]">
+      <div className="mx-auto flex w-full flex-col px-2.5 py-[4.5rem] md:w-[65%] md:gap-3 md:px-0 md:py-0 lg:mt-0 lg:gap-12 2xl:-mt-2 2xl:gap-14">
+        <div className="flex flex-col justify-between md:flex-row md:items-start">
           <div className="space-y-2 md:space-y-0.5 xl:space-y-1 2xl:space-y-1.5">
             <h1 className="text-[22px] font-semibold md:text-[14px] lg:text-[18px] xl:text-[22px] 2xl:text-[28px]">
               Discover Trending Projects
@@ -41,7 +41,7 @@ const Discover = () => {
           </Link>
         </div>
 
-        <div className="mb-1 mt-9 flex items-center justify-between md:-my-8 md:justify-end lg:-my-11 2xl:-my-12">
+        <div className="mb-1 mt-9 flex items-center justify-between md:-mb-2 md:mt-0 md:justify-end lg:-my-11 2xl:-my-12">
           <div className="flex items-center justify-end gap-x-1.5">
             <ArrowLeft
               className={`cursor-pointer md:text-xs lg:text-lg ${
@@ -80,7 +80,7 @@ const Discover = () => {
             }}
             modules={[Pagination]}
             pagination={{ clickable: true }}
-            className="h-[470px] md:h-[250px] lg:h-[310px] xl:h-[390px] 2xl:h-[500px]"
+            className="h-[470px] md:h-[255px] lg:h-[310px] xl:h-[390px] 2xl:h-[500px]"
             style={{
               "--swiper-pagination-color": "#181a20",
             }}
