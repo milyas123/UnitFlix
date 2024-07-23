@@ -1,11 +1,11 @@
-import Layout from "@/Layout";
-import DreamHomeSteps from "@/components/aboutUs/DreamHomeSteps";
-import FAQs from "@/components/aboutUs/FAQs";
-import Hero from "@/components/aboutUs/Hero";
-import MissionVisionSection from "@/components/aboutUs/MissionVisionSection";
-import Team from "@/components/aboutUs/Team";
-import ScrollToTop from "@/components/common/ScrollToTop";
-import StickyIcons from "@/components/common/StickyIcons";
+import Layout from "@/website/Layout";
+import DreamHomeSteps from "@/website/components/aboutUs/DreamHomeSteps";
+import FAQs from "@/website/components/aboutUs/FAQs";
+import Hero from "@/website/components/aboutUs/Hero";
+import MissionVisionSection from "@/website/components/aboutUs/MissionVisionSection";
+import Team from "@/website/components/aboutUs/Team";
+import ScrollToTop from "@/website/components/common/ScrollToTop";
+import StickyIcons from "@/website/components/common/StickyIcons";
 
 import useScrollProgress from "@/hooks/useScrollProgress";
 

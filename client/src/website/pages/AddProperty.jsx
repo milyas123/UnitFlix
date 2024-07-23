@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import GeneralInformation from "@/components/addProperty/GeneralInformation";
-import UserInformation from "@/components/addProperty/UserInformation";
-import PropertyInformation from "@/components/addProperty/PropertyInformation";
-import AddKeyHighlights from "@/components/addProperty/AddKeyHighlights";
-import AddFeaturesAndAmenities from "@/components/addProperty/AddFeaturesAndAmenities";
-import Gallery from "@/components/addProperty/Gallery";
-import InfoModal from "@/components/addProperty/InfoModal";
-import VerifyOTPModal from "@/components/addProperty/VerifyOTPModal";
+import { Button } from "@/website/components/ui/button";
+import GeneralInformation from "@/website/components/addProperty/GeneralInformation";
+import UserInformation from "@/website/components/addProperty/UserInformation";
+import PropertyInformation from "@/website/components/addProperty/PropertyInformation";
+import AddKeyHighlights from "@/website/components/addProperty/AddKeyHighlights";
+import AddFeaturesAndAmenities from "@/website/components/addProperty/AddFeaturesAndAmenities";
+import Gallery from "@/website/components/addProperty/Gallery";
+import InfoModal from "@/website/components/addProperty/InfoModal";
+import VerifyOTPModal from "@/website/components/addProperty/VerifyOTPModal";
 
 const AddProperty = () => {
   const [isInfoModalVisible, setIsInfoModalVisible] = useState(false);

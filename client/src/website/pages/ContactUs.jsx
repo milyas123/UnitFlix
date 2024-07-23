@@ -1,8 +1,8 @@
-import Layout from "@/Layout";
-import Form from "@/components/contactUs/Form";
-import Header from "@/components/contactUs/Header";
-import ScrollToTop from "@/components/common/ScrollToTop";
-import StickyIcons from "@/components/common/StickyIcons";
+import Layout from "@/website/Layout";
+import Form from "@/website/components/contactUs/Form";
+import Header from "@/website/components/contactUs/Header";
+import ScrollToTop from "@/website/components/common/ScrollToTop";
+import StickyIcons from "@/website/components/common/StickyIcons";
 
 import useScrollProgress from "@/hooks/useScrollProgress";
 

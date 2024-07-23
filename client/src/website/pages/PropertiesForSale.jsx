@@ -1,8 +1,8 @@
-import Layout from "@/Layout";
-import Header from "@/components/propertiesForSale/Header";
-import Properties from "@/components/propertiesForSale/Properties";
-import ScrollToTop from "@/components/common/ScrollToTop";
-import StickyIcons from "@/components/common/StickyIcons";
+import Layout from "@/website/Layout";
+import Header from "@/website/components/propertiesForSale/Header";
+import Properties from "@/website/components/propertiesForSale/Properties";
+import ScrollToTop from "@/website/components/common/ScrollToTop";
+import StickyIcons from "@/website/components/common/StickyIcons";
 
 import useScrollProgress from "@/hooks/useScrollProgress";
 

@@ -5,15 +5,15 @@ import { ToastContainer, Slide } from "react-toastify";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Lottie from "lottie-react";
-import RealEstateAnimation from "./lotties/RealEstateAnimation.json";
+import RealEstateAnimation from "@/lotties/RealEstateAnimation.json";
 
-const LandingPage = lazy(() => import("./pages/LandingPage"));
-const PropertiesForSale = lazy(() => import("./pages/PropertiesForSale"));
-const ManageProperties = lazy(() => import("./pages/ManageProperties"));
-const PropertyDetails = lazy(() => import("./pages/PropertyDetails"));
-const ContactUs = lazy(() => import("./pages/ContactUs"));
-const AboutUs = lazy(() => import("./pages/AboutUs"));
-const AddProperty = lazy(() => import("./pages/AddProperty"));
+const LandingPage = lazy(() => import("@/website/pages/LandingPage"));
+const PropertiesForSale = lazy(() => import("@/website/pages/PropertiesForSale"));
+const ManageProperties = lazy(() => import("@/website/pages/ManageProperties"));
+const PropertyDetails = lazy(() => import("@/website/pages/PropertyDetails"));
+const ContactUs = lazy(() => import("@/website/pages/ContactUs"));
+const AboutUs = lazy(() => import("@/website/pages/AboutUs"));
+const AddProperty = lazy(() => import("@/website/pages/AddProperty"));
 
 function App() {
   return (
