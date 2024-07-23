@@ -1,7 +1,7 @@
 const Hero = () => {
   return (
     <>
-      <div className="relative h-[95vh] md:h-[80vh]">
+      <div className="relative h-[795px] md:h-[385px] lg:h-[80vh] lg:max-h-[520px] lg:min-h-[440px] xl:h-[100vh] xl:min-h-[615px] 2xl:h-[80.5vh] 2xl:max-h-[770px] 2xl:min-h-[700px]">
         <img
           src="/assets/imgs/hero-section-img.jpg"
           className="absolute inset-0 size-full object-cover object-top"

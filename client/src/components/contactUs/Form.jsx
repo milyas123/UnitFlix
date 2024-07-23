@@ -6,7 +6,7 @@ import InquiryForm from "../common/InquiryForm";
 
 const Form = () => {
   return (
-    <section className="flex items-center justify-center bg-whiteLilac py-[5rem] md:h-screen">
+    <section className="flex items-center justify-center bg-whiteLilac py-[5rem]">
       <div className="mx-auto flex w-full flex-col items-center justify-between gap-10 bg-white p-4 md:w-[65%] md:flex-row md:gap-0 md:rounded-md md:px-2.5 lg:rounded-lg lg:px-3.5 xl:px-5 2xl:rounded-xl 2xl:px-6">
         <div className="relative flex w-full flex-col justify-between px-4 pb-14 pt-8 text-white md:w-[45%] md:rounded-md md:p-4 lg:rounded-lg lg:p-5 xl:p-6 2xl:rounded-xl 2xl:px-8 2xl:py-10">
           <img
