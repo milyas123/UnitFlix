@@ -2,7 +2,7 @@ import ContentCard from "./ContentCard";
 
 const MissionVisionSection = () => {
   return (
-    <div className="mt-7 flex flex-col items-center justify-center gap-y-[2rem] md:h-screen md:gap-y-[4.2rem] lg:gap-y-[4.6rem] xl:gap-y-[6.5rem] 2xl:gap-y-32">
+    <div className="mt-7 flex flex-col items-center justify-center gap-y-[2rem] md:mt-0 md:h-[36rem] lg:h-[45rem] xl:h-[58rem] 2xl:h-[67rem] md:gap-y-[4.2rem] lg:gap-y-[4.6rem] xl:gap-y-[6.5rem] 2xl:gap-y-32">
       <div className="flex flex-col items-center justify-between gap-y-8 md:flex-row md:gap-x-3.5 md:gap-y-0 lg:gap-x-4 xl:gap-x-5 2xl:gap-x-6">
         <div className="w-full md:w-1/2">
           <ContentCard

@@ -2,7 +2,7 @@ import MemberCard from "./MemberCard";
 
 const Team = () => {
   return (
-    <div className="flex items-center justify-center md:h-screen">
+    <div className="flex items-center justify-center md:h-[32rem] lg:h-[40rem] xl:h-[50rem] 2xl:h-[62rem]">
       <div>
         <div className="space-y-2.5 text-center md:space-y-1 2xl:space-y-2">
           <h1 className="text-[32px] font-semibold md:text-[20px] lg:text-[24px] xl:text-[30px] 2xl:text-[36px]">

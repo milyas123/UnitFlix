@@ -2,7 +2,7 @@ import FAQCard from "./FAQCard";
 
 const FAQs = () => {
   return (
-    <div className="mt-9 mb-10 md:mb-64 md:mt-5 flex items-center justify-center">
+    <div className="mt-9 mb-10 lg:mb-64 md:mt-0 flex items-center justify-center">
       <div>
         <div className="space-y-2 text-center">
           <h1 className="font-semibold text-[32px] md:text-[20px] lg:text-[24px] xl:text-[30px] 2xl:text-[36px]">

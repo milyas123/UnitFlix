@@ -15,7 +15,7 @@ const ManageProperties = () => {
   return (
     <Layout>
       <Hero />
-      <div className="md:mx-auto md:w-[75%]">
+      <div className="md:mx-auto md:w-[77%]">
         <div id="intro-section">
           <PropertyIntro />
         </div>
