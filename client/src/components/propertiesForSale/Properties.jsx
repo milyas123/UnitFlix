@@ -47,14 +47,14 @@ const Properties = () => {
   }, []);
 
   return (
-    <section className="mx-auto mt-[28rem] w-full px-2.5 md:my-[6rem] md:w-[86%] md:px-0 lg:my-[7.5rem] xl:my-[8.5rem] 2xl:my-[10rem]">
+    <section className="mx-auto mt-[28rem] w-full px-2.5 md:my-[4rem] md:w-[87%] md:px-0 lg:my-[6rem] xl:my-[7.5rem] 2xl:my-[8.8rem]">
       <div className="flex flex-col items-start justify-between gap-y-1 md:flex-row md:items-center">
-        <h3 className="text-[20px] font-medium md:text-[14px] lg:text-[16px] xl:text-[20px] 2xl:text-[24px]">
+        <h3 className="text-[20px] font-medium md:text-[12px] lg:text-[15px] xl:text-[18px] 2xl:text-[22px]">
           Properties for sale in Abu Dhabi
         </h3>
         <Link to="/add-property">
-          <Button className="gap-x-1.5 rounded-lg hover:bg-white hover:text-mirage">
-            Sell My Property <BsArrowUpRight size={17} />
+          <Button className="gap-x-1.5 md:px-1 lg:px-2 xl:px-2.5 2xl:px-3 rounded-lg hover:bg-white hover:text-mirage">
+            Sell My Property <BsArrowUpRight className="size-4 md:size-2 lg:size-3 xl:size-4 2xl:size-5" />
           </Button>
         </Link>
       </div>
