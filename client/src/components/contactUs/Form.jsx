@@ -2,12 +2,6 @@ import { CgPhone } from "react-icons/cg";
 import { MdEmail } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaInstagram, FaTwitter, FaDiscord } from "react-icons/fa";
-import { Input } from "../ui/input";
-import { Phone, UserRound } from "lucide-react";
-import { Textarea } from "../ui/textarea";
-import { BiMessageSquareDetail } from "react-icons/bi";
-import { Button } from "../ui/button";
-import Email from "../svgs/Email";
 import InquiryForm from "../common/InquiryForm";
 
 const Form = () => {

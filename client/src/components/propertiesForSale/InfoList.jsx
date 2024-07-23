@@ -20,7 +20,7 @@ const InfoList = ({ heading, count, items }) => {
           </div>
         ))}
       </div>
-      <Button className="w-full rounded-lg uppercase md:text-[6px] lg:text-[8px] xl:text-[10px] 2xl:text-[12px]">
+      <Button className="w-full rounded-lg uppercase hover:bg-white hover:text-mirage md:text-[6px] lg:text-[8px] xl:text-[10px] 2xl:text-[12px]">
         View All {heading}
       </Button>
     </div>

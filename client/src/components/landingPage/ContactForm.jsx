@@ -42,7 +42,7 @@ const ContactForm = () => {
         />
         <BiMessageSquareDetail className="absolute left-2 top-3 size-5 text-grey md:left-1.5 md:top-2 md:size-2.5 lg:top-2.5 lg:size-3 xl:left-[9px] xl:top-[12.5px] xl:size-4 2xl:left-3 2xl:top-3.5 2xl:size-5" />
       </div>
-      <Button className="h-9 rounded-md hover:bg-transparent hover:text-mirage md:h-7 md:text-[8px] lg:h-8 lg:text-[10px] xl:h-9 xl:text-[12px] 2xl:h-10 2xl:py-3 2xl:text-[14px]">
+      <Button className="h-9 rounded-md hover:bg-transparent hover:text-mirage md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:py-5 2xl:text-[14px]">
         Submit
       </Button>
     </form>

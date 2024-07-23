@@ -73,7 +73,7 @@ const GetInTouch = () => {
             placeholder="Enter message"
             className="md:h-[60px] 2xl:h-[160px]"
           />
-          <Button className="rounded-sm">Submit</Button>
+          <Button className="rounded-sm hover:bg-white hover:text-mirage">Submit</Button>
         </form>
       </div>
 

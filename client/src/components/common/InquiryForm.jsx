@@ -71,7 +71,7 @@ const InquiryForm = () => {
       </div>
 
       <div className="ms-auto">
-        <Button className="rounded-md hover:bg-transparent hover:text-mirage md:h-7 md:w-[100px] lg:h-8 lg:w-[120px] xl:h-9 xl:w-[150px] 2xl:h-10 2xl:w-[200px]">
+        <Button className="rounded-md hover:bg-transparent hover:text-mirage md:w-[100px] lg:w-[120px] xl:w-[150px] 2xl:w-[200px] 2xl:py-5">
           Submit
         </Button>
       </div>

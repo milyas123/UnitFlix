@@ -23,7 +23,7 @@ const CTA = () => {
         </h2>
         <div className="flex flex-col items-center gap-4 md:flex-row md:gap-1.5 md:text-[9px] lg:gap-2 lg:text-[11px] xl:gap-3.5 xl:text-[13px] 2xl:gap-5 2xl:text-[15px]">
           <Link to="/add-property">
-            <Button className="h-10 w-[200px] rounded-lg md:h-7 md:w-auto lg:h-8 xl:h-9 2xl:gap-2 2xl:py-6">
+            <Button className="h-10 w-[200px] rounded-lg hover:bg-white hover:text-mirage md:h-7 md:w-auto lg:h-8 xl:h-9 2xl:gap-2 2xl:py-6">
               Submit Property <BsArrowUpRight size={20} />
             </Button>
           </Link>

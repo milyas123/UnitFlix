@@ -75,18 +75,18 @@ const Footer = () => {
               <p className="text-[15px] font-semibold md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:text-[15px]">
                 Follow us on social media
               </p>
-              <div className="flex items-center gap-x-5 text-pastelGrey md:gap-x-1.5 lg:gap-x-2 xl:gap-x-2.5 2xl:gap-x-3">
-                <div className="cursor-pointer rounded-full bg-mirageLight transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage md:p-1 2xl:p-2">
-                  <FaFacebookF className="size-4 cursor-pointer md:size-2 lg:size-3 xl:size-4" />
+              <div className="flex items-center gap-x-4 text-pastelGrey md:gap-x-1.5 lg:gap-x-2 xl:gap-x-2.5 2xl:gap-x-3">
+                <div className="cursor-pointer rounded-full bg-mirageLight transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage p-1 md:p-1 2xl:p-2">
+                  <FaFacebookF className="size-3.5 cursor-pointer md:size-2 lg:size-3 xl:size-4" />
                 </div>
-                <div className="cursor-pointer rounded-full bg-mirageLight transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage md:p-1 2xl:p-2">
-                  <FaTwitter className="size-4 cursor-pointer md:size-2 lg:size-3 xl:size-4" />
+                <div className="cursor-pointer rounded-full bg-mirageLight transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage p-1 md:p-1 2xl:p-2">
+                  <FaTwitter className="size-3.5 cursor-pointer md:size-2 lg:size-3 xl:size-4" />
                 </div>
-                <div className="cursor-pointer rounded-full bg-mirageLight transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage md:p-1 2xl:p-2">
-                  <FaInstagram className="size-4 cursor-pointer md:size-2 lg:size-3 xl:size-4" />
+                <div className="cursor-pointer rounded-full bg-mirageLight transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage p-1 md:p-1 2xl:p-2">
+                  <FaInstagram className="size-3.5 cursor-pointer md:size-2 lg:size-3 xl:size-4" />
                 </div>
-                <div className="cursor-pointer rounded-full bg-mirageLight transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage md:p-1 2xl:p-2">
-                  <FaLinkedinIn className="size-4 cursor-pointer md:size-2 lg:size-3 xl:size-4" />
+                <div className="cursor-pointer rounded-full bg-mirageLight transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage p-1 md:p-1 2xl:p-2">
+                  <FaLinkedinIn className="size-3.5 cursor-pointer md:size-2 lg:size-3 xl:size-4" />
                 </div>
               </div>
             </div>

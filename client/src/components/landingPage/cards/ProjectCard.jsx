@@ -14,7 +14,7 @@ const ProjectCard = () => {
         />
         <div className="absolute -bottom-[90px] left-4 right-4 z-[300] rounded-xl bg-white px-3 py-4 shadow-lg md:-bottom-16 md:left-2 md:right-2 md:rounded-md md:p-2 lg:-bottom-14 lg:left-3.5 lg:right-3.5 lg:rounded-lg lg:p-3 xl:-bottom-16 xl:left-5 xl:right-5 2xl:-bottom-24 2xl:left-6 2xl:right-6 2xl:rounded-xl 2xl:p-3.5">
           <h2
-            className={`text-center font-semibold mb-1.5 md:mb-0.5 lg:mb-1 xl:mb-1.5 2xl:mb-2 ${textSizes}`}
+            className={`mb-1.5 text-center font-semibold md:mb-0.5 lg:mb-1 xl:mb-1.5 2xl:mb-2 ${textSizes}`}
           >
             Azizi Venice at Dubai South
           </h2>
@@ -22,13 +22,13 @@ const ProjectCard = () => {
             Luxurious 1-3 Bedroom Waterfront Apartments & Villas
           </p>
           <p
-            className={`text-center font-semibold text-gray-700 mt-1.5 md:mt-0.5 lg:mt-1 xl:mt-1.5 2xl:mt-2 ${textSizes}`}
+            className={`mt-1.5 text-center font-semibold text-gray-700 md:mt-0.5 lg:mt-1 xl:mt-1.5 2xl:mt-2 ${textSizes}`}
           >
             Starting From <br /> AED 2,000,000
           </p>
-          <div className="flex justify-center mt-2 md:mt-1.5 lg:mt-2 xl:mt-3 2xl:mt-4">
+          <div className="mt-2 flex justify-center md:mt-1.5 lg:mt-2 xl:mt-3 2xl:mt-4">
             <Button
-              className={`font-semibold md:h-2 md:px-2 lg:h-6 lg:px-3 xl:h-7 xl:px-4 2xl:h-8 ${textSizes}`}
+              className={`font-semibold hover:bg-white hover:text-mirage md:h-2 md:px-2 lg:h-6 lg:px-3 xl:h-7 xl:px-4 2xl:h-8 ${textSizes}`}
             >
               Register Your Interest
             </Button>

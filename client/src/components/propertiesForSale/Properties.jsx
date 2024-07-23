@@ -53,7 +53,7 @@ const Properties = () => {
           Properties for sale in Abu Dhabi
         </h3>
         <Link to="/add-property">
-          <Button className="gap-x-1.5 rounded-lg">
+          <Button className="gap-x-1.5 rounded-lg hover:bg-white hover:text-mirage">
             Sell My Property <BsArrowUpRight size={17} />
           </Button>
         </Link>
