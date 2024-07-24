@@ -10,17 +10,17 @@ import RealEstateAnimation from "@/lotties/RealEstateAnimation.json";
 
 // Website pages
 const LandingPage = lazy(() => import("@/website/pages/LandingPage"));
-const PropertiesForSale = lazy(
-  () => import("@/website/pages/PropertiesForSale"),
-);
+const PropertiesForSale = lazy(() => import("@/website/pages/PropertiesForSale"));
 const ManageProperties = lazy(() => import("@/website/pages/ManageProperties"));
 const PropertyDetails = lazy(() => import("@/website/pages/PropertyDetails"));
 const ContactUs = lazy(() => import("@/website/pages/ContactUs"));
 const AboutUs = lazy(() => import("@/website/pages/AboutUs"));
 const AddProperty = lazy(() => import("@/website/pages/AddProperty"));
 
-// Admin panel pages
+// Admin panel
+const Layout = lazy(() => import("@/admin/Layout"));
 const AdminLogin = lazy(() => import("@/admin/pages/AdminLogin"));
+const AdminManageProperties = lazy(() => import("@/admin/pages/AdminManageProperties"));
 
 function App() {
   return (
@@ -51,6 +51,10 @@ function App() {
 
               {/* Admin Login */}
               <Route path="/admin/login" element={<AdminLogin />} />
+
+              <Route path="/admin" element={<Layout />}>
+                <Route path="manage-properties" element={<AdminManageProperties />} />
+              </Route>
             </Routes>
           </Suspense>
         </AppProvider>

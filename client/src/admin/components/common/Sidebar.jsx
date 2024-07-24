@@ -11,35 +11,51 @@ const Sidebar = () => {
   const { isSideBarOpen, updateSidebarValue } = useAppContext();
 
   const Menus = [
-    { title: "Manage Properties", component: Home, path: "/" },
-    { title: "Submitted Requests", component: Requests, path: "/" },
-    { title: "Email Configuration", component: EmailConfig, path: "/" },
+    {
+      title: "Manage Properties",
+      component: Home,
+      path: "/admin/manage-properties",
+    },
+    {
+      title: "Submitted Requests",
+      component: Requests,
+      path: "/admin/submitted-requests",
+    },
+    {
+      title: "Email Configuration",
+      component: EmailConfig,
+      path: "/admin/email-configuration",
+    },
   ];
+
+  const handleSidebarToggle = () => {
+    updateSidebarValue(!isSideBarOpen);
+  };
 
   return (
     <div
-      className={`sticky top-0 h-screen bg-mirage text-white transition-all duration-1000 ease-in-out ${
+      className={`sticky top-0 h-[98vh] rounded-xl bg-mirage text-white transition-all duration-1000 ease-in-out ${
         isSideBarOpen ? "w-[20rem]" : "w-[5rem]"
       }`}
     >
-      <div className="relative flex w-full flex-col border-r pt-4">
+      <div className="relative flex w-full flex-col pt-4">
         <div
-          className={`absolute -right-5 top-[4.7rem] cursor-pointer rounded-full border-2 bg-white p-1 transition-all duration-700 ease-in-out ${
+          className={`absolute -right-3.5 top-[4rem] cursor-pointer rounded-full border bg-white p-0.5 shadow-pastelGrey drop-shadow-2xl transition-all duration-700 ease-in-out ${
             !isSideBarOpen && "rotate-180"
           }`}
-          onClick={() => updateSidebarValue(!isSideBarOpen)}
+          onClick={handleSidebarToggle}
         >
           <ChevronLeft className="text-mirage" />
         </div>
 
         <div
           className={`flex items-center overflow-hidden ${
-            isSideBarOpen ? "justify-start px-6 gap-x-2" : "justify-center"
+            isSideBarOpen ? "justify-start gap-x-2 px-6" : "justify-center"
           }`}
         >
           <img
             src="/assets/imgs/Logo.png"
-            className={`size-[50px] object-cover cursor-pointer duration-500 ${
+            className={`size-[50px] cursor-pointer object-cover duration-500 ${
               isSideBarOpen && "rotate-[360deg]"
             }`}
             alt="company-logo"
@@ -56,25 +72,21 @@ const Sidebar = () => {
         </div>
 
         <ul className="overflow-y-auto px-2 pt-7">
-          {Menus.map((Menu, index) => {
-            const IconComponent = Menu.component;
+          {Menus.map(({ title, component: IconComponent, path }, index) => {
+            const isActive = window.location.pathname.includes(path);
             return (
               <Link
-                to={Menu.path}
+                to={path}
                 key={index}
-                className={`hover:bg-white group mt-2 flex h-[3.3rem] cursor-pointer items-center gap-x-4 rounded-2xl ${
+                className={`group mt-2 flex h-[3.3rem] cursor-pointer items-center gap-x-4 rounded-2xl hover:bg-white ${
                   isSideBarOpen ? "p-3" : "justify-center p-2"
-                } ${
-                  window.location.pathname.includes(Menu.path) && "bg-aquaWhite"
-                }`}
+                } ${isActive && "bg-white text-mirage"}`}
               >
                 <IconComponent className="group-hover:text-mirage" />
                 <span
-                  className={`${
-                    !isSideBarOpen && "hidden"
-                  } font-semibold origin-left text-[14px] text-white group-hover:text-mirage`}
+                  className={`origin-left text-[14px] font-semibold group-hover:text-mirage ${!isSideBarOpen && "hidden"} ${isActive ? "text-mirage" : "text-white"}`}
                 >
-                  {Menu.title}
+                  {title}
                 </span>
               </Link>
             );
