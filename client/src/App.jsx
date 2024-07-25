@@ -21,6 +21,8 @@ const AddProperty = lazy(() => import("@/website/pages/AddProperty"));
 const Layout = lazy(() => import("@/admin/Layout"));
 const AdminLogin = lazy(() => import("@/admin/pages/AdminLogin"));
 const AdminManageProperties = lazy(() => import("@/admin/pages/AdminManageProperties"));
+const AdminSubmittedRequests = lazy(() => import("@/admin/pages/AdminSubmittedRequests"));
+const AdminEmailConfiguration = lazy(() => import("@/admin/pages/AdminEmailConfiguration"));
 
 function App() {
   return (
@@ -54,6 +56,8 @@ function App() {
 
               <Route path="/admin" element={<Layout />}>
                 <Route path="manage-properties" element={<AdminManageProperties />} />
+                <Route path="submitted-requests" element={<AdminSubmittedRequests />} />
+                <Route path="email-configuration" element={<AdminEmailConfiguration />} />
               </Route>
             </Routes>
           </Suspense>

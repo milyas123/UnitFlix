@@ -47,6 +47,7 @@ module.exports = {
         mist: "#E3E9ED",
         oceanBlue: "#186B97",
         mercury: "#E9E9E9",
+        platinum: "#E2E2E2",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

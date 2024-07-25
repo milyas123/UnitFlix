@@ -136,3 +136,8 @@ input[type='number'] {
   border-bottom: 2px solid skyblue;
   border-radius: 2px;
 }
+
+
+th {
+  font-weight: normal;
+}

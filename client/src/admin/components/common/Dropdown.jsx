@@ -37,7 +37,7 @@ const Dropdown = ({ options, placeholder }) => {
   return (
     <div className="relative" ref={dropdownRef}>
       <button
-        className="border-mist flex w-full items-center justify-between gap-3 rounded-md border bg-white p-3 text-left text-[16px] font-medium md:px-2 md:py-2.5 md:text-[12px] xl:p-3 xl:text-[14px] 2xl:px-4 2xl:text-[16]"
+        className="border-mist flex w-full items-center justify-between gap-3 rounded-md border bg-white p-3 text-left text-[16px] font-regular md:px-2 md:py-2.5 md:text-[12px] xl:p-3 xl:text-[14px] 2xl:px-4 2xl:text-[16]"
         onClick={toggleDropdown}
       >
         {selectedOption || placeholder}
