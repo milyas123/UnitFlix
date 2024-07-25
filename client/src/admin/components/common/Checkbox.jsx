@@ -1,14 +1,11 @@
-import { useState } from "react";
 import Check from "../svgs/Check";
 
-const Checkbox = () => {
-  const [checked, setChecked] = useState(false);
-
+const Checkbox = ({ checked, onChange }) => {
   return (
     <div>
       <div
         className="flex size-6 cursor-pointer items-center justify-center rounded-full border-2 border-gray-500"
-        onClick={() => setChecked(!checked)}
+        onClick={onChange}
       >
         {checked && <Check />}
       </div>

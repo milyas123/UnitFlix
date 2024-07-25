@@ -1,11 +1,8 @@
-import { useState } from "react";
 import Filters from "../components/common/Filters";
 import Header from "../components/common/Header";
 import Table from "../components/common/Table";
-import TypeSelectModal from "../components/adminManageProperty/TypeSelectModal";
 
 const AdminManageProperties = () => {
-  const [showTypeSelectModal, setShowTypeSelectModal] = useState(false);
 
   return (
     <>
@@ -17,7 +14,6 @@ const AdminManageProperties = () => {
 
         <Table type="properties" />
       </div>
-      {showTypeSelectModal && <TypeSelectModal />}
     </>
   );
 };

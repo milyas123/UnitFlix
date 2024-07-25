@@ -1,7 +1,7 @@
 import { ImageUp } from "lucide-react";
-import Delete from "../svgs/Delete";
+import Delete from "@/website/components/svgs/Delete";
 
-const Gallery = () => {
+const ProjectGallery = () => {
   return (
     <div className="flex items-start rounded-xl border border-lightGrey bg-white px-8 py-4">
       <h2 className="w-[23%] whitespace-nowrap text-[20px] font-semibold">
@@ -39,4 +39,4 @@ const Gallery = () => {
   );
 };
 
-export default Gallery;
+export default ProjectGallery;

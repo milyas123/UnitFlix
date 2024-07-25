@@ -1,4 +1,4 @@
-const Edit = ({ className, size = 16 }) => {
+const Edit = ({ className, size = 18 }) => {
   return (
     <svg
       className={`cursor-pointer hover:text-black transition-all duration-200 ease-in-out ${className}`}

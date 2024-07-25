@@ -1,4 +1,4 @@
-const Delete = ({ className, size = 16 }) => {
+const Delete = ({ className, size = 18 }) => {
   return (
     <svg
       className={`cursor-pointer transition-all duration-200 ease-in-out hover:text-red-600 ${className}`}

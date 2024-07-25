@@ -2,7 +2,7 @@ import { Input } from "../ui/input";
 
 const UserInformation = () => {
   return (
-    <div className="flex items-start rounded-xl bg-white px-8 py-4">
+    <div className="flex items-start rounded-xl border border-lightGrey bg-white px-8 py-4">
       <h2 className="w-[23%] whitespace-nowrap text-[20px] font-semibold">
         User Information
       </h2>

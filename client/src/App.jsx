@@ -20,6 +20,8 @@ const AddProperty = lazy(() => import("@/website/pages/AddProperty"));
 // Admin panel
 const Layout = lazy(() => import("@/admin/Layout"));
 const AdminLogin = lazy(() => import("@/admin/pages/AdminLogin"));
+const AdminAddProject = lazy(() => import("@/admin/pages/AdminAddProject"));
+const AdminAddProperty = lazy(() => import("@/admin/pages/AdminAddProperty"));
 const AdminManageProperties = lazy(() => import("@/admin/pages/AdminManageProperties"));
 const AdminSubmittedRequests = lazy(() => import("@/admin/pages/AdminSubmittedRequests"));
 const AdminEmailConfiguration = lazy(() => import("@/admin/pages/AdminEmailConfiguration"));
@@ -55,6 +57,8 @@ function App() {
               <Route path="/admin/login" element={<AdminLogin />} />
 
               <Route path="/admin" element={<Layout />}>
+                <Route path="add-property" element={<AdminAddProperty />} />
+                <Route path="add-project" element={<AdminAddProject />} />
                 <Route path="manage-properties" element={<AdminManageProperties />} />
                 <Route path="submitted-requests" element={<AdminSubmittedRequests />} />
                 <Route path="email-configuration" element={<AdminEmailConfiguration />} />

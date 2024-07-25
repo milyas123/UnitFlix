@@ -3,7 +3,7 @@ import Cross from "../svgs/Cross";
 import Tag from "../common/Tag";
 import Button from "../common/Button";
 
-const RequestDetailsModal = () => {
+const RequestDetailsModal = ({ onClose }) => {
   return (
     <>
       <div className="absolute inset-0 bg-black bg-opacity-50"></div>
@@ -26,7 +26,9 @@ const RequestDetailsModal = () => {
               </div>
             </div>
 
-            <Cross className="cursor-pointer" />
+            <div onClick={onClose}>
+              <Cross className="cursor-pointer" />
+            </div>
           </div>
 
           <div className="flex items-center justify-between border-y border-pastelGrey py-6">
@@ -67,7 +69,11 @@ const RequestDetailsModal = () => {
             </div>
           </div>
 
-          <Button variant="filled" className="ms-auto rounded-lg">
+          <Button
+            variant="filled"
+            className="ms-auto rounded-lg"
+            onClick={onClose}
+          >
             Close
           </Button>
         </div>

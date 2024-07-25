@@ -6,7 +6,7 @@ const AdminLogin = () => {
     <div className="max-h-screen min-h-screen overflow-hidden">
       <img
         src="/assets/imgs/admin-login.png"
-        className="relative size-full"
+        className="relative size-full h-screen"
         alt=""
       />
 
@@ -26,15 +26,9 @@ const AdminLogin = () => {
                 placeholder="********"
               />
             </div>
-            <p className="ms-auto text-[14px] font-medium text-mirage">
-              Forgot Password
-            </p>
 
             <div className="flex flex-col items-center gap-y-7">
               <Button className="w-[100px]">Sign in</Button>
-              <Button className="w-[100px]" variant="outline">
-                Sign Up
-              </Button>
             </div>
           </form>
         </div>

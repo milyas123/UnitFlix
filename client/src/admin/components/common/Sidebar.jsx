@@ -34,7 +34,7 @@ const Sidebar = () => {
 
   return (
     <div
-      className={`sticky top-0 h-[98vh] rounded-xl bg-mirage text-white transition-all duration-1000 ease-in-out ${
+      className={`sticky top-2.5 h-[98vh] rounded-xl bg-mirage text-white transition-all duration-1000 ease-in-out ${
         isSideBarOpen ? "w-[20rem]" : "w-[5rem]"
       }`}
     >

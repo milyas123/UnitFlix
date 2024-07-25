@@ -1,9 +1,9 @@
 import { PiListStar } from "react-icons/pi";
-import { Button } from "../ui/button";
-import Edit from "../svgs/Edit";
-import Delete from "../svgs/Delete";
+import { Button } from "@/website/components/ui/button";
+import Edit from "@/website/components/svgs/Edit";
+import Delete from "@/website/components/svgs/Delete";
 
-const AddKeyHighlights = () => {
+const ProjectKeyHighlights = () => {
   return (
     <div className="flex items-start rounded-xl border border-lightGrey bg-white px-8 py-4">
       <div className="w-[23%] space-y-2">
@@ -40,4 +40,4 @@ const AddKeyHighlights = () => {
   );
 };
 
-export default AddKeyHighlights;
+export default ProjectKeyHighlights;

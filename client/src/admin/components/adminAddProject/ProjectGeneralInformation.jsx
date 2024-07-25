@@ -1,15 +1,21 @@
-import React, { useState } from "react";
-import Status from "../svgs/Status";
-import { Input } from "../ui/input";
-import { Textarea } from "../ui/textarea";
+import { useState } from "react";
+import Status from "@/website/components/svgs/Status";
+import { Input } from "@/website/components/ui/input";
+import { Textarea } from "@/website/components/ui/textarea";
+import { ImageUp } from "lucide-react";
 
 const statuses = ["Pre Launch", "Secondary", "Ready to Move In"];
 
-const GeneralInformation = () => {
+const ProjectGeneralInformation = () => {
   const [selectedStatus, setSelectedStatus] = useState(statuses[0]);
+  const [isFeatured, setIsFeatured] = useState("Yes");
 
   const handleStatusSelect = (status) => {
     setSelectedStatus(status);
+  };
+
+  const handleFeaturedSelect = () => {
+    setIsFeatured(isFeatured === "Yes" ? "No" : "Yes");
   };
 
   return (
@@ -18,7 +24,7 @@ const GeneralInformation = () => {
         General Information
       </h2>
       <div className="ms-auto flex w-[72%] flex-col gap-y-8 p-1">
-        <div className="w-full space-y-2.5">
+        <div className="space-y-2.5">
           <label className="text-[16px] font-semibold">Title</label>
           <Input
             type="text"
@@ -28,7 +34,7 @@ const GeneralInformation = () => {
           />
         </div>
 
-        <div className="w-full space-y-2.5">
+        <div className="space-y-2.5">
           <label className="text-[16px] font-semibold">Overview</label>
           <Textarea
             id="overview"
@@ -59,6 +65,39 @@ const GeneralInformation = () => {
         </div>
 
         <div className="w-full space-y-2.5">
+          <label className="text-[16px] font-semibold">Featured</label>
+          <div className="flex items-center gap-x-6">
+            {["Yes", "No"].map((option) => (
+              <div
+                key={option}
+                className={`flex cursor-pointer items-center gap-x-1.5 rounded-md border-2 border-mirage border-opacity-0 px-3 py-2 transition-all duration-300 ease-in-out hover:border-opacity-100 ${
+                  isFeatured !== option && "bg-mirage text-white"
+                }`}
+                onClick={handleFeaturedSelect}
+              >
+                <Status
+                  className={`${isFeatured !== option ? "text-white" : "text-black"}`}
+                  size={25}
+                />
+                <p className="text-[14px]">{option}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="w-full space-y-2.5">
+          <label className="text-[16px] font-semibold">Brochure</label>
+          <div className="flex h-[185px] w-[288px] items-center justify-center rounded-2xl border-2 border-dashed bg-whiteLilac">
+            <div className="flex flex-col items-center justify-center gap-y-2 text-smokeyGrey">
+              <ImageUp size={35} />
+              Upload Brochure
+            </div>
+          </div>
+        </div>
+
+        
+
+        <div className="w-full space-y-2.5">
           <label className="text-[16px] font-semibold">Price</label>
           <Input
             type="number"
@@ -72,4 +111,4 @@ const GeneralInformation = () => {
   );
 };
 
-export default GeneralInformation;
+export default ProjectGeneralInformation;
