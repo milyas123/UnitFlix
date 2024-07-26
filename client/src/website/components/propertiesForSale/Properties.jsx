@@ -6,6 +6,7 @@ import PropertyCard from "./PropertyCard";
 import { FiChevronDown } from "react-icons/fi";
 import { IoMdCheckmark } from "react-icons/io";
 import { Link } from "react-router-dom";
+import Pagination from "./Pagination";
 
 const locationData = [
   { name: "Al Reem Island", count: "10,635" },
@@ -46,6 +47,25 @@ const Properties = () => {
     };
   }, []);
 
+  // Pagination Logic
+  const propertiesPerPage = 6;
+  const [properties, setProperties] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Calculate current blogs to display based on pagination
+  const indexOfLastProperty = currentPage * propertiesPerPage;
+  const indexOfFirstProperty = indexOfLastProperty - propertiesPerPage;
+  const currentProperties = properties.slice(indexOfFirstProperty, indexOfLastProperty);
+
+  // Change page
+  const paginate = (pageNumber) => {
+    const totalPages = Math.ceil(properties.length / propertiesPerPage);
+    if (pageNumber < 1 || pageNumber > totalPages) {
+      return;
+    }
+    setCurrentPage(pageNumber);
+  };
+
   return (
     <section className="mx-auto mt-[28rem] w-full px-2.5 md:my-[4rem] md:w-[87%] md:px-0 lg:my-[6rem] xl:my-[7.5rem] 2xl:my-[8.8rem]">
       <div className="flex flex-col items-start justify-between gap-y-1 md:flex-row md:items-center">
@@ -53,8 +73,9 @@ const Properties = () => {
           Properties for sale in Abu Dhabi
         </h3>
         <Link to="/add-property">
-          <Button className="gap-x-1.5 md:px-1 lg:px-2 xl:px-2.5 2xl:px-3 rounded-lg hover:bg-white hover:text-mirage">
-            Sell My Property <BsArrowUpRight className="size-4 md:size-2 lg:size-3 xl:size-4 2xl:size-5" />
+          <Button className="gap-x-1.5 rounded-lg hover:bg-white hover:text-mirage md:px-1 lg:px-2 xl:px-2.5 2xl:px-3">
+            Sell My Property{" "}
+            <BsArrowUpRight className="size-4 md:size-2 lg:size-3 xl:size-4 2xl:size-5" />
           </Button>
         </Link>
       </div>
@@ -135,9 +156,18 @@ const Properties = () => {
           </div>
 
           <div className="my-3 grid grid-cols-1 place-items-center gap-y-7 md:grid-cols-3 md:gap-y-4 lg:gap-y-5 xl:gap-y-5 2xl:gap-y-6">
-            {[1, 2, 3, 4, 5, 6].map((item) => (
+            {currentProperties.map((item) => (
               <PropertyCard key={item} />
             ))}
+          </div>
+
+          <div className="mt-16">
+            <Pagination
+              propertiesPerPage={propertiesPerPage}
+              totalProperties={properties.length}
+              currentPage={currentPage}
+              paginate={paginate}
+            />
           </div>
         </div>
       </div>
