@@ -73,6 +73,7 @@ const Discover = () => {
           <Swiper
             ref={projectsRef}
             slidesPerView={1}
+            spaceBetween={20}
             breakpoints={{
               640: { slidesPerView: 1, spaceBetween: 40 },
               768: { slidesPerView: 3, spaceBetween: 15 },

@@ -46,6 +46,7 @@ const Testimonials = () => {
             <Swiper
               ref={swiperRef}
               slidesPerView={1}
+              spaceBetween={20}
               breakpoints={{
                 640: { slidesPerView: 2, spaceBetween: 5 },
                 1024: { slidesPerView: 2, spaceBetween: 12 },
