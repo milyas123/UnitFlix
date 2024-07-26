@@ -5,9 +5,9 @@ import Delete from "../svgs/Delete";
 
 const AddKeyHighlights = () => {
   return (
-    <div className="flex items-start rounded-xl border border-lightGrey bg-white px-8 py-4">
-      <div className="w-[23%] space-y-2">
-        <h2 className="whitespace-nowrap text-[20px] font-semibold">
+    <div className="user--addProperty-sectionPadding flex flex-col rounded-xl border border-lightGrey bg-white md:flex-row md:items-start">
+      <div className="space-y-2 md:w-[23%]">
+        <h2 className="user--addProperty-headingTextSize whitespace-nowrap">
           Key Highlights
         </h2>
         <Button
@@ -17,21 +17,21 @@ const AddKeyHighlights = () => {
           Add Highlight
         </Button>
       </div>
-      <div className="ms-auto flex w-[72%] flex-col gap-y-8 p-1">
-        <div className="flex h-[270px] w-[300px] items-center justify-center rounded-md border bg-whiteLilac p-4 text-center">
-          <div className="space-y-2 text-[16px]">
-            <h1 className="flex items-center justify-center gap-1 font-semibold">
+      <div className="mt-4 flex flex-col md:ms-auto md:mt-0 md:w-[72%]">
+        <div className="flex items-center justify-center rounded-md border bg-whiteLilac px-2 py-4 text-center md:h-[140px] md:w-[160px] md:p-2 lg:h-[170px] lg:w-[190px] lg:p-2.5 xl:h-[200px] xl:w-[220px] xl:p-3 2xl:h-[270px] 2xl:w-[300px] 2xl:p-4">
+          <div className="space-y-3 md:space-y-1.5 lg:space-y-2 xl:space-y-3 2xl:space-y-5">
+            <h1 className="user--addProperty-labelTextSize flex items-center justify-center gap-1">
               <PiListStar size={23} /> Features
             </h1>
-            <p className="text-smokeyGrey">
+            <p className="text-smokeyGrey md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:text-[14px]">
               Features meticulously crafted studios, 1, 2 & 3 bedroom
               apartments, as well as exclusive 3-bedroom pool villas and
               4-bedroom royal penthouses with private pools.
             </p>
 
             <div className="flex items-center justify-center gap-x-1.5 text-smokeyGrey">
-              <Edit size={22} />
-              <Delete size={22} />
+              <Edit />
+              <Delete />
             </div>
           </div>
         </div>

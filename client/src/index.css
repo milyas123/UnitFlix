@@ -74,3 +74,15 @@
     @apply bg-background text-foreground;
   }
 }
+
+.user--addProperty-sectionPadding {
+  @apply px-6 py-7 md:p-4 lg:p-6 xl:p-7 2xl:p-8;
+}
+
+.user--addProperty-headingTextSize {
+  @apply text-[20px] font-semibold md:text-[10px] lg:text-[14px] xl:text-[16px] 2xl:text-[20px];
+}
+
+.user--addProperty-labelTextSize {
+  @apply font-semibold text-[14px] md:text-[8px] lg:text-[10px] xl:text-[13px] 2xl:text-[16px];
+}

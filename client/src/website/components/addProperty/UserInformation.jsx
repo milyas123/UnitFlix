@@ -2,13 +2,13 @@ import { Input } from "../ui/input";
 
 const UserInformation = () => {
   return (
-    <div className="flex items-start rounded-xl border border-lightGrey bg-white px-8 py-4">
-      <h2 className="w-[23%] whitespace-nowrap text-[20px] font-semibold">
+    <div className="user--addProperty-sectionPadding flex flex-col rounded-xl border border-lightGrey bg-white md:flex-row md:items-start">
+      <h2 className="user--addProperty-headingTextSize whitespace-nowrap md:w-[23%]">
         User Information
       </h2>
-      <div className="ms-auto flex w-[72%] flex-col gap-y-8 p-1">
-        <div className="w-full space-y-2.5">
-          <label className="text-[16px] font-semibold">Full Name</label>
+      <div className="mt-4 flex flex-col gap-y-4 md:ms-auto md:mt-0 md:w-[72%] md:gap-y-2 lg:gap-y-4 xl:gap-y-6 2xl:gap-y-8">
+        <div className="w-full md:space-y-1 lg:space-y-1.5 xl:space-y-2 2xl:space-y-2.5">
+          <label className="user--addProperty-labelTextSize">Full Name</label>
           <Input
             type="text"
             id="title"
@@ -17,8 +17,8 @@ const UserInformation = () => {
           />
         </div>
 
-        <div className="w-full space-y-2.5">
-          <label className="text-[16px] font-semibold">Email</label>
+        <div className="w-full md:space-y-1 lg:space-y-1.5 xl:space-y-2 2xl:space-y-2.5">
+          <label className="user--addProperty-labelTextSize">Email</label>
           <Input
             type="email"
             id="email"
@@ -27,8 +27,10 @@ const UserInformation = () => {
           />
         </div>
 
-        <div className="w-full space-y-2.5">
-          <label className="text-[16px] font-semibold">Phone Number</label>
+        <div className="w-full md:space-y-1 lg:space-y-1.5 xl:space-y-2 2xl:space-y-2.5">
+          <label className="user--addProperty-labelTextSize">
+            Phone Number
+          </label>
           <Input
             type="email"
             id="email"

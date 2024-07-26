@@ -1,9 +1,7 @@
-const Status = ({ className, size = 16 }) => {
+const Status = ({ className }) => {
   return (
     <svg
-      className={className}
-      width={size}
-      height={size}
+      className={`${className} size-5 md:size-3 lg:size-4 xl:size-5 2xl:size-6`}
       viewBox="0 0 16 16"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

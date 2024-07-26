@@ -32,8 +32,8 @@ const AddProperty = () => {
 
   return (
     <div className="bg-whiteLilac">
-      <div className="w-[50%] mx-auto py-4 flex flex-col gap-7">
-        <div className="rounded-xl bg-white px-8 py-4 text-[22px]">
+      <div className="mx-auto flex w-[95%] flex-col gap-5 py-2 md:w-[60%] md:gap-3 lg:gap-5 xl:gap-6 2xl:gap-7">
+        <div className="rounded-xl bg-white p-3 text-[20px] md:px-4 md:py-2 md:text-[12px] lg:px-6 lg:py-2.5 lg:text-[15px] xl:px-7 xl:py-3 xl:text-[18px] 2xl:px-8 2xl:py-4 2xl:text-[22px]">
           Add Property
         </div>
 
@@ -44,8 +44,8 @@ const AddProperty = () => {
         <AddFeaturesAndAmenities />
         <Gallery />
 
-        <div className="flex justify-end items-center gap-x-3">
-          <Button className="rounded-md bg-red-700 border-red-700 hover:border-mirage">
+        <div className="flex items-center justify-end gap-x-3">
+          <Button className="rounded-md border-red-700 bg-red-700 hover:border-mirage">
             Cancel
           </Button>
           <Button className="rounded-md" onClick={handleSubmit}>
@@ -54,7 +54,9 @@ const AddProperty = () => {
         </div>
       </div>
 
-      {isInfoModalVisible && <InfoModal onClose={handleCloseInfoModal} onNext={handleNext} />}
+      {isInfoModalVisible && (
+        <InfoModal onClose={handleCloseInfoModal} onNext={handleNext} />
+      )}
       {isOTPModalVisible && <VerifyOTPModal onClose={handleCloseOTPModal} />}
     </div>
   );

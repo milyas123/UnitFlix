@@ -6,9 +6,9 @@ import Delete from "../svgs/Delete";
 
 const AddFeaturesAndAmenities = () => {
   return (
-    <div className="flex items-start rounded-xl border border-lightGrey bg-white px-8 py-4">
-      <div className="w-[23%] space-y-2">
-        <h2 className="whitespace-nowrap text-[20px] font-semibold">
+    <div className="user--addProperty-sectionPadding flex flex-col rounded-xl border border-lightGrey bg-white md:flex-row md:items-start">
+      <div className="space-y-2 md:w-[23%]">
+        <h2 className="user--addProperty-headingTextSize whitespace-nowrap">
           Features & Amenities
         </h2>
         <Button
@@ -18,14 +18,16 @@ const AddFeaturesAndAmenities = () => {
           Add Amenities
         </Button>
       </div>
-      <div className="ms-auto flex w-[72%] flex-col gap-y-8 p-1">
-        <div className="flex h-[130px] w-[230px] items-center justify-center rounded-md border bg-whiteLilac p-6">
+      <div className="mt-4 flex flex-col md:ms-auto md:mt-0 md:w-[72%]">
+        <div className="flex items-center justify-center rounded-md border bg-whiteLilac p-6 md:h-[90px] md:w-[130px] lg:h-[105px] lg:w-[160px] xl:h-[115px] xl:w-[200px] 2xl:h-[130px] 2xl:w-[230px]">
           <div className="flex flex-col items-center space-y-3 text-center">
             <RiParkingBoxLine />
-            <p className="text-14px">Parking Spaces: 1</p>
+            <p className="md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:text-[14px]">
+              Parking Spaces: 1
+            </p>
             <div className="flex items-center justify-center gap-x-1.5 text-smokeyGrey">
-              <Edit size={22} />
-              <Delete size={22} />
+              <Edit />
+              <Delete />
             </div>
           </div>
         </div>
