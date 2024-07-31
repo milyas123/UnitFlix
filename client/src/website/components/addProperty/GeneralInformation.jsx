@@ -39,7 +39,7 @@ const GeneralInformation = () => {
 
         <div className="w-full md:space-y-1 lg:space-y-1.5 xl:space-y-2 2xl:space-y-2.5">
           <label className="user--addProperty-labelTextSize">Status</label>
-          <div className="flex flex-wrap items-center gap-2 md:justify-between md:gap-0">
+          <div className="flex flex-wrap items-center gap-2 md:justify-start md:gap-4">
             {statuses.map((status) => (
               <div
                 key={status}

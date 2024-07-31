@@ -1,5 +1,5 @@
+import Button from "../common/Button";
 import { RiParkingBoxLine } from "react-icons/ri";
-import { Button } from "@/website/components/ui/button";
 
 import Edit from "@/website/components/svgs/Edit";
 import Delete from "@/website/components/svgs/Delete";
@@ -11,6 +11,7 @@ const ProjectFeaturesAndAmenities = () => {
         <h2 className="whitespace-nowrap text-[20px] font-semibold">
           Features & Amenities
         </h2>
+        
         <Button
           variant="outline"
           className="rounded-md hover:bg-mirage hover:text-white"

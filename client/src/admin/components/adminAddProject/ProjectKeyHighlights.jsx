@@ -1,5 +1,5 @@
 import { PiListStar } from "react-icons/pi";
-import { Button } from "@/website/components/ui/button";
+import Button from "../common/Button";
 import Edit from "@/website/components/svgs/Edit";
 import Delete from "@/website/components/svgs/Delete";
 

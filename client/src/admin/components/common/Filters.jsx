@@ -11,7 +11,9 @@ const Filters = ({ type }) => {
         Showing Results <span className="text-[16px] font-light">(308)</span>
       </h2>
       <div className="flex w-[60%] items-center justify-between">
-        <div className={`relative flex items-center ${type === "properties" ? "w-[30%]" : "w-[46%]"}`}>
+        <div
+          className={`relative flex items-center ${type === "properties" ? "w-[30%]" : "w-[46%]"}`}
+        >
           <InputField
             type="email"
             id="email"
@@ -21,19 +23,16 @@ const Filters = ({ type }) => {
           <Search className="absolute left-2 top-[13px] text-grey md:left-1.5 xl:left-[9px] 2xl:left-3" />
         </div>
 
-        <div className={`${type === "properties" ? "w-[11%]" : "w-[17%]"}`}>
+        <div className={`${type === "requests" && "min-w-[17%]"}`}>
           <Dropdown options={lookingForOptions} placeholder="Type" />
         </div>
 
         {type === "properties" ? (
           <>
-            <div className="w-[11%]">
-              <Dropdown options={lookingForOptions} placeholder="Purpose" />
-            </div>
+            <Dropdown options={lookingForOptions} placeholder="Purpose" />
 
-            <div className="w-[11%]">
-              <Dropdown options={lookingForOptions} placeholder="User" />
-            </div>
+            <Dropdown options={lookingForOptions} placeholder="User" />
+
             <div className="w-[20%]">
               <Dropdown options={lookingForOptions} placeholder="Date" />
             </div>
@@ -44,11 +43,11 @@ const Filters = ({ type }) => {
           </>
         ) : (
           <>
-            <div className="w-[17%]">
+            <div className="min-w-[17%]">
               <Dropdown options={lookingForOptions} placeholder="Status" />
             </div>
 
-            <div className="w-[17%]">
+            <div className="min-w-[17%]">
               <Dropdown options={lookingForOptions} placeholder="Sort By" />
             </div>
           </>

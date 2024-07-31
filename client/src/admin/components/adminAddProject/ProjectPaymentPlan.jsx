@@ -1,4 +1,3 @@
-import { ImageUp } from "lucide-react";
 import Button from "../common/Button";
 import Edit from "@/website/components/svgs/Edit";
 import Delete from "@/website/components/svgs/Delete";
