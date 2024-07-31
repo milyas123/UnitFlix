@@ -1,0 +1,105 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Work\\Fiver\\Unitflix\\Unitflix.Server\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{61EAC110-950C-429D-9F6F-D0B34D8D1BB1}|Unitflix.Server\\Unitflix.Server.csproj|d:\\work\\fiver\\unitflix\\unitflix.server\\unitflix.server\\controllers\\propertycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61EAC110-950C-429D-9F6F-D0B34D8D1BB1}|Unitflix.Server\\Unitflix.Server.csproj|solutionrelative:unitflix.server\\controllers\\propertycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61EAC110-950C-429D-9F6F-D0B34D8D1BB1}|Unitflix.Server\\Unitflix.Server.csproj|d:\\work\\fiver\\unitflix\\unitflix.server\\unitflix.server\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{61EAC110-950C-429D-9F6F-D0B34D8D1BB1}|Unitflix.Server\\Unitflix.Server.csproj|solutionrelative:unitflix.server\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61EAC110-950C-429D-9F6F-D0B34D8D1BB1}|Unitflix.Server\\Unitflix.Server.csproj|d:\\work\\fiver\\unitflix\\unitflix.server\\unitflix.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61EAC110-950C-429D-9F6F-D0B34D8D1BB1}|Unitflix.Server\\Unitflix.Server.csproj|solutionrelative:unitflix.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61EAC110-950C-429D-9F6F-D0B34D8D1BB1}|Unitflix.Server\\Unitflix.Server.csproj|d:\\work\\fiver\\unitflix\\unitflix.server\\unitflix.server\\database\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61EAC110-950C-429D-9F6F-D0B34D8D1BB1}|Unitflix.Server\\Unitflix.Server.csproj|solutionrelative:unitflix.server\\database\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61EAC110-950C-429D-9F6F-D0B34D8D1BB1}|Unitflix.Server\\Unitflix.Server.csproj|d:\\work\\fiver\\unitflix\\unitflix.server\\unitflix.server\\models\\location.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61EAC110-950C-429D-9F6F-D0B34D8D1BB1}|Unitflix.Server\\Unitflix.Server.csproj|solutionrelative:unitflix.server\\models\\location.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "D:\\Work\\Fiver\\Unitflix\\Unitflix.Server\\Unitflix.Server\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "Unitflix.Server\\appsettings.Development.json",
+              "ToolTip": "D:\\Work\\Fiver\\Unitflix\\Unitflix.Server\\Unitflix.Server\\appsettings.Development.json",
+              "RelativeToolTip": "Unitflix.Server\\appsettings.Development.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAB5AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-07-31T08:24:34.813Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PropertyController.cs",
+              "DocumentMoniker": "D:\\Work\\Fiver\\Unitflix\\Unitflix.Server\\Unitflix.Server\\Controllers\\PropertyController.cs",
+              "RelativeDocumentMoniker": "Unitflix.Server\\Controllers\\PropertyController.cs",
+              "ToolTip": "D:\\Work\\Fiver\\Unitflix\\Unitflix.Server\\Unitflix.Server\\Controllers\\PropertyController.cs",
+              "RelativeToolTip": "Unitflix.Server\\Controllers\\PropertyController.cs",
+              "ViewState": "AQIAAAcAAAAAAAAAAAAAABwAAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-31T08:20:23.157Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "D:\\Work\\Fiver\\Unitflix\\Unitflix.Server\\Unitflix.Server\\Database\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "Unitflix.Server\\Database\\ApplicationDbContext.cs",
+              "ToolTip": "D:\\Work\\Fiver\\Unitflix\\Unitflix.Server\\Unitflix.Server\\Database\\ApplicationDbContext.cs",
+              "RelativeToolTip": "Unitflix.Server\\Database\\ApplicationDbContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAA2AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-31T07:53:58.98Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Location.cs",
+              "DocumentMoniker": "D:\\Work\\Fiver\\Unitflix\\Unitflix.Server\\Unitflix.Server\\Models\\Location.cs",
+              "RelativeDocumentMoniker": "Unitflix.Server\\Models\\Location.cs",
+              "ToolTip": "D:\\Work\\Fiver\\Unitflix\\Unitflix.Server\\Unitflix.Server\\Models\\Location.cs",
+              "RelativeToolTip": "Unitflix.Server\\Models\\Location.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvwcAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-31T07:53:20.629Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Work\\Fiver\\Unitflix\\Unitflix.Server\\Unitflix.Server\\Program.cs",
+              "RelativeDocumentMoniker": "Unitflix.Server\\Program.cs",
+              "ToolTip": "D:\\Work\\Fiver\\Unitflix\\Unitflix.Server\\Unitflix.Server\\Program.cs",
+              "RelativeToolTip": "Unitflix.Server\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-31T07:52:25.298Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

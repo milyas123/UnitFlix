@@ -128,3 +128,6 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+Unitflix.Server/Unitflix.Server/bin
+Unitflix.Server/Unitflix.Server/obj
