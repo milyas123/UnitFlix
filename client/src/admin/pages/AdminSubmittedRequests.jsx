@@ -5,7 +5,7 @@ import Table from "../components/common/Table";
 import RequestDetailsModal from "../components/adminSubmittedRequests/RequestDetailsModal";
 
 const AdminSubmittedRequests = () => {
-  const [showDetailsModal, setShowDetailsModal] = useState(true);
+  const [showDetailsModal, setShowDetailsModal] = useState(false);
 
   return (
     <>
@@ -15,14 +15,10 @@ const AdminSubmittedRequests = () => {
           <Filters type="requests" />
         </div>
 
-        <Table type="requests" />
+        <Table type="requests" showSubmitterDetails={showDetailsModal} setShowSubmitterDetails={setShowDetailsModal} />
       </div>
 
-      {showDetailsModal && (
-        <RequestDetailsModal
-          onClose={() => setShowDetailsModal(!showDetailsModal)}
-        />
-      )}
+      {showDetailsModal && (<RequestDetailsModal onClose={() => setShowDetailsModal(!showDetailsModal)} /> )}
     </>
   );
 };

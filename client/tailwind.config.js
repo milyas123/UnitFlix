@@ -48,6 +48,8 @@ module.exports = {
         oceanBlue: "#186B97",
         mercury: "#E9E9E9",
         platinum: "#E2E2E2",
+        mintGreen: "#1ECA8C",
+        crimsonRed: "#990F02",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

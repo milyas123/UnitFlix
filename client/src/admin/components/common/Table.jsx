@@ -1,9 +1,13 @@
+import { useState } from "react";
 import { formatCurrency } from "@/lib/utils";
 import Tag from "./Tag";
 import LocationPin from "../svgs/LocationPin";
 import ThreeDots from "../svgs/ThreeDots";
+import Button from "./Button";
 
-const Table = ({ type }) => {
+const Table = ({ type, showSubmitterDetails, setShowSubmitterDetails }) => {
+  const [showOptions, setShowOptions] = useState(false);
+
   return (
     <table className="flex w-full flex-col gap-y-2.5">
       <thead className="bg-white">
@@ -96,8 +100,44 @@ const Table = ({ type }) => {
               <span className="text-[15px]">{formatCurrency(3500000)}</span>
             </div>
           </td>
-          <td className="w-[4%] px-4 text-start">
-            <ThreeDots className="cursor-pointer" />
+          <td className="relative w-[4%] px-4 text-start">
+            <ThreeDots
+              className="relative cursor-pointer"
+              onClick={() => setShowOptions(true)}
+            />
+            {showOptions && (
+              <div
+                className="absolute right-0 min-w-[10rem] space-y-2 rounded-xl bg-white p-2 text-black"
+                style={{
+                  boxShadow:
+                    "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px",
+                }}
+              >
+                <Button
+                  className="w-[14rem] rounded-lg"
+                  variant="outline"
+                  onClick={() => setShowSubmitterDetails(!showSubmitterDetails)}
+                >
+                  View Submitter Details
+                </Button>
+
+                <Button className="w-[14rem] rounded-lg" variant="outline">
+                  Preview Property
+                </Button>
+                <Button
+                  className="border-mintGreen text-mintGreen hover:bg-mintGreen w-[14rem] rounded-lg"
+                  variant="outline"
+                >
+                  Accept
+                </Button>
+                <Button
+                  className="border-crimsonRed text-crimsonRed hover:bg-crimsonRed w-[14rem] rounded-lg"
+                  variant="outline"
+                >
+                  Reject
+                </Button>
+              </div>
+            )}
           </td>
         </tr>
       </tbody>
