@@ -15,7 +15,7 @@ const Header = ({ title }) => {
         <h1 className="font-regular text-[22px]">{title}</h1>
         {title === "Manage Properties" && (
           <Button variant="outline" onClick={handleAddNewClick}>
-            Add New
+            Add New Property
           </Button>
         )}
       </div>

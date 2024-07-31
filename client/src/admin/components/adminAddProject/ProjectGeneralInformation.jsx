@@ -45,7 +45,7 @@ const ProjectGeneralInformation = () => {
 
         <div className="w-full space-y-2.5">
           <label className="text-[16px] font-semibold">Status</label>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-start gap-5">
             {statuses.map((status) => (
               <div
                 key={status}

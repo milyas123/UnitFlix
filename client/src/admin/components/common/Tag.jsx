@@ -18,7 +18,7 @@ const Tag = ({ type, children }) => {
   }
 
   return (
-    <span className={`inline-block rounded-full px-4 py-1 font-regular text-[14px] ${style}`}>
+    <span className={`inline-block rounded-full px-4 py-1 font-regular text-[13px] ${style}`}>
       {children}
     </span>
   );
