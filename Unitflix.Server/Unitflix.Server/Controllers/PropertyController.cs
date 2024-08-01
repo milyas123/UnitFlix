@@ -30,11 +30,15 @@ namespace Unitflix.Server.Controllers
 
         #region Routes
 
-        [HttpGet("locations")]
-        public JsonResult Locations()
+        /// <summary>
+        /// Returns list of all of the properties
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("all")]
+        public JsonResult GetAllProperties()
         {
-            List<Location> locations = _dbContext.Locations.ToList();
-            return new JsonResult(new { locations = locations });
+            List<Property> properties = _dbContext.Properties.ToList();
+            return Json(new { properties }); 
         }
 
         #endregion

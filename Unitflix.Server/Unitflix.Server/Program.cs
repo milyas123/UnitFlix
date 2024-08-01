@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 
 using Unitflix.Server.Database;
+using Unitflix.Server.Seeder;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,19 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+//Calling the Seeders
+List<Seeder> seeders = new List<Seeder>()
+{
+    new LocationSeeder(),
+    new DeveloperSeeder(),
+    new PropertyTypeSeeder()
+};
+
+seeders.ForEach(seeder =>
+{
+    seeder.Seed(app.Services);
+});
 
 app.UseHttpsRedirection();
 
