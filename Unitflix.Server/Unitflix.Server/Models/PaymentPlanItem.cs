@@ -6,7 +6,7 @@
 
         public int PropertyId { get; set; }
 
-        public float Amount {  get; set; }
+        public decimal Amount {  get; set; }
 
         public string Title {  get; set; }
 

@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 using Unitflix.Server.Models;
 
+using File = Unitflix.Server.Models.File;
+
 namespace Unitflix.Server.Database
 {
     public class ApplicationDbContext : IdentityDbContext<Admin, AdminRole, int>
@@ -31,6 +33,8 @@ namespace Unitflix.Server.Database
         public DbSet<UserDetail> UserDetails { get; set; }
 
         public DbSet<EmailConfiguration> EmailConfigurations { get; set; }
+
+        public DbSet<File> Files { get; set; }
 
         #endregion
 

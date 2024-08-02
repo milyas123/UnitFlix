@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
+using Unitflix.Server.AutoMapper;
 using Unitflix.Server.Database;
 using Unitflix.Server.Seeder;
 
@@ -15,6 +16,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
         options.UseSqlServer(connectionString);
     }
 });
+
+//Adding auto mapper
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -43,6 +47,7 @@ seeders.ForEach(seeder =>
 });
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 
 app.UseAuthorization();
 

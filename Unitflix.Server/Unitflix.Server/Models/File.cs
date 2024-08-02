@@ -1,6 +1,8 @@
-﻿namespace Unitflix.Server.Models
+﻿using Unitflix.Server.Enums;
+
+namespace Unitflix.Server.Models
 {
-    public class Files
+    public class File
     {
         public int Id { get; set; }
 
@@ -12,6 +14,6 @@
 
         public string Type { get; set; }
 
-        public string Purpose { get; set; }
+        public FilePurpose Purpose { get; set; }
     }
 }
