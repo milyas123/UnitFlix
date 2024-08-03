@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
 using Unitflix.Server.Database;
+using Unitflix.Server.Helpers;
 using Unitflix.Server.Models;
 
 namespace Unitflix.Server.Controllers
@@ -36,7 +37,7 @@ namespace Unitflix.Server.Controllers
         public JsonResult GetLocations()
         {
             List<Location> locations = _dbContext.Locations.ToList();
-            return Json(new { locations });
+            return Response.Message(locations);
         }
 
         /// <summary>
@@ -47,7 +48,7 @@ namespace Unitflix.Server.Controllers
         public JsonResult GetDevelopers()
         {
             List<Developer> developers = _dbContext.Developers.ToList();
-            return Json(new { developers });
+            return Response.Message(developers);
         }
 
         /// <summary>
@@ -58,7 +59,7 @@ namespace Unitflix.Server.Controllers
         public JsonResult GetPropertyTypes()
         {
             List<PropertyType> propertyTypes = _dbContext.PropertyTypes.ToList();
-            return Json(new { propertyTypes });
+            return Response.Message(propertyTypes);
         }
 
         #endregion

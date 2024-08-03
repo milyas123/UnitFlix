@@ -51,5 +51,7 @@ namespace Unitflix.Server.Models
         public List<Feature> Features { get; set; }
 
         public List<PaymentPlanItem> PaymentPlanItems { get; set; }
+
+        public List<PropertyDetail> PropertyDetails { get; set; }
     }
 }

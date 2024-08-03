@@ -1,14 +1,21 @@
 ﻿using AutoMapper;
 
+using FluentValidation.Results;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+using System.Diagnostics;
+using System.Linq;
+
+using Unitflix.Server.API_DTO;
 using Unitflix.Server.Database;
 using Unitflix.Server.DTOs;
 using Unitflix.Server.Enums;
 using Unitflix.Server.Helpers;
 using Unitflix.Server.Models;
 using Unitflix.Server.Results;
+using Unitflix.Server.Validators;
 
 using File = Unitflix.Server.Models.File;
 
@@ -26,6 +33,14 @@ namespace Unitflix.Server.Controllers
 
         private IWebHostEnvironment _webHostEnvironment;
 
+        private PropertyValidator _propertyValidator;
+
+        private ProjectValidator _projectValidator;
+
+        private PropertyUpdateValidator _propertyUpdateValidator;
+
+        private ProjectUpdateValidator _projectUpdateValidator;
+
         #endregion
 
         #region Constructor
@@ -35,11 +50,19 @@ namespace Unitflix.Server.Controllers
         /// </summary>
         public PropertyController(ApplicationDbContext dbContext,
             IMapper mapper,
-            IWebHostEnvironment webHostEnvironment)
+            IWebHostEnvironment webHostEnvironment,
+            PropertyValidator propertyValidator,
+            ProjectValidator projectValidator,
+            PropertyUpdateValidator propertyUpdateValidator,
+            ProjectUpdateValidator projectUpdateValidator)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _webHostEnvironment = webHostEnvironment;
+            _propertyValidator = propertyValidator;
+            _projectValidator = projectValidator;
+            _propertyUpdateValidator = propertyUpdateValidator;
+            _projectUpdateValidator = projectUpdateValidator;
         }
 
         #endregion
@@ -53,121 +76,350 @@ namespace Unitflix.Server.Controllers
         [HttpGet("all")]
         public JsonResult GetAllProperties()
         {
-            List<Property> properties = _dbContext.Properties
+            List<Property> properties = _dbContext.Properties.ToList();
+            return Response.Message(properties); 
+        }
+
+        /// <summary>
+        /// Returns a single property
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id:int}")]
+        public ActionResult GetProperty(int id)
+        {
+            Property? property = _dbContext
+                .Properties
+                .Where(p => p.Id == id)
                 .Include(property => property.Overview)
                 .Include(property => property.Files)
                 .Include(property => property.Features)
                 .Include(property => property.KeyHighlights)
                 .Include(property => property.PaymentPlanItems)
+                .Include(property => property.PropertyDetails)
+                .FirstOrDefault();
+
+            if(property == null)
+            {
+                return Response.Error("Property not found", 404);
+            }
+
+            return Response.Message(property);
+        }
+
+        /// <summary>
+        /// Returns the list of properties for a location id
+        /// </summary>
+        /// <param name="locationId"></param>
+        /// <returns></returns>
+        [HttpGet("location/{locationId:int}")]
+        public ActionResult GetPropertiesForLocation(int locationId)
+        {
+            //Finding the location
+            if(!_dbContext.Locations.Any(location => location.Id == locationId))
+            {
+                return Response.Error("Location not found", 404);
+            }
+
+            List<Property> properties = _dbContext
+                .Properties
+                .Where(p => p.location == locationId)
                 .ToList();
-            return Json(new { properties }); 
+
+            return Response.Message(properties);
+        }
+
+        /// <summary>
+        /// Returns list of properties for a developer
+        /// </summary>
+        /// <param name="developerId"></param>
+        /// <returns></returns>
+        [HttpGet("developer/{developerId:int}")]
+        public ActionResult GetPropertiesForDeveloper(int developerId)
+        {
+            if(!_dbContext.Developers.Any(dev => dev.Id == developerId))
+            {
+                return Response.Error("Developer not found", 404);
+            }
+
+            List<Property> properties = _dbContext
+                .Properties
+                .Where(p => p.Developer.HasValue && p.Developer.Value == developerId)
+                .ToList();
+
+            return Response.Message(properties);
+        }
+
+        /// <summary>
+        /// Returns list of properties for a property type
+        /// </summary>
+        /// <param name="propertyType"></param>
+        /// <returns></returns>
+        [HttpGet("type/{propertyType:int}")]
+        public ActionResult GetPropertiesOfType(int propertyType)
+        {
+            if (!_dbContext.PropertyTypes.Any(type => type.Id == propertyType))
+            {
+                return Response.Error("Property Type not found", 404);
+            }
+
+            List<Property> properties = _dbContext
+                .Properties
+                .Where(p => p.PropertyType == propertyType)
+                .ToList();
+
+            return Response.Message(properties);
+        }
+
+        /// <summary>
+        /// Returns list of properties of a category
+        /// </summary>
+        /// <param name="propertyCategory"></param>
+        /// <returns></returns>
+        [HttpGet("category/{propertyCategory}")]
+        public ActionResult GetPropertiesOfCategory(string propertyCategory)
+        {
+            PropertyCategory category;
+
+            if(!Enum.TryParse(propertyCategory, out category))
+            {
+                return Response.Error("Invalid Property Category");
+            }
+
+            List<Property> properties = _dbContext
+                .Properties
+                .Where(p => p.Category == category)
+                .ToList();
+
+            return Response.Message(properties);
         }
 
         /// <summary>
         /// Creates a Primary Property submitted by an admin
         /// </summary>
         /// <returns></returns>
-        [HttpPost]
-        public async Task<JsonResult> CreatePrimaryProperty([FromForm]PropertyAPIDTO propertyData)
+        [HttpPost("create-property")]
+        public async Task<ActionResult> CreateProperty([FromForm]PropertyWirteAPIDTO propertyData)
         {
             PropertyWriteDTO writeDTO = _mapper.Map<PropertyWriteDTO>(propertyData);
 
-            //If this is a property
-            if (writeDTO.Category == PropertyCategory.Property)
+            ValidationResult validationResult = await _propertyValidator.ValidateAsync(writeDTO);
+
+            if(!validationResult.IsValid)
             {
-                /* Ensure that the property has the follows
-                 * Title
-                 * Location
-                 * Beds
-                 * Bath
-                 * Area
-                 * Price
-                 * Property Type
-                 * Features
-                 * Key Highlights
-                 * Overview
-                 * Gallery Images
-                 * Cover Image
-                 */
+                return Response.Error(validationResult.Errors);
+            }
 
-                if (string.IsNullOrEmpty(writeDTO.Title))
+            Property property = _mapper.Map<Property>(writeDTO);
+            property.Developer = null;
+            property.Status = PropertyStatus.Approved;
+            property.Submission = PropertySubmission.Primary;
+            property.DateAdded = DateTime.Now;
+            _dbContext.Properties.Add(property);
+            _dbContext.SaveChanges();
+
+            Overview overview = _mapper.Map<Overview>(writeDTO.Overview);
+            overview.PropertyId = property.Id;
+            _dbContext.Overviews.Add(overview);
+
+            List<Feature> features = _mapper.Map<List<Feature>>(writeDTO.Features);
+            features.ForEach(feature => feature.PropertyId = property.Id);
+            _dbContext.Features.AddRange(features);
+
+            List<KeyHighlight> keyHighlights = _mapper.Map<List<KeyHighlight>>(writeDTO.KeyHighlights);
+            keyHighlights.ForEach(keyHighlight => keyHighlight.PropertyId = property.Id);
+            _dbContext.KeyHighlights.AddRange(keyHighlights);
+
+            FileSaveResult? result = await writeDTO.CoverImage.Save(_webHostEnvironment, Request.Host.ToString());
+
+            if (result != null)
+            {
+                File file = new File()
                 {
-                    return Response.Error("Invalid Property Title");
+                    Filename = result.FileName,
+                    Purpose = FilePurpose.Cover,
+                    PropertyId = property.Id,
+                    Url = result.Url,
+                    Type = result.Type
+                };
+                _dbContext.Files.Add(file);
+            }
+
+            writeDTO.GalleryImages.ForEach(async galleryImage =>
+            {
+                FileSaveResult? result = await galleryImage.Save(_webHostEnvironment, Request.Host.ToString());
+                if (result != null)
+                {
+                    File file = new File()
+                    {
+                        Filename = result.FileName,
+                        Purpose = FilePurpose.Gallery,
+                        PropertyId = property.Id,
+                        Url = result.Url,
+                        Type = result.Type
+                    };
+                    _dbContext.Files.Add(file);
                 }
-                else if (writeDTO.location <= 0 && !_dbContext.Locations.Any(location => location.Id == writeDTO.location))
+            });
+
+            _dbContext.SaveChanges();
+            return Response.Message("Property Added Successfully");
+        }
+
+        /// <summary>
+        /// Creates a project submitted by an admin
+        /// </summary>
+        /// <param name="propertyData"></param>
+        /// <returns></returns>
+        [HttpPost("create-project")]
+        public async Task<ActionResult> CreateProject([FromForm]PropertyWirteAPIDTO propertyData)
+        {
+            PropertyWriteDTO writeDTO = _mapper.Map<PropertyWriteDTO>(propertyData);
+
+            ValidationResult validationResult = await _projectValidator.ValidateAsync(writeDTO);
+
+            if(!validationResult.IsValid)
+            {
+                return Response.Error(validationResult.Errors);
+            }
+
+            Property property = _mapper.Map<Property>(writeDTO);
+            property.Status = PropertyStatus.Approved;
+            property.Submission = PropertySubmission.Primary;
+            property.DateAdded = DateTime.Now;
+            _dbContext.Properties.Add(property);
+            _dbContext.SaveChanges();
+
+            Overview overview = _mapper.Map<Overview>(writeDTO.Overview);
+            overview.PropertyId = property.Id;
+            _dbContext.Overviews.Add(overview);
+
+            List<Feature> features = _mapper.Map<List<Feature>>(writeDTO.Features);
+            features.ForEach(feature => feature.PropertyId = property.Id);
+            _dbContext.Features.AddRange(features);
+
+            List<KeyHighlight> keyHighlights = _mapper.Map<List<KeyHighlight>>(writeDTO.KeyHighlights);
+            keyHighlights.ForEach(keyHighlight => keyHighlight.PropertyId = property.Id);
+            _dbContext.KeyHighlights.AddRange(keyHighlights);
+
+            List<PaymentPlanItem> paymentPlanItems = _mapper.Map<List<PaymentPlanItem>>(writeDTO.PaymentPlanItems);
+            paymentPlanItems.ForEach(paymentPlan => paymentPlan.PropertyId = property.Id);
+            _dbContext.PaymentPlanItems.AddRange(paymentPlanItems);
+
+            List<PropertyDetail> propertyDetails = _mapper.Map<List<PropertyDetail>>(writeDTO.PropertyDetails);
+            propertyDetails.ForEach(propertyDetail => propertyDetail.PropertyId = property.Id);
+            _dbContext.PropertyDetails.AddRange(propertyDetails);
+
+            FileSaveResult? result = await writeDTO.CoverImage.Save(_webHostEnvironment, Request.Host.ToString());
+
+            if (result != null)
+            {
+                File file = new File()
                 {
-                    return Response.Error("Invalid Location");
+                    Filename = result.FileName,
+                    Purpose = FilePurpose.Cover,
+                    PropertyId = property.Id,
+                    Url = result.Url,
+                    Type = result.Type
+                };
+                _dbContext.Files.Add(file);
+            }
+
+            writeDTO.GalleryImages.ForEach(async galleryImage =>
+            {
+                FileSaveResult? result = await galleryImage.Save(_webHostEnvironment, Request.Host.ToString());
+                if (result != null)
+                {
+                    File file = new File()
+                    {
+                        Filename = result.FileName,
+                        Purpose = FilePurpose.Gallery,
+                        PropertyId = property.Id,
+                        Url = result.Url,
+                        Type = result.Type
+                    };
+                    _dbContext.Files.Add(file);
                 }
-                else if (writeDTO.Beds <= 0)
+            });
+
+            _dbContext.SaveChanges();
+            return Response.Message("Project Added Successfully");
+        }
+
+        /// <summary>
+        /// Updates the specified property
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        [HttpPut("update-property/{id:int}")]
+        public async Task<ActionResult> EditProperty(int id, [FromForm] PropertyUpdateAPIDTO propertyData)
+        {
+            //Getting the property
+            Property? property = await _dbContext.Properties.Where(p => p.Id == id).FirstOrDefaultAsync();
+
+            if(property == null)
+            {
+                return Response.Error("Property not found", 404);
+            }
+            else if (property.Category != PropertyCategory.Property)
+            {
+                return Response.Error("Can only update a property via this API");
+            }
+
+            PropertyUpdateDTO updateDTO = _mapper.Map<PropertyUpdateDTO>(propertyData);
+
+            ValidationResult validationResult = await _propertyUpdateValidator.ValidateAsync(updateDTO);
+
+            if(!validationResult.IsValid)
+            {
+                return Response.Error(validationResult.Errors);
+            }
+
+            property = _mapper.Map(updateDTO, property);
+            _dbContext.Properties.Update(property);
+
+            if(updateDTO.Overview != null)
+            {
+                Overview overview = _dbContext.Overviews.Where(o => o.PropertyId == property.Id).First();
+                overview = _mapper.Map(updateDTO.Overview, overview);
+                _dbContext.Overviews.Update(overview);
+            }
+
+            //Deleting the specified Features
+            if(updateDTO.FeaturesToRemove.Count > 0)
+            {
+                List<Feature> featuresToRemove = await _dbContext.Features.Where(f => updateDTO.FeaturesToRemove.Contains(f.Id)).ToListAsync();
+                _dbContext.Features.RemoveRange(featuresToRemove);
+            }
+
+            List<Feature> features = _mapper.Map<List<Feature>>(updateDTO.Features);
+            features.ForEach(feature => feature.PropertyId = property.Id);
+            _dbContext.Features.AddRange(features);
+
+            //Deleting the specified key highlights
+            if (updateDTO.KeyHighlightsToRemove.Count > 0)
+            {
+                List<KeyHighlight> keyHighlightsToRemove = await _dbContext.KeyHighlights.Where(key => updateDTO.KeyHighlightsToRemove.Contains(key.Id)).ToListAsync();
+                _dbContext.KeyHighlights.RemoveRange(keyHighlightsToRemove);
+            }
+
+            List<KeyHighlight> keyHighlights = _mapper.Map<List<KeyHighlight>>(updateDTO.KeyHighlights);
+            keyHighlights.ForEach(keyHighlight => keyHighlight.PropertyId = property.Id);
+            _dbContext.KeyHighlights.AddRange(keyHighlights);
+
+            //If a new cover image is specified we need to delete the previous one
+            if(updateDTO.CoverImage != null)
+            {
+                //Finding the previous Cover Image
+                File? existingFile = await _dbContext.Files.Where(file => file.PropertyId == id && file.Purpose == FilePurpose.Cover).FirstOrDefaultAsync();
+
+                if(existingFile != null)
                 {
-                    return Response.Error("Number of Beds must be greather than or equal to 1");
-                }
-                else if (writeDTO.Baths <= 0)
-                {
-                    return Response.Error("Number of Baths must be greather than or equal to 1");
-                }
-                else if (writeDTO.Area <= 0)
-                {
-                    return Response.Error("Area of a property must be greater than 0");
-                }
-                else if (writeDTO.Price <= 0)
-                {
-                    return Response.Error("Price of a property must be greater than 0");
-                }
-                else if (writeDTO.PropertyType <= 0 || !_dbContext.PropertyTypes.Any(propertyType => propertyType.Id == writeDTO.PropertyType))
-                {
-                    return Response.Error("Invalid Property Type Specified");
-                }
-                else if (writeDTO.Features == null || writeDTO.Features.Count == 0)
-                {
-                    return Response.Error("A Property must have atleast 1 feature");
-                }
-                else if (writeDTO.KeyHighlights == null || writeDTO.KeyHighlights.Count == 0)
-                {
-                    return Response.Error("A Property must have atleast 1 key highlight");
-                }
-                else if (writeDTO.Overview == null || string.IsNullOrEmpty(writeDTO.Overview.Text))
-                {
-                    return Response.Error("Property must have an overview");
-                }
-                else if (writeDTO.GalleryImages.Count == 0)
-                {
-                    return Response.Error("Property must have atleast 1 gallery image");
-                }
-                else if (writeDTO.GalleryImages.Any(image => image.Size() > 10))
-                {
-                    return Response.Error("All of the gallery images must be less than 10 Mb");
-                }
-                else if (writeDTO.CoverImage == null)
-                {
-                    return Response.Error("Property must have a cover image");
-                }
-                else if (writeDTO.CoverImage.Size() > 10)
-                {
-                    return Response.Error("Cover Image Must be less than 10 Mb in size");
+                    FileHelpers.DeleteFile(_webHostEnvironment, existingFile.Filename);
+                    _dbContext.Files.Remove(existingFile);
                 }
 
-                Property property = _mapper.Map<Property>(writeDTO);
-                property.Developer = null;
-                property.Status = PropertyStatus.Approved;
-                property.Submission = PropertySubmission.Primary;
-                property.DateAdded = DateTime.Now;
-                _dbContext.Properties.Add(property);
-                _dbContext.SaveChanges();
-
-                Overview overview = _mapper.Map<Overview>(writeDTO.Overview);
-                overview.PropertyId = property.Id;
-                _dbContext.Overviews.Add(overview);
-
-                List<Feature> features = _mapper.Map<List<Feature>>(writeDTO.Features);
-                features.ForEach(feature => feature.PropertyId = property.Id);
-                _dbContext.Features.AddRange(features);
-
-                List<KeyHighlight> keyHighlights = _mapper.Map<List<KeyHighlight>>(writeDTO.KeyHighlights);
-                keyHighlights.ForEach(keyHighlight => keyHighlight.PropertyId = property.Id);
-                _dbContext.KeyHighlights.AddRange(keyHighlights);
-
-                FileSaveResult? result = await writeDTO.CoverImage.Save(_webHostEnvironment, Request.Host.ToString());
+                FileSaveResult? result = await updateDTO.CoverImage.Save(_webHostEnvironment, Request.Host.ToString());
 
                 if (result != null)
                 {
@@ -181,137 +433,136 @@ namespace Unitflix.Server.Controllers
                     };
                     _dbContext.Files.Add(file);
                 }
-
-                writeDTO.GalleryImages.ForEach(async galleryImage =>
-                {
-                    FileSaveResult? result = await galleryImage.Save(_webHostEnvironment, Request.Host.ToString());
-                    if (result != null)
-                    {
-                        File file = new File()
-                        {
-                            Filename = result.FileName,
-                            Purpose = FilePurpose.Gallery,
-                            PropertyId = property.Id,
-                            Url = result.Url,
-                            Type = result.Type
-                        };
-                        _dbContext.Files.Add(file);
-                    }
-                });
-
-                _dbContext.SaveChanges();
-                return Response.Message("Property Added Successfully");
             }
-            else
+
+            if(updateDTO.GalleryImagesToRemove.Count > 0)
             {
-                /* Ensure that the Project has the follows
-                 * Title
-                 * Location
-                 * Price
-                 * Property Type
-                 * Developer
-                 * DownPayment
-                 * PaymentPlan
-                 * HandOver
-                 * Featured
-                 * Features
-                 * Key Highlights
-                 * Payment Plan Items
-                 * Overview
-                 * Property Details
-                 * Gallery Images
-                 * Cover Image
-                 */
+                List<File> galleryImagesToRemove = await _dbContext.Files.Where(file => updateDTO.GalleryImagesToRemove.Contains(file.Id) && file.Purpose == FilePurpose.Gallery).ToListAsync();
+                galleryImagesToRemove.ForEach(image =>
+                {
+                    FileHelpers.DeleteFile(_webHostEnvironment, image.Filename);
+                });
+                _dbContext.Files.RemoveRange(galleryImagesToRemove);
+            }
 
-                if (string.IsNullOrEmpty(writeDTO.Title))
+            updateDTO.GalleryImages.ForEach(async galleryImage =>
+            {
+                FileSaveResult? result = await galleryImage.Save(_webHostEnvironment, Request.Host.ToString());
+                if (result != null)
                 {
-                    return Response.Error("Invalid Property Title");
+                    File file = new File()
+                    {
+                        Filename = result.FileName,
+                        Purpose = FilePurpose.Gallery,
+                        PropertyId = property.Id,
+                        Url = result.Url,
+                        Type = result.Type
+                    };
+                    _dbContext.Files.Add(file);
                 }
-                else if (writeDTO.location <= 0 && !_dbContext.Locations.Any(location => location.Id == writeDTO.location))
+            });
+
+            _dbContext.SaveChanges();
+            return Response.Message("Property Updated Successfully");
+
+        }
+
+        /// <summary>
+        /// Updates the specified property
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        [HttpPut("update-project/{id:int}")]
+        public async Task<ActionResult> EditProject(int id, [FromForm] PropertyUpdateAPIDTO propertyData)
+        {
+            //Getting the property
+            Property? property = await _dbContext.Properties.Where(p => p.Id == id).FirstOrDefaultAsync();
+
+            if (property == null)
+            {
+                return Response.Error("Project not found", 404);
+            }
+            else if (property.Category != PropertyCategory.Project)
+            {
+                return Response.Error("Can only update a project via this API");
+            }
+
+            PropertyUpdateDTO updateDTO = _mapper.Map<PropertyUpdateDTO>(propertyData);
+
+            ValidationResult validationResult = await _projectUpdateValidator.ValidateAsync(updateDTO);
+
+            if (!validationResult.IsValid)
+            {
+                return Response.Error(validationResult.Errors);
+            }
+
+            property = _mapper.Map(updateDTO, property);
+            _dbContext.Properties.Update(property);
+
+            if (updateDTO.Overview != null)
+            {
+                Overview overview = _dbContext.Overviews.Where(o => o.PropertyId == property.Id).First();
+                overview = _mapper.Map(updateDTO.Overview, overview);
+                _dbContext.Overviews.Update(overview);
+            }
+
+            //Deleting the specified Features
+            if (updateDTO.FeaturesToRemove.Count > 0)
+            {
+                List<Feature> featuresToRemove = await _dbContext.Features.Where(f => updateDTO.FeaturesToRemove.Contains(f.Id)).ToListAsync();
+                _dbContext.Features.RemoveRange(featuresToRemove);
+            }
+
+            List<Feature> features = _mapper.Map<List<Feature>>(updateDTO.Features);
+            features.ForEach(feature => feature.PropertyId = property.Id);
+            _dbContext.Features.AddRange(features);
+
+            //Deleting the specified key highlights
+            if (updateDTO.KeyHighlightsToRemove.Count > 0)
+            {
+                List<KeyHighlight> keyHighlightsToRemove = await _dbContext.KeyHighlights.Where(key => updateDTO.KeyHighlightsToRemove.Contains(key.Id)).ToListAsync();
+                _dbContext.KeyHighlights.RemoveRange(keyHighlightsToRemove);
+            }
+
+            List<KeyHighlight> keyHighlights = _mapper.Map<List<KeyHighlight>>(updateDTO.KeyHighlights);
+            keyHighlights.ForEach(keyHighlight => keyHighlight.PropertyId = property.Id);
+            _dbContext.KeyHighlights.AddRange(keyHighlights);
+
+            //Deleting the specified payment plan items
+            if (updateDTO.PaymentPlanItemsToRemove.Count > 0)
+            {
+                List<PaymentPlanItem> paymentPlanItemsToRemove = await _dbContext.PaymentPlanItems.Where(item => updateDTO.PaymentPlanItemsToRemove.Contains(item.Id)).ToListAsync();
+                _dbContext.PaymentPlanItems.RemoveRange(paymentPlanItemsToRemove);
+            }
+
+            List<PaymentPlanItem> paymentPlanItems = _mapper.Map<List<PaymentPlanItem>>(updateDTO.PaymentPlanItems);
+            paymentPlanItems.ForEach(paymentPlan => paymentPlan.PropertyId = property.Id);
+            _dbContext.PaymentPlanItems.AddRange(paymentPlanItems);
+
+            //Deleting the specified property details
+            if (updateDTO.PropertyDetailsToRemove.Count > 0)
+            {
+                List<PropertyDetail> propertyDetailsToRemove = await _dbContext.PropertyDetails.Where(item => updateDTO.PropertyDetailsToRemove.Contains(item.Id)).ToListAsync();
+                _dbContext.PropertyDetails.RemoveRange(propertyDetailsToRemove);
+            }
+
+            List<PropertyDetail> propertyDetails = _mapper.Map<List<PropertyDetail>>(updateDTO.PropertyDetails);
+            propertyDetails.ForEach(propertyDetail => propertyDetail.PropertyId = property.Id);
+            _dbContext.PropertyDetails.AddRange(propertyDetails);
+
+            //If a new cover image is specified we need to delete the previous one
+            if (updateDTO.CoverImage != null)
+            {
+                //Finding the previous Cover Image
+                File? existingFile = await _dbContext.Files.Where(file => file.PropertyId == id && file.Purpose == FilePurpose.Cover).FirstOrDefaultAsync();
+
+                if (existingFile != null)
                 {
-                    return Response.Error("Invalid Location");
-                }
-                else if (writeDTO.Developer == null || writeDTO.Developer <= 0)
-                {
-                    return Response.Error("Developer Id must be greater than zero");
-                }
-                else if (writeDTO.DownPayment == null || writeDTO.DownPayment <= 0)
-                {
-                    return Response.Error("Down payment must be greater than 0");
-                }
-                else if (string.IsNullOrEmpty(writeDTO.PaymentPlan))
-                {
-                    return Response.Error("Payment Plan is required");
-                }
-                else if (string.IsNullOrEmpty(writeDTO.HandOver))
-                {
-                    return Response.Error("Hand Over is required");
-                }
-                else if (writeDTO.Price <= 0)
-                {
-                    return Response.Error("Price of a Project must be greater than 0");
-                }
-                else if (writeDTO.PropertyType <= 0 || !_dbContext.PropertyTypes.Any(propertyType => propertyType.Id == writeDTO.PropertyType))
-                {
-                    return Response.Error("Invalid Property Type Specified");
-                }
-                else if (writeDTO.Features == null || writeDTO.Features.Count == 0)
-                {
-                    return Response.Error("A Project must have atleast 1 feature");
-                }
-                else if (writeDTO.PaymentPlanItems == null || writeDTO.PaymentPlanItems.Count == 0)
-                {
-                    return Response.Error("A Project must have atleast 1 payment plan item");
-                }
-                else if (writeDTO.KeyHighlights == null || writeDTO.KeyHighlights.Count == 0)
-                {
-                    return Response.Error("A Project must have atleast 1 key highlight");
-                }
-                else if (writeDTO.Overview == null || string.IsNullOrEmpty(writeDTO.Overview.Text))
-                {
-                    return Response.Error("Project must have an overview");
-                }
-                else if (writeDTO.GalleryImages.Count == 0)
-                {
-                    return Response.Error("Project must have atleast 1 gallery image");
-                }
-                else if (writeDTO.GalleryImages.Any(image => image.Size() > 10))
-                {
-                    return Response.Error("All of the gallery images must be less than 10 Mb");
-                }
-                else if (writeDTO.CoverImage == null)
-                {
-                    return Response.Error("Project must have a cover image");
-                }
-                else if (writeDTO.CoverImage.Size() > 10)
-                {
-                    return Response.Error("Cover Image Must be less than 10 Mb in size");
+                    FileHelpers.DeleteFile(_webHostEnvironment, existingFile.Filename);
+                    _dbContext.Files.Remove(existingFile);
                 }
 
-                Property property = _mapper.Map<Property>(writeDTO);
-                property.Status = PropertyStatus.Approved;
-                property.Submission = PropertySubmission.Primary;
-                property.DateAdded = DateTime.Now;
-                _dbContext.Properties.Add(property);
-                _dbContext.SaveChanges();
-
-                Overview overview = _mapper.Map<Overview>(writeDTO.Overview);
-                overview.PropertyId = property.Id;
-                _dbContext.Overviews.Add(overview);
-
-                List<Feature> features = _mapper.Map<List<Feature>>(writeDTO.Features);
-                features.ForEach(feature => feature.PropertyId = property.Id);
-                _dbContext.Features.AddRange(features);
-
-                List<PaymentPlanItem> paymentPlanItems = _mapper.Map<List<PaymentPlanItem>>(writeDTO.PaymentPlanItems);
-                paymentPlanItems.ForEach(paymentPlan => paymentPlan.PropertyId = property.Id);
-                _dbContext.PaymentPlanItems.AddRange(paymentPlanItems);
-
-                List<KeyHighlight> keyHighlights = _mapper.Map<List<KeyHighlight>>(writeDTO.KeyHighlights);
-                keyHighlights.ForEach(keyHighlight => keyHighlight.PropertyId = property.Id);
-                _dbContext.KeyHighlights.AddRange(keyHighlights);
-
-                FileSaveResult? result = await writeDTO.CoverImage.Save(_webHostEnvironment, Request.Host.ToString());
+                FileSaveResult? result = await updateDTO.CoverImage.Save(_webHostEnvironment, Request.Host.ToString());
 
                 if (result != null)
                 {
@@ -325,27 +576,38 @@ namespace Unitflix.Server.Controllers
                     };
                     _dbContext.Files.Add(file);
                 }
-
-                writeDTO.GalleryImages.ForEach(async galleryImage =>
-                {
-                    FileSaveResult? result = await galleryImage.Save(_webHostEnvironment, Request.Host.ToString());
-                    if (result != null)
-                    {
-                        File file = new File()
-                        {
-                            Filename = result.FileName,
-                            Purpose = FilePurpose.Gallery,
-                            PropertyId = property.Id,
-                            Url = result.Url,
-                            Type = result.Type
-                        };
-                        _dbContext.Files.Add(file);
-                    }
-                });
-
-                _dbContext.SaveChanges();
-                return Response.Message("Project Added Successfully");
             }
+
+            if (updateDTO.GalleryImagesToRemove.Count > 0)
+            {
+                List<File> galleryImagesToRemove = await _dbContext.Files.Where(file => updateDTO.GalleryImagesToRemove.Contains(file.Id) && file.Purpose == FilePurpose.Gallery).ToListAsync();
+                galleryImagesToRemove.ForEach(image =>
+                {
+                    FileHelpers.DeleteFile(_webHostEnvironment, image.Filename);
+                });
+                _dbContext.Files.RemoveRange(galleryImagesToRemove);
+            }
+
+            updateDTO.GalleryImages.ForEach(async galleryImage =>
+            {
+                FileSaveResult? result = await galleryImage.Save(_webHostEnvironment, Request.Host.ToString());
+                if (result != null)
+                {
+                    File file = new File()
+                    {
+                        Filename = result.FileName,
+                        Purpose = FilePurpose.Gallery,
+                        PropertyId = property.Id,
+                        Url = result.Url,
+                        Type = result.Type
+                    };
+                    _dbContext.Files.Add(file);
+                }
+            });
+
+            _dbContext.SaveChanges();
+            return Response.Message("Project Updated Successfully");
+
         }
 
         #endregion

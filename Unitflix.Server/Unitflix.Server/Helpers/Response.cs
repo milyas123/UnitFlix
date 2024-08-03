@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation.Results;
+
+using Microsoft.AspNetCore.Mvc;
+
+using Newtonsoft.Json;
 
 namespace Unitflix.Server.Helpers
 {
@@ -11,9 +15,25 @@ namespace Unitflix.Server.Helpers
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
-        public static JsonResult Error(this HttpResponse response, string message)
+        public static ContentResult Error(this HttpResponse response, string message, int statusCode = 400)
         {
-            return new JsonResult(new { error = message });
+            ContentResult result = new ContentResult();
+            result.StatusCode = statusCode;
+            result.Content = message;
+            return result;
+        }
+
+        /// <summary>
+        /// Returns an error response
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public static ContentResult Error(this HttpResponse response, List<ValidationFailure> faliures, int statusCode = 400)
+        {
+            ContentResult result = new ContentResult();
+            result.StatusCode = statusCode;
+            result.Content = JsonConvert.SerializeObject(new { errors = faliures.Select(f => f.ErrorMessage) });
+            return result;
         }
 
         /// <summary>
@@ -24,6 +44,16 @@ namespace Unitflix.Server.Helpers
         public static JsonResult Message(this HttpResponse response, string message)
         {
             return new JsonResult(new { message = message });
+        }
+
+        /// <summary>
+        /// Returns an object in response
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public static JsonResult Message(this HttpResponse response, object data)
+        {
+            return new JsonResult(new { data = data});
         }
 
         #endregion

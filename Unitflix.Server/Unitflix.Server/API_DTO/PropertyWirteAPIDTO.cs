@@ -1,8 +1,8 @@
 ﻿using Unitflix.Server.Enums;
 
-namespace Unitflix.Server.DTOs
+namespace Unitflix.Server.API_DTO
 {
-    public class PropertyAPIDTO
+    public class PropertyWirteAPIDTO
     {
         public PropertyPurpose Purpose { get; set; }
 

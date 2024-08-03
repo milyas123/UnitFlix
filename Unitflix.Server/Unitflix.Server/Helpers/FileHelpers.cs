@@ -1,4 +1,6 @@
-﻿using Unitflix.Server.Enums;
+﻿using System.Drawing;
+
+using Unitflix.Server.Enums;
 using Unitflix.Server.Results;
 
 namespace Unitflix.Server.Helpers
@@ -15,7 +17,8 @@ namespace Unitflix.Server.Helpers
 
         public static double Size(this IFormFile file)
         {
-            return file.Length / (1024 * 1204);
+            double size = file.Length / (1024 * 1024 * 1.0);
+            return size;
         }
 
         public static async Task<FileSaveResult?> Save(this IFormFile file, IWebHostEnvironment webHost, string host = "localhost:7001")
@@ -35,6 +38,28 @@ namespace Unitflix.Server.Helpers
             {
                 Logger.Log(exc.Message, MessageType.Error);
                 return null;
+            }
+        }
+
+        /// <summary>
+        /// Deletes the file specified
+        /// </summary>
+        /// <param name="webHost"></param>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        public static void DeleteFile(IWebHostEnvironment webHost, string fileName)
+        {
+            string directory = Path.Join(webHost.WebRootPath, DATA_FOLDER);
+            string path = Path.Join(directory, fileName);
+            try
+            {
+                if(File.Exists(path))
+                {
+                    File.Delete(path);
+                }
+            } catch(Exception exc)
+            {
+                Logger.Log(exc.Message, MessageType.Error);
             }
         }
 

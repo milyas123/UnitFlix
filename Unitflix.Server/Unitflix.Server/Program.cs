@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Unitflix.Server.AutoMapper;
 using Unitflix.Server.Database;
 using Unitflix.Server.Seeder;
+using Unitflix.Server.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 //Adding auto mapper
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
+
+//Adding Validators
+builder.Services.AddScoped<PropertyValidator>();
+builder.Services.AddScoped<ProjectValidator>();
+builder.Services.AddScoped<PropertyUpdateValidator>();
+builder.Services.AddScoped<ProjectUpdateValidator>();
+
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
