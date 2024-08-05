@@ -14,11 +14,8 @@ const Table = ({ type, showSubmitterDetails, setShowSubmitterDetails }) => {
         <tr className="flex items-center text-[14px]">
           <th className="w-[3%] py-3 ps-2 text-start">No</th>
           <th className="w-[19%] text-start">Property</th>
-          {type !== "properties" && (
-            <th className="w-[20%] text-start">User</th>
-          )}
+          {type !== "properties" && <th className="w-[20%] text-start">User</th>}
           <th className="w-[17%] text-start">Location</th>
-
           {type === "properties" ? (
             <>
               <th className="w-[10%] text-start">Date Added</th>
@@ -26,11 +23,8 @@ const Table = ({ type, showSubmitterDetails, setShowSubmitterDetails }) => {
               <th className="w-[23%] text-start">Tags</th>
             </>
           ) : (
-            <>
-              <th className="w-[19%] text-start">Status</th>
-            </>
+            <th className="w-[19%] text-start">Status</th>
           )}
-
           <th className="w-[18%] text-start">Amount</th>
           <th className="w-[4%] text-start">Action</th>
         </tr>
@@ -45,7 +39,6 @@ const Table = ({ type, showSubmitterDetails, setShowSubmitterDetails }) => {
                 className="h-[48px] w-[52px] rounded-2xl object-cover"
                 alt=""
               />
-
               <div>
                 <p className="font-regular text-[15px]">Single Row Middle</p>
                 <p className="space-x-1 divide-x divide-black text-[11px]">
@@ -69,7 +62,6 @@ const Table = ({ type, showSubmitterDetails, setShowSubmitterDetails }) => {
               <p className="text-[13px]">Marina Bay</p>
             </div>
           </td>
-
           {type === "properties" ? (
             <>
               <td className="w-[10%] px-4 text-start text-[13px] text-davyGrey">
@@ -79,7 +71,7 @@ const Table = ({ type, showSubmitterDetails, setShowSubmitterDetails }) => {
                 Yes
               </td>
               <td className="w-[23%] px-4 text-start">
-                <div className="flex gap-x-2">
+                <div className="flex flex-wrap gap-2">
                   <Tag type="property">Property</Tag>
                   <Tag type="rental">Rental</Tag>
                   <Tag type="secondary">Secondary</Tag>
@@ -87,13 +79,10 @@ const Table = ({ type, showSubmitterDetails, setShowSubmitterDetails }) => {
               </td>
             </>
           ) : (
-            <>
-              <td className="w-[19%] px-4">
-                <Tag type="pending">Pending</Tag>
-              </td>
-            </>
+            <td className="w-[19%] px-4">
+              <Tag type="pending">Pending</Tag>
+            </td>
           )}
-
           <td className="w-[18%] px-4 text-start">
             <div className="flex items-center gap-x-2 font-medium">
               <span className="text-[11px] text-davyGrey">Starting From</span>
@@ -103,7 +92,7 @@ const Table = ({ type, showSubmitterDetails, setShowSubmitterDetails }) => {
           <td className="relative w-[4%] px-4 text-start">
             <ThreeDots
               className="relative cursor-pointer"
-              onClick={() => setShowOptions(true)}
+              onClick={() => setShowOptions(!showOptions)}
             />
             {showOptions && (
               <div
@@ -116,11 +105,13 @@ const Table = ({ type, showSubmitterDetails, setShowSubmitterDetails }) => {
                 <Button
                   className="w-[14rem] rounded-lg"
                   variant="outline"
-                  onClick={() => setShowSubmitterDetails(!showSubmitterDetails)}
+                  onClick={() => {
+                    setShowSubmitterDetails(true);
+                    setShowOptions(false);
+                  }}
                 >
                   View Submitter Details
                 </Button>
-
                 <Button className="w-[14rem] rounded-lg" variant="outline">
                   Preview Property
                 </Button>

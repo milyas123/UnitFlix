@@ -4,7 +4,7 @@ import { RiParkingBoxLine } from "react-icons/ri";
 import Edit from "@/website/components/svgs/Edit";
 import Delete from "@/website/components/svgs/Delete";
 
-const ProjectFeaturesAndAmenities = () => {
+const ProjectFeaturesAndAmenities = ({ showModal }) => {
   return (
     <div className="flex items-start rounded-xl border border-lightGrey bg-white px-8 py-4">
       <div className="w-[23%] space-y-2">
@@ -14,6 +14,7 @@ const ProjectFeaturesAndAmenities = () => {
         
         <Button
           variant="outline"
+          onClick={() => showModal(true)}
           className="rounded-md hover:bg-mirage hover:text-white"
         >
           Add Amenities

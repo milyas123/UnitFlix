@@ -52,6 +52,7 @@ const ExperienceAndFeedback = () => {
         <div className="ms-auto w-full">
           <Swiper
             slidesPerView={1}
+            spaceBetween={20}
             modules={[Pagination]}
             pagination={{ clickable: true }}
             className="h-[400px] md:h-[200px] md:w-[170px] lg:h-[240px] lg:w-[270px] xl:h-[305px] xl:w-[350px] 2xl:h-[400px] 2xl:w-[400px]"

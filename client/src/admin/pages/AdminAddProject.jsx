@@ -8,10 +8,16 @@ import ProjectGallery from "../components/adminAddProject/ProjectGallery";
 import ProjectPropertyInformation from "../components/adminAddProject/ProjectPropertyInformation";
 import ProjectPropertyDetails from "../components/adminAddProject/ProjectPropertyDetails";
 import ProjectPaymentPlan from "../components/adminAddProject/ProjectPaymentPlan";
-import AddPropertyItemModal from "../components/adminAddProject/AddPropertyItemModal";
+import AddPropertyItemModal from "../components/adminAddProject/modals/AddPropertyItemModal";
+import AddKeyHighlightModal from "../components/adminAddProject/modals/AddKeyHighlightModal";
+import AddAmenityModal from "../components/adminAddProject/modals/AddAmenityModal";
+import AddPaymentPlanModal from "../components/adminAddProject/modals/AddPaymentPlanModal";
 
 const AdminAddProject = () => {
-  const [showPropertyItemModal, setShowPropertyItemModal] = useState(false);
+  const [showAddAmenityModal, setShowAddAmenityModal] = useState(false);
+  const [showAddPaymentPlanModal, setShowAddPaymentPlanModal] = useState(false);
+  const [showAddPropertyItemModal, setShowAddPropertyItemModal] = useState(false);
+  const [showAddKeyHighlightModal, setShowAddKeyHighlightModal] = useState(false);
 
   return (
     <>
@@ -19,11 +25,11 @@ const AdminAddProject = () => {
         <Header title="Add Project" />
 
         <ProjectGeneralInformation />
-        <ProjectPropertyInformation showModal={setShowPropertyItemModal} />
+        <ProjectPropertyInformation showModal={setShowAddPropertyItemModal} />
         <ProjectPropertyDetails />
-        <ProjectKeyHighlights />
-        <ProjectFeaturesAndAmenities />
-        <ProjectPaymentPlan />
+        <ProjectKeyHighlights showModal={setShowAddKeyHighlightModal} />
+        <ProjectFeaturesAndAmenities showModal={setShowAddAmenityModal} />
+        <ProjectPaymentPlan showModal={setShowAddPaymentPlanModal} />
         <ProjectGallery />
 
         <div className="flex items-center justify-end gap-x-3">
@@ -33,8 +39,27 @@ const AdminAddProject = () => {
           <Button className="rounded-md">Submit</Button>
         </div>
       </div>
-      {showPropertyItemModal && <AddPropertyItemModal onClose={() => setShowPropertyItemModal(false)} />}
-      
+      {showAddPropertyItemModal && (
+        <AddPropertyItemModal
+          onClose={() => setShowAddPropertyItemModal(false)}
+        />
+      )}
+
+      {showAddKeyHighlightModal && (
+        <AddKeyHighlightModal
+          onClose={() => setShowAddKeyHighlightModal(false)}
+        />
+      )}
+
+      {showAddAmenityModal && (
+        <AddAmenityModal onClose={() => setShowAddAmenityModal(false)} />
+      )}
+
+      {showAddPaymentPlanModal && (
+        <AddPaymentPlanModal
+          onClose={() => setShowAddPaymentPlanModal(false)}
+        />
+      )}
     </>
   );
 };

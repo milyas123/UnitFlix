@@ -15,10 +15,16 @@ const AdminSubmittedRequests = () => {
           <Filters type="requests" />
         </div>
 
-        <Table type="requests" showSubmitterDetails={showDetailsModal} setShowSubmitterDetails={setShowDetailsModal} />
+        <Table
+          type="requests"
+          showSubmitterDetails={showDetailsModal}
+          setShowSubmitterDetails={setShowDetailsModal}
+        />
       </div>
 
-      {showDetailsModal && (<RequestDetailsModal onClose={() => setShowDetailsModal(!showDetailsModal)} /> )}
+      {showDetailsModal && (
+        <RequestDetailsModal onClose={() => setShowDetailsModal(false)} />
+      )}
     </>
   );
 };
