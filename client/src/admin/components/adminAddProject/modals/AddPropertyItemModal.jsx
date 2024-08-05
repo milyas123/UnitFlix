@@ -1,12 +1,12 @@
-import Cross from "../svgs/Cross";
-import Button from "../common/Button";
-import InputField from "../common/InputField";
+import Cross from "../../svgs/Cross";
+import Button from "../../common/Button";
+import InputField from "../../common/InputField";
 
 const AddPropertyItemModal = ({ onClose }) => {
   return (
     <>
-      <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-      <div className="absolute inset-0 flex items-center justify-center">
+      <div className="fixed inset-0 bg-black bg-opacity-50"></div>
+      <div className="fixed inset-0 flex items-center justify-center">
         <div className="flex w-[40rem] flex-col gap-y-3 rounded-3xl bg-white">
           <div className="border-b border-pastelGrey">
             <div className="flex items-center justify-between px-5 pb-3 pt-5">
@@ -29,7 +29,10 @@ const AddPropertyItemModal = ({ onClose }) => {
           </div>
 
           <div className="flex items-center justify-end gap-x-3 px-5 pb-4 pt-2">
-            <Button className="rounded-md border-red-700 bg-red-700 hover:border-mirage" onClick={onClose}>
+            <Button
+              className="rounded-md border-red-700 bg-red-700 hover:border-mirage"
+              onClick={onClose}
+            >
               Cancel
             </Button>
             <Button className="rounded-md">Submit</Button>
