@@ -2,6 +2,7 @@
 
 using FluentValidation.Results;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -76,7 +77,7 @@ namespace Unitflix.Server.Controllers
         [HttpGet("all")]
         public JsonResult GetAllProperties()
         {
-            List<Property> properties = _dbContext.Properties.ToList();
+            List<Property> properties = _dbContext.Properties.Where(p => p.ApprovalStatus == PropertyStatus.Approved).ToList();
             return Response.Message(properties); 
         }
 
@@ -90,7 +91,7 @@ namespace Unitflix.Server.Controllers
         {
             Property? property = _dbContext
                 .Properties
-                .Where(p => p.Id == id)
+                .Where(p => p.Id == id && p.ApprovalStatus == PropertyStatus.Approved)
                 .Include(property => property.Overview)
                 .Include(property => property.Files)
                 .Include(property => property.Features)
@@ -123,7 +124,7 @@ namespace Unitflix.Server.Controllers
 
             List<Property> properties = _dbContext
                 .Properties
-                .Where(p => p.location == locationId)
+                .Where(p => p.location == locationId && p.ApprovalStatus == PropertyStatus.Approved)
                 .ToList();
 
             return Response.Message(properties);
@@ -144,7 +145,7 @@ namespace Unitflix.Server.Controllers
 
             List<Property> properties = _dbContext
                 .Properties
-                .Where(p => p.Developer.HasValue && p.Developer.Value == developerId)
+                .Where(p => p.Developer.HasValue && p.Developer.Value == developerId && p.ApprovalStatus == PropertyStatus.Approved)
                 .ToList();
 
             return Response.Message(properties);
@@ -165,7 +166,7 @@ namespace Unitflix.Server.Controllers
 
             List<Property> properties = _dbContext
                 .Properties
-                .Where(p => p.PropertyType == propertyType)
+                .Where(p => p.PropertyType == propertyType && p.ApprovalStatus == PropertyStatus.Approved)
                 .ToList();
 
             return Response.Message(properties);
@@ -188,7 +189,7 @@ namespace Unitflix.Server.Controllers
 
             List<Property> properties = _dbContext
                 .Properties
-                .Where(p => p.Category == category)
+                .Where(p => p.Category == category && p.ApprovalStatus == PropertyStatus.Approved)
                 .ToList();
 
             return Response.Message(properties);
@@ -198,6 +199,7 @@ namespace Unitflix.Server.Controllers
         /// Creates a Primary Property submitted by an admin
         /// </summary>
         /// <returns></returns>
+        [Authorize(Roles = "Admin")]
         [HttpPost("create-property")]
         public async Task<ActionResult> CreateProperty([FromForm]PropertyWirteAPIDTO propertyData)
         {
@@ -212,9 +214,10 @@ namespace Unitflix.Server.Controllers
 
             Property property = _mapper.Map<Property>(writeDTO);
             property.Developer = null;
-            property.Status = PropertyStatus.Approved;
+            property.ApprovalStatus = PropertyStatus.Approved;
             property.Submission = PropertySubmission.Primary;
             property.DateAdded = DateTime.Now;
+            property.IsVerified = true;
             _dbContext.Properties.Add(property);
             _dbContext.SaveChanges();
 
@@ -271,6 +274,7 @@ namespace Unitflix.Server.Controllers
         /// </summary>
         /// <param name="propertyData"></param>
         /// <returns></returns>
+        [Authorize(Roles = "Admin")]
         [HttpPost("create-project")]
         public async Task<ActionResult> CreateProject([FromForm]PropertyWirteAPIDTO propertyData)
         {
@@ -284,9 +288,10 @@ namespace Unitflix.Server.Controllers
             }
 
             Property property = _mapper.Map<Property>(writeDTO);
-            property.Status = PropertyStatus.Approved;
+            property.ApprovalStatus = PropertyStatus.Approved;
             property.Submission = PropertySubmission.Primary;
             property.DateAdded = DateTime.Now;
+            property.IsVerified = true;
             _dbContext.Properties.Add(property);
             _dbContext.SaveChanges();
 
@@ -351,6 +356,7 @@ namespace Unitflix.Server.Controllers
         /// </summary>
         /// <param name=""></param>
         /// <returns></returns>
+        [Authorize(Roles = "Admin")]
         [HttpPut("update-property/{id:int}")]
         public async Task<ActionResult> EditProperty(int id, [FromForm] PropertyUpdateAPIDTO propertyData)
         {
@@ -472,6 +478,7 @@ namespace Unitflix.Server.Controllers
         /// </summary>
         /// <param name=""></param>
         /// <returns></returns>
+        [Authorize(Roles = "Admin")]
         [HttpPut("update-project/{id:int}")]
         public async Task<ActionResult> EditProject(int id, [FromForm] PropertyUpdateAPIDTO propertyData)
         {
@@ -608,6 +615,52 @@ namespace Unitflix.Server.Controllers
             _dbContext.SaveChanges();
             return Response.Message("Project Updated Successfully");
 
+        }
+
+        /// <summary>
+        /// Deletes both property and project
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Authorize(Roles = "Admin")]
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> DeleteProperty(int id)
+        {
+            Property? property = await _dbContext.Properties.Where(p => p.Id == id).FirstOrDefaultAsync();
+
+            if(property == null)
+            {
+                return Response.Error("Property not found", 404);
+            }
+
+            _dbContext.Properties.Remove(property);
+
+            List<Overview> overviews = await _dbContext.Overviews.Where(t => t.PropertyId == id).ToListAsync();
+            _dbContext.Overviews.RemoveRange(overviews);
+
+            List<Feature> features = await _dbContext.Features.Where(f => f.PropertyId == id).ToListAsync();
+            _dbContext.Features.RemoveRange(features);
+
+            List<KeyHighlight> keyHighlights = await _dbContext.KeyHighlights.Where(k => k.PropertyId == id).ToListAsync();
+            _dbContext.KeyHighlights.RemoveRange(keyHighlights);
+
+            if(property.Category == PropertyCategory.Project)
+            {
+                List<PropertyDetail> propertyDetails = await _dbContext.PropertyDetails.Where(d => d.PropertyId == id).ToListAsync();
+                _dbContext.PropertyDetails.RemoveRange(propertyDetails);
+
+                List<PaymentPlanItem> paymentPlanItems = await _dbContext.PaymentPlanItems.Where(p => p.PropertyId == id).ToListAsync();
+                _dbContext.PaymentPlanItems.RemoveRange(paymentPlanItems);
+            }
+
+            List<File> files = await _dbContext.Files.Where(f => f.PropertyId == id).ToListAsync();
+            files.ForEach(file =>
+            {
+                FileHelpers.DeleteFile(_webHostEnvironment, file.Filename);
+            });
+            _dbContext.Files.RemoveRange(files);
+            _dbContext.SaveChanges();
+            return Response.Message($"{(property.Category == PropertyCategory.Project ? "Project" : "Property")} deleted successfully");
         }
 
         #endregion

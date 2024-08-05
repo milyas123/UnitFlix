@@ -7,7 +7,7 @@ using File = Unitflix.Server.Models.File;
 
 namespace Unitflix.Server.Database
 {
-    public class ApplicationDbContext : IdentityDbContext<Admin, AdminRole, int>
+    public class ApplicationDbContext : IdentityDbContext<User, UserRole, int>
     {
 
         #region DbSets
@@ -35,6 +35,8 @@ namespace Unitflix.Server.Database
         public DbSet<EmailConfiguration> EmailConfigurations { get; set; }
 
         public DbSet<File> Files { get; set; }
+
+        public DbSet<Otp> Otps { get; set; }
 
         #endregion
 

@@ -23,7 +23,7 @@ namespace Unitflix.Server.DTOs
 
         public int PropertyType { get; set; }
 
-        public PropertyStatus Status { get; set; }
+        public PropertyStatus ApprovalStatus { get; set; }
 
         public int? Developer { get; set; }
 
@@ -34,6 +34,8 @@ namespace Unitflix.Server.DTOs
         public string? HandOver { get; set; }
 
         public bool Featured { get; set; }
+
+        public string Status { get; set; }
 
         public List<FeatureWriteDTO> Features { get; set; } = new List<FeatureWriteDTO>();
 

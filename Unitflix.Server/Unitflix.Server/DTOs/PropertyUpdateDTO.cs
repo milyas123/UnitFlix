@@ -20,8 +20,6 @@ namespace Unitflix.Server.DTOs
 
         public int PropertyType { get; set; }
 
-        public PropertyStatus Status { get; set; }
-
         public int? Developer { get; set; }
 
         public decimal? DownPayment { get; set; }
@@ -31,6 +29,8 @@ namespace Unitflix.Server.DTOs
         public string? HandOver { get; set; }
 
         public bool Featured { get; set; }
+
+        public string Status { get; set; }
 
         public List<int> FeaturesToRemove { get; set; } = new List<int>();
 

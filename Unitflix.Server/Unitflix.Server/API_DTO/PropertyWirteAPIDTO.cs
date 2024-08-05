@@ -22,8 +22,6 @@ namespace Unitflix.Server.API_DTO
 
         public int PropertyType { get; set; }
 
-        public PropertyStatus Status { get; set; }
-
         public int? Developer { get; set; }
 
         public decimal? DownPayment { get; set; }
@@ -45,6 +43,8 @@ namespace Unitflix.Server.API_DTO
         public string PropertyDetails { get; set; }
 
         public string UserDetail { get; set; }
+
+        public string Status { get; set; }
 
         public List<IFormFile> GalleryImages { get; set; } = new List<IFormFile>();
 

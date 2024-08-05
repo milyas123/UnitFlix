@@ -29,7 +29,7 @@ namespace Unitflix.Server.AutoMapper
                 )
                 .ForMember(writeDTO => writeDTO.PropertyDetails, (member) => member.MapFrom(resolver => JsonParser.Parse<List<PropertyDetailsWriteDTO>>(resolver.PropertyDetails))
                 )
-                .ForMember(writeDTO => writeDTO.UserDetail, (member) => member.MapFrom(resolver => JsonParser.Parse<UserDetail>(resolver.UserDetail))
+                .ForMember(writeDTO => writeDTO.UserDetail, (member) => member.MapFrom(resolver => JsonParser.Parse<UserDetailWriteDTO>(resolver.UserDetail))
                 );
 
             CreateMap<PropertyUpdateAPIDTO, PropertyUpdateDTO>()

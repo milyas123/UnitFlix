@@ -2,7 +2,7 @@
 
 namespace Unitflix.Server.Models
 {
-    public class AdminRole : IdentityRole<int>
+    public class User : IdentityUser<int>
     {
     }
 }

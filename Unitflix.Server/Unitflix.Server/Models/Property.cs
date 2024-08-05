@@ -26,7 +26,7 @@ namespace Unitflix.Server.Models
 
         public int PropertyType { get; set; }
 
-        public PropertyStatus Status { get; set; }  
+        public PropertyStatus ApprovalStatus { get; set; }  
 
         public int? Developer { get; set; }
 
@@ -38,9 +38,13 @@ namespace Unitflix.Server.Models
 
         public bool Featured { get; set; }
 
+        public string Status { get; set; }
+
         public PropertySubmission Submission {  get; set; }
 
         public DateTime DateAdded { get; set; }
+
+        public bool IsVerified { get; set; }
 
         public Overview Overview { get; set; }
 
@@ -53,5 +57,7 @@ namespace Unitflix.Server.Models
         public List<PaymentPlanItem> PaymentPlanItems { get; set; }
 
         public List<PropertyDetail> PropertyDetails { get; set; }
+
+        public UserDetail UserDetail { get; set; }
     }
 }
