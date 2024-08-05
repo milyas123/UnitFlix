@@ -60,7 +60,7 @@ const ProjectPropertyInformation = ({ showModal }) => {
               </Button>
             </div>
             <div className="text-[14px]">
-              <div className="border-pastel Grey flex justify-between gap-y-2 divide-x divide-pastelGrey rounded-lg border p-2.5">
+              <div className="border-pastel Grey flex justify-between items-center gap-y-2 divide-x divide-pastelGrey rounded-lg border p-2.5">
                 <div className="flex items-center justify-between gap-x-7 pe-3">
                   <p className="flex items-center gap-1.5 text-davyGrey">
                     <Property /> Property Type
