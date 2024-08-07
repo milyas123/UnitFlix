@@ -1,8 +1,25 @@
+import React, { useState, useEffect } from "react";
 import Cross from "../../svgs/Cross";
 import Button from "../../common/Button";
 import InputField from "../../common/InputField";
 
-const AddPaymentPlanModal = ({ onClose }) => {
+const AddPaymentPlanModal = ({ onClose, onSubmit, editData }) => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [amount, setAmount] = useState("");
+
+  useEffect(() => {
+    if (editData) {
+      setTitle(editData.Title);
+      setDescription(editData.Description);
+      setAmount(editData.Amount);
+    }
+  }, [editData]);
+
+  const handleSubmit = () => {
+    onSubmit(title, description, parseInt(amount, 10));
+  };
+
   return (
     <>
       <div className="fixed inset-0 bg-black bg-opacity-50"></div>
@@ -22,9 +39,25 @@ const AddPaymentPlanModal = ({ onClose }) => {
 
           <div className="border-b border-pastelGrey">
             <div className="space-y-5 px-5 pb-9">
-              <InputField label="Percentage" placeholder="20%" />
-              <InputField label="Title" placeholder="Down Payment" />
-              <InputField label="Description" placeholder="On Booking Date" />
+              <InputField
+                label="Title"
+                placeholder="Down Payment"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+              <InputField
+                label="Description"
+                placeholder="On Booking Date"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+              <InputField
+                label="Amount"
+                placeholder="20"
+                type="number"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+              />
             </div>
           </div>
 
@@ -35,7 +68,9 @@ const AddPaymentPlanModal = ({ onClose }) => {
             >
               Cancel
             </Button>
-            <Button className="rounded-md">Submit</Button>
+            <Button className="rounded-md" onClick={handleSubmit}>
+              Submit
+            </Button>
           </div>
         </div>
       </div>

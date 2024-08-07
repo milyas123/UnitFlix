@@ -1,21 +1,42 @@
-import { useState } from "react";
-import Status from "@/website/components/svgs/Status";
+import { useState, useEffect } from "react";
 import { Input } from "@/website/components/ui/input";
 import { Textarea } from "@/website/components/ui/textarea";
-import { ImageUp } from "lucide-react";
+import { ImageUp, Trash2 } from "lucide-react";
+import Status from "@/website/components/svgs/Status";
+import Delete from "@/website/components/svgs/Delete";
 
 const statuses = ["Pre Launch", "Secondary", "Ready to Move In"];
 
-const ProjectGeneralInformation = () => {
+const ProjectGeneralInformation = ({ formData, handleChange, handleStatusSelect, handleFeaturedSelect, handleFileChange }) => {
   const [selectedStatus, setSelectedStatus] = useState(statuses[0]);
   const [isFeatured, setIsFeatured] = useState("Yes");
+  const [preview, setPreview] = useState(null);
 
-  const handleStatusSelect = (status) => {
+  useEffect(() => {
+    if (formData.brochure) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreview(reader.result);
+      };
+      reader.readAsDataURL(formData.brochure);
+    } else {
+      setPreview(null);
+    }
+  }, [formData.brochure]);
+
+  const handleStatusClick = (status) => {
     setSelectedStatus(status);
+    handleStatusSelect(status);
   };
 
-  const handleFeaturedSelect = () => {
-    setIsFeatured(isFeatured === "Yes" ? "No" : "Yes");
+  const handleFeaturedClick = () => {
+    const newFeaturedStatus = isFeatured === "Yes" ? "No" : "Yes";
+    setIsFeatured(newFeaturedStatus);
+    handleFeaturedSelect(newFeaturedStatus);
+  };
+
+  const handleRemoveBrochure = () => {
+    handleFileChange({ target: { files: [null] } });
   };
 
   return (
@@ -31,6 +52,8 @@ const ProjectGeneralInformation = () => {
             id="title"
             className="ps-3"
             placeholder="Dubai Best Home under 1.5 kanal"
+            value={formData.title}
+            onChange={handleChange}
           />
         </div>
 
@@ -40,6 +63,8 @@ const ProjectGeneralInformation = () => {
             id="overview"
             className="h-[300px] ps-3"
             placeholder="Dubai Best Home under 1.5 kanal"
+            value={formData.overview}
+            onChange={handleChange}
           />
         </div>
 
@@ -52,7 +77,7 @@ const ProjectGeneralInformation = () => {
                 className={`flex cursor-pointer items-center gap-x-1.5 rounded-md border-2 border-mirage border-opacity-0 px-3 py-2 transition-all duration-300 ease-in-out hover:border-opacity-100 ${
                   selectedStatus === status && "bg-mirage text-white"
                 }`}
-                onClick={() => handleStatusSelect(status)}
+                onClick={() => handleStatusClick(status)}
               >
                 <Status
                   className={`${selectedStatus === status ? "text-white" : "text-black"}`}
@@ -73,7 +98,7 @@ const ProjectGeneralInformation = () => {
                 className={`flex cursor-pointer items-center gap-x-1.5 rounded-md border-2 border-mirage border-opacity-0 px-3 py-2 transition-all duration-300 ease-in-out hover:border-opacity-100 ${
                   isFeatured !== option && "bg-mirage text-white"
                 }`}
-                onClick={handleFeaturedSelect}
+                onClick={handleFeaturedClick}
               >
                 <Status
                   className={`${isFeatured !== option ? "text-white" : "text-black"}`}
@@ -87,15 +112,36 @@ const ProjectGeneralInformation = () => {
 
         <div className="w-full space-y-2.5">
           <label className="text-[16px] font-semibold">Brochure</label>
-          <div className="flex h-[185px] w-[288px] items-center justify-center rounded-2xl border-2 border-dashed bg-whiteLilac">
-            <div className="flex flex-col items-center justify-center gap-y-2 text-smokeyGrey">
-              <ImageUp size={35} />
-              Upload Brochure
+          {preview ? (
+            <div className="relative w-[288px] h-[185px]">
+              <img
+                src={preview}
+                alt="Brochure Preview"
+                className="w-full h-full object-cover rounded-2xl"
+              />
+              <button
+                className="absolute top-2 right-2 p-1 bg-red-600 hover:bg-white text-white transition-all duration-200 ease-in-out rounded-full"
+                onClick={handleRemoveBrochure}
+              >
+                <Delete size={20} />
+              </button>
             </div>
-          </div>
+          ) : (
+            <label htmlFor="brochure" className="flex h-[185px] w-[288px] items-center justify-center rounded-2xl border-2 border-dashed bg-whiteLilac cursor-pointer">
+              <input
+                type="file"
+                id="brochure"
+                className="hidden"
+                accept="image/*"
+                onChange={handleFileChange}
+              />
+              <div className="flex flex-col items-center justify-center gap-y-2 text-smokeyGrey">
+                <ImageUp size={35} />
+                Upload Brochure
+              </div>
+            </label>
+          )}
         </div>
-
-        
 
         <div className="w-full space-y-2.5">
           <label className="text-[16px] font-semibold">Price</label>
@@ -104,6 +150,8 @@ const ProjectGeneralInformation = () => {
             id="price"
             className="ps-3"
             placeholder="32,402"
+            value={formData.price}
+            onChange={handleChange}
           />
         </div>
       </div>

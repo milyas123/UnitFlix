@@ -7,11 +7,12 @@ import Property from "@/website/components/svgs/Property";
 import Edit from "@/website/components/svgs/Edit";
 import Delete from "@/website/components/svgs/Delete";
 
-const ProjectPropertyInformation = ({ showModal }) => {
-  const [selectedPurpose, setSelectedPurpose] = useState("Sell");
+const ProjectPropertyInformation = ({ formData, handleChange, showModal }) => {
+  const [selectedPurpose, setSelectedPurpose] = useState(formData.purpose);
 
   const handlePurposeSelect = (purpose) => {
     setSelectedPurpose(purpose);
+    handleChange("purpose", purpose);
   };
 
   return (
@@ -60,53 +61,71 @@ const ProjectPropertyInformation = ({ showModal }) => {
               </Button>
             </div>
             <div className="text-[14px]">
-              <div className="border-pastel Grey flex justify-between items-center gap-y-2 divide-x divide-pastelGrey rounded-lg border p-2.5">
-                <div className="flex items-center justify-between gap-x-7 pe-3">
-                  <p className="flex items-center gap-1.5 text-davyGrey">
-                    <Property /> Property Type
-                  </p>
-                  <p className="font-semibold">Villa</p>
-                </div>
+              {formData.properties.map((property, index) => (
+                <div key={index} className="border-pastelGrey flex justify-between items-center gap-y-2 divide-x divide-pastelGrey rounded-lg border p-2.5">
+                  <div className="flex items-center justify-between gap-x-7 pe-3">
+                    <p className="flex items-center gap-1.5 text-davyGrey">
+                      <Property /> {property.propertyType}
+                    </p>
+                    <p className="font-semibold">{property.unitType}</p>
+                  </div>
 
-                <div className="flex items-center justify-between gap-x-7 px-3">
-                  <p className="flex items-center gap-1.5 text-davyGrey">
-                    <Bed /> Unit Type
-                  </p>
-                  <p className="font-semibold">3 Bedrooms</p>
-                </div>
+                  <div className="flex items-center justify-between gap-x-7 px-3">
+                    <p className="flex items-center gap-1.5 text-davyGrey">
+                      <Bed /> {property.unitType}
+                    </p>
+                    <p className="font-semibold">{property.size}</p>
+                  </div>
 
-                <div className="flex items-center justify-between gap-x-7 px-3">
-                  <p className="flex items-center gap-1.5 text-davyGrey">
-                    <Area /> Size
-                  </p>
-                  <p className="font-semibold">Various Sizes Available</p>
-                </div>
+                  <div className="flex items-center justify-between gap-x-7 px-3">
+                    <p className="flex items-center gap-1.5 text-davyGrey">
+                      <Area /> {property.size}
+                    </p>
+                    <p className="font-semibold">{property.sizeDescription}</p>
+                  </div>
 
-                <div className="flex gap-x-1 ps-3">
-                  <Edit />
-                  <Delete />
+                  <div className="flex gap-x-1 ps-3">
+                    <Edit />
+                    <Delete />
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
 
           <div className="w-full space-y-2.5">
             <label className="text-[16px] font-semibold">Down Payment</label>
-            <Input type="number" id="area" className="ps-3" placeholder="56" />
+            <Input
+              type="number"
+              id="downPayment"
+              className="ps-3"
+              placeholder="56"
+              value={formData.downPayment}
+              onChange={(e) => handleChange("downPayment", e.target.value)}
+            />
           </div>
 
           <div className="w-full space-y-2.5">
             <label className="text-[16px] font-semibold">Payment Plan</label>
-            <Input type="text" id="city" className="ps-3" placeholder="70/30" />
+            <Input
+              type="text"
+              id="paymentPlan"
+              className="ps-3"
+              placeholder="70/30"
+              value={formData.paymentPlan}
+              onChange={(e) => handleChange("paymentPlan", e.target.value)}
+            />
           </div>
 
           <div className="w-full space-y-2.5">
             <label className="text-[16px] font-semibold">Hand Over</label>
             <Input
               type="text"
-              id="location"
+              id="handOver"
               className="ps-3"
               placeholder="Q4 - 2026"
+              value={formData.handOver}
+              onChange={(e) => handleChange("handOver", e.target.value)}
             />
           </div>
         </div>
