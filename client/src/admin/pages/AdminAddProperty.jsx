@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../components/common/Header";
 import Button from "../components/common/Button";
 import Gallery from "@/website/components/addProperty/Gallery";
@@ -12,9 +12,12 @@ import AddKeyHighlightModal from "../components/adminAddProject/modals/AddKeyHig
 
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useLocation } from "react-router-dom";
 
 const AdminAddProperty = () => {
+  const location = useLocation();
   const serverURL = import.meta.env.VITE_SERVER_URL;
+
   const initialFormData = {
     title: "",
     overview: "",
@@ -46,6 +49,32 @@ const AdminAddProperty = () => {
   };
 
   const [formData, setFormData] = useState(initialFormData);
+  const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    if (location.state?.property) {
+      const property = location.state.property;
+      setFormData({
+        title: property?.title,
+        overview: property?.overview,
+        status: property.status,
+        price: property?.price,
+        coverImage: property?.coverImage,
+        propertyTypeIndex: property?.propertyType - 1,
+        propertyCategoryIndex: property?.category,
+        purpose: property?.purpose,
+        area: property?.area,
+        beds: property?.beds,
+        baths: property?.baths,
+        city: property?.city,
+        location: property?.location,
+        keyHighlights: property?.keyHighlights,
+        features: property?.features,
+        galleryImages: property?.galleryImages,
+      });
+      setIsEditing(true);
+    }
+  }, [location.state]);
 
   const [showKeyHighlightModal, setShowKeyHighlightModal] = useState(false);
   const [editKeyHighlightIndex, setEditKeyHighlightIndex] = useState(null);
@@ -75,7 +104,6 @@ const AdminAddProperty = () => {
       coverImage: file,
     }));
   };
-  
 
   const handleRemoveCoverImage = () => {
     setFormData((prevData) => ({
@@ -158,17 +186,14 @@ const AdminAddProperty = () => {
 
   const handleSubmit = async () => {
     const form = new FormData();
-  
-    const overview = {
-      Text: formData.overview
-    };
+    const overview = { Text: formData.overview };
 
-    form.append("title", formData.title); 
+    form.append("title", formData.title);
     form.append("overview", JSON.stringify(overview));
     form.append("status", formData.status);
     form.append("price", formData.price);
     form.append("propertyType", formData.propertyTypeIndex + 1);
-    form.append("category", formData.propertyCategoryIndex + 1);
+    form.append("category", formData.propertyCategoryIndex);
     form.append("purpose", formData.purpose);
     form.append("area", formData.area);
     form.append("beds", formData.beds);
@@ -177,21 +202,30 @@ const AdminAddProperty = () => {
     form.append("features", JSON.stringify(formData.features));
     form.append("keyHighlights", JSON.stringify(formData.keyHighlights));
     form.append("coverImage", formData.coverImage);
-    formData.galleryImages.forEach((image, index) => {
-      form.append(`galleryImages`, image);
-    });
+
+    if (formData.galleryImages) {
+      formData.galleryImages.forEach((image, index) => {
+        form.append(`galleryImages`, image);
+      });
+    }
 
     const token = localStorage.getItem("token");
 
     try {
-      await axios.post(`${serverURL}/property/create-property`, form, {
+      const endpoint = isEditing ? `${serverURL}/property/update-property/${location.state.property.id}` : `${serverURL}/property/create-property`;
+      const method = isEditing ? "put" : "post";
+
+      await axios({
+        method,
+        url: endpoint,
+        data: form,
         headers: {
-          'Content-Type': 'multipart/form-data',
-          'Authorization': `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
         },
       });
-      
-      toast.success("Property added successfully!");
+
+      toast.success(`Property ${isEditing ? "updated" : "added"} successfully!`);
       setFormData(initialFormData);
     } catch (error) {
       toast.error(`Error submitting form`);
@@ -201,9 +235,15 @@ const AdminAddProperty = () => {
 
   return (
     <div className="mx-auto flex w-[80%] flex-col gap-7 pb-4">
-      <Header title="Add Property" />
+      <Header title={isEditing ? "Edit Property" : "Add Property"} />
 
-      <GeneralInformation formData={formData} handleChange={handleChange} handleSelectChange={handleSelectChange} handleFileChange={handleFileChange} handleRemoveCoverImage={handleRemoveCoverImage} />
+      <GeneralInformation
+        formData={formData}
+        handleChange={handleChange}
+        handleSelectChange={handleSelectChange}
+        handleFileChange={handleFileChange}
+        handleRemoveCoverImage={handleRemoveCoverImage}
+      />
       <PropertyInformation formData={formData} handleChange={handleChange} handleSelectChange={handleSelectChange} />
       <AddKeyHighlights
         formData={formData}
@@ -217,15 +257,13 @@ const AdminAddProperty = () => {
         handleEdit={handleEditAmenity}
         handleDelete={handleDeleteAmenity}
       />
-      <Gallery
-        formData={formData}
-        handleAddGalleryImage={handleAddGalleryImage}
-        handleDeleteGalleryImage={handleDeleteGalleryImage}
-      />
+      <Gallery formData={formData} handleAddGalleryImage={handleAddGalleryImage} handleDeleteGalleryImage={handleDeleteGalleryImage} />
 
       <div className="flex items-center justify-end gap-x-3">
         <Button className="rounded-md border-red-700 bg-red-700 hover:border-mirage">Cancel</Button>
-        <Button className="rounded-md" onClick={handleSubmit}>Submit</Button>
+        <Button className="rounded-md" onClick={handleSubmit}>
+          Submit
+        </Button>
       </div>
 
       {showKeyHighlightModal && (

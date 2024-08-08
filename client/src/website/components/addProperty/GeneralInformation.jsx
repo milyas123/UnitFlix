@@ -21,7 +21,7 @@ const GeneralInformation = ({ formData, handleChange, handleSelectChange, handle
             id="title"
             className="ps-3"
             placeholder="Dubai Best Home under 1.5 kanal"
-            value={formData.title}
+            value={formData?.title}
             onChange={handleChange}
           />
         </div>
@@ -32,17 +32,17 @@ const GeneralInformation = ({ formData, handleChange, handleSelectChange, handle
             id="overview"
             className="h-[160px] ps-3 md:h-[100px] lg:h-[160px] xl:h-[230px] 2xl:h-[300px]"
             placeholder="Overview"
-            value={formData.overview}
+            value={formData?.overview}
             onChange={handleChange}
           />
         </div>
 
         <div className="w-full space-y-2.5">
           <label className="text-[16px] font-semibold">Cover Image</label>
-          {formData.coverImage ? (
+          {formData?.coverImage ? (
             <div className="relative w-[288px] h-[185px]">
               <img
-                src={URL.createObjectURL(formData.coverImage)}
+                src={URL.createObjectURL(formData?.coverImage)}
                 alt="Cover Image Preview"
                 className="w-full h-full object-cover rounded-2xl"
               />
@@ -77,12 +77,12 @@ const GeneralInformation = ({ formData, handleChange, handleSelectChange, handle
               <div
                 key={status}
                 className={`flex cursor-pointer items-center gap-x-1 rounded-md border-2 border-mirage border-opacity-0 px-1.5 py-1 transition-all duration-300 ease-in-out hover:border-opacity-100 md:gap-x-0.5 md:px-1 md:py-0.5 lg:gap-x-1 lg:px-1.5 lg:py-1 xl:gap-x-1.5 xl:px-2 xl:py-1.5 2xl:px-3 2xl:py-2 ${
-                  formData.status === status && "bg-mirage text-white"
+                  formData?.status === status && "bg-mirage text-white"
                 }`}
                 onClick={() => handleSelectChange("status", status)}
               >
                 <Status
-                  className={`${formData.status === status ? "text-white" : "text-black"}`}
+                  className={`${formData?.status === status ? "text-white" : "text-black"}`}
                 />
                 <p className="text-[14px] md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:text-[14px]">
                   {status}
@@ -99,7 +99,7 @@ const GeneralInformation = ({ formData, handleChange, handleSelectChange, handle
             id="price"
             className="ps-3"
             placeholder="32,402"
-            value={formData.price}
+            value={formData?.price}
             onChange={handleChange}
           />
         </div>

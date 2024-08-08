@@ -265,7 +265,9 @@ const AdminAddProject = () => {
     //   form.append("floorPlan", formData.floorPlan);
     // }
     form.append("developer", 1);
-    form.append("propertyType", 1);
+    form.append("propertyType", 1); //TODO: Add fields for propertyType & developer
+
+    form.append("category", 1);
     form.append("purpose", formData.purpose);
     form.append("propertyDetails", JSON.stringify(formData.propertyDetails));
     form.append("downPayment", formData.downPayment);

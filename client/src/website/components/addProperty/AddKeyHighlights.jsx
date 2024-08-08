@@ -26,10 +26,10 @@ const AddKeyHighlights = ({ formData, showModal, handleEdit, handleDelete }) => 
           >
             <div className="space-y-3 md:space-y-1.5 lg:space-y-2 xl:space-y-3 2xl:space-y-5">
               <h1 className="user--addProperty-labelTextSize flex items-center justify-center gap-1">
-                <PiListStar size={23} /> {highlight.title}
+                <PiListStar size={23} /> {highlight?.title}
               </h1>
               <p className="text-smokeyGrey md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:text-[14px]">
-                {highlight.Description}
+                {highlight?.Description}
               </p>
               <div className="flex items-center justify-center gap-x-1.5 text-smokeyGrey">
                 <Edit onClick={() => handleEdit(index)} className="cursor-pointer" />
