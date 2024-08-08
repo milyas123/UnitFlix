@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { toast } from "react-toastify";
 import Header from "../components/common/Header";
 import Button from "../components/common/Button";
 import ProjectGeneralInformation from "../components/adminAddProject/ProjectGeneralInformation";
@@ -13,17 +12,19 @@ import AddPropertyItemModal from "../components/adminAddProject/modals/AddProper
 import AddKeyHighlightModal from "../components/adminAddProject/modals/AddKeyHighlightModal";
 import AddAmenityModal from "../components/adminAddProject/modals/AddAmenityModal";
 import AddPaymentPlanModal from "../components/adminAddProject/modals/AddPaymentPlanModal";
+
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const AdminAddProject = () => {
   const serverURL = import.meta.env.VITE_SERVER_URL;
-  const [formData, setFormData] = useState({
+  const initialFormData = {
     title: "",
     overview: "",
     status: "Pre Launch",
     isFeatured: "Yes",
     price: "",
-    coverImage: null, 
+    coverImage: null,
     brochure: null,
     floorPlan: null,
     purpose: 0,
@@ -31,7 +32,7 @@ const AdminAddProject = () => {
     downPayment: "",
     paymentPlan: "",
     handOver: "",
-    location: "",
+    location: 0,
     keyHighlights: [
       {
         title: "Feature",
@@ -63,7 +64,9 @@ const AdminAddProject = () => {
       },
     ],
     galleryImages: [],
-  });
+  };
+
+  const [formData, setFormData] = useState(initialFormData);
 
   const [showAddAmenityModal, setShowAddAmenityModal] = useState(false);
   const [showAddPaymentPlanModal, setShowAddPaymentPlanModal] = useState(false);
@@ -79,6 +82,13 @@ const AdminAddProject = () => {
     setFormData((prevData) => ({
       ...prevData,
       [id]: value,
+    }));
+  };
+
+  const handleLocationChange = (value) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      location: parseInt(value),
     }));
   };
 
@@ -236,26 +246,31 @@ const AdminAddProject = () => {
 
   const handleSubmit = async () => {
     const form = new FormData();
+
+    const overview = {
+      Text: formData.overview
+    };
+
     form.append("title", formData.title);
-    form.append("overview", formData.overview);
+    form.append("overview", JSON.stringify(overview));
     form.append("status", formData.status);
-    form.append("isFeatured", formData.isFeatured);
     form.append("price", formData.price);
     if (formData.coverImage) {
       form.append("coverImage", formData.coverImage);
     }
-    if (formData.brochure) {
-      form.append("brochure", formData.brochure);
-    }
-    if (formData.floorPlan) {
-      form.append("floorPlan", formData.floorPlan);
-    }
+    // if (formData.brochure) {
+    //   form.append("brochure", formData.brochure);
+    // }
+    // if (formData.floorPlan) {
+    //   form.append("floorPlan", formData.floorPlan);
+    // }
+    form.append("developer", 1);
+    form.append("propertyType", 1);
     form.append("purpose", formData.purpose);
     form.append("propertyDetails", JSON.stringify(formData.propertyDetails));
     form.append("downPayment", formData.downPayment);
     form.append("paymentPlan", formData.paymentPlan);
     form.append("handOver", formData.handOver);
-    form.append("city", formData.city);
     form.append("location", formData.location);
     form.append("keyHighlights", JSON.stringify(formData.keyHighlights));
     form.append("features", JSON.stringify(formData.features));
@@ -264,13 +279,12 @@ const AdminAddProject = () => {
       form.append(`galleryImages`, image);
     });
 
-    console.log(formData)
     // Retrieve token from localStorage
     const token = localStorage.getItem("token");
 
     try {
       await axios.post(
-        `${serverURL}/project/create-project`,
+        `${serverURL}/property/create-project`,
         form,
         {
           headers: {
@@ -281,6 +295,7 @@ const AdminAddProject = () => {
       );
       
       toast.success("Project added successfully!");
+      setFormData(initialFormData);
     } catch (error) {
       toast.error("Error submitting form");
       console.error("Error submitting form", error);
@@ -308,8 +323,8 @@ const AdminAddProject = () => {
         />
         <ProjectPropertyDetails
           formData={formData}
-          handleChange={handleChange}
           handleFileChange={(e) => handleFileChange(e, "floorPlan")}
+          handleLocationChange={handleLocationChange}
         />
         <ProjectKeyHighlights
           formData={formData}
