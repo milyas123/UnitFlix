@@ -1,20 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Cross from "../../svgs/Cross";
 import Button from "../../common/Button";
 import InputField from "../../common/InputField";
 
-const AddPropertyItemModal = ({ onClose, onSubmit }) => {
+const AddPropertyItemModal = ({ onClose, onSubmit, editData }) => {
   const [propertyType, setPropertyType] = useState("");
   const [unitType, setUnitType] = useState("");
   const [size, setSize] = useState("");
-  const [sizeDescription, setSizeDescription] = useState("");
+
+  useEffect(() => {
+    if (editData) {
+      setPropertyType(editData.propertyType);
+      setUnitType(editData.unitType);
+      setSize(editData.size);
+    }
+  }, [editData]);
 
   const handleSubmit = () => {
     onSubmit({
       propertyType,
       unitType,
       size,
-      sizeDescription,
     });
   };
 
@@ -54,12 +60,6 @@ const AddPropertyItemModal = ({ onClose, onSubmit }) => {
                 placeholder="Various Size Available"
                 value={size}
                 onChange={(e) => setSize(e.target.value)}
-              />
-              <InputField
-                label="Size Description"
-                placeholder="Various Sizes Available"
-                value={sizeDescription}
-                onChange={(e) => setSizeDescription(e.target.value)}
               />
             </div>
           </div>

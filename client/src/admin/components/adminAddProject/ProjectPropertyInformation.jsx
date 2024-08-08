@@ -7,12 +7,12 @@ import Property from "@/website/components/svgs/Property";
 import Edit from "@/website/components/svgs/Edit";
 import Delete from "@/website/components/svgs/Delete";
 
-const ProjectPropertyInformation = ({ formData, handleChange, showModal }) => {
+const ProjectPropertyInformation = ({ formData, handleChange, showModal, editProperty, deleteProperty }) => {
   const [selectedPurpose, setSelectedPurpose] = useState(formData.purpose);
 
   const handlePurposeSelect = (purpose) => {
     setSelectedPurpose(purpose);
-    handleChange("purpose", purpose);
+    handleChange({ target: { id: "purpose", value: purpose } });
   };
 
   return (
@@ -28,21 +28,21 @@ const ProjectPropertyInformation = ({ formData, handleChange, showModal }) => {
             <div className="flex items-center gap-x-3">
               <div
                 className={`w-[60px] cursor-pointer p-2 text-center ${
-                  selectedPurpose === "Sell"
+                  selectedPurpose === 0
                     ? "border border-mirage bg-mirage text-white"
                     : "border border-smokeyGrey text-smokeyGrey"
                 } rounded-md`}
-                onClick={() => handlePurposeSelect("Sell")}
+                onClick={() => handlePurposeSelect(0)}
               >
                 Sell
               </div>
               <div
                 className={`w-[60px] cursor-pointer p-2 text-center ${
-                  selectedPurpose === "Rent"
+                  selectedPurpose === 1
                     ? "border border-mirage bg-mirage text-white"
                     : "border border-smokeyGrey text-smokeyGrey"
                 } rounded-md`}
-                onClick={() => handlePurposeSelect("Rent")}
+                onClick={() => handlePurposeSelect(1)}
               >
                 Rent
               </div>
@@ -60,33 +60,33 @@ const ProjectPropertyInformation = ({ formData, handleChange, showModal }) => {
                 Add Item
               </Button>
             </div>
-            <div className="text-[14px]">
-              {formData.properties.map((property, index) => (
+            <div className="text-[14px] space-y-4">
+              {formData?.propertyDetails?.map((property, index) => (
                 <div key={index} className="border-pastelGrey flex justify-between items-center gap-y-2 divide-x divide-pastelGrey rounded-lg border p-2.5">
                   <div className="flex items-center justify-between gap-x-7 pe-3">
                     <p className="flex items-center gap-1.5 text-davyGrey">
-                      <Property /> {property.propertyType}
+                      <Property /> Property Type
+                    </p>
+                    <p className="font-semibold">{property.propertyType}</p>
+                  </div>
+
+                  <div className="flex items-center justify-between gap-x-7 px-3">
+                    <p className="flex items-center gap-1.5 text-davyGrey">
+                      <Bed /> Unit Type
                     </p>
                     <p className="font-semibold">{property.unitType}</p>
                   </div>
 
                   <div className="flex items-center justify-between gap-x-7 px-3">
                     <p className="flex items-center gap-1.5 text-davyGrey">
-                      <Bed /> {property.unitType}
+                      <Area /> Size
                     </p>
                     <p className="font-semibold">{property.size}</p>
                   </div>
 
-                  <div className="flex items-center justify-between gap-x-7 px-3">
-                    <p className="flex items-center gap-1.5 text-davyGrey">
-                      <Area /> {property.size}
-                    </p>
-                    <p className="font-semibold">{property.sizeDescription}</p>
-                  </div>
-
                   <div className="flex gap-x-1 ps-3">
-                    <Edit />
-                    <Delete />
+                    <Edit onClick={() => editProperty(index)} />
+                    <Delete onClick={() => deleteProperty(index)} />
                   </div>
                 </div>
               ))}
@@ -101,7 +101,7 @@ const ProjectPropertyInformation = ({ formData, handleChange, showModal }) => {
               className="ps-3"
               placeholder="56"
               value={formData.downPayment}
-              onChange={(e) => handleChange("downPayment", e.target.value)}
+              onChange={handleChange}
             />
           </div>
 
@@ -113,7 +113,7 @@ const ProjectPropertyInformation = ({ formData, handleChange, showModal }) => {
               className="ps-3"
               placeholder="70/30"
               value={formData.paymentPlan}
-              onChange={(e) => handleChange("paymentPlan", e.target.value)}
+              onChange={handleChange}
             />
           </div>
 
@@ -125,7 +125,7 @@ const ProjectPropertyInformation = ({ formData, handleChange, showModal }) => {
               className="ps-3"
               placeholder="Q4 - 2026"
               value={formData.handOver}
-              onChange={(e) => handleChange("handOver", e.target.value)}
+              onChange={handleChange}
             />
           </div>
         </div>

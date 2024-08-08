@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Header from "../components/common/Header";
 import Button from "../components/common/Button";
+import Gallery from "@/website/components/addProperty/Gallery";
+import AddKeyHighlights from "@/website/components/addProperty/AddKeyHighlights";
 import GeneralInformation from "@/website/components/addProperty/GeneralInformation";
 import PropertyInformation from "@/website/components/addProperty/PropertyInformation";
-import AddKeyHighlights from "@/website/components/addProperty/AddKeyHighlights";
 import AddFeaturesAndAmenities from "@/website/components/addProperty/AddFeaturesAndAmenities";
-import Gallery from "@/website/components/addProperty/Gallery";
 
-import AddKeyHighlightModal from "../components/adminAddProject/modals/AddKeyHighlightModal";
 import AddAmenityModal from "../components/adminAddProject/modals/AddAmenityModal";
+import AddKeyHighlightModal from "../components/adminAddProject/modals/AddKeyHighlightModal";
 
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -169,7 +169,7 @@ const AdminAddProperty = () => {
     form.append("price", formData.price);
     form.append("propertyType", formData.propertyTypeIndex + 1);
     form.append("category", formData.propertyCategoryIndex + 1);
-    form.append("purpose", formData.purpose + 1);
+    form.append("purpose", formData.purpose);
     form.append("area", formData.area);
     form.append("beds", formData.beds);
     form.append("baths", formData.baths);
@@ -184,7 +184,7 @@ const AdminAddProperty = () => {
     const token = localStorage.getItem("token");
 
     try {
-      const response = await axios.post(`${serverURL}/property/create-property`, form, {
+      await axios.post(`${serverURL}/property/create-property`, form, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${token}`,

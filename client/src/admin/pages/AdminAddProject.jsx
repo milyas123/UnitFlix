@@ -13,7 +13,6 @@ import AddPropertyItemModal from "../components/adminAddProject/modals/AddProper
 import AddKeyHighlightModal from "../components/adminAddProject/modals/AddKeyHighlightModal";
 import AddAmenityModal from "../components/adminAddProject/modals/AddAmenityModal";
 import AddPaymentPlanModal from "../components/adminAddProject/modals/AddPaymentPlanModal";
-
 import axios from "axios";
 
 const AdminAddProject = () => {
@@ -24,16 +23,14 @@ const AdminAddProject = () => {
     status: "Pre Launch",
     isFeatured: "Yes",
     price: "",
+    coverImage: null, 
     brochure: null,
     floorPlan: null,
-    propertyInformation: {
-      purpose: "Sell",
-      properties: [],
-      downPayment: "",
-      paymentPlan: "",
-      handOver: "",
-    },
-    city: "",
+    purpose: 0,
+    propertyDetails: [],
+    downPayment: "",
+    paymentPlan: "",
+    handOver: "",
     location: "",
     keyHighlights: [
       {
@@ -70,13 +67,12 @@ const AdminAddProject = () => {
 
   const [showAddAmenityModal, setShowAddAmenityModal] = useState(false);
   const [showAddPaymentPlanModal, setShowAddPaymentPlanModal] = useState(false);
-  const [showAddPropertyItemModal, setShowAddPropertyItemModal] =
-    useState(false);
-  const [showAddKeyHighlightModal, setShowAddKeyHighlightModal] =
-    useState(false);
+  const [showAddPropertyItemModal, setShowAddPropertyItemModal] = useState(false);
+  const [showAddKeyHighlightModal, setShowAddKeyHighlightModal] = useState(false);
   const [editKeyHighlightIndex, setEditKeyHighlightIndex] = useState(null);
   const [editAmenityIndex, setEditAmenityIndex] = useState(null);
   const [editPaymentPlanIndex, setEditPaymentPlanIndex] = useState(null);
+  const [editPropertyIndex, setEditPropertyIndex] = useState(null);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -108,25 +104,33 @@ const AdminAddProject = () => {
     }));
   };
 
-  const handlePropertyInformationChange = (field, value) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      propertyInformation: {
-        ...prevData.propertyInformation,
-        [field]: value,
-      },
-    }));
+  const handleAddPropertyItem = (property) => {
+    setFormData((prevData) => {
+      const newProperties = [...prevData.propertyDetails];
+      if (editPropertyIndex !== null) {
+        newProperties[editPropertyIndex] = property;
+        setEditPropertyIndex(null);
+      } else {
+        newProperties.push(property);
+      }
+      return {
+        ...prevData,
+        propertyDetails: newProperties,
+      };
+    });
+    setShowAddPropertyItemModal(false);
   };
 
-  const handleAddPropertyItem = (property) => {
+  const handleEditPropertyItem = (index) => {
+    setEditPropertyIndex(index);
+    setShowAddPropertyItemModal(true);
+  };
+
+  const handleDeletePropertyItem = (index) => {
     setFormData((prevData) => ({
       ...prevData,
-      propertyInformation: {
-        ...prevData.propertyInformation,
-        properties: [...prevData.propertyInformation.properties, property],
-      },
+      propertyDetails: prevData.propertyDetails.filter((_, i) => i !== index),
     }));
-    setShowAddPropertyItemModal(false);
   };
 
   const handleAddHighlight = (title, Description) => {
@@ -237,16 +241,20 @@ const AdminAddProject = () => {
     form.append("status", formData.status);
     form.append("isFeatured", formData.isFeatured);
     form.append("price", formData.price);
+    if (formData.coverImage) {
+      form.append("coverImage", formData.coverImage);
+    }
     if (formData.brochure) {
       form.append("brochure", formData.brochure);
     }
     if (formData.floorPlan) {
       form.append("floorPlan", formData.floorPlan);
     }
-    form.append(
-      "propertyInformation",
-      JSON.stringify(formData.propertyInformation),
-    );
+    form.append("purpose", formData.purpose);
+    form.append("propertyDetails", JSON.stringify(formData.propertyDetails));
+    form.append("downPayment", formData.downPayment);
+    form.append("paymentPlan", formData.paymentPlan);
+    form.append("handOver", formData.handOver);
     form.append("city", formData.city);
     form.append("location", formData.location);
     form.append("keyHighlights", JSON.stringify(formData.keyHighlights));
@@ -256,11 +264,12 @@ const AdminAddProject = () => {
       form.append(`galleryImages`, image);
     });
 
+    console.log(formData)
     // Retrieve token from localStorage
     const token = localStorage.getItem("token");
 
     try {
-      const response = await axios.post(
+      await axios.post(
         `${serverURL}/project/create-project`,
         form,
         {
@@ -270,8 +279,8 @@ const AdminAddProject = () => {
           },
         },
       );
+      
       toast.success("Project added successfully!");
-      console.log("Form submitted successfully", response.data);
     } catch (error) {
       toast.error("Error submitting form");
       console.error("Error submitting form", error);
@@ -288,12 +297,14 @@ const AdminAddProject = () => {
           handleChange={handleChange}
           handleStatusSelect={handleStatusSelect}
           handleFeaturedSelect={handleFeaturedSelect}
-          handleFileChange={(e) => handleFileChange(e, "brochure")}
+          handleFileChange={handleFileChange}
         />
         <ProjectPropertyInformation
-          formData={formData.propertyInformation}
-          handleChange={handlePropertyInformationChange}
+          formData={formData}
+          handleChange={handleChange}
           showModal={setShowAddPropertyItemModal}
+          editProperty={handleEditPropertyItem}
+          deleteProperty={handleDeletePropertyItem}
         />
         <ProjectPropertyDetails
           formData={formData}
@@ -337,6 +348,11 @@ const AdminAddProject = () => {
         <AddPropertyItemModal
           onClose={() => setShowAddPropertyItemModal(false)}
           onSubmit={handleAddPropertyItem}
+          editData={
+            editPropertyIndex !== null
+              ? formData.propertyDetails[editPropertyIndex]
+              : null
+          }
         />
       )}
 

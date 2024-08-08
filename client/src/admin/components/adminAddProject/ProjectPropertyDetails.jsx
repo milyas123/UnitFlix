@@ -70,18 +70,6 @@ const ProjectPropertyDetails = ({
         </div>
 
         <div className="w-full space-y-2.5">
-          <label className="text-[16px] font-semibold">City</label>
-          <Input
-            type="text"
-            id="city"
-            className="ps-3"
-            placeholder="Dubai"
-            value={formData.city}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className="w-full space-y-2.5">
           <label className="text-[16px] font-semibold">Location</label>
           <Input
             type="text"

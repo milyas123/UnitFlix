@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Input } from "@/website/components/ui/input";
 import { Textarea } from "@/website/components/ui/textarea";
-import { ImageUp, Trash2 } from "lucide-react";
+import { ImageUp } from "lucide-react";
 import Status from "@/website/components/svgs/Status";
 import Delete from "@/website/components/svgs/Delete";
 
@@ -10,17 +10,30 @@ const statuses = ["Pre Launch", "Secondary", "Ready to Move In"];
 const ProjectGeneralInformation = ({ formData, handleChange, handleStatusSelect, handleFeaturedSelect, handleFileChange }) => {
   const [selectedStatus, setSelectedStatus] = useState(statuses[0]);
   const [isFeatured, setIsFeatured] = useState("Yes");
-  const [preview, setPreview] = useState(null);
+  const [previewCoverImage, setPreviewCoverImage] = useState(null);
+  const [previewBrochure, setPreviewBrochure] = useState(null);
+
+  useEffect(() => {
+    if (formData.coverImage) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewCoverImage(reader.result);
+      };
+      reader.readAsDataURL(formData.coverImage);
+    } else {
+      setPreviewCoverImage(null);
+    }
+  }, [formData.coverImage]);
 
   useEffect(() => {
     if (formData.brochure) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setPreview(reader.result);
+        setPreviewBrochure(reader.result);
       };
       reader.readAsDataURL(formData.brochure);
     } else {
-      setPreview(null);
+      setPreviewBrochure(null);
     }
   }, [formData.brochure]);
 
@@ -35,8 +48,12 @@ const ProjectGeneralInformation = ({ formData, handleChange, handleStatusSelect,
     handleFeaturedSelect(newFeaturedStatus);
   };
 
+  const handleRemoveCoverImage = () => { 
+    handleFileChange({ target: { files: [null] } }, "coverImage");
+  };
+
   const handleRemoveBrochure = () => {
-    handleFileChange({ target: { files: [null] } });
+    handleFileChange({ target: { files: [null] } }, "brochure");
   };
 
   return (
@@ -111,11 +128,44 @@ const ProjectGeneralInformation = ({ formData, handleChange, handleStatusSelect,
         </div>
 
         <div className="w-full space-y-2.5">
-          <label className="text-[16px] font-semibold">Brochure</label>
-          {preview ? (
+          <label className="text-[16px] font-semibold">Cover Image</label>
+          {previewCoverImage ? (
             <div className="relative w-[288px] h-[185px]">
               <img
-                src={preview}
+                src={previewCoverImage}
+                alt="Cover Image Preview"
+                className="w-full h-full object-cover rounded-2xl"
+              />
+              <button
+                className="absolute top-2 right-2 p-1 bg-red-600 hover:bg-white text-white transition-all duration-200 ease-in-out rounded-full"
+                onClick={handleRemoveCoverImage}
+              >
+                <Delete size={20} />
+              </button>
+            </div>
+          ) : (
+            <label htmlFor="coverImage" className="flex h-[185px] w-[288px] items-center justify-center rounded-2xl border-2 border-dashed bg-whiteLilac cursor-pointer">
+              <input
+                type="file"
+                id="coverImage"
+                className="hidden"
+                accept="image/*"
+                onChange={(e) => handleFileChange(e, "coverImage")}
+              />
+              <div className="flex flex-col items-center justify-center gap-y-2 text-smokeyGrey">
+                <ImageUp size={35} />
+                Upload Cover Image
+              </div>
+            </label>
+          )}
+        </div>
+
+        <div className="w-full space-y-2.5">
+          <label className="text-[16px] font-semibold">Brochure</label>
+          {previewBrochure ? (
+            <div className="relative w-[288px] h-[185px]">
+              <img
+                src={previewBrochure}
                 alt="Brochure Preview"
                 className="w-full h-full object-cover rounded-2xl"
               />
@@ -133,7 +183,7 @@ const ProjectGeneralInformation = ({ formData, handleChange, handleStatusSelect,
                 id="brochure"
                 className="hidden"
                 accept="image/*"
-                onChange={handleFileChange}
+                onChange={(e) => handleFileChange(e, "brochure")}
               />
               <div className="flex flex-col items-center justify-center gap-y-2 text-smokeyGrey">
                 <ImageUp size={35} />
