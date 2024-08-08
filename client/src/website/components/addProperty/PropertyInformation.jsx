@@ -1,6 +1,6 @@
-import React from "react";
 import Status from "../svgs/Status";
 import { Input } from "../ui/input";
+import { AiOutlineDown } from "react-icons/ai";
 
 const propertyTypes = ["Home", "Plot", "Commercial"];
 const propertyCategories = [
@@ -12,6 +12,8 @@ const propertyCategories = [
   "Farm House",
   "Pent House",
 ];
+
+const locations = ["Dubai", "Abu Dhabi", "Sharjah", "Ajman", "Ras Al Khaimah", "Fujairah", "Umm Al Quwain"];
 
 const PropertyInformation = ({ formData, handleChange, handleSelectChange }) => {
   return (
@@ -80,13 +82,32 @@ const PropertyInformation = ({ formData, handleChange, handleSelectChange }) => 
         </div>
 
         <div className="w-full md:space-y-1 lg:space-y-1.5 xl:space-y-2 2xl:space-y-2.5">
-          <label className="user--addProperty-labelTextSize">City</label>
-          <Input type="text" id="city" className="ps-3" placeholder="Dubai" value={formData.city} onChange={handleChange} />
+          <label className="user--addProperty-labelTextSize">Beds</label>
+          <Input type="number" id="beds" className="ps-3" placeholder="3" value={formData.beds} onChange={handleChange} />
+        </div>
+
+        <div className="w-full md:space-y-1 lg:space-y-1.5 xl:space-y-2 2xl:space-y-2.5">
+          <label className="user--addProperty-labelTextSize">Baths</label>
+          <Input type="number" id="baths" className="ps-3" placeholder="3" value={formData.baths} onChange={handleChange} />
         </div>
 
         <div className="w-full md:space-y-1 lg:space-y-1.5 xl:space-y-2 2xl:space-y-2.5">
           <label className="user--addProperty-labelTextSize">Location</label>
-          <Input type="text" id="location" className="ps-3" placeholder="Search Location" value={formData.location} onChange={handleChange} />
+          <div className="relative">
+            <select
+              id="location"
+              className="border-mercury flex w-full appearance-none rounded-sm border bg-background p-3 ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-grey focus:border-hitGrey focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 md:px-2 md:py-1.5 md:text-[8px] lg:px-2.5 lg:py-2 lg:text-[9px] xl:rounded-md xl:border-2 xl:px-3.5 xl:py-2.5 xl:text-[12px] 2xl:py-3 2xl:text-[14px]"
+              value={formData.location}
+              onChange={(e) => handleSelectChange("location", parseInt(e.target.value))}
+            >
+              {locations.map((location, index) => (
+                <option key={index} value={index}>
+                  {location}
+                </option>
+              ))}
+            </select>
+            <AiOutlineDown className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none" />
+          </div>
         </div>
       </div>
     </div>

@@ -15,15 +15,18 @@ import { toast } from "react-toastify";
 
 const AdminAddProperty = () => {
   const serverURL = import.meta.env.VITE_SERVER_URL;
-  const [formData, setFormData] = useState({
+  const initialFormData = {
     title: "",
     overview: "",
     status: "Pre Launch",
     price: "",
+    coverImage: "",
     propertyTypeIndex: 2,
     propertyCategoryIndex: 0,
     purpose: 0,
     area: "",
+    beds: "",
+    baths: "",
     city: "",
     location: "",
     keyHighlights: [
@@ -40,7 +43,9 @@ const AdminAddProperty = () => {
       },
     ],
     galleryImages: [],
-  });
+  };
+
+  const [formData, setFormData] = useState(initialFormData);
 
   const [showKeyHighlightModal, setShowKeyHighlightModal] = useState(false);
   const [editKeyHighlightIndex, setEditKeyHighlightIndex] = useState(null);
@@ -60,6 +65,22 @@ const AdminAddProperty = () => {
     setFormData((prevData) => ({
       ...prevData,
       [field]: value,
+    }));
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setFormData((prevData) => ({
+      ...prevData,
+      coverImage: file,
+    }));
+  };
+  
+
+  const handleRemoveCoverImage = () => {
+    setFormData((prevData) => ({
+      ...prevData,
+      coverImage: "",
     }));
   };
 
@@ -146,14 +167,16 @@ const AdminAddProperty = () => {
     form.append("overview", JSON.stringify(overview));
     form.append("status", formData.status);
     form.append("price", formData.price);
-    form.append("propertyType", formData.propertyTypeIndex);
-    form.append("category", formData.propertyCategoryIndex);
-    form.append("purpose", formData.purpose);
+    form.append("propertyType", formData.propertyTypeIndex + 1);
+    form.append("category", formData.propertyCategoryIndex + 1);
+    form.append("purpose", formData.purpose + 1);
     form.append("area", formData.area);
-    form.append("city", formData.city);
+    form.append("beds", formData.beds);
+    form.append("baths", formData.baths);
     form.append("location", formData.location);
-    form.append("features", formData.features);
-    form.append("keyHighlights", formData.keyHighlights);
+    form.append("features", JSON.stringify(formData.features));
+    form.append("keyHighlights", JSON.stringify(formData.keyHighlights));
+    form.append("coverImage", formData.coverImage);
     formData.galleryImages.forEach((image, index) => {
       form.append(`galleryImages`, image);
     });
@@ -167,12 +190,11 @@ const AdminAddProperty = () => {
           'Authorization': `Bearer ${token}`,
         },
       });
-
- 
+      
       toast.success("Property added successfully!");
-      console.log("Form submitted successfully", response.data);
+      setFormData(initialFormData);
     } catch (error) {
-      toast.error("Error submitting form");
+      toast.error(`Error submitting form`);
       console.error("Error submitting form", error);
     }
   };
@@ -181,7 +203,7 @@ const AdminAddProperty = () => {
     <div className="mx-auto flex w-[80%] flex-col gap-7 pb-4">
       <Header title="Add Property" />
 
-      <GeneralInformation formData={formData} handleChange={handleChange} handleSelectChange={handleSelectChange} />
+      <GeneralInformation formData={formData} handleChange={handleChange} handleSelectChange={handleSelectChange} handleFileChange={handleFileChange} handleRemoveCoverImage={handleRemoveCoverImage} />
       <PropertyInformation formData={formData} handleChange={handleChange} handleSelectChange={handleSelectChange} />
       <AddKeyHighlights
         formData={formData}

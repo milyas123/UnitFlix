@@ -1,10 +1,13 @@
+import React from 'react';
 import Status from "../svgs/Status";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
+import Delete from '../svgs/Delete';
+import { ImageUp } from 'lucide-react';
 
 const statuses = ["Pre Launch", "Secondary", "Ready to Move In"];
 
-const GeneralInformation = ({ formData, handleChange, handleSelectChange }) => {
+const GeneralInformation = ({ formData, handleChange, handleSelectChange, handleFileChange, handleRemoveCoverImage }) => {
   return (
     <div className="user--addProperty-sectionPadding flex flex-col rounded-xl border border-lightGrey bg-white md:flex-row md:items-start">
       <h2 className="user--addProperty-headingTextSize whitespace-nowrap md:w-[23%]">
@@ -32,6 +35,39 @@ const GeneralInformation = ({ formData, handleChange, handleSelectChange }) => {
             value={formData.overview}
             onChange={handleChange}
           />
+        </div>
+
+        <div className="w-full space-y-2.5">
+          <label className="text-[16px] font-semibold">Cover Image</label>
+          {formData.coverImage ? (
+            <div className="relative w-[288px] h-[185px]">
+              <img
+                src={URL.createObjectURL(formData.coverImage)}
+                alt="Cover Image Preview"
+                className="w-full h-full object-cover rounded-2xl"
+              />
+              <button
+                className="absolute top-2 right-2 p-1 bg-red-600 hover:bg-white text-white transition-all duration-200 ease-in-out rounded-full"
+                onClick={handleRemoveCoverImage}
+              >
+                <Delete size={20} />
+              </button>
+            </div>
+          ) : (
+            <label htmlFor="coverImage" className="flex h-[185px] w-[288px] items-center justify-center rounded-2xl border-2 border-dashed bg-whiteLilac cursor-pointer">
+              <input
+                type="file"
+                id="coverImage"
+                className="hidden"
+                accept="image/*"
+                onChange={handleFileChange}
+              />
+              <div className="flex flex-col items-center justify-center gap-y-2 text-smokeyGrey">
+                <ImageUp size={35} />
+                Upload Cover Image
+              </div>
+            </label>
+          )}
         </div>
 
         <div className="w-full md:space-y-1 lg:space-y-1.5 xl:space-y-2 2xl:space-y-2.5">
