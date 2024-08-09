@@ -1,8 +1,29 @@
+import { useState, useEffect } from "react";
 import Cross from "../../svgs/Cross";
 import Button from "../../common/Button";
 import InputField from "../../common/InputField";
 
-const AddPropertyItemModal = ({ onClose }) => {
+const AddPropertyItemModal = ({ onClose, onSubmit, editData }) => {
+  const [propertyType, setPropertyType] = useState("");
+  const [unitType, setUnitType] = useState("");
+  const [size, setSize] = useState("");
+
+  useEffect(() => {
+    if (editData) {
+      setPropertyType(editData.propertyType);
+      setUnitType(editData.unitType);
+      setSize(editData.size);
+    }
+  }, [editData]);
+
+  const handleSubmit = () => {
+    onSubmit({
+      propertyType,
+      unitType,
+      size,
+    });
+  };
+
   return (
     <>
       <div className="fixed inset-0 bg-black bg-opacity-50"></div>
@@ -22,9 +43,24 @@ const AddPropertyItemModal = ({ onClose }) => {
 
           <div className="border-b border-pastelGrey">
             <div className="space-y-5 px-5 pb-9">
-              <InputField label="Property Type" placeholder="Villa" />
-              <InputField label="Unit Type" placeholder="3 Bedrooms" />
-              <InputField label="Size" placeholder="Various Size Available" />
+              <InputField
+                label="Property Type"
+                placeholder="Villa"
+                value={propertyType}
+                onChange={(e) => setPropertyType(e.target.value)}
+              />
+              <InputField
+                label="Unit Type"
+                placeholder="3 Bedrooms"
+                value={unitType}
+                onChange={(e) => setUnitType(e.target.value)}
+              />
+              <InputField
+                label="Size"
+                placeholder="Various Size Available"
+                value={size}
+                onChange={(e) => setSize(e.target.value)}
+              />
             </div>
           </div>
 
@@ -35,7 +71,9 @@ const AddPropertyItemModal = ({ onClose }) => {
             >
               Cancel
             </Button>
-            <Button className="rounded-md">Submit</Button>
+            <Button className="rounded-md" onClick={handleSubmit}>
+              Submit
+            </Button>
           </div>
         </div>
       </div>

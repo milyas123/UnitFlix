@@ -1,10 +1,11 @@
-const Delete = ({ className }) => {
+const Delete = ({ className, onClick }) => {
   return (
     <svg
       className={`size-5 cursor-pointer transition-all duration-200 ease-in-out hover:text-red-600 md:size-3 lg:size-4 xl:size-5 2xl:size-6 ${className}`}
       viewBox="0 0 21 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      onClick={onClick}
     >
       <path
         d="M18 4.98307C15.225 4.70807 12.4333 4.56641 9.65 4.56641C8 4.56641 6.35 4.64974 4.7 4.81641L3 4.98307"

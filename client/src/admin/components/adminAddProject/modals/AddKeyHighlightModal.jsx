@@ -1,9 +1,34 @@
+import React, { useState, useEffect } from "react";
 import Cross from "../../svgs/Cross";
 import Button from "../../common/Button";
 import InputField from "../../common/InputField";
 import TextArea from "../../common/Textarea";
 
-const AddKeyHighlightModal = ({ onClose }) => {
+const AddKeyHighlightModal = ({ onClose, onSubmit, editData }) => {
+  const [title, setTitle] = useState("");
+  const [Description, setDescription] = useState("");
+
+  useEffect(() => {
+    if (editData) {
+      setTitle(editData.title);
+      setDescription(editData.Description);
+    }
+  }, [editData]);
+
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
+  };
+
+  const handleSubmit = () => {
+    onSubmit(title, Description);
+    setTitle("");
+    setDescription("");
+  };
+
   return (
     <>
       <div className="fixed inset-0 bg-black bg-opacity-50"></div>
@@ -23,8 +48,8 @@ const AddKeyHighlightModal = ({ onClose }) => {
 
           <div className="border-b border-pastelGrey">
             <div className="space-y-5 px-5 pb-9">
-              <InputField label="Title" placeholder="Features" />
-              <TextArea label="Description" placeholder="3 Bedrooms" />
+              <InputField label="Title" name="title" placeholder="Features" value={title} onChange={handleTitleChange} />
+              <TextArea label="Description" name="Description" placeholder="3 Bedrooms" value={Description} onChange={handleDescriptionChange} />
             </div>
           </div>
 
@@ -35,7 +60,7 @@ const AddKeyHighlightModal = ({ onClose }) => {
             >
               Cancel
             </Button>
-            <Button className="rounded-md">Submit</Button>
+            <Button className="rounded-md" onClick={handleSubmit}>Submit</Button>
           </div>
         </div>
       </div>

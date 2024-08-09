@@ -2,9 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-
 using System.Text;
-
 using Unitflix.Server.AutoMapper;
 using Unitflix.Server.Database;
 using Unitflix.Server.Managers;
@@ -23,16 +21,16 @@ builder.Services.Configure<EmailOptions>(builder.Configuration.GetSection("Email
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    if(connectionString != null)
+    if (connectionString != null)
     {
         options.UseSqlServer(connectionString);
     }
 });
 
-//Adding auto mapper
+// Adding auto mapper
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
-//Adding identity
+// Adding identity
 builder.Services.AddIdentity<User, UserRole>(options =>
 {
     options.Password.RequireNonAlphanumeric = false;
@@ -45,17 +43,16 @@ builder.Services.AddIdentity<User, UserRole>(options =>
 
 string? jwtSecret = builder.Configuration["JWT:Secret"];
 
-if(!string.IsNullOrEmpty(jwtSecret))
+if (!string.IsNullOrEmpty(jwtSecret))
 {
-    //Adding Authentication
+    // Adding Authentication
     builder.Services.AddAuthentication(options =>
     {
         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
         options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
     })
-
-    //Adding JWT
+    // Adding JWT
     .AddJwtBearer(options =>
     {
         options.SaveToken = true;
@@ -71,7 +68,7 @@ if(!string.IsNullOrEmpty(jwtSecret))
     });
 }
 
-//Adding Validators
+// Adding Validators
 builder.Services.AddScoped<PropertyValidator>();
 builder.Services.AddScoped<ProjectValidator>();
 builder.Services.AddScoped<PropertyUpdateValidator>();
@@ -83,6 +80,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Add CORS services
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyHeader()
+               .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -92,7 +100,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-//Calling the Seeders
+// Calling the Seeders
 List<Seeder> seeders = new List<Seeder>()
 {
     new LocationSeeder(),
@@ -108,6 +116,9 @@ seeders.ForEach(seeder =>
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+// Use CORS
+app.UseCors();
 
 app.UseAuthentication();
 app.UseAuthorization();

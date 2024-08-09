@@ -1,10 +1,11 @@
-const Edit = ({ className }) => {
+const Edit = ({ className, onClick }) => {
   return (
     <svg
       className={`size-5 cursor-pointer transition-all duration-200 ease-in-out hover:text-black md:size-3 lg:size-4 xl:size-5 2xl:size-6 ${className}`}
       viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      onClick={onClick}
     >
       <path
         d="M9.16406 1.66797H7.4974C3.33073 1.66797 1.66406 3.33464 1.66406 7.5013V12.5013C1.66406 16.668 3.33073 18.3346 7.4974 18.3346H12.4974C16.6641 18.3346 18.3307 16.668 18.3307 12.5013V10.8346"
