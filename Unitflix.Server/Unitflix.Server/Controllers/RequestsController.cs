@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 
+using FluentValidation.Internal;
 using FluentValidation.Results;
 
 using Microsoft.AspNetCore.Authorization;
@@ -240,6 +241,35 @@ namespace Unitflix.Server.Controllers
             await _emailManager.SendEmail(property.UserDetail.Email, "Unitflix Property Status Update", $"Hi {property.UserDetail.Name}, the status of your request for property {property.Title} status has been updated to {property.ApprovalStatus.ToString()}.");
 
             return Response.Message("Property Status Updated Successfully");
+        }
+
+        /// <summary>
+        /// Returns a single submitted request with all of the data
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Authorize(Roles = "Admin")]
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult> GetSubmittedRequest(int id)
+        {
+            Property? propertyRequest = await _dbContext
+                .Properties
+                .Where(p => p.Submission == PropertySubmission.Secondary && p.Id == id)
+                .Include(property => property.Overview)
+                .Include(property => property.Files)
+                .Include(property => property.Features)
+                .Include(property => property.KeyHighlights)
+                .Include(property => property.UserDetail)
+                .FirstOrDefaultAsync();
+
+            if(propertyRequest == null)
+            {
+                return Response.Error("Property Request Not Found", 404);
+            }
+            else
+            {
+                return Response.Message(propertyRequest);
+            }
         }
 
         #endregion

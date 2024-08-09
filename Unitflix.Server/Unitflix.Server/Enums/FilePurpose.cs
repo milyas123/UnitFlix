@@ -3,6 +3,8 @@
     public enum FilePurpose
     {
         Cover,
-        Gallery
+        Gallery,
+        Brochure,
+        FloorPlan
     }
 }

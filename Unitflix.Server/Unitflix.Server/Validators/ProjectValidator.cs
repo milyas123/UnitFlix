@@ -118,6 +118,14 @@ namespace Unitflix.Server.Validators
                 .NotEmpty()
                 .WithMessage("Project must have a cover image")
                 .SetValidator(new FileValidator());
+
+            RuleFor(writeDTO => writeDTO.Brochure)
+                .SetValidator(new FileValidator(FileType.Pdf))
+                .When(writeDTO => writeDTO.Brochure != null);
+
+            RuleFor(writeDTO => writeDTO.FloorPlan)
+                .SetValidator(new FileValidator(FileType.Pdf))
+                .When(writeDTO => writeDTO.FloorPlan != null);
         }
 
         #endregion

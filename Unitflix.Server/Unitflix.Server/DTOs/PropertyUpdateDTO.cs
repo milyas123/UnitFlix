@@ -55,5 +55,9 @@ namespace Unitflix.Server.DTOs
         public List<IFormFile> GalleryImages { get; set; } = new List<IFormFile>();
 
         public IFormFile CoverImage { get; set; }
+
+        public IFormFile Brochure { get; set; }
+
+        public IFormFile FloorPlan { get; set; }
     }
 }

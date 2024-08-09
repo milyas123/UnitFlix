@@ -92,6 +92,14 @@ namespace Unitflix.Server.Validators
             RuleFor(dto => dto.CoverImage)
                 .SetValidator(new FileValidator())
                 .When(dto => dto.CoverImage != null);
+
+            RuleFor(writeDTO => writeDTO.Brochure)
+                .SetValidator(new FileValidator(FileType.Pdf))
+                .When(writeDTO => writeDTO.Brochure != null);
+
+            RuleFor(writeDTO => writeDTO.FloorPlan)
+                .SetValidator(new FileValidator(FileType.Pdf))
+                .When(writeDTO => writeDTO.FloorPlan != null);
         }
 
         #endregion

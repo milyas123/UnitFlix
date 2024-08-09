@@ -6,9 +6,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-using System.Diagnostics;
-using System.Linq;
-
 using Unitflix.Server.API_DTO;
 using Unitflix.Server.Database;
 using Unitflix.Server.DTOs;
@@ -77,7 +74,11 @@ namespace Unitflix.Server.Controllers
         [HttpGet("all")]
         public JsonResult GetAllProperties()
         {
-            List<Property> properties = _dbContext.Properties.Where(p => p.ApprovalStatus == PropertyStatus.Approved).ToList();
+            List<Property> properties = _dbContext
+                .Properties
+                .Where(p => p.ApprovalStatus == PropertyStatus.Approved)
+                .Include(property => property.Files.Where(f => f.Purpose == FilePurpose.Cover))
+                .ToList();
             return Response.Message(properties); 
         }
 
@@ -125,6 +126,7 @@ namespace Unitflix.Server.Controllers
             List<Property> properties = _dbContext
                 .Properties
                 .Where(p => p.location == locationId && p.ApprovalStatus == PropertyStatus.Approved)
+                .Include(property => property.Files.Where(f => f.Purpose == FilePurpose.Cover))
                 .ToList();
 
             return Response.Message(properties);
@@ -146,6 +148,7 @@ namespace Unitflix.Server.Controllers
             List<Property> properties = _dbContext
                 .Properties
                 .Where(p => p.Developer.HasValue && p.Developer.Value == developerId && p.ApprovalStatus == PropertyStatus.Approved)
+                .Include(property => property.Files.Where(f => f.Purpose == FilePurpose.Cover))
                 .ToList();
 
             return Response.Message(properties);
@@ -167,6 +170,7 @@ namespace Unitflix.Server.Controllers
             List<Property> properties = _dbContext
                 .Properties
                 .Where(p => p.PropertyType == propertyType && p.ApprovalStatus == PropertyStatus.Approved)
+                .Include(property => property.Files.Where(f => f.Purpose == FilePurpose.Cover))
                 .ToList();
 
             return Response.Message(properties);
@@ -190,6 +194,7 @@ namespace Unitflix.Server.Controllers
             List<Property> properties = _dbContext
                 .Properties
                 .Where(p => p.Category == category && p.ApprovalStatus == PropertyStatus.Approved)
+                .Include(property => property.Files.Where(f => f.Purpose == FilePurpose.Cover))
                 .ToList();
 
             return Response.Message(properties);
@@ -248,22 +253,22 @@ namespace Unitflix.Server.Controllers
                 _dbContext.Files.Add(file);
             }
 
-            writeDTO.GalleryImages.ForEach(async galleryImage =>
+            foreach(IFormFile galleryImage in writeDTO.GalleryImages)
             {
-                FileSaveResult? result = await galleryImage.Save(_webHostEnvironment, Request.Host.ToString());
-                if (result != null)
+                FileSaveResult? galleryImageResult = await galleryImage.Save(_webHostEnvironment, Request.Host.ToString());
+                if (galleryImageResult != null)
                 {
                     File file = new File()
                     {
-                        Filename = result.FileName,
+                        Filename = galleryImageResult.FileName,
                         Purpose = FilePurpose.Gallery,
                         PropertyId = property.Id,
-                        Url = result.Url,
-                        Type = result.Type
+                        Url = galleryImageResult.Url,
+                        Type = galleryImageResult.Type
                     };
                     _dbContext.Files.Add(file);
                 }
-            });
+            }
 
             _dbContext.SaveChanges();
             return Response.Message("Property Added Successfully");
@@ -330,21 +335,62 @@ namespace Unitflix.Server.Controllers
                 _dbContext.Files.Add(file);
             }
 
-            writeDTO.GalleryImages.ForEach(async galleryImage =>
+            if(writeDTO.Brochure != null)
             {
-                FileSaveResult? result = await galleryImage.Save(_webHostEnvironment, Request.Host.ToString());
-                if (result != null)
+                FileSaveResult? brochureResult = await writeDTO.Brochure.Save(_webHostEnvironment, Request.Host.ToString());
+
+                if (brochureResult != null)
                 {
                     File file = new File()
                     {
-                        Filename = result.FileName,
-                        Purpose = FilePurpose.Gallery,
+                        Filename = brochureResult.FileName,
+                        Purpose = FilePurpose.Brochure,
                         PropertyId = property.Id,
-                        Url = result.Url,
-                        Type = result.Type
+                        Url = brochureResult.Url,
+                        Type = brochureResult.Type
                     };
                     _dbContext.Files.Add(file);
                 }
+            }
+
+            if (writeDTO.FloorPlan != null)
+            {
+                FileSaveResult? floorPlanResult = await writeDTO.FloorPlan.Save(_webHostEnvironment, Request.Host.ToString());
+
+                if (floorPlanResult != null)
+                {
+                    File file = new File()
+                    {
+                        Filename = floorPlanResult.FileName,
+                        Purpose = FilePurpose.Brochure,
+                        PropertyId = property.Id,
+                        Url = floorPlanResult.Url,
+                        Type = floorPlanResult.Type
+                    };
+                    _dbContext.Files.Add(file);
+                }
+            }
+
+            foreach(IFormFile galleryImage in writeDTO.GalleryImages)
+            {
+                FileSaveResult? galleryImageResult = await galleryImage.Save(_webHostEnvironment, Request.Host.ToString());
+                if (galleryImageResult != null)
+                {
+                    File file = new File()
+                    {
+                        Filename = galleryImageResult.FileName,
+                        Purpose = FilePurpose.Gallery,
+                        PropertyId = property.Id,
+                        Url = galleryImageResult.Url,
+                        Type = galleryImageResult.Type
+                    };
+                    _dbContext.Files.Add(file);
+                }
+            }
+
+            writeDTO.GalleryImages.ForEach(async galleryImage =>
+            {
+                
             });
 
             _dbContext.SaveChanges();
@@ -451,22 +497,22 @@ namespace Unitflix.Server.Controllers
                 _dbContext.Files.RemoveRange(galleryImagesToRemove);
             }
 
-            updateDTO.GalleryImages.ForEach(async galleryImage =>
+            foreach(IFormFile galleryImage in updateDTO.GalleryImages)
             {
-                FileSaveResult? result = await galleryImage.Save(_webHostEnvironment, Request.Host.ToString());
-                if (result != null)
+                FileSaveResult? galleryImageResult = await galleryImage.Save(_webHostEnvironment, Request.Host.ToString());
+                if (galleryImageResult != null)
                 {
                     File file = new File()
                     {
-                        Filename = result.FileName,
+                        Filename = galleryImageResult.FileName,
                         Purpose = FilePurpose.Gallery,
                         PropertyId = property.Id,
-                        Url = result.Url,
-                        Type = result.Type
+                        Url = galleryImageResult.Url,
+                        Type = galleryImageResult.Type
                     };
                     _dbContext.Files.Add(file);
                 }
-            });
+            }
 
             _dbContext.SaveChanges();
             return Response.Message("Property Updated Successfully");
@@ -585,6 +631,62 @@ namespace Unitflix.Server.Controllers
                 }
             }
 
+            //If a new pdf file is specified for the brochure
+            if (updateDTO.Brochure != null)
+            {
+                //Finding the previous Cover Image
+                File? existingFile = await _dbContext.Files.Where(file => file.PropertyId == id && file.Purpose == FilePurpose.Brochure).FirstOrDefaultAsync();
+
+                if (existingFile != null)
+                {
+                    FileHelpers.DeleteFile(_webHostEnvironment, existingFile.Filename);
+                    _dbContext.Files.Remove(existingFile);
+                }
+
+                FileSaveResult? result = await updateDTO.Brochure.Save(_webHostEnvironment, Request.Host.ToString());
+
+                if (result != null)
+                {
+                    File file = new File()
+                    {
+                        Filename = result.FileName,
+                        Purpose = FilePurpose.Brochure,
+                        PropertyId = property.Id,
+                        Url = result.Url,
+                        Type = result.Type
+                    };
+                    _dbContext.Files.Add(file);
+                }
+            }
+
+            //If a new Floor Plan file is specified for the brochure
+            if (updateDTO.FloorPlan != null)
+            {
+                //Finding the previous Cover Image
+                File? existingFile = await _dbContext.Files.Where(file => file.PropertyId == id && file.Purpose == FilePurpose.FloorPlan).FirstOrDefaultAsync();
+
+                if (existingFile != null)
+                {
+                    FileHelpers.DeleteFile(_webHostEnvironment, existingFile.Filename);
+                    _dbContext.Files.Remove(existingFile);
+                }
+
+                FileSaveResult? result = await updateDTO.FloorPlan.Save(_webHostEnvironment, Request.Host.ToString());
+
+                if (result != null)
+                {
+                    File file = new File()
+                    {
+                        Filename = result.FileName,
+                        Purpose = FilePurpose.FloorPlan,
+                        PropertyId = property.Id,
+                        Url = result.Url,
+                        Type = result.Type
+                    };
+                    _dbContext.Files.Add(file);
+                }
+            }
+
             if (updateDTO.GalleryImagesToRemove.Count > 0)
             {
                 List<File> galleryImagesToRemove = await _dbContext.Files.Where(file => updateDTO.GalleryImagesToRemove.Contains(file.Id) && file.Purpose == FilePurpose.Gallery).ToListAsync();
@@ -595,7 +697,7 @@ namespace Unitflix.Server.Controllers
                 _dbContext.Files.RemoveRange(galleryImagesToRemove);
             }
 
-            updateDTO.GalleryImages.ForEach(async galleryImage =>
+            foreach(IFormFile galleryImage in updateDTO.GalleryImages)
             {
                 FileSaveResult? result = await galleryImage.Save(_webHostEnvironment, Request.Host.ToString());
                 if (result != null)
@@ -610,7 +712,7 @@ namespace Unitflix.Server.Controllers
                     };
                     _dbContext.Files.Add(file);
                 }
-            });
+            }
 
             _dbContext.SaveChanges();
             return Response.Message("Project Updated Successfully");
