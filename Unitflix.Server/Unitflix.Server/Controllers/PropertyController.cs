@@ -218,6 +218,73 @@ namespace Unitflix.Server.Controllers
         }
 
         /// <summary>
+        /// Searches the properties based on query params
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("search")]
+        public async Task<ActionResult> SearchProperties()
+        {
+            string? searchWord = Request.Query["text"];
+            string? propertyType = Request.Query["type"];
+            string? location = Request.Query["location"];
+            string? developer = Request.Query["developer"];
+            string? minPrice = Request.Query["min"];
+            string? maxPrice = Request.Query["max"];
+
+            List<Property> properties = await _dbContext.Properties.ToListAsync();
+
+            if (!string.IsNullOrEmpty(searchWord))
+            {
+                searchWord = searchWord.ToLower();
+                properties = properties
+                    .Where(p => p.Title.ToLower().Contains(searchWord))
+                    .ToList();
+            }
+
+            if(!string.IsNullOrEmpty(propertyType))
+            {
+                int _propertyType = int.Parse(propertyType);
+                properties = properties
+                    .Where(p => p.PropertyType == _propertyType)
+                    .ToList();
+            }
+
+            if (!string.IsNullOrEmpty(location))
+            {
+                int _location = int.Parse(location);
+                properties = properties
+                    .Where(p => p.location == _location)
+                    .ToList();
+            }
+
+            if (!string.IsNullOrEmpty(developer))
+            {
+                int _developer = int.Parse(developer);
+                properties = properties
+                    .Where(p => p.Developer == _developer)
+                    .ToList();
+            }
+
+            if(!string.IsNullOrEmpty(minPrice))
+            {
+                decimal _minPrice = decimal.Parse(minPrice);
+                properties = properties
+                    .Where(p => p.Price >= _minPrice)
+                    .ToList();
+            }
+
+            if (!string.IsNullOrEmpty(maxPrice))
+            {
+                decimal _maxPrice = decimal.Parse(maxPrice);
+                properties = properties
+                    .Where(p => p.Price <= _maxPrice)
+                    .ToList();
+            }
+
+            return Response.Message(new { properties = properties });
+        }
+
+        /// <summary>
         /// Creates a Primary Property submitted by an admin
         /// </summary>
         /// <returns></returns>
