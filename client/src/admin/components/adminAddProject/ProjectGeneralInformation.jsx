@@ -9,7 +9,7 @@ const statuses = ["Pre Launch", "Secondary", "Ready to Move In"];
 
 const ProjectGeneralInformation = ({ formData, handleChange, handleStatusSelect, handleFeaturedSelect, handleFileChange }) => {
   const [selectedStatus, setSelectedStatus] = useState(statuses[0]);
-  const [isFeatured, setIsFeatured] = useState("Yes");
+  const [isFeatured, setIsFeatured] = useState(formData.featured); 
   const [previewCoverImage, setPreviewCoverImage] = useState(null);
   const [previewBrochure, setPreviewBrochure] = useState(null);
 
@@ -43,7 +43,7 @@ const ProjectGeneralInformation = ({ formData, handleChange, handleStatusSelect,
   };
 
   const handleFeaturedClick = () => {
-    const newFeaturedStatus = isFeatured === "Yes" ? "No" : "Yes";
+    const newFeaturedStatus = !isFeatured;
     setIsFeatured(newFeaturedStatus);
     handleFeaturedSelect(newFeaturedStatus);
   };
@@ -74,7 +74,7 @@ const ProjectGeneralInformation = ({ formData, handleChange, handleStatusSelect,
           />
         </div>
 
-        <div className="space-y-2.5">
+        <div className="space-y=2.5">
           <label className="text-[16px] font-semibold">Overview</label>
           <Textarea
             id="overview"
@@ -109,21 +109,30 @@ const ProjectGeneralInformation = ({ formData, handleChange, handleStatusSelect,
         <div className="w-full space-y-2.5">
           <label className="text-[16px] font-semibold">Featured</label>
           <div className="flex items-center gap-x-6">
-            {["Yes", "No"].map((option) => (
-              <div
-                key={option}
-                className={`flex cursor-pointer items-center gap-x-1.5 rounded-md border-2 border-mirage border-opacity-0 px-3 py-2 transition-all duration-300 ease-in-out hover:border-opacity-100 ${
-                  isFeatured !== option && "bg-mirage text-white"
-                }`}
-                onClick={handleFeaturedClick}
-              >
-                <Status
-                  className={`${isFeatured !== option ? "text-white" : "text-black"}`}
-                  size={25}
-                />
-                <p className="text-[14px]">{option}</p>
-              </div>
-            ))}
+            <div
+              className={`flex cursor-pointer items-center gap-x-1.5 rounded-md border-2 border-mirage border-opacity-0 px-3 py-2 transition-all duration-300 ease-in-out hover:border-opacity-100 ${
+                isFeatured && "bg-mirage text-white"
+              }`}
+              onClick={handleFeaturedClick}
+            >
+              <Status
+                className={`${isFeatured ? "text-white" : "text-black"}`}
+                size={25}
+              />
+              <p className="text-[14px]">Yes</p>
+            </div>
+            <div
+              className={`flex cursor-pointer items-center gap-x-1.5 rounded-md border-2 border-mirage border-opacity-0 px-3 py-2 transition-all duration-300 ease-in-out hover:border-opacity-100 ${
+                !isFeatured && "bg-mirage text-white"
+              }`}
+              onClick={handleFeaturedClick}
+            >
+              <Status
+                className={`${!isFeatured ? "text-white" : "text-black"}`}
+                size={25}
+              />
+              <p className="text-[14px]">No</p>
+            </div>
           </div>
         </div>
 
@@ -182,7 +191,7 @@ const ProjectGeneralInformation = ({ formData, handleChange, handleStatusSelect,
                 type="file"
                 id="brochure"
                 className="hidden"
-                accept="image/*"
+                accept="application/pdf"
                 onChange={(e) => handleFileChange(e, "brochure")}
               />
               <div className="flex flex-col items-center justify-center gap-y-2 text-smokeyGrey">

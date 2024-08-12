@@ -1,4 +1,5 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
+import axios from "axios";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -13,9 +14,26 @@ import useSwiperNavigation from "@/hooks/useSwiperNavigation";
 import ArrowLeft from "../svgs/ArrowLeft";
 import ArrowRight from "../svgs/ArrowRight";
 
+const serverURL = import.meta.env.VITE_SERVER_URL;
+
 const Discover = () => {
   const projectsRef = useRef(null);
   const { isBeginning, isEnd } = useSwiperNavigation(projectsRef);
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await axios.get(`${serverURL}/property/featured`);
+        console.log(response.data.data)
+        setProjects(response.data.data);
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      }
+    };
+
+    fetchProjects();
+  }, []);
 
   return (
     <div className="relative mt-[22rem] flex items-center justify-center bg-whiteLilac md:mt-0 md:h-[430px] md:pt-0 lg:h-[95vh] lg:max-h-[530px] lg:min-h-[500px] xl:min-h-[655px] xl:h-[100vh] 2xl:min-h-[825px] 2xl:h-[860px]">
@@ -86,9 +104,9 @@ const Discover = () => {
               "--swiper-pagination-color": "#181a20",
             }}
           >
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => (
-              <SwiperSlide key={item}>
-                <ProjectCard />
+            {projects.map((project) => (
+              <SwiperSlide key={crypto.randomUUID()}>
+                <ProjectCard project={project} />
               </SwiperSlide>
             ))}
           </Swiper>

@@ -16,56 +16,56 @@ import AddPaymentPlanModal from "../components/adminAddProject/modals/AddPayment
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const AdminAddProject = () => {
-  const serverURL = import.meta.env.VITE_SERVER_URL;
-  const initialFormData = {
-    title: "",
-    overview: "",
-    status: "Pre Launch",
-    isFeatured: "Yes",
-    price: "",
-    coverImage: null,
-    brochure: null,
-    floorPlan: null,
-    purpose: 0,
-    propertyDetails: [],
-    downPayment: "",
-    paymentPlan: "",
-    handOver: "",
-    location: 0,
-    keyHighlights: [
-      {
-        title: "Feature",
-        Description:
-          "Features meticulously crafted studios, 1, 2 & 3 bedroom apartments, as well as exclusive 3-bedroom pool villas and 4-bedroom royal penthouses with private pools.",
-      },
-    ],
-    features: [
-      {
-        Name: "Parking Spaces",
-        Icon: "RiParkingBoxLine",
-      },
-    ],
-    paymentPlanItems: [
-      {
-        Title: "Down Payment",
-        Description: "On Booking Date",
-        Amount: 20,
-      },
-      {
-        Title: "During Construction",
-        Description: "1st - 28th Installment",
-        Amount: 50,
-      },
-      {
-        Title: "On Handover",
-        Description: "100% Complete",
-        Amount: 30,
-      },
-    ],
-    galleryImages: [],
-  };
+const serverURL = import.meta.env.VITE_SERVER_URL;
+const initialFormData = {
+  title: "",
+  overview: "",
+  status: "Pre Launch",
+  featured: true, 
+  price: "",
+  coverImage: null,
+  brochure: null,
+  floorPlan: null,
+  purpose: 0,
+  propertyDetails: [],
+  downPayment: "",
+  paymentPlan: "",
+  handOver: "",
+  location: 0,
+  keyHighlights: [
+    {
+      title: "Feature",
+      description:
+        "Features meticulously crafted studios, 1, 2 & 3 bedroom apartments, as well as exclusive 3-bedroom pool villas and 4-bedroom royal penthouses with private pools.",
+    },
+  ],
+  features: [
+    {
+      name: "Parking Spaces",
+      icon: "RiParkingBoxLine",
+    },
+  ],
+  paymentPlanItems: [
+    {
+      Title: "Down Payment",
+      Description: "On Booking Date",
+      Amount: 20,
+    },
+    {
+      Title: "During Construction",
+      Description: "1st - 28th Installment",
+      Amount: 50,
+    },
+    {
+      Title: "On Handover",
+      Description: "100% Complete",
+      Amount: 30,
+    },
+  ],
+  galleryImages: [],
+};
 
+const AdminAddProject = () => {
   const [formData, setFormData] = useState(initialFormData);
 
   const [showAddAmenityModal, setShowAddAmenityModal] = useState(false);
@@ -102,7 +102,7 @@ const AdminAddProject = () => {
   const handleFeaturedSelect = (featured) => {
     setFormData((prevData) => ({
       ...prevData,
-      isFeatured: featured,
+      featured,
     }));
   };
 
@@ -143,14 +143,14 @@ const AdminAddProject = () => {
     }));
   };
 
-  const handleAddHighlight = (title, Description) => {
+  const handleAddHighlight = (title, description) => {
     setFormData((prevData) => {
       const newKeyHighlights = [...prevData.keyHighlights];
       if (editKeyHighlightIndex !== null) {
-        newKeyHighlights[editKeyHighlightIndex] = { title, Description };
+        newKeyHighlights[editKeyHighlightIndex] = { title, description };
         setEditKeyHighlightIndex(null);
       } else {
-        newKeyHighlights.push({ title, Description });
+        newKeyHighlights.push({ title, description });
       }
       return {
         ...prevData,
@@ -172,14 +172,14 @@ const AdminAddProject = () => {
     }));
   };
 
-  const handleAddAmenity = (Name, Icon) => {
+  const handleAddAmenity = (name, icon) => {
     setFormData((prevData) => {
       const newFeatures = [...prevData.features];
       if (editAmenityIndex !== null) {
-        newFeatures[editAmenityIndex] = { Name, Icon };
+        newFeatures[editAmenityIndex] = { name, icon };
         setEditAmenityIndex(null);
       } else {
-        newFeatures.push({ Name, Icon });
+        newFeatures.push({ name, icon });
       }
       return {
         ...prevData,
@@ -258,12 +258,12 @@ const AdminAddProject = () => {
     if (formData.coverImage) {
       form.append("coverImage", formData.coverImage);
     }
-    // if (formData.brochure) {
-    //   form.append("brochure", formData.brochure);
-    // }
-    // if (formData.floorPlan) {
-    //   form.append("floorPlan", formData.floorPlan);
-    // }
+    if (formData.brochure) {
+      form.append("brochure", formData.brochure);
+    }
+    if (formData.floorPlan) {
+      form.append("floorPlan", formData.floorPlan);
+    }
     form.append("developer", 1);
     form.append("propertyType", 1); //TODO: Add fields for propertyType & developer
 
@@ -277,6 +277,7 @@ const AdminAddProject = () => {
     form.append("keyHighlights", JSON.stringify(formData.keyHighlights));
     form.append("features", JSON.stringify(formData.features));
     form.append("paymentPlanItems", JSON.stringify(formData.paymentPlanItems));
+    form.append("featured", formData.featured);
     formData.galleryImages.forEach((image, index) => {
       form.append(`galleryImages`, image);
     });

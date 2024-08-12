@@ -47,7 +47,7 @@ const ProjectPropertyDetails = ({ formData, handleFileChange, handleLocationChan
                 type="file"
                 id="floorPlan"
                 className="hidden"
-                accept="image/*"
+                accept="application/pdf"
                 onChange={(e) => handleFileChange(e, "floorPlan")}
               />
               <div className="flex flex-col items-center justify-center gap-y-2 text-smokeyGrey">

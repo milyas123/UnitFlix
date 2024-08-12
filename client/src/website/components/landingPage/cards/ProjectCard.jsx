@@ -1,6 +1,7 @@
+import { formatCurrency } from "@/lib/utils";
 import { Button } from "../../ui/button";
 
-const ProjectCard = () => {
+const ProjectCard = ({ project }) => {
   const textSizes =
     "text-[16px] md:text-[7px] lg:text-[10px] xl:text-[12px] 2xl:text-[15px]";
 
@@ -16,15 +17,15 @@ const ProjectCard = () => {
           <h2
             className={`mb-1.5 text-center font-semibold md:mb-0.5 lg:mb-1 xl:mb-1.5 2xl:mb-2 ${textSizes}`}
           >
-            Azizi Venice at Dubai South
+            {project?.title}
           </h2>
           <p className={`text-center ${textSizes}`}>
-            Luxurious 1-3 Bedroom Waterfront Apartments & Villas
+            {project?.overview || "Luxurious 1-3 Bedroom Waterfront Apartments & Villas"}
           </p>
           <p
             className={`mt-1.5 text-center font-semibold text-gray-700 md:mt-0.5 lg:mt-1 xl:mt-1.5 2xl:mt-2 ${textSizes}`}
           >
-            Starting From <br /> AED 2,000,000
+            Starting From <br /> {formatCurrency(project?.price)}
           </p>
           <div className="mt-2 flex justify-center md:mt-1.5 lg:mt-2 xl:mt-3 2xl:mt-4">
             <Button
