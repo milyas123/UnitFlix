@@ -54,8 +54,32 @@ namespace Unitflix.Server.AutoMapper
                 .ForMember(writeDTO => writeDTO.GalleryImagesToRemove,
                 member => member.MapFrom(resolver => JsonParser.Parse<List<int>>(resolver.GalleryImagesToRemove)));
 
-            CreateMap<PropertyWriteDTO, Property>();
-            CreateMap<PropertyUpdateDTO, Property>();
+            CreateMap<PropertyWriteDTO, Property>()
+                .ForMember(property => property.Overview,
+                member => member.Ignore())
+                .ForMember(property => property.KeyHighlights,
+                member => member.Ignore())
+                .ForMember(property => property.Features,
+                member => member.Ignore())
+                .ForMember(property => property.PaymentPlanItems,
+                member => member.Ignore())
+                .ForMember(property => property.PropertyDetails,
+                member => member.Ignore())
+                .ForMember(property => property.UserDetail,
+                member => member.Ignore());
+            CreateMap<PropertyUpdateDTO, Property>()
+                .ForMember(property => property.Overview,
+                member => member.Ignore())
+                .ForMember(property => property.KeyHighlights,
+                member => member.Ignore())
+                .ForMember(property => property.Features,
+                member => member.Ignore())
+                .ForMember(property => property.PaymentPlanItems,
+                member => member.Ignore())
+                .ForMember(property => property.PropertyDetails,
+                member => member.Ignore())
+                .ForMember(property => property.UserDetail,
+                member => member.Ignore()); ;
             CreateMap<FeatureWriteDTO, Feature>();
             CreateMap<KeyHighlightWriteDTO, KeyHighlight>();
             CreateMap<OverviewWriteDTO, Overview>();
