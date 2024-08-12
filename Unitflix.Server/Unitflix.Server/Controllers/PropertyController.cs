@@ -202,6 +202,22 @@ namespace Unitflix.Server.Controllers
         }
 
         /// <summary>
+        /// Returns list of featured projects
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("featured")]
+        public ActionResult GetFeaturedProjects()
+        {
+            List<Property> properties = _dbContext
+                .Properties
+                .Where(p => p.Category == PropertyCategory.Project && p.ApprovalStatus == PropertyStatus.Approved && p.Featured)
+                .Include(property => property.Files.Where(f => f.Purpose == FilePurpose.Cover))
+                .ToList();
+
+            return Response.Message(properties);
+        }
+
+        /// <summary>
         /// Creates a Primary Property submitted by an admin
         /// </summary>
         /// <returns></returns>
