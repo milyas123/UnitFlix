@@ -5,13 +5,16 @@ import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
 
-import { MdOutlineLocationOn } from "react-icons/md";
+import { Link } from "react-router-dom";
 import Bed from "../svgs/Bed";
 import Shower from "../svgs/Shower";
 import Area from "../svgs/Area";
-import { Link } from "react-router-dom";
+import { MdOutlineLocationOn } from "react-icons/md";
+import { formatCurrency } from "@/lib/utils";
 
-const PropertyCard = () => {
+const locations = ["Dubai", "Abu Dhabi", "Sharjah", "Ajman", "Ras Al Khaimah", "Fujairah", "Umm Al Quwain"];
+
+const PropertyCard = ({ property }) => {
   return (
     <Link to="/property-details" className="contents">
       <div className="w-full overflow-hidden rounded-lg border border-lightGrey md:w-[90%] md:min-w-[150px] md:max-w-[200px] lg:w-[95%] lg:min-w-[225px] lg:max-w-[270px] xl:min-w-[290px] xl:w-[92%] xl:max-w-[320px] 2xl:w-[95%] 2xl:min-w-[345px] 2xl:max-w-[400px]">
@@ -68,7 +71,7 @@ const PropertyCard = () => {
               size={17}
               className="-ms-0.5 size-5 md:size-2 lg:size-3 xl:size-4 2xl:size-5"
             />
-            The Cedars, Yas Acres, Yas Island, Abu Dhabi
+            {locations[property?.location - 1]}
           </div>
 
           <div className="flex flex-row whitespace-nowrap text-[12px] font-semibold md:text-[5px] lg:text-[7.5px] xl:gap-x-1 xl:text-[9px] 2xl:gap-x-2 2xl:text-[11.5px]">
@@ -76,21 +79,21 @@ const PropertyCard = () => {
               Townhouse
             </span>
             <span className="flex items-center gap-x-1 border-r border-lightGrey px-1 md:px-0.5 lg:px-1">
-              <Bed /> 10 Beds
+              <Bed /> {property?.beds} Beds
             </span>
             <span className="flex items-center gap-x-1 border-r border-lightGrey px-1 md:px-0.5 lg:px-1">
-              <Shower /> 2 Baths
+              <Shower /> {property?.baths} Baths
             </span>
             <span className="flex items-center gap-x-1 ps-1 md:ps-0.5 lg:ps-1">
-              <Area /> 500 sqft
+              <Area /> {property?.area} sqft
             </span>
           </div>
 
           <p className="text-[20px] font-bold md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[22px]">
-            <span className="text-[14px] md:text-[5px] lg:text-[9px] xl:text-[10.5px] 2xl:text-[13px]">
+            {/* <span className="text-[14px] md:text-[5px] lg:text-[9px] xl:text-[10.5px] 2xl:text-[13px]">
               AED
-            </span>{" "}
-            3,500,000
+            </span>{" "} */}
+            {formatCurrency(property?.price)}
           </p>
         </div>
       </div>

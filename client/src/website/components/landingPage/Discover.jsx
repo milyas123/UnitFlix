@@ -21,17 +21,16 @@ const Discover = () => {
   const { isBeginning, isEnd } = useSwiperNavigation(projectsRef);
   const [projects, setProjects] = useState([]);
 
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const response = await axios.get(`${serverURL}/property/featured`);
-        console.log(response.data.data)
-        setProjects(response.data.data);
-      } catch (error) {
-        console.error("Error fetching projects:", error);
-      }
-    };
+  const fetchProjects = async () => {
+    try {
+      const response = await axios.get(`${serverURL}/property/featured`);
+      setProjects(response.data.data);
+    } catch (error) {
+      console.error("Error fetching projects:", error);
+    }
+  };
 
+  useEffect(() => {
     fetchProjects();
   }, []);
 

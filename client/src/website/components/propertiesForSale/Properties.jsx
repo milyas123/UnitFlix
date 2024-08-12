@@ -1,31 +1,33 @@
 import React, { useState, useRef, useEffect } from "react";
 import { BsArrowUpRight } from "react-icons/bs";
-import { Button } from "../ui/button";
-import InfoList from "./InfoList";
-import PropertyCard from "./PropertyCard";
 import { FiChevronDown } from "react-icons/fi";
 import { IoMdCheckmark } from "react-icons/io";
 import { Link } from "react-router-dom";
+
+import { Button } from "../ui/button";
+import InfoList from "./InfoList";
+import PropertyCard from "./PropertyCard";
 import Pagination from "./Pagination";
+
+import axios from "axios";
 
 const locationData = [
   { name: "Al Reem Island", count: "10,635" },
   { name: "Yas Island", count: "10,395" },
   { name: "Saadiyat Island", count: "5,635" },
-  { name: "Saadiyat Island", count: "5,635" },
-  { name: "Saadiyat Island", count: "5,635" },
-  { name: "Saadiyat Island", count: "5,635" },
 ];
 
+const propertiesPerPage = 6;
+const serverURL = import.meta.env.VITE_SERVER_URL;
 const sortOptions = ["Price ↑", "Price ↓", "Date Added ↑", "Date Added ↓"];
 
 const Properties = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [showFilters, setShowFilters] = useState(false);
+  const [properties, setProperties] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
   const dropdownRef = useRef(null);
-
-  const toggleDropdown = () => setIsOpen(!isOpen);
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
@@ -47,12 +49,22 @@ const Properties = () => {
     };
   }, []);
 
-  // Pagination Logic
-  const propertiesPerPage = 6;
-  const [properties, setProperties] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-  const [currentPage, setCurrentPage] = useState(1);
+  // Fetch properties from the server
+  const fetchProperties = async () => {
+    try {
+      const response = await axios.get(`${serverURL}/property/all`);
+      console.log(response.data.data)
+      setProperties(response.data.data);
+    } catch (error) {
+      console.error("Error fetching properties:", error);
+    }
+  };
 
-  // Calculate current blogs to display based on pagination
+  useEffect(() => {
+    fetchProperties();
+  }, []);
+
+  // Calculate current properties to display based on pagination
   const indexOfLastProperty = currentPage * propertiesPerPage;
   const indexOfFirstProperty = indexOfLastProperty - propertiesPerPage;
   const currentProperties = properties.slice(indexOfFirstProperty, indexOfLastProperty);
@@ -119,13 +131,13 @@ const Properties = () => {
             <p className="text-[20px] font-semibold md:text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[20px]">
               Showing Property Results
               <span className="text-[16px] font-light text-slate md:text-[9px] lg:text-[11px] xl:text-[13px] 2xl:text-[16px]">
-                (308)
+                ({properties.length})
               </span>
             </p>
             <div
               className="relative flex w-[140px] items-center justify-between rounded-md border-2 bg-white p-2 text-mirage md:w-[100px] md:px-2 md:py-1.5 lg:w-[130px] 2xl:w-[200px] 2xl:px-3 2xl:py-2.5"
               ref={dropdownRef}
-              onClick={toggleDropdown}
+              onClick={() => setIsOpen(!isOpen)}
             >
               <button className="w-full text-left text-[16px] md:text-[9px] lg:text-[11px] xl:text-[13px] 2xl:text-[16px]">
                 {selectedOption || "Sort By"}
@@ -156,8 +168,8 @@ const Properties = () => {
           </div>
 
           <div className="my-3 grid grid-cols-1 place-items-center gap-y-7 md:grid-cols-3 md:gap-y-4 lg:gap-y-5 xl:gap-y-5 2xl:gap-y-6">
-            {currentProperties.map((item) => (
-              <PropertyCard key={item} />
+            {currentProperties.map((property) => (
+              <PropertyCard key={crypto.randomUUID()} property={property} />
             ))}
           </div>
 
