@@ -103,7 +103,7 @@ namespace Unitflix.Server.Controllers
             userDetail.PropertyId = property.Id;
             _dbContext.UserDetails.Add(userDetail);
 
-            FileSaveResult? result = await writeDTO.CoverImage.Save(_webHostEnvironment, Request.Host.ToString());
+            FileSaveResult? result = await writeDTO.CoverImage.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
 
             if (result != null)
             {
@@ -120,7 +120,7 @@ namespace Unitflix.Server.Controllers
 
             writeDTO.GalleryImages.ForEach(async galleryImage =>
             {
-                FileSaveResult? result = await galleryImage.Save(_webHostEnvironment, Request.Host.ToString());
+                FileSaveResult? result = await galleryImage.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
                 if (result != null)
                 {
                     File file = new File()

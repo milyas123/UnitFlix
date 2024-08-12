@@ -38,7 +38,7 @@ namespace Unitflix.Server.Models
 
         public bool Featured { get; set; }
 
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
         public PropertySubmission Submission {  get; set; }
 

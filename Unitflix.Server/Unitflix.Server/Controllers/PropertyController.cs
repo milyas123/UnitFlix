@@ -74,6 +74,7 @@ namespace Unitflix.Server.Controllers
         [HttpGet("all")]
         public JsonResult GetAllProperties()
         {
+            var data = Request;
             List<Property> properties = _dbContext
                 .Properties
                 .Where(p => p.ApprovalStatus == PropertyStatus.Approved)
@@ -238,7 +239,7 @@ namespace Unitflix.Server.Controllers
             keyHighlights.ForEach(keyHighlight => keyHighlight.PropertyId = property.Id);
             _dbContext.KeyHighlights.AddRange(keyHighlights);
 
-            FileSaveResult? result = await writeDTO.CoverImage.Save(_webHostEnvironment, Request.Host.ToString());
+            FileSaveResult? result = await writeDTO.CoverImage.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
 
             if (result != null)
             {
@@ -255,7 +256,7 @@ namespace Unitflix.Server.Controllers
 
             foreach(IFormFile galleryImage in writeDTO.GalleryImages)
             {
-                FileSaveResult? galleryImageResult = await galleryImage.Save(_webHostEnvironment, Request.Host.ToString());
+                FileSaveResult? galleryImageResult = await galleryImage.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
                 if (galleryImageResult != null)
                 {
                     File file = new File()
@@ -320,7 +321,7 @@ namespace Unitflix.Server.Controllers
             propertyDetails.ForEach(propertyDetail => propertyDetail.PropertyId = property.Id);
             _dbContext.PropertyDetails.AddRange(propertyDetails);
 
-            FileSaveResult? result = await writeDTO.CoverImage.Save(_webHostEnvironment, Request.Host.ToString());
+            FileSaveResult? result = await writeDTO.CoverImage.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
 
             if (result != null)
             {
@@ -337,7 +338,7 @@ namespace Unitflix.Server.Controllers
 
             if(writeDTO.Brochure != null)
             {
-                FileSaveResult? brochureResult = await writeDTO.Brochure.Save(_webHostEnvironment, Request.Host.ToString());
+                FileSaveResult? brochureResult = await writeDTO.Brochure.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
 
                 if (brochureResult != null)
                 {
@@ -355,7 +356,7 @@ namespace Unitflix.Server.Controllers
 
             if (writeDTO.FloorPlan != null)
             {
-                FileSaveResult? floorPlanResult = await writeDTO.FloorPlan.Save(_webHostEnvironment, Request.Host.ToString());
+                FileSaveResult? floorPlanResult = await writeDTO.FloorPlan.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
 
                 if (floorPlanResult != null)
                 {
@@ -373,7 +374,7 @@ namespace Unitflix.Server.Controllers
 
             foreach(IFormFile galleryImage in writeDTO.GalleryImages)
             {
-                FileSaveResult? galleryImageResult = await galleryImage.Save(_webHostEnvironment, Request.Host.ToString());
+                FileSaveResult? galleryImageResult = await galleryImage.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
                 if (galleryImageResult != null)
                 {
                     File file = new File()
@@ -387,11 +388,6 @@ namespace Unitflix.Server.Controllers
                     _dbContext.Files.Add(file);
                 }
             }
-
-            writeDTO.GalleryImages.ForEach(async galleryImage =>
-            {
-                
-            });
 
             _dbContext.SaveChanges();
             return Response.Message("Project Added Successfully");
@@ -471,7 +467,7 @@ namespace Unitflix.Server.Controllers
                     _dbContext.Files.Remove(existingFile);
                 }
 
-                FileSaveResult? result = await updateDTO.CoverImage.Save(_webHostEnvironment, Request.Host.ToString());
+                FileSaveResult? result = await updateDTO.CoverImage.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
 
                 if (result != null)
                 {
@@ -499,7 +495,7 @@ namespace Unitflix.Server.Controllers
 
             foreach(IFormFile galleryImage in updateDTO.GalleryImages)
             {
-                FileSaveResult? galleryImageResult = await galleryImage.Save(_webHostEnvironment, Request.Host.ToString());
+                FileSaveResult? galleryImageResult = await galleryImage.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
                 if (galleryImageResult != null)
                 {
                     File file = new File()
@@ -615,7 +611,7 @@ namespace Unitflix.Server.Controllers
                     _dbContext.Files.Remove(existingFile);
                 }
 
-                FileSaveResult? result = await updateDTO.CoverImage.Save(_webHostEnvironment, Request.Host.ToString());
+                FileSaveResult? result = await updateDTO.CoverImage.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
 
                 if (result != null)
                 {
@@ -643,7 +639,7 @@ namespace Unitflix.Server.Controllers
                     _dbContext.Files.Remove(existingFile);
                 }
 
-                FileSaveResult? result = await updateDTO.Brochure.Save(_webHostEnvironment, Request.Host.ToString());
+                FileSaveResult? result = await updateDTO.Brochure.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
 
                 if (result != null)
                 {
@@ -671,7 +667,7 @@ namespace Unitflix.Server.Controllers
                     _dbContext.Files.Remove(existingFile);
                 }
 
-                FileSaveResult? result = await updateDTO.FloorPlan.Save(_webHostEnvironment, Request.Host.ToString());
+                FileSaveResult? result = await updateDTO.FloorPlan.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
 
                 if (result != null)
                 {
@@ -699,7 +695,7 @@ namespace Unitflix.Server.Controllers
 
             foreach(IFormFile galleryImage in updateDTO.GalleryImages)
             {
-                FileSaveResult? result = await galleryImage.Save(_webHostEnvironment, Request.Host.ToString());
+                FileSaveResult? result = await galleryImage.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
                 if (result != null)
                 {
                     File file = new File()
