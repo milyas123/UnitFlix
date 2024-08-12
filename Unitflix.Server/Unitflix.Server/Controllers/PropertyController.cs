@@ -230,8 +230,18 @@ namespace Unitflix.Server.Controllers
             string? developer = Request.Query["developer"];
             string? minPrice = Request.Query["min"];
             string? maxPrice = Request.Query["max"];
+            string? purpose = Request.Query["purpose"];
 
             List<Property> properties = await _dbContext.Properties.ToListAsync();
+
+            if(!string.IsNullOrEmpty(purpose))
+            {
+                int _purpose = int.Parse(purpose);
+                PropertyPurpose propertyPurpose = (PropertyPurpose)_purpose;
+                properties = properties
+                    .Where(p => p.Purpose == propertyPurpose)
+                    .ToList();
+            }
 
             if (!string.IsNullOrEmpty(searchWord))
             {
