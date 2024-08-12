@@ -12,69 +12,87 @@ import AddKeyHighlightModal from "../components/adminAddProject/modals/AddKeyHig
 
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
+
+const initialFormData = {
+  title: "",
+  overview: "",
+  status: "Pre Launch",
+  price: "",
+  coverImage: "",
+  propertyTypeIndex: 2,
+  propertyCategoryIndex: 0,
+  purpose: 0,
+  area: "",
+  beds: "",
+  baths: "",
+  city: "",
+  location: "",
+  keyHighlights: [
+    {
+      title: "Feature",
+      description:
+        "Features meticulously crafted studios, 1, 2 & 3 bedroom apartments, as well as exclusive 3-bedroom pool villas and 4-bedroom royal penthouses with private pools.",
+    },
+  ],
+  features: [
+    {
+      name: "Parking Spaces",
+      icon: "RiParkingBoxLine",
+    },
+  ],
+  galleryImages: [],
+};
 
 const AdminAddProperty = () => {
-  const location = useLocation();
+  const { id } = useParams();
   const serverURL = import.meta.env.VITE_SERVER_URL;
-
-  const initialFormData = {
-    title: "",
-    overview: "",
-    status: "Pre Launch",
-    price: "",
-    coverImage: "",
-    propertyTypeIndex: 2,
-    propertyCategoryIndex: 0,
-    purpose: 0,
-    area: "",
-    beds: "",
-    baths: "",
-    city: "",
-    location: "",
-    keyHighlights: [
-      {
-        title: "Feature",
-        Description:
-          "Features meticulously crafted studios, 1, 2 & 3 bedroom apartments, as well as exclusive 3-bedroom pool villas and 4-bedroom royal penthouses with private pools.",
-      },
-    ],
-    features: [
-      {
-        Name: "Parking Spaces",
-        Icon: "RiParkingBoxLine",
-      },
-    ],
-    galleryImages: [],
-  };
 
   const [formData, setFormData] = useState(initialFormData);
   const [isEditing, setIsEditing] = useState(false);
 
-  useEffect(() => {
-    if (location.state?.property) {
-      const property = location.state.property;
+  const fetchPropertyData = async (id) => {
+    try {
+      const response = await axios.get(`${serverURL}/property/${id}`);
+      const property = response.data.data;
+
+      // Filter files based on their purpose
+      const coverImage = property.files.find(file => file.purpose === 0)?.url || "";
+      const galleryImages = property.files
+        .filter(file => file.purpose === 1)
+        .map(file => file.url);
+
       setFormData({
-        title: property?.title,
-        overview: property?.overview,
+        title: property.title,
+        overview: property.overview?.text || "",
         status: property.status,
-        price: property?.price,
-        coverImage: property?.coverImage,
-        propertyTypeIndex: property?.propertyType - 1,
-        propertyCategoryIndex: property?.category,
-        purpose: property?.purpose,
-        area: property?.area,
-        beds: property?.beds,
-        baths: property?.baths,
-        city: property?.city,
-        location: property?.location,
-        keyHighlights: property?.keyHighlights,
-        features: property?.features,
-        galleryImages: property?.galleryImages,
+        price: property.price,
+        coverImage: coverImage,
+        propertyTypeIndex: property.propertyType - 1,
+        propertyCategoryIndex: property.category,
+        purpose: property.purpose,
+        area: property.area,
+        beds: property.beds,
+        baths: property.baths,
+        city: property.city || "",
+        location: property.location,
+        keyHighlights: property.keyHighlights || [],
+        features: property.features || [],
+        galleryImages: galleryImages || [],
       });
+
       setIsEditing(true);
+    } catch (error) {
+      toast.error("Failed to load property data");
+      console.error("Error fetching property data", error);
     }
-  }, [location.state]);
+  };
+
+  useEffect(() => {
+    if (id) {
+      fetchPropertyData(id);
+    }
+  }, [id]);
 
   const [showKeyHighlightModal, setShowKeyHighlightModal] = useState(false);
   const [editKeyHighlightIndex, setEditKeyHighlightIndex] = useState(null);
@@ -112,14 +130,14 @@ const AdminAddProperty = () => {
     }));
   };
 
-  const handleAddHighlight = (title, Description) => {
+  const handleAddHighlight = (title, description) => {
     setFormData((prevData) => {
       const newKeyHighlights = [...prevData.keyHighlights];
       if (editKeyHighlightIndex !== null) {
-        newKeyHighlights[editKeyHighlightIndex] = { title, Description };
+        newKeyHighlights[editKeyHighlightIndex] = { title, description };
         setEditKeyHighlightIndex(null);
       } else {
-        newKeyHighlights.push({ title, Description });
+        newKeyHighlights.push({ title, description });
       }
       return {
         ...prevData,
@@ -141,14 +159,14 @@ const AdminAddProperty = () => {
     }));
   };
 
-  const handleAddAmenity = (Name, Icon) => {
+  const handleAddAmenity = (name, icon) => {
     setFormData((prevData) => {
       const newFeatures = [...prevData.features];
       if (editAmenityIndex !== null) {
-        newFeatures[editAmenityIndex] = { Name, Icon };
+        newFeatures[editAmenityIndex] = { name, icon };
         setEditAmenityIndex(null);
       } else {
-        newFeatures.push({ Name, Icon });
+        newFeatures.push({ name, icon });
       }
       return {
         ...prevData,
@@ -193,7 +211,7 @@ const AdminAddProperty = () => {
     form.append("status", formData.status);
     form.append("price", formData.price);
     form.append("propertyType", formData.propertyTypeIndex + 1);
-    form.append("category", formData.propertyCategoryIndex);
+    form.append("category", 0);
     form.append("purpose", formData.purpose);
     form.append("area", formData.area);
     form.append("beds", formData.beds);
@@ -212,7 +230,9 @@ const AdminAddProperty = () => {
     const token = localStorage.getItem("token");
 
     try {
-      const endpoint = isEditing ? `${serverURL}/property/update-property/${location.state.property.id}` : `${serverURL}/property/create-property`;
+      const endpoint = isEditing ? 
+      `${serverURL}/property/update-property/${id}` : `${serverURL}/property/create-property`;
+      
       const method = isEditing ? "put" : "post";
 
       await axios({
@@ -244,7 +264,11 @@ const AdminAddProperty = () => {
         handleFileChange={handleFileChange}
         handleRemoveCoverImage={handleRemoveCoverImage}
       />
-      <PropertyInformation formData={formData} handleChange={handleChange} handleSelectChange={handleSelectChange} />
+      <PropertyInformation 
+        formData={formData} 
+        handleChange={handleChange} 
+        handleSelectChange={handleSelectChange} 
+      />
       <AddKeyHighlights
         formData={formData}
         showModal={setShowKeyHighlightModal}
@@ -257,7 +281,11 @@ const AdminAddProperty = () => {
         handleEdit={handleEditAmenity}
         handleDelete={handleDeleteAmenity}
       />
-      <Gallery formData={formData} handleAddGalleryImage={handleAddGalleryImage} handleDeleteGalleryImage={handleDeleteGalleryImage} />
+      <Gallery 
+        formData={formData} 
+        handleAddGalleryImage={handleAddGalleryImage} 
+        handleDeleteGalleryImage={handleDeleteGalleryImage} 
+      />
 
       <div className="flex items-center justify-end gap-x-3">
         <Button className="rounded-md border-red-700 bg-red-700 hover:border-mirage">Cancel</Button>

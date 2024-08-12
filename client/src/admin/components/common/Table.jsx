@@ -6,6 +6,8 @@ import ThreeDots from "../svgs/ThreeDots";
 import Button from "./Button";
 import moment from 'moment';
 
+const locations = ["Dubai", "Abu Dhabi", "Sharjah", "Ajman", "Ras Al Khaimah", "Fujairah", "Umm Al Quwain"];
+
 const Table = ({ type, setShowSubmitterDetails, data, onDelete, onEdit }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -71,7 +73,7 @@ const Table = ({ type, setShowSubmitterDetails, data, onDelete, onEdit }) => {
             <td className="w-[17%] px-4 text-start">
               <div className="flex items-center gap-x-2 text-davyGrey">
                 <LocationPin />
-                <p className="text-[13px]">{item?.location}</p>
+                <p className="text-[13px]">{locations[item?.location - 1]}</p>
               </div>
             </td>
             {type === "properties" ? (

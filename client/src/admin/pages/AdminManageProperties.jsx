@@ -14,7 +14,7 @@ const AdminManageProperties = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
+  useEffect(() => { 
     fetchProperties();
   }, [serverURL]);
 
@@ -22,7 +22,6 @@ const AdminManageProperties = () => {
     try {
       const response = await axios.get(`${serverURL}/property/all`);
       setProperties(response.data?.data);
-      console.log(response.data.data)
     } catch (err) {
       setError(err);
     } finally {
@@ -47,10 +46,10 @@ const AdminManageProperties = () => {
   };
 
   const handleEdit = (property) => {
-    navigate("/admin/add-property", { state: { property } });
+    navigate(`/admin/edit-property/${property?.id}`);
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p className="size-full flex items-center justify-center h-60">Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
   return (

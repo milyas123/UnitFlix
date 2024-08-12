@@ -6,12 +6,12 @@ import TextArea from "../../common/Textarea";
 
 const AddKeyHighlightModal = ({ onClose, onSubmit, editData }) => {
   const [title, setTitle] = useState("");
-  const [Description, setDescription] = useState("");
+  const [description, setDescription] = useState("");
 
   useEffect(() => {
     if (editData) {
       setTitle(editData.title);
-      setDescription(editData.Description);
+      setDescription(editData.description);
     }
   }, [editData]);
 
@@ -24,7 +24,7 @@ const AddKeyHighlightModal = ({ onClose, onSubmit, editData }) => {
   };
 
   const handleSubmit = () => {
-    onSubmit(title, Description);
+    onSubmit(title, description);
     setTitle("");
     setDescription("");
   };
@@ -49,7 +49,7 @@ const AddKeyHighlightModal = ({ onClose, onSubmit, editData }) => {
           <div className="border-b border-pastelGrey">
             <div className="space-y-5 px-5 pb-9">
               <InputField label="Title" name="title" placeholder="Features" value={title} onChange={handleTitleChange} />
-              <TextArea label="Description" name="Description" placeholder="3 Bedrooms" value={Description} onChange={handleDescriptionChange} />
+              <TextArea label="Description" name="description" placeholder="3 Bedrooms" value={description} onChange={handleDescriptionChange} />
             </div>
           </div>
 
