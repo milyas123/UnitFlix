@@ -29,7 +29,7 @@ const AddKeyHighlights = ({ formData, showModal, handleEdit, handleDelete }) => 
                 <PiListStar size={23} /> {highlight?.title}
               </h1>
               <p className="text-smokeyGrey md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:text-[14px]">
-                {highlight?.Description}
+                {highlight?.description}
               </p>
               <div className="flex items-center justify-center gap-x-1.5 text-smokeyGrey">
                 <Edit onClick={() => handleEdit(index)} className="cursor-pointer" />

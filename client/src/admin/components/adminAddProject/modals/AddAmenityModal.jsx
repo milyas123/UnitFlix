@@ -5,15 +5,15 @@ import InputField from "../../common/InputField";
 
 const AddAmenityModal = ({ onClose, onSubmit, editData }) => {
   const [formData, setFormData] = useState({
-    Name: "",
-    Icon: "",
+    name: "",
+    icon: "",
   });
 
   useEffect(() => {
     if (editData) {
       setFormData({
-        Name: editData.Name,
-        Icon: editData.Icon,
+        name: editData.name,
+        icon: editData.icon,
       });
     }
   }, [editData]);
@@ -27,8 +27,8 @@ const AddAmenityModal = ({ onClose, onSubmit, editData }) => {
   };
 
   const handleSubmit = () => {
-    onSubmit(formData.Name, formData.Icon);
-    setFormData({ Name: "", Icon: "" });
+    onSubmit(formData.name, formData.icon);
+    setFormData({ name: "", icon: "" });
   };
 
   return (
@@ -53,15 +53,15 @@ const AddAmenityModal = ({ onClose, onSubmit, editData }) => {
               <InputField
                 label="Feature/Amenity"
                 placeholder="Parking"
-                name="Name"
-                value={formData.Name}
+                name="name"
+                value={formData.name}
                 onChange={handleInputChange}
               />
               <InputField
                 label="Icon"
                 placeholder="RiParkingBoxLine"
-                name="Icon"
-                value={formData.Icon}
+                name="icon"
+                value={formData.icon}
                 onChange={handleInputChange}
               />
             </div>
