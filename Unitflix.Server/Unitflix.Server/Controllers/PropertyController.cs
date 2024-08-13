@@ -74,11 +74,25 @@ namespace Unitflix.Server.Controllers
         [HttpGet("all")]
         public JsonResult GetAllProperties()
         {
-            var data = Request;
-            List<Property> properties = _dbContext
+            Dictionary<int, Location> locations = _dbContext.Locations.ToDictionary(location => location.Id, location => location);
+            Dictionary<int, Developer> developers = _dbContext.Developers.ToDictionary(dev => dev.Id, dev => dev);
+            Dictionary<int, PropertyType> types = _dbContext.PropertyTypes.ToDictionary(type => type.Id, type => type);
+            List<PropertyReadDTO> properties = _dbContext
                 .Properties
                 .Where(p => p.ApprovalStatus == PropertyStatus.Approved)
                 .Include(property => property.Files.Where(f => f.Purpose == FilePurpose.Cover))
+                .ToList()
+                .Select(property =>
+                {
+                    PropertyReadDTO readDTO = _mapper.Map<PropertyReadDTO>(property);
+                    readDTO.PropertyLocation = locations[property.location];
+                    if(property.Developer != null)
+                    {
+                        readDTO.PropertyDeveloper = developers[property.Developer.Value];
+                    }
+                    readDTO.Type = types[property.PropertyType];
+                    return readDTO;
+                })
                 .ToList();
             return Response.Message(properties); 
         }
@@ -91,7 +105,11 @@ namespace Unitflix.Server.Controllers
         [HttpGet("{id:int}")]
         public ActionResult GetProperty(int id)
         {
-            Property? property = _dbContext
+            Dictionary<int, Location> locations = _dbContext.Locations.ToDictionary(location => location.Id, location => location);
+            Dictionary<int, Developer> developers = _dbContext.Developers.ToDictionary(dev => dev.Id, dev => dev);
+            Dictionary<int, PropertyType> types = _dbContext.PropertyTypes.ToDictionary(type => type.Id, type => type);
+
+            PropertyReadDTO? property = _dbContext
                 .Properties
                 .Where(p => p.Id == id && p.ApprovalStatus == PropertyStatus.Approved)
                 .Include(property => property.Overview)
@@ -100,6 +118,18 @@ namespace Unitflix.Server.Controllers
                 .Include(property => property.KeyHighlights)
                 .Include(property => property.PaymentPlanItems)
                 .Include(property => property.PropertyDetails)
+                .ToList()
+                .Select(property =>
+                {
+                    PropertyReadDTO readDTO = _mapper.Map<PropertyReadDTO>(property);
+                    readDTO.PropertyLocation = locations[property.location];
+                    if (property.Developer != null)
+                    {
+                        readDTO.PropertyDeveloper = developers[property.Developer.Value];
+                    }
+                    readDTO.Type = types[property.PropertyType];
+                    return readDTO;
+                })
                 .FirstOrDefault();
 
             if(property == null)
@@ -123,11 +153,25 @@ namespace Unitflix.Server.Controllers
             {
                 return Response.Error("Location not found", 404);
             }
-
-            List<Property> properties = _dbContext
+            Dictionary<int, Location> locations = _dbContext.Locations.ToDictionary(location => location.Id, location => location);
+            Dictionary<int, Developer> developers = _dbContext.Developers.ToDictionary(dev => dev.Id, dev => dev);
+            Dictionary<int, PropertyType> types = _dbContext.PropertyTypes.ToDictionary(type => type.Id, type => type);
+            List<PropertyReadDTO> properties = _dbContext
                 .Properties
                 .Where(p => p.location == locationId && p.ApprovalStatus == PropertyStatus.Approved)
                 .Include(property => property.Files.Where(f => f.Purpose == FilePurpose.Cover))
+                .ToList()
+                .Select(property =>
+                {
+                    PropertyReadDTO readDTO = _mapper.Map<PropertyReadDTO>(property);
+                    readDTO.PropertyLocation = locations[property.location];
+                    if (property.Developer != null)
+                    {
+                        readDTO.PropertyDeveloper = developers[property.Developer.Value];
+                    }
+                    readDTO.Type = types[property.PropertyType];
+                    return readDTO;
+                })
                 .ToList();
 
             return Response.Message(properties);
@@ -146,10 +190,26 @@ namespace Unitflix.Server.Controllers
                 return Response.Error("Developer not found", 404);
             }
 
-            List<Property> properties = _dbContext
+            Dictionary<int, Location> locations = _dbContext.Locations.ToDictionary(location => location.Id, location => location);
+            Dictionary<int, Developer> developers = _dbContext.Developers.ToDictionary(dev => dev.Id, dev => dev);
+            Dictionary<int, PropertyType> types = _dbContext.PropertyTypes.ToDictionary(type => type.Id, type => type);
+
+            List<PropertyReadDTO> properties = _dbContext
                 .Properties
                 .Where(p => p.Developer.HasValue && p.Developer.Value == developerId && p.ApprovalStatus == PropertyStatus.Approved)
                 .Include(property => property.Files.Where(f => f.Purpose == FilePurpose.Cover))
+                .ToList()
+                .Select(property =>
+                {
+                    PropertyReadDTO readDTO = _mapper.Map<PropertyReadDTO>(property);
+                    readDTO.PropertyLocation = locations[property.location];
+                    if (property.Developer != null)
+                    {
+                        readDTO.PropertyDeveloper = developers[property.Developer.Value];
+                    }
+                    readDTO.Type = types[property.PropertyType];
+                    return readDTO;
+                })
                 .ToList();
 
             return Response.Message(properties);
@@ -168,10 +228,26 @@ namespace Unitflix.Server.Controllers
                 return Response.Error("Property Type not found", 404);
             }
 
-            List<Property> properties = _dbContext
+            Dictionary<int, Location> locations = _dbContext.Locations.ToDictionary(location => location.Id, location => location);
+            Dictionary<int, Developer> developers = _dbContext.Developers.ToDictionary(dev => dev.Id, dev => dev);
+            Dictionary<int, PropertyType> types = _dbContext.PropertyTypes.ToDictionary(type => type.Id, type => type);
+
+            List<PropertyReadDTO> properties = _dbContext
                 .Properties
                 .Where(p => p.PropertyType == propertyType && p.ApprovalStatus == PropertyStatus.Approved)
                 .Include(property => property.Files.Where(f => f.Purpose == FilePurpose.Cover))
+                .ToList()
+                .Select(property =>
+                {
+                    PropertyReadDTO readDTO = _mapper.Map<PropertyReadDTO>(property);
+                    readDTO.PropertyLocation = locations[property.location];
+                    if (property.Developer != null)
+                    {
+                        readDTO.PropertyDeveloper = developers[property.Developer.Value];
+                    }
+                    readDTO.Type = types[property.PropertyType];
+                    return readDTO;
+                })
                 .ToList();
 
             return Response.Message(properties);
@@ -192,11 +268,27 @@ namespace Unitflix.Server.Controllers
                 return Response.Error("Invalid Property Category");
             }
 
-            List<Property> properties = _dbContext
+            Dictionary<int, Location> locations = _dbContext.Locations.ToDictionary(location => location.Id, location => location);
+            Dictionary<int, Developer> developers = _dbContext.Developers.ToDictionary(dev => dev.Id, dev => dev);
+            Dictionary<int, PropertyType> types = _dbContext.PropertyTypes.ToDictionary(type => type.Id, type => type);
+
+            List<PropertyReadDTO> properties = _dbContext
                 .Properties
                 .Where(p => p.Category == category && p.ApprovalStatus == PropertyStatus.Approved)
                 .Include(property => property.Files.Where(f => f.Purpose == FilePurpose.Cover))
-                .ToList();
+                .ToList()
+                .Select(property =>
+                {
+                    PropertyReadDTO readDTO = _mapper.Map<PropertyReadDTO>(property);
+                    readDTO.PropertyLocation = locations[property.location];
+                    if (property.Developer != null)
+                    {
+                        readDTO.PropertyDeveloper = developers[property.Developer.Value];
+                    }
+                    readDTO.Type = types[property.PropertyType];
+                    return readDTO;
+                })
+                .ToList(); ;
 
             return Response.Message(properties);
         }
@@ -208,11 +300,27 @@ namespace Unitflix.Server.Controllers
         [HttpGet("featured")]
         public ActionResult GetFeaturedProjects()
         {
-            List<Property> properties = _dbContext
+            Dictionary<int, Location> locations = _dbContext.Locations.ToDictionary(location => location.Id, location => location);
+            Dictionary<int, Developer> developers = _dbContext.Developers.ToDictionary(dev => dev.Id, dev => dev);
+            Dictionary<int, PropertyType> types = _dbContext.PropertyTypes.ToDictionary(type => type.Id, type => type);
+
+            List<PropertyReadDTO> properties = _dbContext
                 .Properties
                 .Where(p => p.Category == PropertyCategory.Project && p.ApprovalStatus == PropertyStatus.Approved && p.Featured)
                 .Include(property => property.Files.Where(f => f.Purpose == FilePurpose.Cover))
-                .ToList();
+                .ToList()
+                .Select(property =>
+                {
+                    PropertyReadDTO readDTO = _mapper.Map<PropertyReadDTO>(property);
+                    readDTO.PropertyLocation = locations[property.location];
+                    if (property.Developer != null)
+                    {
+                        readDTO.PropertyDeveloper = developers[property.Developer.Value];
+                    }
+                    readDTO.Type = types[property.PropertyType];
+                    return readDTO;
+                })
+                .ToList(); ;
 
             return Response.Message(properties);
         }
@@ -222,7 +330,7 @@ namespace Unitflix.Server.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("search")]
-        public async Task<ActionResult> SearchProperties()
+        public ActionResult SearchProperties()
         {
             string? searchWord = Request.Query["text"];
             string? propertyType = Request.Query["type"];
@@ -232,7 +340,25 @@ namespace Unitflix.Server.Controllers
             string? maxPrice = Request.Query["max"];
             string? purpose = Request.Query["purpose"];
 
-            List<Property> properties = await _dbContext.Properties.ToListAsync();
+            Dictionary<int, Location> locations = _dbContext.Locations.ToDictionary(location => location.Id, location => location);
+            Dictionary<int, Developer> developers = _dbContext.Developers.ToDictionary(dev => dev.Id, dev => dev);
+            Dictionary<int, PropertyType> types = _dbContext.PropertyTypes.ToDictionary(type => type.Id, type => type);
+
+            List<PropertyReadDTO> properties = _dbContext
+                .Properties
+                .ToList()
+                .Select(property =>
+                {
+                    PropertyReadDTO readDTO = _mapper.Map<PropertyReadDTO>(property);
+                    readDTO.PropertyLocation = locations[property.location];
+                    if (property.Developer != null)
+                    {
+                        readDTO.PropertyDeveloper = developers[property.Developer.Value];
+                    }
+                    readDTO.Type = types[property.PropertyType];
+                    return readDTO;
+                })
+                .ToList();
 
             if(!string.IsNullOrEmpty(purpose))
             {

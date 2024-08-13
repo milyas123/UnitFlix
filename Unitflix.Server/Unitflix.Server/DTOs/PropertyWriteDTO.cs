@@ -37,6 +37,8 @@ namespace Unitflix.Server.DTOs
 
         public string Status { get; set; }
 
+        public string Tags { get; set; }
+
         public List<FeatureWriteDTO> Features { get; set; } = new List<FeatureWriteDTO>();
 
         public List<PaymentPlanItemWriteDTO> PaymentPlanItems { get; set; } = new List<PaymentPlanItemWriteDTO>();

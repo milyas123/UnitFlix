@@ -87,7 +87,7 @@ const Table = ({ type, setShowSubmitterDetails, data, onDelete, onEdit }) => {
                 <td className="w-[23%] px-4 text-start">
                   <div className="flex flex-wrap gap-2">
                     <Tag type="property">Property</Tag>
-                    <Tag type={item?.status.toLowerCase()}>{item?.status}</Tag>
+                    <Tag type={item?.status?.toLowerCase()}>{item?.status}</Tag>
                   </div>
                 </td>
               </>

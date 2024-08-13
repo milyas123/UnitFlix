@@ -80,6 +80,10 @@ namespace Unitflix.Server.AutoMapper
                 member => member.Ignore())
                 .ForMember(property => property.UserDetail,
                 member => member.Ignore()); ;
+            CreateMap<Property, PropertyReadDTO>()
+                .ForMember(property => property.PropertyLocation, member => member.Ignore())
+                .ForMember(property => property.PropertyDeveloper, member => member.Ignore())
+                .ForMember(property => property.Type, member => member.Ignore());
             CreateMap<FeatureWriteDTO, Feature>();
             CreateMap<KeyHighlightWriteDTO, KeyHighlight>();
             CreateMap<OverviewWriteDTO, Overview>();

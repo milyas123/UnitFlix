@@ -46,6 +46,8 @@ namespace Unitflix.Server.API_DTO
 
         public string Status { get; set; }
 
+        public string Tags { get; set; }
+
         public List<IFormFile> GalleryImages { get; set; } = new List<IFormFile>();
 
         public IFormFile CoverImage { get; set; }

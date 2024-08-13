@@ -199,9 +199,12 @@ namespace Unitflix.Server.Controllers
         /// <returns></returns>
         [Authorize(Roles = "Admin")]
         [HttpGet("")]
-        public async Task<ActionResult> GetSubmittedRequests()
+        public ActionResult GetSubmittedRequests()
         {
-            List<Property> properties = await _dbContext
+            Dictionary<int, Location> locations = _dbContext.Locations.ToDictionary(location => location.Id, location => location);
+            Dictionary<int, Developer> developers = _dbContext.Developers.ToDictionary(dev => dev.Id, dev => dev);
+            Dictionary<int, PropertyType> types = _dbContext.PropertyTypes.ToDictionary(type => type.Id, type => type);
+            List<PropertyReadDTO> properties = _dbContext
                 .Properties
                 .Where(p => p.Submission == PropertySubmission.Secondary && p.IsVerified)
                 .Include(property => property.Overview)
@@ -209,7 +212,19 @@ namespace Unitflix.Server.Controllers
                 .Include(property => property.Features)
                 .Include(property => property.KeyHighlights)
                 .Include(property => property.UserDetail)
-                .ToListAsync();
+                .ToList()
+                .Select(property =>
+                {
+                    PropertyReadDTO readDTO = _mapper.Map<PropertyReadDTO>(property);
+                    readDTO.PropertyLocation = locations[property.location];
+                    if (property.Developer != null)
+                    {
+                        readDTO.PropertyDeveloper = developers[property.Developer.Value];
+                    }
+                    readDTO.Type = types[property.PropertyType];
+                    return readDTO;
+                })
+                .ToList();
 
             return Response.Message(properties);
         }
@@ -250,9 +265,13 @@ namespace Unitflix.Server.Controllers
         /// <returns></returns>
         [Authorize(Roles = "Admin")]
         [HttpGet("{id:int}")]
-        public async Task<ActionResult> GetSubmittedRequest(int id)
+        public ActionResult GetSubmittedRequest(int id)
         {
-            Property? propertyRequest = await _dbContext
+            Dictionary<int, Location> locations = _dbContext.Locations.ToDictionary(location => location.Id, location => location);
+            Dictionary<int, Developer> developers = _dbContext.Developers.ToDictionary(dev => dev.Id, dev => dev);
+            Dictionary<int, PropertyType> types = _dbContext.PropertyTypes.ToDictionary(type => type.Id, type => type);
+
+            PropertyReadDTO? propertyRequest = _dbContext
                 .Properties
                 .Where(p => p.Submission == PropertySubmission.Secondary && p.Id == id)
                 .Include(property => property.Overview)
@@ -260,7 +279,19 @@ namespace Unitflix.Server.Controllers
                 .Include(property => property.Features)
                 .Include(property => property.KeyHighlights)
                 .Include(property => property.UserDetail)
-                .FirstOrDefaultAsync();
+                .ToList()
+                .Select(property =>
+                {
+                    PropertyReadDTO readDTO = _mapper.Map<PropertyReadDTO>(property);
+                    readDTO.PropertyLocation = locations[property.location];
+                    if (property.Developer != null)
+                    {
+                        readDTO.PropertyDeveloper = developers[property.Developer.Value];
+                    }
+                    readDTO.Type = types[property.PropertyType];
+                    return readDTO;
+                })
+                .FirstOrDefault();
 
             if(propertyRequest == null)
             {

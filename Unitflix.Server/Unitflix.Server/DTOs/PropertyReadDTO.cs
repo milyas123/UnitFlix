@@ -1,10 +1,11 @@
-﻿using System.ComponentModel;
+﻿using Unitflix.Server.Enums;
+using Unitflix.Server.Models;
 
-using Unitflix.Server.Enums;
+using File = Unitflix.Server.Models.File;
 
-namespace Unitflix.Server.Models
+namespace Unitflix.Server.DTOs
 {
-    public class Property
+    public class PropertyReadDTO
     {
         public int Id { get; set; }
 
@@ -14,7 +15,7 @@ namespace Unitflix.Server.Models
 
         public int location { get; set; }
 
-        public PropertyCategory Category{ get; set; }
+        public PropertyCategory Category { get; set; }
 
         public int Beds { get; set; }
 
@@ -26,7 +27,7 @@ namespace Unitflix.Server.Models
 
         public int PropertyType { get; set; }
 
-        public PropertyStatus ApprovalStatus { get; set; }  
+        public PropertyStatus ApprovalStatus { get; set; }
 
         public int? Developer { get; set; }
 
@@ -40,7 +41,7 @@ namespace Unitflix.Server.Models
 
         public string? Status { get; set; }
 
-        public PropertySubmission Submission {  get; set; }
+        public PropertySubmission Submission { get; set; }
 
         public DateTime DateAdded { get; set; }
 
@@ -61,5 +62,11 @@ namespace Unitflix.Server.Models
         public List<PropertyDetail> PropertyDetails { get; set; }
 
         public UserDetail UserDetail { get; set; }
+
+        public Location PropertyLocation { get; set; }
+
+        public Developer PropertyDeveloper { get; set; }
+
+        public PropertyType Type { get; set; }
     }
 }

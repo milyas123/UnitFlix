@@ -32,6 +32,8 @@ namespace Unitflix.Server.DTOs
 
         public string Status { get; set; }
 
+        public string Tags { get; set; }
+
         public List<int> FeaturesToRemove { get; set; } = new List<int>();
 
         public List<FeatureWriteDTO> Features { get; set; } = new List<FeatureWriteDTO>();
