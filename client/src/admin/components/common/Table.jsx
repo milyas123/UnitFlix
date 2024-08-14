@@ -1,16 +1,20 @@
 import { useState } from "react";
-import { formatCurrency } from "@/lib/utils";
-import Tag from "./Tag";
-import LocationPin from "../svgs/LocationPin";
-import ThreeDots from "../svgs/ThreeDots";
-import Button from "./Button";
-import moment from 'moment';
+import moment from "moment";
 
-const locations = ["Dubai", "Abu Dhabi", "Sharjah", "Ajman", "Ras Al Khaimah", "Fujairah", "Umm Al Quwain"];
+import Tag from "./Tag";
+import Button from "./Button";
+import ThreeDots from "../svgs/ThreeDots";
+import LocationPin from "../svgs/LocationPin";
+
+import { formatCurrency } from "@/lib/utils";
+import { useAppContext } from "@/AppContext";
 
 const Table = ({ type, setShowSubmitterDetails, data, onDelete, onEdit }) => {
+  const { locations } = useAppContext();
+
   const [showOptions, setShowOptions] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+
 
   const handleOptionsClick = (itemId) => {
     if (selectedItem === itemId) {
@@ -27,7 +31,9 @@ const Table = ({ type, setShowSubmitterDetails, data, onDelete, onEdit }) => {
         <tr className="flex items-center text-[14px]">
           <th className="w-[3%] py-3 ps-2 text-start">No</th>
           <th className="w-[19%] text-start">Property</th>
-          {type !== "properties" && <th className="w-[20%] text-start">User</th>}
+          {type !== "properties" && (
+            <th className="w-[20%] text-start">User</th>
+          )}
           <th className="w-[17%] text-start">Location</th>
           {type === "properties" ? (
             <>
@@ -43,13 +49,16 @@ const Table = ({ type, setShowSubmitterDetails, data, onDelete, onEdit }) => {
         </tr>
       </thead>
       <tbody className="flex flex-col gap-y-2.5">
-        {data?.map((item) => (
-          <tr key={crypto.randomUUID()} className="flex items-center divide-x divide-platinum bg-white py-2 text-[14px]">
-            <td className="w-[3%] text-center">{item?.id}</td>
+        {data?.map((item, index) => (
+          <tr
+            key={crypto.randomUUID()}
+            className="flex items-center divide-x divide-platinum bg-white py-2 text-[14px]"
+          >
+            <td className="w-[3%] text-center">{index + 1}</td>
             <td className="w-[19%] px-4 text-start">
               <div className="flex items-center gap-x-4">
                 <img
-                  src="/assets/imgs/admin-login.png"
+                  src={item?.files.find((file) => file.purpose === 0)?.url}
                   className="h-[48px] w-[52px] rounded-2xl object-cover"
                   alt=""
                 />
@@ -73,7 +82,7 @@ const Table = ({ type, setShowSubmitterDetails, data, onDelete, onEdit }) => {
             <td className="w-[17%] px-4 text-start">
               <div className="flex items-center gap-x-2 text-davyGrey">
                 <LocationPin />
-                <p className="text-[13px]">{locations[item?.location - 1]}</p>
+                <p className="text-[13px]">{locations.find(loc => loc.id === item?.location)?.name}</p>
               </div>
             </td>
             {type === "properties" ? (
@@ -99,7 +108,9 @@ const Table = ({ type, setShowSubmitterDetails, data, onDelete, onEdit }) => {
             <td className="w-[18%] px-4 text-start">
               <div className="flex items-center gap-x-2 font-medium">
                 <span className="text-[11px] text-davyGrey">Starting From</span>
-                <span className="text-[15px]">{formatCurrency(item?.price)}</span>
+                <span className="text-[15px]">
+                  {formatCurrency(item?.price)}
+                </span>
               </div>
             </td>
             <td className="relative w-[4%] px-4 text-start">
@@ -109,7 +120,7 @@ const Table = ({ type, setShowSubmitterDetails, data, onDelete, onEdit }) => {
               />
               {showOptions && selectedItem === item.id && (
                 <div
-                  className="absolute z-50 right-0 min-w-[10rem] space-y-2 rounded-xl bg-white p-2 text-black"
+                  className="absolute right-0 z-50 min-w-[10rem] space-y-2 rounded-xl bg-white p-2 text-black"
                   style={{
                     boxShadow:
                       "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px",
@@ -125,7 +136,7 @@ const Table = ({ type, setShowSubmitterDetails, data, onDelete, onEdit }) => {
                         Edit
                       </Button>
                       <Button
-                        className="border-crimsonRed text-crimsonRed hover:bg-crimsonRed w-[10rem] rounded-lg"
+                        className="w-[10rem] rounded-lg border-crimsonRed text-crimsonRed hover:bg-crimsonRed"
                         variant="outline"
                         onClick={() => onDelete(item.id)}
                       >
@@ -144,17 +155,20 @@ const Table = ({ type, setShowSubmitterDetails, data, onDelete, onEdit }) => {
                       >
                         View Submitter Details
                       </Button>
-                      <Button className="w-[14rem] rounded-lg" variant="outline">
+                      <Button
+                        className="w-[14rem] rounded-lg"
+                        variant="outline"
+                      >
                         Preview Property
                       </Button>
                       <Button
-                        className="border-mintGreen text-mintGreen hover:bg-mintGreen w-[14rem] rounded-lg"
+                        className="w-[14rem] rounded-lg border-mintGreen text-mintGreen hover:bg-mintGreen"
                         variant="outline"
                       >
                         Accept
                       </Button>
                       <Button
-                        className="border-crimsonRed text-crimsonRed hover:bg-crimsonRed w-[14rem] rounded-lg"
+                        className="w-[14rem] rounded-lg border-crimsonRed text-crimsonRed hover:bg-crimsonRed"
                         variant="outline"
                       >
                         Reject

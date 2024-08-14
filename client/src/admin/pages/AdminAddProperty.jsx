@@ -20,7 +20,7 @@ const initialFormData = {
   status: "Pre Launch",
   price: "",
   coverImage: "",
-  propertyTypeIndex: 2,
+  propertyTypeIndex: 0,
   propertyCategoryIndex: 0,
   purpose: 0,
   area: "",
@@ -48,8 +48,8 @@ const AdminAddProperty = () => {
   const { id } = useParams();
   const serverURL = import.meta.env.VITE_SERVER_URL;
 
-  const [formData, setFormData] = useState(initialFormData);
   const [isEditing, setIsEditing] = useState(false);
+  const [formData, setFormData] = useState(initialFormData);
 
   const fetchPropertyData = async (id) => {
     try {
@@ -68,7 +68,7 @@ const AdminAddProperty = () => {
         status: property.status,
         price: property.price,
         coverImage: coverImage,
-        propertyTypeIndex: property.propertyType - 1,
+        propertyTypeIndex: property.propertyType,
         propertyCategoryIndex: property.category,
         purpose: property.purpose,
         area: property.area,
@@ -210,7 +210,7 @@ const AdminAddProperty = () => {
     form.append("overview", JSON.stringify(overview));
     form.append("status", formData.status);
     form.append("price", formData.price);
-    form.append("propertyType", formData.propertyTypeIndex + 1);
+    form.append("propertyType", formData.propertyTypeIndex);
     form.append("category", 0);
     form.append("purpose", formData.purpose);
     form.append("area", formData.area);

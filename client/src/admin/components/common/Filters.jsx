@@ -13,7 +13,7 @@ const Filters = ({ type }) => {
       </h2>
       <div className="flex w-[72%] items-center justify-between">
         <div
-          className={`relative flex items-center min-w-[150px] ${type === "properties" ? "w-[30%]" : "w-[46%]"}`}
+          className={`relative flex min-w-[150px] items-center ${type === "properties" ? "w-[30%]" : "w-[46%]"}`}
         >
           <InputField
             type="email"

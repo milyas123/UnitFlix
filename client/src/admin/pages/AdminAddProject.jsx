@@ -23,6 +23,8 @@ const initialFormData = {
   status: "Pre Launch",
   featured: true, 
   price: "",
+  propertyType: 0,
+  developer : 0,
   coverImage: null,
   brochure: null,
   floorPlan: null,
@@ -85,10 +87,10 @@ const AdminAddProject = () => {
     }));
   };
 
-  const handleLocationChange = (value) => {
+  const handleSelectChange = (field, value) => {
     setFormData((prevData) => ({
       ...prevData,
-      location: parseInt(value),
+      [field]: parseInt(value),
     }));
   };
 
@@ -255,6 +257,7 @@ const AdminAddProject = () => {
     form.append("overview", JSON.stringify(overview));
     form.append("status", formData.status);
     form.append("price", formData.price);
+    
     if (formData.coverImage) {
       form.append("coverImage", formData.coverImage);
     }
@@ -264,10 +267,10 @@ const AdminAddProject = () => {
     if (formData.floorPlan) {
       form.append("floorPlan", formData.floorPlan);
     }
-    form.append("developer", 1);
-    form.append("propertyType", 1); //TODO: Add fields for propertyType & developer
 
     form.append("category", 1);
+    form.append("developer", formData.developer);
+    form.append("propertyType", formData.propertyType);
     form.append("purpose", formData.purpose);
     form.append("propertyDetails", JSON.stringify(formData.propertyDetails));
     form.append("downPayment", formData.downPayment);
@@ -323,11 +326,12 @@ const AdminAddProject = () => {
           showModal={setShowAddPropertyItemModal}
           editProperty={handleEditPropertyItem}
           deleteProperty={handleDeletePropertyItem}
+          handleSelectChange={handleSelectChange}
         />
         <ProjectPropertyDetails
           formData={formData}
           handleFileChange={(e) => handleFileChange(e, "floorPlan")}
-          handleLocationChange={handleLocationChange}
+          handleLocationChange={handleSelectChange}
         />
         <ProjectKeyHighlights
           formData={formData}

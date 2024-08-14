@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
-import { Input } from "@/website/components/ui/input";
-import { ImageUp } from "lucide-react";
-import Delete from "@/website/components/svgs/Delete";
-import { AiOutlineDown } from "react-icons/ai";
 
-const locations = ["Dubai", "Abu Dhabi", "Sharjah", "Ajman", "Ras Al Khaimah", "Fujairah", "Umm Al Quwain"];
+import { ImageUp } from "lucide-react";
+import { AiOutlineDown } from "react-icons/ai";
+import Delete from "@/website/components/svgs/Delete";
+
+import { useAppContext } from "@/AppContext";
 
 const ProjectPropertyDetails = ({ formData, handleFileChange, handleLocationChange }) => {
   const [preview, setPreview] = useState(null);
+  const { developers, locations } = useAppContext();
 
   useEffect(() => {
     if (formData.floorPlan) {
@@ -58,18 +59,37 @@ const ProjectPropertyDetails = ({ formData, handleFileChange, handleLocationChan
           )}
         </div>
 
-        <div className="w-full space-y-2.5">
-          <label className="text-[16px] font-semibold">Location</label>
+        <div className="w-full md:space-y-1 lg:space-y-1.5 xl:space-y-2 2xl:space-y-2.5">
+          <label className="user--addProperty-labelTextSize">Developer</label>
           <div className="relative">
             <select
               id="location"
               className="border-mercury flex w-full appearance-none rounded-sm border bg-background p-3 ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-grey focus:border-hitGrey focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 md:px-2 md:py-1.5 md:text-[8px] lg:px-2.5 lg:py-2 lg:text-[9px] xl:rounded-md xl:border-2 xl:px-3.5 xl:py-2.5 xl:text-[12px] 2xl:py-3 2xl:text-[14px]"
-              value={formData.location}
-              onChange={(e) => handleLocationChange(e.target.value)}
+              value={formData?.developer}
+              onChange={(e) => handleLocationChange("developer", parseInt(e.target.value))}
+            >
+              {developers.map((developer, index) => (
+                <option key={index} value={developer?.id}>
+                  {developer.name}
+                </option>
+              ))}
+            </select>
+            <AiOutlineDown className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none" />
+          </div>
+        </div>
+
+        <div className="w-full md:space-y-1 lg:space-y-1.5 xl:space-y-2 2xl:space-y-2.5">
+          <label className="user--addProperty-labelTextSize">Location</label>
+          <div className="relative">
+            <select
+              id="location"
+              className="border-mercury flex w-full appearance-none rounded-sm border bg-background p-3 ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-grey focus:border-hitGrey focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 md:px-2 md:py-1.5 md:text-[8px] lg:px-2.5 lg:py-2 lg:text-[9px] xl:rounded-md xl:border-2 xl:px-3.5 xl:py-2.5 xl:text-[12px] 2xl:py-3 2xl:text-[14px]"
+              value={formData?.location}
+              onChange={(e) => handleLocationChange("location", parseInt(e.target.value))}
             >
               {locations.map((location, index) => (
-                <option key={index} value={index}>
-                  {location}
+                <option key={index} value={location?.id}>
+                  {location.name}
                 </option>
               ))}
             </select>
