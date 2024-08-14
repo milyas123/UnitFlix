@@ -9,16 +9,14 @@ import InfoList from "./InfoList";
 import PropertyCard from "./PropertyCard";
 import Pagination from "./Pagination";
 
-const locationData = [
-  { name: "Al Reem Island", count: "10,635" },
-  { name: "Yas Island", count: "10,395" },
-  { name: "Saadiyat Island", count: "5,635" },
-];
+import { useAppContext } from "@/AppContext";
 
 const propertiesPerPage = 12;
 const sortOptions = ["Price ↑", "Price ↓", "Date Added ↑", "Date Added ↓"];
 
 const Properties = ({ properties }) => {
+  const { locations, developers, propertyTypes } = useAppContext();
+
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [showFilters, setShowFilters] = useState(false);
@@ -93,20 +91,20 @@ const Properties = ({ properties }) => {
         >
           <InfoList
             heading="Locations"
-            count={locationData.length}
-            items={locationData}
+            count={locations?.length}
+            items={locations}
           />
 
           <InfoList
             heading="Developers"
-            count={locationData.length}
-            items={locationData}
+            count={developers.length}
+            items={developers}
           />
 
           <InfoList
             heading="Type"
-            count={locationData.length}
-            items={locationData}
+            count={propertyTypes.length}
+            items={propertyTypes}
           />
         </div>
 

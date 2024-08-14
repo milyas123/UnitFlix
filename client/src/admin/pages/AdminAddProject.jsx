@@ -15,16 +15,17 @@ import AddPaymentPlanModal from "../components/adminAddProject/modals/AddPayment
 
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const serverURL = import.meta.env.VITE_SERVER_URL;
 const initialFormData = {
   title: "",
   overview: "",
   status: "Pre Launch",
-  featured: true, 
+  featured: true,
   price: "",
   propertyType: 0,
-  developer : 0,
+  developer: 0,
   coverImage: null,
   brochure: null,
   floorPlan: null,
@@ -68,8 +69,10 @@ const initialFormData = {
 };
 
 const AdminAddProject = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState(initialFormData);
 
+  const [loading, setLoading] = useState(false);
   const [showAddAmenityModal, setShowAddAmenityModal] = useState(false);
   const [showAddPaymentPlanModal, setShowAddPaymentPlanModal] = useState(false);
   const [showAddPropertyItemModal, setShowAddPropertyItemModal] = useState(false);
@@ -247,17 +250,18 @@ const AdminAddProject = () => {
   };
 
   const handleSubmit = async () => {
+    setLoading(true);
     const form = new FormData();
 
     const overview = {
-      Text: formData.overview
+      Text: formData.overview,
     };
 
     form.append("title", formData.title);
     form.append("overview", JSON.stringify(overview));
     form.append("status", formData.status);
     form.append("price", formData.price);
-    
+
     if (formData.coverImage) {
       form.append("coverImage", formData.coverImage);
     }
@@ -289,29 +293,28 @@ const AdminAddProject = () => {
     const token = localStorage.getItem("token");
 
     try {
-      await axios.post(
-        `${serverURL}/property/create-project`,
-        form,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${token}`,
-          },
+      await axios.post(`${serverURL}/property/create-project`, form, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
         },
-      );
-      
+      });
+
       toast.success("Project added successfully!");
       setFormData(initialFormData);
+      navigate("/admin/manage-properties");
     } catch (error) {
       toast.error("Error submitting form");
       console.error("Error submitting form", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <>
       <div className="mx-auto flex w-[80%] flex-col gap-7 pb-4">
-        <Header title="Add Project" />
+        <Header title="Add Project" showBackButton={true} />
 
         <ProjectGeneralInformation
           formData={formData}
@@ -358,11 +361,18 @@ const AdminAddProject = () => {
         />
 
         <div className="flex items-center justify-end gap-x-3">
-          <Button className="rounded-md border-red-700 bg-red-700 hover:border-mirage">
+          <Button
+            className="rounded-md border-red-700 bg-red-700 hover:border-mirage"
+            onClick={() => navigate("/admin/manage-properties")}
+          >
             Cancel
           </Button>
-          <Button className="rounded-md" onClick={handleSubmit}>
-            Submit
+          <Button
+            className="rounded-md"
+            onClick={handleSubmit}
+            disabled={loading}
+          >
+            {loading ? "Submitting..." : "Submit"}
           </Button>
         </div>
       </div>

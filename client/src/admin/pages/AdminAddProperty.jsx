@@ -12,7 +12,7 @@ import AddKeyHighlightModal from "../components/adminAddProject/modals/AddKeyHig
 
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const initialFormData = {
   title: "",
@@ -45,8 +45,10 @@ const initialFormData = {
 
 const AdminAddProperty = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const serverURL = import.meta.env.VITE_SERVER_URL;
 
+  const [loading, setLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
 
@@ -56,10 +58,11 @@ const AdminAddProperty = () => {
       const property = response.data.data;
 
       // Filter files based on their purpose
-      const coverImage = property.files.find(file => file.purpose === 0)?.url || "";
+      const coverImage =
+        property.files.find((file) => file.purpose === 0)?.url || "";
       const galleryImages = property.files
-        .filter(file => file.purpose === 1)
-        .map(file => file.url);
+        .filter((file) => file.purpose === 1)
+        .map((file) => file.url);
 
       setFormData({
         title: property.title,
@@ -201,6 +204,8 @@ const AdminAddProperty = () => {
   };
 
   const handleSubmit = async () => {
+    setLoading(true);
+
     const form = new FormData();
     const overview = { Text: formData.overview };
 
@@ -228,9 +233,10 @@ const AdminAddProperty = () => {
     const token = localStorage.getItem("token");
 
     try {
-      const endpoint = isEditing ? 
-      `${serverURL}/property/update-property/${id}` : `${serverURL}/property/create-property`;
-      
+      const endpoint = isEditing
+        ? `${serverURL}/property/update-property/${id}`
+        : `${serverURL}/property/create-property`;
+
       const method = isEditing ? "put" : "post";
 
       await axios({
@@ -243,17 +249,22 @@ const AdminAddProperty = () => {
         },
       });
 
-      toast.success(`Property ${isEditing ? "updated" : "added"} successfully!`);
+      toast.success(
+        `Property ${isEditing ? "updated" : "added"} successfully!`,
+      );
       setFormData(initialFormData);
+      navigate("/admin/manage-properties");
     } catch (error) {
       toast.error(`Error submitting form`);
       console.error("Error submitting form", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="mx-auto flex w-[80%] flex-col gap-7 pb-4">
-      <Header title={isEditing ? "Edit Property" : "Add Property"} />
+      <Header title={isEditing ? "Edit Property" : "Add Property"} showBackButton={true} />
 
       <GeneralInformation
         formData={formData}
@@ -262,10 +273,10 @@ const AdminAddProperty = () => {
         handleFileChange={handleFileChange}
         handleRemoveCoverImage={handleRemoveCoverImage}
       />
-      <PropertyInformation 
-        formData={formData} 
-        handleChange={handleChange} 
-        handleSelectChange={handleSelectChange} 
+      <PropertyInformation
+        formData={formData}
+        handleChange={handleChange}
+        handleSelectChange={handleSelectChange}
       />
       <AddKeyHighlights
         formData={formData}
@@ -279,16 +290,25 @@ const AdminAddProperty = () => {
         handleEdit={handleEditAmenity}
         handleDelete={handleDeleteAmenity}
       />
-      <Gallery 
-        formData={formData} 
-        handleAddGalleryImage={handleAddGalleryImage} 
-        handleDeleteGalleryImage={handleDeleteGalleryImage} 
+      <Gallery
+        formData={formData}
+        handleAddGalleryImage={handleAddGalleryImage}
+        handleDeleteGalleryImage={handleDeleteGalleryImage}
       />
 
       <div className="flex items-center justify-end gap-x-3">
-        <Button className="rounded-md border-red-700 bg-red-700 hover:border-mirage">Cancel</Button>
-        <Button className="rounded-md" onClick={handleSubmit}>
-          Submit
+        <Button
+          className="rounded-md border-red-700 bg-red-700 hover:border-mirage"
+          onClick={() => navigate("/admin/manage-properties")}
+        >
+          Cancel
+        </Button>
+        <Button
+          className="rounded-md"
+          onClick={handleSubmit}
+          disabled={loading}
+        >
+          {loading ? "Submitting..." : "Submit"}
         </Button>
       </div>
 
@@ -296,7 +316,11 @@ const AdminAddProperty = () => {
         <AddKeyHighlightModal
           onClose={() => setShowKeyHighlightModal(false)}
           onSubmit={handleAddHighlight}
-          editData={editKeyHighlightIndex !== null ? formData.keyHighlights[editKeyHighlightIndex] : null}
+          editData={
+            editKeyHighlightIndex !== null
+              ? formData.keyHighlights[editKeyHighlightIndex]
+              : null
+          }
         />
       )}
 
@@ -304,7 +328,11 @@ const AdminAddProperty = () => {
         <AddAmenityModal
           onClose={() => setShowAmenityModal(false)}
           onSubmit={handleAddAmenity}
-          editData={editAmenityIndex !== null ? formData.features[editAmenityIndex] : null}
+          editData={
+            editAmenityIndex !== null
+              ? formData.features[editAmenityIndex]
+              : null
+          }
         />
       )}
     </div>

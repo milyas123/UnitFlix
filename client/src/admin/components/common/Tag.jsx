@@ -10,7 +10,7 @@ const tagStyles = {
   rejected: "text-[#990F02] bg-[#990F02]/10"
 };
 
-const Tag = ({ type, children }) => {
+const Tag = ({ type }) => {
   const style = tagStyles[type];
 
   if (!style) {
@@ -18,8 +18,8 @@ const Tag = ({ type, children }) => {
   }
 
   return (
-    <span className={`inline-block rounded-full px-4 py-1 font-regular text-[13px] ${style}`}>
-      {children}
+    <span className={`inline-block rounded-full px-4 py-1 font-regular text-[13px] capitalize ${style}`}>
+      {type}
     </span>
   );
 };

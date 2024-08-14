@@ -15,7 +15,6 @@ const Table = ({ type, setShowSubmitterDetails, data, onDelete, onEdit }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
 
-
   const handleOptionsClick = (itemId) => {
     if (selectedItem === itemId) {
       setShowOptions(!showOptions);
@@ -82,7 +81,9 @@ const Table = ({ type, setShowSubmitterDetails, data, onDelete, onEdit }) => {
             <td className="w-[17%] px-4 text-start">
               <div className="flex items-center gap-x-2 text-davyGrey">
                 <LocationPin />
-                <p className="text-[13px]">{locations.find(loc => loc.id === item?.location)?.name}</p>
+                <p className="text-[13px]">
+                  {locations.find((loc) => loc.id === item?.location)?.name}
+                </p>
               </div>
             </td>
             {type === "properties" ? (
@@ -95,8 +96,9 @@ const Table = ({ type, setShowSubmitterDetails, data, onDelete, onEdit }) => {
                 </td>
                 <td className="w-[23%] px-4 text-start">
                   <div className="flex flex-wrap gap-2">
-                    <Tag type="property">Property</Tag>
-                    <Tag type={item?.status?.toLowerCase()}>{item?.status}</Tag>
+                    <Tag type={item?.category === 0 ? "property" : "project"} />
+                    <Tag type={item?.status?.toLowerCase()} />
+                    <Tag type={item?.purpose === 0 ? "sale" : "rental"} />
                   </div>
                 </td>
               </>
