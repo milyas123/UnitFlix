@@ -1,8 +1,6 @@
-import Filters from "./Filters";
-
 const Hero = () => {
   return (
-    <section className="relative h-[800px] md:h-[385px] lg:h-[80vh] lg:max-h-[520px] lg:min-h-[440px] xl:min-h-[615px] xl:h-[100vh] 2xl:min-h-[700px] 2xl:h-[80.5vh] 2xl:max-h-[770px]">
+    <section className="relative h-[800px] md:h-[385px] lg:h-[80vh] lg:max-h-[520px] lg:min-h-[440px] xl:h-[100vh] xl:min-h-[615px] 2xl:h-[80.5vh] 2xl:max-h-[770px] 2xl:min-h-[700px]">
       <img
         src="/assets/imgs/hero-section-img.jpg"
         className="absolute inset-0 size-full object-cover object-top"
@@ -18,9 +16,6 @@ const Hero = () => {
             Discover, Invest, Live
           </p>
         </div>
-      </div>
-      <div className="absolute -bottom-[22rem] z-[200] w-full md:-bottom-6 xl:-bottom-10">
-        <Filters />
       </div>
     </section>
   );

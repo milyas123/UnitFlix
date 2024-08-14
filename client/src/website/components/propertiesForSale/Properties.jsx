@@ -9,8 +9,6 @@ import InfoList from "./InfoList";
 import PropertyCard from "./PropertyCard";
 import Pagination from "./Pagination";
 
-import axios from "axios";
-
 const locationData = [
   { name: "Al Reem Island", count: "10,635" },
   { name: "Yas Island", count: "10,395" },
@@ -18,14 +16,12 @@ const locationData = [
 ];
 
 const propertiesPerPage = 6;
-const serverURL = import.meta.env.VITE_SERVER_URL;
 const sortOptions = ["Price ↑", "Price ↓", "Date Added ↑", "Date Added ↓"];
 
-const Properties = () => {
+const Properties = ({ properties }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [showFilters, setShowFilters] = useState(false);
-  const [properties, setProperties] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const dropdownRef = useRef(null);
 
@@ -49,29 +45,17 @@ const Properties = () => {
     };
   }, []);
 
-  // Fetch properties from the server
-  const fetchProperties = async () => {
-    try {
-      const response = await axios.get(`${serverURL}/property/all`);
-      console.log(response.data.data)
-      setProperties(response.data.data);
-    } catch (error) {
-      console.error("Error fetching properties:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchProperties();
-  }, []);
-
   // Calculate current properties to display based on pagination
   const indexOfLastProperty = currentPage * propertiesPerPage;
   const indexOfFirstProperty = indexOfLastProperty - propertiesPerPage;
-  const currentProperties = properties.slice(indexOfFirstProperty, indexOfLastProperty);
+  const currentProperties = properties?.slice(
+    indexOfFirstProperty,
+    indexOfLastProperty,
+  );
 
   // Change page
   const paginate = (pageNumber) => {
-    const totalPages = Math.ceil(properties.length / propertiesPerPage);
+    const totalPages = Math.ceil(properties?.length / propertiesPerPage);
     if (pageNumber < 1 || pageNumber > totalPages) {
       return;
     }
@@ -131,7 +115,7 @@ const Properties = () => {
             <p className="text-[20px] font-semibold md:text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[20px]">
               Showing Property Results
               <span className="text-[16px] font-light text-slate md:text-[9px] lg:text-[11px] xl:text-[13px] 2xl:text-[16px]">
-                ({properties.length})
+                ({properties?.length})
               </span>
             </p>
             <div
@@ -167,20 +151,28 @@ const Properties = () => {
             </div>
           </div>
 
-          <div className="my-3 grid grid-cols-1 place-items-center gap-y-7 md:grid-cols-3 md:gap-y-4 lg:gap-y-5 xl:gap-y-5 2xl:gap-y-6">
-            {currentProperties.map((property) => (
-              <PropertyCard key={crypto.randomUUID()} property={property} />
-            ))}
-          </div>
+          {properties?.length === 0 ? (
+            <p className="mt-6 text-center text-[18px] font-medium md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px]">
+              No properties found.
+            </p>
+          ) : (
+            <>
+              <div className="my-3 grid grid-cols-1 place-items-center gap-y-7 md:grid-cols-3 md:gap-y-4 lg:gap-y-5 xl:gap-y-5 2xl:gap-y-6">
+                {currentProperties?.map((property) => (
+                  <PropertyCard key={crypto.randomUUID()} property={property} />
+                ))}
+              </div>
 
-          <div className="mt-16">
-            <Pagination
-              propertiesPerPage={propertiesPerPage}
-              totalProperties={properties.length}
-              currentPage={currentPage}
-              paginate={paginate}
-            />
-          </div>
+              <div className="mt-16">
+                <Pagination
+                  propertiesPerPage={propertiesPerPage}
+                  totalProperties={properties?.length}
+                  currentPage={currentPage}
+                  paginate={paginate}
+                />
+              </div>
+            </>
+          )}
         </div>
       </div>
     </section>
