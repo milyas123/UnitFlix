@@ -91,7 +91,7 @@ const Table = ({ type, setShowSubmitterDetails, data, onDelete, onEdit }) => {
                   {moment(item?.dateAdded).format("MMMM Do, YYYY")}
                 </td>
                 <td className="w-[7%] px-4 text-start text-[13px] text-davyGrey">
-                  Yes
+                  {item?.featured ? "Yes" : "No"}
                 </td>
                 <td className="w-[23%] px-4 text-start">
                   <div className="flex flex-wrap gap-2">
