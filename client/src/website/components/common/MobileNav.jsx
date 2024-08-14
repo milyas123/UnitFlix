@@ -6,8 +6,8 @@ import { RxDash } from "react-icons/rx";
 import { GrPhone } from "react-icons/gr";
 
 const buttonItems = [
-  { name: "Buy", link: "/properties-for-sale" },
-  { name: "Rent", link: "/properties-for-sale" },
+  { name: "Buy", link: "/properties-for-sale?param=0" },
+  { name: "Rent", link: "/properties-for-rent?param=1" },
   { name: "Manage", link: "/manage-properties" },
   { name: "About Us", link: "/about-us" },
 ];

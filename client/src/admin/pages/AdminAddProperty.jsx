@@ -21,7 +21,6 @@ const initialFormData = {
   price: "",
   coverImage: "",
   propertyTypeIndex: 0,
-  propertyCategoryIndex: 0,
   purpose: 0,
   area: "",
   beds: "",
@@ -69,7 +68,6 @@ const AdminAddProperty = () => {
         price: property.price,
         coverImage: coverImage,
         propertyTypeIndex: property.propertyType,
-        propertyCategoryIndex: property.category,
         purpose: property.purpose,
         area: property.area,
         beds: property.beds,
@@ -206,12 +204,12 @@ const AdminAddProperty = () => {
     const form = new FormData();
     const overview = { Text: formData.overview };
 
+    form.append("category", 0);
     form.append("title", formData.title);
     form.append("overview", JSON.stringify(overview));
     form.append("status", formData.status);
     form.append("price", formData.price);
     form.append("propertyType", formData.propertyTypeIndex);
-    form.append("category", 0);
     form.append("purpose", formData.purpose);
     form.append("area", formData.area);
     form.append("beds", formData.beds);

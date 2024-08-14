@@ -15,7 +15,7 @@ const locationData = [
   { name: "Saadiyat Island", count: "5,635" },
 ];
 
-const propertiesPerPage = 6;
+const propertiesPerPage = 12;
 const sortOptions = ["Price ↑", "Price ↓", "Date Added ↑", "Date Added ↓"];
 
 const Properties = ({ properties }) => {

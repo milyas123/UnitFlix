@@ -39,19 +39,6 @@ const PropertyInformation = ({ formData, handleChange, handleSelectChange }) => 
 
         <div className="w-full space-y-0.5 md:space-y-1 lg:space-y-1.5 xl:space-y-2 2xl:space-y-2.5">
           <label className="user--addProperty-labelTextSize">Select Property Type</label>
-          <div className="flex rounded-lg bg-[#F1F1F1] p-1.5 md:p-1 lg:p-1.5">
-            {propertyCategories.map((category, index) => (
-              <div
-                key={category}
-                className={`w-full cursor-pointer rounded-lg bg-white bg-opacity-0 p-2 text-center text-[14px] transition-all duration-200 ease-in-out md:p-1 md:text-[8px] lg:p-1.5 lg:text-[10px] xl:p-2 xl:text-[12px] 2xl:text-[14px] ${
-                  formData?.propertyCategoryIndex === index && "bg-opacity-100"
-                }`}
-                onClick={() => handleSelectChange("propertyCategoryIndex", index)}
-              >
-                {category}
-              </div>
-            ))}
-          </div>
 
           <div className="flex flex-wrap items-center gap-x-3 md:gap-y-1.5 lg:gap-y-2 xl:gap-y-3 2xl:gap-y-4">
             {propertyTypes.map((type) => (

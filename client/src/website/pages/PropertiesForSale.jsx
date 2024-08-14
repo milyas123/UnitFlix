@@ -9,6 +9,7 @@ import Filters from "../components/landingPage/Filters";
 
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useSearchParams } from "react-router-dom";
 
 const sliderMinValue = 50000;
 const sliderMaxValue = 5000000;
@@ -16,11 +17,14 @@ const serverURL = import.meta.env.VITE_SERVER_URL;
 
 const PropertiesForSale = () => {
   const showTopButton = useScrollProgress("properties-section");
+  const [searchParams] = useSearchParams();
+  const param = searchParams.get("param");
+
   const [properties, setProperties] = useState([]);
 
-  const [selectedTab, setSelectedTab] = useState("All");
   const [text, setText] = useState("");
   const [value, setValue] = useState([0, 100]);
+  const [selectedTab, setSelectedTab] = useState("All");
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedDeveloper, setSelectedDeveloper] = useState(null);
   const [selectedPropertyType, setSelectedPropertyType] = useState(null);
@@ -36,7 +40,7 @@ const PropertiesForSale = () => {
         sliderMinValue + (value[0] / 100) * (sliderMaxValue - sliderMinValue),
       max:
         sliderMinValue + (value[1] / 100) * (sliderMaxValue - sliderMinValue),
-      purpose: selectedTab === "All" ? 0 : selectedTab === "For Sale" ? 1 : 2,
+      purpose: selectedTab === "All" ? 0 : selectedTab === "For Sale" ? 0 : 1,
     };
 
     const queryString = new URLSearchParams(searchParams).toString();
@@ -45,7 +49,6 @@ const PropertiesForSale = () => {
       const response = await axios.get(
         `${serverURL}/property/search?${queryString}`,
       );
-      console.log(response.data.data.properties);
 
       setProperties(response.data?.data.properties);
     } catch (error) {
@@ -57,8 +60,8 @@ const PropertiesForSale = () => {
   // Fetch properties from the server
   const fetchProperties = async () => {
     try {
-      const response = await axios.get(`${serverURL}/property/all`);
-      setProperties(response.data.data);
+      const response = await axios.get(`${serverURL}/property/search?${new URLSearchParams({purpose: param}).toString()}`);
+      setProperties(response.data.data.properties);
     } catch (error) {
       console.error("Error fetching properties:", error);
     }
@@ -66,7 +69,7 @@ const PropertiesForSale = () => {
 
   useEffect(() => {
     fetchProperties();
-  }, []);
+  }, [param]);
 
   return (
     <Layout>

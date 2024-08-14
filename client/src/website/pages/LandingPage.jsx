@@ -44,7 +44,7 @@ const LandingPage = () => {
         sliderMinValue + (value[0] / 100) * (sliderMaxValue - sliderMinValue),
       max:
         sliderMinValue + (value[1] / 100) * (sliderMaxValue - sliderMinValue),
-      purpose: selectedTab === "All" ? 0 : selectedTab === "For Sale" ? 1 : 2,
+      purpose: selectedTab === "All" ? 0 : selectedTab === "For Sale" ? 0 : 1,
     };
 
     const queryString = new URLSearchParams(searchParams).toString();

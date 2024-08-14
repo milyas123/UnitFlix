@@ -47,6 +47,7 @@ function App() {
             <Routes>
               <Route exact path="/" element={<LandingPage />} />
               <Route path="/properties-for-sale" element={<PropertiesForSale />} />
+              <Route path="/properties-for-rent" element={<PropertiesForSale />} />
               <Route path="/manage-properties" element={<ManageProperties />} />
               <Route path="/property-details" element={<PropertyDetails />} />
               <Route path="/contact-us" element={<ContactUs />} />
