@@ -13,6 +13,10 @@ namespace Unitflix.Server.Validators
         /// </summary>
         public KeyHighlightValidator()
         {
+            RuleFor(keyHighlight => keyHighlight.Id)
+                .GreaterThan(0)
+                .When(keyHighlight => keyHighlight.Id.HasValue);
+
             RuleFor(keyHighlight => keyHighlight.Title)
                 .NotEmpty()
                 .WithMessage("Key highlight title is required");

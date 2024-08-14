@@ -13,6 +13,10 @@ namespace Unitflix.Server.Validators
         /// </summary>
         public FeatureValidator()
         {
+            RuleFor(feature => feature.Id)
+                .GreaterThan(0)
+                .When(feature => feature.Id.HasValue);
+
             RuleFor(feature => feature.Icon)
                 .NotEmpty()
                 .WithMessage("Feature icon is required");
