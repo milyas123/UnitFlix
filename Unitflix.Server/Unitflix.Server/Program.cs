@@ -76,6 +76,8 @@ builder.Services.AddScoped<ProjectUpdateValidator>();
 builder.Services.AddScoped<PropertyRequestValidator>();
 
 builder.Services.AddScoped<EmailManager>();
+builder.Services.AddScoped<PropertyDataManager>();
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

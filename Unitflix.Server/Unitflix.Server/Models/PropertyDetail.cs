@@ -1,11 +1,7 @@
 ﻿namespace Unitflix.Server.Models
 {
-    public class PropertyDetail
+    public class PropertyDetail : BaseAttachedItem
     {
-        public int Id { get; set; }
-
-        public int PropertyId {  get; set; }
-
         public string PropertyType { get; set; }
 
         public string UnitType {  get; set; }

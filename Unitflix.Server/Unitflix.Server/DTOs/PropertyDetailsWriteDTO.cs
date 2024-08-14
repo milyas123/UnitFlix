@@ -2,6 +2,8 @@
 {
     public class PropertyDetailsWriteDTO
     {
+        public int? Id { get; set; }
+
         public string PropertyType { get; set; }
 
         public string UnitType { get; set; }

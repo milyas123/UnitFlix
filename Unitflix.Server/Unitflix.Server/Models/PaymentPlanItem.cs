@@ -1,11 +1,7 @@
 ﻿namespace Unitflix.Server.Models
 {
-    public class PaymentPlanItem
+    public class PaymentPlanItem : BaseAttachedItem
     {
-        public int Id { get; set; }
-
-        public int PropertyId { get; set; }
-
         public decimal Amount {  get; set; }
 
         public string Title {  get; set; }

@@ -11,6 +11,7 @@ using Unitflix.Server.Database;
 using Unitflix.Server.DTOs;
 using Unitflix.Server.Enums;
 using Unitflix.Server.Helpers;
+using Unitflix.Server.Managers;
 using Unitflix.Server.Models;
 using Unitflix.Server.Results;
 using Unitflix.Server.Validators;
@@ -39,6 +40,8 @@ namespace Unitflix.Server.Controllers
 
         private ProjectUpdateValidator _projectUpdateValidator;
 
+        private PropertyDataManager _dataManager;
+
         #endregion
 
         #region Constructor
@@ -52,7 +55,8 @@ namespace Unitflix.Server.Controllers
             PropertyValidator propertyValidator,
             ProjectValidator projectValidator,
             PropertyUpdateValidator propertyUpdateValidator,
-            ProjectUpdateValidator projectUpdateValidator)
+            ProjectUpdateValidator projectUpdateValidator,
+            PropertyDataManager dataManager)
         {
             _dbContext = dbContext;
             _mapper = mapper;
@@ -61,6 +65,7 @@ namespace Unitflix.Server.Controllers
             _projectValidator = projectValidator;
             _propertyUpdateValidator = propertyUpdateValidator;
             _projectUpdateValidator = projectUpdateValidator;
+            _dataManager = dataManager;
         }
 
         #endregion
@@ -72,29 +77,14 @@ namespace Unitflix.Server.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("all")]
-        public JsonResult GetAllProperties()
+        public async Task<ActionResult> GetAllProperties()
         {
-            Dictionary<int, Location> locations = _dbContext.Locations.ToDictionary(location => location.Id, location => location);
-            Dictionary<int, Developer> developers = _dbContext.Developers.ToDictionary(dev => dev.Id, dev => dev);
-            Dictionary<int, PropertyType> types = _dbContext.PropertyTypes.ToDictionary(type => type.Id, type => type);
-            List<PropertyReadDTO> properties = _dbContext
+            List<Property> properties = await _dbContext
                 .Properties
                 .Where(p => p.ApprovalStatus == PropertyStatus.Approved)
                 .Include(property => property.Files.Where(f => f.Purpose == FilePurpose.Cover))
-                .ToList()
-                .Select(property =>
-                {
-                    PropertyReadDTO readDTO = _mapper.Map<PropertyReadDTO>(property);
-                    readDTO.PropertyLocation = locations[property.location];
-                    if(property.Developer != null)
-                    {
-                        readDTO.PropertyDeveloper = developers[property.Developer.Value];
-                    }
-                    readDTO.Type = types[property.PropertyType];
-                    return readDTO;
-                })
-                .ToList();
-            return Response.Message(properties); 
+                .ToListAsync();
+            return Response.Message(_dataManager.IncludeData(properties)); 
         }
 
         /// <summary>
@@ -103,13 +93,9 @@ namespace Unitflix.Server.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id:int}")]
-        public ActionResult GetProperty(int id)
+        public async Task<ActionResult> GetProperty(int id)
         {
-            Dictionary<int, Location> locations = _dbContext.Locations.ToDictionary(location => location.Id, location => location);
-            Dictionary<int, Developer> developers = _dbContext.Developers.ToDictionary(dev => dev.Id, dev => dev);
-            Dictionary<int, PropertyType> types = _dbContext.PropertyTypes.ToDictionary(type => type.Id, type => type);
-
-            PropertyReadDTO? property = _dbContext
+            List<Property> properties = await _dbContext
                 .Properties
                 .Where(p => p.Id == id && p.ApprovalStatus == PropertyStatus.Approved)
                 .Include(property => property.Overview)
@@ -118,26 +104,16 @@ namespace Unitflix.Server.Controllers
                 .Include(property => property.KeyHighlights)
                 .Include(property => property.PaymentPlanItems)
                 .Include(property => property.PropertyDetails)
-                .ToList()
-                .Select(property =>
-                {
-                    PropertyReadDTO readDTO = _mapper.Map<PropertyReadDTO>(property);
-                    readDTO.PropertyLocation = locations[property.location];
-                    if (property.Developer != null)
-                    {
-                        readDTO.PropertyDeveloper = developers[property.Developer.Value];
-                    }
-                    readDTO.Type = types[property.PropertyType];
-                    return readDTO;
-                })
-                .FirstOrDefault();
+                .ToListAsync();
 
-            if(property == null)
+            PropertyReadDTO? readDTO = _dataManager.IncludeData(properties).FirstOrDefault();
+
+            if(readDTO == null)
             {
                 return Response.Error("Property not found", 404);
             }
 
-            return Response.Message(property);
+            return Response.Message(readDTO);
         }
 
         /// <summary>
@@ -146,35 +122,20 @@ namespace Unitflix.Server.Controllers
         /// <param name="locationId"></param>
         /// <returns></returns>
         [HttpGet("location/{locationId:int}")]
-        public ActionResult GetPropertiesForLocation(int locationId)
+        public async Task<ActionResult> GetPropertiesForLocation(int locationId)
         {
             //Finding the location
             if(!_dbContext.Locations.Any(location => location.Id == locationId))
             {
                 return Response.Error("Location not found", 404);
             }
-            Dictionary<int, Location> locations = _dbContext.Locations.ToDictionary(location => location.Id, location => location);
-            Dictionary<int, Developer> developers = _dbContext.Developers.ToDictionary(dev => dev.Id, dev => dev);
-            Dictionary<int, PropertyType> types = _dbContext.PropertyTypes.ToDictionary(type => type.Id, type => type);
-            List<PropertyReadDTO> properties = _dbContext
+            List<Property> properties = await _dbContext
                 .Properties
                 .Where(p => p.location == locationId && p.ApprovalStatus == PropertyStatus.Approved)
                 .Include(property => property.Files.Where(f => f.Purpose == FilePurpose.Cover))
-                .ToList()
-                .Select(property =>
-                {
-                    PropertyReadDTO readDTO = _mapper.Map<PropertyReadDTO>(property);
-                    readDTO.PropertyLocation = locations[property.location];
-                    if (property.Developer != null)
-                    {
-                        readDTO.PropertyDeveloper = developers[property.Developer.Value];
-                    }
-                    readDTO.Type = types[property.PropertyType];
-                    return readDTO;
-                })
-                .ToList();
+                .ToListAsync();
 
-            return Response.Message(properties);
+            return Response.Message(_dataManager.IncludeData(properties));
         }
 
         /// <summary>
@@ -183,36 +144,20 @@ namespace Unitflix.Server.Controllers
         /// <param name="developerId"></param>
         /// <returns></returns>
         [HttpGet("developer/{developerId:int}")]
-        public ActionResult GetPropertiesForDeveloper(int developerId)
+        public async Task<ActionResult> GetPropertiesForDeveloper(int developerId)
         {
             if(!_dbContext.Developers.Any(dev => dev.Id == developerId))
             {
                 return Response.Error("Developer not found", 404);
             }
 
-            Dictionary<int, Location> locations = _dbContext.Locations.ToDictionary(location => location.Id, location => location);
-            Dictionary<int, Developer> developers = _dbContext.Developers.ToDictionary(dev => dev.Id, dev => dev);
-            Dictionary<int, PropertyType> types = _dbContext.PropertyTypes.ToDictionary(type => type.Id, type => type);
-
-            List<PropertyReadDTO> properties = _dbContext
+            List<Property> properties = await _dbContext
                 .Properties
                 .Where(p => p.Developer.HasValue && p.Developer.Value == developerId && p.ApprovalStatus == PropertyStatus.Approved)
                 .Include(property => property.Files.Where(f => f.Purpose == FilePurpose.Cover))
-                .ToList()
-                .Select(property =>
-                {
-                    PropertyReadDTO readDTO = _mapper.Map<PropertyReadDTO>(property);
-                    readDTO.PropertyLocation = locations[property.location];
-                    if (property.Developer != null)
-                    {
-                        readDTO.PropertyDeveloper = developers[property.Developer.Value];
-                    }
-                    readDTO.Type = types[property.PropertyType];
-                    return readDTO;
-                })
-                .ToList();
+                .ToListAsync();
 
-            return Response.Message(properties);
+            return Response.Message(_dataManager.IncludeData(properties));
         }
 
         /// <summary>
@@ -221,36 +166,20 @@ namespace Unitflix.Server.Controllers
         /// <param name="propertyType"></param>
         /// <returns></returns>
         [HttpGet("type/{propertyType:int}")]
-        public ActionResult GetPropertiesOfType(int propertyType)
+        public async Task<ActionResult> GetPropertiesOfType(int propertyType)
         {
             if (!_dbContext.PropertyTypes.Any(type => type.Id == propertyType))
             {
                 return Response.Error("Property Type not found", 404);
             }
 
-            Dictionary<int, Location> locations = _dbContext.Locations.ToDictionary(location => location.Id, location => location);
-            Dictionary<int, Developer> developers = _dbContext.Developers.ToDictionary(dev => dev.Id, dev => dev);
-            Dictionary<int, PropertyType> types = _dbContext.PropertyTypes.ToDictionary(type => type.Id, type => type);
-
-            List<PropertyReadDTO> properties = _dbContext
+            List<Property> properties = await _dbContext
                 .Properties
                 .Where(p => p.PropertyType == propertyType && p.ApprovalStatus == PropertyStatus.Approved)
                 .Include(property => property.Files.Where(f => f.Purpose == FilePurpose.Cover))
-                .ToList()
-                .Select(property =>
-                {
-                    PropertyReadDTO readDTO = _mapper.Map<PropertyReadDTO>(property);
-                    readDTO.PropertyLocation = locations[property.location];
-                    if (property.Developer != null)
-                    {
-                        readDTO.PropertyDeveloper = developers[property.Developer.Value];
-                    }
-                    readDTO.Type = types[property.PropertyType];
-                    return readDTO;
-                })
-                .ToList();
+                .ToListAsync();
 
-            return Response.Message(properties);
+            return Response.Message(_dataManager.IncludeData(properties));
         }
 
         /// <summary>
@@ -259,7 +188,7 @@ namespace Unitflix.Server.Controllers
         /// <param name="propertyCategory"></param>
         /// <returns></returns>
         [HttpGet("category/{propertyCategory}")]
-        public ActionResult GetPropertiesOfCategory(string propertyCategory)
+        public async Task<ActionResult> GetPropertiesOfCategory(string propertyCategory)
         {
             PropertyCategory category;
 
@@ -268,29 +197,13 @@ namespace Unitflix.Server.Controllers
                 return Response.Error("Invalid Property Category");
             }
 
-            Dictionary<int, Location> locations = _dbContext.Locations.ToDictionary(location => location.Id, location => location);
-            Dictionary<int, Developer> developers = _dbContext.Developers.ToDictionary(dev => dev.Id, dev => dev);
-            Dictionary<int, PropertyType> types = _dbContext.PropertyTypes.ToDictionary(type => type.Id, type => type);
-
-            List<PropertyReadDTO> properties = _dbContext
+            List<Property> properties = await _dbContext
                 .Properties
                 .Where(p => p.Category == category && p.ApprovalStatus == PropertyStatus.Approved)
                 .Include(property => property.Files.Where(f => f.Purpose == FilePurpose.Cover))
-                .ToList()
-                .Select(property =>
-                {
-                    PropertyReadDTO readDTO = _mapper.Map<PropertyReadDTO>(property);
-                    readDTO.PropertyLocation = locations[property.location];
-                    if (property.Developer != null)
-                    {
-                        readDTO.PropertyDeveloper = developers[property.Developer.Value];
-                    }
-                    readDTO.Type = types[property.PropertyType];
-                    return readDTO;
-                })
-                .ToList(); ;
+                .ToListAsync();
 
-            return Response.Message(properties);
+            return Response.Message(_dataManager.IncludeData(properties));
         }
 
         /// <summary>
@@ -298,31 +211,15 @@ namespace Unitflix.Server.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("featured")]
-        public ActionResult GetFeaturedProjects()
+        public async Task<ActionResult> GetFeaturedProjects()
         {
-            Dictionary<int, Location> locations = _dbContext.Locations.ToDictionary(location => location.Id, location => location);
-            Dictionary<int, Developer> developers = _dbContext.Developers.ToDictionary(dev => dev.Id, dev => dev);
-            Dictionary<int, PropertyType> types = _dbContext.PropertyTypes.ToDictionary(type => type.Id, type => type);
-
-            List<PropertyReadDTO> properties = _dbContext
+            List<Property> properties = await _dbContext
                 .Properties
                 .Where(p => p.Category == PropertyCategory.Project && p.ApprovalStatus == PropertyStatus.Approved && p.Featured)
                 .Include(property => property.Files.Where(f => f.Purpose == FilePurpose.Cover))
-                .ToList()
-                .Select(property =>
-                {
-                    PropertyReadDTO readDTO = _mapper.Map<PropertyReadDTO>(property);
-                    readDTO.PropertyLocation = locations[property.location];
-                    if (property.Developer != null)
-                    {
-                        readDTO.PropertyDeveloper = developers[property.Developer.Value];
-                    }
-                    readDTO.Type = types[property.PropertyType];
-                    return readDTO;
-                })
-                .ToList(); ;
+                .ToListAsync();
 
-            return Response.Message(properties);
+            return Response.Message(_dataManager.IncludeData(properties));
         }
 
         /// <summary>
@@ -330,7 +227,7 @@ namespace Unitflix.Server.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("search")]
-        public ActionResult SearchProperties()
+        public async Task<ActionResult> SearchProperties()
         {
             string? searchWord = Request.Query["text"];
             string? propertyType = Request.Query["type"];
@@ -340,25 +237,9 @@ namespace Unitflix.Server.Controllers
             string? maxPrice = Request.Query["max"];
             string? purpose = Request.Query["purpose"];
 
-            Dictionary<int, Location> locations = _dbContext.Locations.ToDictionary(location => location.Id, location => location);
-            Dictionary<int, Developer> developers = _dbContext.Developers.ToDictionary(dev => dev.Id, dev => dev);
-            Dictionary<int, PropertyType> types = _dbContext.PropertyTypes.ToDictionary(type => type.Id, type => type);
-
-            List<PropertyReadDTO> properties = _dbContext
+            List<Property> properties = await _dbContext
                 .Properties
-                .ToList()
-                .Select(property =>
-                {
-                    PropertyReadDTO readDTO = _mapper.Map<PropertyReadDTO>(property);
-                    readDTO.PropertyLocation = locations[property.location];
-                    if (property.Developer != null)
-                    {
-                        readDTO.PropertyDeveloper = developers[property.Developer.Value];
-                    }
-                    readDTO.Type = types[property.PropertyType];
-                    return readDTO;
-                })
-                .ToList();
+                .ToListAsync();
 
             if(!string.IsNullOrEmpty(purpose))
             {
@@ -417,7 +298,7 @@ namespace Unitflix.Server.Controllers
                     .ToList();
             }
 
-            return Response.Message(new { properties = properties });
+            return Response.Message(new { properties = _dataManager.IncludeData(properties) });
         }
 
         /// <summary>
@@ -451,12 +332,10 @@ namespace Unitflix.Server.Controllers
             _dbContext.Overviews.Add(overview);
 
             List<Feature> features = _mapper.Map<List<Feature>>(writeDTO.Features);
-            features.ForEach(feature => feature.PropertyId = property.Id);
-            _dbContext.Features.AddRange(features);
+            _dbContext.Features.CreateOrUpdate(features, property.Id);
 
-            List<KeyHighlight> keyHighlights = _mapper.Map<List<KeyHighlight>>(writeDTO.KeyHighlights);
-            keyHighlights.ForEach(keyHighlight => keyHighlight.PropertyId = property.Id);
-            _dbContext.KeyHighlights.AddRange(keyHighlights);
+            List<KeyHighlight> keyHighlights= _mapper.Map<List<KeyHighlight>>(writeDTO.KeyHighlights);
+            _dbContext.KeyHighlights.CreateOrUpdate(keyHighlights, property.Id);
 
             FileSaveResult? result = await writeDTO.CoverImage.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
 
@@ -525,20 +404,16 @@ namespace Unitflix.Server.Controllers
             _dbContext.Overviews.Add(overview);
 
             List<Feature> features = _mapper.Map<List<Feature>>(writeDTO.Features);
-            features.ForEach(feature => feature.PropertyId = property.Id);
-            _dbContext.Features.AddRange(features);
+            _dbContext.Features.CreateOrUpdate(features, property.Id);
 
             List<KeyHighlight> keyHighlights = _mapper.Map<List<KeyHighlight>>(writeDTO.KeyHighlights);
-            keyHighlights.ForEach(keyHighlight => keyHighlight.PropertyId = property.Id);
-            _dbContext.KeyHighlights.AddRange(keyHighlights);
+            _dbContext.KeyHighlights.CreateOrUpdate(keyHighlights, property.Id);
 
             List<PaymentPlanItem> paymentPlanItems = _mapper.Map<List<PaymentPlanItem>>(writeDTO.PaymentPlanItems);
-            paymentPlanItems.ForEach(paymentPlan => paymentPlan.PropertyId = property.Id);
-            _dbContext.PaymentPlanItems.AddRange(paymentPlanItems);
+            _dbContext.PaymentPlanItems.CreateOrUpdate(paymentPlanItems, property.Id);
 
             List<PropertyDetail> propertyDetails = _mapper.Map<List<PropertyDetail>>(writeDTO.PropertyDetails);
-            propertyDetails.ForEach(propertyDetail => propertyDetail.PropertyId = property.Id);
-            _dbContext.PropertyDetails.AddRange(propertyDetails);
+            _dbContext.PropertyDetails.CreateOrUpdate(propertyDetails, property.Id);
 
             FileSaveResult? result = await writeDTO.CoverImage.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
 
@@ -660,8 +535,7 @@ namespace Unitflix.Server.Controllers
             }
 
             List<Feature> features = _mapper.Map<List<Feature>>(updateDTO.Features);
-            features.ForEach(feature => feature.PropertyId = property.Id);
-            _dbContext.Features.AddRange(features);
+            _dbContext.Features.CreateOrUpdate(features, property.Id);
 
             //Deleting the specified key highlights
             if (updateDTO.KeyHighlightsToRemove.Count > 0)
@@ -671,8 +545,7 @@ namespace Unitflix.Server.Controllers
             }
 
             List<KeyHighlight> keyHighlights = _mapper.Map<List<KeyHighlight>>(updateDTO.KeyHighlights);
-            keyHighlights.ForEach(keyHighlight => keyHighlight.PropertyId = property.Id);
-            _dbContext.KeyHighlights.AddRange(keyHighlights);
+            _dbContext.KeyHighlights.CreateOrUpdate(keyHighlights, property.Id);
 
             //If a new cover image is specified we need to delete the previous one
             if(updateDTO.CoverImage != null)

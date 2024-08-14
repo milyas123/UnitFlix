@@ -37,6 +37,8 @@ namespace Unitflix.Server.Controllers
 
         private EmailManager _emailManager;
 
+        private PropertyDataManager _dataManager;
+
         #endregion
 
         #region Constructor
@@ -48,13 +50,15 @@ namespace Unitflix.Server.Controllers
             IMapper mapper, 
             PropertyRequestValidator validator,
             IWebHostEnvironment webHostEnvironment,
-            EmailManager emailManager)
+            EmailManager emailManager,
+            PropertyDataManager dataManager)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _propertyRequestValidator = validator;
             _webHostEnvironment = webHostEnvironment;
             _emailManager = emailManager;
+            _dataManager = dataManager;
         }
 
         #endregion
@@ -199,12 +203,9 @@ namespace Unitflix.Server.Controllers
         /// <returns></returns>
         [Authorize(Roles = "Admin")]
         [HttpGet("")]
-        public ActionResult GetSubmittedRequests()
+        public async Task<ActionResult> GetSubmittedRequests()
         {
-            Dictionary<int, Location> locations = _dbContext.Locations.ToDictionary(location => location.Id, location => location);
-            Dictionary<int, Developer> developers = _dbContext.Developers.ToDictionary(dev => dev.Id, dev => dev);
-            Dictionary<int, PropertyType> types = _dbContext.PropertyTypes.ToDictionary(type => type.Id, type => type);
-            List<PropertyReadDTO> properties = _dbContext
+            List<Property> properties = await _dbContext
                 .Properties
                 .Where(p => p.Submission == PropertySubmission.Secondary && p.IsVerified)
                 .Include(property => property.Overview)
@@ -212,21 +213,9 @@ namespace Unitflix.Server.Controllers
                 .Include(property => property.Features)
                 .Include(property => property.KeyHighlights)
                 .Include(property => property.UserDetail)
-                .ToList()
-                .Select(property =>
-                {
-                    PropertyReadDTO readDTO = _mapper.Map<PropertyReadDTO>(property);
-                    readDTO.PropertyLocation = locations[property.location];
-                    if (property.Developer != null)
-                    {
-                        readDTO.PropertyDeveloper = developers[property.Developer.Value];
-                    }
-                    readDTO.Type = types[property.PropertyType];
-                    return readDTO;
-                })
-                .ToList();
+                .ToListAsync();
 
-            return Response.Message(properties);
+            return Response.Message(_dataManager.IncludeData(properties));
         }
 
         /// <summary>
@@ -265,13 +254,9 @@ namespace Unitflix.Server.Controllers
         /// <returns></returns>
         [Authorize(Roles = "Admin")]
         [HttpGet("{id:int}")]
-        public ActionResult GetSubmittedRequest(int id)
+        public async Task<ActionResult> GetSubmittedRequest(int id)
         {
-            Dictionary<int, Location> locations = _dbContext.Locations.ToDictionary(location => location.Id, location => location);
-            Dictionary<int, Developer> developers = _dbContext.Developers.ToDictionary(dev => dev.Id, dev => dev);
-            Dictionary<int, PropertyType> types = _dbContext.PropertyTypes.ToDictionary(type => type.Id, type => type);
-
-            PropertyReadDTO? propertyRequest = _dbContext
+            List<Property> properties = await _dbContext
                 .Properties
                 .Where(p => p.Submission == PropertySubmission.Secondary && p.Id == id)
                 .Include(property => property.Overview)
@@ -279,27 +264,17 @@ namespace Unitflix.Server.Controllers
                 .Include(property => property.Features)
                 .Include(property => property.KeyHighlights)
                 .Include(property => property.UserDetail)
-                .ToList()
-                .Select(property =>
-                {
-                    PropertyReadDTO readDTO = _mapper.Map<PropertyReadDTO>(property);
-                    readDTO.PropertyLocation = locations[property.location];
-                    if (property.Developer != null)
-                    {
-                        readDTO.PropertyDeveloper = developers[property.Developer.Value];
-                    }
-                    readDTO.Type = types[property.PropertyType];
-                    return readDTO;
-                })
-                .FirstOrDefault();
+                .ToListAsync();
 
-            if(propertyRequest == null)
+            PropertyReadDTO? readDTO = _dataManager.IncludeData(properties).FirstOrDefault();
+
+            if(readDTO == null)
             {
                 return Response.Error("Property Request Not Found", 404);
             }
             else
             {
-                return Response.Message(propertyRequest);
+                return Response.Message(readDTO);
             }
         }
 
