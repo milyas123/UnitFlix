@@ -40,22 +40,17 @@ const LandingPage = () => {
       location: selectedLocation || "",
       type: selectedPropertyType || "",
       developer: selectedDeveloper || "",
-      min:
-        sliderMinValue + (value[0] / 100) * (sliderMaxValue - sliderMinValue),
-      max:
-        sliderMinValue + (value[1] / 100) * (sliderMaxValue - sliderMinValue),
+      min: sliderMinValue + (value[0] / 100) * (sliderMaxValue - sliderMinValue),
+      max: sliderMinValue + (value[1] / 100) * (sliderMaxValue - sliderMinValue),
       purpose: selectedTab === "All" ? 0 : selectedTab === "For Sale" ? 0 : 1,
     };
 
     const queryString = new URLSearchParams(searchParams).toString();
 
     try {
-      const response = await axios.get(
-        `${serverURL}/property/search?${queryString}`,
-      );
-      console.log(response.data.data.properties);
-
-      setProperties(response.data?.data.properties);
+      const response = await axios.get(`${serverURL}/property/search?${queryString}`);
+      const filteredProperties = response.data?.data?.properties?.filter(property => property.category === 1);
+      setProperties(filteredProperties);
     } catch (error) {
       toast.error("Error fetching results. Try again!");
       console.log(error.message);
@@ -65,7 +60,8 @@ const LandingPage = () => {
   const fetchProjects = async () => {
     try {
       const response = await axios.get(`${serverURL}/property/featured`);
-      setProperties(response.data.data);
+      const filteredProperties = response.data?.data.filter(property => property.category === 1);
+      setProperties(filteredProperties);
     } catch (error) {
       console.error("Error fetching projects:", error);
     }

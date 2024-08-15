@@ -44,11 +44,9 @@ const PropertiesForSale = () => {
     const queryString = new URLSearchParams(searchParams).toString();
 
     try {
-      const response = await axios.get(
-        `${serverURL}/property/search?${queryString}`,
-      );
-
-      setProperties(response.data?.data.properties);
+      const response = await axios.get(`${serverURL}/property/search?${queryString}`);
+      const filteredProperties = response.data?.data?.properties?.filter(property => property.category === 1);
+      setProperties(filteredProperties);
     } catch (error) {
       toast.error("Error fetching results. Try again!");
       console.log(error.message);
@@ -59,7 +57,8 @@ const PropertiesForSale = () => {
   const fetchProperties = async () => {
     try {
       const response = await axios.get(`${serverURL}/property/search?${new URLSearchParams({purpose: param}).toString()}`);
-      setProperties(response.data?.data.properties);
+      const filteredProperties = response.data?.data?.properties?.filter(property => property.category === 1);
+      setProperties(filteredProperties);
     } catch (error) {
       console.error("Error fetching properties:", error);
     }
