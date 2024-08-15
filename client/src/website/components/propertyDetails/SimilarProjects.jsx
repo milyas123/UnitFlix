@@ -5,14 +5,13 @@ import { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 
-import { MoveLeft, MoveRight } from "lucide-react";
 import ProjectCard from "../landingPage/cards/ProjectCard";
 
 import useSwiperNavigation from "@/hooks/useSwiperNavigation";
 import ArrowLeft from "../svgs/ArrowLeft";
 import ArrowRight from "../svgs/ArrowRight";
 
-const SimilarProjects = () => {
+const SimilarProjects = ({ relatedProjects }) => {
   const projectsSwiperRef = useRef(null);
   const { isBeginning, isEnd } = useSwiperNavigation(projectsSwiperRef);
 
@@ -51,9 +50,9 @@ const SimilarProjects = () => {
           modules={[Navigation]}
           className="h-[450px] md:h-[220px] lg:h-[260px] xl:h-[330px] 2xl:h-[420px]"
         >
-          {[1, 2, 3, 4, 5, 6].map((item) => (
-            <SwiperSlide key={item}>
-              <ProjectCard key={item} />
+          {relatedProjects?.map((project) => (
+            <SwiperSlide key={crypto.randomUUID()}>
+              <ProjectCard project={project}  />
             </SwiperSlide>
           ))}
         </Swiper>

@@ -5,14 +5,13 @@ import { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 
-import { MoveLeft, MoveRight } from "lucide-react";
 import PropertyCard from "../propertiesForSale/PropertyCard";
 
 import useSwiperNavigation from "@/hooks/useSwiperNavigation";
 import ArrowLeft from "../svgs/ArrowLeft";
 import ArrowRight from "../svgs/ArrowRight";
 
-const SimilarProperties = () => {
+const SimilarProperties = ({ relatedProperties }) => {
   const propertiesSwiperRef = useRef(null);
   const { isBeginning, isEnd } = useSwiperNavigation(propertiesSwiperRef);
 
@@ -51,9 +50,9 @@ const SimilarProperties = () => {
           modules={[Navigation]}
           className="h-[600px] md:h-[370px] lg:h-[390px] xl:h-[430px] 2xl:h-[550px]"
         >
-          {[1, 2, 3, 4, 5, 6].map((item) => (
-            <SwiperSlide key={item}>
-              <PropertyCard key={item} />
+          {relatedProperties?.map((property) => (
+            <SwiperSlide key={crypto.randomUUID()}>
+              <PropertyCard property={property} />
             </SwiperSlide>
           ))}
         </Swiper>

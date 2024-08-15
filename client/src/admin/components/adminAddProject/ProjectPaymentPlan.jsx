@@ -19,7 +19,7 @@ const ProjectPaymentPlan = ({ formData, showModal, handleEdit, handleDelete }) =
       </div>
 
       <div className="ms-auto flex w-[72%] flex-col gap-y-8 p-1">
-        <div className="w-full flex justify-between flex-wrap space-y-2.5">
+        <div className="w-full flex justify-start flex-wrap gap-2.5">
           {formData.paymentPlanItems.map((item, index) => (
             <div key={index} className="flex items-center justify-between">
               <div className="flex h-[180px] w-[240px] items-center justify-center rounded-md border p-2">

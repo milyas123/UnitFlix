@@ -1,20 +1,10 @@
 import React, { useState } from "react";
-import Slider from "react-slick";
 import { BsArrowUpRight, BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { X } from "lucide-react";
+
+import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-const images = [
-  "/assets/imgs/p1.jpg",
-  "/assets/imgs/p2.jpg",
-  "/assets/imgs/p3.jpg",
-  "/assets/imgs/p4.jpg",
-  "/assets/imgs/p5.jpg",
-  "/assets/imgs/p6.jpg",
-  "/assets/imgs/p7.jpg",
-  "/assets/imgs/p8.jpg",
-];
 
 const SampleNextArrow = (props) => {
   const { onClick } = props;
@@ -40,17 +30,16 @@ const SamplePrevArrow = (props) => {
   );
 };
 
-const ImageGallery = () => {
+const ImageGallery = ({ imgFiles }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+
+  // Filter the images with the purpose of 1
+  const images = imgFiles?.filter((file) => file.purpose === 1).map((file) => file.url);
 
   const openModal = (index) => {
     setSelectedImageIndex(index);
     setModalIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalIsOpen(false);
   };
 
   const settings = {
@@ -89,7 +78,7 @@ const ImageGallery = () => {
               onClick={() => openModal(1)}
             >
               <img
-                src="/assets/imgs/p2.jpg"
+                src={images && images[0] ? images[0] : "/assets/imgs/p2.jpg"}
                 className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
                 alt=""
               />
@@ -99,7 +88,7 @@ const ImageGallery = () => {
               onClick={() => openModal(2)}
             >
               <img
-                src="/assets/imgs/p3.jpg"
+                src={images && images[1] ? images[1] : "/assets/imgs/p3.jpg"}
                 className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
                 alt=""
               />
@@ -112,7 +101,7 @@ const ImageGallery = () => {
               onClick={() => openModal(3)}
             >
               <img
-                src="/assets/imgs/p4.jpg"
+                src={images && images[2] ? images[2] : "/assets/imgs/p4.jpg"}
                 className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
                 alt=""
               />
@@ -122,7 +111,7 @@ const ImageGallery = () => {
               onClick={() => openModal(4)}
             >
               <img
-                src="/assets/imgs/p6.jpg"
+                src={images && images[3] ? images[3] : "/assets/imgs/p6.jpg"}
                 className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
                 alt=""
               />
@@ -132,7 +121,7 @@ const ImageGallery = () => {
               onClick={() => openModal(5)}
             >
               <img
-                src="/assets/imgs/p7.jpg"
+                src={images && images[4] ? images[4] : "/assets/imgs/p7.jpg"}
                 className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
                 alt=""
               />
@@ -144,7 +133,7 @@ const ImageGallery = () => {
               onClick={() => openModal(6)}
             >
               <img
-                src="/assets/imgs/p8.jpg"
+                src={images && images[5] ? images[5] : "/assets/imgs/p8.jpg"}
                 className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
                 alt=""
               />
@@ -154,7 +143,7 @@ const ImageGallery = () => {
               onClick={() => openModal(7)}
             >
               <img
-                src="/assets/imgs/p5.jpg"
+                src={images && images[6] ? images[6] : "/assets/imgs/p5.jpg"}
                 className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
                 alt=""
               />
@@ -167,7 +156,7 @@ const ImageGallery = () => {
           onClick={() => openModal(0)}
         >
           <img
-            src="/assets/imgs/p1.jpg"
+            src={images && images[7] ? images[7] : "/assets/imgs/p1.jpg"}
             className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
             alt=""
           />
@@ -180,10 +169,10 @@ const ImageGallery = () => {
             <X
               className="absolute right-5 top-24 z-20 cursor-pointer text-white opacity-60 transition-all duration-200 ease-in-out hover:opacity-100"
               size={35}
-              onClick={closeModal}
+              onClick={() => setModalIsOpen(false)}
             />
             <Slider {...settings}>
-              {images.map((image, index) => (
+              {images?.map((image, index) => (
                 <div
                   key={index}
                   className="h-[350px] md:h-[500px] w-full rounded-sm lg:rounded-lg"

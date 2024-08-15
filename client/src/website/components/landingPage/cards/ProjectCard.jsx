@@ -10,7 +10,7 @@ const ProjectCard = ({ project }) => {
       <div className="relative">
         <img
           className="h-[310px] w-full rounded-xl object-cover shadow-lg shadow-pastelGrey md:h-[140px] md:rounded-md lg:h-[190px] lg:rounded-lg xl:h-[250px] 2xl:h-[310px] 2xl:rounded-xl"
-          src="/assets/imgs/discover.jpg"
+          src={project?.files.find((file) => file.purpose === 0)?.url}
           alt="Dubai South"
         />
         <div className="absolute -bottom-[90px] left-4 right-4 z-[300] rounded-xl bg-white px-3 py-4 shadow-lg md:-bottom-16 md:left-2 md:right-2 md:rounded-md md:p-2 lg:-bottom-14 lg:left-3.5 lg:right-3.5 lg:rounded-lg lg:p-3 xl:-bottom-16 xl:left-5 xl:right-5 2xl:-bottom-24 2xl:left-6 2xl:right-6 2xl:rounded-xl 2xl:p-3.5">
@@ -20,7 +20,8 @@ const ProjectCard = ({ project }) => {
             {project?.title}
           </h2>
           <p className={`text-center ${textSizes}`}>
-            {project?.overview || "Luxurious 1-3 Bedroom Waterfront Apartments & Villas"}
+            {project?.overview ||
+              "Luxurious 1-3 Bedroom Waterfront Apartments & Villas"}
           </p>
           <p
             className={`mt-1.5 text-center font-semibold text-gray-700 md:mt-0.5 lg:mt-1 xl:mt-1.5 2xl:mt-2 ${textSizes}`}

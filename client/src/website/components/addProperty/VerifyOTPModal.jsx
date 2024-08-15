@@ -4,41 +4,61 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 
 const VerifyOTPModal = ({ onClose }) => {
-  const [otp, setOtp] = useState(Array(6).fill("0"));
+  const [otp, setOtp] = useState(Array(6).fill(""));
 
   const handleChange = (value, index) => {
+    if (value.length > 1) return;
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
+
+    // Move focus to the next input
+    if (value && index < otp.length - 1) {
+      const nextInput = document.getElementById(`otp-input-${index + 1}`);
+      if (nextInput) {
+        nextInput.focus();
+      }
+    }
+  };
+
+  const handleKeyDown = (e, index) => {
+    if (e.key === "Backspace" && !otp[index] && index > 0) {
+      const prevInput = document.getElementById(`otp-input-${index - 1}`);
+      if (prevInput) {
+        prevInput.focus();
+      }
+    }
   };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="relative w-[64rem] rounded-xl bg-white p-6 flex justify-between items-center gap-x-7">
+      <div className="relative flex w-[64rem] items-center justify-between gap-x-7 rounded-xl bg-white p-6">
         <SquareX
           size={30}
-          className="cursor-pointer absolute top-4 right-4 text-2xl font-bold text-gray-600 hover:text-gray-800"
+          className="absolute right-4 top-4 cursor-pointer text-2xl font-bold text-gray-600 hover:text-gray-800"
           onClick={onClose}
         />
 
         <img
           src="/assets/imgs/otp.png"
-          className="w-1/2 h-[470px] object-cover rounded-xl"
+          className="h-[470px] w-1/2 rounded-xl object-cover"
           alt="OTP Verification"
         />
 
-        <div className="w-1/2 flex justify-center items-center">
-          <div className="flex flex-col gap-4 justify-center w-full text-center">
-            <h1 className="font-semibold text-[30px]">OTP Verification</h1>
-            <div className="flex justify-between items-center gap-x-1.5">
+        <div className="flex w-1/2 items-center justify-center">
+          <div className="flex w-full flex-col justify-center gap-4 text-center">
+            <h1 className="text-[30px] font-semibold">OTP Verification</h1>
+            <div className="flex items-center justify-between gap-x-1.5">
               {otp.map((digit, index) => (
                 <Input
                   type="number"
                   key={index}
-                  className="size-[64px] rounded-lg border-2 p-1.5 text-[48px] font-medium text-border flex justify-center items-center text-center"
+                  id={`otp-input-${index}`}
+                  className="flex size-[64px] items-center justify-center rounded-lg border-2 p-1.5 text-center text-[48px] font-medium text-border"
                   maxLength={1}
                   value={digit}
                   onChange={(e) => handleChange(e.target.value, index)}
+                  onKeyDown={(e) => handleKeyDown(e, index)}
                 />
               ))}
             </div>

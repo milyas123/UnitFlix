@@ -5,19 +5,22 @@ import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
 
-import { Link } from "react-router-dom";
 import Bed from "../svgs/Bed";
 import Shower from "../svgs/Shower";
 import Area from "../svgs/Area";
-import { MdOutlineLocationOn } from "react-icons/md";
-import { formatCurrency } from "@/lib/utils";
 
-const locations = ["Dubai", "Abu Dhabi", "Sharjah", "Ajman", "Ras Al Khaimah", "Fujairah", "Umm Al Quwain"];
+import { Link } from "react-router-dom";
+import { MdOutlineLocationOn } from "react-icons/md";
+
+import { formatCurrency } from "@/lib/utils";
+import { useAppContext } from "@/AppContext";
 
 const PropertyCard = ({ property }) => {
+  const { locations } = useAppContext();
+
   return (
-    <Link to="/property-details" className="contents">
-      <div className="w-full overflow-hidden rounded-lg border border-lightGrey md:w-[90%] md:min-w-[150px] md:max-w-[200px] lg:w-[95%] lg:min-w-[225px] lg:max-w-[270px] xl:min-w-[290px] xl:w-[92%] xl:max-w-[320px] 2xl:w-[95%] 2xl:min-w-[345px] 2xl:max-w-[400px]">
+    <Link to={`/property-details/${property?.id}`} className="contents">
+      <div className="w-full overflow-hidden rounded-lg border border-lightGrey md:w-[90%] md:min-w-[150px] md:max-w-[200px] lg:w-[95%] lg:min-w-[225px] lg:max-w-[270px] xl:w-[92%] xl:min-w-[290px] xl:max-w-[320px] 2xl:w-[95%] 2xl:min-w-[345px] 2xl:max-w-[400px]">
         <style jsx>{`
           .property-card .swiper-pagination-bullet {
             background-color: #ffffff;
@@ -43,16 +46,19 @@ const PropertyCard = ({ property }) => {
               "--swiper-pagination-color": "#FFFFFF",
             }}
           >
-            {[1, 2, 3, 4, 5].map((item) => (
-              <SwiperSlide key={item} className="relative">
-                <img
-                  src="/assets/imgs/building-img.jpg"
-                  alt=""
-                  className="size-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-              </SwiperSlide>
-            ))}
+            {property?.files.map(
+              (image) =>
+                image.purpose === 0 && (
+                  <SwiperSlide key={crypto.randomUUID()} className="relative">
+                    <img
+                      src={image.url}
+                      alt={`${image?.url}`}
+                      className="size-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+                  </SwiperSlide>
+                ),
+            )}
           </Swiper>
         </div>
 
@@ -71,12 +77,12 @@ const PropertyCard = ({ property }) => {
               size={17}
               className="-ms-0.5 size-5 md:size-2 lg:size-3 xl:size-4 2xl:size-5"
             />
-            {locations[property?.location - 1]}
+            {locations.find((loc) => loc.id === property?.location)?.name}
           </div>
 
           <div className="flex flex-row whitespace-nowrap text-[12px] font-semibold md:text-[5px] lg:text-[7.5px] xl:gap-x-1 xl:text-[9px] 2xl:gap-x-2 2xl:text-[11.5px]">
             <span className="border-r border-lightGrey pe-1 text-[16px] font-bold text-mirage md:pe-0.5 md:text-[6px] lg:pe-1 lg:text-[8px] xl:pe-1.5 xl:text-[11px] 2xl:text-[13px]">
-              Townhouse
+              {property?.title}
             </span>
             <span className="flex items-center gap-x-1 border-r border-lightGrey px-1 md:px-0.5 lg:px-1">
               <Bed /> {property?.beds} Beds

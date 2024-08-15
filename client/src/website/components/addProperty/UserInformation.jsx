@@ -1,6 +1,6 @@
 import { Input } from "../ui/input";
 
-const UserInformation = () => {
+const UserInformation = ({ formData, handleChange }) => {
   return (
     <div className="user--addProperty-sectionPadding flex flex-col rounded-xl border border-lightGrey bg-white md:flex-row md:items-start">
       <h2 className="user--addProperty-headingTextSize whitespace-nowrap md:w-[23%]">
@@ -11,9 +11,11 @@ const UserInformation = () => {
           <label className="user--addProperty-labelTextSize">Full Name</label>
           <Input
             type="text"
-            id="title"
+            id="name"
             className="ps-3"
-            placeholder="Dubai Best Home under 1.5 kanal"
+            placeholder="John Doe"
+            value={formData.userDetail.name}
+            onChange={handleChange}
           />
         </div>
 
@@ -24,6 +26,8 @@ const UserInformation = () => {
             id="email"
             className="ps-3"
             placeholder="example@gmail.com"
+            value={formData.userDetail.email}
+            onChange={handleChange}
           />
         </div>
 
@@ -32,10 +36,12 @@ const UserInformation = () => {
             Phone Number
           </label>
           <Input
-            type="email"
-            id="email"
+            type="text"
+            id="phoneNumber"
             className="ps-3"
             placeholder="000 0000 0000"
+            value={formData.userDetail.phoneNumber}
+            onChange={handleChange}
           />
         </div>
       </div>

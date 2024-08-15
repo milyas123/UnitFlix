@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import { ImageUp } from "lucide-react";
+import { AiFillFilePdf } from "react-icons/ai";
+
 import { Input } from "@/website/components/ui/input";
 import { Textarea } from "@/website/components/ui/textarea";
-import { ImageUp } from "lucide-react";
 import Status from "@/website/components/svgs/Status";
 import Delete from "@/website/components/svgs/Delete";
 
@@ -11,7 +13,7 @@ const ProjectGeneralInformation = ({ formData, handleChange, handleStatusSelect,
   const [selectedStatus, setSelectedStatus] = useState(statuses[0]);
   const [isFeatured, setIsFeatured] = useState(formData.featured); 
   const [previewCoverImage, setPreviewCoverImage] = useState(null);
-  const [previewBrochure, setPreviewBrochure] = useState(null);
+  const [brochureFileName, setBrochureFileName] = useState(null);
 
   useEffect(() => {
     if (formData.coverImage) {
@@ -27,13 +29,9 @@ const ProjectGeneralInformation = ({ formData, handleChange, handleStatusSelect,
 
   useEffect(() => {
     if (formData.brochure) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreviewBrochure(reader.result);
-      };
-      reader.readAsDataURL(formData.brochure);
+      setBrochureFileName(formData.brochure.name);
     } else {
-      setPreviewBrochure(null);
+      setBrochureFileName(null);
     }
   }, [formData.brochure]);
 
@@ -54,7 +52,7 @@ const ProjectGeneralInformation = ({ formData, handleChange, handleStatusSelect,
 
   const handleRemoveBrochure = () => {
     handleFileChange({ target: { files: [null] } }, "brochure");
-  };
+  }
 
   return (
     <div className="flex items-start rounded-xl border border-lightGrey bg-white px-8 py-4">
@@ -171,15 +169,12 @@ const ProjectGeneralInformation = ({ formData, handleChange, handleStatusSelect,
 
         <div className="w-full space-y-2.5">
           <label className="text-[16px] font-semibold">Brochure</label>
-          {previewBrochure ? (
-            <div className="relative w-[288px] h-[185px]">
-              <img
-                src={previewBrochure}
-                alt="Brochure Preview"
-                className="w-full h-full object-cover rounded-2xl"
-              />
+          {brochureFileName ? (
+            <div className="relative flex items-center gap-2 p-2 rounded-lg border border-dashed border-gray-400">
+              <AiFillFilePdf size={30} className="text-red-600" />
+              <p className="text-[14px] text-black">{brochureFileName}</p>
               <button
-                className="absolute top-2 right-2 p-1 bg-red-600 hover:bg-white text-white transition-all duration-200 ease-in-out rounded-full"
+                className="absolute top-1 right-1 p-1 bg-red-600 hover:bg-white text-white transition-all duration-200 ease-in-out rounded-full"
                 onClick={handleRemoveBrochure}
               >
                 <Delete size={20} />
@@ -196,7 +191,7 @@ const ProjectGeneralInformation = ({ formData, handleChange, handleStatusSelect,
               />
               <div className="flex flex-col items-center justify-center gap-y-2 text-smokeyGrey">
                 <ImageUp size={35} />
-                Upload Brochure
+                Upload Brochure PDF
               </div>
             </label>
           )}

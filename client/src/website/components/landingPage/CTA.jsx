@@ -27,7 +27,7 @@ const CTA = () => {
               Submit Property <BsArrowUpRight size={20} />
             </Button>
           </Link>
-          <Link to="/properties-for-sale">
+          <Link to="/properties-for-sale?param=0">
             <Button className="h-10 w-[200px] rounded-lg border-white bg-white text-mirage hover:bg-transparent hover:text-white md:h-7 md:w-auto lg:h-8 xl:h-9 2xl:gap-2 2xl:py-6">
               Browse Properties <BsArrowUpRight size={20} />
             </Button>

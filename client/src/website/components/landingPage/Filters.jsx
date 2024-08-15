@@ -1,19 +1,28 @@
-import React, { useState } from "react";
 import { Button } from "../ui/button";
-import { IoIosSearch } from "react-icons/io";
-import { formatCurrency } from "@/lib/utils";
 import Dropdown from "../common/Dropdown";
+import { IoIosSearch } from "react-icons/io";
 
-const tabs = ["All", "For Sale", "For Rent"];
-const lookingForOptions = ["House", "Apartment", "Condo"];
-const locationOptions = ["New York", "Los Angeles", "Chicago"];
-const developerOptions = ["Developer A", "Developer B", "Developer C"];
+import { formatCurrency } from "@/lib/utils";
+import { useAppContext } from "@/AppContext";
 
-const Filters = () => {
-  const [selectedTab, setSelectedTab] = useState("All");
-  const [value, setValue] = useState([0, 100]);
-  const minValue = 5000;
-  const maxValue = 50000;
+const Filters = ({
+  selectedTab,
+  setSelectedTab,
+  sliderMinValue,
+  sliderMaxValue,
+  value,
+  setValue,
+  text,
+  setText,
+  selectedLocation,
+  setSelectedLocation,
+  selectedDeveloper,
+  setSelectedDeveloper,
+  selectedPropertyType,
+  setSelectedPropertyType,
+  handleSearch,
+}) => {
+  const { locations, developers, propertyTypes } = useAppContext();
 
   const handleSliderChange = (index, newValue) => {
     const updatedValue = [...value];
@@ -41,7 +50,7 @@ const Filters = () => {
     const upHandler = () => {
       document.removeEventListener(
         isTouch ? "touchmove" : "mousemove",
-        moveHandler,
+        moveHandler
       );
       document.removeEventListener(isTouch ? "touchend" : "mouseup", upHandler);
     };
@@ -53,10 +62,11 @@ const Filters = () => {
   return (
     <div className="mx-auto w-full md:w-[69%]">
       <div className="mx-auto flex w-[80%] items-center justify-between rounded-t-lg bg-whiteLilac p-3 font-semibold md:mx-0 md:w-[23%] md:rounded-t-md md:px-3 md:py-2 lg:rounded-t-lg lg:py-2.5 xl:py-3.5 2xl:rounded-t-xl 2xl:p-4">
-        {tabs.map((tab, index) => (
+        {["All", "For Sale", "For Rent"].map((tab, index) => (
           <div
             key={index}
             className="flex w-auto cursor-pointer justify-center"
+            onClick={() => setSelectedTab(tab)}
           >
             <p
               className={`inline-block text-center text-[14px] transition-all duration-300 md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px] ${
@@ -64,7 +74,6 @@ const Filters = () => {
                   ? "border-b-2 border-black text-black"
                   : "border-b-2 border-transparent text-smokeyGrey"
               }`}
-              onClick={() => setSelectedTab(tab)}
             >
               {tab}
             </p>
@@ -77,21 +86,39 @@ const Filters = () => {
           <p className="font-semibold text-mirage">Search</p>
           <input
             type="text"
+            name="text"
             placeholder="Enter Keywords"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
             className="w-full border-b-2 border-transparent focus:border-b-hitGrey focus:outline-none"
           />
         </div>
         <div className="space-y-2 border-b-2 md:w-[90px] md:space-y-1.5 md:border-b-0 md:border-r md:border-r-[#F1F1F1] md:ps-3.5 md:text-[7px] lg:w-[100px] lg:space-y-1.5 lg:ps-0 lg:text-[9px] xl:w-[120px] xl:space-y-2.5 xl:text-[11px] 2xl:w-[145px] 2xl:text-[14px]">
           <p className="font-semibold text-mirage">Looking For</p>
-          <Dropdown options={lookingForOptions} placeholder="Type" />
+          <Dropdown
+            options={propertyTypes}
+            placeholder="Type"
+            selectedOption={selectedPropertyType}
+            onChange={setSelectedPropertyType}
+          />
         </div>
         <div className="space-y-2 border-b-2 md:w-[90px] md:space-y-1.5 md:border-b-0 md:border-r md:border-r-[#F1F1F1] md:ps-3.5 md:text-[7px] lg:w-[100px] lg:space-y-1.5 lg:ps-0 lg:text-[9px] xl:w-[120px] xl:space-y-2.5 xl:text-[11px] 2xl:w-[145px] 2xl:text-[14px]">
           <p className="font-semibold text-mirage">Location</p>
-          <Dropdown options={locationOptions} placeholder="Location" />
+          <Dropdown
+            options={locations}
+            placeholder="Location"
+            selectedOption={selectedLocation}
+            onChange={setSelectedLocation}
+          />
         </div>
         <div className="space-y-2 border-b-2 md:w-[90px] md:space-y-1.5 md:border-b-0 md:border-r md:border-r-[#F1F1F1] md:ps-3.5 md:text-[7px] lg:w-[100px] lg:space-y-1.5 lg:ps-0 lg:text-[9px] xl:w-[120px] xl:space-y-2.5 xl:text-[11px] 2xl:w-[145px] 2xl:text-[14px]">
           <p className="font-semibold text-mirage">Developer</p>
-          <Dropdown options={developerOptions} placeholder="All" />
+          <Dropdown
+            options={developers}
+            placeholder="All"
+            selectedOption={selectedDeveloper}
+            onChange={setSelectedDeveloper}
+          />
         </div>
 
         <div className="space-y-3.5 md:space-y-2 md:border-r md:border-r-[#F1F1F1] md:px-3.5 md:text-[7px] lg:space-y-3 lg:pe-4 lg:text-[9px] xl:space-y-4 xl:pe-5 xl:text-[11px] 2xl:space-y-4 2xl:text-[14px]">
@@ -100,18 +127,18 @@ const Filters = () => {
             <div className="flex items-center text-[12px] md:hidden">
               <p>
                 {formatCurrency(
-                  minValue + (value[0] / 100) * (maxValue - minValue),
+                  sliderMinValue + ((value?.[0] ?? 0) / 100) * (sliderMaxValue - sliderMinValue)
                 )}
               </p>
               <p className="mx-1">-</p>
               <p>
                 {formatCurrency(
-                  minValue + (value[1] / 100) * (maxValue - minValue),
+                  sliderMinValue + ((value?.[1] ?? 100) / 100) * (sliderMaxValue - sliderMinValue)
                 )}
               </p>
             </div>
           </div>
-          <div className="w-[95%] mx-auto sm:mx-0 sm:w-full slider-container relative flex items-center">
+          <div className="slider-container relative mx-auto flex w-[95%] items-center sm:mx-0 sm:w-full">
             <input
               type="range"
               min="0"
@@ -159,7 +186,7 @@ const Filters = () => {
               }}
             >
               {formatCurrency(
-                minValue + (value[0] / 100) * (maxValue - minValue),
+                sliderMinValue + (value[0] / 100) * (sliderMaxValue - sliderMinValue)
               )}
             </div>
             <div
@@ -171,14 +198,17 @@ const Filters = () => {
               }}
             >
               {formatCurrency(
-                minValue + (value[1] / 100) * (maxValue - minValue),
+                sliderMinValue + (value[1] / 100) * (sliderMaxValue - sliderMinValue)
               )}
             </div>
           </div>
         </div>
 
         <div className="ms-2 mt-3 md:mt-0">
-          <Button className="h-10 gap-x-0.5 py-5 hover:bg-transparent hover:text-mirage md:h-7 md:rounded-md md:px-2 md:py-0 md:text-[8px] lg:h-8 lg:px-3 lg:text-[10px] xl:h-9 xl:rounded-lg xl:px-4 xl:text-[13px] 2xl:px-5 2xl:py-6 2xl:text-[16px]">
+          <Button
+            className="h-10 gap-x-0.5 py-5 hover:bg-transparent hover:text-mirage md:h-7 md:rounded-md md:px-2 md:py-0 md:text-[8px] lg:h-8 lg:px-3 lg:text-[10px] xl:h-9 xl:rounded-lg xl:px-4 xl:text-[13px] 2xl:px-5 2xl:py-6 2xl:text-[16px]"
+            onClick={handleSearch}
+          >
             <IoIosSearch className="size-6 md:size-4 lg:size-5 xl:size-6 2xl:size-7" />{" "}
             Search
           </Button>

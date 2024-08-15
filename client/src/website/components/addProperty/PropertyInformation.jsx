@@ -2,20 +2,13 @@ import Status from "../svgs/Status";
 import { Input } from "../ui/input";
 import { AiOutlineDown } from "react-icons/ai";
 
-const propertyTypes = ["Home", "Plot", "Commercial"];
-const propertyCategories = [
-  "House",
-  "Flat",
-  "Room",
-  "Upper Portion",
-  "Lower Portion",
-  "Farm House",
-  "Pent House",
-];
+import { useAppContext } from "@/AppContext";
 
-const locations = ["Dubai", "Abu Dhabi", "Sharjah", "Ajman", "Ras Al Khaimah", "Fujairah", "Umm Al Quwain"];
+const propertyCategories = ["Home", "Plot", "Commercial"];
 
 const PropertyInformation = ({ formData, handleChange, handleSelectChange }) => {
+  const { locations, propertyTypes } = useAppContext();
+
   return (
     <div className="user--addProperty-sectionPadding flex flex-col rounded-xl border border-lightGrey bg-white md:flex-row md:items-start">
       <h2 className="user--addProperty-headingTextSize whitespace-nowrap md:w-[23%]">
@@ -46,31 +39,18 @@ const PropertyInformation = ({ formData, handleChange, handleSelectChange }) => 
 
         <div className="w-full space-y-0.5 md:space-y-1 lg:space-y-1.5 xl:space-y-2 2xl:space-y-2.5">
           <label className="user--addProperty-labelTextSize">Select Property Type</label>
-          <div className="flex rounded-lg bg-[#F1F1F1] p-1.5 md:p-1 lg:p-1.5">
-            {propertyTypes.map((type, index) => (
-              <div
-                key={type}
-                className={`w-full cursor-pointer rounded-lg bg-white bg-opacity-0 p-2 text-center text-[14px] transition-all duration-200 ease-in-out md:p-1 md:text-[8px] lg:p-1.5 lg:text-[10px] xl:p-2 xl:text-[12px] 2xl:text-[14px] ${
-                  formData?.propertyTypeIndex === index && "bg-opacity-100"
-                }`}
-                onClick={() => handleSelectChange("propertyTypeIndex", index)}
-              >
-                {type}
-              </div>
-            ))}
-          </div>
 
           <div className="flex flex-wrap items-center gap-x-3 md:gap-y-1.5 lg:gap-y-2 xl:gap-y-3 2xl:gap-y-4">
-            {propertyCategories.map((category, index) => (
+            {propertyTypes.map((type) => (
               <div
-                key={category}
+                key={crypto.randomUUID()}
                 className={`flex cursor-pointer items-center gap-x-1 rounded-md border-2 border-mirage border-opacity-0 px-1.5 py-1 transition-all duration-300 ease-in-out hover:border-opacity-100 md:gap-x-0.5 md:px-1 md:py-0.5 lg:gap-x-1 lg:px-1.5 lg:py-1 xl:gap-x-1.5 xl:px-2 xl:py-1.5 2xl:px-3 2xl:py-2 ${
-                  formData?.propertyCategoryIndex === index && "bg-mirage text-white"
+                  formData?.propertyTypeIndex === type?.id && "bg-mirage text-white"
                 }`}
-                onClick={() => handleSelectChange("propertyCategoryIndex", index)}
+                onClick={() => handleSelectChange("propertyTypeIndex", type?.id)}
               >
-                <Status className={`${formData?.propertyCategoryIndex === index ? "text-white" : "text-black"}`} />
-                <p className="text-[14px] md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:text-[14px]">{category}</p>
+                <Status className={`${formData?.propertyTypeIndex === type?.id ? "text-white" : "text-black"}`} />
+                <p className="text-[14px] md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:text-[14px]">{type?.name}</p>
               </div>
             ))}
           </div>
@@ -101,8 +81,8 @@ const PropertyInformation = ({ formData, handleChange, handleSelectChange }) => 
               onChange={(e) => handleSelectChange("location", parseInt(e.target.value))}
             >
               {locations.map((location, index) => (
-                <option key={index} value={index}>
-                  {location}
+                <option key={index} value={location?.id}>
+                  {location.name}
                 </option>
               ))}
             </select>

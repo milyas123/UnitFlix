@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
-const PaymentPlan = () => {
+const PaymentPlan = ({ paymentPlanData }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
 
   useEffect(() => {
@@ -35,10 +35,10 @@ const PaymentPlan = () => {
           <div className="mt-auto h-[18rem] md:ms-auto md:h-auto md:w-[50%]">
             <div className="xl:border-b-5 2xl:border-b-6 flex h-full w-full flex-col items-center justify-center border-r-4 border-mirage pb-4 pe-2 md:gap-0.5 md:border-b-2 md:border-r-0 md:pe-0 lg:gap-1 lg:border-b-4 2xl:gap-1.5">
               <h2 className="text-[16px] font-semibold text-sunriseOrange md:text-[10px] lg:text-[12px] xl:text-[15px] 2xl:text-[18px]">
-                During Construction
+                {paymentPlanData && paymentPlanData[1]?.title}
               </h2>
               <p className="text-[12px] md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]">
-                1st - 28th Installment
+                {paymentPlanData && paymentPlanData[1]?.description}
               </p>
             </div>
           </div>
@@ -60,10 +60,10 @@ const PaymentPlan = () => {
           <div className="flex h-[8.5rem] flex-col items-center text-center md:h-auto md:w-[24%]">
             <div className="flex h-full w-full flex-col items-center justify-center md:gap-0.5 lg:gap-1 2xl:gap-1.5">
               <h2 className="text-[16px] font-semibold text-sunriseOrange md:text-[10px] lg:text-[12px] xl:text-[15px] 2xl:text-[18px]">
-                Down Payment
+                {paymentPlanData && paymentPlanData[0]?.title}
               </h2>
               <p className="text-[12px] md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]">
-                On Booking Date
+                {paymentPlanData && paymentPlanData[1]?.description}
               </p>
             </div>
           </div>
@@ -80,13 +80,13 @@ const PaymentPlan = () => {
             </div>
           </div>
 
-          <div className="mt-auto h-[8.5rem] md:ms-auto md:h-auto md:w-[24%]">
+          <div className="mt-auto h-[8.5rem] md:ms-auto md:mt-0 md:h-auto md:w-[24%]">
             <div className="flex h-full w-full flex-col items-center justify-center md:gap-0.5 lg:gap-1 2xl:gap-1.5">
               <h2 className="text-[16px] font-semibold text-sunriseOrange md:text-[10px] lg:text-[12px] xl:text-[15px] 2xl:text-[18px]">
-                On Handover
+                {paymentPlanData && paymentPlanData[2]?.title}
               </h2>
               <p className="text-[12px] md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]">
-                100% Completion
+                {paymentPlanData && paymentPlanData[2]?.description}
               </p>
             </div>
           </div>
