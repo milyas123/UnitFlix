@@ -1,8 +1,9 @@
 import { useState } from 'react';
+import axios from 'axios';
+
 import Button from "../components/common/Button";
 import InputField from "../components/common/InputField";
 
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,6 +11,7 @@ const AdminLogin = () => {
   const navigate = useNavigate();
   const serverURL = import.meta.env.VITE_SERVER_URL;
   const [formData, setFormData] = useState({ Username: '', Password: '' });
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,14 +23,17 @@ const AdminLogin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const response = await axios.post(`${serverURL}/admin/login`, formData);
       localStorage.setItem("token", response.data.data.token);
       toast.success('Login successful!');
-      navigate("/admin/manage-properties")
+      navigate("/admin/manage-properties");
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
       toast.error('Login failed. Please check your credentials and try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -64,7 +69,9 @@ const AdminLogin = () => {
             </div>
 
             <div className="flex flex-col items-center gap-y-7">
-              <Button className="w-[100px]" type="submit">Sign in</Button>
+              <Button className="w-[100px]" type="submit" disabled={isLoading}>
+                {isLoading ? 'Signing in...' : 'Sign in'}
+              </Button>
             </div>
           </form>
         </div>

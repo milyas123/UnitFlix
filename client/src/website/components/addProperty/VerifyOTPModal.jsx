@@ -3,9 +3,13 @@ import { SquareX } from "lucide-react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 
-const VerifyOTPModal = ({ onClose }) => {
-  const [otp, setOtp] = useState(Array(6).fill(""));
+import axios from "axios";
+import { toast } from "react-toastify";
 
+const VerifyOTPModal = ({ propertyData, onClose }) => {
+  const [otp, setOtp] = useState(Array(6).fill(""));
+  const [loading, setLoading] = useState(false);
+  
   const handleChange = (value, index) => {
     if (value.length > 1) return;
     const newOtp = [...otp];
@@ -27,6 +31,27 @@ const VerifyOTPModal = ({ onClose }) => {
       if (prevInput) {
         prevInput.focus();
       }
+    }
+  };
+
+  const handleSubmit = async () => {
+    setLoading(true);
+    const otpCode = otp.join("");
+    const payload = {
+      email: propertyData.email,
+      otp: otpCode,
+      propertyId: propertyData.propertyId,
+    };
+
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/request/verify`, payload);
+      toast.success(response.data?.message);
+      onClose(); 
+    } catch (error) {
+      console.error("Error verifying OTP", error);
+      toast.error(error.response?.data);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -62,7 +87,13 @@ const VerifyOTPModal = ({ onClose }) => {
                 />
               ))}
             </div>
-            <Button className="rounded-md">Submit</Button>
+            <Button
+              className="rounded-md"
+              onClick={handleSubmit}
+              disabled={loading}
+            >
+              {loading ? "Verifying..." : "Submit"}
+            </Button>
           </div>
         </div>
       </div>

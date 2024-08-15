@@ -30,6 +30,7 @@ const Gallery = ({ formData, handleAddGalleryImage, handleDeleteGalleryImage }) 
               type="file"
               id="gallery-upload"
               multiple
+              accept=".jpg,.jpeg,.png"
               className="hidden"
               onChange={handleImageUpload}
             />

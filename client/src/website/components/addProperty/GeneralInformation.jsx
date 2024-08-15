@@ -61,7 +61,7 @@ const GeneralInformation = ({ formData, handleChange, handleSelectChange, handle
                 type="file"
                 id="coverImage"
                 className="hidden"
-                accept="image/*"
+                accept=".jpg,.jpeg,.png"
                 onChange={handleFileChange}
               />
               <div className="flex flex-col items-center justify-center gap-y-2 text-smokeyGrey">

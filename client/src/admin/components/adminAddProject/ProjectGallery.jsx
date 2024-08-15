@@ -30,6 +30,7 @@ const ProjectGallery = ({ formData, handleAddGalleryImage, handleDeleteGalleryIm
               type="file"
               id="gallery-upload"
               multiple
+              accept=".jpg,.jpeg,.png"
               className="hidden"
               onChange={handleImageUpload}
             />

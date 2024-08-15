@@ -12,6 +12,8 @@ import AddAmenityModal from "@/admin/components/adminAddProject/modals/AddAmenit
 
 import axios from "axios";
 import { toast } from "react-toastify";
+import { FaChevronLeft } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import InfoModal from "@/website/components/addProperty/InfoModal";
 import VerifyOTPModal from "../components/addProperty/VerifyOTPModal";
 
@@ -39,10 +41,15 @@ const initialFormData = {
 };
 
 const AddProperty = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
   const [isInfoModalVisible, setIsInfoModalVisible] = useState(false);
   const [isOTPModalVisible, setIsOTPModalVisible] = useState(false);
+  const [propertyData, setPropertyData] = useState({
+    propertyId: null,
+    email: "",
+  });
 
   const [showKeyHighlightModal, setShowKeyHighlightModal] = useState(false);
   const [editKeyHighlightIndex, setEditKeyHighlightIndex] = useState(null);
@@ -200,7 +207,11 @@ const AddProperty = () => {
         },
       });
 
-      console.log(response.data)
+      setPropertyData({
+        propertyId: response.data?.data.propertyId,
+        email: response.data?.data.email,
+      });
+
       toast.success("Property added successfully!");
       setFormData(initialFormData);
       setIsInfoModalVisible(true);
@@ -220,7 +231,12 @@ const AddProperty = () => {
   return (
     <div className="bg-whiteLilac">
       <div className="mx-auto flex w-[95%] flex-col gap-5 py-2 md:w-[60%] md:gap-3 lg:gap-5 xl:gap-6 2xl:gap-7">
-        <div className="rounded-xl bg-white p-3 text-[20px] md:px-4 md:py-2 md:text-[12px] lg:px-6 lg:py-2.5 lg:text-[15px] xl:px-7 xl:py-3 xl:text-[18px] 2xl:px-8 2xl:py-4 2xl:text-[22px]">
+        <div className="flex items-center rounded-xl bg-white p-3 text-[20px] md:px-4 md:py-2 md:text-[12px] lg:px-6 lg:py-2.5 lg:text-[15px] xl:px-7 xl:py-3 xl:text-[18px] 2xl:px-8 2xl:py-4 2xl:text-[22px]">
+          <FaChevronLeft
+            className="mr-4 cursor-pointer"
+            size={20}
+            onClick={() => navigate(-1)}
+          />
           Add Property
         </div>
 
@@ -272,14 +288,6 @@ const AddProperty = () => {
         </div>
       </div>
 
-      {isInfoModalVisible && (
-        <InfoModal onClose={() => setIsInfoModalVisible(false)} onNext={handleNext} />
-      )}
-
-      {isOTPModalVisible && (
-        <VerifyOTPModal onClose={() => setIsOTPModalVisible(false)} />
-      )}
-
       {showKeyHighlightModal && (
         <AddKeyHighlightModal
           onClose={() => setShowKeyHighlightModal(false)}
@@ -301,6 +309,20 @@ const AddProperty = () => {
               ? formData.features[editAmenityIndex]
               : null
           }
+        />
+      )}
+
+      {isInfoModalVisible && (
+        <InfoModal
+          onClose={() => setIsInfoModalVisible(false)}
+          onNext={handleNext}
+        />
+      )}
+
+      {isOTPModalVisible && (
+        <VerifyOTPModal
+          propertyData={propertyData}
+          onClose={() => setIsOTPModalVisible(false)}
         />
       )}
     </div>
