@@ -1,18 +1,65 @@
+import { useState } from "react";
+import axios from "axios";
+
 import Email from "../svgs/Email";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { UserRound, Phone } from "lucide-react";
 import { BiMessageSquareDetail } from "react-icons/bi";
+import { toast } from "react-toastify";
+
+const serverURL = import.meta.env.VITE_SERVER_URL;
 
 const ContactForm = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await axios.post(`${serverURL}/email/contact`, formData);
+      console.log("Form submitted successfully:", response.data);
+      toast.success("Submitted successfully!");
+      setFormData({ name: "", email: "", phone: "", message: "" });
+    } catch (error) {
+      console.error("Error submitting the form:", error.data);
+      setError(error.response?.data || "There was an issue submitting the form. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <form className="flex flex-col gap-y-4 md:gap-y-1.5 lg:gap-y-2 xl:gap-y-3 2xl:gap-y-4">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col gap-y-4 md:gap-y-1.5 lg:gap-y-2 xl:gap-y-3 2xl:gap-y-4"
+    >
       <div className="relative flex items-center">
         <Input
           type="text"
           id="name"
           placeholder="Enter your name"
+          value={formData.name}
+          onChange={handleChange}
           className="ps-9 md:ps-5 lg:ps-[22px] xl:ps-8 2xl:ps-[38px]"
         />
         <UserRound className="absolute left-2 size-5 text-grey md:left-1.5 md:size-2.5 lg:size-3 xl:left-[9px] xl:size-4 2xl:left-3 2xl:size-5" />
@@ -22,6 +69,8 @@ const ContactForm = () => {
           type="email"
           id="email"
           placeholder="example@domain.com"
+          value={formData.email}
+          onChange={handleChange}
           className="ps-9 md:ps-5 lg:ps-[22px] xl:ps-8 2xl:ps-[38px]"
         />
         <Email className="absolute left-2 text-grey md:left-1.5 xl:left-[9px] 2xl:left-3" />
@@ -31,19 +80,29 @@ const ContactForm = () => {
           type="number"
           id="phone"
           placeholder="(+92) 311 7995274"
+          value={formData.phone}
+          onChange={handleChange}
           className="ps-9 md:ps-5 lg:ps-[22px] xl:ps-8 2xl:ps-[38px]"
         />
         <Phone className="absolute left-2 size-5 text-grey md:left-1.5 md:size-2.5 lg:size-3 xl:left-[9px] xl:size-4 2xl:left-3 2xl:size-5" />
       </div>
       <div className="relative flex items-center">
         <Textarea
+          id="message"
           placeholder="I want to buy/rent..."
+          value={formData.message}
+          onChange={handleChange}
           className="ps-9 md:ps-5 lg:ps-[22px] xl:ps-8 2xl:ps-[38px]"
         />
         <BiMessageSquareDetail className="absolute left-2 top-3 size-5 text-grey md:left-1.5 md:top-2 md:size-2.5 lg:top-2.5 lg:size-3 xl:left-[9px] xl:top-[12.5px] xl:size-4 2xl:left-3 2xl:top-3.5 2xl:size-5" />
       </div>
-      <Button className="h-9 rounded-md hover:bg-transparent hover:text-mirage md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:py-5 2xl:text-[14px]">
-        Submit
+      {error && <div className="font-medium text-red-500">{error}</div>}
+      <Button
+        type="submit"
+        className="h-9 rounded-md hover:bg-transparent hover:text-mirage md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:py-5 2xl:text-[14px]"
+        disabled={loading}
+      >
+        {loading ? "Submitting..." : "Submit"}
       </Button>
     </form>
   );

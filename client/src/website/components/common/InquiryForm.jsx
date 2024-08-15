@@ -121,7 +121,7 @@ const InquiryForm = () => {
         </div>
       </div>
 
-      {error && <div className="font-semibold text-red-500">{error}</div>}
+      {error && <div className="font-medium text-red-500">{error}</div>}
 
       <div className="ms-auto">
         <Button
