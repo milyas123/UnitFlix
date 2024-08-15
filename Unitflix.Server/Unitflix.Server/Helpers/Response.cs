@@ -56,6 +56,16 @@ namespace Unitflix.Server.Helpers
             return new JsonResult(new { data = data});
         }
 
+        /// <summary>
+        /// Returns an object and message in response
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public static JsonResult Message(this HttpResponse response, string message, object data)
+        {
+            return new JsonResult(new { data = data, message = message });
+        }
+
         #endregion
     }
 }

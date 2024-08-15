@@ -156,7 +156,7 @@ namespace Unitflix.Server.Controllers
             //Sending OTP
             await _emailManager.SendEmail(userDetail.Email, "Unitflix OTP Request", $"Hi {userDetail.Name} your property request has been received. This is your OTP {otpCode} code which will expire in 10 Minutes. Verify this to ensure that your request is submitted.");
 
-            return Response.Message("Property Submitted Successfully");
+            return Response.Message("Property Submitted Successfully", new { propertyId = property.Id, email = userDetail.Email });
         }
 
         /// <summary>
