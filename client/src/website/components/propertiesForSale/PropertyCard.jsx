@@ -19,7 +19,7 @@ const PropertyCard = ({ property }) => {
   const { locations } = useAppContext();
 
   return (
-    <Link to="/property-details" className="contents">
+    <Link to={`/property-details/${property?.id}`} className="contents">
       <div className="w-full overflow-hidden rounded-lg border border-lightGrey md:w-[90%] md:min-w-[150px] md:max-w-[200px] lg:w-[95%] lg:min-w-[225px] lg:max-w-[270px] xl:w-[92%] xl:min-w-[290px] xl:max-w-[320px] 2xl:w-[95%] 2xl:min-w-[345px] 2xl:max-w-[400px]">
         <style jsx>{`
           .property-card .swiper-pagination-bullet {

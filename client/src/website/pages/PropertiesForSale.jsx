@@ -36,10 +36,8 @@ const PropertiesForSale = () => {
       location: selectedLocation || "",
       type: selectedPropertyType || "",
       developer: selectedDeveloper || "",
-      min:
-        sliderMinValue + (value[0] / 100) * (sliderMaxValue - sliderMinValue),
-      max:
-        sliderMinValue + (value[1] / 100) * (sliderMaxValue - sliderMinValue),
+      min: sliderMinValue + (value[0] / 100) * (sliderMaxValue - sliderMinValue),
+      max: sliderMinValue + (value[1] / 100) * (sliderMaxValue - sliderMinValue),
       purpose: selectedTab === "All" ? 0 : selectedTab === "For Sale" ? 0 : 1,
     };
 
@@ -61,7 +59,7 @@ const PropertiesForSale = () => {
   const fetchProperties = async () => {
     try {
       const response = await axios.get(`${serverURL}/property/search?${new URLSearchParams({purpose: param}).toString()}`);
-      setProperties(response.data.data.properties);
+      setProperties(response.data?.data.properties);
     } catch (error) {
       console.error("Error fetching properties:", error);
     }

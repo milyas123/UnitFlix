@@ -1,7 +1,8 @@
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
+
+import { Suspense, lazy } from "react";
 import { AppProvider } from "./AppContext";
-import React, { Suspense, lazy } from "react";
 import { ToastContainer, Slide } from "react-toastify";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -49,12 +50,12 @@ function App() {
               <Route path="/properties-for-sale" element={<PropertiesForSale />} />
               <Route path="/properties-for-rent" element={<PropertiesForSale />} />
               <Route path="/manage-properties" element={<ManageProperties />} />
-              <Route path="/property-details" element={<PropertyDetails />} />
+              <Route path="/property-details/:id" element={<PropertyDetails />} />
               <Route path="/contact-us" element={<ContactUs />} />
               <Route path="/about-us" element={<AboutUs />} />
               <Route path="/add-property" element={<AddProperty />} />
 
-              {/* Admin Login */}
+              {/* Admin panel */}
               <Route path="/admin/login" element={<AdminLogin />} />
 
               <Route path="/admin" element={<Layout />}>

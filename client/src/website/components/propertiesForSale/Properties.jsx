@@ -102,7 +102,7 @@ const Properties = ({ properties }) => {
           />
 
           <InfoList
-            heading="Type"
+            heading="Types"
             count={propertyTypes.length}
             items={propertyTypes}
           />
