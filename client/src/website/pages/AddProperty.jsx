@@ -1,33 +1,220 @@
 import { useState } from "react";
 import { Button } from "@/website/components/ui/button";
+
 import GeneralInformation from "@/website/components/addProperty/GeneralInformation";
 import UserInformation from "@/website/components/addProperty/UserInformation";
 import PropertyInformation from "@/website/components/addProperty/PropertyInformation";
 import AddKeyHighlights from "@/website/components/addProperty/AddKeyHighlights";
 import AddFeaturesAndAmenities from "@/website/components/addProperty/AddFeaturesAndAmenities";
 import Gallery from "@/website/components/addProperty/Gallery";
+import AddKeyHighlightModal from "@/admin/components/adminAddProject/modals/AddKeyHighlightModal";
+import AddAmenityModal from "@/admin/components/adminAddProject/modals/AddAmenityModal";
+
+import axios from "axios";
+import { toast } from "react-toastify";
 import InfoModal from "@/website/components/addProperty/InfoModal";
-import VerifyOTPModal from "@/website/components/addProperty/VerifyOTPModal";
+import VerifyOTPModal from "../components/addProperty/VerifyOTPModal";
+
+const initialFormData = {
+  title: "",
+  overview: "",
+  status: "Pre Launch",
+  price: "",
+  coverImage: "",
+  propertyTypeIndex: 0,
+  purpose: 0,
+  area: "",
+  beds: "",
+  baths: "",
+  city: "",
+  location: "",
+  keyHighlights: [],
+  features: [],
+  galleryImages: [],
+  userDetail: {
+    email: "",
+    name: "",
+    phoneNumber: "",
+  },
+};
 
 const AddProperty = () => {
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState(initialFormData);
   const [isInfoModalVisible, setIsInfoModalVisible] = useState(false);
   const [isOTPModalVisible, setIsOTPModalVisible] = useState(false);
 
-  const handleSubmit = () => {
-    setIsInfoModalVisible(true);
+  const [showKeyHighlightModal, setShowKeyHighlightModal] = useState(false);
+  const [editKeyHighlightIndex, setEditKeyHighlightIndex] = useState(null);
+
+  const [showAmenityModal, setShowAmenityModal] = useState(false);
+  const [editAmenityIndex, setEditAmenityIndex] = useState(null);
+
+  const serverURL = import.meta.env.VITE_SERVER_URL;
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
   };
 
-  const handleCloseInfoModal = () => {
-    setIsInfoModalVisible(false);
+  const handleUserDetailsChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      userDetail: {
+        ...prevData.userDetail,
+        [id]: value,
+      },
+    }));
+  };
+
+  const handleSelectChange = (field, value) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [field]: value,
+    }));
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setFormData((prevData) => ({
+      ...prevData,
+      coverImage: file,
+    }));
+  };
+
+  const handleRemoveCoverImage = () => {
+    setFormData((prevData) => ({
+      ...prevData,
+      coverImage: "",
+    }));
+  };
+
+  const handleAddHighlight = (title, description) => {
+    setFormData((prevData) => {
+      const newKeyHighlights = [...prevData.keyHighlights];
+      if (editKeyHighlightIndex !== null) {
+        newKeyHighlights[editKeyHighlightIndex] = { title, description };
+        setEditKeyHighlightIndex(null);
+      } else {
+        newKeyHighlights.push({ title, description });
+      }
+      return {
+        ...prevData,
+        keyHighlights: newKeyHighlights,
+      };
+    });
+    setShowKeyHighlightModal(false);
+  };
+
+  const handleEditHighlight = (index) => {
+    setEditKeyHighlightIndex(index);
+    setShowKeyHighlightModal(true);
+  };
+
+  const handleDeleteHighlight = (index) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      keyHighlights: prevData.keyHighlights.filter((_, i) => i !== index),
+    }));
+  };
+
+  const handleAddAmenity = (name, icon) => {
+    setFormData((prevData) => {
+      const newFeatures = [...prevData.features];
+      if (editAmenityIndex !== null) {
+        newFeatures[editAmenityIndex] = { name, icon };
+        setEditAmenityIndex(null);
+      } else {
+        newFeatures.push({ name, icon });
+      }
+      return {
+        ...prevData,
+        features: newFeatures,
+      };
+    });
+    setShowAmenityModal(false);
+  };
+
+  const handleEditAmenity = (index) => {
+    setEditAmenityIndex(index);
+    setShowAmenityModal(true);
+  };
+
+  const handleDeleteAmenity = (index) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      features: prevData.features.filter((_, i) => i !== index),
+    }));
+  };
+
+  const handleAddGalleryImage = (file) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      galleryImages: [...prevData.galleryImages, file],
+    }));
+  };
+
+  const handleDeleteGalleryImage = (index) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      galleryImages: prevData.galleryImages.filter((_, i) => i !== index),
+    }));
+  };
+
+  const handleSubmit = async () => {
+    setLoading(true);
+
+    const form = new FormData();
+    const overview = { text: formData.overview };
+
+    form.append("category", 0);
+    form.append("title", formData.title);
+    form.append("overview", JSON.stringify(overview));
+    form.append("status", formData.status);
+    form.append("price", formData.price);
+    form.append("propertyType", formData.propertyTypeIndex);
+    form.append("purpose", formData.purpose);
+    form.append("area", formData.area);
+    form.append("beds", formData.beds);
+    form.append("baths", formData.baths);
+    form.append("location", formData.location);
+    form.append("features", JSON.stringify(formData.features));
+    form.append("keyHighlights", JSON.stringify(formData.keyHighlights));
+    form.append("coverImage", formData.coverImage);
+    form.append("userDetail", JSON.stringify(formData.userDetail));
+
+    if (formData.galleryImages) {
+      formData.galleryImages.forEach((image, index) => {
+        form.append(`galleryImages`, image);
+      });
+    }
+
+    try {
+      const response = await axios.post(`${serverURL}/request`, form, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      console.log(response.data)
+      toast.success("Property added successfully!");
+      setFormData(initialFormData);
+      setIsInfoModalVisible(true);
+    } catch (error) {
+      toast.error("Error submitting form");
+      console.error("Error submitting form", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleNext = () => {
     setIsInfoModalVisible(false);
     setIsOTPModalVisible(true);
-  };
-
-  const handleCloseOTPModal = () => {
-    setIsOTPModalVisible(false);
   };
 
   return (
@@ -37,27 +224,85 @@ const AddProperty = () => {
           Add Property
         </div>
 
-        <GeneralInformation />
-        <UserInformation />
-        <PropertyInformation />
-        <AddKeyHighlights />
-        <AddFeaturesAndAmenities />
-        <Gallery />
+        <GeneralInformation
+          formData={formData}
+          handleChange={handleChange}
+          handleSelectChange={handleSelectChange}
+          handleFileChange={handleFileChange}
+          handleRemoveCoverImage={handleRemoveCoverImage}
+        />
+        <UserInformation
+          formData={formData}
+          handleChange={handleUserDetailsChange}
+        />
+        <PropertyInformation
+          formData={formData}
+          handleChange={handleChange}
+          handleSelectChange={handleSelectChange}
+        />
+        <AddKeyHighlights
+          formData={formData}
+          showModal={setShowKeyHighlightModal}
+          handleEdit={handleEditHighlight}
+          handleDelete={handleDeleteHighlight}
+        />
+        <AddFeaturesAndAmenities
+          formData={formData}
+          showModal={setShowAmenityModal}
+          handleEdit={handleEditAmenity}
+          handleDelete={handleDeleteAmenity}
+        />
+        <Gallery
+          formData={formData}
+          handleAddGalleryImage={handleAddGalleryImage}
+          handleDeleteGalleryImage={handleDeleteGalleryImage}
+        />
 
         <div className="flex items-center justify-end gap-x-3">
           <Button className="rounded-md border-red-700 bg-red-700 hover:border-mirage">
             Cancel
           </Button>
-          <Button className="rounded-md" onClick={handleSubmit}>
-            Submit
+          <Button
+            className="rounded-md"
+            onClick={handleSubmit}
+            disabled={loading}
+          >
+            {loading ? "Submitting..." : "Submit"}
           </Button>
         </div>
       </div>
 
       {isInfoModalVisible && (
-        <InfoModal onClose={handleCloseInfoModal} onNext={handleNext} />
+        <InfoModal onClose={() => setIsInfoModalVisible(false)} onNext={handleNext} />
       )}
-      {isOTPModalVisible && <VerifyOTPModal onClose={handleCloseOTPModal} />}
+
+      {isOTPModalVisible && (
+        <VerifyOTPModal onClose={() => setIsOTPModalVisible(false)} />
+      )}
+
+      {showKeyHighlightModal && (
+        <AddKeyHighlightModal
+          onClose={() => setShowKeyHighlightModal(false)}
+          onSubmit={handleAddHighlight}
+          editData={
+            editKeyHighlightIndex !== null
+              ? formData.keyHighlights[editKeyHighlightIndex]
+              : null
+          }
+        />
+      )}
+
+      {showAmenityModal && (
+        <AddAmenityModal
+          onClose={() => setShowAmenityModal(false)}
+          onSubmit={handleAddAmenity}
+          editData={
+            editAmenityIndex !== null
+              ? formData.features[editAmenityIndex]
+              : null
+          }
+        />
+      )}
     </div>
   );
 };
