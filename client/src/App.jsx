@@ -7,6 +7,7 @@ import { ToastContainer, Slide } from "react-toastify";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Lottie from "lottie-react";
+import ProtectedRoute from "./ProtectedRoute";
 import RealEstateAnimation from "@/lotties/RealEstateAnimation.json";
 
 // Website pages
@@ -58,7 +59,7 @@ function App() {
               {/* Admin panel */}
               <Route path="/admin/login" element={<AdminLogin />} />
 
-              <Route path="/admin" element={<Layout />}>
+              <Route path="/admin" element={ <ProtectedRoute> <Layout /> </ProtectedRoute>} >
                 <Route path="add-property" element={<AdminAddProperty />} />
                 <Route path="edit-property/:id" element={<AdminAddProperty />} />
                 <Route path="add-project" element={<AdminAddProject />} />
@@ -70,11 +71,7 @@ function App() {
           </Suspense>
         </AppProvider>
       </BrowserRouter>
-      <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        transition={Slide}
-      />
+      <ToastContainer position="top-center" autoClose={3000} transition={Slide} />
     </div>
   );
 }

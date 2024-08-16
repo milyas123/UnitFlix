@@ -26,7 +26,7 @@ const AdminLogin = () => {
     setIsLoading(true);
     try {
       const response = await axios.post(`${serverURL}/admin/login`, formData);
-      localStorage.setItem("token", response.data.data.token);
+      localStorage.setItem("token", response.data?.data.token);
       toast.success('Login successful!');
       navigate("/admin/manage-properties");
     } catch (error) {
@@ -69,7 +69,7 @@ const AdminLogin = () => {
             </div>
 
             <div className="flex flex-col items-center gap-y-7">
-              <Button className="w-[100px]" type="submit" disabled={isLoading}>
+              <Button className="min-w-[100px]" type="submit" disabled={isLoading}>
                 {isLoading ? 'Signing in...' : 'Sign in'}
               </Button>
             </div>
