@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import moment from "moment";
 
 import Tag from "./Tag";
@@ -11,15 +11,16 @@ import { useNavigate } from "react-router-dom";
 
 const Table = ({
   type,
-  showSubmitterDetails,
   data,
   onDelete,
   onEdit,
   onAccept,
   onReject,
   loadingAction,
+  showSubmitterDetails,
 }) => {
   const navigate = useNavigate();
+  const optionsRef = useRef(null);
   const [showOptions, setShowOptions] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -41,6 +42,19 @@ const Table = ({
     await onReject(itemId);
     setShowOptions(false);
   };
+
+  const handleClickOutside = (event) => {
+    if (optionsRef.current && !optionsRef.current.contains(event.target)) {
+      setShowOptions(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <table className="flex w-full flex-col gap-y-2.5">
@@ -138,6 +152,7 @@ const Table = ({
               />
               {showOptions && selectedItem === item.id && (
                 <div
+                  ref={optionsRef}
                   className="absolute right-0 z-50 min-w-[10rem] space-y-2 rounded-xl bg-white p-2 text-black"
                   style={{
                     boxShadow:
@@ -185,7 +200,10 @@ const Table = ({
                       </Button>
 
                       <Button
-                        className={`w-[14rem] rounded-lg border-mintGreen text-mintGreen hover:bg-mintGreen ${loadingAction.id === item.id && "cursor-not-allowed opacity-50"}`}
+                        className={`w-[14rem] rounded-lg border-mintGreen text-mintGreen hover:bg-mintGreen ${
+                          loadingAction.id === item.id &&
+                          "cursor-not-allowed opacity-50"
+                        }`}
                         variant="outline"
                         onClick={() => {
                           if (!loadingAction.id) {
@@ -200,7 +218,10 @@ const Table = ({
                           : "Accept"}
                       </Button>
                       <Button
-                        className={`w-[14rem] rounded-lg border-crimsonRed text-crimsonRed hover:bg-crimsonRed ${loadingAction.id === item.id && "cursor-not-allowed opacity-50"}`}
+                        className={`w-[14rem] rounded-lg border-crimsonRed text-crimsonRed hover:bg-crimsonRed ${
+                          loadingAction.id === item.id &&
+                          "cursor-not-allowed opacity-50"
+                        }`}
                         variant="outline"
                         onClick={() => {
                           if (!loadingAction.id) {
