@@ -65,6 +65,7 @@ function App() {
                 <Route path="add-project" element={<AdminAddProject />} />
                 <Route path="manage-properties" element={<AdminManageProperties />} />
                 <Route path="submitted-requests" element={<AdminSubmittedRequests />} />
+                <Route path="property-details/:id" element={<PropertyDetails />} />
                 <Route path="email-configuration" element={<AdminEmailConfiguration />} />
               </Route>
             </Routes>

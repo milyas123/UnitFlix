@@ -7,8 +7,19 @@ import ThreeDots from "../svgs/ThreeDots";
 import LocationPin from "../svgs/LocationPin";
 
 import { formatCurrency } from "@/lib/utils";
+import { useNavigate } from "react-router-dom";
 
-const Table = ({ type, showSubmitterDetails, data, onDelete, onEdit }) => {
+const Table = ({
+  type,
+  showSubmitterDetails,
+  data,
+  onDelete,
+  onEdit,
+  onAccept,
+  onReject,
+  loadingAction,
+}) => {
+  const navigate = useNavigate();
   const [showOptions, setShowOptions] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -19,6 +30,16 @@ const Table = ({ type, showSubmitterDetails, data, onDelete, onEdit }) => {
       setShowOptions(true);
       setSelectedItem(itemId);
     }
+  };
+
+  const handleAccept = async (itemId) => {
+    await onAccept(itemId);
+    setShowOptions(false);
+  };
+
+  const handleReject = async (itemId) => {
+    await onReject(itemId);
+    setShowOptions(false);
   };
 
   return (
@@ -78,9 +99,7 @@ const Table = ({ type, showSubmitterDetails, data, onDelete, onEdit }) => {
             <td className="w-[17%] px-4 text-start">
               <div className="flex items-center gap-x-2 text-davyGrey">
                 <LocationPin />
-                <p className="text-[13px]">
-                  {item?.propertyLocation?.name}
-                </p>
+                <p className="text-[13px]">{item?.propertyLocation?.name}</p>
               </div>
             </td>
             {type === "properties" ? (
@@ -154,23 +173,46 @@ const Table = ({ type, showSubmitterDetails, data, onDelete, onEdit }) => {
                       >
                         View Submitter Details
                       </Button>
+
                       <Button
                         className="w-[14rem] rounded-lg"
                         variant="outline"
+                        onClick={() =>
+                          navigate(`/admin/property-details/${item.id}`)
+                        }
                       >
                         Preview Property
                       </Button>
+
                       <Button
-                        className="w-[14rem] rounded-lg border-mintGreen text-mintGreen hover:bg-mintGreen"
+                        className={`w-[14rem] rounded-lg border-mintGreen text-mintGreen hover:bg-mintGreen ${loadingAction.id === item.id && "cursor-not-allowed opacity-50"}`}
                         variant="outline"
+                        onClick={() => {
+                          if (!loadingAction.id) {
+                            handleAccept(item.id);
+                          }
+                        }}
+                        disabled={loadingAction.id === item.id}
                       >
-                        Accept
+                        {loadingAction.id === item.id &&
+                        loadingAction.type === 1
+                          ? "Accepting..."
+                          : "Accept"}
                       </Button>
                       <Button
-                        className="w-[14rem] rounded-lg border-crimsonRed text-crimsonRed hover:bg-crimsonRed"
+                        className={`w-[14rem] rounded-lg border-crimsonRed text-crimsonRed hover:bg-crimsonRed ${loadingAction.id === item.id && "cursor-not-allowed opacity-50"}`}
                         variant="outline"
+                        onClick={() => {
+                          if (!loadingAction.id) {
+                            handleReject(item.id);
+                          }
+                        }}
+                        disabled={loadingAction.id === item.id}
                       >
-                        Reject
+                        {loadingAction.id === item.id &&
+                        loadingAction.type === 2
+                          ? "Rejecting..."
+                          : "Reject"}
                       </Button>
                     </>
                   )}
