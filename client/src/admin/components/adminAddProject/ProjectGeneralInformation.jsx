@@ -9,7 +9,7 @@ import Delete from "@/website/components/svgs/Delete";
 
 const statuses = ["Pre Launch", "Secondary", "Ready to Move In"];
 
-const ProjectGeneralInformation = ({ formData, handleChange, handleStatusSelect, handleFeaturedSelect, handleFileChange }) => {
+const ProjectGeneralInformation = ({ formData, handleChange, handleSelect, handleFileChange }) => {
   const [selectedStatus, setSelectedStatus] = useState(statuses[0]);
   const [isFeatured, setIsFeatured] = useState(formData.featured); 
   const [previewCoverImage, setPreviewCoverImage] = useState(null);
@@ -37,13 +37,13 @@ const ProjectGeneralInformation = ({ formData, handleChange, handleStatusSelect,
 
   const handleStatusClick = (status) => {
     setSelectedStatus(status);
-    handleStatusSelect(status);
+    handleSelect("status", status);
   };
 
   const handleFeaturedClick = () => {
     const newFeaturedStatus = !isFeatured;
     setIsFeatured(newFeaturedStatus);
-    handleFeaturedSelect(newFeaturedStatus);
+    handleSelect("featured" ,newFeaturedStatus);
   };
 
   const handleRemoveCoverImage = () => { 

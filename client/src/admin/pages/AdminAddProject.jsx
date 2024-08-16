@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import Header from "../components/common/Header";
 import Button from "../components/common/Button";
 import ProjectGeneralInformation from "../components/adminAddProject/ProjectGeneralInformation";
@@ -93,21 +94,7 @@ const AdminAddProject = () => {
   const handleSelectChange = (field, value) => {
     setFormData((prevData) => ({
       ...prevData,
-      [field]: parseInt(value),
-    }));
-  };
-
-  const handleStatusSelect = (status) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      status,
-    }));
-  };
-
-  const handleFeaturedSelect = (featured) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      featured,
+      [field]: value,
     }));
   };
 
@@ -319,8 +306,7 @@ const AdminAddProject = () => {
         <ProjectGeneralInformation
           formData={formData}
           handleChange={handleChange}
-          handleStatusSelect={handleStatusSelect}
-          handleFeaturedSelect={handleFeaturedSelect}
+          handleSelect={handleSelectChange}
           handleFileChange={handleFileChange}
         />
         <ProjectPropertyInformation
