@@ -59,7 +59,7 @@ function App() {
               {/* Admin panel */}
               <Route path="/admin/login" element={<AdminLogin />} />
 
-              <Route path="/admin" element={ <ProtectedRoute> <Layout /> </ProtectedRoute>} >
+              <Route path="/admin" element={<ProtectedRoute> <Layout /> </ProtectedRoute>} >
                 <Route path="add-property" element={<AdminAddProperty />} />
                 <Route path="edit-property/:id" element={<AdminAddProperty />} />
                 <Route path="add-project" element={<AdminAddProject />} />

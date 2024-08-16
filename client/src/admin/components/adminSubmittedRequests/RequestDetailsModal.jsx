@@ -1,9 +1,9 @@
-import { formatCurrency } from "@/lib/utils";
 import Cross from "../svgs/Cross";
 import Tag from "../common/Tag";
 import Button from "../common/Button";
+import { formatCurrency } from "@/lib/utils";
 
-const RequestDetailsModal = ({ onClose }) => {
+const RequestDetailsModal = ({ request, onClose }) => {
   return (
     <>
       <div className="absolute inset-0 bg-black bg-opacity-50"></div>
@@ -12,13 +12,13 @@ const RequestDetailsModal = ({ onClose }) => {
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-x-2.5">
               <img
-                src="/assets/imgs/admin-login.png"
+                src={request?.files.find((file) => file.purpose === 0)?.url}
                 className="h-[48px] w-[50px] rounded-2xl object-cover"
                 alt=""
               />
 
               <div>
-                <p className="font-regular text-[20px]">Single Row Middle</p>
+                <p className="font-regular text-[20px]">{request?.title}</p>
                 <p className="space-x-1 divide-x divide-black text-[14px]">
                   <span>2BHK</span> <span className="ps-1">Vacant</span>
                   <span className="ps-1">Study Room</span>
@@ -33,39 +33,47 @@ const RequestDetailsModal = ({ onClose }) => {
 
           <div className="flex items-center justify-between border-y border-pastelGrey py-6">
             <div className="space-y-2">
-              <p className="text-[14px] text-davyGrey">Type</p>{" "}
-              <p className="text-[16px] font-medium">Appartment</p>
+              <p className="text-[14px] text-davyGrey">Type</p>
+              <p className="text-[16px] font-medium">{request?.type?.name}</p>
             </div>
             <div className="space-y-2">
-              <p className="text-[14px] text-davyGrey">Location</p>{" "}
-              <p className="text-[16px] font-medium">Marina Bay</p>
-            </div>
-            <div className="space-y-2">
-              <p className="text-[14px] text-davyGrey">Amount</p>{" "}
+              <p className="text-[14px] text-davyGrey">Location</p>
               <p className="text-[16px] font-medium">
-                {formatCurrency(3500000)}
+                {request?.propertyLocation?.name}
               </p>
             </div>
             <div className="space-y-2">
-              <p className="text-[14px] text-davyGrey">Status</p>{" "}
+              <p className="text-[14px] text-davyGrey">Amount</p>
               <p className="text-[16px] font-medium">
-                <Tag type="accepted">Accepted</Tag>
+                {formatCurrency(request?.price)}
+              </p>
+            </div>
+            <div className="space-y-2">
+              <p className="text-[14px] text-davyGrey">Status</p>
+              <p className="text-[16px] font-medium">
+                <Tag type={request?.status?.toLowerCase()} />
               </p>
             </div>
           </div>
 
           <div className="flex items-center justify-between border-b border-pastelGrey pb-6">
             <div className="space-y-2">
-              <p className="text-[14px] text-davyGrey">Name</p>{" "}
-              <p className="text-[16px] font-medium">Ali Mustafa</p>
+              <p className="text-[14px] text-davyGrey">Name</p>
+              <p className="text-[16px] font-medium">
+                {request?.userDetail?.name}
+              </p>
             </div>
             <div className="space-y-2">
-              <p className="text-[14px] text-davyGrey">Email</p>{" "}
-              <p className="text-[16px] font-medium">ali.mustafa@gmail.com</p>
+              <p className="text-[14px] text-davyGrey">Email</p>
+              <p className="text-[16px] font-medium">
+                {request?.userDetail?.email}
+              </p>
             </div>
             <div className="space-y-2">
-              <p className="text-[14px] text-davyGrey">Phone#</p>{" "}
-              <p className="text-[16px] font-medium">+41 238 2352 2324</p>
+              <p className="text-[14px] text-davyGrey">Phone#</p>
+              <p className="text-[16px] font-medium">
+                {request?.userDetail?.phoneNumber}
+              </p>
             </div>
           </div>
 

@@ -5,11 +5,11 @@ import Button from "./Button";
 
 const lookingForOptions = ["House", "Apartment", "Condo"];
 
-const Filters = ({ type }) => {
+const Filters = ({ type, totalRecords }) => {
   return (
     <div className="flex items-center justify-between">
       <h2 className="w-[20%] text-[20px] font-semibold">
-        Showing Results <span className="text-[16px] font-light">(308)</span>
+        Showing Results <span className="text-[16px] font-light">({totalRecords})</span>
       </h2>
       <div className="flex w-[72%] items-center justify-between">
         <div

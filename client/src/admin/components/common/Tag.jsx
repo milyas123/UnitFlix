@@ -7,15 +7,12 @@ const tagStyles = {
   primary: "text-[#0F9D48] bg-[#0F9D48]/15",
   pending: "text-[#E7B70E] bg-[#E7B70E]/10",
   accepted: "text-[#1ECA8C] bg-[#1ECA8C]/10",
-  rejected: "text-[#990F02] bg-[#990F02]/10"
+  rejected: "text-[#990F02] bg-[#990F02]/10",
+  default: "text-[#000000] bg-[#E1E4E5]/45"
 };
 
 const Tag = ({ type }) => {
-  const style = tagStyles[type];
-
-  if (!style) {
-    return null;
-  }
+  const style = tagStyles[type] || tagStyles.default;
 
   return (
     <span className={`inline-block rounded-full px-4 py-1 font-regular text-[13px] capitalize ${style}`}>

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Filters from "../components/common/Filters";
@@ -14,7 +14,7 @@ const AdminManageProperties = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => { 
+  useEffect(() => {
     fetchProperties();
   }, [serverURL]);
 
@@ -49,16 +49,26 @@ const AdminManageProperties = () => {
     navigate(`/admin/edit-property/${property?.id}`);
   };
 
-  if (loading) return <p className="size-full flex items-center justify-center h-60">Loading...</p>;
+  if (loading)
+    return (
+      <p className="flex size-full h-60 items-center justify-center">
+        Loading...
+      </p>
+    );
   if (error) return <p>Error: {error.message}</p>;
 
   return (
     <div className="space-y-5">
       <div className="flex flex-col gap-y-10">
         <Header title="Manage Properties" />
-        <Filters type="properties" />
+        <Filters type="properties" totalRecords={properties?.length} />
       </div>
-      <Table type="properties" data={properties} onDelete={handleDelete} onEdit={handleEdit} />
+      <Table
+        type="properties"
+        data={properties}
+        onDelete={handleDelete}
+        onEdit={handleEdit}
+      />
     </div>
   );
 };

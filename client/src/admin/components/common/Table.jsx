@@ -7,11 +7,8 @@ import ThreeDots from "../svgs/ThreeDots";
 import LocationPin from "../svgs/LocationPin";
 
 import { formatCurrency } from "@/lib/utils";
-import { useAppContext } from "@/AppContext";
 
-const Table = ({ type, setShowSubmitterDetails, data, onDelete, onEdit }) => {
-  const { locations } = useAppContext();
-
+const Table = ({ type, showSubmitterDetails, data, onDelete, onEdit }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -73,8 +70,8 @@ const Table = ({ type, setShowSubmitterDetails, data, onDelete, onEdit }) => {
             {type !== "properties" && (
               <td className="w-[20%] px-4 text-start">
                 <div className="flex flex-col text-davyGrey">
-                  <span className="text-[13px]">Ali Mustafa</span>
-                  <span className="text-[9px]">ali.mustafa@gmail.com</span>
+                  <span className="text-[13px]">{item?.userDetail?.name}</span>
+                  <span className="text-[9px]">{item?.userDetail?.email}</span>
                 </div>
               </td>
             )}
@@ -82,7 +79,7 @@ const Table = ({ type, setShowSubmitterDetails, data, onDelete, onEdit }) => {
               <div className="flex items-center gap-x-2 text-davyGrey">
                 <LocationPin />
                 <p className="text-[13px]">
-                  {locations.find((loc) => loc.id === item?.location)?.name}
+                  {item?.propertyLocation?.name}
                 </p>
               </div>
             </td>
@@ -97,14 +94,14 @@ const Table = ({ type, setShowSubmitterDetails, data, onDelete, onEdit }) => {
                 <td className="w-[23%] px-4 text-start">
                   <div className="flex flex-wrap gap-2">
                     <Tag type={item?.category === 0 ? "property" : "project"} />
-                    <Tag type={item?.status?.toLowerCase()} />
+                    <Tag type={item?.status.toLowerCase()} />
                     <Tag type={item?.purpose === 0 ? "sale" : "rental"} />
                   </div>
                 </td>
               </>
             ) : (
               <td className="w-[19%] px-4">
-                <Tag type="pending">Pending</Tag>
+                <Tag type={item?.status.toLowerCase()} />
               </td>
             )}
             <td className="w-[18%] px-4 text-start">
@@ -151,7 +148,7 @@ const Table = ({ type, setShowSubmitterDetails, data, onDelete, onEdit }) => {
                         className="w-[14rem] rounded-lg"
                         variant="outline"
                         onClick={() => {
-                          setShowSubmitterDetails(true);
+                          showSubmitterDetails(item);
                           setShowOptions(false);
                         }}
                       >
