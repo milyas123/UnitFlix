@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "../ui/button";
 
-const InfoList = ({ heading, count, items }) => {
+const InfoList = ({ heading, count, items, handleItemClick }) => {
   const [showAll, setShowAll] = useState(false);
 
   const handleViewAll = () => {
@@ -30,10 +30,9 @@ const InfoList = ({ heading, count, items }) => {
                   : "translateY(-10px)",
             }}
           >
-            <span className="cursor-pointer transition-all duration-300 ease-in-out hover:underline">
+            <span className="cursor-pointer transition-all duration-300 ease-in-out hover:underline" onClick={() => handleItemClick(item.id)}>
               {item.name}
             </span>
-            {/* <span className="text-[18px] text-slate md:text-[9px] lg:text-[11px] xl:text-[13px] 2xl:text-[16px]">{ (${item?.id})}</span> */}
           </div>
         ))}
       </div>

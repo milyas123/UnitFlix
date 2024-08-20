@@ -14,7 +14,7 @@ import { useAppContext } from "@/AppContext";
 const propertiesPerPage = 12;
 const sortOptions = ["Price ↑", "Price ↓", "Date Added ↑", "Date Added ↓"];
 
-const Properties = ({ properties }) => {
+const Properties = ({ properties, handleItemClick }) => {
   const { locations, developers, propertyTypes } = useAppContext();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -93,18 +93,21 @@ const Properties = ({ properties }) => {
             heading="Locations"
             count={locations?.length}
             items={locations}
+            handleItemClick={(id) => handleItemClick("location", id)}
           />
 
           <InfoList
             heading="Developers"
             count={developers.length}
             items={developers}
+            handleItemClick={(id) => handleItemClick("developer", id)}
           />
 
           <InfoList
             heading="Types"
             count={propertyTypes.length}
             items={propertyTypes}
+            handleItemClick={(id) => handleItemClick("type", id)}
           />
         </div>
 
@@ -113,7 +116,7 @@ const Properties = ({ properties }) => {
             <p className="text-[20px] font-semibold md:text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[20px]">
               Showing Property Results
               <span className="text-[16px] font-light text-slate md:text-[9px] lg:text-[11px] xl:text-[13px] 2xl:text-[16px]">
-                ({properties?.length})
+                ({properties?.length || 0})
               </span>
             </p>
             <div

@@ -68,6 +68,18 @@ const PropertiesForSale = () => {
     fetchProperties();
   }, [param]);
 
+  const handleItemClick = async (type, id) => {
+    try {
+      const response = await axios.get(`${serverURL}/property/${type}/${id}`);
+      console.log(response.data)
+      const filteredProperties = response.data?.data?.filter(property => property.category === 1);
+      setProperties(filteredProperties);
+    } catch (error) {
+      toast.error("Error fetching properties. Try again!");
+      console.log(error.message);
+    }
+  };
+
   return (
     <Layout>
       <div className="relative">
@@ -93,7 +105,7 @@ const PropertiesForSale = () => {
         </div>
       </div>
       <div id="properties-section">
-        <Properties properties={properties} />
+        <Properties properties={properties} handleItemClick={handleItemClick} />
       </div>
 
       <StickyIcons showIcons={showTopButton} />
