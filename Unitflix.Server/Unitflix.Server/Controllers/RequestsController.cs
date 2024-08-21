@@ -205,6 +205,14 @@ namespace Unitflix.Server.Controllers
         [HttpGet("")]
         public async Task<ActionResult> GetSubmittedRequests()
         {
+            string? page = Request.Query["page"];
+            string? searchWord = Request.Query["text"];
+            string? propertyType = Request.Query["type"];
+            string? status = Request.Query["status"];
+            string? orderBy = Request.Query["order"];
+            const int RESULTS_PER_PAGE = 12;
+            int totalPages = 0;
+
             List<Property> properties = await _dbContext
                 .Properties
                 .Where(p => p.Submission == PropertySubmission.Secondary && p.IsVerified)
@@ -215,7 +223,72 @@ namespace Unitflix.Server.Controllers
                 .Include(property => property.UserDetail)
                 .ToListAsync();
 
-            return Response.Message(_dataManager.IncludeData(properties));
+            if (!string.IsNullOrEmpty(searchWord))
+            {
+                searchWord = searchWord.ToLower();
+                properties = properties
+                    .Where(p => p.Title.ToLower().Contains(searchWord) || (!string.IsNullOrEmpty(p.Tags) && p.Tags.ToLower().Contains(searchWord)))
+                    .ToList();
+            }
+
+            if (!string.IsNullOrEmpty(propertyType))
+            {
+                int _propertyType = int.Parse(propertyType);
+                properties = properties
+                    .Where(p => p.PropertyType == _propertyType)
+                    .ToList();
+            }
+
+            if (!string.IsNullOrEmpty(status))
+            {
+                int _status = int.Parse(status);
+                PropertyStatus propertyStatus = (PropertyStatus)_status;
+                properties = properties
+                    .Where(p => p.ApprovalStatus == propertyStatus)
+                    .ToList();
+            }
+
+            if (!string.IsNullOrEmpty(orderBy))
+            {
+                string[] availableOptions = ["PriceASC", "PriceDESC", "DateASC", "DateDESC"];
+                if (availableOptions.Contains(orderBy))
+                {
+                    switch (orderBy)
+                    {
+                        case "PriceASC":
+                            properties = properties.OrderBy(p => p.Price).ToList();
+                            break;
+                        case "PriceDESC":
+                            properties = properties.OrderByDescending(p => p.Price).ToList();
+                            break;
+                        case "DateASC":
+                            properties = properties.OrderBy(p => p.DateAdded).ToList();
+                            break;
+                        case "DateDESC":
+                            properties = properties.OrderByDescending(p => p.DateAdded).ToList();
+                            break;
+                    }
+                }
+            }
+
+            if (!string.IsNullOrEmpty(page))
+            {
+                int pageNumber = 0;
+                if (int.TryParse(page, out pageNumber))
+                {
+                    if (pageNumber > 0)
+                    {
+                        totalPages = (int)Math.Ceiling(properties.Count / (double)RESULTS_PER_PAGE);
+                        int start = (pageNumber - 1) * RESULTS_PER_PAGE;
+                        properties = properties
+                            .Skip(start)
+                            .Take(RESULTS_PER_PAGE)
+                            .ToList();
+                    }
+                }
+            }
+
+            return Response.Message(new { properties = _dataManager.IncludeData(properties), pages = totalPages });
         }
 
         /// <summary>
