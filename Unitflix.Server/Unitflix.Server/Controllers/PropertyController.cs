@@ -4,6 +4,7 @@ using FluentValidation.Results;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Microsoft.EntityFrameworkCore;
 
 using Unitflix.Server.API_DTO;
@@ -232,10 +233,15 @@ namespace Unitflix.Server.Controllers
             string? searchWord = Request.Query["text"];
             string? propertyType = Request.Query["type"];
             string? location = Request.Query["location"];
+            string? category = Request.Query["category"];
             string? developer = Request.Query["developer"];
             string? minPrice = Request.Query["min"];
             string? maxPrice = Request.Query["max"];
             string? purpose = Request.Query["purpose"];
+            string? page = Request.Query["page"];
+            string? orderBy = Request.Query["order"];
+            const int RESULTS_PER_PAGE = 12;
+            int totalPages = 0;
 
             List<Property> properties = await _dbContext
                 .Properties
@@ -254,7 +260,7 @@ namespace Unitflix.Server.Controllers
             {
                 searchWord = searchWord.ToLower();
                 properties = properties
-                    .Where(p => p.Title.ToLower().Contains(searchWord))
+                    .Where(p => p.Title.ToLower().Contains(searchWord) || (!string.IsNullOrEmpty(p.Tags) && p.Tags.ToLower().Contains(searchWord)))
                     .ToList();
             }
 
@@ -271,6 +277,15 @@ namespace Unitflix.Server.Controllers
                 int _location = int.Parse(location);
                 properties = properties
                     .Where(p => p.location == _location)
+                    .ToList();
+            }
+
+            if(!string.IsNullOrEmpty(category))
+            {
+                int _category = int.Parse(category);
+                PropertyCategory propertyCategory = (PropertyCategory)_category;
+                properties = properties
+                    .Where(p => p.Category == propertyCategory)
                     .ToList();
             }
 
@@ -298,7 +313,47 @@ namespace Unitflix.Server.Controllers
                     .ToList();
             }
 
-            return Response.Message(new { properties = _dataManager.IncludeData(properties) });
+            if(!string.IsNullOrEmpty(orderBy))
+            {
+                string[] availableOptions = ["PriceASC", "PriceDESC", "DateASC", "DateDESC"];
+                if (availableOptions.Contains(orderBy))
+                {
+                    switch (orderBy)
+                    {
+                        case "PriceASC":
+                            properties = properties.OrderBy(p => p.Price).ToList();
+                            break;
+                        case "PriceDESC":
+                            properties = properties.OrderByDescending(p => p.Price).ToList();
+                            break;
+                        case "DateASC":
+                            properties = properties.OrderBy(p => p.DateAdded).ToList();
+                            break;
+                        case "DateDESC":
+                            properties = properties.OrderByDescending(p => p.DateAdded).ToList();
+                            break;
+                    }
+                }
+            }
+
+            if(!string.IsNullOrEmpty(page))
+            {
+                int pageNumber = 0;
+                if(int.TryParse(page, out pageNumber))
+                {
+                    if(pageNumber > 0)
+                    {
+                        totalPages = (int)Math.Ceiling(properties.Count / (double)RESULTS_PER_PAGE);
+                        int start = (pageNumber -  1) * RESULTS_PER_PAGE;
+                        properties = properties
+                            .Skip(start)
+                            .Take(RESULTS_PER_PAGE)
+                            .ToList();
+                    }
+                }
+            }
+
+            return Response.Message(new { properties = _dataManager.IncludeData(properties), pages = totalPages });
         }
 
         /// <summary>
