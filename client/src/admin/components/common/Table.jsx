@@ -89,7 +89,7 @@ const Table = ({
             <td className="w-[19%] px-4 text-start">
               <div className="flex items-center gap-x-4">
                 <img
-                  src={item?.files.find((file) => file.purpose === 0)?.url}
+                  src={item?.files?.find((file) => file?.purpose === 0)?.url}
                   className="h-[48px] w-[52px] rounded-2xl object-cover"
                   alt=""
                 />
@@ -127,14 +127,14 @@ const Table = ({
                 <td className="w-[23%] px-4 text-start">
                   <div className="flex flex-wrap gap-2">
                     <Tag type={item?.category === 0 ? "property" : "project"} />
-                    <Tag type={item?.status.toLowerCase()} />
+                    <Tag type={item?.status?.toLowerCase()} />
                     <Tag type={item?.purpose === 0 ? "sale" : "rental"} />
                   </div>
                 </td>
               </>
             ) : (
               <td className="w-[19%] px-4">
-                <Tag type={item?.status.toLowerCase()} />
+                <Tag type={item?.status?.toLowerCase()} />
               </td>
             )}
             <td className="w-[18%] px-4 text-start">
@@ -148,9 +148,9 @@ const Table = ({
             <td className="relative w-[4%] px-4 text-start">
               <ThreeDots
                 className="relative cursor-pointer"
-                onClick={() => handleOptionsClick(item.id)}
+                onClick={() => handleOptionsClick(item?.id)}
               />
-              {showOptions && selectedItem === item.id && (
+              {showOptions && selectedItem === item?.id && (
                 <div
                   ref={optionsRef}
                   className="absolute right-0 z-50 min-w-[10rem] space-y-2 rounded-xl bg-white p-2 text-black"
@@ -171,7 +171,7 @@ const Table = ({
                       <Button
                         className="w-[10rem] rounded-lg border-crimsonRed text-crimsonRed hover:bg-crimsonRed"
                         variant="outline"
-                        onClick={() => onDelete(item.id)}
+                        onClick={() => onDelete(item?.id)}
                       >
                         Delete
                       </Button>
@@ -193,7 +193,7 @@ const Table = ({
                         className="w-[14rem] rounded-lg"
                         variant="outline"
                         onClick={() =>
-                          navigate(`/admin/property-details/${item.id}`)
+                          navigate(`/admin/property-details/${item?.id}`)
                         }
                       >
                         Preview Property
@@ -201,37 +201,37 @@ const Table = ({
 
                       <Button
                         className={`w-[14rem] rounded-lg border-mintGreen text-mintGreen hover:bg-mintGreen ${
-                          loadingAction.id === item.id &&
+                          loadingAction?.id === item?.id &&
                           "cursor-not-allowed opacity-50"
                         }`}
                         variant="outline"
                         onClick={() => {
-                          if (!loadingAction.id) {
-                            handleAccept(item.id);
+                          if (!loadingAction?.id) {
+                            handleAccept(item?.id);
                           }
                         }}
-                        disabled={loadingAction.id === item.id}
+                        disabled={loadingAction?.id === item?.id}
                       >
-                        {loadingAction.id === item.id &&
-                        loadingAction.type === 1
+                        {loadingAction?.id === item?.id &&
+                        loadingAction?.type === 1
                           ? "Accepting..."
                           : "Accept"}
                       </Button>
                       <Button
                         className={`w-[14rem] rounded-lg border-crimsonRed text-crimsonRed hover:bg-crimsonRed ${
-                          loadingAction.id === item.id &&
+                          loadingAction?.id === item?.id &&
                           "cursor-not-allowed opacity-50"
                         }`}
                         variant="outline"
                         onClick={() => {
-                          if (!loadingAction.id) {
-                            handleReject(item.id);
+                          if (!loadingAction?.id) {
+                            handleReject(item?.id);
                           }
                         }}
-                        disabled={loadingAction.id === item.id}
+                        disabled={loadingAction?.id === item?.id}
                       >
-                        {loadingAction.id === item.id &&
-                        loadingAction.type === 2
+                        {loadingAction?.id === item?.id &&
+                        loadingAction?.type === 2
                           ? "Rejecting..."
                           : "Reject"}
                       </Button>

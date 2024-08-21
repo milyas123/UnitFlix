@@ -44,7 +44,7 @@ const Dropdown = ({ options, placeholder, onChange }) => {
         />
       </button>
       <ul
-        className={`absolute z-10 mt-1 w-full origin-top transform overflow-y-auto rounded-md bg-white shadow-lg transition-all duration-300 md:w-[6rem] lg:w-[8rem] xl:min-w-[10rem] 2xl:min-w-[12rem] ${
+        className={`absolute z-10 mt-1 w-full origin-top transform overflow-y-auto overflow-x-hidden rounded-md bg-white shadow-lg transition-all duration-300 md:w-[6rem] lg:w-[8rem] xl:min-w-[10rem] 2xl:min-w-[12rem] ${
           isOpen
             ? "max-h-[15rem] scale-y-100 opacity-100"
             : "max-h-0 scale-y-0 opacity-0"
