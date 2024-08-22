@@ -164,14 +164,16 @@ const Properties = ({ properties, handleItemClick }) => {
                 ))}
               </div>
 
-              <div className="mt-16">
-                <Pagination
-                  propertiesPerPage={propertiesPerPage}
-                  totalProperties={properties?.length}
-                  currentPage={currentPage}
-                  paginate={paginate}
-                />
-              </div>
+              {properties?.length >= 12 && (
+                <div className="mt-16">
+                  <Pagination
+                    propertiesPerPage={propertiesPerPage}
+                    totalProperties={properties?.length}
+                    currentPage={currentPage}
+                    paginate={paginate}
+                  />
+                </div>
+              )}
             </>
           )}
         </div>

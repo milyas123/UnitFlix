@@ -4,6 +4,7 @@ import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import Delete from '../svgs/Delete';
 import { ImageUp } from 'lucide-react';
+import TextEditor from '@/admin/components/common/TextEditor';
 
 const statuses = ["Pre Launch", "Secondary", "Ready to Move In"];
 
@@ -28,12 +29,9 @@ const GeneralInformation = ({ formData, handleChange, handleSelectChange, handle
 
         <div className="w-full md:space-y-1 lg:space-y-1.5 xl:space-y-2 2xl:space-y-2.5">
           <label className="user--addProperty-labelTextSize">Overview</label>
-          <Textarea
-            id="overview"
-            className="h-[160px] ps-3 md:h-[100px] lg:h-[160px] xl:h-[230px] 2xl:h-[300px]"
-            placeholder="Overview"
-            value={formData?.overview}
-            onChange={handleChange}
+          <TextEditor
+            overview={formData.overview}
+            setOverview={(value) => handleSelectChange("overview", value)}
           />
         </div>
 

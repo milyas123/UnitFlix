@@ -71,7 +71,6 @@ const PropertiesForSale = () => {
   const handleItemClick = async (type, id) => {
     try {
       const response = await axios.get(`${serverURL}/property/${type}/${id}`);
-      console.log(response.data)
       const filteredProperties = response.data?.data?.filter(property => property.category === 1);
       setProperties(filteredProperties);
     } catch (error) {

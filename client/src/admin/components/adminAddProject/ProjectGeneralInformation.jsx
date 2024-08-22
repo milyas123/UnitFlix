@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { ImageUp } from "lucide-react";
 import { AiFillFilePdf } from "react-icons/ai";
 
+import TextEditor from "../common/TextEditor";
 import { Input } from "@/website/components/ui/input";
-import { Textarea } from "@/website/components/ui/textarea";
 import Status from "@/website/components/svgs/Status";
 import Delete from "@/website/components/svgs/Delete";
 
@@ -43,7 +43,7 @@ const ProjectGeneralInformation = ({ formData, handleChange, handleSelect, handl
   const handleFeaturedClick = () => {
     const newFeaturedStatus = !isFeatured;
     setIsFeatured(newFeaturedStatus);
-    handleSelect("featured" ,newFeaturedStatus);
+    handleSelect("featured", newFeaturedStatus);
   };
 
   const handleRemoveCoverImage = () => { 
@@ -72,14 +72,11 @@ const ProjectGeneralInformation = ({ formData, handleChange, handleSelect, handl
           />
         </div>
 
-        <div className="space-y=2.5">
-          <label className="text-[16px] font-semibold">Overview</label>
-          <Textarea
-            id="overview"
-            className="h-[300px] ps-3"
-            placeholder="Dubai Best Home under 1.5 kanal"
-            value={formData.overview}
-            onChange={handleChange}
+        <div className="space-y-2.5">
+          <label className="text-[16px] font-semibold">Overview</label> 
+          <TextEditor
+            overview={formData.overview}
+            setOverview={(value) => handleSelect("overview", value)}
           />
         </div>
 

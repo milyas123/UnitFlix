@@ -36,36 +36,9 @@ const initialFormData = {
   paymentPlan: "",
   handOver: "",
   location: 0,
-  keyHighlights: [
-    {
-      title: "Feature",
-      description:
-        "Features meticulously crafted studios, 1, 2 & 3 bedroom apartments, as well as exclusive 3-bedroom pool villas and 4-bedroom royal penthouses with private pools.",
-    },
-  ],
-  features: [
-    {
-      name: "Parking Spaces",
-      icon: "RiParkingBoxLine",
-    },
-  ],
-  paymentPlanItems: [
-    {
-      Title: "Down Payment",
-      Description: "On Booking Date",
-      Amount: 20,
-    },
-    {
-      Title: "During Construction",
-      Description: "1st - 28th Installment",
-      Amount: 50,
-    },
-    {
-      Title: "On Handover",
-      Description: "100% Complete",
-      Amount: 30,
-    },
-  ],
+  keyHighlights: [],
+  features: [],
+  paymentPlanItems: [],
   galleryImages: [],
 };
 

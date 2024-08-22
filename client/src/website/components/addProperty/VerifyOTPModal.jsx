@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 const VerifyOTPModal = ({ propertyData, onClose }) => {
   const [otp, setOtp] = useState(Array(6).fill(""));
   const [loading, setLoading] = useState(false);
-  
+
   const handleChange = (value, index) => {
     if (value.length > 1) return;
     const newOtp = [...otp];
@@ -44,9 +44,12 @@ const VerifyOTPModal = ({ propertyData, onClose }) => {
     };
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/request/verify`, payload);
+      const response = await axios.post(
+        `${import.meta.env.VITE_SERVER_URL}/request/verify`,
+        payload,
+      );
       toast.success(response.data?.message);
-      onClose(); 
+      onClose();
     } catch (error) {
       console.error("Error verifying OTP", error);
       toast.error(error.response?.data);
@@ -76,14 +79,15 @@ const VerifyOTPModal = ({ propertyData, onClose }) => {
             <div className="flex items-center justify-between gap-x-1.5">
               {otp.map((digit, index) => (
                 <Input
-                  type="number"
                   key={index}
                   id={`otp-input-${index}`}
+                  type="number"
                   className="flex size-[64px] items-center justify-center rounded-lg border-2 p-1.5 text-center text-[48px] font-medium text-border"
                   maxLength={1}
                   value={digit}
                   onChange={(e) => handleChange(e.target.value, index)}
                   onKeyDown={(e) => handleKeyDown(e, index)}
+                  style={{color: "black"}}
                 />
               ))}
             </div>

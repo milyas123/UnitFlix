@@ -137,7 +137,115 @@ input[type='number'] {
   border-radius: 2px;
 }
 
-
 th {
   font-weight: normal;
+}
+
+/* Text Editor */
+.ql-toolbar {
+  border-radius: 10px 10px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.ql-toolbar.ql-snow .ql-formats {
+  display: flex !important;
+  flex-wrap: wrap;
+}
+
+.ql-toolbar .ql-section {
+  display: flex;
+  padding: 0.5em;
+  border-right: 0.5px solid gray;
+  border-bottom: 0.5px solid gray;
+  align-items: center;
+}
+
+.text-editor .ql-container {
+  border-radius: 0 0 10px 10px;
+}
+
+.text-editor .ql-container .ql-editor {
+  min-height: 300px;
+}
+
+.buttons-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 3em;
+}
+
+.buttons-container .field-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  margin: 1em 0 0.25em 0;
+}
+
+.buttons-container .field-buttons .field-save-btn,
+.buttons-container .field-buttons .field-discard-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em;
+  border-radius: 5px;
+  margin: 0 0.25em;
+  background-color: gray;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition-property: background-color, color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+}
+
+.buttons-container .field-buttons .field-save-btn {
+  background-color: green;
+  color: white;
+}
+
+.buttons-container .field-buttons .field-save-btn:hover {
+  background-color: green;
+}
+
+.buttons-container .field-buttons .field-discard-btn {
+  background-color: red;
+  color: white;
+}
+
+.buttons-container .field-buttons .field-discard-btn:hover {
+  background-color: red;
+}
+
+/* Font Styles */
+.ql-font-arial {
+  font-family: Arial !important;
+}
+
+.ql-font-comic-sans {
+  font-family: "Comic Sans", cursive !important;
+}
+
+.ql-font-courier-new {
+  font-family: "Courier New", Courier, monospace !important;
+}
+
+.ql-font-georgia {
+  font-family: Georgia, serif !important;
+}
+
+.ql-font-helvetica {
+  font-family: Helvetica, Arial, sans-serif !important;
+}
+
+.ql-font-lucida {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif !important;
+}
+
+/* Media Query */
+@media screen and (max-width: 440px) {
+  .ql-toolbar .ql-section {
+    font-size: 0.9rem;
+  }
 }

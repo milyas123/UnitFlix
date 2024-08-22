@@ -27,19 +27,8 @@ const initialFormData = {
   baths: "",
   city: "",
   location: "",
-  keyHighlights: [
-    {
-      title: "Feature",
-      description:
-        "Features meticulously crafted studios, 1, 2 & 3 bedroom apartments, as well as exclusive 3-bedroom pool villas and 4-bedroom royal penthouses with private pools.",
-    },
-  ],
-  features: [
-    {
-      name: "Parking Spaces",
-      icon: "RiParkingBoxLine",
-    },
-  ],
+  keyHighlights: [],
+  features: [],
   galleryImages: [],
 };
 
