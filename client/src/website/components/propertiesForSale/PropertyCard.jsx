@@ -17,7 +17,6 @@ import { useAppContext } from "@/AppContext";
 
 const PropertyCard = ({ property }) => {
   const { locations } = useAppContext();
-
   return (
     <Link to={`/property-details/${property?.id}`} className="contents">
       <div className="w-full overflow-hidden rounded-lg border border-lightGrey md:w-[90%] md:min-w-[150px] md:max-w-[200px] lg:w-[95%] lg:min-w-[225px] lg:max-w-[270px] xl:w-[92%] xl:min-w-[290px] xl:max-w-[320px] 2xl:w-[95%] 2xl:min-w-[345px] 2xl:max-w-[400px]">
@@ -47,8 +46,7 @@ const PropertyCard = ({ property }) => {
             }}
           >
             {property?.files.map(
-              (image) =>
-                image.purpose === 0 && (
+              (image) => (
                   <SwiperSlide key={crypto.randomUUID()} className="relative">
                     <img
                       src={image.url}
@@ -62,36 +60,32 @@ const PropertyCard = ({ property }) => {
           </Swiper>
         </div>
 
-        <div className="flex flex-col gap-y-3.5 p-2 md:gap-y-1.5 md:px-2 md:py-1.5 lg:gap-y-2 lg:p-2.5 xl:gap-y-2.5 xl:p-3 2xl:p-[12px]">
-          <div className="flex flex-row flex-wrap font-semibold md:whitespace-nowrap md:text-[6px] lg:text-[8px] xl:text-[11px] 2xl:text-[13.5px]">
-            <span className="border-r border-lightGrey pe-1">
-              Single Row Middle
-            </span>
-            <span className="border-r border-lightGrey px-1">2BHK</span>
-            <span className="border-r border-lightGrey px-1">Vacant</span>
-            <span className="md:ps-1">Study Room</span>
+        <div
+            className="flex flex-col gap-y-3.5 p-2 md:gap-y-1.5 md:px-2 md:py-1.5 lg:gap-y-2 lg:p-2.5 xl:gap-y-2.5 xl:p-3 2xl:p-[12px]">
+          <div
+              className="flex flex-row flex-wrap font-semibold md:text-[6px] lg:text-[8px] xl:text-[11px] 2xl:text-[13.5px]">
+            {property?.tags}
           </div>
 
-          <div className="flex items-center justify-start gap-x-0.5 text-[14px] md:text-[6px] lg:text-[8px] xl:text-[11px] 2xl:text-[13.5px]">
+          <div
+              className="flex items-center justify-start gap-x-0.5 text-[14px] md:text-[6px] lg:text-[8px] xl:text-[11px] 2xl:text-[13.5px]">
             <MdOutlineLocationOn
-              size={17}
-              className="-ms-0.5 size-5 md:size-2 lg:size-3 xl:size-4 2xl:size-5"
+                size={17}
+                className="-ms-0.5 size-5 md:size-2 lg:size-3 xl:size-4 2xl:size-5"
             />
             {locations.find((loc) => loc.id === property?.location)?.name}
           </div>
 
-          <div className="flex flex-row whitespace-nowrap text-[12px] font-semibold md:text-[5px] lg:text-[7.5px] xl:gap-x-1 xl:text-[9px] 2xl:gap-x-2 2xl:text-[11.5px]">
-            <span className="border-r border-lightGrey pe-1 text-[16px] font-bold text-mirage md:pe-0.5 md:text-[6px] lg:pe-1 lg:text-[8px] xl:pe-1.5 xl:text-[11px] 2xl:text-[13px]">
-              {property?.title}
+          <div
+              className="flex flex-row whitespace-nowrap text-[12px] font-semibold md:text-[5px] lg:text-[7.5px] xl:gap-x-1 xl:text-[9px] 2xl:gap-x-2 2xl:text-[11.5px]">
+            <span className="flex items-center gap-x-1 border-r border-lightGrey px-1 md:px-0.5 lg:px-1">
+              <Bed/> {property?.beds} Beds
             </span>
             <span className="flex items-center gap-x-1 border-r border-lightGrey px-1 md:px-0.5 lg:px-1">
-              <Bed /> {property?.beds} Beds
-            </span>
-            <span className="flex items-center gap-x-1 border-r border-lightGrey px-1 md:px-0.5 lg:px-1">
-              <Shower /> {property?.baths} Baths
+              <Shower/> {property?.baths} Baths
             </span>
             <span className="flex items-center gap-x-1 ps-1 md:ps-0.5 lg:ps-1">
-              <Area /> {property?.area} sqft
+              <Area/> {property?.area.toLocaleString()} sqft
             </span>
           </div>
 

@@ -2,12 +2,21 @@ import React, { useState, useRef, useEffect } from "react";
 import { IoMdCheckmark } from "react-icons/io";
 import { FiChevronDown } from "react-icons/fi";
 
-const Dropdown = ({ options, placeholder, onChange }) => {
+const Dropdown = ({ options, placeholder, onChange, currentOption}) => {
   const dropdownRef = useRef(null);
 
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    if(options && currentOption) {
+      const foundOption = options.filter(option => option.id === currentOption)[0];
+      if(foundOption) {
+        setSelectedOption(foundOption)
+      }
+    }
+  }, [currentOption]);
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);

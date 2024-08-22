@@ -84,7 +84,7 @@ const AdminSubmittedRequests = () => {
 
         <Table
           type="requests"
-          data={requests}
+          data={requests.properties}
           showSubmitterDetails={handleShowDetails}
           onAccept={(requestId) => handleUpdateStatus(requestId, 1)}
           onReject={(requestId) => handleUpdateStatus(requestId, 2)}

@@ -86,7 +86,7 @@ const Table = ({
             className="flex items-center divide-x divide-platinum bg-white py-2 text-[14px]"
           >
             <td className="w-[3%] text-center">{index + 1}</td>
-            <td className="w-[19%] px-4 text-start">
+            <td className="w-[25%] px-4 text-start">
               <div className="flex items-center gap-x-4">
                 <img
                   src={item?.files?.find((file) => file?.purpose === 0)?.url}
@@ -96,8 +96,7 @@ const Table = ({
                 <div>
                   <p className="font-regular text-[15px]">{item?.title}</p>
                   <p className="space-x-1 divide-x divide-black text-[11px]">
-                    <span>2BHK</span> <span className="ps-1">Vacant</span>
-                    <span className="ps-1">Study Room</span>
+                    {item?.tags}
                   </p>
                 </div>
               </div>
@@ -110,7 +109,7 @@ const Table = ({
                 </div>
               </td>
             )}
-            <td className="w-[17%] px-4 text-start">
+            <td className="w-[13%] px-4 text-start">
               <div className="flex items-center gap-x-2 text-davyGrey">
                 <LocationPin />
                 <p className="text-[13px]">{item?.propertyLocation?.name}</p>
@@ -127,7 +126,7 @@ const Table = ({
                 <td className="w-[23%] px-4 text-start">
                   <div className="flex flex-wrap gap-2">
                     <Tag type={item?.category === 0 ? "property" : "project"} />
-                    <Tag type={item?.status?.toLowerCase()} />
+                    <Tag type={item?.submission === 0 ? 'primary' : 'secondary'} />
                     <Tag type={item?.purpose === 0 ? "sale" : "rental"} />
                   </div>
                 </td>

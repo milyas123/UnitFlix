@@ -37,21 +37,23 @@ const Gallery = ({ formData, handleAddGalleryImage, handleDeleteGalleryImage }) 
           </label>
         </div>
 
-        {formData?.galleryImages?.map((image, index) => (
-          <div key={index} className="space-y-2">
-            <div className="flex items-center justify-between">
-              <p className="user--addProperty-labelTextSize">Image {index + 1}</p>
-              <Delete className="cursor-pointer" onClick={() => handleDeleteGalleryImage(index)} />
-            </div>
-            <div className="overflow-hidden">
-              <img
-                src={typeof image === "string" && image.startsWith("http") ? image : URL.createObjectURL(image)}
-                className="h-[170px] w-full rounded-2xl object-cover md:h-[100px] md:w-[150px] lg:h-[130px] lg:w-[190px] xl:h-[150px] xl:w-[240px] 2xl:h-[185px] 2xl:w-[288px]"
-                alt={`Property ${index + 1}`}
-              />
-            </div>
-          </div>
-        ))}
+        <div className='flex flex-wrap'>
+          {formData?.galleryImages?.map((image, index) => (
+              <div key={index} className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <p className="user--addProperty-labelTextSize">Image {index + 1}</p>
+                  <Delete className="cursor-pointer" onClick={() => handleDeleteGalleryImage(index)} />
+                </div>
+                <div className="overflow-hidden">
+                  <img
+                      src={typeof image === "string" && image.startsWith("http") ? image : URL.createObjectURL(image)}
+                      className="h-[170px] w-full rounded-2xl object-cover md:h-[100px] md:w-[150px] lg:h-[130px] lg:w-[190px] xl:h-[150px] xl:w-[240px] 2xl:h-[185px] 2xl:w-[288px]"
+                      alt={`Property ${index + 1}`}
+                  />
+                </div>
+              </div>
+          ))}
+        </div>
       </div>
     </div>
   );

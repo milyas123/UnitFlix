@@ -245,6 +245,7 @@ namespace Unitflix.Server.Controllers
 
             List<Property> properties = await _dbContext
                 .Properties
+                .Include(property => property.Files)
                 .ToListAsync();
 
             if(!string.IsNullOrEmpty(purpose))

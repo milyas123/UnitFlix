@@ -21,6 +21,7 @@ import { useNavigate } from "react-router-dom";
 const serverURL = import.meta.env.VITE_SERVER_URL;
 const initialFormData = {
   title: "",
+  tags: "",
   overview: "",
   status: "Pre Launch",
   featured: true,
@@ -218,6 +219,7 @@ const AdminAddProject = () => {
     };
 
     form.append("title", formData.title);
+    form.append("tags", formData.tags);
     form.append("overview", JSON.stringify(overview));
     form.append("status", formData.status);
     form.append("price", formData.price);
@@ -264,7 +266,10 @@ const AdminAddProject = () => {
       setFormData(initialFormData);
       navigate("/admin/manage-properties");
     } catch (error) {
-      toast.error("Error submitting form");
+      const errors = error.response.data.errors
+      for(let err of errors) {
+        toast.error(err);
+      }
       console.error("Error submitting form", error);
     } finally {
       setLoading(false);

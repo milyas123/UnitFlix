@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { Button } from "@/website/components/ui/button";
 
 import GeneralInformation from "@/website/components/addProperty/GeneralInformation";
@@ -20,6 +20,7 @@ import VerifyOTPModal from "../components/addProperty/VerifyOTPModal";
 const initialFormData = {
   title: "",
   overview: "",
+  tags: "",
   status: "Pre Launch",
   price: "",
   coverImage: "",
@@ -173,13 +174,13 @@ const AddProperty = () => {
   };
 
   const handleSubmit = async () => {
-    setLoading(true);
 
     const form = new FormData();
     const overview = { text: formData.overview };
 
     form.append("category", 0);
     form.append("title", formData.title);
+    form.append('tags', formData.tags);
     form.append("overview", JSON.stringify(overview));
     form.append("status", formData.status);
     form.append("price", formData.price);
@@ -193,6 +194,7 @@ const AddProperty = () => {
     form.append("keyHighlights", JSON.stringify(formData.keyHighlights));
     form.append("coverImage", formData.coverImage);
     form.append("userDetail", JSON.stringify(formData.userDetail));
+    console.log(formData)
 
     if (formData.galleryImages) {
       formData.galleryImages.forEach((image, index) => {
@@ -216,7 +218,10 @@ const AddProperty = () => {
       setFormData(initialFormData);
       setIsInfoModalVisible(true);
     } catch (error) {
-      toast.error("Error submitting form");
+      const errors = error.response.data.errors
+      for(let err of errors) {
+        toast.error(err);
+      }
       console.error("Error submitting form", error);
     } finally {
       setLoading(false);

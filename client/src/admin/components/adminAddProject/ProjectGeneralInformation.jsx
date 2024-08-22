@@ -63,20 +63,32 @@ const ProjectGeneralInformation = ({ formData, handleChange, handleSelect, handl
         <div className="space-y-2.5">
           <label className="text-[16px] font-semibold">Title</label>
           <Input
-            type="text"
-            id="title"
-            className="ps-3"
-            placeholder="Dubai Best Home under 1.5 kanal"
-            value={formData.title}
-            onChange={handleChange}
+              type="text"
+              id="title"
+              className="ps-3"
+              placeholder="Dubai Best Home under 1.5 kanal"
+              value={formData.title}
+              onChange={handleChange}
           />
         </div>
 
         <div className="space-y-2.5">
-          <label className="text-[16px] font-semibold">Overview</label> 
+          <label className="text-[16px] font-semibold">Tags</label>
+          <Input
+              type="text"
+              id="tags"
+              className="ps-3"
+              placeholder="Spacious Bedrooms | City View"
+              value={formData.tags}
+              onChange={handleChange}
+          />
+        </div>
+
+        <div className="space-y-2.5">
+          <label className="text-[16px] font-semibold">Overview</label>
           <TextEditor
-            overview={formData.overview}
-            setOverview={(value) => handleSelect("overview", value)}
+              overview={formData.overview}
+              setOverview={(value) => handleSelect("overview", value)}
           />
         </div>
 
@@ -84,19 +96,19 @@ const ProjectGeneralInformation = ({ formData, handleChange, handleSelect, handl
           <label className="text-[16px] font-semibold">Status</label>
           <div className="flex items-center justify-start gap-5">
             {statuses.map((status) => (
-              <div
-                key={status}
-                className={`flex cursor-pointer items-center gap-x-1.5 rounded-md border-2 border-mirage border-opacity-0 px-3 py-2 transition-all duration-300 ease-in-out hover:border-opacity-100 ${
-                  selectedStatus === status && "bg-mirage text-white"
-                }`}
-                onClick={() => handleStatusClick(status)}
-              >
-                <Status
-                  className={`${selectedStatus === status ? "text-white" : "text-black"}`}
-                  size={25}
-                />
-                <p className="text-[14px]">{status}</p>
-              </div>
+                <div
+                    key={status}
+                    className={`flex cursor-pointer items-center gap-x-1.5 rounded-md border-2 border-mirage border-opacity-0 px-3 py-2 transition-all duration-300 ease-in-out hover:border-opacity-100 ${
+                        selectedStatus === status && "bg-mirage text-white"
+                    }`}
+                    onClick={() => handleStatusClick(status)}
+                >
+                  <Status
+                      className={`${selectedStatus === status ? "text-white" : "text-black"}`}
+                      size={25}
+                  />
+                  <p className="text-[14px]">{status}</p>
+                </div>
             ))}
           </div>
         </div>
@@ -105,26 +117,26 @@ const ProjectGeneralInformation = ({ formData, handleChange, handleSelect, handl
           <label className="text-[16px] font-semibold">Featured</label>
           <div className="flex items-center gap-x-6">
             <div
-              className={`flex cursor-pointer items-center gap-x-1.5 rounded-md border-2 border-mirage border-opacity-0 px-3 py-2 transition-all duration-300 ease-in-out hover:border-opacity-100 ${
-                isFeatured && "bg-mirage text-white"
-              }`}
-              onClick={handleFeaturedClick}
+                className={`flex cursor-pointer items-center gap-x-1.5 rounded-md border-2 border-mirage border-opacity-0 px-3 py-2 transition-all duration-300 ease-in-out hover:border-opacity-100 ${
+                    isFeatured && "bg-mirage text-white"
+                }`}
+                onClick={handleFeaturedClick}
             >
               <Status
-                className={`${isFeatured ? "text-white" : "text-black"}`}
-                size={25}
+                  className={`${isFeatured ? "text-white" : "text-black"}`}
+                  size={25}
               />
               <p className="text-[14px]">Yes</p>
             </div>
             <div
-              className={`flex cursor-pointer items-center gap-x-1.5 rounded-md border-2 border-mirage border-opacity-0 px-3 py-2 transition-all duration-300 ease-in-out hover:border-opacity-100 ${
-                !isFeatured && "bg-mirage text-white"
-              }`}
-              onClick={handleFeaturedClick}
+                className={`flex cursor-pointer items-center gap-x-1.5 rounded-md border-2 border-mirage border-opacity-0 px-3 py-2 transition-all duration-300 ease-in-out hover:border-opacity-100 ${
+                    !isFeatured && "bg-mirage text-white"
+                }`}
+                onClick={handleFeaturedClick}
             >
               <Status
-                className={`${!isFeatured ? "text-white" : "text-black"}`}
-                size={25}
+                  className={`${!isFeatured ? "text-white" : "text-black"}`}
+                  size={25}
               />
               <p className="text-[14px]">No</p>
             </div>
@@ -134,75 +146,77 @@ const ProjectGeneralInformation = ({ formData, handleChange, handleSelect, handl
         <div className="w-full space-y-2.5">
           <label className="text-[16px] font-semibold">Cover Image</label>
           {previewCoverImage ? (
-            <div className="relative w-[288px] h-[185px]">
-              <img
-                src={previewCoverImage}
-                alt="Cover Image Preview"
-                className="w-full h-full object-cover rounded-2xl"
-              />
-              <button
-                className="absolute top-2 right-2 p-1 bg-red-600 hover:bg-white text-white transition-all duration-200 ease-in-out rounded-full"
-                onClick={handleRemoveCoverImage}
-              >
-                <Delete size={20} />
-              </button>
-            </div>
-          ) : (
-            <label htmlFor="coverImage" className="flex h-[185px] w-[288px] items-center justify-center rounded-2xl border-2 border-dashed bg-whiteLilac cursor-pointer">
-              <input
-                type="file"
-                id="coverImage"
-                className="hidden"
-                accept=".jpg,.jpeg,.png"
-                onChange={(e) => handleFileChange(e, "coverImage")}
-              />
-              <div className="flex flex-col items-center justify-center gap-y-2 text-smokeyGrey">
-                <ImageUp size={35} />
-                Upload Cover Image
+              <div className="relative w-[288px] h-[185px]">
+                <img
+                    src={previewCoverImage}
+                    alt="Cover Image Preview"
+                    className="w-full h-full object-cover rounded-2xl"
+                />
+                <button
+                    className="absolute top-2 right-2 p-1 bg-red-600 hover:bg-white text-white transition-all duration-200 ease-in-out rounded-full"
+                    onClick={handleRemoveCoverImage}
+                >
+                  <Delete size={20}/>
+                </button>
               </div>
-            </label>
+          ) : (
+              <label htmlFor="coverImage"
+                     className="flex h-[185px] w-[288px] items-center justify-center rounded-2xl border-2 border-dashed bg-whiteLilac cursor-pointer">
+                <input
+                    type="file"
+                    id="coverImage"
+                    className="hidden"
+                    accept=".jpg,.jpeg,.png"
+                    onChange={(e) => handleFileChange(e, "coverImage")}
+                />
+                <div className="flex flex-col items-center justify-center gap-y-2 text-smokeyGrey">
+                  <ImageUp size={35}/>
+                  Upload Cover Image
+                </div>
+              </label>
           )}
         </div>
 
         <div className="w-full space-y-2.5">
           <label className="text-[16px] font-semibold">Brochure</label>
           {brochureFileName ? (
-            <div className="relative flex items-center gap-2 p-2 rounded-lg border border-dashed border-gray-400">
-              <AiFillFilePdf size={30} className="text-red-600" />
-              <p className="text-[14px] text-black">{brochureFileName}</p>
-              <button
-                className="absolute top-1 right-1 p-1 bg-red-600 hover:bg-white text-white transition-all duration-200 ease-in-out rounded-full"
-                onClick={handleRemoveBrochure}
-              >
-                <Delete size={20} />
-              </button>
-            </div>
-          ) : (
-            <label htmlFor="brochure" className="flex h-[185px] w-[288px] items-center justify-center rounded-2xl border-2 border-dashed bg-whiteLilac cursor-pointer">
-              <input
-                type="file"
-                id="brochure"
-                className="hidden"
-                accept="application/pdf"
-                onChange={(e) => handleFileChange(e, "brochure")}
-              />
-              <div className="flex flex-col items-center justify-center gap-y-2 text-smokeyGrey">
-                <ImageUp size={35} />
-                Upload Brochure PDF
+              <div className="relative flex items-center gap-2 p-2 rounded-lg border border-dashed border-gray-400">
+                <AiFillFilePdf size={30} className="text-red-600"/>
+                <p className="text-[14px] text-black">{brochureFileName}</p>
+                <button
+                    className="absolute top-1 right-1 p-1 bg-red-600 hover:bg-white text-white transition-all duration-200 ease-in-out rounded-full"
+                    onClick={handleRemoveBrochure}
+                >
+                  <Delete size={20}/>
+                </button>
               </div>
-            </label>
+          ) : (
+              <label htmlFor="brochure"
+                     className="flex h-[185px] w-[288px] items-center justify-center rounded-2xl border-2 border-dashed bg-whiteLilac cursor-pointer">
+                <input
+                    type="file"
+                    id="brochure"
+                    className="hidden"
+                    accept="application/pdf"
+                    onChange={(e) => handleFileChange(e, "brochure")}
+                />
+                <div className="flex flex-col items-center justify-center gap-y-2 text-smokeyGrey">
+                  <ImageUp size={35}/>
+                  Upload Brochure PDF
+                </div>
+              </label>
           )}
         </div>
 
         <div className="w-full space-y-2.5">
           <label className="text-[16px] font-semibold">Price</label>
           <Input
-            type="number"
-            id="price"
-            className="ps-3"
-            placeholder="32,402"
-            value={formData.price}
-            onChange={handleChange}
+              type="number"
+              id="price"
+              className="ps-3"
+              placeholder="32,402"
+              value={formData.price}
+              onChange={handleChange}
           />
         </div>
       </div>

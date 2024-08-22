@@ -16,6 +16,7 @@ import useScrollProgress from "@/hooks/useScrollProgress";
 
 import axios from "axios";
 import { toast } from "react-toastify";
+import {useNavigate} from "react-router-dom";
 
 const sliderMinValue = 50000;
 const sliderMaxValue = 5000000;
@@ -23,7 +24,7 @@ const serverURL = import.meta.env.VITE_SERVER_URL;
 
 const LandingPage = () => {
   const showButtons = useScrollProgress("discover-section");
-
+  const navigate = useNavigate();
   const [properties, setProperties] = useState([]);
 
   const [selectedTab, setSelectedTab] = useState("All");
@@ -36,25 +37,33 @@ const LandingPage = () => {
   // search properties based on user selected options
   const handleSearch = async () => {
     const searchParams = {
-      text,
-      location: selectedLocation || "",
-      type: selectedPropertyType || "",
-      developer: selectedDeveloper || "",
       min: sliderMinValue + (value[0] / 100) * (sliderMaxValue - sliderMinValue),
       max: sliderMinValue + (value[1] / 100) * (sliderMaxValue - sliderMinValue),
-      purpose: selectedTab === "All" ? 0 : selectedTab === "For Sale" ? 0 : 1,
+      page: 1,
     };
 
-    const queryString = new URLSearchParams(searchParams).toString();
-
-    try {
-      const response = await axios.get(`${serverURL}/property/search?${queryString}`);
-      const filteredProperties = response.data?.data?.properties?.filter(property => property.category === 1);
-      setProperties(filteredProperties);
-    } catch (error) {
-      toast.error("Error fetching results. Try again!");
-      console.log(error.message);
+    if(text) {
+      searchParams.text = text;
     }
+
+    if(selectedLocation) {
+      searchParams.location = selectedLocation;
+    }
+
+    if(selectedPropertyType) {
+      searchParams.type = selectedPropertyType;
+    }
+
+    if(selectedDeveloper) {
+      searchParams.developer = selectedDeveloper;
+    }
+
+    if(selectedTab && selectedTab !== 'All') {
+      searchParams.purpose = selectedTab === "For Sale" ? 0 : 1;
+    }
+
+    const queryString = new URLSearchParams(searchParams).toString();
+    navigate(`/properties-for-sale?${queryString}`)
   };
 
   const fetchProjects = async () => {

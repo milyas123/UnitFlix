@@ -98,7 +98,7 @@ const Filters = ({
           <Dropdown
             options={propertyTypes}
             placeholder="Type"
-            selectedOption={selectedPropertyType}
+            currentOption={selectedPropertyType}
             onChange={setSelectedPropertyType}
           />
         </div>
@@ -107,7 +107,7 @@ const Filters = ({
           <Dropdown
             options={locations}
             placeholder="Location"
-            selectedOption={selectedLocation}
+            currentOption={selectedLocation}
             onChange={setSelectedLocation}
           />
         </div>
@@ -116,7 +116,7 @@ const Filters = ({
           <Dropdown
             options={developers}
             placeholder="All"
-            selectedOption={selectedDeveloper}
+            currentOption={selectedDeveloper}
             onChange={setSelectedDeveloper}
           />
         </div>

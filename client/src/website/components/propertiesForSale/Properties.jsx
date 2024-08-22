@@ -12,19 +12,36 @@ import Pagination from "./Pagination";
 import { useAppContext } from "@/AppContext";
 
 const propertiesPerPage = 12;
-const sortOptions = ["Price ↑", "Price ↓", "Date Added ↑", "Date Added ↓"];
+const sortOptions = [{label: "Price ↑", value: "PriceASC"}, {label: "Price ↓", value: "PriceDESC"}, {label: "Date Added ↑", value: "DateASC"}, {label: "Date Added ↓", value: "DateDESC"}];
+const categoryOptions = [{label: "All", value: -1}, {label: "Properties", value: 0}, {label: "Projects", value: 1}];
 
-const Properties = ({ properties, handleItemClick }) => {
+const Properties = ({ properties, handleItemClick, onSortOptionChange, sortOption, onCategoryChange, categoryOption }) => {
   const { locations, developers, propertyTypes } = useAppContext();
 
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const dropdownRef = useRef(null);
+  const categoryDropDownRef = useRef(null);
+  const [selectedOption, setSelectedOption] = useState({});
+  const [selectedCategory, setSelectedCategory] = useState({});
+
+  useEffect(() => {
+    setSelectedOption(sortOptions.filter(option => option.value === sortOption)[0]);
+  }, [sortOption])
+
+  useEffect(() => {
+    setSelectedCategory(categoryOptions.filter(option => option.value === categoryOption)[0]);
+  }, [categoryOption]);
+
+  const handleCategoryOptionClick = (option) => {
+    onCategoryChange(option.value);
+    setIsCategoryOpen(false);
+  };
 
   const handleOptionClick = (option) => {
-    setSelectedOption(option);
+    onSortOptionChange(option.value);
     setIsOpen(false);
   };
 
@@ -112,69 +129,107 @@ const Properties = ({ properties, handleItemClick }) => {
         </div>
 
         <div className="w-full md:ms-auto md:w-[80%]">
-          <div className="flex flex-col items-start whitespace-nowrap rounded-xl border border-lightGrey bg-whiteLilac p-3 md:flex-row md:items-center md:justify-between md:p-2 lg:p-3 xl:p-3.5 2xl:p-4">
+          <div
+              className="flex flex-col items-start whitespace-nowrap rounded-xl border border-lightGrey bg-whiteLilac p-3 md:flex-row md:items-center md:justify-between md:p-2 lg:p-3 xl:p-3.5 2xl:p-4">
             <p className="text-[20px] font-semibold md:text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[20px]">
               Showing Property Results
-              <span className="text-[16px] font-light text-slate md:text-[9px] lg:text-[11px] xl:text-[13px] 2xl:text-[16px]">
+              <span
+                  className="text-[16px] font-light text-slate md:text-[9px] lg:text-[11px] xl:text-[13px] 2xl:text-[16px]">
                 ({properties?.length || 0})
               </span>
             </p>
-            <div
-              className="relative flex w-[140px] items-center justify-between rounded-md border-2 bg-white p-2 text-mirage md:w-[100px] md:px-2 md:py-1.5 lg:w-[130px] 2xl:w-[200px] 2xl:px-3 2xl:py-2.5"
-              ref={dropdownRef}
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              <button className="w-full text-left text-[16px] md:text-[9px] lg:text-[11px] xl:text-[13px] 2xl:text-[16px]">
-                {selectedOption || "Sort By"}
-              </button>
-              <FiChevronDown />
-              <ul
-                className={`absolute top-10 z-10 mt-1 max-w-[15rem] origin-top transform rounded-md bg-white text-[18px] shadow-lg transition-all duration-300 md:text-[9px] lg:text-[11px] xl:text-[13px] 2xl:text-[16px] ${
-                  isOpen
-                    ? "max-h-[15rem] scale-y-100 opacity-100"
-                    : "max-h-0 scale-y-0 opacity-0"
-                }`}
+            <div className='flex items-center justify-end gap-x-[0.5em]'>
+              <div
+                  className="relative flex w-[140px] items-center justify-between rounded-md border-2 bg-white p-2 text-mirage md:w-[100px] md:px-2 md:py-1.5 lg:w-[130px] 2xl:w-[200px] 2xl:px-3 2xl:py-2.5"
+                  ref={categoryDropDownRef}
+                  onClick={() => setIsCategoryOpen(!isCategoryOpen)}
               >
-                {isOpen &&
-                  sortOptions.map((option, index) => (
-                    <li
-                      key={index}
-                      className="flex cursor-pointer items-center justify-between whitespace-nowrap p-2 hover:bg-gray-100"
-                      onClick={() => handleOptionClick(option)}
-                    >
-                      {option}
-                      {selectedOption === option && (
-                        <IoMdCheckmark className="text-blue-500" />
-                      )}
-                    </li>
-                  ))}
-              </ul>
+                <button
+                    className="w-full text-left text-[16px] md:text-[9px] lg:text-[11px] xl:text-[13px] 2xl:text-[16px]">
+                  {selectedCategory ? selectedCategory.label : "Category"}
+                </button>
+                <FiChevronDown/>
+                <ul
+                    className={`absolute top-10 z-10 mt-1 max-w-[15rem] origin-top transform rounded-md bg-white text-[18px] shadow-lg transition-all duration-300 md:text-[9px] lg:text-[11px] xl:text-[13px] 2xl:text-[16px] ${
+                        isCategoryOpen
+                            ? "max-h-[15rem] scale-y-100 opacity-100"
+                            : "max-h-0 scale-y-0 opacity-0"
+                    }`}
+                >
+                  {isCategoryOpen &&
+                      categoryOptions.map((option, index) => (
+                          <li
+                              key={index}
+                              className="flex cursor-pointer items-center justify-between whitespace-nowrap p-2 hover:bg-gray-100"
+                              onClick={() => handleCategoryOptionClick(option)}
+                          >
+                            {option.label}
+                            {selectedCategory && selectedCategory.value === option.value && (
+                                <IoMdCheckmark className="text-blue-500"/>
+                            )}
+                          </li>
+                      ))}
+                </ul>
+              </div>
+              <div
+                  className="relative flex w-[140px] items-center justify-between rounded-md border-2 bg-white p-2 text-mirage md:w-[100px] md:px-2 md:py-1.5 lg:w-[130px] 2xl:w-[200px] 2xl:px-3 2xl:py-2.5"
+                  ref={dropdownRef}
+                  onClick={() => setIsOpen(!isOpen)}
+              >
+                <button
+                    className="w-full text-left text-[16px] md:text-[9px] lg:text-[11px] xl:text-[13px] 2xl:text-[16px]">
+                  {selectedOption ? selectedOption.label : "Sort By"}
+                </button>
+                <FiChevronDown/>
+                <ul
+                    className={`absolute top-10 z-10 mt-1 max-w-[15rem] origin-top transform rounded-md bg-white text-[18px] shadow-lg transition-all duration-300 md:text-[9px] lg:text-[11px] xl:text-[13px] 2xl:text-[16px] ${
+                        isOpen
+                            ? "max-h-[15rem] scale-y-100 opacity-100"
+                            : "max-h-0 scale-y-0 opacity-0"
+                    }`}
+                >
+                  {isOpen &&
+                      sortOptions.map((option, index) => (
+                          <li
+                              key={index}
+                              className="flex cursor-pointer items-center justify-between whitespace-nowrap p-2 hover:bg-gray-100"
+                              onClick={() => handleOptionClick(option)}
+                          >
+                            {option.label}
+                            {selectedOption && selectedOption.value === option.value && (
+                                <IoMdCheckmark className="text-blue-500"/>
+                            )}
+                          </li>
+                      ))}
+                </ul>
+              </div>
             </div>
           </div>
 
           {properties?.length === 0 ? (
-            <p className="mt-6 text-center text-[18px] font-medium md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px]">
-              No properties found.
-            </p>
+              <p className="mt-6 text-center text-[18px] font-medium md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px]">
+                No properties found.
+              </p>
           ) : (
-            <>
-              <div className="my-3 grid grid-cols-1 place-items-center gap-y-7 md:grid-cols-3 md:gap-y-4 lg:gap-y-5 xl:gap-y-5 2xl:gap-y-6">
-                {currentProperties?.map((property) => (
-                  <PropertyCard key={crypto.randomUUID()} property={property} />
-                ))}
-              </div>
-
-              {properties?.length >= 12 && (
-                <div className="mt-16">
-                  <Pagination
-                    propertiesPerPage={propertiesPerPage}
-                    totalProperties={properties?.length}
-                    currentPage={currentPage}
-                    paginate={paginate}
-                  />
+              <>
+                <div
+                    className="my-3 grid grid-cols-1 place-items-center gap-y-7 md:grid-cols-3 md:gap-y-4 lg:gap-y-5 xl:gap-y-5 2xl:gap-y-6">
+                  {currentProperties?.map((property) => (
+                      <PropertyCard key={crypto.randomUUID()} property={property}/>
+                  ))}
                 </div>
-              )}
-            </>
+
+                {properties?.length >= 12 && (
+                    <div className="mt-16">
+                      <Pagination
+                          propertiesPerPage={propertiesPerPage}
+                          totalProperties={properties?.length}
+                          currentPage={currentPage}
+                          paginate={paginate}
+                      />
+                    </div>
+                )}
+              </>
           )}
         </div>
       </div>

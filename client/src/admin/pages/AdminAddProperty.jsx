@@ -16,6 +16,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 const initialFormData = {
   title: "",
+  tags: "",
   overview: "",
   status: "Pre Launch",
   price: "",
@@ -55,6 +56,7 @@ const AdminAddProperty = () => {
 
       setFormData({
         title: property.title,
+        tags: property.tags,
         overview: property.overview?.text || "",
         status: property.status,
         price: property.price,
@@ -200,6 +202,7 @@ const AdminAddProperty = () => {
 
     form.append("category", 0);
     form.append("title", formData.title);
+    form.append("tags", formData.tags);
     form.append("overview", JSON.stringify(overview));
     form.append("status", formData.status);
     form.append("price", formData.price);
@@ -244,7 +247,10 @@ const AdminAddProperty = () => {
       setFormData(initialFormData);
       navigate("/admin/manage-properties");
     } catch (error) {
-      toast.error(`Error submitting form`);
+      const errors = error.response.data.errors
+      for(let err of errors) {
+        toast.error(err);
+      }
       console.error("Error submitting form", error);
     } finally {
       setLoading(false);
