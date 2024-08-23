@@ -14,7 +14,7 @@ const sliderMinValue = 50000;
 const sliderMaxValue = 5000000;
 const serverURL = import.meta.env.VITE_SERVER_URL;
 
-const PropertiesForSale = () => {
+const SearchProperties = () => {
   const showTopButton = useScrollProgress("properties-section");
   const [searchParams] = useSearchParams();
   const param = searchParams.get("param");
@@ -30,6 +30,10 @@ const PropertiesForSale = () => {
   const [selectedPropertyType, setSelectedPropertyType] = useState(null);
   const [sortOption, setSortOption] = useState("");
   const [categoryOption, setCategoryOption] = useState(-1);
+  const [purpose, setPurpose] = useState(-1);
+  const [location, setLocation] = useState(-1);
+  const [pages, setPages] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
 
   // search properties based on user selected options
   const handleSearch = async () => {
@@ -68,7 +72,7 @@ const PropertiesForSale = () => {
     }
 
     const queryString = new URLSearchParams(searchParams).toString();
-    navigate(`/properties-for-sale?${queryString}`);
+    navigate(`/search?${queryString}`);
     navigate(0);
   };
 
@@ -79,6 +83,7 @@ const PropertiesForSale = () => {
         `${serverURL}/property/search?${searchParams.toString()}`,
       );
       const filteredProperties = response.data?.data?.properties;
+      setPages(response.data?.data?.pages);
       setProperties(filteredProperties);
     } catch (error) {
       console.error("Error fetching properties:", error);
@@ -91,8 +96,14 @@ const PropertiesForSale = () => {
       setText(text);
     }
 
+    const page = searchParams.get("page");
+    if(page) {
+      setCurrentPage(parseInt(page))
+    }
+
     const purpose = searchParams.get("purpose");
     if (purpose) {
+      setPurpose(parseInt(purpose));
       setSelectedTab(parseInt(purpose) === 0 ? "For Sale" : "For Rent");
     } else {
       setSelectedTab("All");
@@ -105,6 +116,7 @@ const PropertiesForSale = () => {
 
     const location = searchParams.get("location");
     if (location !== undefined) {
+      setLocation(parseInt(location));
       setSelectedLocation(parseInt(location));
     }
 
@@ -154,7 +166,7 @@ const PropertiesForSale = () => {
     }
 
     const queryString = new URLSearchParams(searchParams).toString();
-    navigate(`/properties-for-sale?${queryString}`);
+    navigate(`/search?${queryString}`);
     navigate(0);
   };
 
@@ -171,7 +183,7 @@ const PropertiesForSale = () => {
     }
 
     const queryString = new URLSearchParams(params).toString();
-    navigate(`/properties-for-sale?${queryString}`);
+    navigate(`/search?${queryString}`);
     navigate(0);
   };
 
@@ -185,14 +197,20 @@ const PropertiesForSale = () => {
     }
 
     const queryString = new URLSearchParams(searchParams).toString();
-    navigate(`/properties-for-sale?${queryString}`);
+    navigate(`/search?${queryString}`);
     navigate(0);
   };
+
+  const onChangePage = (pageNumber) => {
+    searchParams.set("page", pageNumber);
+    navigate(`/search?${searchParams.toString()}`);
+    navigate(0);
+  }
 
   return (
     <Layout>
       <div className="relative">
-        <Header />
+        <Header purpose={purpose} />
         <div className="absolute -bottom-[26rem] z-20 w-full md:-bottom-6 lg:-bottom-7 xl:-bottom-10 2xl:-bottom-11">
           <Filters
             selectedTab={selectedTab}
@@ -215,12 +233,17 @@ const PropertiesForSale = () => {
       </div>
       <div id="properties-section">
         <Properties
-          properties={properties}
-          handleItemClick={handleItemClick}
-          onSortOptionChange={onSortOptionChange}
-          sortOption={sortOption}
-          categoryOption={categoryOption}
-          onCategoryChange={onCategoryChange}
+            location={location}
+            purpose={purpose}
+            properties={properties}
+            handleItemClick={handleItemClick}
+            onSortOptionChange={onSortOptionChange}
+            sortOption={sortOption}
+            categoryOption={categoryOption}
+            onCategoryChange={onCategoryChange}
+            pages={pages}
+            currentPage={currentPage}
+            changePage={onChangePage}
         />
       </div>
 
@@ -230,4 +253,4 @@ const PropertiesForSale = () => {
   );
 };
 
-export default PropertiesForSale;
+export default SearchProperties;

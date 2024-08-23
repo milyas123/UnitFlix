@@ -2,18 +2,14 @@ import ArrowLeft from "../svgs/ArrowLeft";
 import ArrowRight from "../svgs/ArrowRight";
 
 export default function Pagination({
-  propertiesPerPage,
-  totalProperties,
-  currentPage,
-  paginate,
+    totalPages,
+    currentPage,
+    paginate
 }) {
-  const totalPages = Math.ceil(totalProperties / propertiesPerPage);
   const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
-  const textSize =
-    "2xl:text-[12px] xl:text-[10px] lg:text-[8px] md:text-[6px] text-[5px]";
-  const iconSize =
-    "2xl:h-[16px] xl:h-[14px] lg:h-[12px] md:h-[10px] h-[9px] lg:mr-[5px] md:mr-[2px] mr-[1px]";
+  const textSize = "2xl:text-[12px] xl:text-[10px] lg:text-[8px] md:text-[6px] text-[5px]";
+  const iconSize = "2xl:h-[16px] xl:h-[14px] lg:h-[12px] md:h-[10px] h-[9px] lg:mr-[5px] md:mr-[2px] mr-[1px]";
   const itemPadding = "lg:px-4 md:px-3 px-2 py-2";
 
   return (

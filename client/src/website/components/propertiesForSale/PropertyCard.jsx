@@ -14,6 +14,7 @@ import { MdOutlineLocationOn } from "react-icons/md";
 
 import { formatCurrency } from "@/lib/utils";
 import { useAppContext } from "@/AppContext";
+import LazyLoad from "react-lazyload";
 
 const PropertyCard = ({ property }) => {
   const { locations } = useAppContext();
@@ -39,7 +40,7 @@ const PropertyCard = ({ property }) => {
             modules={[Pagination, Navigation]}
             pagination={{ clickable: true }}
             navigation={true}
-            className="md:h-[160px] lg:h-[180px] xl:h-[200px] 2xl:h-[300px]"
+            className="h-[350px] md:h-[160px] lg:h-[180px] xl:h-[200px] 2xl:h-[300px]"
             style={{
               "--swiper-navigation-size": "16px",
               "--swiper-navigation-color": "#FFFFFF",
@@ -48,11 +49,13 @@ const PropertyCard = ({ property }) => {
           >
             {property?.files.map((image) => (
               <SwiperSlide key={crypto.randomUUID()} className="relative">
-                <img
-                  src={image.url}
-                  alt={`${image?.url}`}
-                  className="size-full object-cover"
-                />
+                <LazyLoad className='size-full'>
+                  <img
+                      src={image.url}
+                      alt={`${image?.url}`}
+                      className="size-full object-cover"
+                  />
+                </LazyLoad>
                 <div className="absolute inset-0 bg-black bg-opacity-50"></div>
               </SwiperSlide>
             ))}

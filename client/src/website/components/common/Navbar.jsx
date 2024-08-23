@@ -7,8 +7,8 @@ import MobileNavIcon from "../svgs/MobileNavIcon";
 import MobileNav from "./MobileNav";
 
 const buttonItems = [
-  { name: "Buy", link: "/properties-for-sale?param=0" },
-  { name: "Rent", link: "/properties-for-rent?param=1" },
+  { name: "Buy", link: "/search?purpose=0" },
+  { name: "Rent", link: "/search?purpose=1" },
   { name: "Manage", link: "/manage-properties" },
   { name: "About Us", link: "/about-us" },
 ];
@@ -58,7 +58,7 @@ const Navbar = () => {
               </Link>
               <div className="flex flex-row md:gap-x-2 lg:gap-x-3.5 xl:gap-x-4 2xl:gap-x-5">
                 {buttonItems.map((item, index) => (
-                  <Link to={item.link} key={index}>
+                  <Link reloadDocument to={item.link} key={index}>
                     <Button className="rounded-full border-transparent bg-white bg-opacity-10 text-white hover:bg-white hover:text-mirage md:h-7 md:px-2.5 md:text-[8px] lg:h-8 lg:px-3 lg:text-[10px] xl:h-9 xl:text-[13px] 2xl:h-10 2xl:px-4 2xl:text-[16px]">
                       {item.name} <RxDash size={25} />
                     </Button>

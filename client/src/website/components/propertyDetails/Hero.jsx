@@ -1,9 +1,11 @@
-const Hero = ({ title, location }) => {
+import BreadCrumb from "@/website/components/common/BreadCrumb.jsx";
+
+const Hero = ({ title, location, coverImage }) => {
   return (
     <>
       <div className="relative h-[795px] md:h-[385px] lg:h-[80vh] lg:max-h-[520px] lg:min-h-[440px] xl:h-[100vh] xl:min-h-[615px] 2xl:h-[80.5vh] 2xl:max-h-[770px] 2xl:min-h-[700px]">
         <img
-          src="/assets/imgs/hero-section-img.jpg"
+          src={coverImage}
           className="absolute inset-0 size-full object-cover object-top"
           alt=""
         />
@@ -14,7 +16,7 @@ const Hero = ({ title, location }) => {
               {`${title} at ${location}`}
             </h1>
             <p className="text-[14px] font-light md:text-[12px] lg:text-[13px] xl:text-[18px] 2xl:text-[22px]">
-              {`Home / Properties For Sale / ${location}`} 
+              <BreadCrumb text={'Home'} link={'/'} /> / <BreadCrumb text={'Properties For Sale'} link={'/properties-for-sale?page=1'} /> / {location}
             </p>
           </div>
         </div>

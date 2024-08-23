@@ -1,0 +1,22 @@
+[
+  {
+    "id": "parking",
+    "name": "Parking"
+  },
+  {
+    "id": "swimming",
+    "name": "Swimming"
+  },
+  {
+    "id": "air",
+    "name": "Air"
+  },
+  {
+    "id": "heater",
+    "name": "Heater"
+  },
+  {
+    "id": "double",
+    "name": "Double"
+  }
+]

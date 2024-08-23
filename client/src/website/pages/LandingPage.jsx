@@ -63,7 +63,7 @@ const LandingPage = () => {
     }
 
     const queryString = new URLSearchParams(searchParams).toString();
-    navigate(`/properties-for-sale?${queryString}`)
+    navigate(`/search?${queryString}`)
   };
 
   const fetchProjects = async () => {

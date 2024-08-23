@@ -10,6 +10,8 @@ import PropertyCard from "./PropertyCard";
 import Pagination from "./Pagination";
 
 import { useAppContext } from "@/AppContext";
+import ProjectCard from "@/website/components/landingPage/cards/ProjectCard.jsx";
+import LazyLoad from "react-lazyload";
 
 const propertiesPerPage = 12;
 const sortOptions = [
@@ -25,23 +27,34 @@ const categoryOptions = [
 ];
 
 const Properties = ({
-  properties,
-  handleItemClick,
-  onSortOptionChange,
-  sortOption,
-  onCategoryChange,
-  categoryOption,
+    properties,
+    handleItemClick,
+    onSortOptionChange,
+    sortOption,
+    onCategoryChange,
+    categoryOption,
+    purpose,
+    location,
+    pages,
+    currentPage,
+    changePage,
 }) => {
   const { locations, developers, propertyTypes } = useAppContext();
 
   const [isOpen, setIsOpen] = useState(false);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
   const dropdownRef = useRef(null);
   const categoryDropDownRef = useRef(null);
   const [selectedOption, setSelectedOption] = useState({});
   const [selectedCategory, setSelectedCategory] = useState({});
+  const [locationData, setLocationData] = useState(undefined);
+
+  useEffect(() => {
+    if(locations.length > 0 && location > 0) {
+      setLocationData(locations.filter(l => l.id === location)[0]);
+    }
+  }, [locations, location])
 
   useEffect(() => {
     setSelectedOption(
@@ -80,32 +93,25 @@ const Properties = ({
     };
   }, []);
 
-  // Calculate current properties to display based on pagination
-  const indexOfLastProperty = currentPage * propertiesPerPage;
-  const indexOfFirstProperty = indexOfLastProperty - propertiesPerPage;
-  const currentProperties = properties?.slice(
-    indexOfFirstProperty,
-    indexOfLastProperty,
-  );
+  const currentProperties = properties;
 
   // Change page
   const paginate = (pageNumber) => {
-    const totalPages = Math.ceil(properties?.length / propertiesPerPage);
-    if (pageNumber < 1 || pageNumber > totalPages) {
+    if (pageNumber < 1 || pageNumber > pages) {
       return;
     }
-    setCurrentPage(pageNumber);
+    changePage(pageNumber)
   };
 
   return (
     <section className="mx-auto mt-[28rem] w-full px-2.5 md:my-[4rem] md:w-[87%] md:px-0 lg:my-[6rem] xl:my-[7.5rem] 2xl:my-[8.8rem]">
       <div className="flex flex-col items-start justify-between gap-y-1 md:flex-row md:items-center">
         <h3 className="text-[20px] font-medium md:text-[12px] lg:text-[15px] xl:text-[18px] 2xl:text-[22px]">
-          Properties for sale in Abu Dhabi
+          Properties {purpose === 0 ? 'For Sale' : (purpose === 1 ? 'For Rent' : '') } {locationData ? `in ${locationData.name}` : ''}
         </h3>
         <Link to="/add-property">
           <Button className="gap-x-1.5 rounded-lg hover:bg-white hover:text-mirage md:px-1 lg:px-2 xl:px-2.5 2xl:px-3">
-            Sell My Property{" "}
+            List My Property{" "}
             <BsArrowUpRight className="size-4 md:size-2 lg:size-3 xl:size-4 2xl:size-5" />
           </Button>
         </Link>
@@ -232,15 +238,20 @@ const Properties = ({
             <>
               <div className="my-3 grid grid-cols-1 place-items-center gap-y-7 md:grid-cols-3 md:gap-y-4 lg:gap-y-5 xl:gap-y-5 2xl:gap-y-6">
                 {currentProperties?.map((property) => (
-                  <PropertyCard key={crypto.randomUUID()} property={property} />
+                    <>
+                      {
+                        property.category === 0 ?
+                            <PropertyCard key={crypto.randomUUID()} property={property} /> :
+                            <ProjectCard project={property} isLimited={true} />
+                      }
+                    </>
                 ))}
               </div>
 
-              {properties?.length > 12 && (
+              {pages > 1 && (
                 <div className="mt-16">
                   <Pagination
-                    propertiesPerPage={propertiesPerPage}
-                    totalProperties={properties?.length}
+                    totalPages={pages}
                     currentPage={currentPage}
                     paginate={paginate}
                   />

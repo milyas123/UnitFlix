@@ -58,6 +58,7 @@ const PropertyDetails = () => {
   }, []);
 
   useEffect(() => {
+    console.log(property)
     if (property?.location && property?.developer) {
       fetchRelatedProperties(property?.location, property?.developer);
     }
@@ -66,8 +67,9 @@ const PropertyDetails = () => {
   return (
     <Layout>
       <Hero
-        title={property?.title}
-        location={property?.propertyLocation?.name}
+          coverImage={property?.files.filter(file => file.purpose === 0).map(file => file.url)[0]}
+          title={property?.title}
+          location={property?.propertyLocation?.name}
       />
       <div className="mx-auto mt-7 flex w-[95%] md:mt-7 md:w-[91%] lg:mt-9 xl:mt-12 2xl:mt-16">
         <div className="w-full md:w-[74%]">

@@ -2,19 +2,23 @@ import React, { useState, useEffect } from "react";
 import Cross from "../../svgs/Cross";
 import Button from "../../common/Button";
 import InputField from "../../common/InputField";
+import Dropdown from "@/website/components/common/Dropdown.jsx";
+import {getFeaturedIcons} from "@/lib/icons.jsx";
 
 const AddAmenityModal = ({ onClose, onSubmit, editData }) => {
   const [formData, setFormData] = useState({
     name: "",
     icon: "",
   });
+  const [selectedIcon, setSelectedIcon] = useState('')
 
   useEffect(() => {
+    console.log(editData);
     if (editData) {
       setFormData({
         name: editData.name,
-        icon: editData.icon,
       });
+      setSelectedIcon(editData.icon)
     }
   }, [editData]);
 
@@ -27,7 +31,7 @@ const AddAmenityModal = ({ onClose, onSubmit, editData }) => {
   };
 
   const handleSubmit = () => {
-    onSubmit(formData.name, formData.icon);
+    onSubmit(formData.name, selectedIcon);
     setFormData({ name: "", icon: "" });
   };
 
@@ -41,7 +45,6 @@ const AddAmenityModal = ({ onClose, onSubmit, editData }) => {
               <div className="flex items-center gap-x-2.5">
                 <h1 className="font-regular text-[22px]">Add Feature & Amenity</h1>
               </div>
-
               <div onClick={onClose}>
                 <Cross className="cursor-pointer" />
               </div>
@@ -51,19 +54,24 @@ const AddAmenityModal = ({ onClose, onSubmit, editData }) => {
           <div className="border-b border-pastelGrey">
             <div className="space-y-5 px-5 pb-9">
               <InputField
-                label="Feature/Amenity"
-                placeholder="Parking"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
+                  label="Feature/Amenity"
+                  placeholder="Parking"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
               />
-              <InputField
-                label="Icon"
-                placeholder="RiParkingBoxLine"
-                name="icon"
-                value={formData.icon}
-                onChange={handleInputChange}
-              />
+              <div className="w-full">
+                <p className="font-semibold text-mirage">Icon</p>
+                <div className='text-[16px] p-3 md:text-[12px] xl:text-[14px] md:px-2 md:py-2.5 xl:p-3 2xl:text-[16px] 2xl:px-4 appearance-none border border-midGrey rounded-md w-full text-black leading-tight focus:outline-none focus:shadow-outline font-regular '>
+                  <Dropdown
+                      options={getFeaturedIcons()}
+                      placeholder="Icon"
+                      currentOption={selectedIcon}
+                      onChange={setSelectedIcon}
+                      fullLength={true}
+                  />
+                </div>
+              </div>
             </div>
           </div>
 

@@ -12,7 +12,7 @@ import RealEstateAnimation from "@/lotties/RealEstateAnimation.json";
 
 // Website pages
 const LandingPage = lazy(() => import("@/website/pages/LandingPage"));
-const PropertiesForSale = lazy(() => import("@/website/pages/PropertiesForSale"));
+const SearchProperties = lazy(() => import("@/website/pages/SearchProperties.jsx"));
 const ManageProperties = lazy(() => import("@/website/pages/ManageProperties"));
 const PropertyDetails = lazy(() => import("@/website/pages/PropertyDetails"));
 const ContactUs = lazy(() => import("@/website/pages/ContactUs"));
@@ -49,8 +49,7 @@ function App() {
           >
             <Routes>
               <Route exact path="/" element={<LandingPage />} />
-              <Route path="/properties-for-sale" element={<PropertiesForSale />} />
-              <Route path="/properties-for-rent" element={<PropertiesForSale />} />
+              <Route path="/search" element={<SearchProperties />} />
               <Route path="/manage-properties" element={<ManageProperties />} />
               <Route path="/property-details/:id" element={<PropertyDetails />} />
               <Route path="/contact-us" element={<ContactUs />} />

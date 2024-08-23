@@ -1,29 +1,7 @@
-import Heater from "../svgs/Heater";
-import Parking from "../svgs/Parking";
-import Swimming from "../svgs/Swimming";
-import AirConditioned from "../svgs/AirConditioned";
-import DoubleGlazedWindow from "../svgs/DoubleGlazedWindow";
 import AmenityCard from "./AmenityCard";
-import { FiHelpCircle } from 'react-icons/fi';
-
-const iconMapping = {
-  parking: <Parking />,
-  swimming: <Swimming />,
-  airConditioned: <AirConditioned />,
-  heater: <Heater />,
-  doubleGlazedWindow: <DoubleGlazedWindow />,
-};
+import {getIcon} from "@/lib/icons.jsx";
 
 const FeaturesAndAmenities = ({ amenities }) => {
-  const renderIcon = (iconText) => {
-    const lowercasedIconText = iconText.toLowerCase();
-    if (lowercasedIconText.includes("parking")) return iconMapping.parking;
-    if (lowercasedIconText.includes("swimming")) return iconMapping.swimming;
-    if (lowercasedIconText.includes("air")) return iconMapping.airConditioned;
-    if (lowercasedIconText.includes("heater")) return iconMapping.heater;
-    if (lowercasedIconText.includes("double")) return iconMapping.doubleGlazedWindow;
-    return <FiHelpCircle />;
-  };
 
   return (
     <div className="md:mt-9 lg:mt-12 xl:mt-14 2xl:mt-16">
@@ -34,7 +12,7 @@ const FeaturesAndAmenities = ({ amenities }) => {
         {amenities?.map((amenity, index) => (
           <AmenityCard
             key={index}
-            icon={renderIcon(amenity?.icon)}
+            icon={getIcon(amenity?.icon)}
             text={amenity?.name}
           />
         ))}
