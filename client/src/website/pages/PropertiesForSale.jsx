@@ -8,8 +8,7 @@ import useScrollProgress from "@/hooks/useScrollProgress";
 import Filters from "../components/landingPage/Filters";
 
 import axios from "axios";
-import { toast } from "react-toastify";
-import {useNavigate, useSearchParams} from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const sliderMinValue = 50000;
 const sliderMaxValue = 5000000;
@@ -29,7 +28,7 @@ const PropertiesForSale = () => {
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedDeveloper, setSelectedDeveloper] = useState(null);
   const [selectedPropertyType, setSelectedPropertyType] = useState(null);
-  const [sortOption, setSortOption] = useState('');
+  const [sortOption, setSortOption] = useState("");
   const [categoryOption, setCategoryOption] = useState(-1);
 
   // search properties based on user selected options
@@ -40,43 +39,45 @@ const PropertiesForSale = () => {
       page: 1,
     };
 
-    if(text) {
+    if (text) {
       searchParams.text = text;
     }
 
-    if(selectedLocation) {
+    if (selectedLocation) {
       searchParams.location = selectedLocation;
     }
 
-    if(selectedPropertyType) {
+    if (selectedPropertyType) {
       searchParams.type = selectedPropertyType;
     }
 
-    if(selectedDeveloper) {
+    if (selectedDeveloper) {
       searchParams.developer = selectedDeveloper;
     }
 
-    if(selectedTab && selectedTab !== 'All') {
+    if (selectedTab && selectedTab !== "All") {
       searchParams.purpose = selectedTab === "For Sale" ? 0 : 1;
     }
 
-    if(sortOption) {
+    if (sortOption) {
       searchParams.order = sortOption;
     }
 
-    if(categoryOption >= 0) {
+    if (categoryOption >= 0) {
       searchParams.category = categoryOption;
     }
 
     const queryString = new URLSearchParams(searchParams).toString();
-    navigate(`/properties-for-sale?${queryString}`)
-    navigate(0)
+    navigate(`/properties-for-sale?${queryString}`);
+    navigate(0);
   };
 
   // Fetch properties from the server
   const fetchProperties = async () => {
     try {
-      const response = await axios.get(`${serverURL}/property/search?${searchParams.toString()}`);
+      const response = await axios.get(
+        `${serverURL}/property/search?${searchParams.toString()}`,
+      );
       const filteredProperties = response.data?.data?.properties;
       setProperties(filteredProperties);
     } catch (error) {
@@ -86,53 +87,53 @@ const PropertiesForSale = () => {
 
   const setPropertyValues = () => {
     const text = searchParams.get("text");
-    if(text) {
+    if (text) {
       setText(text);
     }
 
     const purpose = searchParams.get("purpose");
-    if(purpose) {
-      setSelectedTab(parseInt(purpose) === 0 ? 'For Sale' : "For Rent")
+    if (purpose) {
+      setSelectedTab(parseInt(purpose) === 0 ? "For Sale" : "For Rent");
     } else {
       setSelectedTab("All");
     }
 
     const type = searchParams.get("type");
-    if(type !== undefined) {
-      setSelectedPropertyType(parseInt(type))
+    if (type !== undefined) {
+      setSelectedPropertyType(parseInt(type));
     }
 
     const location = searchParams.get("location");
-    if(location !== undefined) {
+    if (location !== undefined) {
       setSelectedLocation(parseInt(location));
     }
 
-    const developer = searchParams.get('developer');
-    if(developer !== undefined) {
-      setSelectedDeveloper(parseInt(developer))
+    const developer = searchParams.get("developer");
+    if (developer !== undefined) {
+      setSelectedDeveloper(parseInt(developer));
     }
 
     let min = searchParams.get("min");
     let max = searchParams.get("max");
-    if(min && max) {
+    if (min && max) {
       min = (parseInt(min) / (sliderMaxValue - sliderMinValue)) * 100;
       max = (parseInt(max) / (sliderMaxValue - sliderMinValue)) * 100;
-      setValue([min, max])
+      setValue([min, max]);
     }
 
-    const sortOption = searchParams.get("order")
-    if(sortOption) {
-      setSortOption(sortOption)
+    const sortOption = searchParams.get("order");
+    if (sortOption) {
+      setSortOption(sortOption);
     }
 
     let category = searchParams.get("category");
-    if(category !== undefined) {
+    if (category !== undefined) {
       category = parseInt(category);
-      setCategoryOption(category)
+      setCategoryOption(category);
     } else {
       setCategoryOption(-1);
     }
-  }
+  };
 
   useEffect(() => {
     fetchProperties();
@@ -141,50 +142,52 @@ const PropertiesForSale = () => {
 
   const handleItemClick = async (type, id) => {
     const searchParams = {
-      min: sliderMinValue + (value[0] / 100) * (sliderMaxValue - sliderMinValue),
-      max: sliderMinValue + (value[1] / 100) * (sliderMaxValue - sliderMinValue),
+      min:
+        sliderMinValue + (value[0] / 100) * (sliderMaxValue - sliderMinValue),
+      max:
+        sliderMinValue + (value[1] / 100) * (sliderMaxValue - sliderMinValue),
       page: 1,
     };
 
-    if(id) {
+    if (id) {
       searchParams[type] = id;
     }
 
     const queryString = new URLSearchParams(searchParams).toString();
-    navigate(`/properties-for-sale?${queryString}`)
-    navigate(0)
+    navigate(`/properties-for-sale?${queryString}`);
+    navigate(0);
   };
 
   const onSortOptionChange = (option) => {
     const params = {
       page: 1,
-      order: option
+      order: option,
     };
 
     let category = searchParams.get("category");
-    if(category) {
+    if (category) {
       category = parseInt(category);
       params.category = category;
     }
 
     const queryString = new URLSearchParams(params).toString();
-    navigate(`/properties-for-sale?${queryString}`)
-    navigate(0)
-  }
+    navigate(`/properties-for-sale?${queryString}`);
+    navigate(0);
+  };
 
   const onCategoryChange = (category) => {
     const searchParams = {
       page: 1,
     };
 
-    if(category >= 0) {
+    if (category >= 0) {
       searchParams.category = category;
     }
 
     const queryString = new URLSearchParams(searchParams).toString();
-    navigate(`/properties-for-sale?${queryString}`)
-    navigate(0)
-  }
+    navigate(`/properties-for-sale?${queryString}`);
+    navigate(0);
+  };
 
   return (
     <Layout>
@@ -211,7 +214,14 @@ const PropertiesForSale = () => {
         </div>
       </div>
       <div id="properties-section">
-        <Properties properties={properties} handleItemClick={handleItemClick} onSortOptionChange={onSortOptionChange} sortOption={sortOption} categoryOption={categoryOption} onCategoryChange={onCategoryChange} />
+        <Properties
+          properties={properties}
+          handleItemClick={handleItemClick}
+          onSortOptionChange={onSortOptionChange}
+          sortOption={sortOption}
+          categoryOption={categoryOption}
+          onCategoryChange={onCategoryChange}
+        />
       </div>
 
       <StickyIcons showIcons={showTopButton} />

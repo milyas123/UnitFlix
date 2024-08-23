@@ -12,6 +12,7 @@ import Download from "../svgs/Download";
 
 const Description = ({
   title,
+  category,
   status,
   developer,
   location,
@@ -42,27 +43,36 @@ const Description = ({
             <h1 className="text-[24px] font-semibold md:text-[15px] lg:text-[18px] xl:text-[25px] 2xl:text-[30px]">
               {title}
             </h1>
-            <Button className="hidden border-sunriseOrange bg-sunriseOrange font-light text-white hover:cursor-default hover:bg-sunriseOrange md:flex md:h-4 md:rounded md:p-1 lg:h-5 lg:text-[10px] xl:h-6 2xl:h-7 2xl:text-[16px]">
-              {status}
-            </Button>
+            {category === 1 && (
+              <Button className="hidden border-sunriseOrange bg-sunriseOrange font-light text-white hover:cursor-default hover:bg-sunriseOrange md:flex md:h-4 md:rounded md:p-1 lg:h-5 lg:text-[10px] xl:h-6 2xl:h-7 2xl:text-[16px]">
+                {status}
+              </Button>
+            )}
           </div>
 
           <div className="md:space-y-0.5 lg:space-y-1 xl:space-y-1.5">
             <div className="flex items-center text-[14px] text-smokeyGrey md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]">
-              <p className="border-e border-e-pastelGrey pe-1.5 md:pe-1 2xl:pe-2">
-                By {developer}
-              </p>
-              <p className="flex items-center gap-x-1 ps-1.5 md:ps-1 2xl:ps-2">
+              {category === 1 && (
+                <p className="border-e border-e-pastelGrey pe-1.5 md:pe-1 2xl:pe-2">
+                  By {developer}
+                </p>
+              )}
+
+              <p
+                className={`flex items-center gap-x-1 ${category === 1 && "ps-1.5 md:ps-1 2xl:ps-2"}`}
+              >
                 <FiMapPin /> {location}
               </p>
             </div>
-            <Button
-              className="group hidden items-center gap-x-1 rounded-md border bg-transparent text-mirage hover:text-white md:flex md:px-1 md:text-[7px] lg:h-6 lg:text-[9px]"
-              onClick={handleDownloadBrochure}
-            >
-              <Download className="text-black group-hover:text-white" />
-              Download Brochure
-            </Button>
+            {category === 1 && (
+              <Button
+                className="group hidden items-center gap-x-1 rounded-md border bg-transparent text-mirage hover:text-white md:flex md:px-1 md:text-[7px] lg:h-6 lg:text-[9px]"
+                onClick={handleDownloadBrochure}
+              >
+                <Download className="text-black group-hover:text-white" />
+                Download Brochure
+              </Button>
+            )}
           </div>
         </div>
 
@@ -79,18 +89,21 @@ const Description = ({
           <Button className="h-8 border-sunriseOrange bg-sunriseOrange font-light text-white hover:cursor-default hover:bg-sunriseOrange">
             New Launch
           </Button>
-          <Button
-            className="h-8 items-center gap-x-1 rounded-md border bg-transparent text-mirage hover:text-white"
-            onClick={handleDownloadBrochure}
-          >
-            <Download className="text-black group-hover:text-white" />
-            Download Brochure
-          </Button>
+          {category === 1 && (
+            <Button
+              className="h-8 items-center gap-x-1 rounded-md border bg-transparent text-mirage hover:text-white"
+              onClick={handleDownloadBrochure}
+            >
+              <Download className="text-black group-hover:text-white" />
+              Download Brochure
+            </Button>
+          )}
         </div>
       </div>
 
       <div className="flex flex-col rounded border p-3.5 md:gap-y-3 md:p-2 lg:gap-y-3.5 lg:p-2.5 xl:gap-y-4 xl:p-3 2xl:gap-y-5 2xl:rounded-md 2xl:p-4">
-        {propertyDetails &&
+        {category === 1 &&
+          propertyDetails &&
           propertyDetails?.map((propertyDetail) => (
             <div className="flex w-full flex-col justify-between gap-y-4 border-b border-pastelGrey pb-4 md:flex-row md:gap-y-1.5 md:border-b-0 md:pb-0 lg:gap-y-2.5 xl:gap-y-3.5 2xl:gap-y-5">
               <div

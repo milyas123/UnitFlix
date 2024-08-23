@@ -73,6 +73,7 @@ const PropertyDetails = () => {
         <div className="w-full md:w-[74%]">
           <Description
             title={property?.title}
+            category={property?.category}
             status={property?.status}
             developer={property?.propertyDeveloper?.name}
             location={property?.propertyLocation?.name}
@@ -87,14 +88,22 @@ const PropertyDetails = () => {
             <Highlights highlights={property?.keyHighlights} />
           </div>
           <Overview
+            category={property?.category}
             overviewText={property?.overview?.text}
             floorPlan={property?.files.find((file) => file.purpose === 3)?.url}
           />
           <FeaturesAndAmenities amenities={property?.features} />
-          <PaymentPlan paymentPlanData={property?.paymentPlanItems} />
+          {property?.category === 1 && (
+            <PaymentPlan paymentPlanData={property?.paymentPlanItems} />
+          )}
           <ImageGallery imgFiles={property?.files} />
-          <SimilarProjects relatedProjects={relatedProperties.byDeveloper} />
-          <SimilarProperties relatedProperties={relatedProperties.byLocation} />
+          {property?.category === 0 ? (
+            <SimilarProperties
+              relatedProperties={relatedProperties.byLocation}
+            />
+          ) : (
+            <SimilarProjects relatedProjects={relatedProperties.byDeveloper} />
+          )}
         </div>
         <div className="ms-auto hidden w-[23.5%] md:block">
           <div className="sticky top-24">

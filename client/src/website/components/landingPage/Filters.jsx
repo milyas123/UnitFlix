@@ -1,6 +1,7 @@
 import { Button } from "../ui/button";
 import Dropdown from "../common/Dropdown";
 import { IoIosSearch } from "react-icons/io";
+import { useEffect, useState } from "react";
 
 import { formatCurrency } from "@/lib/utils";
 import { useAppContext } from "@/AppContext";
@@ -23,6 +24,14 @@ const Filters = ({
   handleSearch,
 }) => {
   const { locations, developers, propertyTypes } = useAppContext();
+  const [filtersApplied, setFiltersApplied] = useState(false);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const hasQueryParams = Array.from(urlParams.keys()).length > 0;
+
+    setFiltersApplied(hasQueryParams);
+  }, []);
 
   const handleSliderChange = (index, newValue) => {
     const updatedValue = [...value];
@@ -57,6 +66,16 @@ const Filters = ({
 
     document.addEventListener(isTouch ? "touchmove" : "mousemove", moveHandler);
     document.addEventListener(isTouch ? "touchend" : "mouseup", upHandler);
+  };
+
+  const clearFilters = () => {
+    // Remove all query params from the URL
+    const url = new URL(window.location.href);
+    url.search = "";
+    window.history.pushState({}, "", url);
+
+    // Reload the page to apply the changes
+    window.location.reload();
   };
 
   return (
@@ -127,13 +146,17 @@ const Filters = ({
             <div className="flex items-center text-[12px] md:hidden">
               <p>
                 {formatCurrency(
-                  sliderMinValue + ((value?.[0] ?? 0) / 100) * (sliderMaxValue - sliderMinValue)
+                  sliderMinValue +
+                    ((value?.[0] ?? 0) / 100) *
+                      (sliderMaxValue - sliderMinValue)
                 )}
               </p>
               <p className="mx-1">-</p>
               <p>
                 {formatCurrency(
-                  sliderMinValue + ((value?.[1] ?? 100) / 100) * (sliderMaxValue - sliderMinValue)
+                  sliderMinValue +
+                    ((value?.[1] ?? 100) / 100) *
+                      (sliderMaxValue - sliderMinValue)
                 )}
               </p>
             </div>
@@ -186,7 +209,8 @@ const Filters = ({
               }}
             >
               {formatCurrency(
-                sliderMinValue + (value[0] / 100) * (sliderMaxValue - sliderMinValue)
+                sliderMinValue +
+                  (value[0] / 100) * (sliderMaxValue - sliderMinValue)
               )}
             </div>
             <div
@@ -198,13 +222,14 @@ const Filters = ({
               }}
             >
               {formatCurrency(
-                sliderMinValue + (value[1] / 100) * (sliderMaxValue - sliderMinValue)
+                sliderMinValue +
+                  (value[1] / 100) * (sliderMaxValue - sliderMinValue)
               )}
             </div>
           </div>
         </div>
 
-        <div className="ms-2 mt-3 md:mt-0">
+        <div className="ms-2 mt-3 flex md:mt-0">
           <Button
             className="h-10 gap-x-0.5 py-5 hover:bg-transparent hover:text-mirage md:h-7 md:rounded-md md:px-2 md:py-0 md:text-[8px] lg:h-8 lg:px-3 lg:text-[10px] xl:h-9 xl:rounded-lg xl:px-4 xl:text-[13px] 2xl:px-5 2xl:py-6 2xl:text-[16px]"
             onClick={handleSearch}
@@ -212,6 +237,15 @@ const Filters = ({
             <IoIosSearch className="size-6 md:size-4 lg:size-5 xl:size-6 2xl:size-7" />{" "}
             Search
           </Button>
+          {filtersApplied && (
+            <Button
+              variant="outline"
+              className="ml-2 h-10 gap-x-0.5 py-5 hover:bg-red-500 hover:text-white md:h-7 md:rounded-md md:px-2 md:py-0 md:text-[8px] lg:h-8 lg:px-3 lg:text-[10px] xl:h-9 xl:rounded-lg xl:px-4 xl:text-[13px] 2xl:px-5 2xl:py-6 2xl:text-[16px]"
+              onClick={clearFilters}
+            >
+              Clear Filters
+            </Button>
+          )}
         </div>
       </div>
     </div>

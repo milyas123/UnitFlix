@@ -1,7 +1,7 @@
 import { Button } from "../ui/button";
 import Download from "../svgs/Download";
 
-const Overview = ({ overviewText, floorPlan }) => {
+const Overview = ({ overviewText, floorPlan, category }) => {
   const handleDownloadFloorPlan = () => {
     const link = document.createElement("a");
     link.href = floorPlan;
@@ -19,16 +19,21 @@ const Overview = ({ overviewText, floorPlan }) => {
       <p className="text-[14px] md:text-[8px] lg:text-[10px] xl:text-[13px] 2xl:text-[16px]">
         {overviewText}
       </p>
-      <div className="my-4 flex flex-row items-center justify-between gap-2 md:mb-0 md:mt-2 md:flex-col md:items-start md:justify-start lg:mt-3 2xl:mt-4">
-        <h1 className="text-[24px] font-medium md:text-[12px] lg:text-[15px] xl:text-[18px] 2xl:text-[24px]">
-          Floor Plan
-        </h1>
+      {category === 1 && (
+        <div className="my-4 flex flex-row items-center justify-between gap-2 md:mb-0 md:mt-2 md:flex-col md:items-start md:justify-start lg:mt-3 2xl:mt-4">
+          <h1 className="text-[24px] font-medium md:text-[12px] lg:text-[15px] xl:text-[18px] 2xl:text-[24px]">
+            Floor Plan
+          </h1>
 
-        <Button className="h-8 items-center gap-x-1 rounded-md border bg-transparent text-mirage hover:text-white md:px-1 md:text-[7px] lg:h-6 lg:text-[9px] group" onClick={handleDownloadFloorPlan}>
-          <Download className="text-black group-hover:text-white" />
-          Download Floor Plan
-        </Button>
-      </div>
+          <Button
+            className="group h-8 items-center gap-x-1 rounded-md border bg-transparent text-mirage hover:text-white md:px-1 md:text-[7px] lg:h-6 lg:text-[9px]"
+            onClick={handleDownloadFloorPlan}
+          >
+            <Download className="text-black group-hover:text-white" />
+            Download Floor Plan
+          </Button>
+        </div>
+      )}
     </div>
   );
 };
