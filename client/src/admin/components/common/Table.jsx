@@ -23,6 +23,7 @@ const Table = ({
   const optionsRef = useRef(null);
   const [showOptions, setShowOptions] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  console.log(data)
 
   const handleOptionsClick = (itemId) => {
     if (selectedItem === itemId) {
@@ -61,11 +62,11 @@ const Table = ({
       <thead className="bg-white">
         <tr className="flex items-center text-[14px]">
           <th className="w-[3%] py-3 ps-2 text-start">No</th>
-          <th className="w-[19%] text-start">Property</th>
+          <th className="w-[25%] text-start">Property</th>
           {type !== "properties" && (
             <th className="w-[20%] text-start">User</th>
           )}
-          <th className="w-[17%] text-start">Location</th>
+          <th className="w-[13%] text-start">Location</th>
           {type === "properties" ? (
             <>
               <th className="w-[10%] text-start">Date Added</th>
@@ -112,7 +113,7 @@ const Table = ({
             <td className="w-[13%] px-4 text-start">
               <div className="flex items-center gap-x-2 text-davyGrey">
                 <LocationPin />
-                <p className="text-[13px]">{item?.propertyLocation?.name}</p>
+                <p className="text-[13px] w-[100%]">{item?.propertyLocation?.name}</p>
               </div>
             </td>
             {type === "properties" ? (
@@ -133,7 +134,7 @@ const Table = ({
               </>
             ) : (
               <td className="w-[19%] px-4">
-                <Tag type={item?.status?.toLowerCase()} />
+                <Tag type={item?.approvalStatus === 0 ? "pending" : (item?.approvalStatus === 1 ? "accepted" : 'rejected')} />
               </td>
             )}
             <td className="w-[18%] px-4 text-start">

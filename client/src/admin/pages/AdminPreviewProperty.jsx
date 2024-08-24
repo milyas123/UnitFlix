@@ -41,8 +41,9 @@ const AdminPreviewProperty = () => {
   return (
     <>
       <Hero
-        title={property?.title}
-        location={property?.propertyLocation?.name}
+          coverImage={property?.files.filter(file => file.purpose === 0).map(file => file.url)[0]}
+          title={property?.title}
+          location={property?.propertyLocation?.name}
       />
       <div className="mx-auto mt-7 flex w-[95%] md:mt-7 md:w-[91%] lg:mt-9 xl:mt-12 2xl:mt-16">
         <div className="w-full">
@@ -53,10 +54,13 @@ const AdminPreviewProperty = () => {
             location={property?.propertyLocation?.name}
             brochure={property?.files.find((file) => file.purpose === 2)?.url}
             price={property?.price}
-            propertyDetails={property?.propertyDetails}
+            propertyDetails={property?.category === 0 ? [{propertyType: property.type.name, unitType: `${property.beds} Bedroom`, size: `${property.area.toLocaleString()} Sqft`}] : property?.propertyDetails}
             downPayment={property?.downPayment}
             paymentPlan={property?.paymentPlan}
             handOver={property?.handOver}
+            purpose={property?.purpose}
+            property={property}
+            category={property?.category}
           />
           <div id="highlights-section">
             <Highlights highlights={property?.keyHighlights} />
@@ -66,7 +70,6 @@ const AdminPreviewProperty = () => {
             floorPlan={property?.files.find((file) => file.purpose === 3)?.url}
           />
           <FeaturesAndAmenities amenities={property?.features} />
-          <PaymentPlan paymentPlanData={property?.paymentPlanItems} />
           <ImageGallery imgFiles={property?.files} />
         </div>
       </div>

@@ -6,8 +6,6 @@ import Delete from '../svgs/Delete';
 import { ImageUp } from 'lucide-react';
 import TextEditor from '@/admin/components/common/TextEditor';
 
-const statuses = ["Pre Launch", "Secondary", "Ready to Move In"];
-
 const GeneralInformation = ({ formData, handleChange, handleSelectChange, handleFileChange, handleRemoveCoverImage }) => {
   return (
     <div className="user--addProperty-sectionPadding flex flex-col rounded-xl border border-lightGrey bg-white md:flex-row md:items-start">
@@ -82,28 +80,6 @@ const GeneralInformation = ({ formData, handleChange, handleSelectChange, handle
                 </div>
               </label>
           )}
-        </div>
-
-        <div className="w-full md:space-y-1 lg:space-y-1.5 xl:space-y-2 2xl:space-y-2.5">
-          <label className="user--addProperty-labelTextSize">Status</label>
-          <div className="flex flex-wrap items-center gap-2 md:justify-start md:gap-4">
-            {statuses.map((status) => (
-                <div
-                    key={status}
-                    className={`flex cursor-pointer items-center gap-x-1 rounded-md border-2 border-mirage border-opacity-0 px-1.5 py-1 transition-all duration-300 ease-in-out hover:border-opacity-100 md:gap-x-0.5 md:px-1 md:py-0.5 lg:gap-x-1 lg:px-1.5 lg:py-1 xl:gap-x-1.5 xl:px-2 xl:py-1.5 2xl:px-3 2xl:py-2 ${
-                        formData?.status === status && "bg-mirage text-white"
-                    }`}
-                    onClick={() => handleSelectChange("status", status)}
-                >
-                  <Status
-                      className={`${formData?.status === status ? "text-white" : "text-black"}`}
-                  />
-                  <p className="text-[14px] md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:text-[14px]">
-                    {status}
-                  </p>
-                </div>
-            ))}
-          </div>
         </div>
 
         <div className="w-full md:space-y-1 lg:space-y-1.5 xl:space-y-2 2xl:space-y-2.5">

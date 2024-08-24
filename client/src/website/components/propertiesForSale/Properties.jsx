@@ -173,7 +173,7 @@ const Properties = ({
                 </button>
                 <FiChevronDown />
                 <ul
-                  className={`absolute top-10 z-10 mt-1 max-w-[15rem] origin-top transform rounded-md bg-white text-[18px] shadow-lg transition-all duration-300 md:text-[9px] lg:text-[11px] xl:text-[13px] 2xl:text-[16px] ${
+                  className={`absolute top-10 left-0 z-10 mt-1 w-[100%] origin-top transform rounded-md bg-white text-[18px] shadow-lg transition-all duration-300 md:text-[9px] lg:text-[11px] xl:text-[13px] 2xl:text-[16px] ${
                     isCategoryOpen
                       ? "max-h-[15rem] scale-y-100 opacity-100"
                       : "max-h-0 scale-y-0 opacity-0"
@@ -205,7 +205,7 @@ const Properties = ({
                 </button>
                 <FiChevronDown />
                 <ul
-                  className={`absolute top-10 z-10 mt-1 max-w-[15rem] origin-top transform rounded-md bg-white text-[18px] shadow-lg transition-all duration-300 md:text-[9px] lg:text-[11px] xl:text-[13px] 2xl:text-[16px] ${
+                  className={`absolute top-10 left-0 z-10 mt-1 w-[100%] origin-top transform rounded-md bg-white text-[18px] shadow-lg transition-all duration-300 md:text-[9px] lg:text-[11px] xl:text-[13px] 2xl:text-[16px] ${
                     isOpen
                       ? "max-h-[15rem] scale-y-100 opacity-100"
                       : "max-h-0 scale-y-0 opacity-0"
@@ -241,7 +241,7 @@ const Properties = ({
                     <>
                       {
                         property.category === 0 ?
-                            <PropertyCard key={crypto.randomUUID()} property={property} /> :
+                            <PropertyCard property={property} /> :
                             <ProjectCard project={property} isLimited={true} />
                       }
                     </>

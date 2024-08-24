@@ -13,7 +13,6 @@ const AddAmenityModal = ({ onClose, onSubmit, editData }) => {
   const [selectedIcon, setSelectedIcon] = useState('')
 
   useEffect(() => {
-    console.log(editData);
     if (editData) {
       setFormData({
         name: editData.name,

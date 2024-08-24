@@ -15,6 +15,10 @@ const SimilarProjects = ({ relatedProjects }) => {
   const projectsSwiperRef = useRef(null);
   const { isBeginning, isEnd } = useSwiperNavigation(projectsSwiperRef);
 
+  if(!relatedProjects || relatedProjects.length === 0) {
+      return (<></>)
+  }
+
   return (
     <div className="mt-8 md:mt-10 lg:mt-12 xl:mt-16 2xl:mt-24">
       <div className="flex items-center justify-between">

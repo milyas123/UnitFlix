@@ -245,6 +245,7 @@ namespace Unitflix.Server.Controllers
 
             List<Property> properties = await _dbContext
                 .Properties
+                .Where(property => property.ApprovalStatus == PropertyStatus.Approved)
                 .Include(property => property.Files)
                 .ToListAsync();
 

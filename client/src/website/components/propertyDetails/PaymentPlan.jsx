@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
+import PaymentPlanItemFrame from "@/website/components/propertyDetails/PaymentPlanItemFrame.jsx";
+import PaymentPlanLine from "@/website/components/propertyDetails/PaymentPlanLine.jsx";
 
 const PaymentPlan = ({ paymentPlanData }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
-
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 640);
@@ -18,78 +19,60 @@ const PaymentPlan = ({ paymentPlanData }) => {
         Payment Plan
       </h1>
 
-      <div className="mt-8 flex h-[36rem] flex-row justify-center md:mt-1.5 md:h-auto md:flex-col md:space-y-2 lg:mt-2 xl:mt-3 xl:space-y-4 2xl:mt-4">
-        <div className="flex w-[50%] flex-col items-end md:w-auto md:flex-row md:justify-between">
-          <div className="flex h-[8.5rem] flex-col items-center text-center md:h-auto md:w-[24%]">
-            <div className="xl:border-b-5 2xl:border-b-6 flex h-full w-full items-center justify-center border-r-4 border-mirage pe-2 md:border-b-2 md:border-r-0 md:pb-2 md:pe-0 lg:border-b-4 xl:pb-4">
-              <img
-                src={
-                  isMobile ? "/assets/imgs/mob-20.png" : "/assets/imgs/20.png"
-                }
-                className="size-[80px] object-contain md:size-[50px] lg:size-[60px] xl:size-[80px] 2xl:size-[100px]"
-                alt=""
-              />
-            </div>
-          </div>
-
-          <div className="mt-auto h-[18rem] md:ms-auto md:h-auto md:w-[50%]">
-            <div className="xl:border-b-5 2xl:border-b-6 flex h-full w-full flex-col items-center justify-center border-r-4 border-mirage pb-4 pe-2 md:gap-0.5 md:border-b-2 md:border-r-0 md:pe-0 lg:gap-1 lg:border-b-4 2xl:gap-1.5">
-              <h2 className="text-[16px] font-semibold text-sunriseOrange md:text-[10px] lg:text-[12px] xl:text-[15px] 2xl:text-[18px]">
-                {paymentPlanData && paymentPlanData[1]?.title}
-              </h2>
-              <p className="text-[12px] md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]">
-                {paymentPlanData && paymentPlanData[1]?.description}
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-auto h-[8.5rem] md:ms-auto md:h-auto md:w-[24%]">
-            <div className="xl:border-b-5 2xl:border-b-6 flex h-full w-full items-center justify-center border-r-4 border-mirage pe-2 md:border-b-2 md:border-r-0 md:pb-2 md:pe-0 lg:border-b-4 xl:pb-4">
-              <img
-                src={
-                  isMobile ? "/assets/imgs/mob-30.png" : "/assets/imgs/30.png"
-                }
-                className="size-[80px] object-contain md:size-[50px] lg:size-[60px] xl:size-[80px] 2xl:size-[100px]"
-                alt=""
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="flex w-[50%] flex-col items-start ps-2.5 md:w-auto md:flex-row md:items-start md:justify-between md:ps-0">
-          <div className="flex h-[8.5rem] flex-col items-center text-center md:h-auto md:w-[24%]">
-            <div className="flex h-full w-full flex-col items-center justify-center md:gap-0.5 lg:gap-1 2xl:gap-1.5">
-              <h2 className="text-[16px] font-semibold text-sunriseOrange md:text-[10px] lg:text-[12px] xl:text-[15px] 2xl:text-[18px]">
-                {paymentPlanData && paymentPlanData[0]?.title}
-              </h2>
-              <p className="text-[12px] md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]">
-                {paymentPlanData && paymentPlanData[1]?.description}
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-auto h-[18rem] md:ms-auto md:h-auto md:w-[50%]">
-            <div className="flex h-full w-full items-center justify-center">
-              <img
-                src={
-                  isMobile ? "/assets/imgs/mob-50.png" : "/assets/imgs/50.png"
-                }
-                className="size-[80px] object-contain md:size-[50px] lg:size-[60px] xl:size-[80px] 2xl:size-[100px]"
-                alt=""
-              />
-            </div>
-          </div>
-
-          <div className="mt-auto h-[8.5rem] md:ms-auto md:mt-0 md:h-auto md:w-[24%]">
-            <div className="flex h-full w-full flex-col items-center justify-center md:gap-0.5 lg:gap-1 2xl:gap-1.5">
-              <h2 className="text-[16px] font-semibold text-sunriseOrange md:text-[10px] lg:text-[12px] xl:text-[15px] 2xl:text-[18px]">
-                {paymentPlanData && paymentPlanData[2]?.title}
-              </h2>
-              <p className="text-[12px] md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]">
-                {paymentPlanData && paymentPlanData[2]?.description}
-              </p>
-            </div>
-          </div>
+      <div className="mt-8 flex flex-row justify-center md:mt-1.5 md:h-auto md:flex-col md:space-y-2 lg:mt-2 xl:mt-3 xl:space-y-4 2xl:mt-4">
+        <div className="flex flex-col items-center gap-y-2 md:gap-y-0 gap-x-2 md:flex-row md:justify-between relative md:h-[200px] lg:h-[250px]">
+          {
+            paymentPlanData.map((paymentPlanItem, index) => {
+              return (
+                  <>
+                    <div className={`flex h-[8.5rem] ${isMobile ? 'w-full' : ''} flex-col items-center text-center md:h-auto md:w-[${paymentPlanItem.amount}%] relative`}>
+                      {
+                        index % 2 === 0 ?
+                            <div className='w-full flex flex-row gap-x-[1em] md:gap-x-0 md:flex-col items-center text-center translate-x-[17%] md:translate-x-0'>
+                              <PaymentPlanItemFrame
+                                  className="size-[90px] md:size-[50px] lg:size-[60px] xl:size-[80px] 2xl:size-[100px]"
+                                  value={`${paymentPlanItem.amount}%`}
+                                  isMobile={isMobile}
+                              />
+                              <PaymentPlanLine/>
+                              <div className={`flex h-[8.5rem] flex-col items-center text-center md:h-auto w-[180px] md:w-full`}>
+                                <div
+                                    className="flex h-full w-full flex-col items-center justify-center md:gap-0.5 lg:gap-1 2xl:gap-1.5">
+                                  <h2 className="text-[16px] font-semibold text-sunriseOrange md:text-[10px] lg:text-[12px] xl:text-[15px] 2xl:text-[18px] text-nowrap">
+                                    {paymentPlanItem?.title}
+                                  </h2>
+                                  <p className="text-[12px] md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px] text-nowrap">
+                                    {paymentPlanItem?.description}
+                                  </p>
+                                </div>
+                              </div>
+                            </div> :
+                            <div className='w-full flex flex-row gap-x-[1em] md:gap-x-0 md:flex-col items-center text-center -translate-x-[12.5%] md:translate-x-0 md:translate-y-[19%] lg:translate-y-[18%] xl:translate-y-[24%]'>
+                              <div className={`flex h-[8.5rem] flex-col items-center text-center md:h-auto w-[180px] md:w-full`}>
+                                <div
+                                    className="flex h-full w-full flex-col items-center justify-center md:gap-0.5 lg:gap-1 2xl:gap-1.5">
+                                  <h2 className="text-[16px] font-semibold text-sunriseOrange md:text-[10px] lg:text-[12px] xl:text-[15px] 2xl:text-[18px] text-nowrap">
+                                    {paymentPlanItem?.title}
+                                  </h2>
+                                  <p className="text-[12px] md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px] text-nowrap">
+                                    {paymentPlanItem?.description}
+                                  </p>
+                                </div>
+                              </div>
+                              <PaymentPlanLine />
+                              <PaymentPlanItemFrame
+                                  className="size-[90px] md:size-[50px] lg:size-[60px] xl:size-[80px] 2xl:size-[100px]"
+                                  value={`${paymentPlanItem.amount}%`}
+                                  inverted={true}
+                                  isMobile={isMobile}
+                              />
+                            </div>
+                      }
+                    </div>
+                  </>
+              )
+            })
+          }
         </div>
       </div>
     </div>

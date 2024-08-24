@@ -79,7 +79,7 @@ const AdminSubmittedRequests = () => {
       <div className="space-y-5">
         <div className="flex flex-col gap-y-10">
           <Header title="Submitted Requests" />
-          <Filters type="requests" totalRecords={requests?.length} />
+          <Filters type="requests" totalRecords={requests?.properties.length} />
         </div>
 
         <Table

@@ -20,8 +20,7 @@ const RequestDetailsModal = ({ request, onClose }) => {
               <div>
                 <p className="font-regular text-[20px]">{request?.title}</p>
                 <p className="space-x-1 divide-x divide-black text-[14px]">
-                  <span>2BHK</span> <span className="ps-1">Vacant</span>
-                  <span className="ps-1">Study Room</span>
+                  {request.tags}
                 </p>
               </div>
             </div>
@@ -51,7 +50,7 @@ const RequestDetailsModal = ({ request, onClose }) => {
             <div className="space-y-2">
               <p className="text-[14px] text-davyGrey">Status</p>
               <p className="text-[16px] font-medium">
-                <Tag type={request?.status?.toLowerCase()} />
+                <Tag type={request?.approvalStatus === 0 ? "pending" : (request?.approvalStatus === 1 ? "accepted" : 'rejected')} />
               </p>
             </div>
           </div>

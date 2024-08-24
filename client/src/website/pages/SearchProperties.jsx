@@ -9,6 +9,7 @@ import Filters from "../components/landingPage/Filters";
 
 import axios from "axios";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import Spinner from "@/website/components/common/Spinner.jsx";
 
 const sliderMinValue = 50000;
 const sliderMaxValue = 5000000;
@@ -19,6 +20,7 @@ const SearchProperties = () => {
   const [searchParams] = useSearchParams();
   const param = searchParams.get("param");
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
 
   const [properties, setProperties] = useState([]);
 
@@ -78,6 +80,7 @@ const SearchProperties = () => {
 
   // Fetch properties from the server
   const fetchProperties = async () => {
+    setIsLoading(true);
     try {
       const response = await axios.get(
         `${serverURL}/property/search?${searchParams.toString()}`,
@@ -87,6 +90,9 @@ const SearchProperties = () => {
       setProperties(filteredProperties);
     } catch (error) {
       console.error("Error fetching properties:", error);
+    }
+    finally {
+      setIsLoading(false)
     }
   };
 
@@ -128,8 +134,10 @@ const SearchProperties = () => {
     let min = searchParams.get("min");
     let max = searchParams.get("max");
     if (min && max) {
-      min = (parseInt(min) / (sliderMaxValue - sliderMinValue)) * 100;
-      max = (parseInt(max) / (sliderMaxValue - sliderMinValue)) * 100;
+      min = parseInt(min) - sliderMinValue;
+      max = parseInt(max) - sliderMinValue;
+      min = ( min / (sliderMaxValue - sliderMinValue)) * 100;
+      max = ( max / (sliderMaxValue - sliderMinValue)) * 100;
       setValue([min, max]);
     }
 
@@ -232,19 +240,25 @@ const SearchProperties = () => {
         </div>
       </div>
       <div id="properties-section">
-        <Properties
-            location={location}
-            purpose={purpose}
-            properties={properties}
-            handleItemClick={handleItemClick}
-            onSortOptionChange={onSortOptionChange}
-            sortOption={sortOption}
-            categoryOption={categoryOption}
-            onCategoryChange={onCategoryChange}
-            pages={pages}
-            currentPage={currentPage}
-            changePage={onChangePage}
-        />
+        {
+          isLoading ?
+              <div className='flex items-center justify-center h-[300px] mt-[350px] md:mt-0'>
+                <Spinner />
+              </div> :
+              <Properties
+                  location={location}
+                  purpose={purpose}
+                  properties={properties}
+                  handleItemClick={handleItemClick}
+                  onSortOptionChange={onSortOptionChange}
+                  sortOption={sortOption}
+                  categoryOption={categoryOption}
+                  onCategoryChange={onCategoryChange}
+                  pages={pages}
+                  currentPage={currentPage}
+                  changePage={onChangePage}
+              />
+        }
       </div>
 
       <StickyIcons showIcons={showTopButton} />

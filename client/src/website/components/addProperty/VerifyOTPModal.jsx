@@ -6,7 +6,7 @@ import { Input } from "../ui/input";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const VerifyOTPModal = ({ propertyData, onClose }) => {
+const VerifyOTPModal = ({ propertyData, onClose, onOtpVerify }) => {
   const [otp, setOtp] = useState(Array(6).fill(""));
   const [loading, setLoading] = useState(false);
 
@@ -49,7 +49,7 @@ const VerifyOTPModal = ({ propertyData, onClose }) => {
         payload,
       );
       toast.success(response.data?.message);
-      onClose();
+      onOtpVerify();
     } catch (error) {
       console.error("Error verifying OTP", error);
       toast.error(error.response?.data);

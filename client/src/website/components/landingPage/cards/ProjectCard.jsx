@@ -3,6 +3,8 @@ import { Button } from "../../ui/button";
 import {Link} from "react-router-dom";
 import LazyLoad from 'react-lazyload';
 import FeaturedIcon from "@/website/components/common/FeaturedIcon.jsx";
+import Tag from "@/website/components/common/Tag.jsx";
+import PropertyTags from "@/website/components/common/PropertyTags.jsx";
 
 const ProjectCard = ({ project, isLimited }) => {
   const textSizes =
@@ -19,13 +21,9 @@ const ProjectCard = ({ project, isLimited }) => {
                   alt="Dubai South"
               />
             </LazyLoad>
-            {
-              project.featured ?
-                  <div className='absolute top-2 left-2 bg-sunriseOrange text-white px-3 py-1 rounded-sm flex items-center gap-x-1 text-[16px] md:text-[12px] lg:text-[13px] xl:text-[14px] 2xl:text-[16px]'>
-                    <FeaturedIcon className={'h-[20px] md:h-[16px] lg:h-[18px] xl:h-[19px] 2xl:h-[20px]'} /> FEATURED
-                  </div>
-                  : <></>
-            }
+            <div className='absolute top-2 left-2 flex items-center gap-2'>
+              <PropertyTags property={project} />
+            </div>
             <div
                 className={`absolute z-[300] bg-white px-3 py-4 md:p-2 lg:p-3 2xl:p-3.5 ${isLimited ? 'border border-lightGrey bottom-0 left-0 right-0 rounded-lg' : 'rounded-xl md:rounded-md lg:rounded-lg 2xl:rounded-xl shadow-lg -bottom-[90px] md:-bottom-16 lg:-bottom-14 xl:-bottom-16 2xl:-bottom-24 left-4 right-4 md:left-2 md:right-2 lg:left-3.5 lg:right-3.5 xl:left-5 xl:right-5 2xl:left-6 2xl:right-6'}`}>
               <h2

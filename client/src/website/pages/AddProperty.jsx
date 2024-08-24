@@ -177,6 +177,7 @@ const AddProperty = () => {
 
     const form = new FormData();
     const overview = { text: formData.overview };
+    setLoading(true)
 
     form.append("category", 0);
     form.append("title", formData.title);
@@ -232,6 +233,10 @@ const AddProperty = () => {
     setIsInfoModalVisible(false);
     setIsOTPModalVisible(true);
   };
+
+  const onOtpVerify = () => {
+    navigate("/search?page=1");
+  }
 
   return (
     <div className="bg-whiteLilac">
@@ -328,6 +333,7 @@ const AddProperty = () => {
         <VerifyOTPModal
           propertyData={propertyData}
           onClose={() => setIsOTPModalVisible(false)}
+          onOtpVerify={onOtpVerify}
         />
       )}
     </div>

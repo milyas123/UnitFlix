@@ -6,7 +6,7 @@ const Hero = ({ title, location, coverImage }) => {
       <div className="relative h-[795px] md:h-[385px] lg:h-[80vh] lg:max-h-[520px] lg:min-h-[440px] xl:h-[100vh] xl:min-h-[615px] 2xl:h-[80.5vh] 2xl:max-h-[770px] 2xl:min-h-[700px]">
         <img
           src={coverImage}
-          className="absolute inset-0 size-full object-cover object-top"
+          className="absolute inset-0 size-full object-cover object-center"
           alt=""
         />
         <div className="absolute inset-0 z-50 bg-black bg-opacity-60"></div>

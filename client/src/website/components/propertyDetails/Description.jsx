@@ -9,19 +9,22 @@ import Property from "../svgs/Property";
 import DownPayment from "../svgs/DownPayment";
 import PaymentPlan from "../svgs/PaymentPlan";
 import Download from "../svgs/Download";
+import PropertyTags from "@/website/components/common/PropertyTags.jsx";
 
 const Description = ({
-  title,
-  category,
-  status,
-  developer,
-  location,
-  brochure,
-  price,
-  propertyDetails,
-  downPayment,
-  paymentPlan,
-  handOver,
+    title,
+    category,
+    status,
+    developer,
+    location,
+    brochure,
+    price,
+    propertyDetails,
+    downPayment,
+    paymentPlan,
+    handOver,
+    purpose,
+    property
 }) => {
   const titleSizes =
     "text-[14px] md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]";
@@ -43,11 +46,7 @@ const Description = ({
             <h1 className="text-[24px] font-semibold md:text-[15px] lg:text-[18px] xl:text-[25px] 2xl:text-[30px]">
               {title}
             </h1>
-            {category === 1 && (
-              <Button className="hidden border-sunriseOrange bg-sunriseOrange font-light text-white hover:cursor-default hover:bg-sunriseOrange md:flex md:h-4 md:rounded md:p-1 lg:h-5 lg:text-[10px] xl:h-6 2xl:h-7 2xl:text-[16px]">
-                {status}
-              </Button>
-            )}
+            <PropertyTags property={property} details/>
           </div>
 
           <div className="md:space-y-0.5 lg:space-y-1 xl:space-y-1.5">
@@ -80,13 +79,19 @@ const Description = ({
           <h3 className="text-[12px] font-medium text-davyGrey md:text-end md:text-[8px] lg:text-[10px] xl:text-[13px] 2xl:text-[16px]">
             Starting From
           </h3>
-          <p className="text-[20px] font-bold md:text-[10px] lg:text-[13px] xl:text-[18px] 2xl:text-[20px]">
-            {formatCurrency(price)}
-          </p>
+          <div className="flex items-end">
+            <p className="text-[20px] font-bold md:text-[10px] lg:text-[13px] xl:text-[18px] 2xl:text-[20px]">
+              {formatCurrency(price)}
+            </p>
+            <p className='text-[16px] text-gray-500 md:text-[8px] lg:text-[10px] xl:text-[14px] 2xl:text-[16px]'>
+              {purpose === 1 ? '/month' : ''}
+            </p>
+          </div>
         </div>
 
         <div className="flex items-center justify-between text-[14px] md:hidden">
-          <Button className="h-8 border-sunriseOrange bg-sunriseOrange font-light text-white hover:cursor-default hover:bg-sunriseOrange">
+          <Button
+              className="h-8 border-sunriseOrange bg-sunriseOrange font-light text-white hover:cursor-default hover:bg-sunriseOrange">
             New Launch
           </Button>
           {category === 1 && (
@@ -102,8 +107,7 @@ const Description = ({
       </div>
 
       <div className="flex flex-col rounded border p-3.5 md:gap-y-3 md:p-2 lg:gap-y-3.5 lg:p-2.5 xl:gap-y-4 xl:p-3 2xl:gap-y-5 2xl:rounded-md 2xl:p-4">
-        {category === 1 &&
-          propertyDetails &&
+        { propertyDetails &&
           propertyDetails?.map((propertyDetail) => (
             <div className="flex w-full flex-col justify-between gap-y-4 border-b border-pastelGrey pb-4 md:flex-row md:gap-y-1.5 md:border-b-0 md:pb-0 lg:gap-y-2.5 xl:gap-y-3.5 2xl:gap-y-5">
               <div
@@ -141,34 +145,39 @@ const Description = ({
             </div>
           ))}
 
-        <div className="flex w-full flex-col justify-between gap-y-4 pt-4 md:flex-row md:gap-y-1.5 md:pt-0 lg:gap-y-2.5 xl:gap-y-3.5 2xl:gap-y-5">
-          <div
-            className={`flex w-full items-center justify-between md:border-e md:border-e-pastelGrey md:pe-2 lg:pe-3 xl:pe-3.5 2xl:pe-4 ${titleSizes}`}
-          >
-            <p className="flex items-center gap-1.5 text-davyGrey md:gap-1 lg:gap-1.5">
-              <DownPayment size={18} /> Down Payment
-            </p>
-            <p className={`font-semibold ${valueSizes}`}>{downPayment}%</p>
-          </div>
+        {
+          category === 1 && (
+                <div
+                    className="flex w-full flex-col justify-between gap-y-4 pt-4 md:flex-row md:gap-y-1.5 md:pt-0 lg:gap-y-2.5 xl:gap-y-3.5 2xl:gap-y-5">
+                  <div
+                      className={`flex w-full items-center justify-between md:border-e md:border-e-pastelGrey md:pe-2 lg:pe-3 xl:pe-3.5 2xl:pe-4 ${titleSizes}`}
+                  >
+                    <p className="flex items-center gap-1.5 text-davyGrey md:gap-1 lg:gap-1.5">
+                      <DownPayment size={18}/> Down Payment
+                    </p>
+                    <p className={`font-semibold ${valueSizes}`}>{downPayment}%</p>
+                  </div>
 
-          <div
-            className={`flex w-full items-center justify-between md:border-e md:border-e-pastelGrey md:px-2 lg:px-3 xl:px-3.5 2xl:px-4 ${titleSizes}`}
-          >
-            <p className="flex items-center gap-1.5 text-davyGrey md:gap-1 lg:gap-1.5">
-              <PaymentPlan size={18} /> Payment Plan
-            </p>
-            <p className={`font-semibold ${valueSizes}`}>{paymentPlan}</p>
-          </div>
+                  <div
+                      className={`flex w-full items-center justify-between md:border-e md:border-e-pastelGrey md:px-2 lg:px-3 xl:px-3.5 2xl:px-4 ${titleSizes}`}
+                  >
+                    <p className="flex items-center gap-1.5 text-davyGrey md:gap-1 lg:gap-1.5">
+                      <PaymentPlan size={18}/> Payment Plan
+                    </p>
+                    <p className={`font-semibold ${valueSizes}`}>{paymentPlan}</p>
+                  </div>
 
-          <div
-            className={`flex w-full items-center justify-between md:ps-2 lg:ps-3 xl:ps-3.5 2xl:ps-4 ${titleSizes}`}
-          >
-            <p className="flex items-center gap-1.5 text-davyGrey md:gap-1 lg:gap-1.5">
-              <HandOver size={18} /> Hand Over
-            </p>
-            <p className={`font-semibold ${valueSizes}`}>{handOver}</p>
-          </div>
-        </div>
+                  <div
+                      className={`flex w-full items-center justify-between md:ps-2 lg:ps-3 xl:ps-3.5 2xl:ps-4 ${titleSizes}`}
+                  >
+                    <p className="flex items-center gap-1.5 text-davyGrey md:gap-1 lg:gap-1.5">
+                      <HandOver size={18}/> Hand Over
+                    </p>
+                    <p className={`font-semibold ${valueSizes}`}>{handOver}</p>
+                  </div>
+                </div>
+            )
+        }
       </div>
     </div>
   );

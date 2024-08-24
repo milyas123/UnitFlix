@@ -5,6 +5,7 @@ import { X } from "lucide-react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import LazyLoad from "react-lazyload";
 
 const SampleNextArrow = (props) => {
   const { onClick } = props;
@@ -64,110 +65,149 @@ const ImageGallery = ({ imgFiles }) => {
           className="flex cursor-pointer items-center gap-1.5 border-b-2 border-transparent transition duration-200 ease-in-out hover:border-mirage"
         >
           <p className="text-[14px] font-semibold text-mirage md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:text-[15px]">
-            See All Images
+            See All Images {imgFiles ? `(${imgFiles.filter(file => file.purpose === 1).length})` : ''}
           </p>
           <BsArrowUpRight size={18} />
         </div>
       </div>
 
       <div className="mt-4 flex flex-col gap-5 md:mt-2 md:flex-row md:gap-0 lg:mt-3 xl:mt-5 2xl:mt-6">
-        <div className="w-full space-y-5 md:w-[69.5%] md:space-y-2.5 lg:space-y-3 2xl:space-y-5">
+        <div className={`w-full space-y-5 md:space-y-2.5 lg:space-y-3 2xl:space-y-5 ${images && images[7] ? 'md:w-[69.5%]' : 'md:w-full'}`}>
           <div className="flex flex-col justify-between gap-5 md:flex-row md:gap-0">
-            <div
-              className="h-[300px] overflow-hidden rounded-lg md:h-[120px] md:w-[32%] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]"
-              onClick={() => openModal(1)}
-            >
-              <img
-                src={images && images[0] ? images[0] : "/assets/imgs/p2.jpg"}
-                className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
-                alt=""
-              />
-            </div>
-            <div
-              className="h-[300px] overflow-hidden rounded-lg md:ms-auto md:h-[120px] md:w-[66%] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]"
-              onClick={() => openModal(2)}
-            >
-              <img
-                src={images && images[1] ? images[1] : "/assets/imgs/p3.jpg"}
-                className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
-                alt=""
-              />
-            </div>
-          </div>
-
-          <div className="flex flex-col justify-between gap-5 md:flex-row md:gap-0">
-            <div
-              className="h-[300px] w-full overflow-hidden rounded-lg md:h-[120px] md:w-[32%] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]"
-              onClick={() => openModal(3)}
-            >
-              <img
-                src={images && images[2] ? images[2] : "/assets/imgs/p4.jpg"}
-                className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
-                alt=""
-              />
-            </div>
-            <div
-              className="h-[300px] w-full overflow-hidden rounded-lg md:h-[120px] md:w-[32%] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]"
-              onClick={() => openModal(4)}
-            >
-              <img
-                src={images && images[3] ? images[3] : "/assets/imgs/p6.jpg"}
-                className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
-                alt=""
-              />
-            </div>
-            <div
-              className="h-[300px] w-full overflow-hidden rounded-lg md:h-[120px] md:w-[32%] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]"
-              onClick={() => openModal(5)}
-            >
-              <img
-                src={images && images[4] ? images[4] : "/assets/imgs/p7.jpg"}
-                className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
-                alt=""
-              />
-            </div>
+            {
+              images && images[0] ?
+                  <div
+                      className={`h-[300px] overflow-hidden rounded-lg md:h-[120px] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px] ${images && images[1] ? 'md:w-[32%]' : "md:w-[100%]"}`}
+                      onClick={() => openModal(0)}
+                  >
+                    <LazyLoad className='h-full'>
+                      <img
+                          src={images[0]}
+                          className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
+                          alt=""
+                      />
+                    </LazyLoad>
+                  </div> : <></>
+            }
+            {
+              images && images[1] ?
+                  <div
+                      className="h-[300px] overflow-hidden rounded-lg md:ms-auto md:h-[120px] md:w-[66%] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]"
+                      onClick={() => openModal(1)}
+                  >
+                    <LazyLoad>
+                      <img
+                          src={images[1]}
+                          className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
+                          alt=""
+                      />
+                    </LazyLoad>
+                  </div> : <></>
+            }
           </div>
           <div className="flex flex-col justify-between gap-5 md:flex-row md:gap-0">
-            <div
-              className="h-[300px] w-full overflow-hidden rounded-lg md:h-[120px] md:w-[66%] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]"
-              onClick={() => openModal(6)}
-            >
-              <img
-                src={images && images[5] ? images[5] : "/assets/imgs/p8.jpg"}
-                className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
-                alt=""
-              />
-            </div>
-            <div
-              className="h-[300px] w-full overflow-hidden rounded-lg md:ms-auto md:h-[120px] md:w-[32%] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]"
-              onClick={() => openModal(7)}
-            >
-              <img
-                src={images && images[6] ? images[6] : "/assets/imgs/p5.jpg"}
-                className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
-                alt=""
-              />
-            </div>
+            {
+              images && images[2] ?
+                  <div
+                      className={`h-[300px] w-full overflow-hidden rounded-lg md:h-[120px] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px] ${images && images[3] && images[4] ? 'md:w-[32%]' : (images[3] ? 'md:w-[50%]' : 'md:w-[100%]')}`}
+                      onClick={() => openModal(2)}
+                  >
+                    <LazyLoad className='h-full'>
+                      <img
+                          src={images[2]}
+                          className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
+                          alt=""
+                      />
+                    </LazyLoad>
+                  </div> : <></>
+            }
+            {
+              images && images[3] ?
+                  <div
+                      className={`h-[300px] w-full overflow-hidden rounded-lg md:h-[120px] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px] ${images && images[4] ? 'md:w-[32%]' : 'md:w-[50%]'}`}
+                      onClick={() => openModal(3)}
+                  >
+                    <LazyLoad className="h-full">
+                      <img
+                          src={images[3]}
+                          className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
+                          alt=""
+                      />
+                    </LazyLoad>
+                  </div> : <></>
+            }
+            {
+              images && images[4] ?
+                  <div
+                      className="h-[300px] w-full overflow-hidden rounded-lg md:h-[120px] md:w-[32%] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]"
+                      onClick={() => openModal(4)}
+                  >
+                    <LazyLoad className="h-full">
+                      <img
+                          src={images[4]}
+                          className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
+                          alt=""
+                      />
+                    </LazyLoad>
+                  </div> : <></>
+            }
+          </div>
+          <div className="flex flex-col justify-between gap-5 md:flex-row md:gap-0">
+            {
+              images && images[5] ?
+                  <div
+                      className={`h-[300px] w-full overflow-hidden rounded-lg md:h-[120px] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px] ${images && images[6] ? 'md:w-[66%]' : 'md:w-[100%]'}`}
+                      onClick={() => openModal(5)}
+                  >
+                    <LazyLoad className="h-full">
+                      <img
+                          src={images[5]}
+                          className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
+                          alt=""
+                      />
+                    </LazyLoad>
+                  </div> : <></>
+            }
+            {
+              images && images[6] ?
+                  <div
+                      className="h-[300px] w-full overflow-hidden rounded-lg md:ms-auto md:h-[120px] md:w-[32%] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]"
+                      onClick={() => openModal(6)}
+                  >
+                    <LazyLoad className='h-full'>
+                      <img
+                          src={images[6]}
+                          className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
+                          alt=""
+                      />
+                    </LazyLoad>
+                  </div> : <></>
+            }
           </div>
         </div>
-
-        <div
-          className="h-[300px] w-full overflow-hidden rounded-lg md:ms-auto md:h-auto md:w-[29%] md:rounded-sm xl:rounded-lg"
-          onClick={() => openModal(0)}
-        >
-          <img
-            src={images && images[7] ? images[7] : "/assets/imgs/p1.jpg"}
-            className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
-            alt=""
-          />
-        </div>
+        {
+          images && images[7] ?
+              <div
+                  className="h-[300px] w-full overflow-hidden rounded-lg md:ms-auto md:h-auto md:w-[29%] md:rounded-sm xl:rounded-lg"
+                  onClick={() => openModal(7)}
+              >
+                <LazyLoad className='h-full'>
+                  <img
+                      src={images[7]}
+                      className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
+                      alt=""
+                  />
+                </LazyLoad>
+              </div> : <></>
+        }
       </div>
 
       {modalIsOpen && (
-        <div className="fixed inset-0 z-[600] flex size-full items-center justify-center bg-black bg-opacity-70">
-          <div className="slider-container md:min-w-auto w-[85%] min-w-[330px] max-w-[370px] rounded-sm md:max-w-5xl xl:rounded-lg">
-            <X
-              className="absolute right-5 top-24 z-20 cursor-pointer text-white opacity-60 transition-all duration-200 ease-in-out hover:opacity-100"
+          <div className="fixed inset-0 z-[600] flex size-full items-center justify-center bg-black bg-opacity-70">
+            <div
+                className="slider-container md:min-w-auto w-[85%] min-w-[330px] max-w-[370px] rounded-sm md:max-w-5xl xl:rounded-lg">
+              <X
+                  className="absolute right-5 top-24 z-20 cursor-pointer text-white opacity-60 transition-all duration-200 ease-in-out hover:opacity-100"
               size={35}
               onClick={() => setModalIsOpen(false)}
             />
@@ -177,16 +217,18 @@ const ImageGallery = ({ imgFiles }) => {
                   key={index}
                   className="h-[350px] md:h-[500px] w-full rounded-sm lg:rounded-lg"
                 >
-                  <img
-                    src={image}
-                    className="size-full transform rounded-sm object-cover lg:rounded-lg"
-                    alt=""
-                  />
+                  <LazyLoad className={'size-full'}>
+                    <img
+                        src={image}
+                        className="size-full transform rounded-sm object-cover lg:rounded-lg"
+                        alt=""
+                    />
+                  </LazyLoad>
                 </div>
               ))}
             </Slider>
+            </div>
           </div>
-        </div>
       )}
     </div>
   );

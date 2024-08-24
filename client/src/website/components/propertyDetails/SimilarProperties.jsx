@@ -15,6 +15,12 @@ const SimilarProperties = ({ relatedProperties }) => {
   const propertiesSwiperRef = useRef(null);
   const { isBeginning, isEnd } = useSwiperNavigation(propertiesSwiperRef);
 
+  if(!relatedProperties || relatedProperties.length === 0) {
+      return (
+          <div className='h-[100px]'></div>
+      )
+  }
+
   return (
     <div className="md:mt-5 lg:mt-8 xl:mt-14 2xl:mt-16">
       <div className="flex items-center justify-between">

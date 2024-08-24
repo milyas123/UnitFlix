@@ -15,8 +15,8 @@ import StickyIcons from "@/website/components/common/StickyIcons";
 import useScrollProgress from "@/hooks/useScrollProgress";
 
 import axios from "axios";
-import { toast } from "react-toastify";
 import {useNavigate} from "react-router-dom";
+import Spinner from "@/website/components/common/Spinner.jsx";
 
 const sliderMinValue = 50000;
 const sliderMaxValue = 5000000;
@@ -26,6 +26,7 @@ const LandingPage = () => {
   const showButtons = useScrollProgress("discover-section");
   const navigate = useNavigate();
   const [properties, setProperties] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [selectedTab, setSelectedTab] = useState("All");
   const [text, setText] = useState("");
@@ -68,11 +69,15 @@ const LandingPage = () => {
 
   const fetchProjects = async () => {
     try {
+      setIsLoading(true);
       const response = await axios.get(`${serverURL}/property/featured`);
       const filteredProperties = response.data?.data.filter(property => property.category === 1);
       setProperties(filteredProperties);
     } catch (error) {
       console.error("Error fetching projects:", error);
+    }
+    finally {
+      setIsLoading(false);
     }
   };
 
@@ -105,7 +110,14 @@ const LandingPage = () => {
         </div>
       </div>
       <div id="discover-section">
-        <Discover projects={properties} />
+        {
+          isLoading ?
+              <div className='h-[300px] mt-[300px] md:mt-[0px] flex items-center justify-center pt-[10em]'>
+                <Spinner />
+              </div>
+              :
+              <Discover projects={properties} />
+        }
       </div>
       <Help />
       <AboutUs />
