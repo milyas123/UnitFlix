@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Microsoft.EntityFrameworkCore;
 
+using System.Globalization;
+
 using Unitflix.Server.API_DTO;
 using Unitflix.Server.Database;
 using Unitflix.Server.DTOs;
@@ -133,7 +135,7 @@ namespace Unitflix.Server.Controllers
             List<Property> properties = await _dbContext
                 .Properties
                 .Where(p => p.location == locationId && p.ApprovalStatus == PropertyStatus.Approved)
-                .Include(property => property.Files.Where(f => f.Purpose == FilePurpose.Cover))
+                .Include(property => property.Files)
                 .ToListAsync();
 
             return Response.Message(_dataManager.IncludeData(properties));
@@ -155,7 +157,7 @@ namespace Unitflix.Server.Controllers
             List<Property> properties = await _dbContext
                 .Properties
                 .Where(p => p.Developer.HasValue && p.Developer.Value == developerId && p.ApprovalStatus == PropertyStatus.Approved)
-                .Include(property => property.Files.Where(f => f.Purpose == FilePurpose.Cover))
+                .Include(property => property.Files)
                 .ToListAsync();
 
             return Response.Message(_dataManager.IncludeData(properties));
@@ -240,6 +242,8 @@ namespace Unitflix.Server.Controllers
             string? purpose = Request.Query["purpose"];
             string? page = Request.Query["page"];
             string? orderBy = Request.Query["order"];
+            string? from = Request.Query["from"];
+            string? to = Request.Query["to"];
             const int RESULTS_PER_PAGE = 12;
             int totalPages = 0;
 
@@ -249,7 +253,7 @@ namespace Unitflix.Server.Controllers
                 .Include(property => property.Files)
                 .ToListAsync();
 
-            if(!string.IsNullOrEmpty(purpose))
+            if (!string.IsNullOrEmpty(purpose))
             {
                 int _purpose = int.Parse(purpose);
                 PropertyPurpose propertyPurpose = (PropertyPurpose)_purpose;
@@ -266,7 +270,7 @@ namespace Unitflix.Server.Controllers
                     .ToList();
             }
 
-            if(!string.IsNullOrEmpty(propertyType))
+            if (!string.IsNullOrEmpty(propertyType))
             {
                 int _propertyType = int.Parse(propertyType);
                 properties = properties
@@ -282,7 +286,7 @@ namespace Unitflix.Server.Controllers
                     .ToList();
             }
 
-            if(!string.IsNullOrEmpty(category))
+            if (!string.IsNullOrEmpty(category))
             {
                 int _category = int.Parse(category);
                 PropertyCategory propertyCategory = (PropertyCategory)_category;
@@ -299,7 +303,7 @@ namespace Unitflix.Server.Controllers
                     .ToList();
             }
 
-            if(!string.IsNullOrEmpty(minPrice))
+            if (!string.IsNullOrEmpty(minPrice))
             {
                 decimal _minPrice = decimal.Parse(minPrice);
                 properties = properties
@@ -315,7 +319,7 @@ namespace Unitflix.Server.Controllers
                     .ToList();
             }
 
-            if(!string.IsNullOrEmpty(orderBy))
+            if (!string.IsNullOrEmpty(orderBy))
             {
                 string[] availableOptions = ["PriceASC", "PriceDESC", "DateASC", "DateDESC"];
                 if (availableOptions.Contains(orderBy))
@@ -338,7 +342,25 @@ namespace Unitflix.Server.Controllers
                 }
             }
 
-            if(!string.IsNullOrEmpty(page))
+            if (!string.IsNullOrEmpty(from))
+            {
+                DateTime fromDate;
+                if(DateTime.TryParseExact(from, "MM/dd/yyyy", CultureInfo.CurrentCulture, DateTimeStyles.None, out fromDate))
+                {
+                    properties = properties.Where(p => p.DateAdded >= fromDate).ToList();
+                }
+            }
+
+            if (!string.IsNullOrEmpty(to))
+            {
+                DateTime toDate;
+                if (DateTime.TryParseExact(to, "MM/dd/yyyy", CultureInfo.CurrentCulture, DateTimeStyles.None, out toDate))
+                {
+                    properties = properties.Where(p => p.DateAdded <= toDate).ToList();
+                }
+            }
+
+            if (!string.IsNullOrEmpty(page))
             {
                 int pageNumber = 0;
                 if(int.TryParse(page, out pageNumber))
@@ -712,8 +734,7 @@ namespace Unitflix.Server.Controllers
             }
 
             List<Feature> features = _mapper.Map<List<Feature>>(updateDTO.Features);
-            features.ForEach(feature => feature.PropertyId = property.Id);
-            _dbContext.Features.AddRange(features);
+            _dbContext.Features.CreateOrUpdate(features, property.Id);
 
             //Deleting the specified key highlights
             if (updateDTO.KeyHighlightsToRemove.Count > 0)
@@ -723,8 +744,7 @@ namespace Unitflix.Server.Controllers
             }
 
             List<KeyHighlight> keyHighlights = _mapper.Map<List<KeyHighlight>>(updateDTO.KeyHighlights);
-            keyHighlights.ForEach(keyHighlight => keyHighlight.PropertyId = property.Id);
-            _dbContext.KeyHighlights.AddRange(keyHighlights);
+            _dbContext.KeyHighlights.CreateOrUpdate(keyHighlights, property.Id);
 
             //Deleting the specified payment plan items
             if (updateDTO.PaymentPlanItemsToRemove.Count > 0)
@@ -734,8 +754,7 @@ namespace Unitflix.Server.Controllers
             }
 
             List<PaymentPlanItem> paymentPlanItems = _mapper.Map<List<PaymentPlanItem>>(updateDTO.PaymentPlanItems);
-            paymentPlanItems.ForEach(paymentPlan => paymentPlan.PropertyId = property.Id);
-            _dbContext.PaymentPlanItems.AddRange(paymentPlanItems);
+            _dbContext.PaymentPlanItems.CreateOrUpdate(paymentPlanItems, property.Id);
 
             //Deleting the specified property details
             if (updateDTO.PropertyDetailsToRemove.Count > 0)
@@ -745,8 +764,7 @@ namespace Unitflix.Server.Controllers
             }
 
             List<PropertyDetail> propertyDetails = _mapper.Map<List<PropertyDetail>>(updateDTO.PropertyDetails);
-            propertyDetails.ForEach(propertyDetail => propertyDetail.PropertyId = property.Id);
-            _dbContext.PropertyDetails.AddRange(propertyDetails);
+            _dbContext.PropertyDetails.CreateOrUpdate(propertyDetails, property.Id);
 
             //If a new cover image is specified we need to delete the previous one
             if (updateDTO.CoverImage != null)

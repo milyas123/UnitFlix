@@ -45,11 +45,11 @@ const PropertyInformation = ({ formData, handleChange, handleSelectChange }) => 
               <div
                 key={crypto.randomUUID()}
                 className={`flex cursor-pointer items-center gap-x-1 rounded-md border-2 border-mirage border-opacity-0 px-1.5 py-1 transition-all duration-300 ease-in-out hover:border-opacity-100 md:gap-x-0.5 md:px-1 md:py-0.5 lg:gap-x-1 lg:px-1.5 lg:py-1 xl:gap-x-1.5 xl:px-2 xl:py-1.5 2xl:px-3 2xl:py-2 ${
-                  formData?.propertyTypeIndex === type?.id && "bg-mirage text-white"
+                  formData?.propertyType === type?.id && "bg-mirage text-white"
                 }`}
                 onClick={() => handleSelectChange("propertyTypeIndex", type?.id)}
               >
-                <Status className={`${formData?.propertyTypeIndex === type?.id ? "text-white" : "text-black"}`} />
+                <Status className={`${formData?.propertyType === type?.id ? "text-white" : "text-black"}`} />
                 <p className="text-[14px] md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:text-[14px]">{type?.name}</p>
               </div>
             ))}

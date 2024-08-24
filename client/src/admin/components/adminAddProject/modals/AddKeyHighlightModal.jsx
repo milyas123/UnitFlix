@@ -29,6 +29,14 @@ const AddKeyHighlightModal = ({ onClose, onSubmit, editData }) => {
     setDescription("");
   };
 
+  const onCloseClick = () => {
+    setTitle('');
+    setDescription('');
+    if(onClose) {
+      onClose();
+    }
+  }
+
   return (
     <>
       <div className="fixed inset-0 bg-black bg-opacity-50"></div>
@@ -40,7 +48,7 @@ const AddKeyHighlightModal = ({ onClose, onSubmit, editData }) => {
                 <h1 className="font-regular text-[22px]">Add Key Highlight</h1>
               </div>
 
-              <div onClick={onClose}>
+              <div onClick={onCloseClick}>
                 <Cross className="cursor-pointer" />
               </div>
             </div>
@@ -56,7 +64,7 @@ const AddKeyHighlightModal = ({ onClose, onSubmit, editData }) => {
           <div className="flex items-center justify-end gap-x-3 px-5 pb-4 pt-2">
             <Button
               className="rounded-md border-red-700 bg-red-700 hover:border-mirage"
-              onClick={onClose}
+              onClick={onCloseClick}
             >
               Cancel
             </Button>

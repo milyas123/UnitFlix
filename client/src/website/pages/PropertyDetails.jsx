@@ -45,14 +45,20 @@ const PropertyDetails = () => {
 
   const fetchRelatedProperties = async (locationId, developerId) => {
     try {
-      const [locationResponse, developerResponse] = await Promise.all([
-        axios.get(`${serverURL}/property/location/${locationId}`),
-        axios.get(`${serverURL}/property/developer/${developerId}`),
-      ]);
+      const requests = [];
+
+      if(locationId) {
+        requests.push(axios.get(`${serverURL}/property/location/${locationId}`))
+      }
+
+      if(developerId) {
+        requests.push(axios.get(`${serverURL}/property/developer/${developerId}`));
+      }
+      const [locationResponse, developerResponse] = await Promise.all(requests);
 
       setRelatedProperties({
-        byLocation: locationResponse.data?.data.filter(p => p.id !== property.id) || [],
-        byDeveloper: developerResponse.data?.data.filter(p => p.id !== property.id) || [],
+        byLocation: locationResponse ? locationResponse.data?.data.filter(p => p.id !== property.id) || [] : [],
+        byDeveloper: developerResponse ? developerResponse.data?.data.filter(p => p.id !== property.id) || [] : [],
       });
     } catch (error) {
       console.log("Error fetching related properties:", error.message);
@@ -64,8 +70,7 @@ const PropertyDetails = () => {
   }, []);
 
   useEffect(() => {
-    console.log(property)
-    if (property?.location && property?.developer) {
+    if (property?.location || property?.developer) {
       fetchRelatedProperties(property?.location, property?.developer);
     }
   }, [property]);

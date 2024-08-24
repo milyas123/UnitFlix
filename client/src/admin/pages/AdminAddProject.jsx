@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 
 import Header from "../components/common/Header";
 import Button from "../components/common/Button";
@@ -16,7 +16,7 @@ import AddPaymentPlanModal from "../components/adminAddProject/modals/AddPayment
 
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 const serverURL = import.meta.env.VITE_SERVER_URL;
 const initialFormData = {
@@ -45,8 +45,10 @@ const initialFormData = {
 
 const AdminAddProject = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
   const [formData, setFormData] = useState(initialFormData);
 
+  const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showAddAmenityModal, setShowAddAmenityModal] = useState(false);
   const [showAddPaymentPlanModal, setShowAddPaymentPlanModal] = useState(false);
@@ -56,6 +58,59 @@ const AdminAddProject = () => {
   const [editAmenityIndex, setEditAmenityIndex] = useState(null);
   const [editPaymentPlanIndex, setEditPaymentPlanIndex] = useState(null);
   const [editPropertyIndex, setEditPropertyIndex] = useState(null);
+
+  const fetchProjectData = async (id) => {
+    try {
+      const response = await axios.get(`${serverURL}/property/${id}`);
+      const property = response.data.data;
+
+      // Filter files based on their purpose
+      const coverImage = property.files.find((file) => file.purpose === 0) || undefined;
+      const galleryImages = property.files.filter((file) => file.purpose === 1);
+      const brochure = property.files.filter((file) => file.purpose === 2)[0];
+      const floorPlan = property.files.filter((file) => file.purpose === 3)[0];
+      setFormData({
+        title: property.title,
+        tags: property.tags,
+        overview: property.overview?.text || "",
+        featured: property.featured,
+        brochure: brochure,
+        floorPlan: floorPlan,
+        status: property.status,
+        price: property.price,
+        coverImage: coverImage,
+        propertyType: property.propertyType,
+        purpose: property.purpose,
+        downPayment: property.downPayment,
+        paymentPlan: property.paymentPlan,
+        handOver: property.handOver,
+        developer: property.developer,
+        city: property.city || "",
+        location: property.location,
+        keyHighlights: property.keyHighlights || [],
+        features: property.features || [],
+        galleryImages: galleryImages || [],
+        propertyDetails: property.propertyDetails || [],
+        paymentPlanItems: property.paymentPlanItems || [],
+        galleryImagesToRemove: [],
+        keyHighlightsToRemove: [],
+        featuresToRemove: [],
+        propertyDetailsToRemove: [],
+        paymentPlanItemsToRemove: [],
+      });
+
+      setIsEditing(true);
+    } catch (error) {
+      toast.error("Failed to load property data");
+      console.error("Error fetching property data", error);
+    }
+  };
+
+  useEffect(() => {
+    if (id) {
+      fetchProjectData(id);
+    }
+  }, [id]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -84,7 +139,9 @@ const AdminAddProject = () => {
     setFormData((prevData) => {
       const newProperties = [...prevData.propertyDetails];
       if (editPropertyIndex !== null) {
-        newProperties[editPropertyIndex] = property;
+        newProperties[editPropertyIndex].propertyType = property.propertyType;
+        newProperties[editPropertyIndex].unitType = property.unitType;
+        newProperties[editPropertyIndex].size = property.size;
         setEditPropertyIndex(null);
       } else {
         newProperties.push(property);
@@ -103,17 +160,26 @@ const AdminAddProject = () => {
   };
 
   const handleDeletePropertyItem = (index) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      propertyDetails: prevData.propertyDetails.filter((_, i) => i !== index),
-    }));
+    if(isEditing && formData.propertyDetails[index].id) {
+      setFormData((prevData) => ({
+        ...prevData,
+        propertyDetailsToRemove: [...prevData.propertyDetailsToRemove, formData.propertyDetails[index].id],
+        propertyDetails: prevData.propertyDetails.filter((_, i) => i !== index),
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        propertyDetails: prevData.propertyDetails.filter((_, i) => i !== index),
+      }));
+    }
   };
 
   const handleAddHighlight = (title, description) => {
     setFormData((prevData) => {
       const newKeyHighlights = [...prevData.keyHighlights];
       if (editKeyHighlightIndex !== null) {
-        newKeyHighlights[editKeyHighlightIndex] = { title, description };
+        newKeyHighlights[editKeyHighlightIndex].title = title;
+        newKeyHighlights[editKeyHighlightIndex].description = description;
         setEditKeyHighlightIndex(null);
       } else {
         newKeyHighlights.push({ title, description });
@@ -132,17 +198,26 @@ const AdminAddProject = () => {
   };
 
   const handleDeleteHighlight = (index) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      keyHighlights: prevData.keyHighlights.filter((_, i) => i !== index),
-    }));
+    if(isEditing && formData.keyHighlights[index].id) {
+      setFormData((prevData) => ({
+        ...prevData,
+        keyHighlightsToRemove: [...prevData.keyHighlightsToRemove, prevData.keyHighlights[index].id],
+        keyHighlights: prevData.keyHighlights.filter((_, i) => i !== index),
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        keyHighlights: prevData.keyHighlights.filter((_, i) => i !== index),
+      }));
+    }
   };
 
   const handleAddAmenity = (name, icon) => {
     setFormData((prevData) => {
       const newFeatures = [...prevData.features];
       if (editAmenityIndex !== null) {
-        newFeatures[editAmenityIndex] = { name, icon };
+        newFeatures[editAmenityIndex].name = name;
+        newFeatures[editAmenityIndex].icon = icon;
         setEditAmenityIndex(null);
       } else {
         newFeatures.push({ name, icon });
@@ -161,20 +236,30 @@ const AdminAddProject = () => {
   };
 
   const handleDeleteAmenity = (index) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      features: prevData.features.filter((_, i) => i !== index),
-    }));
+    if(isEditing && formData.features[index].id) {
+      setFormData((prevData) => ({
+        ...prevData,
+        featuresToRemove: [...prevData.featuresToRemove, prevData.features[index].id],
+        features: prevData.features.filter((_, i) => i !== index),
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        features: prevData.features.filter((_, i) => i !== index),
+      }));
+    }
   };
 
-  const handleAddPaymentPlan = (Title, Description, Amount) => {
+  const handleAddPaymentPlan = (title, description, amount) => {
     setFormData((prevData) => {
       const newPaymentPlans = [...prevData.paymentPlanItems];
       if (editPaymentPlanIndex !== null) {
-        newPaymentPlans[editPaymentPlanIndex] = { Title, Description, Amount };
+        newPaymentPlans[editPaymentPlanIndex].title = title;
+        newPaymentPlans[editPaymentPlanIndex].description = description;
+        newPaymentPlans[editPaymentPlanIndex].amount = amount;
         setEditPaymentPlanIndex(null);
       } else {
-        newPaymentPlans.push({ Title, Description, Amount });
+        newPaymentPlans.push({ title, description, amount });
       }
       return {
         ...prevData,
@@ -190,10 +275,18 @@ const AdminAddProject = () => {
   };
 
   const handleDeletePaymentPlan = (index) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      paymentPlanItems: prevData.paymentPlanItems.filter((_, i) => i !== index),
-    }));
+    if(isEditing && formData.paymentPlanItems[index].id) {
+      setFormData((prevData) => ({
+        ...prevData,
+        paymentPlanItemsToRemove: [...prevData.paymentPlanItemsToRemove, prevData.paymentPlanItems[index].id],
+        paymentPlanItems: prevData.paymentPlanItems.filter((_, i) => i !== index),
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        paymentPlanItems: prevData.paymentPlanItems.filter((_, i) => i !== index),
+      }));
+    }
   };
 
   const handleAddGalleryImage = (file) => {
@@ -204,10 +297,18 @@ const AdminAddProject = () => {
   };
 
   const handleDeleteGalleryImage = (index) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      galleryImages: prevData.galleryImages.filter((_, i) => i !== index),
-    }));
+    if(isEditing && formData.galleryImages[index].id) {
+      setFormData((prevData) => ({
+        ...prevData,
+        galleryImagesToRemove: [...prevData.galleryImagesToRemove, prevData.galleryImages[index].id],
+        galleryImages: prevData.galleryImages.filter((_, i) => i !== index),
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        galleryImages: prevData.galleryImages.filter((_, i) => i !== index),
+      }));
+    }
   };
 
   const handleSubmit = async () => {
@@ -224,13 +325,13 @@ const AdminAddProject = () => {
     form.append("status", formData.status);
     form.append("price", formData.price);
 
-    if (formData.coverImage) {
+    if (formData.coverImage && !formData.coverImage.id) {
       form.append("coverImage", formData.coverImage);
     }
-    if (formData.brochure) {
+    if (formData.brochure && !formData.brochure.id) {
       form.append("brochure", formData.brochure);
     }
-    if (formData.floorPlan) {
+    if (formData.floorPlan && !formData.floorPlan.id) {
       form.append("floorPlan", formData.floorPlan);
     }
 
@@ -247,25 +348,47 @@ const AdminAddProject = () => {
     form.append("features", JSON.stringify(formData.features));
     form.append("paymentPlanItems", JSON.stringify(formData.paymentPlanItems));
     form.append("featured", formData.featured);
-    formData.galleryImages.forEach((image, index) => {
-      form.append(`galleryImages`, image);
+
+    if(isEditing) {
+      form.append('galleryImagesToRemove', JSON.stringify(formData.galleryImagesToRemove));
+      form.append('paymentPlanItemsToRemove', JSON.stringify(formData.paymentPlanItemsToRemove));
+      form.append('featuresToRemove', JSON.stringify(formData.featuresToRemove));
+      form.append('propertyDetailsToRemove', JSON.stringify(formData.propertyDetailsToRemove));
+      form.append('keyHighlightsToRemove', JSON.stringify(formData.keyHighlightsToRemove));
+    }
+
+    formData.galleryImages.forEach((image) => {
+      if(image && !image.id) {
+        form.append(`galleryImages`, image);
+      }
     });
 
     // Retrieve token from localStorage
     const token = localStorage.getItem("token");
 
     try {
-      await axios.post(`${serverURL}/property/create-project`, form, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
-        },
+
+      const endpoint = isEditing
+          ? `${serverURL}/property/update-project/${id}`
+          : `${serverURL}/property/create-project`;
+
+      const method = isEditing ? "put" : "post";
+
+      await axios({
+          method,
+          url: endpoint,
+          data: form,
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
       });
 
-      toast.success("Project added successfully!");
+      toast.success(`Project ${isEditing ? 'updated' : 'added'} successfully!`);
       setFormData(initialFormData);
       navigate("/admin/manage-properties");
     } catch (error) {
+      console.log(error)
       const errors = error.response.data.errors
       for(let err of errors) {
         toast.error(err);
@@ -342,7 +465,10 @@ const AdminAddProject = () => {
       </div>
       {showAddPropertyItemModal && (
         <AddPropertyItemModal
-          onClose={() => setShowAddPropertyItemModal(false)}
+          onClose={() => {
+            setShowAddPropertyItemModal(false);
+            setEditPropertyIndex(null);
+          }}
           onSubmit={handleAddPropertyItem}
           editData={
             editPropertyIndex !== null
@@ -354,7 +480,10 @@ const AdminAddProject = () => {
 
       {showAddKeyHighlightModal && (
         <AddKeyHighlightModal
-          onClose={() => setShowAddKeyHighlightModal(false)}
+          onClose={() => {
+            setShowAddKeyHighlightModal(false);
+            setEditKeyHighlightIndex(null);
+          }}
           onSubmit={handleAddHighlight}
           editData={
             editKeyHighlightIndex !== null

@@ -21,9 +21,10 @@ import PropertyTags from "@/website/components/common/PropertyTags.jsx";
 
 const PropertyCard = ({ property }) => {
   const { locations } = useAppContext();
+  console.log(property)
 
   return (
-    <Link to={`/property-details/${property?.id}`} className="contents">
+    <Link to={`/property-details/${property?.id}`} reloadDocument className="contents">
       <div
           className="w-full relative overflow-hidden rounded-lg border border-lightGrey md:w-[90%] md:min-w-[150px] md:max-w-[200px] lg:w-[95%] lg:min-w-[225px] lg:max-w-[270px] xl:w-[92%] xl:min-w-[290px] xl:max-w-[320px] 2xl:w-[95%] 2xl:min-w-[345px] 2xl:max-w-[400px] h-[505px] md:h-[239px] lg:h-[286px] xl:h-[348.5px] 2xl:h-[469.75px]">
         <style jsx>{`
@@ -52,7 +53,7 @@ const PropertyCard = ({ property }) => {
               }}
           >
             {property?.files.map((image) => (
-                <SwiperSlide key={crypto.randomUUID()} className="relative">
+                <SwiperSlide key={image.id} className="relative">
                   <LazyLoad className='size-full'>
                     <img
                         src={image.url}

@@ -49,10 +49,9 @@ const AdminAddProperty = () => {
 
       // Filter files based on their purpose
       const coverImage =
-        property.files.find((file) => file.purpose === 0)?.url || "";
+        property.files.find((file) => file.purpose === 0) || undefined;
       const galleryImages = property.files
-        .filter((file) => file.purpose === 1)
-        .map((file) => file.url);
+        .filter((file) => file.purpose === 1);
 
       setFormData({
         title: property.title,
@@ -61,7 +60,7 @@ const AdminAddProperty = () => {
         status: property.status,
         price: property.price,
         coverImage: coverImage,
-        propertyTypeIndex: property.propertyType,
+        propertyType: property.propertyType,
         purpose: property.purpose,
         area: property.area,
         beds: property.beds,
@@ -71,6 +70,9 @@ const AdminAddProperty = () => {
         keyHighlights: property.keyHighlights || [],
         features: property.features || [],
         galleryImages: galleryImages || [],
+        galleryImagesToRemove: [],
+        keyHighlightsToRemove: [],
+        featuresToRemove: [],
       });
 
       setIsEditing(true);
@@ -126,7 +128,8 @@ const AdminAddProperty = () => {
     setFormData((prevData) => {
       const newKeyHighlights = [...prevData.keyHighlights];
       if (editKeyHighlightIndex !== null) {
-        newKeyHighlights[editKeyHighlightIndex] = { title, description };
+        newKeyHighlights[editKeyHighlightIndex].title = title;
+        newKeyHighlights[editKeyHighlightIndex].description = description;
         setEditKeyHighlightIndex(null);
       } else {
         newKeyHighlights.push({ title, description });
@@ -145,17 +148,26 @@ const AdminAddProperty = () => {
   };
 
   const handleDeleteHighlight = (index) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      keyHighlights: prevData.keyHighlights.filter((_, i) => i !== index),
-    }));
+    if(isEditing && formData.keyHighlights[index].id) {
+      setFormData((prevData) => ({
+        ...prevData,
+        keyHighlightsToRemove: [...prevData.keyHighlightsToRemove, prevData.keyHighlights[index].id],
+        keyHighlights: prevData.keyHighlights.filter((_, i) => i !== index),
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        keyHighlights: prevData.keyHighlights.filter((_, i) => i !== index),
+      }));
+    }
   };
 
   const handleAddAmenity = (name, icon) => {
     setFormData((prevData) => {
       const newFeatures = [...prevData.features];
       if (editAmenityIndex !== null) {
-        newFeatures[editAmenityIndex] = { name, icon };
+        newFeatures[editAmenityIndex].name = name;
+        newFeatures[editAmenityIndex].icon = icon;
         setEditAmenityIndex(null);
       } else {
         newFeatures.push({ name, icon });
@@ -174,10 +186,18 @@ const AdminAddProperty = () => {
   };
 
   const handleDeleteAmenity = (index) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      features: prevData.features.filter((_, i) => i !== index),
-    }));
+    if(isEditing && formData.features[index].id) {
+      setFormData((prevData) => ({
+        ...prevData,
+        featuresToRemove: [...prevData.featuresToRemove, prevData.features[index].id],
+        features: prevData.features.filter((_, i) => i !== index),
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        features: prevData.features.filter((_, i) => i !== index),
+      }));
+    }
   };
 
   const handleAddGalleryImage = (file) => {
@@ -188,11 +208,23 @@ const AdminAddProperty = () => {
   };
 
   const handleDeleteGalleryImage = (index) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      galleryImages: prevData.galleryImages.filter((_, i) => i !== index),
-    }));
+    if(isEditing && formData.galleryImages[index].id) {
+      setFormData((prevData) => ({
+        ...prevData,
+        galleryImagesToRemove: [...prevData.galleryImagesToRemove, prevData.galleryImages[index].id],
+        galleryImages: prevData.galleryImages.filter((_, i) => i !== index),
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        galleryImages: prevData.galleryImages.filter((_, i) => i !== index),
+      }));
+    }
   };
+
+  useEffect(() => {
+    console.log(formData)
+  }, [formData]);
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -214,11 +246,22 @@ const AdminAddProperty = () => {
     form.append("location", formData.location);
     form.append("features", JSON.stringify(formData.features));
     form.append("keyHighlights", JSON.stringify(formData.keyHighlights));
-    form.append("coverImage", formData.coverImage);
+
+    if(isEditing) {
+      form.append('galleryImagesToRemove', JSON.stringify(formData.galleryImagesToRemove));
+      form.append('keyHighlightsToRemove', JSON.stringify(formData.keyHighlightsToRemove));
+      form.append('featuresToRemove', JSON.stringify(formData.featuresToRemove));
+    }
+
+    if(formData.coverImage && !formData.coverImage.id) {
+      form.append("coverImage", formData.coverImage);
+    }
 
     if (formData.galleryImages) {
-      formData.galleryImages.forEach((image, index) => {
-        form.append(`galleryImages`, image);
+      formData.galleryImages.forEach((image) => {
+        if(!image.id) {
+          form.append(`galleryImages`, image);
+        }
       });
     }
 
@@ -309,7 +352,10 @@ const AdminAddProperty = () => {
 
       {showKeyHighlightModal && (
         <AddKeyHighlightModal
-          onClose={() => setShowKeyHighlightModal(false)}
+          onClose={() => {
+            setShowKeyHighlightModal(false)
+            setEditKeyHighlightIndex(null);
+          }}
           onSubmit={handleAddHighlight}
           editData={
             editKeyHighlightIndex !== null
@@ -321,7 +367,10 @@ const AdminAddProperty = () => {
 
       {showAmenityModal && (
         <AddAmenityModal
-          onClose={() => setShowAmenityModal(false)}
+          onClose={() => {
+            setShowAmenityModal(false)
+            setEditAmenityIndex(null)
+          }}
           onSubmit={handleAddAmenity}
           editData={
             editAmenityIndex !== null

@@ -6,33 +6,34 @@ import Dropdown from "@/website/components/common/Dropdown.jsx";
 import {getFeaturedIcons} from "@/lib/icons.jsx";
 
 const AddAmenityModal = ({ onClose, onSubmit, editData }) => {
-  const [formData, setFormData] = useState({
-    name: "",
-    icon: "",
-  });
+  const [name, setName] = useState('');
   const [selectedIcon, setSelectedIcon] = useState('')
 
   useEffect(() => {
     if (editData) {
-      setFormData({
-        name: editData.name,
-      });
+      setName(editData.name);
       setSelectedIcon(editData.icon)
     }
   }, [editData]);
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    const { value } = e.target;
+    setName(value);
   };
 
   const handleSubmit = () => {
-    onSubmit(formData.name, selectedIcon);
-    setFormData({ name: "", icon: "" });
+    onSubmit(name, selectedIcon);
+    setName('');
+    setSelectedIcon('');
   };
+
+  const onCloseClick = () => {
+    setSelectedIcon("");
+    setName('');
+    if(onClose) {
+      onClose();
+    }
+  }
 
   return (
     <>
@@ -44,7 +45,7 @@ const AddAmenityModal = ({ onClose, onSubmit, editData }) => {
               <div className="flex items-center gap-x-2.5">
                 <h1 className="font-regular text-[22px]">Add Feature & Amenity</h1>
               </div>
-              <div onClick={onClose}>
+              <div onClick={onCloseClick}>
                 <Cross className="cursor-pointer" />
               </div>
             </div>
@@ -56,7 +57,7 @@ const AddAmenityModal = ({ onClose, onSubmit, editData }) => {
                   label="Feature/Amenity"
                   placeholder="Parking"
                   name="name"
-                  value={formData.name}
+                  value={name}
                   onChange={handleInputChange}
               />
               <div className="w-full">
@@ -75,7 +76,7 @@ const AddAmenityModal = ({ onClose, onSubmit, editData }) => {
           </div>
 
           <div className="flex items-center justify-end gap-x-3 px-5 pb-4 pt-2">
-            <Button className="rounded-md border-red-700 bg-red-700 hover:border-mirage" onClick={onClose}>
+            <Button className="rounded-md border-red-700 bg-red-700 hover:border-mirage" onClick={onCloseClick}>
               Cancel
             </Button>
             <Button className="rounded-md" onClick={handleSubmit}>

@@ -44,7 +44,7 @@ const Gallery = ({ formData, handleAddGalleryImage, handleDeleteGalleryImage }) 
               </div>
               <div className="overflow-hidden">
                 <img
-                    src={typeof image === "string" && image.startsWith("http") ? image : URL.createObjectURL(image)}
+                    src={image && image.id ? image.url : URL.createObjectURL(image)}
                     className="h-[170px] w-full rounded-2xl object-cover md:h-[100px] md:w-[150px] lg:h-[130px] lg:w-[190px] xl:h-[150px] xl:w-[240px] 2xl:h-[185px] 2xl:w-[288px]"
                     alt={`Property ${index + 1}`}
                 />

@@ -18,7 +18,6 @@ const ProjectPropertyInformation = ({
   handleSelectChange,
 }) => {
   const { propertyTypes } = useAppContext();
-
   return (
     <>
       <div className="flex items-start rounded-xl border border-lightGrey bg-white px-8 py-4">

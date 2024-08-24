@@ -2,8 +2,6 @@ import { formatCurrency } from "@/lib/utils";
 import { Button } from "../../ui/button";
 import {Link} from "react-router-dom";
 import LazyLoad from 'react-lazyload';
-import FeaturedIcon from "@/website/components/common/FeaturedIcon.jsx";
-import Tag from "@/website/components/common/Tag.jsx";
 import PropertyTags from "@/website/components/common/PropertyTags.jsx";
 
 const ProjectCard = ({ project, isLimited }) => {
@@ -11,7 +9,7 @@ const ProjectCard = ({ project, isLimited }) => {
     "text-[16px] md:text-[7px] lg:text-[10px] xl:text-[12px] 2xl:text-[15px]";
 
   return (
-      <Link className='contents' to={`/property-details/${project?.id}`}>
+      <Link className='contents' reloadDocument to={`/property-details/${project?.id}`}>
         <div className={`cursor-pointer ${isLimited ? 'w-full md:w-[90%] md:min-w-[150px] md:max-w-[200px] lg:w-[95%] lg:min-w-[225px] lg:max-w-[270px] xl:w-[92%] xl:min-w-[290px] xl:max-w-[320px] 2xl:w-[95%] 2xl:min-w-[345px] 2xl:max-w-[400px]' : 'shadow-lg md:w-[95%] md:max-w-[190px] md:rounded-md lg:w-[99%] lg:max-w-[250px] xl:max-w-[295px] 2xl:max-w-[400px] 2xl:rounded-xl'}`}>
           <div className={`relative`}>
             <LazyLoad>

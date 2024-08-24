@@ -10,9 +10,9 @@ const AddPaymentPlanModal = ({ onClose, onSubmit, editData }) => {
 
   useEffect(() => {
     if (editData) {
-      setTitle(editData.Title);
-      setDescription(editData.Description);
-      setAmount(editData.Amount);
+      setTitle(editData.title);
+      setDescription(editData.description);
+      setAmount(editData.amount);
     }
   }, [editData]);
 

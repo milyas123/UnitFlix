@@ -10,6 +10,7 @@ import PropertyCard from "../propertiesForSale/PropertyCard";
 import useSwiperNavigation from "@/hooks/useSwiperNavigation";
 import ArrowLeft from "../svgs/ArrowLeft";
 import ArrowRight from "../svgs/ArrowRight";
+import ProjectCard from "@/website/components/landingPage/cards/ProjectCard.jsx";
 
 const SimilarProperties = ({ relatedProperties }) => {
   const propertiesSwiperRef = useRef(null);
@@ -57,8 +58,12 @@ const SimilarProperties = ({ relatedProperties }) => {
           className="h-[600px] md:h-[370px] lg:h-[390px] xl:h-[430px] 2xl:h-[550px]"
         >
           {relatedProperties?.map((property) => (
-            <SwiperSlide key={crypto.randomUUID()}>
-              <PropertyCard property={property} />
+            <SwiperSlide key={property.id}>
+                {
+                    property.category === 0 ?
+                        <PropertyCard property={property} /> :
+                        <ProjectCard project={property} isLimited={true} />
+                }
             </SwiperSlide>
           ))}
         </Swiper>

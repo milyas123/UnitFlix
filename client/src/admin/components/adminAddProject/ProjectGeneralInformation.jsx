@@ -10,40 +10,12 @@ import Delete from "@/website/components/svgs/Delete";
 const statuses = ["Pre Launch", "Secondary", "Ready to Move In"];
 
 const ProjectGeneralInformation = ({ formData, handleChange, handleSelect, handleFileChange }) => {
-  const [selectedStatus, setSelectedStatus] = useState(statuses[0]);
-  const [isFeatured, setIsFeatured] = useState(formData.featured); 
-  const [previewCoverImage, setPreviewCoverImage] = useState(null);
-  const [brochureFileName, setBrochureFileName] = useState(null);
-
-  useEffect(() => {
-    if (formData.coverImage) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreviewCoverImage(reader.result);
-      };
-      reader.readAsDataURL(formData.coverImage);
-    } else {
-      setPreviewCoverImage(null);
-    }
-  }, [formData.coverImage]);
-
-  useEffect(() => {
-    if (formData.brochure) {
-      setBrochureFileName(formData.brochure.name);
-    } else {
-      setBrochureFileName(null);
-    }
-  }, [formData.brochure]);
-
   const handleStatusClick = (status) => {
-    setSelectedStatus(status);
     handleSelect("status", status);
   };
 
   const handleFeaturedClick = () => {
-    const newFeaturedStatus = !isFeatured;
-    setIsFeatured(newFeaturedStatus);
-    handleSelect("featured", newFeaturedStatus);
+    handleSelect("featured", !formData.featured);
   };
 
   const handleRemoveCoverImage = () => { 
@@ -99,12 +71,12 @@ const ProjectGeneralInformation = ({ formData, handleChange, handleSelect, handl
                 <div
                     key={status}
                     className={`flex cursor-pointer items-center gap-x-1.5 rounded-md border-2 border-mirage border-opacity-0 px-3 py-2 transition-all duration-300 ease-in-out hover:border-opacity-100 ${
-                        selectedStatus === status && "bg-mirage text-white"
+                        formData.status === status && "bg-mirage text-white"
                     }`}
                     onClick={() => handleStatusClick(status)}
                 >
                   <Status
-                      className={`${selectedStatus === status ? "text-white" : "text-black"}`}
+                      className={`${formData.status === status ? "text-white" : "text-black"}`}
                       size={25}
                   />
                   <p className="text-[14px]">{status}</p>
@@ -118,24 +90,24 @@ const ProjectGeneralInformation = ({ formData, handleChange, handleSelect, handl
           <div className="flex items-center gap-x-6">
             <div
                 className={`flex cursor-pointer items-center gap-x-1.5 rounded-md border-2 border-mirage border-opacity-0 px-3 py-2 transition-all duration-300 ease-in-out hover:border-opacity-100 ${
-                    isFeatured && "bg-mirage text-white"
+                    formData.featured && "bg-mirage text-white"
                 }`}
                 onClick={handleFeaturedClick}
             >
               <Status
-                  className={`${isFeatured ? "text-white" : "text-black"}`}
+                  className={`${formData.featured ? "text-white" : "text-black"}`}
                   size={25}
               />
               <p className="text-[14px]">Yes</p>
             </div>
             <div
                 className={`flex cursor-pointer items-center gap-x-1.5 rounded-md border-2 border-mirage border-opacity-0 px-3 py-2 transition-all duration-300 ease-in-out hover:border-opacity-100 ${
-                    !isFeatured && "bg-mirage text-white"
+                    !formData.featured && "bg-mirage text-white"
                 }`}
                 onClick={handleFeaturedClick}
             >
               <Status
-                  className={`${!isFeatured ? "text-white" : "text-black"}`}
+                  className={`${!formData.featured ? "text-white" : "text-black"}`}
                   size={25}
               />
               <p className="text-[14px]">No</p>
@@ -145,10 +117,10 @@ const ProjectGeneralInformation = ({ formData, handleChange, handleSelect, handl
 
         <div className="w-full space-y-2.5">
           <label className="text-[16px] font-semibold">Cover Image</label>
-          {previewCoverImage ? (
+          {formData.coverImage ? (
               <div className="relative w-[288px] h-[185px]">
                 <img
-                    src={previewCoverImage}
+                    src={formData.coverImage && formData.coverImage.id ? formData.coverImage.url : URL.createObjectURL(formData.coverImage)}
                     alt="Cover Image Preview"
                     className="w-full h-full object-cover rounded-2xl"
                 />
@@ -179,10 +151,10 @@ const ProjectGeneralInformation = ({ formData, handleChange, handleSelect, handl
 
         <div className="w-full space-y-2.5">
           <label className="text-[16px] font-semibold">Brochure</label>
-          {brochureFileName ? (
+          {formData.brochure ? (
               <div className="relative flex items-center gap-2 p-2 rounded-lg border border-dashed border-gray-400">
                 <AiFillFilePdf size={30} className="text-red-600"/>
-                <p className="text-[14px] text-black">{brochureFileName}</p>
+                <p className="text-[14px] text-black">{formData.brochure && formData.brochure.id ? formData.brochure.filename : formData.brochure.name}</p>
                 <button
                     className="absolute top-1 right-1 p-1 bg-red-600 hover:bg-white text-white transition-all duration-200 ease-in-out rounded-full"
                     onClick={handleRemoveBrochure}

@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 
 import Filters from "../components/common/Filters";
 import Header from "../components/common/Header";
 import Table from "../components/common/Table";
+import moment from "moment/moment.js";
 
 const AdminManageProperties = () => {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ const AdminManageProperties = () => {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams()
 
   useEffect(() => {
     fetchProperties();
@@ -20,8 +22,8 @@ const AdminManageProperties = () => {
 
   const fetchProperties = async () => {
     try {
-      const response = await axios.get(`${serverURL}/property/all`);
-      setProperties(response.data?.data);
+      const response = await axios.get(`${serverURL}/property/search?${searchParams.toString()}`);
+      setProperties(response.data?.data.properties);
     } catch (err) {
       setError(err);
     } finally {
@@ -46,7 +48,11 @@ const AdminManageProperties = () => {
   };
 
   const handleEdit = (property) => {
-    navigate(`/admin/edit-property/${property?.id}`);
+    if(property.category === 0) {
+      navigate(`/admin/edit-property/${property?.id}`);
+    } else if (property.category === 1) {
+      navigate(`/admin/edit-project/${property?.id}`);
+    }
   };
 
   if (loading)
@@ -61,7 +67,7 @@ const AdminManageProperties = () => {
     <div className="space-y-5">
       <div className="flex flex-col gap-y-10">
         <Header title="Manage Properties" />
-        <Filters type="properties" totalRecords={properties?.length} />
+        <Filters type="properties" totalRecords={properties?.length}/>
       </div>
       <Table
         type="properties"

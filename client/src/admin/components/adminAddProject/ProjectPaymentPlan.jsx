@@ -26,10 +26,10 @@ const ProjectPaymentPlan = ({ formData, showModal, handleEdit, handleDelete }) =
                 <div className="flex flex-col items-center space-y-6 text-center">
                   <div>
                     <h2 className="flex flex-col font-semibold">
-                      <span className="text-[32px]">{item.Amount}%</span>
-                      <span className="text-[20px]">{item.Title}</span>
+                      <span className="text-[32px]">{item.amount}%</span>
+                      <span className="text-[20px]">{item.title}</span>
                     </h2>
-                    <p className="text-[14px]">{item.Description}</p>
+                    <p className="text-[14px]">{item.description}</p>
                   </div>
                   <div className="flex items-center justify-center gap-x-1.5 text-smokeyGrey">
                     <Edit size={22} onClick={() => handleEdit(index)} />

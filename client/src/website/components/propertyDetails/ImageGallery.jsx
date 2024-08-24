@@ -83,7 +83,7 @@ const ImageGallery = ({ imgFiles }) => {
                     <LazyLoad className='h-full'>
                       <img
                           src={images[0]}
-                          className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
+                          className="h-full w-full transform rounded-lg object-cover object-center transition-transform duration-300 hover:scale-105"
                           alt=""
                       />
                     </LazyLoad>
@@ -98,7 +98,7 @@ const ImageGallery = ({ imgFiles }) => {
                     <LazyLoad>
                       <img
                           src={images[1]}
-                          className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
+                          className="h-full w-full transform rounded-lg object-cover object-center transition-transform duration-300 hover:scale-105"
                           alt=""
                       />
                     </LazyLoad>
@@ -115,7 +115,7 @@ const ImageGallery = ({ imgFiles }) => {
                     <LazyLoad className='h-full'>
                       <img
                           src={images[2]}
-                          className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
+                          className="h-full w-full transform rounded-lg object-cover object-center transition-transform duration-300 hover:scale-105"
                           alt=""
                       />
                     </LazyLoad>
@@ -130,7 +130,7 @@ const ImageGallery = ({ imgFiles }) => {
                     <LazyLoad className="h-full">
                       <img
                           src={images[3]}
-                          className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
+                          className="h-full w-full transform rounded-lg object-cover object-center transition-transform duration-300 hover:scale-105"
                           alt=""
                       />
                     </LazyLoad>
@@ -145,7 +145,7 @@ const ImageGallery = ({ imgFiles }) => {
                     <LazyLoad className="h-full">
                       <img
                           src={images[4]}
-                          className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
+                          className="h-full w-full transform rounded-lg object-cover object-center transition-transform duration-300 hover:scale-105"
                           alt=""
                       />
                     </LazyLoad>
@@ -162,7 +162,7 @@ const ImageGallery = ({ imgFiles }) => {
                     <LazyLoad className="h-full">
                       <img
                           src={images[5]}
-                          className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
+                          className="h-full w-full transform rounded-lg object-coverobject-center transition-transform duration-300 hover:scale-105"
                           alt=""
                       />
                     </LazyLoad>
@@ -177,7 +177,7 @@ const ImageGallery = ({ imgFiles }) => {
                     <LazyLoad className='h-full'>
                       <img
                           src={images[6]}
-                          className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
+                          className="h-full w-full transform rounded-lg object-cover object-center transition-transform duration-300 hover:scale-105"
                           alt=""
                       />
                     </LazyLoad>
@@ -194,7 +194,7 @@ const ImageGallery = ({ imgFiles }) => {
                 <LazyLoad className='h-full'>
                   <img
                       src={images[7]}
-                      className="h-full w-full transform rounded-lg object-cover transition-transform duration-300 hover:scale-105"
+                      className="h-full w-full transform rounded-lg object-cover object-center transition-transform duration-300 hover:scale-105"
                       alt=""
                   />
                 </LazyLoad>

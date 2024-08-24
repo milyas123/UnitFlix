@@ -8,7 +8,7 @@ const PropertyTags = ({property, details}) => {
     }
 
     return (
-        <>
+        <div className='flex items-center gap-x-2'>
             {
                 details && property.category === 1 ?
                     <Tag color={'purple'} text={property.status}>
@@ -29,7 +29,7 @@ const PropertyTags = ({property, details}) => {
                         {property.purpose === 0 ? 'Buy' : 'Rent'}
                     </Tag>
             }
-        </>
+        </div>
     )
 }
 

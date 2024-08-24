@@ -11,21 +11,11 @@ const ProjectPropertyDetails = ({
   handleFileChange,
   handleLocationChange,
 }) => {
-  const [floorPlanFileName, setFloorPlanFileName] = useState(null);
   const { developers, locations } = useAppContext();
-
-  useEffect(() => {
-    if (formData.floorPlan) {
-      setFloorPlanFileName(formData.floorPlan.name);
-    } else {
-      setFloorPlanFileName(null);
-    }
-  }, [formData.floorPlan]);
 
   const handleRemoveFloorPlan = () => {
     handleFileChange({ target: { files: [null] } }, "floorPlan");
   };
-
   return (
     <div className="flex items-start rounded-xl border border-lightGrey bg-white px-8 py-4">
       <h2 className="w-[23%] whitespace-nowrap text-[20px] font-semibold">
@@ -34,10 +24,10 @@ const ProjectPropertyDetails = ({
       <div className="ms-auto flex w-[72%] flex-col gap-y-8 p-1">
         <div className="w-full space-y-2.5">
           <label className="text-[16px] font-semibold">Floor Plan</label>
-          {floorPlanFileName ? (
+          {formData.floorPlan ? (
             <div className="relative flex items-center gap-2 rounded-lg border border-dashed border-gray-400 p-2">
               <AiFillFilePdf size={30} className="text-red-600" />
-              <p className="text-[14px] text-black">{floorPlanFileName}</p>
+              <p className="text-[14px] text-black">{formData.floorPlan && formData.floorPlan.id ? formData.floorPlan.filename : formData.floorPlan.name}</p>
               <button
                 className="absolute right-1 top-1 rounded-full bg-red-600 p-1 text-white transition-all duration-200 ease-in-out hover:bg-white"
                 onClick={handleRemoveFloorPlan}

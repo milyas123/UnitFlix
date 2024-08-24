@@ -51,8 +51,7 @@ const GeneralInformation = ({ formData, handleChange, handleSelectChange, handle
           {formData?.coverImage ? (
               <div className="relative w-[288px] h-[185px]">
                 <img
-                    src={typeof formData.coverImage === "string" && formData.coverImage.startsWith("http")
-                        ? formData.coverImage : URL.createObjectURL(formData.coverImage)
+                    src={formData.coverImage && formData.coverImage.id ? formData.coverImage.url : URL.createObjectURL(formData.coverImage)
                     }
                     alt="Cover Image Preview"
                     className="w-full h-full object-cover rounded-2xl"
