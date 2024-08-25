@@ -74,6 +74,8 @@ builder.Services.AddScoped<ProjectValidator>();
 builder.Services.AddScoped<PropertyUpdateValidator>();
 builder.Services.AddScoped<ProjectUpdateValidator>();
 builder.Services.AddScoped<PropertyRequestValidator>();
+builder.Services.AddScoped<EmailConfigurationAddValidator>();
+builder.Services.AddScoped<EmailConfigurationUpdateValidator>();
 
 builder.Services.AddScoped<EmailManager>();
 builder.Services.AddScoped<PropertyDataManager>();

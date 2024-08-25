@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+using System.Globalization;
+
 using Unitflix.Server.API_DTO;
 using Unitflix.Server.Database;
 using Unitflix.Server.DTOs;
@@ -208,8 +210,12 @@ namespace Unitflix.Server.Controllers
             string? page = Request.Query["page"];
             string? searchWord = Request.Query["text"];
             string? propertyType = Request.Query["type"];
+            string? location = Request.Query["location"];
+            string? purpose = Request.Query["purpose"];
             string? status = Request.Query["status"];
             string? orderBy = Request.Query["order"];
+            string? from = Request.Query["from"];
+            string? to = Request.Query["to"];
             const int RESULTS_PER_PAGE = 12;
             int totalPages = 0;
 
@@ -231,11 +237,28 @@ namespace Unitflix.Server.Controllers
                     .ToList();
             }
 
+            if (!string.IsNullOrEmpty(purpose))
+            {
+                int _purpose = int.Parse(purpose);
+                PropertyPurpose propertyPurpose = (PropertyPurpose)_purpose;
+                properties = properties
+                    .Where(p => p.Purpose == propertyPurpose)
+                    .ToList();
+            }
+
             if (!string.IsNullOrEmpty(propertyType))
             {
                 int _propertyType = int.Parse(propertyType);
                 properties = properties
                     .Where(p => p.PropertyType == _propertyType)
+                    .ToList();
+            }
+
+            if (!string.IsNullOrEmpty(location))
+            {
+                int _location = int.Parse(location);
+                properties = properties
+                    .Where(p => p.location == _location)
                     .ToList();
             }
 
@@ -246,6 +269,24 @@ namespace Unitflix.Server.Controllers
                 properties = properties
                     .Where(p => p.ApprovalStatus == propertyStatus)
                     .ToList();
+            }
+
+            if (!string.IsNullOrEmpty(from))
+            {
+                DateTime fromDate;
+                if (DateTime.TryParseExact(from, "MM/dd/yyyy", CultureInfo.CurrentCulture, DateTimeStyles.None, out fromDate))
+                {
+                    properties = properties.Where(p => p.DateAdded >= fromDate).ToList();
+                }
+            }
+
+            if (!string.IsNullOrEmpty(to))
+            {
+                DateTime toDate;
+                if (DateTime.TryParseExact(to, "MM/dd/yyyy", CultureInfo.CurrentCulture, DateTimeStyles.None, out toDate))
+                {
+                    properties = properties.Where(p => p.DateAdded <= toDate).ToList();
+                }
             }
 
             if (!string.IsNullOrEmpty(orderBy))

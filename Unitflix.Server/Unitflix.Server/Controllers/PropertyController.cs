@@ -319,6 +319,24 @@ namespace Unitflix.Server.Controllers
                     .ToList();
             }
 
+            if (!string.IsNullOrEmpty(from))
+            {
+                DateTime fromDate;
+                if (DateTime.TryParseExact(from, "MM/dd/yyyy", CultureInfo.CurrentCulture, DateTimeStyles.None, out fromDate))
+                {
+                    properties = properties.Where(p => p.DateAdded >= fromDate).ToList();
+                }
+            }
+
+            if (!string.IsNullOrEmpty(to))
+            {
+                DateTime toDate;
+                if (DateTime.TryParseExact(to, "MM/dd/yyyy", CultureInfo.CurrentCulture, DateTimeStyles.None, out toDate))
+                {
+                    properties = properties.Where(p => p.DateAdded <= toDate).ToList();
+                }
+            }
+
             if (!string.IsNullOrEmpty(orderBy))
             {
                 string[] availableOptions = ["PriceASC", "PriceDESC", "DateASC", "DateDESC"];
@@ -342,23 +360,6 @@ namespace Unitflix.Server.Controllers
                 }
             }
 
-            if (!string.IsNullOrEmpty(from))
-            {
-                DateTime fromDate;
-                if(DateTime.TryParseExact(from, "MM/dd/yyyy", CultureInfo.CurrentCulture, DateTimeStyles.None, out fromDate))
-                {
-                    properties = properties.Where(p => p.DateAdded >= fromDate).ToList();
-                }
-            }
-
-            if (!string.IsNullOrEmpty(to))
-            {
-                DateTime toDate;
-                if (DateTime.TryParseExact(to, "MM/dd/yyyy", CultureInfo.CurrentCulture, DateTimeStyles.None, out toDate))
-                {
-                    properties = properties.Where(p => p.DateAdded <= toDate).ToList();
-                }
-            }
 
             if (!string.IsNullOrEmpty(page))
             {

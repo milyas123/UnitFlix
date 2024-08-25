@@ -7,8 +7,8 @@ import MobileNavIcon from "../svgs/MobileNavIcon";
 import MobileNav from "./MobileNav";
 
 const buttonItems = [
-  { name: "Buy", link: "/search?purpose=0" },
-  { name: "Rent", link: "/search?purpose=1" },
+  { name: "Buy", link: "/search?purpose=0&page=1" },
+  { name: "Rent", link: "/search?purpose=1&page=1" },
   { name: "Manage", link: "/manage-properties" },
   { name: "About Us", link: "/about-us" },
 ];

@@ -1,5 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AutoMapper;
+
+using FluentValidation;
+using FluentValidation.Results;
+
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -7,10 +14,12 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
+using Unitflix.Server.Database;
 using Unitflix.Server.DTOs;
 using Unitflix.Server.Helpers;
 using Unitflix.Server.Models;
 using Unitflix.Server.Options;
+using Unitflix.Server.Validators;
 
 namespace Unitflix.Server.Controllers
 {
@@ -19,9 +28,17 @@ namespace Unitflix.Server.Controllers
     {
         #region Private Members
 
-        private UserManager<User> _userManager { get; set; }
+        private UserManager<User> _userManager;
 
-        private JWTOptions _jwtOptions { get; set; }
+        private JWTOptions _jwtOptions;
+
+        private IMapper _mapper;
+
+        private EmailConfigurationAddValidator _emailConfigurationValidator;
+
+        private EmailConfigurationUpdateValidator _emailConfigurationUpdateValidator;
+
+        private ApplicationDbContext _dbContext;
 
         #endregion
 
@@ -30,10 +47,19 @@ namespace Unitflix.Server.Controllers
         /// <summary>
         /// Default Constructor
         /// </summary>
-        public AdminController(UserManager<User> userManager, IOptions<JWTOptions> jwtOptions)
+        public AdminController(UserManager<User> userManager, 
+            IOptions<JWTOptions> jwtOptions,
+            IMapper mapper,
+            EmailConfigurationAddValidator emailConfigurationValidator,
+            ApplicationDbContext dbContext,
+            EmailConfigurationUpdateValidator emailConfigurationUpdateValidator)
         {
             _userManager = userManager;
             _jwtOptions = jwtOptions.Value;
+            _mapper = mapper;
+            _emailConfigurationValidator = emailConfigurationValidator;
+            _dbContext = dbContext;
+            _emailConfigurationUpdateValidator = emailConfigurationUpdateValidator;
         }
 
         #endregion
@@ -96,6 +122,88 @@ namespace Unitflix.Server.Controllers
             return Response.Message(new {
                 token = new JwtSecurityTokenHandler().WriteToken(token)
             });
+        }
+
+        /// <summary>
+        /// Creates or updates an already existing email configuration
+        /// </summary>
+        /// <param name="writeDTO"></param>
+        /// <returns></returns>
+        [Authorize(Roles = "Admin")]
+        [HttpPost("email-configuration")]
+        public async Task<ActionResult> CreateOrUpdateEmailConfiguration([FromBody]EmailConfigurationWriteDTO writeDTO)
+        {
+            EmailConfiguration configuration = _mapper.Map<EmailConfiguration>(writeDTO);
+            //Getting an existing configuration
+            EmailConfiguration? existingConfiguration = await _dbContext.EmailConfigurations.FirstOrDefaultAsync();
+
+            //If an existing config exists then update it
+            if(existingConfiguration != null)
+            {
+
+                ValidationResult result = _emailConfigurationUpdateValidator.Validate(writeDTO);
+
+                if(!result.IsValid)
+                {
+                    return Response.Error(result.Errors);
+                }
+
+                if(!string.IsNullOrEmpty(configuration.Email))
+                {
+                    existingConfiguration.Email = configuration.Email;
+                }
+
+                if(!string.IsNullOrEmpty(configuration.Password))
+                {
+                    existingConfiguration.Password = configuration.Password;
+                }
+
+                if(!string.IsNullOrEmpty(configuration.Host))
+                {
+                    existingConfiguration.Host = configuration.Host;
+                }
+
+                if (configuration.Port > 0)
+                {
+                    existingConfiguration.Port = configuration.Port;
+                }
+
+                _dbContext.EmailConfigurations.Update(existingConfiguration);
+                await _dbContext.SaveChangesAsync();
+                EmailConfigurationReadDTO readDTO = _mapper.Map<EmailConfigurationReadDTO>(existingConfiguration);
+                return Response.Message("Email Configuration Updated Successfully", new { configuration = readDTO });
+            }
+            else
+            {
+                ValidationResult result = _emailConfigurationValidator.Validate(writeDTO);
+
+                if(!result.IsValid)
+                {
+                    return Response.Error(result.Errors);
+                }
+
+                _dbContext.EmailConfigurations.Add(configuration);
+                await _dbContext.SaveChangesAsync();
+                EmailConfigurationReadDTO readDTO = _mapper.Map<EmailConfigurationReadDTO>(configuration);
+                return Response.Message("Email Configuration Added Successfully", new { configuration = readDTO });
+            }
+        }
+
+        /// <summary>
+        /// Returns the email configuration
+        /// </summary>
+        /// <returns></returns>
+        [Authorize(Roles = "Admin")]
+        [HttpGet("email-configuration")]
+        public async Task<ActionResult> GetEmailConfiguration()
+        {
+            EmailConfiguration? configuration = await _dbContext.EmailConfigurations.FirstOrDefaultAsync();
+            if (configuration == null)
+            {
+                return Response.Error("No Email Configuration Found", 404);
+            }
+            EmailConfigurationReadDTO readDTO = _mapper.Map<EmailConfigurationReadDTO>(configuration);
+            return Response.Message(new { configuration = readDTO });
         }
 
         #endregion

@@ -90,6 +90,8 @@ namespace Unitflix.Server.AutoMapper
             CreateMap<PaymentPlanItemWriteDTO, PaymentPlanItem>();
             CreateMap<PropertyDetailsWriteDTO, PropertyDetail>();
             CreateMap<UserDetailWriteDTO, UserDetail>();
+            CreateMap<EmailConfigurationWriteDTO, EmailConfiguration>();
+            CreateMap<EmailConfiguration, EmailConfigurationReadDTO>();
         }
 
         #endregion

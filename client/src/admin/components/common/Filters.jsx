@@ -8,29 +8,32 @@ import {DateRangePicker} from "rsuite";
 import 'rsuite/DateRangePicker/styles/index.css';
 import moment from "moment";
 import {useNavigate, useSearchParams} from "react-router-dom";
-const lookingForOptions = ["House", "Apartment", "Condo"];
+
 const purposeOptions = [{id: -1, name: 'All'}, {id: 0, name: "Sale"}, {id: 1, name: "Rent"}];
 const categoryOptions = [{id: -1, name: 'All'}, {id: 0, name: 'Property'}, {id: 1, name: 'Project'}]
+const propertyStatusOptions = [{id: -1, name: 'All'}, {id: 0, name: "Pending"}, {id: 1, name: "Accepted"}, {id: 2, name: "Rejected"}];
 
 const Filters = ({ type, totalRecords }) => {
-    const {locations, developers} = useAppContext();
+    const {locations, developers, propertyTypes} = useAppContext();
     const [dateRange, setDateRange] = useState([]);
     const [selectedPurpose, setSelectedPurpose] = useState(undefined);
     const [selectedCategory, setSelectedCategory] = useState(undefined);
     const [selectedLocation, setSelectedLocation] = useState(undefined);
+    const [selectedPropertyType, setSelectedPropertyType] = useState(undefined);
     const [selectedDeveloper, setSelectedDeveloper] = useState(undefined);
+    const [selectedStatus, setSelectedStatus] = useState(undefined);
     const [searchTerm, setSearchTerm] = useState("");
     const [canClear, setCanClear] = useState(false);
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
 
     useEffect(() => {
-        if(dateRange.length > 0 || selectedDeveloper || selectedLocation || selectedPurpose !== undefined || selectedCategory !== undefined || searchTerm) {
+        if(dateRange.length > 0 || selectedDeveloper || selectedLocation || selectedPurpose !== undefined || selectedCategory !== undefined || searchTerm || selectedPropertyType || selectedStatus !== undefined) {
             setCanClear(true);
         } else {
             setCanClear(false);
         }
-    }, [dateRange, selectedDeveloper, selectedLocation, selectedPurpose, selectedCategory, searchTerm]);
+    }, [dateRange, selectedDeveloper, selectedLocation, selectedPurpose, selectedCategory, searchTerm, selectedPropertyType, selectedStatus]);
 
     useEffect(() => {
         if(searchParams) {
@@ -43,6 +46,8 @@ const Filters = ({ type, totalRecords }) => {
             setSelectedCategory(params.category);
             setSelectedDeveloper(params.developer);
             setSearchTerm(params.text);
+            setSelectedPropertyType(params.type)
+            setSelectedStatus(params.status)
         }
     }, [searchParams])
 
@@ -83,6 +88,18 @@ const Filters = ({ type, totalRecords }) => {
             params.developer = developers.filter(d => d.id === developerId)[0];
         }
 
+        const propertyType = searchParams.get('type');
+        if(propertyType) {
+            const propertyTypeId = parseInt(propertyType);
+            params.type = propertyTypes.filter(p => p.id === propertyTypeId)[0];
+        }
+
+        const status = searchParams.get('status');
+        if(status) {
+            const statusId = parseInt(status);
+            params.status = propertyStatusOptions.filter(p => p.id === statusId)[0];
+        }
+
         const text = searchParams.get('text');
         if(text) {
             params.text = text;
@@ -121,13 +138,29 @@ const Filters = ({ type, totalRecords }) => {
             params.text = searchTerm;
         }
 
+        if(selectedStatus && selectedStatus.id > -1) {
+            params.status = selectedStatus.id;
+        }
+
+        if(selectedPropertyType) {
+            params.type = selectedPropertyType.id;
+        }
+
         const searchParams = new URLSearchParams(params).toString();
-        navigate(`/admin/manage-properties?${searchParams}`)
+        if(type === 'requests') {
+            navigate(`/admin/submitted-requests?${searchParams}`)
+        } else {
+            navigate(`/admin/manage-properties?${searchParams}`)
+        }
         navigate(0)
     }
 
     const onClear = () => {
-        navigate('/admin/manage-properties?page=1');
+        if(type === 'requests') {
+            navigate('/admin/submitted-requests?page=1');
+        } else {
+            navigate('/admin/manage-properties?page=1');
+        }
         navigate(0)
     }
 
@@ -170,27 +203,37 @@ const Filters = ({ type, totalRecords }) => {
                             onSelectedOptionRender={(option) => option.name} onOptionRender={option => option.name} onOptionCompare={(op1, op2) => op1.id === op2.id}
                             currentOption={selectedDeveloper} onOptionChange={option => setSelectedDeveloper(option)}
                 />
-                <Button variant="filled" className="rounded-lg" onClick={handleSearch}>
-                  Search
-                </Button>
-                  {
-                      canClear ?
-                          <Button variant="filled" className="rounded-lg" onClick={onClear}>
-                              Clear
-                          </Button> : <></>
-                  }
               </>
             ) : (
                 <>
-                    <div className="min-w-[17%]">
-                        <Dropdown options={lookingForOptions} placeholder="Status"/>
-                    </div>
-
-                    <div className="min-w-[17%]">
-                        <Dropdown options={lookingForOptions} placeholder="Sort By"/>
-                    </div>
+                    <DateRangePicker format='MM/dd/yyyy' value={dateRange} placeholder='Select date range' size='lg' onChange={value => setDateRange(value)} />
+                    <Dropdown placeholder={'Purpose'} options={purposeOptions} onItemFilter={(option, search) => option.name.toLowerCase().includes(search.toLowerCase())}
+                              onSelectedOptionRender={(option) => option.name} onOptionRender={option => option.name} onOptionCompare={(op1, op2) => op1.id === op2.id}
+                              currentOption={selectedPurpose} onOptionChange={option => setSelectedPurpose(option)}
+                    />
+                    <Dropdown placeholder={'Location'} options={locations} onItemFilter={(option, search) => option.name.toLowerCase().includes(search.toLowerCase())}
+                              onSelectedOptionRender={(option) => option.name} onOptionRender={option => option.name} onOptionCompare={(op1, op2) => op1.id === op2.id}
+                              currentOption={selectedLocation} onOptionChange={option => setSelectedLocation(option)}
+                    />
+                    <Dropdown placeholder={'Property Type'} options={propertyTypes} onItemFilter={(option, search) => option.name.toLowerCase().includes(search.toLowerCase())}
+                              onSelectedOptionRender={(option) => option.name} onOptionRender={option => option.name} onOptionCompare={(op1, op2) => op1.id === op2.id}
+                              currentOption={selectedPropertyType} onOptionChange={option => setSelectedPropertyType(option)}
+                    />
+                    <Dropdown placeholder={'Status'} options={propertyStatusOptions} onItemFilter={(option, search) => option.name.toLowerCase().includes(search.toLowerCase())}
+                              onSelectedOptionRender={(option) => option.name} onOptionRender={option => option.name} onOptionCompare={(op1, op2) => op1.id === op2.id}
+                              currentOption={selectedStatus} onOptionChange={option => setSelectedStatus(option)}
+                    />
                 </>
             )}
+            <Button variant="filled" className="rounded-lg" onClick={handleSearch}>
+              Search
+            </Button>
+            {
+                canClear ?
+                  <Button variant="filled" className="rounded-lg" onClick={onClear}>
+                      Clear
+                  </Button> : <></>
+            }
           </div>
         </div>
     );

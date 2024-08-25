@@ -1,11 +1,11 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {useNavigate, useSearchParams} from "react-router-dom";
 
 import Filters from "../components/common/Filters";
 import Header from "../components/common/Header";
 import Table from "../components/common/Table";
-import moment from "moment/moment.js";
+import Pagination from "@/website/components/propertiesForSale/Pagination.jsx";
 
 const AdminManageProperties = () => {
   const navigate = useNavigate();
@@ -15,15 +15,30 @@ const AdminManageProperties = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams()
+  const [pages, setPages] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    if(searchParams) {
+      const page = searchParams.get("page");
+      if(page) {
+        setCurrentPage(parseInt(page));
+      } else {
+        setCurrentPage(1);
+      }
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     fetchProperties();
   }, [serverURL]);
 
   const fetchProperties = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(`${serverURL}/property/search?${searchParams.toString()}`);
       setProperties(response.data?.data.properties);
+      setPages(response.data?.data.pages);
     } catch (err) {
       setError(err);
     } finally {
@@ -55,6 +70,14 @@ const AdminManageProperties = () => {
     }
   };
 
+  const paginate = (pageNumber) => {
+    if(pageNumber > 0 && pageNumber <= pages) {
+      searchParams.set("page", pageNumber);
+      navigate(`/admin/manage-properties?${searchParams.toString()}`);
+      navigate(0);
+    }
+  }
+
   if (loading)
     return (
       <p className="flex size-full h-60 items-center justify-center">
@@ -75,6 +98,14 @@ const AdminManageProperties = () => {
         onDelete={handleDelete}
         onEdit={handleEdit}
       />
+      {pages > 1 && (
+          <div className="mt-16">
+            <Pagination totalPages={pages}
+                currentPage={currentPage}
+                paginate={paginate}
+            />
+          </div>
+      )}
     </div>
   );
 };

@@ -5,6 +5,7 @@ import { useAppContext } from "../../../AppContext";
 import Home from "../svgs/Home";
 import Requests from "../svgs/Requests";
 import EmailConfig from "../svgs/EmailConfig";
+import {MdLogout} from "react-icons/md";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -14,18 +15,29 @@ const Sidebar = () => {
     {
       title: "Manage Properties",
       component: Home,
-      path: "/admin/manage-properties",
+      path: "/admin/manage-properties?page=1",
+      basePath: "/admin/manage-properties"
     },
     {
       title: "Submitted Requests",
       component: Requests,
-      path: "/admin/submitted-requests",
+      path: "/admin/submitted-requests?page=1",
+      basePath: "/admin/submitted-requests"
     },
     {
       title: "Email Configuration",
       component: EmailConfig,
       path: "/admin/email-configuration",
+      basePath: "/admin/email-configuration"
     },
+    {
+      title: "Logout",
+      component: MdLogout,
+      action: () => {
+        localStorage.removeItem("token");
+        window.location = '/admin/login'
+      }
+    }
   ];
 
   const handleSidebarToggle = () => {
@@ -72,8 +84,8 @@ const Sidebar = () => {
         </div>
 
         <ul className="overflow-y-auto px-2 pt-7">
-          {Menus.map(({ title, component: IconComponent, path }, index) => {
-            const isActive = window.location.pathname.includes(path);
+          {Menus.map(({ title, component: IconComponent, path, basePath, action }, index) => {
+            const isActive = window.location.pathname.includes(basePath);
             return (
               <Link
                 to={path}
@@ -81,6 +93,11 @@ const Sidebar = () => {
                 className={`group mt-2 flex h-[3.3rem] cursor-pointer items-center gap-x-4 rounded-2xl hover:bg-white ${
                   isSideBarOpen ? "p-3" : "justify-center p-2"
                 } ${isActive && "bg-white text-mirage"}`}
+                onClick={() => {
+                  if(action) {
+                    action();
+                  }
+                }}
               >
                 <IconComponent className="group-hover:text-mirage" />
                 <span

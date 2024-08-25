@@ -7,6 +7,8 @@ using System.Text;
 using Unitflix.Server.Options;
 using Microsoft.Extensions.Options;
 using MimeKit;
+using Unitflix.Server.Database;
+using Unitflix.Server.Models;
 
 namespace Unitflix.Server.Managers
 {
@@ -17,6 +19,8 @@ namespace Unitflix.Server.Managers
 
         private EmailOptions _emailOptions;
 
+        private ApplicationDbContext _dbContext;
+
         #endregion
 
         #region Constructor
@@ -24,9 +28,11 @@ namespace Unitflix.Server.Managers
         /// <summary>
         /// Default Constructor
         /// </summary>
-        public EmailManager(IOptions<EmailOptions> emailOptions)
+        public EmailManager(IOptions<EmailOptions> emailOptions,
+            ApplicationDbContext dbContext)
         {
             _emailOptions = emailOptions.Value;
+            _dbContext = dbContext;
         }
 
         #endregion
@@ -39,13 +45,37 @@ namespace Unitflix.Server.Managers
         /// <returns></returns>
         public async Task SendEmail(string email, string subject, string message)
         {
-            SmtpClient client = new SmtpClient();
-            client.Connect(_emailOptions.SmtpServer, _emailOptions.SmtpPort);
-            client.Authenticate(_emailOptions.Email, _emailOptions.Password);
+            //Getting an email configuration
+            EmailConfiguration? configuration = _dbContext.EmailConfigurations.FirstOrDefault();
 
+            SmtpClient client = new SmtpClient();
             MimeMessage mailMessage = new MimeMessage();
-            mailMessage.From.Add(new MailboxAddress(_emailOptions.Email, _emailOptions.Email));
-            mailMessage.To.Add(new MailboxAddress(email, email));
+
+            string smtpServer;
+            int smtpPort;
+            string adminEmail;
+            string password;
+            // If the configuration is available use that
+            if (configuration != null)
+            {
+                smtpServer = configuration.Host;
+                smtpPort = configuration.Port;
+                adminEmail = configuration.Email;
+                password = configuration.Password;
+            }
+            // Else use the fallback from the appsettings
+            else
+            {
+                smtpServer = _emailOptions.SmtpServer;
+                smtpPort = _emailOptions.SmtpPort;
+                adminEmail = _emailOptions.Email;
+                password = _emailOptions.Password;
+            }
+
+            client.Connect(smtpServer, smtpPort);
+            client.Authenticate(adminEmail, password);
+            mailMessage.From.Add(new MailboxAddress(adminEmail, adminEmail));
+            mailMessage.To.Add(new MailboxAddress(adminEmail, adminEmail));
             mailMessage.Subject = subject;
             BodyBuilder builder = new BodyBuilder();
             builder.TextBody = message;
