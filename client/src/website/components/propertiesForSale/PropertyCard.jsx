@@ -21,8 +21,6 @@ import PropertyTags from "@/website/components/common/PropertyTags.jsx";
 
 const PropertyCard = ({ property }) => {
   const { locations } = useAppContext();
-  console.log(property)
-
   return (
     <Link to={`/property-details/${property?.id}`} reloadDocument className="contents">
       <div

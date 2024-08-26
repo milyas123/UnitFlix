@@ -76,7 +76,7 @@ Email: {contactForm.Email}
 Phone: {contactForm.Phone}
 Message: {contactForm.Message}
 ";
-            await _emailManager.SendEmail(_emailOptions.Email, "Contact Form Submission Received", message);
+            await _emailManager.SendEmail(_emailOptions.Email, "Contact Form Submission Received", message, true);
             return Response.Message("Contact Form has been submitted successfully");
         }
 

@@ -16,21 +16,23 @@ import { FaChevronLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import InfoModal from "@/website/components/addProperty/InfoModal";
 import VerifyOTPModal from "../components/addProperty/VerifyOTPModal";
+import MessageModal from "@/website/components/common/MessageModal.jsx";
+import { MdErrorOutline} from "react-icons/md";
 
 const initialFormData = {
   title: "",
   overview: "",
   tags: "",
   status: "Pre Launch",
-  price: "",
+  price: 0,
   coverImage: "",
-  propertyTypeIndex: 0,
+  propertyType: 1,
   purpose: 0,
-  area: "",
-  beds: "",
-  baths: "",
+  area: 0,
+  beds: 0,
+  baths: 0,
   city: "",
-  location: "",
+  location: 1,
   keyHighlights: [],
   features: [],
   galleryImages: [],
@@ -47,10 +49,12 @@ const AddProperty = () => {
   const [formData, setFormData] = useState(initialFormData);
   const [isInfoModalVisible, setIsInfoModalVisible] = useState(false);
   const [isOTPModalVisible, setIsOTPModalVisible] = useState(false);
+  const [isMessageModalVisible, setIsMessageModalVisible] = useState(false);
   const [propertyData, setPropertyData] = useState({
     propertyId: null,
     email: "",
   });
+  const [errors, setErrors] = useState([]);
 
   const [showKeyHighlightModal, setShowKeyHighlightModal] = useState(false);
   const [editKeyHighlightIndex, setEditKeyHighlightIndex] = useState(null);
@@ -185,7 +189,7 @@ const AddProperty = () => {
     form.append("overview", JSON.stringify(overview));
     form.append("status", formData.status);
     form.append("price", formData.price);
-    form.append("propertyType", formData.propertyTypeIndex);
+    form.append("propertyType", formData.propertyType);
     form.append("purpose", formData.purpose);
     form.append("area", formData.area);
     form.append("beds", formData.beds);
@@ -195,10 +199,9 @@ const AddProperty = () => {
     form.append("keyHighlights", JSON.stringify(formData.keyHighlights));
     form.append("coverImage", formData.coverImage);
     form.append("userDetail", JSON.stringify(formData.userDetail));
-    console.log(formData)
 
     if (formData.galleryImages) {
-      formData.galleryImages.forEach((image, index) => {
+      formData.galleryImages.forEach((image) => {
         form.append(`galleryImages`, image);
       });
     }
@@ -210,24 +213,33 @@ const AddProperty = () => {
         },
       });
 
+      console.log(response)
+
       setPropertyData({
         propertyId: response.data?.data.propertyId,
         email: response.data?.data.email,
       });
 
-      toast.success("Property added successfully!");
       setFormData(initialFormData);
-      setIsInfoModalVisible(true);
+      setIsMessageModalVisible(true);
     } catch (error) {
-      const errors = error.response.data.errors
-      for(let err of errors) {
-        toast.error(err);
-      }
       console.error("Error submitting form", error);
+      setErrors(error.response.data.errors || [error.response.data.error]);
+      setIsMessageModalVisible(true);
     } finally {
       setLoading(false);
     }
   };
+
+  const onMessageModalClose = () => {
+
+    if(errors.length === 0) {
+      setIsInfoModalVisible(true);
+    }
+
+    setIsMessageModalVisible(false);
+    setErrors([]);
+  }
 
   const handleNext = () => {
     setIsInfoModalVisible(false);
@@ -336,6 +348,41 @@ const AddProperty = () => {
           onOtpVerify={onOtpVerify}
         />
       )}
+
+      {
+        isMessageModalVisible && (
+          <MessageModal title={errors && errors.length > 0 ? `Errors (${errors.length})` : 'Request Submitted Successfully'} onClose={onMessageModalClose}>
+            <div className='flex flex-col gap-y-1'>
+              {
+                errors.map((error, index) => {
+                  return (
+                      <div className='flex items-center gap-x-2' key={index}>
+                        <div className='text-red-500'>
+                          <MdErrorOutline />
+                        </div>
+                        <p className='text-red-500'>
+                          {error}
+                        </p>
+                      </div>
+                  )
+                })
+              }
+              {
+                errors.length > 0 ?
+                    <div className="text-smokeyGrey flex items-center gap-x-2">
+                      Please fix the above errors and try again
+                    </div> : <></>
+              }
+              {
+                errors.length === 0 ?
+                    <div className='flex gap-x-2 text-smokeyGrey'>
+                      Request has been captured. Please proceed forward to verify your email via an otp and complete the submission.
+                    </div> : <></>
+              }
+            </div>
+          </MessageModal>
+          )
+      }
     </div>
   );
 };

@@ -17,6 +17,7 @@ import useScrollProgress from "@/hooks/useScrollProgress";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import Spinner from "@/website/components/common/Spinner.jsx";
+import MessageModal from "@/website/components/common/MessageModal.jsx";
 
 const sliderMinValue = 50000;
 const sliderMaxValue = 5000000;
@@ -86,49 +87,49 @@ const LandingPage = () => {
   }, []);
 
   return (
-    <Layout>
-      <div className="relative">
-        <Hero />
-        <div className="absolute -bottom-[22rem] z-[200] w-full md:-bottom-6 xl:-bottom-10">
-          <Filters
-            selectedTab={selectedTab}
-            setSelectedTab={setSelectedTab}
-            sliderMinValue={sliderMinValue}
-            sliderMaxValue={sliderMaxValue}
-            value={value}
-            setValue={setValue}
-            text={text}
-            setText={setText}
-            selectedLocation={selectedLocation}
-            setSelectedLocation={setSelectedLocation}
-            selectedDeveloper={selectedDeveloper}
-            setSelectedDeveloper={setSelectedDeveloper}
-            selectedPropertyType={selectedPropertyType}
-            setSelectedPropertyType={setSelectedPropertyType}
-            handleSearch={handleSearch}
-          />
+    <>
+      <Layout>
+        <div className="relative">
+          <Hero />
+          <div className="absolute -bottom-[22rem] z-[200] w-full md:-bottom-6 xl:-bottom-10">
+            <Filters
+                selectedTab={selectedTab}
+                setSelectedTab={setSelectedTab}
+                sliderMinValue={sliderMinValue}
+                sliderMaxValue={sliderMaxValue}
+                value={value}
+                setValue={setValue}
+                text={text}
+                setText={setText}
+                selectedLocation={selectedLocation}
+                setSelectedLocation={setSelectedLocation}
+                selectedDeveloper={selectedDeveloper}
+                setSelectedDeveloper={setSelectedDeveloper}
+                selectedPropertyType={selectedPropertyType}
+                setSelectedPropertyType={setSelectedPropertyType}
+                handleSearch={handleSearch}
+            />
+          </div>
         </div>
-      </div>
-      <div id="discover-section">
-        {
-          isLoading ?
-              <div className='h-[300px] mt-[300px] md:mt-[0px] flex items-center justify-center pt-[10em]'>
-                <Spinner />
-              </div>
-              :
-              <Discover projects={properties} />
-        }
-      </div>
-      <Help />
-      <AboutUs />
-      <ContactUs />
-      <CTA />
-      <ExperienceAndFeedback />
-
-      <StickyIcons showIcons={showButtons} />
-
-      {showButtons && <ScrollToTop />}
-    </Layout>
+        <div id="discover-section">
+          {
+            isLoading ?
+                <div className='h-[300px] mt-[300px] md:mt-[0px] flex items-center justify-center pt-[10em]'>
+                  <Spinner />
+                </div>
+                :
+                <Discover projects={properties} />
+          }
+        </div>
+        <Help />
+        <AboutUs />
+        <ContactUs />
+        <CTA />
+        <ExperienceAndFeedback />
+        <StickyIcons showIcons={showButtons} />
+        {showButtons && <ScrollToTop />}
+      </Layout>
+    </>
   );
 };
 

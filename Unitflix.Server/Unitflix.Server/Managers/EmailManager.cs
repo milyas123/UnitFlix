@@ -43,7 +43,7 @@ namespace Unitflix.Server.Managers
         /// Sends an email to the specified user
         /// </summary>
         /// <returns></returns>
-        public async Task SendEmail(string email, string subject, string message)
+        public async Task SendEmail(string email, string subject, string message, bool self = false)
         {
             //Getting an email configuration
             EmailConfiguration? configuration = _dbContext.EmailConfigurations.FirstOrDefault();
@@ -75,7 +75,14 @@ namespace Unitflix.Server.Managers
             client.Connect(smtpServer, smtpPort);
             client.Authenticate(adminEmail, password);
             mailMessage.From.Add(new MailboxAddress(adminEmail, adminEmail));
-            mailMessage.To.Add(new MailboxAddress(adminEmail, adminEmail));
+            if(self)
+            {
+                mailMessage.To.Add(new MailboxAddress(adminEmail, adminEmail));
+            } 
+            else
+            {
+                mailMessage.To.Add(new MailboxAddress(email, email));
+            }
             mailMessage.Subject = subject;
             BodyBuilder builder = new BodyBuilder();
             builder.TextBody = message;

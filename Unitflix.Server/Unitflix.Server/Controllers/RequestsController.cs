@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+using Newtonsoft.Json;
+
 using System.Globalization;
 
 using Unitflix.Server.API_DTO;
@@ -169,6 +171,12 @@ namespace Unitflix.Server.Controllers
         [HttpPost("verify")]
         public async Task<ActionResult> VerifyOtp([FromBody] OtpVerifyDTO verifyDTO)
         {
+            Console.WriteLine(JsonConvert.SerializeObject(verifyDTO));
+            if(verifyDTO == null)
+            {
+                return Response.Error("Invalid Data");
+            }
+
             if(string.IsNullOrEmpty(verifyDTO.Email))
             {
                 return Response.Error("Invalid Email");

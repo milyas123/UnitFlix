@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useReducer, useState} from "react";
 import { SquareX } from "lucide-react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
@@ -8,6 +8,8 @@ import { toast } from "react-toastify";
 
 const VerifyOTPModal = ({ propertyData, onClose, onOtpVerify }) => {
   const [otp, setOtp] = useState(Array(6).fill(""));
+
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleChange = (value, index) => {
@@ -36,23 +38,22 @@ const VerifyOTPModal = ({ propertyData, onClose, onOtpVerify }) => {
 
   const handleSubmit = async () => {
     setLoading(true);
+    setError('');
     const otpCode = otp.join("");
     const payload = {
       email: propertyData.email,
       otp: otpCode,
       propertyId: propertyData.propertyId,
     };
-
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_SERVER_URL}/request/verify`,
         payload,
       );
-      toast.success(response.data?.message);
       onOtpVerify();
     } catch (error) {
       console.error("Error verifying OTP", error);
-      toast.error(error.response?.data);
+      setError(error.response.data);
     } finally {
       setLoading(false);
     }
@@ -91,10 +92,16 @@ const VerifyOTPModal = ({ propertyData, onClose, onOtpVerify }) => {
                 />
               ))}
             </div>
+            {
+              error ?
+                  <div className='text-sm text-red-500'>
+                    {error}
+                  </div> : <></>
+            }
             <Button
-              className="rounded-md"
-              onClick={handleSubmit}
-              disabled={loading}
+                className="rounded-md"
+                onClick={handleSubmit}
+                disabled={loading}
             >
               {loading ? "Verifying..." : "Submit"}
             </Button>

@@ -5,7 +5,6 @@ import Delete from "../svgs/Delete";
 import {getIcon} from "@/lib/icons.jsx";
 
 const AddFeaturesAndAmenities = ({ formData, showModal, handleEdit, handleDelete }) => {
-    console.log(formData)
   return (
     <div className="user--addProperty-sectionPadding flex flex-col rounded-xl border border-lightGrey bg-white md:flex-row md:items-start">
       <div className="space-y-2 md:w-[23%]">

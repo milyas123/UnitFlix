@@ -4,11 +4,8 @@ import { AiOutlineDown } from "react-icons/ai";
 
 import { useAppContext } from "@/AppContext";
 
-const propertyCategories = ["Home", "Plot", "Commercial"];
-
 const PropertyInformation = ({ formData, handleChange, handleSelectChange }) => {
   const { locations, propertyTypes } = useAppContext();
-
   return (
     <div className="user--addProperty-sectionPadding flex flex-col rounded-xl border border-lightGrey bg-white md:flex-row md:items-start">
       <h2 className="user--addProperty-headingTextSize whitespace-nowrap md:w-[23%]">
@@ -47,7 +44,7 @@ const PropertyInformation = ({ formData, handleChange, handleSelectChange }) => 
                 className={`flex cursor-pointer items-center gap-x-1 rounded-md border-2 border-mirage border-opacity-0 px-1.5 py-1 transition-all duration-300 ease-in-out hover:border-opacity-100 md:gap-x-0.5 md:px-1 md:py-0.5 lg:gap-x-1 lg:px-1.5 lg:py-1 xl:gap-x-1.5 xl:px-2 xl:py-1.5 2xl:px-3 2xl:py-2 ${
                   formData?.propertyType === type?.id && "bg-mirage text-white"
                 }`}
-                onClick={() => handleSelectChange("propertyTypeIndex", type?.id)}
+                onClick={() => handleSelectChange("propertyType", type?.id)}
               >
                 <Status className={`${formData?.propertyType === type?.id ? "text-white" : "text-black"}`} />
                 <p className="text-[14px] md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:text-[14px]">{type?.name}</p>

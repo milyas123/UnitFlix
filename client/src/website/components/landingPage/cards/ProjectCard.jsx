@@ -8,6 +8,15 @@ const ProjectCard = ({ project, isLimited }) => {
   const textSizes =
     "text-[16px] md:text-[7px] lg:text-[10px] xl:text-[12px] 2xl:text-[15px]";
 
+  const onRegisterInterest = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const footerElement = document.querySelector("footer");
+    if(footerElement) {
+      footerElement.scrollIntoView({behavior: "smooth"});
+    }
+  }
+
   return (
       <Link className='contents' reloadDocument to={`/property-details/${project?.id}`}>
         <div className={`cursor-pointer ${isLimited ? 'w-full md:w-[90%] md:min-w-[150px] md:max-w-[200px] lg:w-[95%] lg:min-w-[225px] lg:max-w-[270px] xl:w-[92%] xl:min-w-[290px] xl:max-w-[320px] 2xl:w-[95%] 2xl:min-w-[345px] 2xl:max-w-[400px]' : 'shadow-lg md:w-[95%] md:max-w-[190px] md:rounded-md lg:w-[99%] lg:max-w-[250px] xl:max-w-[295px] 2xl:max-w-[400px] 2xl:rounded-xl'}`}>
@@ -43,9 +52,7 @@ const ProjectCard = ({ project, isLimited }) => {
                 isLimited ?
                     <></> :
                     <div className="mt-2 flex justify-center md:mt-1.5 lg:mt-2 xl:mt-3 2xl:mt-4">
-                      <Button
-                          className={`font-semibold hover:bg-white hover:text-mirage md:h-2 md:px-2 lg:h-6 lg:px-3 xl:h-7 xl:px-4 2xl:h-8 ${textSizes}`}
-                      >
+                      <Button className={`font-semibold hover:bg-white hover:text-mirage md:h-2 md:px-2 lg:h-6 lg:px-3 xl:h-7 xl:px-4 2xl:h-8 ${textSizes}`} onClick={onRegisterInterest}>
                         Register Your Interest
                       </Button>
                     </div>
