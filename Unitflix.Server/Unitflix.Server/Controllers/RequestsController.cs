@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 using Unitflix.Server.API_DTO;
 using Unitflix.Server.Database;
@@ -171,15 +172,15 @@ namespace Unitflix.Server.Controllers
         [HttpPost("verify")]
         public async Task<ActionResult> VerifyOtp([FromBody] OtpVerifyDTO verifyDTO)
         {
-            Console.WriteLine(JsonConvert.SerializeObject(verifyDTO));
             if(verifyDTO == null)
             {
                 return Response.Error("Invalid Data");
             }
 
-            if(string.IsNullOrEmpty(verifyDTO.Email))
+            Regex emailRegex = new Regex(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+$");
+            if (string.IsNullOrEmpty(verifyDTO.Email) || !emailRegex.IsMatch(verifyDTO.Email))
             {
-                return Response.Error("Invalid Email");
+                return Response.Error("Invalid Email. Email must be of type abc@example.com");
             }
 
             Otp? otpResult = await _dbContext.Otps.Where(otp => otp.Code == verifyDTO.Otp && otp.Email == verifyDTO.Email && otp.PropertyId == verifyDTO.PropertyId).FirstOrDefaultAsync();
@@ -204,6 +205,45 @@ namespace Unitflix.Server.Controllers
                 _dbContext.SaveChanges();
 
                 return Response.Message("Otp Verified Successfully");
+            }
+        }
+
+        /// <summary>
+        /// Re-generates the otp
+        /// </summary>
+        /// <param name="regenerateDTO"></param>
+        /// <returns></returns>
+        [HttpPost("otp/regenerate")]
+        public async Task<ActionResult> RegenerateOTP([FromBody]OTPRegenerateDTO regenerateDTO)
+        {
+            if (regenerateDTO == null)
+            {
+                return Response.Error("Invalid Data");
+            }
+
+            Regex emailRegex = new Regex(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+$");
+            if (string.IsNullOrEmpty(regenerateDTO.Email) || !emailRegex.IsMatch(regenerateDTO.Email))
+            {
+                return Response.Error("Invalid Email. Email must be of type abc@example.com");
+            }
+
+            Otp? existingOTP = await _dbContext.Otps.Where(otp => otp.Email == regenerateDTO.Email && otp.PropertyId == regenerateDTO.PropertyId).FirstOrDefaultAsync();
+
+            if (existingOTP == null)
+            {
+                return Response.Error("No otp found");
+            }
+            else
+            {
+                existingOTP.Code = OtpCodeGenerator.Generate();
+                existingOTP.ExpiresAt = DateTime.Now.AddMinutes(10);
+                _dbContext.Otps.Update(existingOTP);
+                _dbContext.SaveChanges();
+
+                //Sending OTP
+                await _emailManager.SendEmail(existingOTP.Email, "Unitflix OTP Request", $"This is your OTP {existingOTP.Code} code which will expire in 10 Minutes. Verify this to ensure that your request is submitted.");
+
+                return Response.Message("Otp Resend Successfully");
             }
         }
 

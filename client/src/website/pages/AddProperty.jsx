@@ -47,7 +47,7 @@ const AddProperty = () => {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
   const [isInfoModalVisible, setIsInfoModalVisible] = useState(false);
-  const [isOTPModalVisible, setIsOTPModalVisible] = useState(false);
+  const [isOTPModalVisible, setIsOTPModalVisible] = useState(true);
   const [isMessageModalVisible, setIsMessageModalVisible] = useState(false);
   const [propertyData, setPropertyData] = useState({
     propertyId: null,
@@ -294,7 +294,6 @@ const AddProperty = () => {
           handleAddGalleryImage={handleAddGalleryImage}
           handleDeleteGalleryImage={handleDeleteGalleryImage}
         />
-
         <div className="flex items-center justify-end gap-x-3">
           <Button className="rounded-md border-red-700 bg-red-700 hover:border-mirage">
             Cancel

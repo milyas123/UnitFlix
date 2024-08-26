@@ -1,15 +1,31 @@
-import {useReducer, useState} from "react";
+import {useEffect, useReducer, useState} from "react";
 import { SquareX } from "lucide-react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 
 import axios from "axios";
+import Spinner from "@/website/components/common/Spinner.jsx";
 
 const VerifyOTPModal = ({ propertyData, onClose, onOtpVerify }) => {
   const [otp, setOtp] = useState(Array(6).fill(""));
-
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const serverURL = import.meta.env.VITE_SERVER_URL;
+
+  const otpResendLimit = 60;
+  const [otpResendTimer, setOtpResendTimer] = useState(otpResendLimit);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if(otpResendTimer > 0) {
+        setOtpResendTimer(otpResendTimer - 1);
+      }
+    }, 1000)
+    return () => {
+      clearInterval(interval);
+    }
+  }, [otpResendTimer]);
 
   const handleChange = (value, index) => {
     if (value.length > 1) return;
@@ -58,6 +74,29 @@ const VerifyOTPModal = ({ propertyData, onClose, onOtpVerify }) => {
     }
   };
 
+  const handleResendAgain = async () => {
+    setIsLoading(true);
+    try {
+      const response = await axios.post(`${serverURL}/request/otp/regenerate`, {
+        email: propertyData.email,
+        propertyId: propertyData.propertyId,
+      }, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(response);
+      setOtpResendTimer(otpResendLimit);
+    }
+    catch (err) {
+      console.log(err);
+      setError(err.response.data);
+    }
+    finally {
+      setIsLoading(false)
+    }
+  }
+
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="relative flex w-[64rem] items-center justify-between gap-x-7 rounded-xl bg-white p-6">
@@ -90,6 +129,18 @@ const VerifyOTPModal = ({ propertyData, onClose, onOtpVerify }) => {
                   style={{color: "black"}}
                 />
               ))}
+            </div>
+            <div className='flex items-center justify-between w-full text-sm'>
+              <div className='text-smokeyGrey'>
+                Resend Again in {otpResendTimer}s
+              </div>
+              <div className={`transition-all ${otpResendTimer === 0 ? 'text-black cursor-pointer' : 'text-smokeyGrey'}`} onClick={handleResendAgain}>
+                {
+                    isLoading ?
+                      <Spinner className='size-[20px]' /> :
+                      'Resend Again'
+                }
+              </div>
             </div>
             {
               error ?
