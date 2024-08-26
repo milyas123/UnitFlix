@@ -6,14 +6,16 @@ export default function Pagination({
     currentPage,
     paginate
 }) {
-  const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
-
-  const textSize = "2xl:text-[12px] xl:text-[10px] lg:text-[8px] md:text-[6px] text-[5px]";
+    const MAX_PAGES_TO_SHOW = 3;
+    const start = Math.max(currentPage - MAX_PAGES_TO_SHOW, 0);
+    const end = Math.min(currentPage + MAX_PAGES_TO_SHOW, totalPages);
+  const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1).slice(start, end);
+  const textSize = "2xl:text-[12px] xl:text-[10px] lg:text-[8px] md:text-[6px] text-[12px]";
   const iconSize = "2xl:h-[16px] xl:h-[14px] lg:h-[12px] md:h-[10px] h-[9px] lg:mr-[5px] md:mr-[2px] mr-[1px]";
-  const itemPadding = "lg:px-4 md:px-3 px-2 py-2";
+  const itemPadding = "lg:px-4 md:px-3 px-3 py-3";
 
   return (
-    <div className="flex items-center justify-center border-t border-t-mercury bg-white p-6 sm:px-6">
+    <div className="flex items-center justify-center border-t border-t-mercury bg-white p-6 sm:px-2">
       <nav
         className="isolate inline-flex -space-x-px shadow-sm"
         aria-label="Pagination"

@@ -247,17 +247,16 @@ const Properties = ({
                     </>
                 ))}
               </div>
-
-              {pages > 1 && (
-                <div className="mt-16">
-                  <Pagination
+            </>
+          )}
+          {pages > 1 && (
+              <div className="mt-16">
+                <Pagination
                     totalPages={pages}
                     currentPage={currentPage}
                     paginate={paginate}
-                  />
-                </div>
-              )}
-            </>
+                />
+              </div>
           )}
         </div>
       </div>

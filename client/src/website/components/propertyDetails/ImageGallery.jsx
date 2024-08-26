@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { BsArrowUpRight, BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { X } from "lucide-react";
 
@@ -44,7 +44,7 @@ const ImageGallery = ({ imgFiles }) => {
   };
 
   const settings = {
-    infinite: true,
+    infinite: images.length > 1,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -212,20 +212,22 @@ const ImageGallery = ({ imgFiles }) => {
               onClick={() => setModalIsOpen(false)}
             />
             <Slider {...settings}>
-              {images?.map((image, index) => (
-                <div
-                  key={index}
-                  className="h-[350px] md:h-[500px] w-full rounded-sm lg:rounded-lg"
-                >
-                  <LazyLoad className={'size-full'}>
-                    <img
-                        src={image}
-                        className="size-full transform rounded-sm object-cover lg:rounded-lg"
-                        alt=""
-                    />
-                  </LazyLoad>
-                </div>
-              ))}
+              {images?.map((image, index) => {
+                return (
+                    <div
+                        key={index}
+                        className="h-[350px] md:h-[500px] w-full rounded-sm lg:rounded-lg"
+                    >
+                      <LazyLoad className={'size-full'}>
+                        <img
+                            src={image}
+                            className="size-full transform rounded-sm object-cover lg:rounded-lg"
+                            alt=""
+                        />
+                      </LazyLoad>
+                    </div>
+                )
+              })}
             </Slider>
             </div>
           </div>
