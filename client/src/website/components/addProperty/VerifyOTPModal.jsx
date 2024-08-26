@@ -4,7 +4,6 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 
 import axios from "axios";
-import { toast } from "react-toastify";
 
 const VerifyOTPModal = ({ propertyData, onClose, onOtpVerify }) => {
   const [otp, setOtp] = useState(Array(6).fill(""));

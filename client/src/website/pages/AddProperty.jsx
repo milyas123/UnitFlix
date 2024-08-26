@@ -11,7 +11,6 @@ import AddKeyHighlightModal from "@/admin/components/adminAddProject/modals/AddK
 import AddAmenityModal from "@/admin/components/adminAddProject/modals/AddAmenityModal";
 
 import axios from "axios";
-import { toast } from "react-toastify";
 import { FaChevronLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import InfoModal from "@/website/components/addProperty/InfoModal";
