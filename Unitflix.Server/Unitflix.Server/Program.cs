@@ -2,14 +2,20 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+
+using Log = Serilog.Log;
+
 using System.Text;
+
 using Unitflix.Server.AutoMapper;
 using Unitflix.Server.Database;
+using Unitflix.Server.Exceptions;
 using Unitflix.Server.Managers;
 using Unitflix.Server.Models;
 using Unitflix.Server.Options;
 using Unitflix.Server.Seeder;
 using Unitflix.Server.Validators;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -84,6 +90,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
+
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .Enrich.FromLogContext()
+    .CreateLogger();
+
+builder.Host.UseSerilog(Log.Logger);
+
 // Add CORS services
 builder.Services.AddCors(options =>
 {
@@ -123,6 +139,8 @@ app.UseStaticFiles();
 
 // Use CORS
 app.UseCors();
+
+app.UseExceptionHandler();
 
 app.UseAuthentication();
 app.UseAuthorization();

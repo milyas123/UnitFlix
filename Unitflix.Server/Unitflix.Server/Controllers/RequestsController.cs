@@ -1,14 +1,10 @@
 ﻿using AutoMapper;
 
-using FluentValidation.Internal;
 using FluentValidation.Results;
 
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
-using Newtonsoft.Json;
 
 using System.Globalization;
 using System.Text.RegularExpressions;
@@ -44,6 +40,8 @@ namespace Unitflix.Server.Controllers
 
         private PropertyDataManager _dataManager;
 
+        private ILogger<RequestsController> _logger;
+
         #endregion
 
         #region Constructor
@@ -56,7 +54,8 @@ namespace Unitflix.Server.Controllers
             PropertyRequestValidator validator,
             IWebHostEnvironment webHostEnvironment,
             EmailManager emailManager,
-            PropertyDataManager dataManager)
+            PropertyDataManager dataManager,
+            ILogger<RequestsController> logger)
         {
             _dbContext = dbContext;
             _mapper = mapper;
@@ -64,6 +63,7 @@ namespace Unitflix.Server.Controllers
             _webHostEnvironment = webHostEnvironment;
             _emailManager = emailManager;
             _dataManager = dataManager;
+            _logger = logger;
         }
 
         #endregion
@@ -78,6 +78,11 @@ namespace Unitflix.Server.Controllers
         [HttpPost("")]
         public async Task<ActionResult> SubmitRequest([FromForm] PropertyWirteAPIDTO requestData)
         {
+            if (requestData == null)
+            {
+                return Response.Error("Invalid Request Data");
+            }
+
             PropertyWriteDTO writeDTO = _mapper.Map<PropertyWriteDTO>(requestData);
 
             ValidationResult validationResult = await _propertyRequestValidator.ValidateAsync(writeDTO);
@@ -157,7 +162,7 @@ namespace Unitflix.Server.Controllers
             };
             _dbContext.Otps.Add(otp);
             _dbContext.SaveChanges();
-
+            _logger.LogInformation("A property request with property Id {propertyId} has been submitted by a user {name} and email {email} for approval by an Admin. The property is currently not verified", property.Id, userDetail.Name, userDetail.Email);
             //Sending OTP
             await _emailManager.SendEmail(userDetail.Email, "Unitflix OTP Request", $"Hi {userDetail.Name} your property request has been received. This is your OTP {otpCode} code which will expire in 10 Minutes. Verify this to ensure that your request is submitted.");
 
@@ -191,18 +196,17 @@ namespace Unitflix.Server.Controllers
             }
             else
             {
-                //Deleting the OTP
-                _dbContext.Otps.Remove(otpResult);
-
                 Property? property = await _dbContext.Properties.Where(p => p.Id == otpResult.PropertyId).FirstOrDefaultAsync();
 
                 if (property != null)
                 {
+                    //Deleting the OTP
+                    _dbContext.Otps.Remove(otpResult);
                     property.IsVerified = true;
                     _dbContext.Properties.Update(property);
+                    _dbContext.SaveChanges();
+                    _logger.LogInformation("A property request with property Id {propertyId} has been verified by the user with email {email} and is available for admin approval", property.Id, verifyDTO.Email);
                 }
-
-                _dbContext.SaveChanges();
 
                 return Response.Message("Otp Verified Successfully");
             }
@@ -388,6 +392,11 @@ namespace Unitflix.Server.Controllers
         [HttpPut("{id:int}")]
         public async Task<ActionResult> UpdateStatus(int id, [FromBody]StatusUpdateDTO statusUpdate)
         {
+            if (statusUpdate == null)
+            {
+                return Response.Error("Invalid Status Update Data");
+            }
+
             Property? property = await _dbContext
                 .Properties
                 .Where(p => p.Id == id && p.Submission == PropertySubmission.Secondary)
@@ -402,7 +411,7 @@ namespace Unitflix.Server.Controllers
             property.ApprovalStatus = statusUpdate.Status;
             _dbContext.Properties.Update(property);
             _dbContext.SaveChanges();
-
+            _logger.LogInformation("Status of a property request with property Id {propertyId} has been changed by the admin to {status}", property.Id, property.ApprovalStatus.ToString());
             //Sending OTP
             await _emailManager.SendEmail(property.UserDetail.Email, "Unitflix Property Status Update", $"Hi {property.UserDetail.Name}, the status of your request for property {property.Title} status has been updated to {property.ApprovalStatus.ToString()}.");
 

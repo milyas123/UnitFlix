@@ -1,4 +1,4 @@
-import {useEffect, useReducer, useState} from "react";
+import {useEffect, useState} from "react";
 import { SquareX } from "lucide-react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";

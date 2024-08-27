@@ -44,6 +44,11 @@ namespace Unitflix.Server.Controllers
         [HttpPost("contact")]
         public async Task<ActionResult> SubmitForm([FromBody]ContactFormDTO contactForm)
         {
+            if (contactForm == null)
+            {
+                return Response.Error("Invalid Contact Data");
+            }
+
             Regex emailRegex = new Regex(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+$");
             if (string.IsNullOrEmpty(contactForm.Name))
             {

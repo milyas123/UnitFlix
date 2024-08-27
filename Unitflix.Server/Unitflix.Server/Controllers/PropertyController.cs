@@ -45,6 +45,8 @@ namespace Unitflix.Server.Controllers
 
         private PropertyDataManager _dataManager;
 
+        private ILogger<PropertyController> _logger;
+
         #endregion
 
         #region Constructor
@@ -59,7 +61,8 @@ namespace Unitflix.Server.Controllers
             ProjectValidator projectValidator,
             PropertyUpdateValidator propertyUpdateValidator,
             ProjectUpdateValidator projectUpdateValidator,
-            PropertyDataManager dataManager)
+            PropertyDataManager dataManager,
+            ILogger<PropertyController> logger)
         {
             _dbContext = dbContext;
             _mapper = mapper;
@@ -69,6 +72,7 @@ namespace Unitflix.Server.Controllers
             _propertyUpdateValidator = propertyUpdateValidator;
             _projectUpdateValidator = projectUpdateValidator;
             _dataManager = dataManager;
+            _logger = logger;
         }
 
         #endregion
@@ -389,6 +393,11 @@ namespace Unitflix.Server.Controllers
         [HttpPost("create-property")]
         public async Task<ActionResult> CreateProperty([FromForm]PropertyWirteAPIDTO propertyData)
         {
+            if(propertyData == null)
+            {
+                return Response.Error("Invalid Property Data");
+            }
+
             PropertyWriteDTO writeDTO = _mapper.Map<PropertyWriteDTO>(propertyData);
 
             ValidationResult validationResult = await _propertyValidator.ValidateAsync(writeDTO);
@@ -406,7 +415,8 @@ namespace Unitflix.Server.Controllers
             property.IsVerified = true;
             _dbContext.Properties.Add(property);
             _dbContext.SaveChanges();
-
+            _logger.LogInformation("A Property has been Added by Admin With Id {propertyId}", property.Id);
+            
             Overview overview = _mapper.Map<Overview>(writeDTO.Overview);
             overview.PropertyId = property.Id;
             _dbContext.Overviews.Add(overview);
@@ -450,6 +460,8 @@ namespace Unitflix.Server.Controllers
             }
 
             _dbContext.SaveChanges();
+            _logger.LogInformation("Property Overview, Features ({featuresCount}), KeyHighlights ({keyHighlightsCount}) and Images ({galleryImagesCount}) has been uploaded for Property Id {propertyId} by Admin", features.Count, keyHighlights.Count, writeDTO.GalleryImages.Count, property.Id);
+
             return Response.Message("Property Added Successfully");
         }
 
@@ -462,6 +474,11 @@ namespace Unitflix.Server.Controllers
         [HttpPost("create-project")]
         public async Task<ActionResult> CreateProject([FromForm]PropertyWirteAPIDTO propertyData)
         {
+            if (propertyData == null)
+            {
+                return Response.Error("Invalid Project Data");
+            }
+
             PropertyWriteDTO writeDTO = _mapper.Map<PropertyWriteDTO>(propertyData);
 
             ValidationResult validationResult = await _projectValidator.ValidateAsync(writeDTO);
@@ -478,6 +495,7 @@ namespace Unitflix.Server.Controllers
             property.IsVerified = true;
             _dbContext.Properties.Add(property);
             _dbContext.SaveChanges();
+            _logger.LogInformation("A Project has been Added by Admin With Id {propertyId}", property.Id);
 
             Overview overview = _mapper.Map<Overview>(writeDTO.Overview);
             overview.PropertyId = property.Id;
@@ -564,6 +582,7 @@ namespace Unitflix.Server.Controllers
             }
 
             _dbContext.SaveChanges();
+            _logger.LogInformation("Property Overview, Features ({featuresCount}), KeyHighlights ({keyHighlightsCount}), Payment Plan Items ({paymentPlanItemsCount}), Property Item Details ({propertyDetailsCount}) and Images ({galleryImagesCount}) has been uploaded for Project Id {propertyId} by Admin", features.Count, keyHighlights.Count, paymentPlanItems.Count, propertyDetails.Count, writeDTO.GalleryImages.Count, property.Id);
             return Response.Message("Project Added Successfully");
         }
 
@@ -576,6 +595,11 @@ namespace Unitflix.Server.Controllers
         [HttpPut("update-property/{id:int}")]
         public async Task<ActionResult> EditProperty(int id, [FromForm] PropertyUpdateAPIDTO propertyData)
         {
+            if (propertyData == null)
+            {
+                return Response.Error("Invalid Property Data");
+            }
+
             //Getting the property
             Property? property = await _dbContext.Properties.Where(p => p.Id == id).FirstOrDefaultAsync();
 
@@ -683,6 +707,7 @@ namespace Unitflix.Server.Controllers
             }
 
             _dbContext.SaveChanges();
+            _logger.LogInformation("Property with id {propertyId} has been updated. Property Overview, Features ({featuresCount}), KeyHighlights ({keyHighlightsCount}) and Images ({galleryImagesCount}) has been uploaded for Property Id {propertyId} by Admin and Features ({featuresToRemoveCount}), KeyHighlights ({keyHighlightsToRemoveCount}) and Images ({galleryImagesToRemoveCount}) have been removed", property.Id, features.Count, keyHighlights.Count, updateDTO.GalleryImages.Count, property.Id, updateDTO.FeaturesToRemove.Count, updateDTO.KeyHighlightsToRemove.Count, updateDTO.GalleryImagesToRemove.Count);
             return Response.Message("Property Updated Successfully");
 
         }
@@ -696,6 +721,11 @@ namespace Unitflix.Server.Controllers
         [HttpPut("update-project/{id:int}")]
         public async Task<ActionResult> EditProject(int id, [FromForm] PropertyUpdateAPIDTO propertyData)
         {
+            if (propertyData == null)
+            {
+                return Response.Error("Invalid Project Data");
+            }
+
             //Getting the property
             Property? property = await _dbContext.Properties.Where(p => p.Id == id).FirstOrDefaultAsync();
 
@@ -879,6 +909,7 @@ namespace Unitflix.Server.Controllers
             }
 
             _dbContext.SaveChanges();
+            _logger.LogInformation("Project with id {propertyId} has been updated. Project Overview, Features ({featuresCount}), KeyHighlights ({keyHighlightsCount}), Payment Plan Items ({paymentPlanItemsCount}), Property Details ({propertyDetailsCount}) and Images ({galleryImagesCount}) has been uploaded for Project Id {propertyId} by Admin and Features ({featuresToRemoveCount}), KeyHighlights ({keyHighlightsToRemoveCount}), Payment Plan Items To Remove ({paymentPlanItemsToRemoveCount}), Property Details To Remove ({propertyDetailsToRemoveCount}) and Images ({galleryImagesToRemoveCount}) have been removed", property.Id, features.Count, keyHighlights.Count, paymentPlanItems.Count, propertyDetails.Count, updateDTO.GalleryImages.Count, property.Id, updateDTO.FeaturesToRemove.Count, updateDTO.KeyHighlightsToRemove.Count, updateDTO.PaymentPlanItemsToRemove.Count, updateDTO.PropertyDetails.Count, updateDTO.GalleryImagesToRemove.Count);
             return Response.Message("Project Updated Successfully");
 
         }
@@ -926,6 +957,7 @@ namespace Unitflix.Server.Controllers
             });
             _dbContext.Files.RemoveRange(files);
             _dbContext.SaveChanges();
+            _logger.LogInformation("{type} with id {propertyId} has been deleted by the Admin", property.Category == PropertyCategory.Project ? "Project" : "Property", property.Id);
             return Response.Message($"{(property.Category == PropertyCategory.Project ? "Project" : "Property")} deleted successfully");
         }
 

@@ -15,10 +15,10 @@ namespace Unitflix.Server.Seeder
             using (var serviceProvider = provider.CreateAsyncScope())
             {
                 ApplicationDbContext dbContext = serviceProvider.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                ILogger<DeveloperSeeder> logger = serviceProvider.ServiceProvider.GetRequiredService<ILogger<DeveloperSeeder>>();
                 //If no developers exists then add default developers
                 if (dbContext != null && dbContext.Developers.Count() == 0)
                 {
-                    Logger.Log("Inserting Developers");
                     List<Developer> developers = new List<Developer>
                     {
                         new Developer() { Name = "Alice" },
@@ -34,7 +34,7 @@ namespace Unitflix.Server.Seeder
                     };
                     dbContext.Developers.AddRange(developers);
                     dbContext.SaveChanges();
-                    Logger.Log("Developers Inserted Successfully", MessageType.Success);
+                    logger.LogInformation("Default Developers have been inserted into the database");
                 }
             }
         }

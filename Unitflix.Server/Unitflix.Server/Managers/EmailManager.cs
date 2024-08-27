@@ -21,6 +21,8 @@ namespace Unitflix.Server.Managers
 
         private ApplicationDbContext _dbContext;
 
+        private ILogger<EmailManager> _logger;
+
         #endregion
 
         #region Constructor
@@ -29,10 +31,12 @@ namespace Unitflix.Server.Managers
         /// Default Constructor
         /// </summary>
         public EmailManager(IOptions<EmailOptions> emailOptions,
-            ApplicationDbContext dbContext)
+            ApplicationDbContext dbContext,
+            ILogger<EmailManager> logger)
         {
             _emailOptions = emailOptions.Value;
             _dbContext = dbContext;
+            _logger = logger;
         }
 
         #endregion
@@ -91,9 +95,10 @@ namespace Unitflix.Server.Managers
             try
             {
                 await client.SendAsync(mailMessage);
+                _logger.LogInformation("An Email has been sent from {from} to {to}", adminEmail, self ? adminEmail : email);
             } catch(Exception exc)
             {
-                Console.Write(exc);
+                _logger.LogError(exc, "An Exception has occurred when sending an email has been sent from {from} to {to} with message {message}", adminEmail, self ? adminEmail : email, exc.Message);
             }
             finally
             {

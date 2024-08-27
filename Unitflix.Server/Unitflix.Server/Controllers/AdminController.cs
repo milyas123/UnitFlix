@@ -40,6 +40,8 @@ namespace Unitflix.Server.Controllers
 
         private ApplicationDbContext _dbContext;
 
+        private ILogger<AdminController> _logger;
+
         #endregion
 
         #region Constructor
@@ -52,7 +54,8 @@ namespace Unitflix.Server.Controllers
             IMapper mapper,
             EmailConfigurationAddValidator emailConfigurationValidator,
             ApplicationDbContext dbContext,
-            EmailConfigurationUpdateValidator emailConfigurationUpdateValidator)
+            EmailConfigurationUpdateValidator emailConfigurationUpdateValidator,
+            ILogger<AdminController> logger)
         {
             _userManager = userManager;
             _jwtOptions = jwtOptions.Value;
@@ -60,6 +63,7 @@ namespace Unitflix.Server.Controllers
             _emailConfigurationValidator = emailConfigurationValidator;
             _dbContext = dbContext;
             _emailConfigurationUpdateValidator = emailConfigurationUpdateValidator;
+            _logger = logger;
         }
 
         #endregion
@@ -73,6 +77,11 @@ namespace Unitflix.Server.Controllers
         [HttpPost("login")]
         public async Task<ActionResult> Login([FromBody]LoginDTO data)
         {
+            if(data == null)
+            {
+                return Response.Error("Invalid Login Data");
+            }
+
             if(string.IsNullOrEmpty(data.Username))
             {
                 return Response.Error("Invalid Username");
@@ -118,7 +127,7 @@ namespace Unitflix.Server.Controllers
                 claims: authClaims,
                 signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
             );
-
+            _logger.LogInformation("Admin Logged In");
             return Response.Message(new {
                 token = new JwtSecurityTokenHandler().WriteToken(token)
             });
@@ -133,6 +142,11 @@ namespace Unitflix.Server.Controllers
         [HttpPost("email-configuration")]
         public async Task<ActionResult> CreateOrUpdateEmailConfiguration([FromBody]EmailConfigurationWriteDTO writeDTO)
         {
+            if(writeDTO == null)
+            {
+                return Response.Error("Invalid Email Configuration Data");
+            }
+
             EmailConfiguration configuration = _mapper.Map<EmailConfiguration>(writeDTO);
             //Getting an existing configuration
             EmailConfiguration? existingConfiguration = await _dbContext.EmailConfigurations.FirstOrDefaultAsync();
@@ -170,6 +184,7 @@ namespace Unitflix.Server.Controllers
 
                 _dbContext.EmailConfigurations.Update(existingConfiguration);
                 await _dbContext.SaveChangesAsync();
+                _logger.LogInformation("Admin Configuration has been updated to Email: {email}, Host: {host}, Port: {port}", existingConfiguration.Email, existingConfiguration.Host, existingConfiguration.Port);
                 EmailConfigurationReadDTO readDTO = _mapper.Map<EmailConfigurationReadDTO>(existingConfiguration);
                 return Response.Message("Email Configuration Updated Successfully", new { configuration = readDTO });
             }
@@ -184,6 +199,7 @@ namespace Unitflix.Server.Controllers
 
                 _dbContext.EmailConfigurations.Add(configuration);
                 await _dbContext.SaveChangesAsync();
+                _logger.LogInformation("Admin Configuration has been created with information Email: {email}, Host: {host}, Port: {port}", configuration.Email, configuration.Host, configuration.Port);
                 EmailConfigurationReadDTO readDTO = _mapper.Map<EmailConfigurationReadDTO>(configuration);
                 return Response.Message("Email Configuration Added Successfully", new { configuration = readDTO });
             }

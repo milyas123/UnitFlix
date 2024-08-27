@@ -27,23 +27,24 @@ namespace Unitflix.Server.Seeder
                 UserManager<User> userManager = service.ServiceProvider.GetRequiredService<UserManager<User>>();
                 RoleManager<UserRole> roleManager = service.ServiceProvider.GetRequiredService<RoleManager<UserRole>>();
                 IOptions<AdminOptions> adminOptions = service.ServiceProvider.GetRequiredService<IOptions<AdminOptions>>();
+                ILogger<AdminSeeder> logger = service.ServiceProvider.GetRequiredService<ILogger<AdminSeeder>>();
                 if(dbContext != null)
                 {
                     if(dbContext.Roles.Count() == 0)
                     {
-                        Logger.Log("Inserting Role");
+                        logger.LogInformation("Inserting Admin Role as none exists");
                         UserRole role = new UserRole()
                         {
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         };
                         await roleManager.CreateAsync(role);
-                        Logger.Log("Role Inserted Successfully", MessageType.Success);
+                        logger.LogInformation("Admin Role Inserted Successfully");
                     }
 
                     if(dbContext.Users.Count() == 0)
                     {
-                        Logger.Log("Inserting Default Admin Account");
+                        logger.LogInformation("Inserting Default Admin Account");
                         User admin = new User()
                         {
                             Email = "admin@gmail.com",
@@ -55,14 +56,10 @@ namespace Unitflix.Server.Seeder
                             //Adding to the role
                             await userManager.AddToRoleAsync(admin, "Admin");
 
-                            Logger.Log("User Inserted Successfully", MessageType.Success);
+                            logger.LogInformation("Default Admin Account Create Successfully and Added to the Admin Role");
                         } else
                         {
-                            Logger.Log("Error in inserting User", MessageType.Error);
-                            foreach (IdentityError error in result.Errors)
-                            {
-                                Logger.Log(error.Description, MessageType.Error);
-                            }
+                            logger.LogError("Error when adding the default admin account {errors}", result.Errors);
                         }
                     }
                 }

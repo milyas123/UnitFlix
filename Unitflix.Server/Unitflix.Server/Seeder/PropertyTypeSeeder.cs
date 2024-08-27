@@ -13,10 +13,10 @@ namespace Unitflix.Server.Seeder
             using (var serviceProvider = provider.CreateAsyncScope())
             {
                 ApplicationDbContext dbContext = serviceProvider.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                ILogger<PropertyTypeSeeder> logger = serviceProvider.ServiceProvider.GetRequiredService<ILogger<PropertyTypeSeeder>>();
                 //If no property type exists then add default property types
                 if (dbContext != null && dbContext.PropertyTypes.Count() == 0)
                 {
-                    Logger.Log("Inserting Property Types");
                     List<PropertyType> propertyTypes = new List<PropertyType>
                     {
                         new PropertyType() { Name = "Flat" },
@@ -25,7 +25,7 @@ namespace Unitflix.Server.Seeder
                     };
                     dbContext.PropertyTypes.AddRange(propertyTypes);
                     dbContext.SaveChanges();
-                    Logger.Log("Property Types Inserted Successfully", MessageType.Success);
+                    logger.LogInformation("Default Property Types have been inserted into the database");
                 }
             }
         }

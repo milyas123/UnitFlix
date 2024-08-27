@@ -36,7 +36,7 @@ namespace Unitflix.Server.Helpers
                 return new FileSaveResult(){ FileName = fileName, FilePath = path, Url = $"{protocol}://{host}/{DATA_FOLDER}/{fileName}", Type = Path.GetExtension(fileName) };
             } catch(Exception exc)
             {
-                Logger.Log(exc.Message, MessageType.Error);
+                Logger.ConsoleLog(exc.Message, MessageType.Error);
                 return null;
             }
         }
@@ -59,7 +59,7 @@ namespace Unitflix.Server.Helpers
                 }
             } catch(Exception exc)
             {
-                Logger.Log(exc.Message, MessageType.Error);
+                Logger.ConsoleLog(exc.Message, MessageType.Error);
             }
         }
 

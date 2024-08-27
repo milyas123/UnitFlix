@@ -15,10 +15,10 @@ namespace Unitflix.Server.Seeder
             using(var serviceProvider = provider.CreateAsyncScope())
             {
                 ApplicationDbContext dbContext = serviceProvider.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                ILogger<LocationSeeder> logger = serviceProvider.ServiceProvider.GetRequiredService<ILogger<LocationSeeder>>();
                 //If no locations exists then add locations
                 if(dbContext != null && dbContext.Locations.Count() == 0)
                 {
-                    Logger.Log("Inserting Locations");
                     List<Location> dubaiLocations = new List<Location>
                     {
                         new Location() { Name = "Downtown Dubai" },
@@ -49,7 +49,7 @@ namespace Unitflix.Server.Seeder
                     };
                     dbContext.Locations.AddRange(dubaiLocations);
                     dbContext.SaveChanges();
-                    Logger.Log("Locations Inserted Successfully", MessageType.Success);
+                    logger.LogInformation("Default Locations have been inserted into the Database");
                 }
             }
         }
