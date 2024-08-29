@@ -107,14 +107,6 @@ const CustomToolbar = ({ quillRef }) => {
           </select>
         </div>
         <div className="ql-section">
-          <select className="ql-font" defaultValue="comic-sans">
-            <option value="arial">Arial</option>
-            <option value="comic-sans">Comic Sans</option>
-            <option value="courier-new">Courier New</option>
-            <option value="georgia">Georgia</option>
-            <option value="helvetica">Helvetica</option>
-            <option value="lucida">Lucida</option>
-          </select>
           <select className="ql-size">
             {fontSizeArr.map((font, index) => {
               return (
@@ -131,11 +123,6 @@ const CustomToolbar = ({ quillRef }) => {
           <button className="ql-underline"></button>
           <button className="ql-strike"></button>
           <button className="ql-blockquote"></button>
-          <button className="ql-code-block"></button>
-          <button className="ql-link"></button>
-          <button className="ql-image"></button>
-          <select className="ql-color" />
-          <select className="ql-background" />
           <button className="ql-list" value="ordered"></button>
           <button className="ql-list" value="bullet"></button>
           <button className="ql-indent" value="+1">
@@ -144,9 +131,6 @@ const CustomToolbar = ({ quillRef }) => {
           <button className="ql-indent" value="-1">
             Outdent
           </button>
-        </div>
-        <div className="ql-section">
-          <select className="ql-align" />
         </div>
       </span>
     </div>

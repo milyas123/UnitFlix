@@ -16,7 +16,7 @@ const Overview = ({ overviewText, floorPlan, category }) => {
           Overview
         </h1>
       </div>
-      <p className="text-[14px] md:text-[8px] lg:text-[10px] xl:text-[13px] 2xl:text-[16px]" dangerouslySetInnerHTML={{__html: overviewText}}>
+      <p className="text-[14px] md:text-[8px] lg:text-[10px] xl:text-[13px] 2xl:text-[16px] overview" dangerouslySetInnerHTML={{__html: overviewText}}>
       </p>
       {category === 1 && (
         <div className="my-4 flex flex-row items-center justify-between gap-2 md:mb-0 md:mt-2 md:flex-col md:items-start md:justify-start lg:mt-3 2xl:mt-4">

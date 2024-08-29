@@ -16,6 +16,8 @@ using Unitflix.Server.Options;
 using Unitflix.Server.Seeder;
 using Unitflix.Server.Validators;
 using Serilog;
+using Quartz;
+using Unitflix.Server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -90,6 +92,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddQuartz();
+builder.Services.AddQuartzHostedService(opt =>
+{
+    opt.WaitForJobsToComplete = true;
+});
+
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 
@@ -119,6 +127,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+var scheduler = new JobSchedulingService();
+await scheduler.ScheduleService(app.Services);
 
 // Calling the Seeders
 List<Seeder> seeders = new List<Seeder>()

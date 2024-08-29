@@ -23,7 +23,7 @@ namespace Unitflix.Server.Validators
                     string[] allowedExtensions = [];
                     if(fileType == FileType.Image)
                     {
-                        allowedExtensions = [".png", ".jpg", ".jpeg"];
+                        allowedExtensions = [".png", ".jpg", ".jpeg", ".webp"];
                     }
                     else if (fileType == FileType.Pdf)
                     {

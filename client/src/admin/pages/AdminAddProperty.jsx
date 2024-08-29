@@ -238,7 +238,7 @@ const AdminAddProperty = () => {
     form.append("overview", JSON.stringify(overview));
     form.append("status", formData.status);
     form.append("price", formData.price);
-    form.append("propertyType", formData.propertyTypeIndex);
+    form.append("propertyType", formData.propertyType);
     form.append("purpose", formData.purpose);
     form.append("area", formData.area);
     form.append("beds", formData.beds);

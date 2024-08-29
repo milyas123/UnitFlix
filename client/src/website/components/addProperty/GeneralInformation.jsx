@@ -93,7 +93,7 @@ const GeneralInformation = ({ formData, handleChange, handleSelectChange, handle
                     onClick={() => handleStatusClick(status.name)}
                 >
                   <Status
-                      className={`${formData.status.name === status ? "text-white" : "text-black"}`}
+                      className={`${formData.status === status.name ? "text-white" : "text-black"}`}
                       size={25}
                   />
                   <p className="text-[14px]">{status.name}</p>

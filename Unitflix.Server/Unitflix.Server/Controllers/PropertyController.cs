@@ -420,7 +420,16 @@ namespace Unitflix.Server.Controllers
             property.DateAdded = DateTime.Now;
             property.IsVerified = true;
             _dbContext.Properties.Add(property);
-            _dbContext.SaveChanges();
+            try
+            {
+                _dbContext.SaveChanges();
+            }
+            catch(Exception exc)
+            {
+                _logger.LogError(exc, "Exception Occurred when saving the property: {message}", exc.Message);
+                return Response.Error($"Error saving the property: {exc.Message}");
+
+            }
             _logger.LogInformation("A Property has been Added by Admin With Id {propertyId}", property.Id);
             
             Overview overview = _mapper.Map<Overview>(writeDTO.Overview);
@@ -433,39 +442,61 @@ namespace Unitflix.Server.Controllers
             List<KeyHighlight> keyHighlights= _mapper.Map<List<KeyHighlight>>(writeDTO.KeyHighlights);
             _dbContext.KeyHighlights.CreateOrUpdate(keyHighlights, property.Id);
 
-            FileSaveResult? result = await writeDTO.CoverImage.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
+            List<File> newFilesAdded = new List<File>();
 
-            if (result != null)
+            try
             {
-                File file = new File()
-                {
-                    Filename = result.FileName,
-                    Purpose = FilePurpose.Cover,
-                    PropertyId = property.Id,
-                    Url = result.Url,
-                    Type = result.Type
-                };
-                _dbContext.Files.Add(file);
-            }
-
-            foreach(IFormFile galleryImage in writeDTO.GalleryImages)
-            {
-                FileSaveResult? galleryImageResult = await galleryImage.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
-                if (galleryImageResult != null)
+                FileSaveResult? result = await writeDTO.CoverImage.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
+                if (result != null)
                 {
                     File file = new File()
                     {
-                        Filename = galleryImageResult.FileName,
-                        Purpose = FilePurpose.Gallery,
+                        Filename = result.FileName,
+                        Purpose = FilePurpose.Cover,
                         PropertyId = property.Id,
-                        Url = galleryImageResult.Url,
-                        Type = galleryImageResult.Type
+                        Url = result.Url,
+                        Type = result.Type
                     };
+                    newFilesAdded.Add(file);
                     _dbContext.Files.Add(file);
                 }
+
+                foreach (IFormFile galleryImage in writeDTO.GalleryImages)
+                {
+                    FileSaveResult? galleryImageResult = await galleryImage.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
+                    if (galleryImageResult != null)
+                    {
+                        File file = new File()
+                        {
+                            Filename = galleryImageResult.FileName,
+                            Purpose = FilePurpose.Gallery,
+                            PropertyId = property.Id,
+                            Url = galleryImageResult.Url,
+                            Type = galleryImageResult.Type
+                        };
+                        newFilesAdded.Add(file);
+                        _dbContext.Files.Add(file);
+                    }
+                }
+
+                _dbContext.SaveChanges();
+            }
+            catch(Exception exc)
+            {
+                _logger.LogError(exc, "Exception Occurred when saving the property related data: {message}", exc.Message);
+                //Deleting the property we added and returning the error
+                _dbContext.Properties.Remove(property);
+                _dbContext.SaveChanges();
+
+                //Deleting all of the uploaded files from the storage related to the current request
+                foreach(File file in newFilesAdded)
+                {
+                    FileHelpers.DeleteFile(_webHostEnvironment, file.Filename);
+                }
+
+                return Response.Error($"Error saving the property: {exc.Message}");
             }
 
-            _dbContext.SaveChanges();
             _logger.LogInformation("Property Overview, Features ({featuresCount}), KeyHighlights ({keyHighlightsCount}) and Images ({galleryImagesCount}) has been uploaded for Property Id {propertyId} by Admin", features.Count, keyHighlights.Count, writeDTO.GalleryImages.Count, property.Id);
 
             return Response.Message("Property Added Successfully");
@@ -500,7 +531,15 @@ namespace Unitflix.Server.Controllers
             property.DateAdded = DateTime.Now;
             property.IsVerified = true;
             _dbContext.Properties.Add(property);
-            _dbContext.SaveChanges();
+            try
+            {
+                _dbContext.SaveChanges();
+            }
+            catch(Exception exc)
+            {
+                _logger.LogError(exc, "Exception Occurred when saving a project: {message}", exc.Message);
+                return Response.Error($"Error when saving the Project: {exc.Message}");
+            }
             _logger.LogInformation("A Project has been Added by Admin With Id {propertyId}", property.Id);
 
             Overview overview = _mapper.Map<Overview>(writeDTO.Overview);
@@ -519,75 +558,99 @@ namespace Unitflix.Server.Controllers
             List<PropertyDetail> propertyDetails = _mapper.Map<List<PropertyDetail>>(writeDTO.PropertyDetails);
             _dbContext.PropertyDetails.CreateOrUpdate(propertyDetails, property.Id);
 
-            FileSaveResult? result = await writeDTO.CoverImage.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
+            List<File> newAddedFiles = new List<File>();
 
-            if (result != null)
+            try
             {
-                File file = new File()
-                {
-                    Filename = result.FileName,
-                    Purpose = FilePurpose.Cover,
-                    PropertyId = property.Id,
-                    Url = result.Url,
-                    Type = result.Type
-                };
-                _dbContext.Files.Add(file);
-            }
-
-            if(writeDTO.Brochure != null)
-            {
-                FileSaveResult? brochureResult = await writeDTO.Brochure.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
-
-                if (brochureResult != null)
+                FileSaveResult? result = await writeDTO.CoverImage.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
+                if (result != null)
                 {
                     File file = new File()
                     {
-                        Filename = brochureResult.FileName,
-                        Purpose = FilePurpose.Brochure,
+                        Filename = result.FileName,
+                        Purpose = FilePurpose.Cover,
                         PropertyId = property.Id,
-                        Url = brochureResult.Url,
-                        Type = brochureResult.Type
+                        Url = result.Url,
+                        Type = result.Type
                     };
+                    newAddedFiles.Add(file);
                     _dbContext.Files.Add(file);
                 }
-            }
 
-            if (writeDTO.FloorPlan != null)
-            {
-                FileSaveResult? floorPlanResult = await writeDTO.FloorPlan.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
-
-                if (floorPlanResult != null)
+                if (writeDTO.Brochure != null)
                 {
-                    File file = new File()
-                    {
-                        Filename = floorPlanResult.FileName,
-                        Purpose = FilePurpose.Brochure,
-                        PropertyId = property.Id,
-                        Url = floorPlanResult.Url,
-                        Type = floorPlanResult.Type
-                    };
-                    _dbContext.Files.Add(file);
-                }
-            }
+                    FileSaveResult? brochureResult = await writeDTO.Brochure.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
 
-            foreach(IFormFile galleryImage in writeDTO.GalleryImages)
-            {
-                FileSaveResult? galleryImageResult = await galleryImage.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
-                if (galleryImageResult != null)
+                    if (brochureResult != null)
+                    {
+                        File file = new File()
+                        {
+                            Filename = brochureResult.FileName,
+                            Purpose = FilePurpose.Brochure,
+                            PropertyId = property.Id,
+                            Url = brochureResult.Url,
+                            Type = brochureResult.Type
+                        };
+                        newAddedFiles.Add(file);
+                        _dbContext.Files.Add(file);
+                    }
+                }
+
+                if (writeDTO.FloorPlan != null)
                 {
-                    File file = new File()
+                    FileSaveResult? floorPlanResult = await writeDTO.FloorPlan.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
+
+                    if (floorPlanResult != null)
                     {
-                        Filename = galleryImageResult.FileName,
-                        Purpose = FilePurpose.Gallery,
-                        PropertyId = property.Id,
-                        Url = galleryImageResult.Url,
-                        Type = galleryImageResult.Type
-                    };
-                    _dbContext.Files.Add(file);
+                        File file = new File()
+                        {
+                            Filename = floorPlanResult.FileName,
+                            Purpose = FilePurpose.Brochure,
+                            PropertyId = property.Id,
+                            Url = floorPlanResult.Url,
+                            Type = floorPlanResult.Type
+                        };
+                        newAddedFiles.Add(file);
+                        _dbContext.Files.Add(file);
+                    }
                 }
+
+                foreach (IFormFile galleryImage in writeDTO.GalleryImages)
+                {
+                    FileSaveResult? galleryImageResult = await galleryImage.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
+                    if (galleryImageResult != null)
+                    {
+                        File file = new File()
+                        {
+                            Filename = galleryImageResult.FileName,
+                            Purpose = FilePurpose.Gallery,
+                            PropertyId = property.Id,
+                            Url = galleryImageResult.Url,
+                            Type = galleryImageResult.Type
+                        };
+                        newAddedFiles.Add(file);
+                        _dbContext.Files.Add(file);
+                    }
+                }
+
+                _dbContext.SaveChanges();
+            }
+            catch (Exception exc)
+            {
+                _logger.LogError(exc, "Exception Occurred when saving the project related data: {message}", exc.Message);
+                //Deleting the property we added and returning the error
+                _dbContext.Properties.Remove(property);
+                _dbContext.SaveChanges();
+
+                //Deleting all of the uploaded files from the storage related to the current request
+                foreach (File file in newAddedFiles)
+                {
+                    FileHelpers.DeleteFile(_webHostEnvironment, file.Filename);
+                }
+
+                return Response.Error($"Error saving the Project: {exc.Message}");
             }
 
-            _dbContext.SaveChanges();
             _logger.LogInformation("Property Overview, Features ({featuresCount}), KeyHighlights ({keyHighlightsCount}), Payment Plan Items ({paymentPlanItemsCount}), Property Item Details ({propertyDetailsCount}) and Images ({galleryImagesCount}) has been uploaded for Project Id {propertyId} by Admin", features.Count, keyHighlights.Count, paymentPlanItems.Count, propertyDetails.Count, writeDTO.GalleryImages.Count, property.Id);
             return Response.Message("Project Added Successfully");
         }
@@ -640,7 +703,7 @@ namespace Unitflix.Server.Controllers
             //Deleting the specified Features
             if(updateDTO.FeaturesToRemove.Count > 0)
             {
-                List<Feature> featuresToRemove = await _dbContext.Features.Where(f => updateDTO.FeaturesToRemove.Contains(f.Id)).ToListAsync();
+                List<Feature> featuresToRemove = await _dbContext.Features.Where(f => updateDTO.FeaturesToRemove.Contains(f.Id) && f.PropertyId == property.Id).ToListAsync();
                 _dbContext.Features.RemoveRange(featuresToRemove);
             }
 
@@ -650,44 +713,94 @@ namespace Unitflix.Server.Controllers
             //Deleting the specified key highlights
             if (updateDTO.KeyHighlightsToRemove.Count > 0)
             {
-                List<KeyHighlight> keyHighlightsToRemove = await _dbContext.KeyHighlights.Where(key => updateDTO.KeyHighlightsToRemove.Contains(key.Id)).ToListAsync();
+                List<KeyHighlight> keyHighlightsToRemove = await _dbContext.KeyHighlights.Where(key => updateDTO.KeyHighlightsToRemove.Contains(key.Id) && key.PropertyId == property.Id).ToListAsync();
                 _dbContext.KeyHighlights.RemoveRange(keyHighlightsToRemove);
             }
 
             List<KeyHighlight> keyHighlights = _mapper.Map<List<KeyHighlight>>(updateDTO.KeyHighlights);
             _dbContext.KeyHighlights.CreateOrUpdate(keyHighlights, property.Id);
 
-            //If a new cover image is specified we need to delete the previous one
-            if(updateDTO.CoverImage != null)
-            {
-                //Finding the previous Cover Image
-                File? existingFile = await _dbContext.Files.Where(file => file.PropertyId == id && file.Purpose == FilePurpose.Cover).FirstOrDefaultAsync();
+            List<File> newAddedFiles = new List<File>();
+            List<string> filesToDelete = new List<string>();
 
-                if(existingFile != null)
+            try
+            {
+                //If a new cover image is specified we need to delete the previous one
+                if (updateDTO.CoverImage != null)
                 {
-                    FileHelpers.DeleteFile(_webHostEnvironment, existingFile.Filename);
-                    _dbContext.Files.Remove(existingFile);
+                    //Finding the previous Cover Image
+                    File? existingFile = await _dbContext.Files.Where(file => file.PropertyId == id && file.Purpose == FilePurpose.Cover).FirstOrDefaultAsync();
+
+                    if (existingFile != null)
+                    {
+                        filesToDelete.Add(existingFile.Filename);
+                        _dbContext.Files.Remove(existingFile);
+                    }
+
+                    FileSaveResult? result = await updateDTO.CoverImage.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
+
+                    if (result != null)
+                    {
+                        File file = new File()
+                        {
+                            Filename = result.FileName,
+                            Purpose = FilePurpose.Cover,
+                            PropertyId = property.Id,
+                            Url = result.Url,
+                            Type = result.Type
+                        };
+                        newAddedFiles.Add(file);
+                        _dbContext.Files.Add(file);
+                    }
                 }
 
-                FileSaveResult? result = await updateDTO.CoverImage.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
-
-                if (result != null)
+                foreach (IFormFile galleryImage in updateDTO.GalleryImages)
                 {
-                    File file = new File()
+                    FileSaveResult? galleryImageResult = await galleryImage.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
+                    if (galleryImageResult != null)
                     {
-                        Filename = result.FileName,
-                        Purpose = FilePurpose.Cover,
-                        PropertyId = property.Id,
-                        Url = result.Url,
-                        Type = result.Type
-                    };
-                    _dbContext.Files.Add(file);
+                        File file = new File()
+                        {
+                            Filename = galleryImageResult.FileName,
+                            Purpose = FilePurpose.Gallery,
+                            PropertyId = property.Id,
+                            Url = galleryImageResult.Url,
+                            Type = galleryImageResult.Type
+                        };
+                        newAddedFiles.Add(file);
+                        _dbContext.Files.Add(file);
+                    }
+                }
+
+                _dbContext.SaveChanges();
+            }
+            catch(Exception exc)
+            {
+                _logger.LogError(exc, "Exception Occurred when updating the property: {message}", exc.Message);
+
+                //Deleting all of the uploaded files from the storage related to the current request
+                foreach (File file in newAddedFiles)
+                {
+                    FileHelpers.DeleteFile(_webHostEnvironment, file.Filename);
+                }
+
+                return Response.Error($"Error updating the property: {exc.Message}");
+            } 
+
+            // Deleting the files for which there is only 1 occurrence.
+            // Reason for deleting now rather than before is to ensure that new files and data has been saved and only then remove the files
+            // Otherwise these files would not be recoverable
+            if(filesToDelete.Count > 0)
+            {
+                foreach(string file in filesToDelete)
+                {
+                    FileHelpers.DeleteFile(_webHostEnvironment, file);
                 }
             }
 
-            if(updateDTO.GalleryImagesToRemove.Count > 0)
+            if (updateDTO.GalleryImagesToRemove.Count > 0)
             {
-                List<File> galleryImagesToRemove = await _dbContext.Files.Where(file => updateDTO.GalleryImagesToRemove.Contains(file.Id) && file.Purpose == FilePurpose.Gallery).ToListAsync();
+                List<File> galleryImagesToRemove = await _dbContext.Files.Where(file => updateDTO.GalleryImagesToRemove.Contains(file.Id) && file.Purpose == FilePurpose.Gallery && file.PropertyId == property.Id).ToListAsync();
                 galleryImagesToRemove.ForEach(image =>
                 {
                     FileHelpers.DeleteFile(_webHostEnvironment, image.Filename);
@@ -695,24 +808,6 @@ namespace Unitflix.Server.Controllers
                 _dbContext.Files.RemoveRange(galleryImagesToRemove);
             }
 
-            foreach(IFormFile galleryImage in updateDTO.GalleryImages)
-            {
-                FileSaveResult? galleryImageResult = await galleryImage.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
-                if (galleryImageResult != null)
-                {
-                    File file = new File()
-                    {
-                        Filename = galleryImageResult.FileName,
-                        Purpose = FilePurpose.Gallery,
-                        PropertyId = property.Id,
-                        Url = galleryImageResult.Url,
-                        Type = galleryImageResult.Type
-                    };
-                    _dbContext.Files.Add(file);
-                }
-            }
-
-            _dbContext.SaveChanges();
             _logger.LogInformation("Property with id {propertyId} has been updated. Property Overview, Features ({featuresCount}), KeyHighlights ({keyHighlightsCount}) and Images ({galleryImagesCount}) has been uploaded for Property Id {propertyId} by Admin and Features ({featuresToRemoveCount}), KeyHighlights ({keyHighlightsToRemoveCount}) and Images ({galleryImagesToRemoveCount}) have been removed", property.Id, features.Count, keyHighlights.Count, updateDTO.GalleryImages.Count, property.Id, updateDTO.FeaturesToRemove.Count, updateDTO.KeyHighlightsToRemove.Count, updateDTO.GalleryImagesToRemove.Count);
             return Response.Message("Property Updated Successfully");
 
@@ -766,7 +861,7 @@ namespace Unitflix.Server.Controllers
             //Deleting the specified Features
             if (updateDTO.FeaturesToRemove.Count > 0)
             {
-                List<Feature> featuresToRemove = await _dbContext.Features.Where(f => updateDTO.FeaturesToRemove.Contains(f.Id)).ToListAsync();
+                List<Feature> featuresToRemove = await _dbContext.Features.Where(f => updateDTO.FeaturesToRemove.Contains(f.Id) && f.PropertyId == property.Id).ToListAsync();
                 _dbContext.Features.RemoveRange(featuresToRemove);
             }
 
@@ -776,7 +871,7 @@ namespace Unitflix.Server.Controllers
             //Deleting the specified key highlights
             if (updateDTO.KeyHighlightsToRemove.Count > 0)
             {
-                List<KeyHighlight> keyHighlightsToRemove = await _dbContext.KeyHighlights.Where(key => updateDTO.KeyHighlightsToRemove.Contains(key.Id)).ToListAsync();
+                List<KeyHighlight> keyHighlightsToRemove = await _dbContext.KeyHighlights.Where(key => updateDTO.KeyHighlightsToRemove.Contains(key.Id) && key.PropertyId == property.Id).ToListAsync();
                 _dbContext.KeyHighlights.RemoveRange(keyHighlightsToRemove);
             }
 
@@ -786,7 +881,7 @@ namespace Unitflix.Server.Controllers
             //Deleting the specified payment plan items
             if (updateDTO.PaymentPlanItemsToRemove.Count > 0)
             {
-                List<PaymentPlanItem> paymentPlanItemsToRemove = await _dbContext.PaymentPlanItems.Where(item => updateDTO.PaymentPlanItemsToRemove.Contains(item.Id)).ToListAsync();
+                List<PaymentPlanItem> paymentPlanItemsToRemove = await _dbContext.PaymentPlanItems.Where(item => updateDTO.PaymentPlanItemsToRemove.Contains(item.Id) && item.PropertyId == property.Id).ToListAsync();
                 _dbContext.PaymentPlanItems.RemoveRange(paymentPlanItemsToRemove);
             }
 
@@ -796,122 +891,157 @@ namespace Unitflix.Server.Controllers
             //Deleting the specified property details
             if (updateDTO.PropertyDetailsToRemove.Count > 0)
             {
-                List<PropertyDetail> propertyDetailsToRemove = await _dbContext.PropertyDetails.Where(item => updateDTO.PropertyDetailsToRemove.Contains(item.Id)).ToListAsync();
+                List<PropertyDetail> propertyDetailsToRemove = await _dbContext.PropertyDetails.Where(item => updateDTO.PropertyDetailsToRemove.Contains(item.Id) && item.PropertyId == property.Id).ToListAsync();
                 _dbContext.PropertyDetails.RemoveRange(propertyDetailsToRemove);
             }
 
             List<PropertyDetail> propertyDetails = _mapper.Map<List<PropertyDetail>>(updateDTO.PropertyDetails);
             _dbContext.PropertyDetails.CreateOrUpdate(propertyDetails, property.Id);
 
-            //If a new cover image is specified we need to delete the previous one
-            if (updateDTO.CoverImage != null)
+            List<File> newAddedFiles = new List<File>();
+            List<string> filesToDelete = new List<string>();
+
+            try
             {
-                //Finding the previous Cover Image
-                File? existingFile = await _dbContext.Files.Where(file => file.PropertyId == id && file.Purpose == FilePurpose.Cover).FirstOrDefaultAsync();
-
-                if (existingFile != null)
+                //If a new cover image is specified we need to delete the previous one
+                if (updateDTO.CoverImage != null)
                 {
-                    FileHelpers.DeleteFile(_webHostEnvironment, existingFile.Filename);
-                    _dbContext.Files.Remove(existingFile);
-                }
+                    //Finding the previous Cover Image
+                    File? existingFile = await _dbContext.Files.Where(file => file.PropertyId == id && file.Purpose == FilePurpose.Cover).FirstOrDefaultAsync();
 
-                FileSaveResult? result = await updateDTO.CoverImage.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
-
-                if (result != null)
-                {
-                    File file = new File()
+                    if (existingFile != null)
                     {
-                        Filename = result.FileName,
-                        Purpose = FilePurpose.Cover,
-                        PropertyId = property.Id,
-                        Url = result.Url,
-                        Type = result.Type
-                    };
-                    _dbContext.Files.Add(file);
+                        filesToDelete.Add(existingFile.Filename);
+                        _dbContext.Files.Remove(existingFile);
+                    }
+
+                    FileSaveResult? result = await updateDTO.CoverImage.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
+
+                    if (result != null)
+                    {
+                        File file = new File()
+                        {
+                            Filename = result.FileName,
+                            Purpose = FilePurpose.Cover,
+                            PropertyId = property.Id,
+                            Url = result.Url,
+                            Type = result.Type
+                        };
+                        newAddedFiles.Add(file);
+                        _dbContext.Files.Add(file);
+                    }
                 }
+
+                //If a new pdf file is specified for the brochure
+                if (updateDTO.Brochure != null)
+                {
+                    //Finding the previous Cover Image
+                    File? existingFile = await _dbContext.Files.Where(file => file.PropertyId == id && file.Purpose == FilePurpose.Brochure).FirstOrDefaultAsync();
+
+                    if (existingFile != null)
+                    {
+                        filesToDelete.Add(existingFile.Filename);
+                        _dbContext.Files.Remove(existingFile);
+                    }
+
+                    FileSaveResult? result = await updateDTO.Brochure.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
+
+                    if (result != null)
+                    {
+                        File file = new File()
+                        {
+                            Filename = result.FileName,
+                            Purpose = FilePurpose.Brochure,
+                            PropertyId = property.Id,
+                            Url = result.Url,
+                            Type = result.Type
+                        };
+                        newAddedFiles.Add(file);
+                        _dbContext.Files.Add(file);
+                    }
+                }
+
+                //If a new file is specified for the floor plan
+                if (updateDTO.FloorPlan != null)
+                {
+                    //Finding the previous Cover Image
+                    File? existingFile = await _dbContext.Files.Where(file => file.PropertyId == id && file.Purpose == FilePurpose.FloorPlan).FirstOrDefaultAsync();
+
+                    if (existingFile != null)
+                    {
+                        filesToDelete.Add(existingFile.Filename);
+                        _dbContext.Files.Remove(existingFile);
+                    }
+
+                    FileSaveResult? result = await updateDTO.FloorPlan.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
+
+                    if (result != null)
+                    {
+                        File file = new File()
+                        {
+                            Filename = result.FileName,
+                            Purpose = FilePurpose.FloorPlan,
+                            PropertyId = property.Id,
+                            Url = result.Url,
+                            Type = result.Type
+                        };
+                        newAddedFiles.Add(file);
+                        _dbContext.Files.Add(file);
+                    }
+                }
+
+                foreach (IFormFile galleryImage in updateDTO.GalleryImages)
+                {
+                    FileSaveResult? result = await galleryImage.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
+                    if (result != null)
+                    {
+                        File file = new File()
+                        {
+                            Filename = result.FileName,
+                            Purpose = FilePurpose.Gallery,
+                            PropertyId = property.Id,
+                            Url = result.Url,
+                            Type = result.Type
+                        };
+                        newAddedFiles.Add(file);
+                        _dbContext.Files.Add(file);
+                    }
+                }
+
+                _dbContext.SaveChanges();
+            }
+            catch (Exception exc)
+            {
+                _logger.LogError(exc, "Exception Occurred when updating the project: {message}", exc.Message);
+
+                //Deleting all of the uploaded files from the storage related to the current request
+                foreach (File file in newAddedFiles)
+                {
+                    FileHelpers.DeleteFile(_webHostEnvironment, file.Filename);
+                }
+
+                return Response.Error($"Error updating the project: {exc.Message}");
             }
 
-            //If a new pdf file is specified for the brochure
-            if (updateDTO.Brochure != null)
+            // Deleting the files for which there is only 1 occurrence.
+            // Reason for deleting now rather than before is to ensure that new files and data has been saved and only then remove the files
+            // Otherwise these files would not be recoverable
+            if (filesToDelete.Count > 0)
             {
-                //Finding the previous Cover Image
-                File? existingFile = await _dbContext.Files.Where(file => file.PropertyId == id && file.Purpose == FilePurpose.Brochure).FirstOrDefaultAsync();
-
-                if (existingFile != null)
+                foreach (string file in filesToDelete)
                 {
-                    FileHelpers.DeleteFile(_webHostEnvironment, existingFile.Filename);
-                    _dbContext.Files.Remove(existingFile);
-                }
-
-                FileSaveResult? result = await updateDTO.Brochure.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
-
-                if (result != null)
-                {
-                    File file = new File()
-                    {
-                        Filename = result.FileName,
-                        Purpose = FilePurpose.Brochure,
-                        PropertyId = property.Id,
-                        Url = result.Url,
-                        Type = result.Type
-                    };
-                    _dbContext.Files.Add(file);
-                }
-            }
-
-            //If a new Floor Plan file is specified for the brochure
-            if (updateDTO.FloorPlan != null)
-            {
-                //Finding the previous Cover Image
-                File? existingFile = await _dbContext.Files.Where(file => file.PropertyId == id && file.Purpose == FilePurpose.FloorPlan).FirstOrDefaultAsync();
-
-                if (existingFile != null)
-                {
-                    FileHelpers.DeleteFile(_webHostEnvironment, existingFile.Filename);
-                    _dbContext.Files.Remove(existingFile);
-                }
-
-                FileSaveResult? result = await updateDTO.FloorPlan.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
-
-                if (result != null)
-                {
-                    File file = new File()
-                    {
-                        Filename = result.FileName,
-                        Purpose = FilePurpose.FloorPlan,
-                        PropertyId = property.Id,
-                        Url = result.Url,
-                        Type = result.Type
-                    };
-                    _dbContext.Files.Add(file);
+                    FileHelpers.DeleteFile(_webHostEnvironment, file);
                 }
             }
 
             if (updateDTO.GalleryImagesToRemove.Count > 0)
             {
-                List<File> galleryImagesToRemove = await _dbContext.Files.Where(file => updateDTO.GalleryImagesToRemove.Contains(file.Id) && file.Purpose == FilePurpose.Gallery).ToListAsync();
+                List<File> galleryImagesToRemove = await _dbContext.Files.Where(file => updateDTO.GalleryImagesToRemove.Contains(file.Id) && file.Purpose == FilePurpose.Gallery && file.PropertyId == property.Id).ToListAsync();
                 galleryImagesToRemove.ForEach(image =>
                 {
                     FileHelpers.DeleteFile(_webHostEnvironment, image.Filename);
                 });
                 _dbContext.Files.RemoveRange(galleryImagesToRemove);
-            }
-
-            foreach(IFormFile galleryImage in updateDTO.GalleryImages)
-            {
-                FileSaveResult? result = await galleryImage.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
-                if (result != null)
-                {
-                    File file = new File()
-                    {
-                        Filename = result.FileName,
-                        Purpose = FilePurpose.Gallery,
-                        PropertyId = property.Id,
-                        Url = result.Url,
-                        Type = result.Type
-                    };
-                    _dbContext.Files.Add(file);
-                }
             }
 
             _dbContext.SaveChanges();
