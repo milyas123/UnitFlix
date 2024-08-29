@@ -11,6 +11,7 @@ export const AppProvider = ({ children }) => {
   const [locations, setLocations] = useState([]);
   const [developers, setDevelopers] = useState([]);
   const [propertyTypes, setPropertyTypes] = useState([]);
+  const [propertyStatuses, setPropertyStatuses] = useState([]);
   
   const updateSidebarValue = (newValue) => {
     setIsSidebarOpen(newValue);
@@ -19,15 +20,17 @@ export const AppProvider = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [locationsRes, developersRes, propertyTypesRes] = await Promise.all([
+        const [locationsRes, developersRes, propertyTypesRes, propertyStatusRes] = await Promise.all([
           axios.get(`${serverURL}/data/locations`),
           axios.get(`${serverURL}/data/developers`),
           axios.get(`${serverURL}/data/property_types`),
+          axios.get(`${serverURL}/data/property_statuses`)
         ]);
 
         setLocations(locationsRes.data.data);
         setDevelopers(developersRes.data.data);
         setPropertyTypes(propertyTypesRes.data.data);
+        setPropertyStatuses(propertyStatusRes.data.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -44,6 +47,7 @@ export const AppProvider = ({ children }) => {
         locations,
         developers,
         propertyTypes,
+        propertyStatuses
       }}
     >
       {children}

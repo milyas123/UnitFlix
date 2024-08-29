@@ -47,6 +47,19 @@ namespace Unitflix.Server.Validators
                     }
                 });
 
+            RuleFor(writeDTO => writeDTO.Status)
+                .NotEmpty()
+                .WithMessage("Project Status is required")
+                .Custom((status, context) =>
+                {
+                    string category = PropertyCategory.Project.ToString();
+                    //Checking whether any status with this name exists for property
+                    if (!dbContext.PropertyStatuses.Where(p => p.Name.Equals(status) && p.Category == category).Any())
+                    {
+                        context.AddFailure("Invalid Status Provided. No related status found for the project");
+                    }
+                });
+
             RuleFor(writeDTO => writeDTO.DownPayment)
                 .GreaterThan(0)
                 .WithMessage("Down payment must be greater than or equal to 1");

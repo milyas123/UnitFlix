@@ -1,6 +1,6 @@
 ﻿namespace Unitflix.Server.Enums
 {
-    public enum PropertyStatus
+    public enum PropertyApprovalStatus
     {
         Pending,
         Approved,

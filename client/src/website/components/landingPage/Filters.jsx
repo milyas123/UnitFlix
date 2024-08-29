@@ -24,7 +24,7 @@ const Filters = ({
   setSelectedPropertyType,
   handleSearch,
 }) => {
-  const { locations, developers, propertyTypes } = useAppContext();
+  const { locations, developers, propertyTypes, propertyStatuses } = useAppContext();
   const [filtersApplied, setFiltersApplied] = useState(false);
   const navigate = useNavigate();
 

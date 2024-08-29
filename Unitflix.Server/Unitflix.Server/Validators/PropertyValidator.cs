@@ -36,6 +36,19 @@ namespace Unitflix.Server.Validators
                     }
                 });
 
+            RuleFor(writeDTO => writeDTO.Status)
+                .NotEmpty()
+                .WithMessage("Property Status is required")
+                .Custom((status, context) =>
+                {
+                    string category = PropertyCategory.Property.ToString();
+                    //Checking whether any status with this name exists for property
+                    if(!dbContext.PropertyStatuses.Where(p => p.Name.Equals(status) && p.Category == category).Any())
+                    {
+                        context.AddFailure("Invalid Status Provided. No related status found for the property");
+                    }
+                });
+
             RuleFor(writeDTO => writeDTO.Beds)
                 .GreaterThan(0)
                 .WithMessage("Number of beds must be greater than or equal to 1");

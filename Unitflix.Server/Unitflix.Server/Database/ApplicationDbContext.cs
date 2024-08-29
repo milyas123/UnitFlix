@@ -38,6 +38,8 @@ namespace Unitflix.Server.Database
 
         public DbSet<Otp> Otps { get; set; }
 
+        public DbSet<PropertyStatus> PropertyStatuses { get; set; }
+
         #endregion
 
         #region Constructor

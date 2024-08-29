@@ -59,6 +59,19 @@ namespace Unitflix.Server.Validators
                     }
                 });
 
+            RuleFor(writeDTO => writeDTO.Status)
+                .NotEmpty()
+                .WithMessage("Property Status is required")
+                .Custom((status, context) =>
+                {
+                    string category = PropertyCategory.Property.ToString();
+                    //Checking whether any status with this name exists for property
+                    if (!dbContext.PropertyStatuses.Where(p => p.Name.Equals(status) && p.Category == category).Any())
+                    {
+                        context.AddFailure("Invalid Status Provided. No related status found for the property");
+                    }
+                });
+
             RuleForEach(dto => dto.Features)
                 .SetValidator(new FeatureValidator());
 

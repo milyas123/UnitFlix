@@ -39,8 +39,7 @@ const Properties = ({
     currentPage,
     changePage,
 }) => {
-  const { locations, developers, propertyTypes } = useAppContext();
-
+  const { locations, developers, propertyTypes, propertyStatuses } = useAppContext();
   const [isOpen, setIsOpen] = useState(false);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
@@ -49,6 +48,13 @@ const Properties = ({
   const [selectedOption, setSelectedOption] = useState({});
   const [selectedCategory, setSelectedCategory] = useState({});
   const [locationData, setLocationData] = useState(undefined);
+
+  let filteredStatuses = [];
+  if(categoryOption >= 0) {
+    filteredStatuses = propertyStatuses.filter(status => status.category === (categoryOption === 0 ? 'Property' : 'Project'));
+  } else {
+    filteredStatuses = propertyStatuses;
+  }
 
   useEffect(() => {
     if(locations.length > 0 && location > 0) {
@@ -132,25 +138,33 @@ const Properties = ({
           }`}
           id="filters"
         >
+
+          <InfoList
+              heading="Status"
+              count={filteredStatuses?.length}
+              items={filteredStatuses}
+              handleItemClick={(item) => handleItemClick("status", item.name)}
+          />
+
           <InfoList
             heading="Locations"
             count={locations?.length}
             items={locations}
-            handleItemClick={(id) => handleItemClick("location", id)}
+            handleItemClick={(item) => handleItemClick("location", item.id)}
           />
 
           <InfoList
             heading="Developers"
             count={developers.length}
             items={developers}
-            handleItemClick={(id) => handleItemClick("developer", id)}
+            handleItemClick={(item) => handleItemClick("developer", item.id)}
           />
 
           <InfoList
             heading="Types"
             count={propertyTypes.length}
             items={propertyTypes}
-            handleItemClick={(id) => handleItemClick("type", id)}
+            handleItemClick={(item) => handleItemClick("type", item.id)}
           />
         </div>
 

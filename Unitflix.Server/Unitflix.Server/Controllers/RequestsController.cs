@@ -94,7 +94,7 @@ namespace Unitflix.Server.Controllers
 
             Property property = _mapper.Map<Property>(writeDTO);
             property.Developer = null;
-            property.ApprovalStatus = PropertyStatus.Pending;
+            property.ApprovalStatus = PropertyApprovalStatus.Pending;
             property.Submission = PropertySubmission.Secondary;
             property.DateAdded = DateTime.Now;
             property.IsVerified = false;
@@ -317,7 +317,7 @@ namespace Unitflix.Server.Controllers
             if (!string.IsNullOrEmpty(status))
             {
                 int _status = int.Parse(status);
-                PropertyStatus propertyStatus = (PropertyStatus)_status;
+                PropertyApprovalStatus propertyStatus = (PropertyApprovalStatus)_status;
                 properties = properties
                     .Where(p => p.ApprovalStatus == propertyStatus)
                     .ToList();

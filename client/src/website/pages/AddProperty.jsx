@@ -22,7 +22,7 @@ const initialFormData = {
   title: "",
   overview: "",
   tags: "",
-  status: "Pre Launch",
+  status: "",
   price: 0,
   coverImage: "",
   propertyType: 1,
@@ -47,7 +47,7 @@ const AddProperty = () => {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
   const [isInfoModalVisible, setIsInfoModalVisible] = useState(false);
-  const [isOTPModalVisible, setIsOTPModalVisible] = useState(true);
+  const [isOTPModalVisible, setIsOTPModalVisible] = useState(false);
   const [isMessageModalVisible, setIsMessageModalVisible] = useState(false);
   const [propertyData, setPropertyData] = useState({
     propertyId: null,
@@ -70,6 +70,13 @@ const AddProperty = () => {
       [id]: value,
     }));
   };
+
+  const handleStatusChange = (status) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      status: status,
+    }));
+  }
 
   const handleUserDetailsChange = (e) => {
     const { id, value } = e.target;
@@ -267,6 +274,7 @@ const AddProperty = () => {
           handleSelectChange={handleSelectChange}
           handleFileChange={handleFileChange}
           handleRemoveCoverImage={handleRemoveCoverImage}
+          handleStatusClick={handleStatusChange}
         />
         <UserInformation
           formData={formData}

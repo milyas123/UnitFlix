@@ -3,9 +3,11 @@ using Microsoft.Extensions.Options;
 
 using System.Text.RegularExpressions;
 
+using Unitflix.Server.Database;
 using Unitflix.Server.DTOs;
 using Unitflix.Server.Helpers;
 using Unitflix.Server.Managers;
+using Unitflix.Server.Models;
 using Unitflix.Server.Options;
 
 namespace Unitflix.Server.Controllers
@@ -19,6 +21,8 @@ namespace Unitflix.Server.Controllers
 
         private EmailOptions _emailOptions;
 
+        private ApplicationDbContext _dbContext;
+
         #endregion
 
         #region Constructor
@@ -26,10 +30,13 @@ namespace Unitflix.Server.Controllers
         /// <summary>
         /// Default Constructor
         /// </summary>
-        public EmailController(EmailManager emailManager, IOptions<EmailOptions> emailOptions)
+        public EmailController(EmailManager emailManager, 
+            IOptions<EmailOptions> emailOptions,
+            ApplicationDbContext dbContext)
         {
             _emailManager = emailManager;
             _emailOptions = emailOptions.Value;
+            _dbContext = dbContext;
         }
 
         #endregion
@@ -81,6 +88,23 @@ Email: {contactForm.Email}
 Phone: {contactForm.Phone}
 Message: {contactForm.Message}
 ";
+
+            if (contactForm.PropertyId.HasValue)
+            {
+                Property? property = _dbContext.Properties.Where(p => p.Id == contactForm.PropertyId.Value).FirstOrDefault();
+                if(property != null)
+                {
+                    message = @$"{message}
+---------------------------------------
+Property Id: {property.Id}
+Property Title: {property.Title}
+Price: AED {property.Price}
+Purpose: {property.Purpose.ToString()}
+Category: {property.Category.ToString()}
+";
+                }
+            }
+
             await _emailManager.SendEmail(_emailOptions.Email, "Contact Form Submission Received", message, true);
             return Response.Message("Contact Form has been submitted successfully");
         }

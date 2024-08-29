@@ -4,7 +4,6 @@ using FluentValidation.Results;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Microsoft.EntityFrameworkCore;
 
 using System.Globalization;
@@ -88,7 +87,7 @@ namespace Unitflix.Server.Controllers
         {
             List<Property> properties = await _dbContext
                 .Properties
-                .Where(p => p.ApprovalStatus == PropertyStatus.Approved)
+                .Where(p => p.ApprovalStatus == PropertyApprovalStatus.Approved)
                 .Include(property => property.Files.Where(f => f.Purpose == FilePurpose.Cover))
                 .ToListAsync();
             return Response.Message(_dataManager.IncludeData(properties)); 
@@ -104,7 +103,7 @@ namespace Unitflix.Server.Controllers
         {
             List<Property> properties = await _dbContext
                 .Properties
-                .Where(p => p.Id == id && p.ApprovalStatus == PropertyStatus.Approved)
+                .Where(p => p.Id == id && p.ApprovalStatus == PropertyApprovalStatus.Approved)
                 .Include(property => property.Overview)
                 .Include(property => property.Files)
                 .Include(property => property.Features)
@@ -138,7 +137,7 @@ namespace Unitflix.Server.Controllers
             }
             List<Property> properties = await _dbContext
                 .Properties
-                .Where(p => p.location == locationId && p.ApprovalStatus == PropertyStatus.Approved)
+                .Where(p => p.location == locationId && p.ApprovalStatus == PropertyApprovalStatus.Approved)
                 .Include(property => property.Files)
                 .ToListAsync();
 
@@ -160,7 +159,7 @@ namespace Unitflix.Server.Controllers
 
             List<Property> properties = await _dbContext
                 .Properties
-                .Where(p => p.Developer.HasValue && p.Developer.Value == developerId && p.ApprovalStatus == PropertyStatus.Approved)
+                .Where(p => p.Developer.HasValue && p.Developer.Value == developerId && p.ApprovalStatus == PropertyApprovalStatus.Approved)
                 .Include(property => property.Files)
                 .ToListAsync();
 
@@ -182,7 +181,7 @@ namespace Unitflix.Server.Controllers
 
             List<Property> properties = await _dbContext
                 .Properties
-                .Where(p => p.PropertyType == propertyType && p.ApprovalStatus == PropertyStatus.Approved)
+                .Where(p => p.PropertyType == propertyType && p.ApprovalStatus == PropertyApprovalStatus.Approved)
                 .Include(property => property.Files.Where(f => f.Purpose == FilePurpose.Cover))
                 .ToListAsync();
 
@@ -206,7 +205,7 @@ namespace Unitflix.Server.Controllers
 
             List<Property> properties = await _dbContext
                 .Properties
-                .Where(p => p.Category == category && p.ApprovalStatus == PropertyStatus.Approved)
+                .Where(p => p.Category == category && p.ApprovalStatus == PropertyApprovalStatus.Approved)
                 .Include(property => property.Files.Where(f => f.Purpose == FilePurpose.Cover))
                 .ToListAsync();
 
@@ -222,7 +221,7 @@ namespace Unitflix.Server.Controllers
         {
             List<Property> properties = await _dbContext
                 .Properties
-                .Where(p => p.Category == PropertyCategory.Project && p.ApprovalStatus == PropertyStatus.Approved && p.Featured)
+                .Where(p => p.Category == PropertyCategory.Project && p.ApprovalStatus == PropertyApprovalStatus.Approved && p.Featured)
                 .Include(property => property.Files.Where(f => f.Purpose == FilePurpose.Cover))
                 .ToListAsync();
 
@@ -241,6 +240,7 @@ namespace Unitflix.Server.Controllers
             string? location = Request.Query["location"];
             string? category = Request.Query["category"];
             string? developer = Request.Query["developer"];
+            string? status = Request.Query["status"];
             string? minPrice = Request.Query["min"];
             string? maxPrice = Request.Query["max"];
             string? purpose = Request.Query["purpose"];
@@ -253,7 +253,7 @@ namespace Unitflix.Server.Controllers
 
             List<Property> properties = await _dbContext
                 .Properties
-                .Where(property => property.ApprovalStatus == PropertyStatus.Approved)
+                .Where(property => property.ApprovalStatus == PropertyApprovalStatus.Approved)
                 .Include(property => property.Files)
                 .ToListAsync();
 
@@ -304,6 +304,12 @@ namespace Unitflix.Server.Controllers
                 int _developer = int.Parse(developer);
                 properties = properties
                     .Where(p => p.Developer == _developer)
+                    .ToList();
+            }
+
+            if(!string.IsNullOrEmpty(status)) {
+                properties = properties
+                    .Where(p => p.Status.Equals(status))
                     .ToList();
             }
 
@@ -409,7 +415,7 @@ namespace Unitflix.Server.Controllers
 
             Property property = _mapper.Map<Property>(writeDTO);
             property.Developer = null;
-            property.ApprovalStatus = PropertyStatus.Approved;
+            property.ApprovalStatus = PropertyApprovalStatus.Approved;
             property.Submission = PropertySubmission.Primary;
             property.DateAdded = DateTime.Now;
             property.IsVerified = true;
@@ -489,7 +495,7 @@ namespace Unitflix.Server.Controllers
             }
 
             Property property = _mapper.Map<Property>(writeDTO);
-            property.ApprovalStatus = PropertyStatus.Approved;
+            property.ApprovalStatus = PropertyApprovalStatus.Approved;
             property.Submission = PropertySubmission.Primary;
             property.DateAdded = DateTime.Now;
             property.IsVerified = true;

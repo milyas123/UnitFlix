@@ -8,17 +8,17 @@ const PropertyTags = ({property, details}) => {
     }
 
     return (
-        <div className='flex items-center gap-x-2'>
-            {
-                details && property.category === 1 ?
-                    <Tag color={'purple'} text={property.status}>
-                    </Tag> : <></>
-            }
+        <div className='flex items-center flex-wrap gap-2'>
             {
                 property.featured && !details ?
                     <Tag textColor={'white'} color={'#EB6753'}>
                         <FeaturedIcon className={'h-[20px] md:h-[16px] lg:h-[18px] xl:h-[19px] 2xl:h-[20px]'} /> FEATURED
                     </Tag>: <></>
+            }
+            {
+                details ?
+                    <Tag color={property.propertyStatus ? property.propertyStatus.color : 'purple'} text={property.status}></Tag> :
+                    <Tag color={property.propertyStatus ? property.propertyStatus.color : 'purple'} textColor={'white'} text={property.status}></Tag>
             }
             {
                 details ?

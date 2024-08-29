@@ -1,6 +1,8 @@
 ﻿using Unitflix.Server.Enums;
 using Unitflix.Server.Models;
 
+using PropertyApprovalStatus = Unitflix.Server.Enums.PropertyApprovalStatus;
+
 namespace Unitflix.Server.DTOs
 {
     public class PropertyWriteDTO
@@ -23,7 +25,7 @@ namespace Unitflix.Server.DTOs
 
         public int PropertyType { get; set; }
 
-        public PropertyStatus ApprovalStatus { get; set; }
+        public PropertyApprovalStatus ApprovalStatus { get; set; }
 
         public int? Developer { get; set; }
 

@@ -1,5 +1,6 @@
 ﻿using Unitflix.Server.Enums;
 using Unitflix.Server.Models;
+using PropertyApprovalStatus = Unitflix.Server.Enums.PropertyApprovalStatus;
 
 using File = Unitflix.Server.Models.File;
 
@@ -27,7 +28,7 @@ namespace Unitflix.Server.DTOs
 
         public int PropertyType { get; set; }
 
-        public PropertyStatus ApprovalStatus { get; set; }
+        public PropertyApprovalStatus ApprovalStatus { get; set; }
 
         public int? Developer { get; set; }
 
@@ -68,5 +69,7 @@ namespace Unitflix.Server.DTOs
         public Developer PropertyDeveloper { get; set; }
 
         public PropertyType Type { get; set; }
+
+        public PropertyStatusReadDTO PropertyStatus { get; set; }
     }
 }

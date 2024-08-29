@@ -18,7 +18,7 @@ const initialFormData = {
   title: "",
   tags: "",
   overview: "",
-  status: "Pre Launch",
+  status: "",
   price: 0,
   coverImage: "",
   propertyType: 1,
@@ -310,6 +310,7 @@ const AdminAddProperty = () => {
         handleSelectChange={handleSelectChange}
         handleFileChange={handleFileChange}
         handleRemoveCoverImage={handleRemoveCoverImage}
+        handleStatusClick={status => handleSelectChange('status', status)}
       />
       <PropertyInformation
         formData={formData}

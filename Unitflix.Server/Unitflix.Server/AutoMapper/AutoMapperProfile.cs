@@ -92,6 +92,7 @@ namespace Unitflix.Server.AutoMapper
             CreateMap<UserDetailWriteDTO, UserDetail>();
             CreateMap<EmailConfigurationWriteDTO, EmailConfiguration>();
             CreateMap<EmailConfiguration, EmailConfigurationReadDTO>();
+            CreateMap<PropertyStatus, PropertyStatusReadDTO>();
         }
 
         #endregion

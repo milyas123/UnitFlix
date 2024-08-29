@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+
+using Microsoft.AspNetCore.Mvc;
 
 using Unitflix.Server.Database;
+using Unitflix.Server.DTOs;
 using Unitflix.Server.Helpers;
 using Unitflix.Server.Models;
 
@@ -13,6 +16,8 @@ namespace Unitflix.Server.Controllers
 
         private ApplicationDbContext _dbContext;
 
+        private IMapper _mapper;
+
         #endregion
 
         #region Constructor
@@ -20,9 +25,11 @@ namespace Unitflix.Server.Controllers
         /// <summary>
         /// Default Constructor
         /// </summary>
-        public DataController(ApplicationDbContext dbContext)
+        public DataController(ApplicationDbContext dbContext,
+            IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
         #endregion
@@ -60,6 +67,17 @@ namespace Unitflix.Server.Controllers
         {
             List<PropertyType> propertyTypes = _dbContext.PropertyTypes.ToList();
             return Response.Message(propertyTypes);
+        }
+
+        /// <summary>
+        /// Gets a list of property statuses from the database
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("property_statuses")]
+        public JsonResult GetPropertyStatuses()
+        {
+            List<PropertyStatus> propertyStatuses = _dbContext.PropertyStatuses.ToList();
+            return Response.Message(_mapper.Map<List<PropertyStatusReadDTO>>(propertyStatuses));
         }
 
         #endregion

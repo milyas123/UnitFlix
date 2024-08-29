@@ -6,10 +6,13 @@ import TextEditor from "../common/TextEditor";
 import { Input } from "@/website/components/ui/input";
 import Status from "@/website/components/svgs/Status";
 import Delete from "@/website/components/svgs/Delete";
+import {useAppContext} from "@/AppContext.jsx";
 
-const statuses = ["Pre Launch", "Secondary", "Ready to Move In"];
 
 const ProjectGeneralInformation = ({ formData, handleChange, handleSelect, handleFileChange }) => {
+
+  const {propertyStatuses} = useAppContext();
+
   const handleStatusClick = (status) => {
     handleSelect("status", status);
   };
@@ -67,19 +70,19 @@ const ProjectGeneralInformation = ({ formData, handleChange, handleSelect, handl
         <div className="w-full space-y-2.5">
           <label className="text-[16px] font-semibold">Status</label>
           <div className="flex items-center justify-start gap-5">
-            {statuses.map((status) => (
+            {propertyStatuses.filter(status => status.category === 'Project').map((status) => (
                 <div
-                    key={status}
+                    key={status.id}
                     className={`flex cursor-pointer items-center gap-x-1.5 rounded-md border-2 border-mirage border-opacity-0 px-3 py-2 transition-all duration-300 ease-in-out hover:border-opacity-100 ${
-                        formData.status === status && "bg-mirage text-white"
+                        formData.status === status.name && "bg-mirage text-white"
                     }`}
-                    onClick={() => handleStatusClick(status)}
+                    onClick={() => handleStatusClick(status.name)}
                 >
                   <Status
-                      className={`${formData.status === status ? "text-white" : "text-black"}`}
+                      className={`${formData.status === status.name ? "text-white" : "text-black"}`}
                       size={25}
                   />
-                  <p className="text-[14px]">{status}</p>
+                  <p className="text-[14px]">{status.name}</p>
                 </div>
             ))}
           </div>

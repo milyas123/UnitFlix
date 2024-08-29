@@ -4,18 +4,9 @@ import {Link} from "react-router-dom";
 import LazyLoad from 'react-lazyload';
 import PropertyTags from "@/website/components/common/PropertyTags.jsx";
 
-const ProjectCard = ({ project, isLimited }) => {
+const ProjectCard = ({ project, isLimited, onRegisterInterest }) => {
   const textSizes =
     "text-[16px] md:text-[7px] lg:text-[10px] xl:text-[12px] 2xl:text-[15px]";
-
-  const onRegisterInterest = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const footerElement = document.querySelector("footer");
-    if(footerElement) {
-      footerElement.scrollIntoView({behavior: "smooth"});
-    }
-  }
 
   return (
       <Link className='contents' reloadDocument to={`/property-details/${project?.id}`}>
@@ -34,25 +25,33 @@ const ProjectCard = ({ project, isLimited }) => {
             <div
                 className={`absolute z-[300] bg-white px-3 py-4 md:p-2 lg:p-3 2xl:p-3.5 ${isLimited ? 'border border-lightGrey bottom-0 left-0 right-0 rounded-lg' : 'rounded-xl md:rounded-md lg:rounded-lg 2xl:rounded-xl shadow-lg -bottom-[90px] md:-bottom-16 lg:-bottom-14 xl:-bottom-16 2xl:-bottom-24 left-4 right-4 md:left-2 md:right-2 lg:left-3.5 lg:right-3.5 xl:left-5 xl:right-5 2xl:left-6 2xl:right-6'}`}>
               <h2
-                  className={`mb-1.5 text-center font-semibold md:mb-0.5 lg:mb-1 xl:mb-1.5 2xl:mb-2 ${textSizes}`}
+                  className={`mb-1.5 ${isLimited ? 'text-left' : "text-center"} font-semibold md:mb-0.5 lg:mb-1 xl:mb-1.5 2xl:mb-2 ${textSizes}`}
               >
                 {project?.title}
               </h2>
-              <p className={`text-center ${textSizes}`}>
+              <p className={`${isLimited ? 'text-left' : 'text-center'} ${textSizes}`}>
                 {
                   project?.tags
                 }
               </p>
-              <p
-                  className={`mt-1.5 text-center font-semibold text-gray-700 md:mt-0.5 lg:mt-1 xl:mt-1.5 2xl:mt-2 ${textSizes}`}
-              >
-                Starting From <br/> {formatCurrency(project?.price)}
-              </p>
+              {
+                isLimited ?
+                    <p className={`mt-1.5 text-center font-semibold text-gray-700 md:mt-0.5 lg:mt-1 xl:mt-1.5 2xl:mt-2 ${textSizes} flex flex-col items-start`} >
+                      <p>Starting From</p> <p className='text-mirage text-[20px] font-bold md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[22px]'>{formatCurrency(project?.price)}</p>
+                    </p> :
+                    <p
+                        className={`mt-1.5 text-center font-semibold text-gray-700 md:mt-0.5 lg:mt-1 xl:mt-1.5 2xl:mt-2 ${textSizes}`}
+                    >
+                      Starting From <br/> {formatCurrency(project?.price)}
+                    </p>
+              }
               {
                 isLimited ?
                     <></> :
                     <div className="mt-2 flex justify-center md:mt-1.5 lg:mt-2 xl:mt-3 2xl:mt-4">
-                      <Button className={`font-semibold hover:bg-white hover:text-mirage md:h-2 md:px-2 lg:h-6 lg:px-3 xl:h-7 xl:px-4 2xl:h-8 ${textSizes}`} onClick={onRegisterInterest}>
+                      <Button
+                          className={`font-semibold hover:bg-white hover:text-mirage md:h-2 md:px-2 lg:h-6 lg:px-3 xl:h-7 xl:px-4 2xl:h-8 ${textSizes}`}
+                          onClick={onRegisterInterest}>
                         Register Your Interest
                       </Button>
                     </div>

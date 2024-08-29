@@ -43,7 +43,7 @@ const PropertyCard = ({ property }) => {
               modules={[Pagination, Navigation]}
               pagination={{clickable: true}}
               navigation={true}
-              className="h-[350px] md:h-[160px] lg:h-[180px] xl:h-[200px] 2xl:h-[300px]"
+              className="h-[320px] md:h-[160px] lg:h-[180px] xl:h-[200px] 2xl:h-[300px]"
               style={{
                 "--swiper-navigation-size": "16px",
                 "--swiper-navigation-color": "#FFFFFF",

@@ -127,6 +127,7 @@ List<Seeder> seeders = new List<Seeder>()
     new DeveloperSeeder(),
     new PropertyTypeSeeder(),
     new AdminSeeder(),
+    new PropertyStatusSeeder(),
 };
 
 seeders.ForEach(seeder =>

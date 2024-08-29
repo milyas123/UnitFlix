@@ -23,7 +23,7 @@ const initialFormData = {
   title: "",
   tags: "",
   overview: "",
-  status: "Pre Launch",
+  status: "",
   featured: true,
   price: "",
   propertyType: 1,

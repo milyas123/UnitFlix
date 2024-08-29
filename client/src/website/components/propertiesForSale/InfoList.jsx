@@ -30,18 +30,21 @@ const InfoList = ({ heading, count, items, handleItemClick }) => {
                   : "translateY(-10px)",
             }}
           >
-            <span className="cursor-pointer transition-all duration-300 ease-in-out hover:underline" onClick={() => handleItemClick(item.id)}>
+            <span className="cursor-pointer transition-all duration-300 ease-in-out hover:underline" onClick={() => handleItemClick(item)}>
               {item.name}
             </span>
           </div>
         ))}
       </div>
-      <Button
-        onClick={handleViewAll}
-        className="w-full rounded-lg uppercase hover:bg-white hover:text-mirage md:text-[6px] lg:text-[8px] xl:text-[10px] 2xl:text-[12px]"
-      >
-        {showAll ? "Show Less" : `View All ${heading}`}
-      </Button>
+        {
+            count > 3 ?
+                <Button
+                    onClick={handleViewAll}
+                    className="w-full rounded-lg uppercase hover:bg-white hover:text-mirage md:text-[6px] lg:text-[8px] xl:text-[10px] 2xl:text-[12px]"
+                >
+                    {showAll ? "Show Less" : `View All ${heading}`}
+                </Button> : <></>
+        }
     </div>
   );
 };

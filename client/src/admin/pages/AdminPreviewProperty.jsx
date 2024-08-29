@@ -70,7 +70,7 @@ const AdminPreviewProperty = () => {
             floorPlan={property?.files.find((file) => file.purpose === 3)?.url}
           />
           <FeaturesAndAmenities amenities={property?.features} />
-          <ImageGallery imgFiles={property?.files} />
+          <ImageGallery imgFiles={property ? property.files : []} />
         </div>
       </div>
 

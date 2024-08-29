@@ -26,7 +26,7 @@ namespace Unitflix.Server.Models
 
         public int PropertyType { get; set; }
 
-        public PropertyStatus ApprovalStatus { get; set; }  
+        public PropertyApprovalStatus ApprovalStatus { get; set; }  
 
         public int? Developer { get; set; }
 

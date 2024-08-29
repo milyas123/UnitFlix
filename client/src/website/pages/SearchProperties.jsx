@@ -161,51 +161,29 @@ const SearchProperties = () => {
   }, [param]);
 
   const handleItemClick = async (type, id) => {
-    const searchParams = {
-      min:
-        sliderMinValue + (value[0] / 100) * (sliderMaxValue - sliderMinValue),
-      max:
-        sliderMinValue + (value[1] / 100) * (sliderMaxValue - sliderMinValue),
-      page: 1,
-    };
-
-    if (id) {
-      searchParams[type] = id;
-    }
-
-    const queryString = new URLSearchParams(searchParams).toString();
-    navigate(`/search?${queryString}`);
+    searchParams.set('page', 1);
+    searchParams.set(type, id);
+    navigate(`/search?${searchParams.toString()}`);
     navigate(0);
   };
 
   const onSortOptionChange = (option) => {
-    const params = {
-      page: 1,
-      order: option,
-    };
 
-    let category = searchParams.get("category");
-    if (category) {
-      category = parseInt(category);
-      params.category = category;
-    }
+    searchParams.set('page', 1);
+    searchParams.set('order', option);
 
-    const queryString = new URLSearchParams(params).toString();
-    navigate(`/search?${queryString}`);
+    navigate(`/search?${searchParams.toString()}`);
     navigate(0);
   };
 
   const onCategoryChange = (category) => {
-    const searchParams = {
-      page: 1,
-    };
 
     if (category >= 0) {
-      searchParams.category = category;
+      searchParams.set("category", category);
+      searchParams.set('page', 1);
     }
 
-    const queryString = new URLSearchParams(searchParams).toString();
-    navigate(`/search?${queryString}`);
+    navigate(`/search?${searchParams.toString()}`);
     navigate(0);
   };
 

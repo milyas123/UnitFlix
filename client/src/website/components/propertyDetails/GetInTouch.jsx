@@ -50,13 +50,12 @@ const countryCodes = [
   { code: "+234", name: "Nigeria" },
 ];
 
-const GetInTouch = () => {
+const GetInTouch = ({propertyId}) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     contact: "",
     code: '',
-    bio: "",
     message: "",
   });
 
@@ -89,20 +88,19 @@ const GetInTouch = () => {
         name: formData.name,
         email: formData.email,
         phone: formData.code + formData.contact,
-        bio: formData.bio,
         message: formData.message,
+        propertyId: propertyId
       }
       const response = await axios.post(`${serverURL}/email/contact`, payload);
-      console.log("Form submitted successfully:", response.data);
+      console.log(response)
       setFormData({
         name: "",
         email: "",
         code: "",
         contact: "",
-        bio: "",
         message: "",
       });
-      setMessage('Your message has been submitted successfully. We will get back to you promptly')
+      setMessage('Your interest has been registered regarding this property. We will get back to you promptly')
       setStatus('success');
     } catch (error) {
       console.error("Error submitting the form:", error.data);
@@ -165,15 +163,8 @@ const GetInTouch = () => {
                     onChange={handleChange}
                 />
               </div>
-              <Input
-                  type="text"
-                  id="bio"
-                  placeholder="I am "
-                  value={formData.bio}
-                  onChange={handleChange}
-              />
               <Textarea
-                  placeholder="Enter message"
+                  placeholder="I want to buy/rent..."
                   className="md:h-[60px] 2xl:h-[160px]"
                   id="message"
                   value={formData.message}
@@ -185,7 +176,7 @@ const GetInTouch = () => {
                   className="rounded-sm hover:bg-white hover:text-mirage"
                   disabled={loading}
               >
-                {loading ? "Submitting..." : "Submit"}
+                {loading ? "Registering Interest..." : "Register Interest"}
               </Button>
             </form>
           </div>
@@ -213,7 +204,7 @@ const GetInTouch = () => {
         </div>
         {
           message && status === 'success' ?
-              <MessageModal title={status === 'success' ? 'Success' : 'Error'} onClose={onMessageModalClose}>
+              <MessageModal title={status === 'success' ? 'Interest Registered Successfully' : 'Error'} onClose={onMessageModalClose}>
                 <p className='text-smokeyGrey'>{message}</p>
               </MessageModal> : <></>
         }

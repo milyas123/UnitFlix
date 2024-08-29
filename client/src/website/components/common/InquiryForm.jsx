@@ -11,7 +11,7 @@ import MessageModal from "@/website/components/common/MessageModal.jsx";
 
 const serverURL = import.meta.env.VITE_SERVER_URL;
 
-const InquiryForm = () => {
+const InquiryForm = ({propertyId}) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -37,7 +37,12 @@ const InquiryForm = () => {
     setMessage(null);
 
     try {
-      const response = await axios.post(`${serverURL}/email/contact`, formData);
+      const formDataToSubmit = {...formData};
+      if(propertyId) {
+        formDataToSubmit.propertyId = propertyId;
+      }
+
+      const response = await axios.post(`${serverURL}/email/contact`, formDataToSubmit);
       console.log("Form submitted successfully:", response.data);
       setMessage('Your message has been submitted successfully. We will get back to you promptly')
       setStatus('success');
