@@ -15,6 +15,8 @@ import { MdOutlineLocationOn } from "react-icons/md";
 import { formatCurrency } from "@/lib/utils";
 import { useAppContext } from "@/AppContext";
 import PropertyTags from "@/website/components/common/PropertyTags.jsx";
+import LazyLoad from "react-lazyload";
+import SpinnerContainer from "@/website/components/common/SpinnerContainer.jsx";
 
 const PropertyCard = ({ property }) => {
   const { locations } = useAppContext();
@@ -33,34 +35,35 @@ const PropertyCard = ({ property }) => {
           }
         `}</style>
         <div className="property-card">
-          <Swiper
-              slidesPerView={1}
-              spaceBetween={30}
-              modules={[Pagination, Navigation]}
-              pagination={{clickable: true}}
-              navigation={true}
-              className="h-[320px] md:h-[160px] lg:h-[180px] xl:h-[200px] 2xl:h-[300px]"
-              style={{
-                "--swiper-navigation-size": "16px",
-                "--swiper-navigation-color": "#FFFFFF",
-                "--swiper-pagination-color": "#FFFFFF",
-              }}
-          >
-            {property?.files.map((image) => (
-                <SwiperSlide key={image.id} className="relative">
-                    <img
-                        src={image.url}
-                        alt={`${image?.url}`}
-                        className="size-full object-cover"
-                    />
-                  <div className="absolute inset-0 bg-black bg-opacity-50 group-hover:bg-opacity-20 transition-all duration-300 ease-in-out"></div>
-                </SwiperSlide>
-            ))}
-          </Swiper>
+          <LazyLoad className="h-[320px] md:h-[160px] lg:h-[180px] xl:h-[200px] 2xl:h-[300px]" placeholder={<SpinnerContainer />}>
+              <Swiper
+                  slidesPerView={1}
+                  spaceBetween={30}
+                  modules={[Pagination, Navigation]}
+                  pagination={{clickable: true}}
+                  navigation={true}
+                  className="h-[320px] md:h-[160px] lg:h-[180px] xl:h-[200px] 2xl:h-[300px]"
+                  style={{
+                      "--swiper-navigation-size": "16px",
+                      "--swiper-navigation-color": "#FFFFFF",
+                      "--swiper-pagination-color": "#FFFFFF",
+                  }}
+              >
+                  {property?.files.map((image) => (
+                      <SwiperSlide key={image.id} className="relative">
+                          <img
+                              src={image.url}
+                              alt={`${image?.url}`}
+                              className="size-full object-cover"
+                          />
+                          <div className="absolute inset-0 bg-black bg-opacity-50 group-hover:bg-opacity-20 transition-all duration-300 ease-in-out"></div>
+                      </SwiperSlide>
+                  ))}
+              </Swiper>
+          </LazyLoad>
         </div>
         <div className="flex flex-col gap-y-3.5 p-2 md:gap-y-1.5 md:px-2 md:py-1.5 lg:gap-y-2 lg:p-2.5 xl:gap-y-2.5 xl:p-3 2xl:p-[12px]">
-          <div
-              className="flex flex-row flex-wrap font-semibold md:text-[6px] lg:text-[8px] xl:text-[11px] 2xl:text-[13.5px]">
+          <div className="flex flex-row flex-wrap font-semibold md:text-[6px] lg:text-[8px] xl:text-[11px] 2xl:text-[13.5px]">
             {property?.tags}
           </div>
 
@@ -92,7 +95,7 @@ const PropertyCard = ({ property }) => {
             {formatCurrency(property?.price)}
           </p>
         </div>
-        <div className='absolute top-2 left-2 flex items-center gap-2 z-[5]'>
+        <div className='absolute top-2 left-2 flex items-center gap-2 z-[5] w-[92%]'>
           <PropertyTags property={property} />
         </div>
       </div>

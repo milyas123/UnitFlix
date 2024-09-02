@@ -20,7 +20,7 @@ const PaymentPlan = ({ paymentPlanData }) => {
       </h1>
 
       <div className="mt-8 flex flex-row justify-center md:mt-1.5 md:h-auto md:flex-col md:space-y-2 lg:mt-2 xl:mt-3 xl:space-y-4 2xl:mt-4">
-        <div className="flex flex-col items-center gap-y-2 md:gap-y-0 gap-x-0 md:flex-row relative md:h-[200px] lg:h-[250px]">
+        <div className="flex flex-col items-center gap-y-2 md:gap-y-0 gap-x-2 md:flex-row relative md:h-[200px] lg:h-[250px]">
           {
             paymentPlanData.map((paymentPlanItem, index) => {
               return (

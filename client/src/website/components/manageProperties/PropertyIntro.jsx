@@ -1,5 +1,7 @@
 import { LuBadgeCheck } from "react-icons/lu";
 import website from "@/data/website.json";
+import LazyLoad from "react-lazyload";
+import SpinnerContainer from "@/website/components/common/SpinnerContainer.jsx";
 
 const PropertyIntro = () => {
   return (
@@ -31,11 +33,13 @@ const PropertyIntro = () => {
           </div>
         </div>
         <div className="ms-auto md:w-[39%]">
-          <img
-            src={website.managePage.section1.image}
-            className="h-[610px] object-cover md:h-[250px] lg:h-[320px] xl:h-[450px] 2xl:h-[520px]"
-            alt="property-image"
-          />
+          <LazyLoad className="h-[610px] object-cover md:h-[250px] lg:h-[320px] xl:h-[450px] 2xl:h-[520px]" placeholder={<SpinnerContainer />}>
+            <img
+                src={website.managePage.section1.image}
+                className="h-[610px] object-cover md:h-[250px] lg:h-[320px] xl:h-[450px] 2xl:h-[520px]"
+                alt="property-image"
+            />
+          </LazyLoad>
         </div>
       </div>
     </div>

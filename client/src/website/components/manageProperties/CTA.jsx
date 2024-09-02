@@ -1,17 +1,22 @@
 import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
 import website from "@/data/website.json";
+import LazyLoad from "react-lazyload";
+import SpinnerContainer from "@/website/components/common/SpinnerContainer.jsx";
 
 const CTA = () => {
   return (
     <div className="relative m-2 mb-[2.5rem] h-[436px] overflow-hidden rounded-md sm:m-0 md:mb-[4rem] md:h-[210px] lg:mb-[6rem] lg:h-[250px] xl:mb-[7rem] xl:h-[330px] 2xl:mb-[9rem] 2xl:h-[400px]">
-      <img
-        src={website.managePage.section4.backgroundImage}
-        className="h-full w-full object-cover"
-        alt="call-to-action"
-      />
-      <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50" />
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 text-center text-white md:gap-5 lg:gap-7 xl:gap-8 2xl:gap-10">
+        <LazyLoad className="h-full w-full" placeholder={<SpinnerContainer />}>
+            <img
+                src={website.managePage.section4.backgroundImage}
+                className="h-full w-full object-cover"
+                alt="call-to-action"
+            />
+        </LazyLoad>
+        <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"/>
+        <div
+            className="absolute inset-0 flex flex-col items-center justify-center gap-4 text-center text-white md:gap-5 lg:gap-7 xl:gap-8 2xl:gap-10">
         <p className="font-regular text-[12px] md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:text-[15px]">
           - {website.managePage.section4.subHeading}
         </p>

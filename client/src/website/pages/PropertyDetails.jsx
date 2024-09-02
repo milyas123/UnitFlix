@@ -17,7 +17,6 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import useScrollProgress from "@/hooks/useScrollProgress";
 import Spinner from "@/website/components/common/Spinner.jsx";
-import RegisterInterestModal from "@/website/components/common/RegisterInterestModal.jsx";
 
 const PropertyDetails = () => {
   const { id } = useParams();

@@ -2,6 +2,8 @@ import { formatCurrency } from "@/lib/utils";
 import { Button } from "../../ui/button";
 import {Link} from "react-router-dom";
 import PropertyTags from "@/website/components/common/PropertyTags.jsx";
+import LazyLoad from "react-lazyload";
+import SpinnerContainer from "@/website/components/common/SpinnerContainer.jsx";
 
 const ProjectCard = ({ project, isLimited, onRegisterInterest }) => {
   const textSizes =
@@ -12,14 +14,17 @@ const ProjectCard = ({ project, isLimited, onRegisterInterest }) => {
         <div className={`group cursor-pointer ${isLimited ? 'w-full md:w-[90%] md:min-w-[150px] md:max-w-[200px] lg:w-[95%] lg:min-w-[225px] lg:max-w-[270px] xl:w-[92%] xl:min-w-[290px] xl:max-w-[320px] 2xl:w-[95%] 2xl:min-w-[345px] 2xl:max-w-[400px]' : 'shadow-lg md:w-[95%] md:max-w-[190px] md:rounded-md lg:w-[99%] lg:max-w-[250px] xl:max-w-[295px] 2xl:max-w-[400px] 2xl:rounded-xl'}`}>
           <div className={`relative`}>
             <div className={'relative'}>
-              <img
-                  className={`w-full object-cover ${isLimited ? 'rounded-lg h-[505px] md:h-[239px] lg:h-[286px] xl:h-[348.5px] 2xl:h-[469.75px]' : 'rounded-xl  2xl:rounded-xl md:rounded-md lg:rounded-lg  shadow-lg shadow-pastelGrey h-[310px] md:h-[140px] lg:h-[190px] xl:h-[250px] 2xl:h-[310px]'}`}
-                  src={project?.files.find((file) => file.purpose === 0)?.url}
-                  alt="Dubai South"
-              />
-              <div className={`absolute inset-0 bg-black bg-opacity-50 group-hover:bg-opacity-20 transition-all duration-300 ease-in-out ${isLimited ? "rounded-lg" : "rounded-xl  2xl:rounded-xl md:rounded-md lg:rounded-lg"}`}></div>
+              <LazyLoad placeholder={<SpinnerContainer />} className={`w-full ${isLimited ? 'h-[505px] md:h-[239px] lg:h-[286px] xl:h-[348.5px] 2xl:h-[469.75px]' : 'h-[310px] md:h-[140px] lg:h-[190px] xl:h-[250px] 2xl:h-[310px]'}`}>
+                <img loading='lazy'
+                    className={`w-full object-cover ${isLimited ? 'rounded-lg h-[505px] md:h-[239px] lg:h-[286px] xl:h-[348.5px] 2xl:h-[469.75px]' : 'rounded-xl  2xl:rounded-xl md:rounded-md lg:rounded-lg  shadow-lg shadow-pastelGrey h-[310px] md:h-[140px] lg:h-[190px] xl:h-[250px] 2xl:h-[310px]'}`}
+                    src={project?.files.find((file) => file.purpose === 0)?.url}
+                    alt="Dubai South"
+                />
+              </LazyLoad>
+              <div
+                  className={`absolute inset-0 bg-black bg-opacity-50 group-hover:bg-opacity-20 transition-all duration-300 ease-in-out ${isLimited ? "rounded-lg" : "rounded-xl  2xl:rounded-xl md:rounded-md lg:rounded-lg"}`}></div>
             </div>
-            <div className='absolute top-2 left-2 flex items-center gap-2'>
+            <div className='absolute top-2 w-[92%] left-2 flex items-center gap-2'>
               <PropertyTags property={project}/>
             </div>
             <div

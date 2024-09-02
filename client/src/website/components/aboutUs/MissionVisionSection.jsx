@@ -1,5 +1,7 @@
 import ContentCard from "./ContentCard";
 import website from "@/data/website.json";
+import LazyLoad from "react-lazyload";
+import SpinnerContainer from "@/website/components/common/SpinnerContainer.jsx";
 
 const MissionVisionSection = () => {
   return (
@@ -13,17 +15,20 @@ const MissionVisionSection = () => {
           />
         </div>
         <div className="w-full md:w-1/2">
-          <img
-            src={website.aboutPage.section1.image}
-            className="h-[420px] w-full rounded-lg object-cover md:h-[200px] lg:h-[245px] xl:h-[320px] 2xl:h-[360px]"
-            alt=""
-          />
+            <LazyLoad className={"h-[420px] w-full md:h-[200px] lg:h-[245px] xl:h-[320px] 2xl:h-[360px]"} placeholder={<SpinnerContainer />}>
+                <img
+                    src={website.aboutPage.section1.image}
+                    className="h-[420px] w-full rounded-lg object-cover md:h-[200px] lg:h-[245px] xl:h-[320px] 2xl:h-[360px]"
+                    alt=""
+                />
+            </LazyLoad>
         </div>
       </div>
 
-      <div className="flex flex-col items-center gap-y-8 md:flex-row md:gap-x-3.5 md:gap-y-0 lg:gap-x-4 xl:gap-x-5 2xl:gap-x-6">
-        {
-          website.aboutPage.section2.items.map((item, index) => {
+        <div
+            className="flex flex-col items-center gap-y-8 md:flex-row md:gap-x-3.5 md:gap-y-0 lg:gap-x-4 xl:gap-x-5 2xl:gap-x-6">
+            {
+                website.aboutPage.section2.items.map((item, index) => {
             return (
                 <div className="w-full md:w-1/2" key={index}>
                   <ContentCard

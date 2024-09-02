@@ -1,15 +1,19 @@
 import { Button } from "../ui/button";
 import website from "@/data/website.json";
+import LazyLoad from "react-lazyload";
+import SpinnerContainer from "@/website/components/common/SpinnerContainer.jsx";
 
 const Hero = () => {
   return (
     <>
       <div className="relative h-[800px] overflow-hidden md:h-[395px] lg:h-[82vh] lg:max-h-[530px] lg:min-h-[450px] xl:min-h-[625px] xl:h-[100vh] 2xl:min-h-[710px] 2xl:h-[82vh] 2xl:max-h-[800px]">
-        <img
-          src={website.managePage.backgroundImage}
-          className="absolute size-full object-cover object-top"
-          alt=""
-        />
+        <LazyLoad className={"absolute size-full"} placeholder={<SpinnerContainer />}>
+          <img
+              src={website.managePage.backgroundImage}
+              className="absolute size-full object-cover object-top"
+              alt=""
+          />
+        </LazyLoad>
         <div className="absolute inset-0 z-50 bg-black bg-opacity-50"></div>
         <div className="absolute z-50 mx-auto flex size-full items-center justify-center">
           <div className="mx-auto space-y-3 text-center text-white md:w-[76%] md:space-y-2.5 md:text-left lg:space-y-3.5 xl:space-y-4 2xl:space-y-5">

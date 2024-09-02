@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy } from "react";
 
 import Layout from "@/website/Layout";
 import Hero from "@/website/components/landingPage/Hero";
 import Filters from "@/website/components/landingPage/Filters";
 import Discover from "@/website/components/landingPage/Discover";
-import Help from "@/website/components/landingPage/Help";
-import AboutUs from "@/website/components/landingPage/AboutUs";
-import ContactUs from "@/website/components/landingPage/ContactUs";
-import CTA from "@/website/components/landingPage/CTA";
-import ExperienceAndFeedback from "@/website/components/landingPage/ExperienceAndFeedback";
+const Help = lazy(() => import("@/website/components/landingPage/Help"));
+const AboutUs = lazy(() => import("@/website/components/landingPage/AboutUs"));
+const ContactUs = lazy(() => import("@/website/components/landingPage/ContactUs"));
+const CTA = lazy(() => import("@/website/components/landingPage/CTA"));
+const ExperienceAndFeedback = lazy(() => import("@/website/components/landingPage/ExperienceAndFeedback"));
 import ScrollToTop from "@/website/components/common/ScrollToTop";
 import StickyIcons from "@/website/components/common/StickyIcons";
 
@@ -17,6 +17,9 @@ import useScrollProgress from "@/hooks/useScrollProgress";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import Spinner from "@/website/components/common/Spinner.jsx";
+import LazyLoad from "react-lazyload";
+import SpinnerContainer from "@/website/components/common/SpinnerContainer.jsx";
+import {motion} from "framer-motion";
 
 const sliderMinValue = 50000;
 const sliderMaxValue = 5000000;
@@ -85,11 +88,24 @@ const LandingPage = () => {
     fetchProjects();
   }, []);
 
+  const variants = {
+    initial: {opacity: 0, y: 200},
+    inView: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        delay: 0.25,
+        ease: "easeInOut"
+      }
+    },
+  }
+
   return (
     <>
       <Layout>
         <div className="relative">
-          <Hero />
+          <Hero/>
           <div className="absolute -bottom-[22rem] z-[200] w-full md:-bottom-6 xl:-bottom-10">
             <Filters
                 selectedTab={selectedTab}
@@ -107,6 +123,7 @@ const LandingPage = () => {
                 selectedPropertyType={selectedPropertyType}
                 setSelectedPropertyType={setSelectedPropertyType}
                 handleSearch={handleSearch}
+                animate={true}
             />
           </div>
         </div>
@@ -114,23 +131,43 @@ const LandingPage = () => {
           {
             isLoading ?
                 <div className='h-[300px] mt-[300px] md:mt-[0px] flex items-center justify-center pt-[10em]'>
-                  <Spinner />
+                  <Spinner/>
                 </div>
                 :
                 properties.length > 0 ?
-                    <Discover projects={properties} /> : <></>
+                    <Discover projects={properties}/> : <></>
           }
         </div>
-        <Help />
-        <AboutUs />
-        <ContactUs />
-        <CTA />
-        <ExperienceAndFeedback />
-        <StickyIcons showIcons={showButtons} />
-        {showButtons && <ScrollToTop />}
+        <motion.div variants={variants} initial={'initial'} whileInView={'inView'} viewport={{once: true}}>
+          <LazyLoad className='w-full min-h-[200px]' placeholder={<SpinnerContainer/>}>
+            <Help/>
+          </LazyLoad>
+        </motion.div>
+        <motion.div variants={variants} initial={'initial'} whileInView={'inView'} viewport={{once: true}}>
+          <LazyLoad className='w-full min-h-[200px]' placeholder={<SpinnerContainer/>}>
+            <AboutUs/>
+          </LazyLoad>
+        </motion.div>
+        <motion.div variants={variants} initial={'initial'} whileInView={'inView'} viewport={{once: true}}>
+          <LazyLoad className='w-full min-h-[200px]' placeholder={<SpinnerContainer/>}>
+            <ContactUs/>
+          </LazyLoad>
+        </motion.div>
+        <motion.div variants={variants} initial={'initial'} whileInView={'inView'} viewport={{once: true}}>
+          <LazyLoad className='w-full min-h-[200px]' placeholder={<SpinnerContainer/>}>
+            <CTA/>
+          </LazyLoad>
+        </motion.div>
+        <motion.div variants={variants} initial={'initial'} whileInView={'inView'} viewport={{once: true}}>
+          <LazyLoad className='w-full min-h-[200px]' placeholder={<SpinnerContainer/>}>
+            <ExperienceAndFeedback/>
+          </LazyLoad>
+        </motion.div>
+          <StickyIcons showIcons={showButtons}/>
+          {showButtons && <ScrollToTop/>}
       </Layout>
     </>
-  );
+);
 };
 
 export default LandingPage;

@@ -6,6 +6,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import LazyLoad from "react-lazyload";
+import SpinnerContainer from "@/website/components/common/SpinnerContainer.jsx";
 
 const SampleNextArrow = (props) => {
   const { onClick } = props;
@@ -80,7 +81,7 @@ const ImageGallery = ({ imgFiles }) => {
                       className={`h-[300px] overflow-hidden rounded-lg md:h-[120px] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px] ${images && images[1] ? 'md:w-[32%]' : "md:w-[100%]"}`}
                       onClick={() => openModal(0)}
                   >
-                    <LazyLoad className='h-full'>
+                    <LazyLoad className='h-full w-full' placeholder={<SpinnerContainer />}>
                       <img
                           src={images[0]}
                           className="h-full w-full transform rounded-lg object-cover object-center transition-transform duration-300 hover:scale-105"
@@ -95,7 +96,7 @@ const ImageGallery = ({ imgFiles }) => {
                       className="h-[300px] overflow-hidden rounded-lg md:ms-auto md:h-[120px] md:w-[66%] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]"
                       onClick={() => openModal(1)}
                   >
-                    <LazyLoad>
+                    <LazyLoad className='h-full w-full' placeholder={<SpinnerContainer />}>
                       <img
                           src={images[1]}
                           className="h-full w-full transform rounded-lg object-cover object-center transition-transform duration-300 hover:scale-105"
@@ -112,7 +113,7 @@ const ImageGallery = ({ imgFiles }) => {
                       className={`h-[300px] w-full overflow-hidden rounded-lg md:h-[120px] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px] ${images && images[3] && images[4] ? 'md:w-[32%]' : (images[3] ? 'md:w-[50%]' : 'md:w-[100%]')}`}
                       onClick={() => openModal(2)}
                   >
-                    <LazyLoad className='h-full'>
+                    <LazyLoad className='h-full w-full' placeholder={<SpinnerContainer />}>
                       <img
                           src={images[2]}
                           className="h-full w-full transform rounded-lg object-cover object-center transition-transform duration-300 hover:scale-105"
@@ -127,7 +128,7 @@ const ImageGallery = ({ imgFiles }) => {
                       className={`h-[300px] w-full overflow-hidden rounded-lg md:h-[120px] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px] ${images && images[4] ? 'md:w-[32%]' : 'md:w-[50%]'}`}
                       onClick={() => openModal(3)}
                   >
-                    <LazyLoad className="h-full">
+                    <LazyLoad className='h-full w-full' placeholder={<SpinnerContainer />}>
                       <img
                           src={images[3]}
                           className="h-full w-full transform rounded-lg object-cover object-center transition-transform duration-300 hover:scale-105"
@@ -142,7 +143,7 @@ const ImageGallery = ({ imgFiles }) => {
                       className="h-[300px] w-full overflow-hidden rounded-lg md:h-[120px] md:w-[32%] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]"
                       onClick={() => openModal(4)}
                   >
-                    <LazyLoad className="h-full">
+                    <LazyLoad className='h-full w-full' placeholder={<SpinnerContainer />}>
                       <img
                           src={images[4]}
                           className="h-full w-full transform rounded-lg object-cover object-center transition-transform duration-300 hover:scale-105"
@@ -159,7 +160,7 @@ const ImageGallery = ({ imgFiles }) => {
                       className={`h-[300px] w-full overflow-hidden rounded-lg md:h-[120px] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px] ${images && images[6] ? 'md:w-[66%]' : 'md:w-[100%]'}`}
                       onClick={() => openModal(5)}
                   >
-                    <LazyLoad className="h-full">
+                    <LazyLoad className='h-full w-full' placeholder={<SpinnerContainer />}>
                       <img
                           src={images[5]}
                           className="h-full w-full transform rounded-lg object-coverobject-center transition-transform duration-300 hover:scale-105"
@@ -174,7 +175,7 @@ const ImageGallery = ({ imgFiles }) => {
                       className="h-[300px] w-full overflow-hidden rounded-lg md:ms-auto md:h-[120px] md:w-[32%] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]"
                       onClick={() => openModal(6)}
                   >
-                    <LazyLoad className='h-full'>
+                    <LazyLoad className='h-full w-full' placeholder={<SpinnerContainer />}>
                       <img
                           src={images[6]}
                           className="h-full w-full transform rounded-lg object-cover object-center transition-transform duration-300 hover:scale-105"
@@ -191,7 +192,7 @@ const ImageGallery = ({ imgFiles }) => {
                   className="h-[300px] w-full overflow-hidden rounded-lg md:ms-auto md:h-auto md:w-[29%] md:rounded-sm xl:rounded-lg"
                   onClick={() => openModal(7)}
               >
-                <LazyLoad className='h-full'>
+                <LazyLoad className='h-full w-full' placeholder={<SpinnerContainer />}>
                   <img
                       src={images[7]}
                       className="h-full w-full transform rounded-lg object-cover object-center transition-transform duration-300 hover:scale-105"
@@ -218,7 +219,7 @@ const ImageGallery = ({ imgFiles }) => {
                         key={index}
                         className="h-[350px] md:h-[500px] w-full rounded-sm lg:rounded-lg"
                     >
-                      <LazyLoad className={'size-full'}>
+                      <LazyLoad className={'size-full'} placeholder={<SpinnerContainer />}>
                         <img
                             src={image}
                             className="size-full transform rounded-sm object-cover lg:rounded-lg"

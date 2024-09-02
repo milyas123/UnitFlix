@@ -7,6 +7,7 @@ import { formatCurrency } from "@/lib/utils";
 import { useAppContext } from "@/AppContext";
 import {useNavigate} from "react-router-dom";
 import website from "@/data/website.json";
+import {motion} from "framer-motion"
 
 const Filters = ({
   selectedTab,
@@ -24,6 +25,7 @@ const Filters = ({
   selectedPropertyType,
   setSelectedPropertyType,
   handleSearch,
+    animate
 }) => {
   const { locations, developers, propertyTypes, propertyStatuses } = useAppContext();
   const [filtersApplied, setFiltersApplied] = useState(false);
@@ -82,7 +84,8 @@ const Filters = ({
   };
 
   return (
-    <div className={`mx-auto w-full ${filtersApplied ? 'md:w-[80%]' : 'md:w-[69%]'}`}>
+    <motion.div animate={{x: [animate ? -2000 : 0, 0]}} transition={{ duration: animate ? 1.5 : 0, ease: "easeInOut", times: [0, 1], delay: animate ? 0.5 : 0 }}
+        className={`mx-auto w-full -md:translate-x-[2000px] ${filtersApplied ? 'md:w-[80%]' : 'md:w-[69%]'}`}>
       <div className="mx-auto flex w-[80%] items-center justify-between rounded-t-lg bg-whiteLilac p-3 font-semibold md:mx-0 md:w-[23%] md:rounded-t-md md:px-3 md:py-2 lg:rounded-t-lg lg:py-2.5 xl:py-3.5 2xl:rounded-t-xl 2xl:p-4">
         {["All", "For Sale", "For Rent"].map((tab, index) => (
           <div
@@ -102,8 +105,12 @@ const Filters = ({
           </div>
         ))}
       </div>
-
-      <div className="flex flex-grow flex-col justify-between gap-y-8 rounded-lg bg-white p-5 shadow md:flex-row md:gap-y-0 md:rounded-none md:rounded-b-md md:rounded-r-md md:px-3 md:py-2 lg:rounded-b-lg lg:rounded-r-lg lg:py-2.5 xl:py-3.5 2xl:rounded-b-xl 2xl:rounded-r-xl 2xl:p-4">
+      <motion.div animate={{height: [animate ? 0 : 90, 90], padding: [animate? 0 : 8, 8]}} transition={{duration: animate ? 0.5 : 0, delay: animate ? 2 : 0, ease: "easeInOut", times: [0, 1]}}
+                  onAnimationComplete={() => {
+                    const element = document.querySelector(".filters");
+                    element.style.overflow = "visible"
+                  }}
+          className="filters flex flex-grow flex-col justify-between items-center gap-y-8 rounded-lg bg-white p-5 shadow md:flex-row md:gap-y-0 md:rounded-none md:rounded-b-md md:rounded-r-md md:px-3 md:py-2 lg:rounded-b-lg lg:rounded-r-lg lg:py-2.5 xl:py-3.5 2xl:rounded-b-xl 2xl:rounded-r-xl 2xl:p-4 md:overflow-hidden">
         <div className="space-y-2 border-b-2 md:w-[85px] md:space-y-1.5 md:border-b-0 md:border-r md:border-r-[#F1F1F1] md:text-[7px] lg:w-[100px] lg:space-y-1.5 lg:ps-0 lg:text-[9px] xl:w-[120px] xl:space-y-2.5 xl:text-[11px] 2xl:w-[145px] 2xl:text-[14px]">
           <p className="font-semibold text-mirage">{website.filters.text}</p>
           <input
@@ -250,8 +257,8 @@ const Filters = ({
             </Button>
           )}
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

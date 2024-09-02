@@ -11,42 +11,30 @@ import ProtectedRoute from "./ProtectedRoute";
 import RealEstateAnimation from "@/lotties/RealEstateAnimation.json";
 
 // Website pages
-const LandingPage = lazy(() => import("@/website/pages/LandingPage"));
-const SearchProperties = lazy(() => import("@/website/pages/SearchProperties.jsx"));
-const ManageProperties = lazy(() => import("@/website/pages/ManageProperties"));
-const PropertyDetails = lazy(() => import("@/website/pages/PropertyDetails"));
-const ContactUs = lazy(() => import("@/website/pages/ContactUs"));
-const AboutUs = lazy(() => import("@/website/pages/AboutUs"));
-const AddProperty = lazy(() => import("@/website/pages/AddProperty"));
+import LandingPage from "@/website/pages/LandingPage";
+import SearchProperties from "@/website/pages/SearchProperties.jsx";
+import ManageProperties from "@/website/pages/ManageProperties";
+import PropertyDetails from "@/website/pages/PropertyDetails";
+import ContactUs from "@/website/pages/ContactUs";
+import AboutUs from "@/website/pages/AboutUs";
+import AddProperty from "@/website/pages/AddProperty";
 
 // Admin panel
-const Layout = lazy(() => import("@/admin/Layout"));
-const AdminLogin = lazy(() => import("@/admin/pages/AdminLogin"));
-const AdminAddProject = lazy(() => import("@/admin/pages/AdminAddProject"));
-const AdminAddProperty = lazy(() => import("@/admin/pages/AdminAddProperty"));
-const AdminPreviewProperty = lazy(() => import("@/admin/pages/AdminPreviewProperty"));
-const AdminManageProperties = lazy(() => import("@/admin/pages/AdminManageProperties"));
-const AdminSubmittedRequests = lazy(() => import("@/admin/pages/AdminSubmittedRequests"));
-const AdminEmailConfiguration = lazy(() => import("@/admin/pages/AdminEmailConfiguration"));
+import Layout from "@/admin/Layout";
+import AdminLogin from "@/admin/pages/AdminLogin";
+import AdminAddProject from "@/admin/pages/AdminAddProject";
+import AdminAddProperty from "@/admin/pages/AdminAddProperty";
+import AdminPreviewProperty from "@/admin/pages/AdminPreviewProperty";
+import AdminManageProperties from "@/admin/pages/AdminManageProperties";
+import AdminSubmittedRequests from "@/admin/pages/AdminSubmittedRequests";
+import AdminEmailConfiguration from "@/admin/pages/AdminEmailConfiguration";
 
 function App() {
   return (
     <div className="font-poppins">
       <BrowserRouter>
-        <AppProvider>
-          <Suspense
-            fallback={
-              <div className="relative flex h-screen w-[100vw] items-center justify-center md:mx-auto md:w-[50%]">
-                <Lottie
-                  className="absolute inset-0 size-full object-cover"
-                  animationData={RealEstateAnimation}
-                  loop={true}
-                  autoPlay={true}
-                  rendererSettings={{ preserveAspectRatio: "xMidYMid slice" }}
-                />
-              </div>
-            }
-          >
+        <Suspense>
+          <AppProvider>
             <Routes>
               <Route exact path="/" element={<LandingPage />} />
               <Route path="/search" element={<SearchProperties />} />
@@ -70,8 +58,8 @@ function App() {
                 <Route path="email-configuration" element={<AdminEmailConfiguration />} />
               </Route>
             </Routes>
-          </Suspense>
-        </AppProvider>
+          </AppProvider>
+        </Suspense>
       </BrowserRouter>
       <ToastContainer position="top-center" autoClose={3000} transition={Slide} />
     </div>
