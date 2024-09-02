@@ -17,14 +17,14 @@ const Hero = () => {
         <div className="absolute inset-0 z-50 bg-black bg-opacity-50"></div>
         <div className="absolute z-50 flex size-full items-center justify-center">
             <div className="space-y-4 text-center text-white md:space-y-2 lg:space-y-3.5 2xl:space-y-4">
-                <motion.div initial={{opacity: 0, y: 100}} animate={{y: [100, 0], opacity: [0, 1]}}
-                            transition={{duration: 1, delay: 1, ease: "easeInOut", times: [0, 1]}}>
+                <motion.div initial={{opacity: 0, y: 100}} whileInView={{y: [100, 0], opacity: [0, 1]}} viewport={{once: true}}
+                            transition={{duration: 1, ease: "easeInOut"}}>
                     <h1 className="heading mx-7 text-[44px] font-semibold md:text-[23px] lg:text-[28px] xl:text-[36px] 2xl:text-[44px]">
                         {website.landingPage.hero.heading}
                     </h1>
                 </motion.div>
-                <motion.div initial={{opacity: 0, y: 100}} animate={{y: [100, 0], opacity: [0, 1]}}
-                            transition={{duration: 1, delay: 1, ease: "easeInOut", times: [0, 1]}}>
+                <motion.div initial={{opacity: 0, y: 100}} whileInView={{y: [100, 0], opacity: [0, 1]}} viewport={{once: true}}
+                            transition={{duration: 1, ease: "easeInOut"}}>
                     <p className="tagline font-regular text-[30px] md:text-[18px] lg:text-[22px] xl:text-[26px] 2xl:text-[34px]">
                         {website.landingPage.hero.tagLine}
                     </p>
