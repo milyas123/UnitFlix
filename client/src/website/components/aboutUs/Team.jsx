@@ -1,4 +1,6 @@
 import MemberCard from "./MemberCard";
+import website from "@/data/website.json";
+import Multiline from "@/website/components/common/Multiline.jsx";
 
 const Team = () => {
   return (
@@ -6,17 +8,16 @@ const Team = () => {
       <div>
         <div className="space-y-2.5 text-center md:space-y-1 2xl:space-y-2">
           <h1 className="text-[32px] font-semibold md:text-[20px] lg:text-[24px] xl:text-[30px] 2xl:text-[36px]">
-            Our Amazing Team
+            {website.aboutPage.section4.heading}
           </h1>
           <p className="w-full text-[14px] text-smokeyGrey md:mx-auto md:w-[50%] md:text-[8px] lg:text-[10px] xl:text-[13px] 2xl:text-[16px]">
-            Welcome to the team! We are a group of individuals working together
-            to achieve our goals Get to know the faces behind our success
+            <Multiline text={website.aboutPage.section4.description} />
           </p>
         </div>
 
         <div className="mt-8 grid grid-cols-1 place-content-between gap-6 md:gap-x-10 lg:gap-x-12 px-3 md:mt-3 md:grid-cols-4 lg:mt-5 xl:mt-7 2xl:mt-8">
-          {[1, 2, 3, 4].map((item) => (
-            <MemberCard key={item} number={item} />
+          {website.aboutPage.section4.members.map((member, index) => (
+            <MemberCard key={index} number={index} image={member.image} name={member.name} description={member.description} position={member.position} />
           ))}
         </div>
       </div>

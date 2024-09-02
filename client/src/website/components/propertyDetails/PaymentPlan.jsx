@@ -20,12 +20,13 @@ const PaymentPlan = ({ paymentPlanData }) => {
       </h1>
 
       <div className="mt-8 flex flex-row justify-center md:mt-1.5 md:h-auto md:flex-col md:space-y-2 lg:mt-2 xl:mt-3 xl:space-y-4 2xl:mt-4">
-        <div className="flex flex-col items-center gap-y-2 md:gap-y-0 gap-x-2 md:flex-row md:justify-between relative md:h-[200px] lg:h-[250px]">
+        <div className="flex flex-col items-center gap-y-2 md:gap-y-0 gap-x-0 md:flex-row relative md:h-[200px] lg:h-[250px]">
           {
             paymentPlanData.map((paymentPlanItem, index) => {
               return (
                   <>
-                    <div className={`flex h-[8.5rem] ${isMobile ? 'w-full' : ''} flex-col items-center text-center md:h-auto md:w-[${paymentPlanItem.amount}%] relative`}>
+                    <div className={`flex h-[8.5rem] flex-col items-center text-center md:h-auto relative`}
+                        style={{width: `${isMobile ? 100 : paymentPlanItem.amount}%`}}>
                       {
                         index % 2 === 0 ?
                             <div className='w-full flex flex-row gap-x-[1em] md:gap-x-0 md:flex-col items-center text-center translate-x-[17%] md:translate-x-0'>

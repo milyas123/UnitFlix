@@ -412,8 +412,21 @@ namespace Unitflix.Server.Controllers
             _dbContext.Properties.Update(property);
             _dbContext.SaveChanges();
             _logger.LogInformation("Status of a property request with property Id {propertyId} has been changed by the admin to {status}", property.Id, property.ApprovalStatus.ToString());
+
+            string message = "";
+
+            //If any message is provided it will be added to the email
+            if(statusUpdate.Message != null)
+            {
+                message = $@"
+
+Reason:
+{statusUpdate.Message}
+";
+            }
+
             //Sending OTP
-            await _emailManager.SendEmail(property.UserDetail.Email, "Unitflix Property Status Update", $"Hi {property.UserDetail.Name}, the status of your request for property {property.Title} status has been updated to {property.ApprovalStatus.ToString()}.");
+            await _emailManager.SendEmail(property.UserDetail.Email, "Unitflix Property Status Update", $@"Hi {property.UserDetail.Name}, the status of your request for property {property.Title} status has been updated to {property.ApprovalStatus.ToString()}.{message}");
 
             return Response.Message("Property Status Updated Successfully");
         }

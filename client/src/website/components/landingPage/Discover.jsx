@@ -12,6 +12,7 @@ import ArrowLeft from "../svgs/ArrowLeft";
 import ArrowRight from "../svgs/ArrowRight";
 import useSwiperNavigation from "@/hooks/useSwiperNavigation";
 import RegisterInterestModal from "@/website/components/common/RegisterInterestModal.jsx";
+import website from "@/data/website.json";
 
 const Discover = ({ projects }) => {
   const projectsRef = useRef(null);
@@ -33,10 +34,10 @@ const Discover = ({ projects }) => {
             <div className="flex flex-col justify-between md:flex-row md:items-start">
               <div className="space-y-2 md:space-y-0.5 xl:space-y-1 2xl:space-y-1.5">
                 <h1 className="text-[22px] font-semibold md:text-[14px] lg:text-[18px] xl:text-[22px] 2xl:text-[28px]">
-                  Discover Trending Projects
+                  {website.landingPage.trendingProjects.heading}
                 </h1>
                 <p className="text-[14px] text-smokeyGrey md:text-[8px] lg:text-[10px] xl:text-[11px] 2xl:text-[13px]">
-                  Aliquam lacinia diam quis lacus euismod
+                  {website.landingPage.trendingProjects.description}
                 </p>
               </div>
 

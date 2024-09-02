@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { formatCurrency } from "@/lib/utils";
 import { useAppContext } from "@/AppContext";
 import {useNavigate} from "react-router-dom";
+import website from "@/data/website.json";
 
 const Filters = ({
   selectedTab,
@@ -104,7 +105,7 @@ const Filters = ({
 
       <div className="flex flex-grow flex-col justify-between gap-y-8 rounded-lg bg-white p-5 shadow md:flex-row md:gap-y-0 md:rounded-none md:rounded-b-md md:rounded-r-md md:px-3 md:py-2 lg:rounded-b-lg lg:rounded-r-lg lg:py-2.5 xl:py-3.5 2xl:rounded-b-xl 2xl:rounded-r-xl 2xl:p-4">
         <div className="space-y-2 border-b-2 md:w-[85px] md:space-y-1.5 md:border-b-0 md:border-r md:border-r-[#F1F1F1] md:text-[7px] lg:w-[100px] lg:space-y-1.5 lg:ps-0 lg:text-[9px] xl:w-[120px] xl:space-y-2.5 xl:text-[11px] 2xl:w-[145px] 2xl:text-[14px]">
-          <p className="font-semibold text-mirage">Search</p>
+          <p className="font-semibold text-mirage">{website.filters.text}</p>
           <input
             type="text"
             name="text"
@@ -115,7 +116,7 @@ const Filters = ({
           />
         </div>
         <div className="space-y-2 border-b-2 md:w-[90px] md:space-y-1.5 md:border-b-0 md:border-r md:border-r-[#F1F1F1] md:ps-3.5 md:text-[7px] lg:w-[100px] lg:space-y-1.5 lg:ps-0 lg:text-[9px] xl:w-[120px] xl:space-y-2.5 xl:text-[11px] 2xl:w-[145px] 2xl:text-[14px]">
-          <p className="font-semibold text-mirage">Looking For</p>
+          <p className="font-semibold text-mirage">{website.filters.propertyType}</p>
           <Dropdown
             options={propertyTypes}
             placeholder="Type"
@@ -124,7 +125,7 @@ const Filters = ({
           />
         </div>
         <div className="space-y-2 border-b-2 md:w-[90px] md:space-y-1.5 md:border-b-0 md:border-r md:border-r-[#F1F1F1] md:ps-3.5 md:text-[7px] lg:w-[100px] lg:space-y-1.5 lg:ps-0 lg:text-[9px] xl:w-[120px] xl:space-y-2.5 xl:text-[11px] 2xl:w-[145px] 2xl:text-[14px]">
-          <p className="font-semibold text-mirage">Location</p>
+          <p className="font-semibold text-mirage">{website.filters.location}</p>
           <Dropdown
             options={locations}
             placeholder="Location"
@@ -133,7 +134,7 @@ const Filters = ({
           />
         </div>
         <div className="space-y-2 border-b-2 md:w-[90px] md:space-y-1.5 md:border-b-0 md:border-r md:border-r-[#F1F1F1] md:ps-3.5 md:text-[7px] lg:w-[100px] lg:space-y-1.5 lg:ps-0 lg:text-[9px] xl:w-[120px] xl:space-y-2.5 xl:text-[11px] 2xl:w-[145px] 2xl:text-[14px]">
-          <p className="font-semibold text-mirage">Developer</p>
+          <p className="font-semibold text-mirage">{website.filters.developer}</p>
           <Dropdown
             options={developers}
             placeholder="All"
@@ -144,7 +145,7 @@ const Filters = ({
 
         <div className="space-y-3.5 md:space-y-2 md:border-r md:border-r-[#F1F1F1] md:px-3.5 md:text-[7px] lg:space-y-3 lg:pe-4 lg:text-[9px] xl:space-y-4 xl:pe-5 xl:text-[11px] 2xl:space-y-4 2xl:text-[14px]">
           <div className="flex items-center justify-between">
-            <p className="font-semibold text-mirage">Price</p>
+            <p className="font-semibold text-mirage">{website.filters.price}</p>
             <div className="flex items-center text-[12px] md:hidden">
               <p>
                 {formatCurrency(
@@ -237,7 +238,7 @@ const Filters = ({
             onClick={handleSearch}
           >
             <IoIosSearch className="size-6 md:size-4 lg:size-5 xl:size-6 2xl:size-7" />{" "}
-            Search
+            {website.filters.searchButton}
           </Button>
           {filtersApplied && (
             <Button
@@ -245,7 +246,7 @@ const Filters = ({
               className="ml-2 h-10 gap-x-0.5 py-5 hover:bg-red-500 hover:text-white md:h-7 md:rounded-md md:px-2 md:py-0 md:text-[8px] lg:h-8 lg:px-3 lg:text-[10px] xl:h-9 xl:rounded-lg xl:px-4 xl:text-[13px] 2xl:px-5 2xl:py-6 2xl:text-[16px]"
               onClick={clearFilters}
             >
-              Clear Filters
+              {website.filters.clearButton}
             </Button>
           )}
         </div>

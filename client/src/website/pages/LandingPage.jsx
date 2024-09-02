@@ -17,7 +17,6 @@ import useScrollProgress from "@/hooks/useScrollProgress";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import Spinner from "@/website/components/common/Spinner.jsx";
-import RegisterInterestModal from "@/website/components/common/RegisterInterestModal.jsx";
 
 const sliderMinValue = 50000;
 const sliderMaxValue = 5000000;
@@ -118,7 +117,8 @@ const LandingPage = () => {
                   <Spinner />
                 </div>
                 :
-                <Discover projects={properties} />
+                properties.length > 0 ?
+                    <Discover projects={properties} /> : <></>
           }
         </div>
         <Help />

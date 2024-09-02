@@ -9,6 +9,8 @@ import TestimonialCard from "./TestimonialCard";
 import { MoveLeft, MoveRight } from "lucide-react";
 
 import useSwiperNavigation from "@/hooks/useSwiperNavigation";
+import website from "@/data/website.json";
+import Multiline from "@/website/components/common/Multiline.jsx";
 
 const Testimonials = () => {
   const swiperRef = useRef(null);
@@ -26,7 +28,7 @@ const Testimonials = () => {
       <div className="flex flex-col items-center p-6 md:flex-row md:px-3.5 md:pb-0.5 md:pt-3.5 lg:px-4 lg:pb-1 lg:pt-4 xl:px-5 xl:pb-1.5 xl:pt-5 2xl:px-6 2xl:pb-3 2xl:pt-6">
         <div className="mb-9 text-center sm:mb-0 md:w-[28%]">
           <h1 className="text-[24px] font-bold md:text-[18px] lg:text-[21px] xl:text-[28px] 2xl:text-[32px]">
-            What Our <br className="hidden md:flex" /> Clients Say?
+            <Multiline text={website.managePage.section3.heading} />
           </h1>
         </div>
 
@@ -58,9 +60,9 @@ const Testimonials = () => {
                 "--swiper-pagination-color": "#FFFFFF",
               }}
             >
-              {[1, 2, 3, 4, 5, 6].map((item) => (
-                <SwiperSlide key={item}>
-                  <TestimonialCard />
+              {website.managePage.section3.reviews.map((review, index) => (
+                <SwiperSlide key={index}>
+                  <TestimonialCard review={review.review} username={review.username} />
                 </SwiperSlide>
               ))}
             </Swiper>

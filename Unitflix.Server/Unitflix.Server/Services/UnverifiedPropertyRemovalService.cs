@@ -34,6 +34,13 @@ namespace Unitflix.Server.Services
 
         #endregion
 
+        #region Public Methods
+
+        /// <summary>
+        /// Executes the task of finding and deleting the unverified properties and all of their related data
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public async Task Execute(IJobExecutionContext context)
         {
             List<Property> unverifiedProperties = _dbContext
@@ -41,7 +48,7 @@ namespace Unitflix.Server.Services
                 .Where(p => !p.IsVerified)
                 .ToList();
 
-            foreach(Property property in unverifiedProperties)
+            foreach (Property property in unverifiedProperties)
             {
                 List<Overview> overviews = await _dbContext.Overviews.Where(t => t.PropertyId == property.Id).ToListAsync();
                 _dbContext.Overviews.RemoveRange(overviews);
@@ -61,7 +68,7 @@ namespace Unitflix.Server.Services
                     _dbContext.PaymentPlanItems.RemoveRange(paymentPlanItems);
                 }
 
-                if(property.Submission == PropertySubmission.Secondary)
+                if (property.Submission == PropertySubmission.Secondary)
                 {
                     List<UserDetail> userDetails = await _dbContext
                         .UserDetails
@@ -88,5 +95,7 @@ namespace Unitflix.Server.Services
             _dbContext.SaveChanges();
             Console.WriteLine($"Found and removed {unverifiedProperties.Count} Unverified Properties at {DateTime.Now.ToString("HH:mm:ss dd-MM-yyyy")}");
         }
+
+        #endregion
     }
 }

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect, useRef} from "react";
 
 import Filters from "../components/common/Filters";
 import Header from "../components/common/Header";
@@ -7,20 +7,24 @@ import Table from "../components/common/Table";
 import RequestDetailsModal from "../components/adminSubmittedRequests/RequestDetailsModal";
 
 import { toast } from "react-toastify";
-import {useSearchParams} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 import Pagination from "@/website/components/propertiesForSale/Pagination.jsx";
+import ReasonMessageModal from "@/admin/components/adminSubmittedRequests/ReasonMessageModal.jsx";
 const serverURL = import.meta.env.VITE_SERVER_URL;
 
 const AdminSubmittedRequests = () => {
+  const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [requests, setRequests] = useState([]);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
   const [selectedRequest, setSelectedRequest] = useState(null);
   const [loadingAction, setLoadingAction] = useState({ id: null, type: null });
+  const [isRejectionMessageModalShown, setIsRejectionMessageModalShown] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams()
   const [pages, setPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
+  const requestToReject = useRef(-1);
 
   useEffect(() => {
     fetchRequests();
@@ -61,10 +65,10 @@ const AdminSubmittedRequests = () => {
     setShowDetailsModal(true);
   };
 
-  const handleUpdateStatus = async (requestId, status) => {
+  const handleUpdateStatus = async (requestId, status, message) => {
     setLoadingAction({ id: requestId, type: status });
     try {
-      await axios.put(`${serverURL}/request/${requestId}`, { status },
+      await axios.put(`${serverURL}/request/${requestId}`, { status, message },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -82,12 +86,29 @@ const AdminSubmittedRequests = () => {
     }
   };
 
+  const onRejectRequest = (requestId) => {
+    requestToReject.current = requestId;
+    setIsRejectionMessageModalShown(true);
+  }
+
   const paginate = (pageNumber) => {
     if(pageNumber > 0 && pageNumber <= pages) {
       searchParams.set("page", pageNumber);
       navigate(`/admin/manage-properties?${searchParams.toString()}`);
       navigate(0);
     }
+  }
+
+  const submitRejectionMessageModal = async (message) => {
+    if(!loadingAction.type) {
+      await handleUpdateStatus(requestToReject.current, 2, message);
+      setIsRejectionMessageModalShown(false);
+    }
+  }
+
+  const closeRejectionMessageModal = () => {
+    setIsRejectionMessageModalShown(false);
+    requestToReject.current = -1;
   }
 
   if (loading)
@@ -112,7 +133,7 @@ const AdminSubmittedRequests = () => {
           data={requests}
           showSubmitterDetails={handleShowDetails}
           onAccept={(requestId) => handleUpdateStatus(requestId, 1)}
-          onReject={(requestId) => handleUpdateStatus(requestId, 2)}
+          onReject={(requestId) => onRejectRequest(requestId)}
           loadingAction={loadingAction}
         />
         {pages > 1 && (
@@ -124,6 +145,13 @@ const AdminSubmittedRequests = () => {
             </div>
         )}
       </div>
+
+      {
+        isRejectionMessageModalShown ?
+            <ReasonMessageModal onClose={closeRejectionMessageModal}
+                                onSubmit={submitRejectionMessageModal}
+                                loadingAction={loadingAction}/> : <></>
+      }
 
       {showDetailsModal && (
         <RequestDetailsModal

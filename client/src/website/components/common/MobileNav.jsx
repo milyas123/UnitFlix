@@ -4,12 +4,13 @@ import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
 import { RxDash } from "react-icons/rx";
 import { GrPhone } from "react-icons/gr";
+import website from "@/data/website.json";
 
 const buttonItems = [
-  { name: "Buy", link: "/properties-for-sale?param=0" },
-  { name: "Rent", link: "/properties-for-rent?param=1" },
-  { name: "Manage", link: "/manage-properties" },
-  { name: "About Us", link: "/about-us" },
+  { name: website.navbar.buyButton, link: "/search?purpose=0&page=1" },
+  { name: website.navbar.rentButton, link: "/search?purpose=1&page=1" },
+  { name: website.navbar.manageButton, link: "/manage-properties" },
+  { name: website.navbar.aboutUsButton, link: "/about-us" },
 ];
 
 const MobileNav = ({ onClose, isVisible }) => {
@@ -43,7 +44,7 @@ const MobileNav = ({ onClose, isVisible }) => {
           <div className="mx-auto flex w-[90%] items-center justify-between">
             <Link to="/">
               <img
-                src="/assets/imgs/Logo.png"
+                src={website.navbar.logo}
                 className="h-[79px] w-[82px] object-cover"
                 alt="company-logo"
               />
@@ -68,18 +69,18 @@ const MobileNav = ({ onClose, isVisible }) => {
 
         <div className="mt-auto flex w-full flex-col gap-y-5 p-3">
           <a
-            href="tel:+(088) 123 456 789"
+            href={`tel:${website.contact.phoneNumber}`}
             className="flex items-center justify-center gap-x-1.5 text-[14px]"
           >
             <GrPhone size={20} />
-            +(088) 123 456 789
+            {website.contact.phoneNumberDisplay}
           </a>
           <Link to="/contact-us">
             <Button
               variant="outline"
               className="h-10 w-full rounded-full border-white bg-transparent px-4 text-[14px]"
             >
-              Contact Us
+              {website.navbar.contactUsButton}
             </Button>
           </Link>
         </div>

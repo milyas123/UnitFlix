@@ -15,12 +15,25 @@ namespace Unitflix.Server.Helpers
 
         #region Public Methods
 
+        /// <summary>
+        /// Returns the size of the file in Mbs
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
         public static double Size(this IFormFile file)
         {
             double size = file.Length / (1024 * 1024 * 1.0);
             return size;
         }
 
+        /// <summary>
+        /// Saves the file in the wwwroot/uploads folder
+        /// </summary>
+        /// <param name="file">The file to be saved</param>
+        /// <param name="webHost">The env to use to find the root path</param>
+        /// <param name="protocol">The protocol at which server is running</param>
+        /// <param name="host">The hostname of the server to use in file url</param>
+        /// <returns></returns>
         public static async Task<FileSaveResult?> Save(this IFormFile file, IWebHostEnvironment webHost, string protocol, string host = "localhost:7001")
         {
             string directory = Path.Join(webHost.WebRootPath, DATA_FOLDER);
@@ -67,6 +80,10 @@ namespace Unitflix.Server.Helpers
 
         #region Private Methods
 
+        /// <summary>
+        /// Ensures that a directory exists on the file system
+        /// </summary>
+        /// <param name="directory"></param>
         private static void EnsureDirectory(string directory)
         {
             if(!Directory.Exists(directory))
@@ -75,9 +92,17 @@ namespace Unitflix.Server.Helpers
             }
         }
 
+        /// <summary>
+        /// Generates a unique file name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         private static string GenerateFileName(string name)
         {
-            return $"{DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")}-{name}";
+            string extension = Path.GetExtension(name);
+            string nameWithoutExtension = name.Replace(extension, "");
+            nameWithoutExtension = nameWithoutExtension.Substring(0, Math.Min(nameWithoutExtension.Length, 30));
+            return $"{Guid.NewGuid()}-{nameWithoutExtension}{extension}";
         }
 
         #endregion

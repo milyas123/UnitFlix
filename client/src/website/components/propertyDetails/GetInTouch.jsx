@@ -8,6 +8,7 @@ import { FiPhone } from "react-icons/fi";
 import { BsWhatsapp } from "react-icons/bs";
 import CountryCodeDropdown from "./CountryCodeDropdown";
 import MessageModal from "@/website/components/common/MessageModal.jsx";
+import website from "@/data/website.json";
 
 const serverURL = import.meta.env.VITE_SERVER_URL;
 
@@ -183,20 +184,20 @@ const GetInTouch = ({propertyId}) => {
           <div className="flex justify-between gap-1.5 rounded border md:p-2 lg:p-3 xl:p-4 2xl:px-4 2xl:py-6">
             <div className="flex flex-col items-center justify-center gap-3">
               <FiPhone size={24}/>
-              <a href="tel:+97142483400">
+              <a href={`tel:${website.contact.phoneNumber}`}>
                 <Button
                     className="border bg-transparent text-mirage hover:bg-mirage hover:text-white md:rounded md:px-2 lg:px-3.5 xl:rounded-md xl:px-4 2xl:px-5">
-                  +971 4 248 3400
+                  {website.contact.phoneNumberDisplay}
                 </Button>
               </a>
             </div>
 
             <div className="flex flex-col items-center justify-center gap-3">
               <BsWhatsapp size={24}/>
-              <a href="https://wa.me/971551623236">
+              <a href={`https://wa.me/${website.contact.whatsappNumber}`}>
                 <Button
                     className="border bg-transparent text-mirage hover:bg-mirage hover:text-white md:rounded md:px-2 lg:px-3.5 xl:rounded-md xl:px-4 2xl:px-5">
-                  +971 55 162 3236
+                  {website.contact.whatsappNumberDisplay}
                 </Button>
               </a>
             </div>

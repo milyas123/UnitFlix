@@ -40,6 +40,8 @@ namespace Unitflix.Server.Models
 
         public string? Status { get; set; }
 
+        public bool IsDeleted { get; set; } = false;
+
         public PropertySubmission Submission {  get; set; }
 
         public DateTime DateAdded { get; set; }

@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { IoChevronDown } from "react-icons/io5";
 
-const FAQCard = () => {
+const FAQCard = ({title, description}) => {
   const [isOpen, setIsOpen] = useState(false);
   const contentRef = useRef(null);
   const [height, setHeight] = useState("0px");
@@ -20,7 +20,7 @@ const FAQCard = () => {
         className="flex cursor-pointer items-center justify-between text-[16px] font-medium md:text-[12px] lg:text-[14px] xl:text-[17px] 2xl:text-[20px]"
         onClick={toggleOpen}
       >
-        How do you guys handle the property management?
+          {title}
         <IoChevronDown
           size={23}
           className={`transition duration-300 ease-in-out ${isOpen && "rotate-180"}`}
@@ -33,10 +33,7 @@ const FAQCard = () => {
         className={`transition-max-height overflow-hidden text-[11.5px] duration-300 ease-in-out md:text-[8px] lg:text-[10px] xl:text-[13px] 2xl:text-[16px]`}
       >
         <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it.
+            {description}
         </p>
       </div>
     </div>

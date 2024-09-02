@@ -7,21 +7,13 @@ import { Textarea } from "../ui/textarea";
 import { BiMessageSquareDetail } from "react-icons/bi";
 import { Button } from "../ui/button";
 import Email from "../svgs/Email";
+import website from "@/data/website.json";
 
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
 import { BsDot } from "react-icons/bs";
 import MessageModal from "@/website/components/common/MessageModal.jsx";
 
 const serverURL = import.meta.env.VITE_SERVER_URL;
-
-const quickLinks = [
-  "Terms of Use",
-  "Privacy Policy",
-  "Our Services",
-  "Contact",
-  "Careers",
-  "FAQs",
-];
 
 const Footer = () => {
   const [formData, setFormData] = useState({
@@ -82,7 +74,7 @@ const Footer = () => {
               <div className="flex w-full flex-col gap-8 md:w-[30%] md:gap-7 lg:gap-9 xl:gap-12 2xl:gap-14">
                 <div className="flex items-center gap-1.5">
                   <img
-                      src="/assets/imgs/Logo.png"
+                      src={website.footer.logo}
                       className="size-[60px] object-cover md:size-[35px] lg:size-[42px] xl:size-[50px] 2xl:size-[60px]"
                       alt=""
                   />
@@ -94,26 +86,26 @@ const Footer = () => {
                 <div className="flex items-center justify-between md:gap-10 md:px-2.5">
                   <div className="space-y-1.5">
                     <p className="font-regular whitespace-nowrap text-[14px] text-slate md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]">
-                      Total Free Customer Care
+                      {website.footer.phoneNumberLabel}
                     </p>
                     <a
-                        href="tel:+(088) 123 456 789"
+                        href={`tel:${website.contact.phoneNumber}`}
                         className="text-[15px] font-semibold md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:text-[15px]"
                     >
-                      +(088) 123 456 789
+                      {website.contact.phoneNumberDisplay}
                     </a>
                   </div>
 
                   <div className="space-y-1.5">
                     <p className="font-regular text-[14px] text-slate md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]">
-                      Live Support?
+                      {website.footer.emailLabel}
                     </p>
                     <a
-                        href="mailto:hi@homez.com"
+                        href={`mailto:${website.contact.email}`}
                         target="_top"
                         className="text-[15px] font-semibold md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:text-[15px]"
                     >
-                      hi@homez.com
+                      {website.contact.email}
                     </a>
                   </div>
                 </div>
@@ -124,22 +116,18 @@ const Footer = () => {
                   </p>
                   <div
                       className="flex items-center gap-x-4 text-pastelGrey md:gap-x-1.5 lg:gap-x-2 xl:gap-x-2.5 2xl:gap-x-3">
-                    <div
-                        className="cursor-pointer rounded-full bg-mirageLight transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage p-1 md:p-1 2xl:p-2">
+                    <a href={website.footer.social.facebook} className="cursor-pointer rounded-full bg-mirageLight transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage p-1 md:p-1 2xl:p-2">
                       <FaFacebookF className="size-3.5 cursor-pointer md:size-2 lg:size-3 xl:size-4"/>
-                    </div>
-                    <div
-                        className="cursor-pointer rounded-full bg-mirageLight transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage p-1 md:p-1 2xl:p-2">
+                    </a>
+                    <a href={website.footer.social.x} className="cursor-pointer rounded-full bg-mirageLight transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage p-1 md:p-1 2xl:p-2">
                       <FaTwitter className="size-3.5 cursor-pointer md:size-2 lg:size-3 xl:size-4"/>
-                    </div>
-                    <div
-                        className="cursor-pointer rounded-full bg-mirageLight transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage p-1 md:p-1 2xl:p-2">
+                    </a>
+                    <a href={website.footer.social.instagram} className="cursor-pointer rounded-full bg-mirageLight transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage p-1 md:p-1 2xl:p-2">
                       <FaInstagram className="size-3.5 cursor-pointer md:size-2 lg:size-3 xl:size-4"/>
-                    </div>
-                    <div
-                        className="cursor-pointer rounded-full bg-mirageLight transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage p-1 md:p-1 2xl:p-2">
+                    </a>
+                    <a href={website.footer.social.linkedin} className="cursor-pointer rounded-full bg-mirageLight transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage p-1 md:p-1 2xl:p-2">
                       <FaLinkedinIn className="size-3.5 cursor-pointer md:size-2 lg:size-3 xl:size-4"/>
-                    </div>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -147,13 +135,11 @@ const Footer = () => {
               <div className="flex w-full flex-col items-start md:w-[30%] md:items-center">
                 <div className="space-y-3.5 md:space-y-2 lg:space-y-2.5 xl:space-y-3.5 2xl:space-y-4">
                   <h4 className="text-[15px] font-semibold">Quick Links</h4>
-                  {quickLinks.map((quickLink, index) => (
-                      <p
-                          key={index}
-                          className="cursor-pointer text-[14px] text-slate transition-all duration-200 ease-in-out hover:text-white md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]"
-                      >
-                        {quickLink}
-                      </p>
+                  {website.footer.quickLinks.map((quickLink, index) => (
+                      <a key={index} className="cursor-pointer text-[14px] text-slate transition-all duration-200 ease-in-out hover:text-white md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px] block"
+                        href={quickLink.link}>
+                        {quickLink.label}
+                      </a>
                   ))}
                 </div>
               </div>
@@ -227,13 +213,11 @@ const Footer = () => {
 
             <div
                 className="mx-auto flex flex-col items-center justify-between gap-y-5 border-t border-white border-opacity-10 py-5 text-[14px] text-slate md:w-[65%] md:flex-row md:gap-y-0 md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]">
-              <p>&copy; Unitflix - All rights reserved</p>
+              <p>{website.footer.rights}</p>
               <div className="flex items-center gap-x-3 md:gap-x-1 lg:gap-x-1.5 xl:gap-x-2 2xl:gap-x-2.5">
-                <p>Privacy</p>
+                <a className='transition-all duration-200 ease-in-out hover:text-white' href={website.footer.privacy.link}>{website.footer.privacy.label}</a>
                 <BsDot/>
-                <p>Terms</p>
-                <BsDot/>
-                <p>Sitemap</p>
+                <a className='transition-all duration-200 ease-in-out hover:text-white' href={website.footer.terms.link}>{website.footer.terms.label}</a>
               </div>
             </div>
           </div>

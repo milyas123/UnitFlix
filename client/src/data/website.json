@@ -1,0 +1,525 @@
+{
+  "navbar": {
+    "logo": "/assets/imgs/Logo.png",
+    "buyButton": "Buy",
+    "rentButton": "Rent",
+    "manageButton": "Manage",
+    "aboutUsButton": "About Us",
+    "contactUsButton": "Contact Us"
+  },
+  "contact": {
+    "phoneNumberDisplay": "+971 55 327 9516",
+    "phoneNumber": "+971553279516",
+    "whatsappNumber": "+971555370818",
+    "whatsappNumberDisplay": "+971 55 537 0818",
+    "email": "hi@homez.com",
+    "address": "132 Dartmouth Street Boston, Massachusetts 02156 United States",
+    "mapsLocation": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1561.1318089412869!2d-71.07746119977328!3d42.346650524330826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e37a0d715622b3%3A0x5b2af19970952585!2s132%20Dartmouth%20St%2C%20Boston%2C%20MA%2002116%2C%20USA!5e0!3m2!1sen!2s!4v1719933206277!5m2!1sen!2s"
+  },
+  "landingPage": {
+    "hero": {
+      "heading": "Find Your Perfect Place",
+      "tagLine": "Discover, Invest, Live",
+      "backgroundImage": "/assets/imgs/hero-section-img.jpg"
+    },
+    "trendingProjects": {
+      "heading": "Discover Trending Projects",
+      "description": "Aliquam lacinia diam quis lacus euismod"
+    },
+    "howCanWeHelp": {
+      "title": "How Can We Help",
+      "options": {
+        "Buy": [
+          {
+            "title": "Find out how much you can afford",
+            "description": "We'll help you estimate your budget range. Save to your buyer profile to help in your search.",
+            "linkText": "Try our affordability calculator",
+            "link": "",
+            "imgSrc": "/assets/imgs/spot-badge.png"
+          },
+          {
+            "title": "Find out how much you can afford",
+            "description": "We'll help you estimate your budget range. Save to your buyer profile to help in your search.",
+            "linkText": "Try our affordability calculator",
+            "link": "",
+            "imgSrc": "/assets/imgs/spot-badge.png"
+          },
+          {
+            "title": "Find out how much you can afford",
+            "description": "We'll help you estimate your budget range. Save to your buyer profile to help in your search.",
+            "linkText": "Try our affordability calculator",
+            "link": "",
+            "imgSrc": "/assets/imgs/spot-badge.png"
+          }
+        ],
+        "Sell": [
+          {
+            "title": "How we sell quickly?",
+            "description": "We'll help you estimate your budget range. Save to your buyer profile to help in your search.",
+            "linkText": "Try our affordability calculator",
+            "link": "",
+            "imgSrc": "/assets/imgs/spot-badge.png"
+          },
+          {
+            "title": "How much do we charge?",
+            "description": "We'll help you estimate your budget range. Save to your buyer profile to help in your search.",
+            "linkText": "Try our affordability calculator",
+            "link": "",
+            "imgSrc": "/assets/imgs/spot-badge.png"
+          },
+          {
+            "title": "Find out how much you can afford",
+            "description": "We'll help you estimate your budget range. Save to your buyer profile to help in your search.",
+            "linkText": "Try our affordability calculator",
+            "link": "",
+            "imgSrc": "/assets/imgs/spot-badge.png"
+          }
+        ],
+        "Rent": [
+          {
+            "title": "How we verify tenant history?",
+            "description": "We'll help you estimate your budget range. Save to your buyer profile to help in your search.",
+            "linkText": "Try our affordability calculator",
+            "link": "",
+            "imgSrc": "/assets/imgs/spot-badge.png"
+          },
+          {
+            "title": "Find out how much you can afford",
+            "description": "We'll help you estimate your budget range. Save to your buyer profile to help in your search.",
+            "linkText": "Try our affordability calculator",
+            "link": "",
+            "imgSrc": "/assets/imgs/spot-badge.png"
+          },
+          {
+            "title": "Find out how much you can afford",
+            "description": "We'll help you estimate your budget range. Save to your buyer profile to help in your search.",
+            "linkText": "Try our affordability calculator",
+            "link": "",
+            "imgSrc": "/assets/imgs/spot-badge.png"
+          }
+        ],
+        "Manage": [
+          {
+            "title": "Find out how much you can afford",
+            "description": "We'll help you estimate your budget range. Save to your buyer profile to help in your search.",
+            "linkText": "Try our affordability calculator",
+            "link": "",
+            "imgSrc": "/assets/imgs/spot-badge.png"
+          },
+          {
+            "title": "Find out how much you can afford",
+            "description": "We'll help you estimate your budget range. Save to your buyer profile to help in your search.",
+            "linkText": "Try our affordability calculator",
+            "link": "",
+            "imgSrc": "/assets/imgs/spot-badge.png"
+          },
+          {
+            "title": "Find out how much you can afford",
+            "description": "We'll help you estimate your budget range. Save to your buyer profile to help in your search.",
+            "linkText": "Try our affordability calculator",
+            "link": "",
+            "imgSrc": "/assets/imgs/spot-badge.png"
+          }
+        ]
+      }
+    },
+    "whoAreWe": {
+      "backgroundImage": "/assets/imgs/about-bg.png",
+      "title": "Who Are We & Why Choose Us?",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a efficitur sapien. In non urna consectetur, rhoncus nulla ut, vulputate neque. Praesent vel sollicitudin dolor. Donec pulvinar risus vitae condimentum vestibulum.",
+      "items": [
+        {
+          "imgSrc": "/assets/imgs/key.png",
+          "title": "Expertise",
+          "description": "Lorem ipsum dolor sit amet elit. Suspendisse varius enim in eros elementum tristique."
+        },
+        {
+          "imgSrc": "/assets/imgs/creditcard.png",
+          "title": "Reliability",
+          "description": "Lorem ipsum dolor sit amet elit. Suspendisse varius enim in eros elementum tristique."
+        },
+        {
+          "imgSrc": "/assets/imgs/creditcard.png",
+          "title": "Innovation",
+          "description": "Lorem ipsum dolor sit amet elit. Suspendisse varius enim in eros elementum tristique."
+        },
+        {
+          "imgSrc": "/assets/imgs/creditcard.png",
+          "title": "Client-Centric",
+          "description": "Lorem ipsum dolor sit amet elit. Suspendisse varius enim in eros elementum tristique."
+        }
+      ]
+    },
+    "contactUs": {
+      "title": "CONTACT US",
+      "heading": "One Stop For All Your Real Estate Needs,",
+      "tagLine": "Leading Real Estate",
+      "description": "Aeon & Trisl trusted Real Estate Company in Dubai for buy, sale or rent properties within affordable price with different ranges of apartments, villas, studio rooms"
+    },
+    "cta": {
+      "backgroundImage": "/assets/imgs/cta.webp",
+      "tagLine": "BUY OR SELL",
+      "title": [
+        "Looking to Buy a new property or sell an existing one?",
+        "Homez provides an awesome solution!"
+      ],
+      "button1": "Submit Property",
+      "button2": "Browse Properties"
+    },
+    "exp": {
+      "title": "More than 10 Years of Experience",
+      "description": "Lorem ipsum dolor sit amet, consectetur.",
+      "stats": [
+        {
+          "value": "85%",
+          "name": "Completed Projects"
+        },
+        {
+          "value": "94%",
+          "name": "Satisfied Customers"
+        },
+        {
+          "value": "95%",
+          "name": "Home Ownership"
+        }
+      ],
+      "reviews": [
+        {
+          "heading": "Awesome Design",
+          "review": "“Amazing design, easy to customize and a design quality superlative account on its cloud platform for the optimized performance. And we didn’t on our original designs.”",
+          "rating": 4,
+          "userImage": "/assets/imgs/user.png",
+          "userName": "Ali Tufan",
+          "userPost": "Product Manager"
+        },
+        {
+          "heading": "Awesome Design",
+          "review": "“Amazing design, easy to customize and a design quality superlative account on its cloud platform for the optimized performance. And we didn’t on our original designs.”",
+          "rating": 5,
+          "userImage": "/assets/imgs/user.png",
+          "userName": "Ali Tufan",
+          "userPost": "Product Manager"
+        },
+        {
+          "heading": "Awesome Design",
+          "review": "“Amazing design, easy to customize and a design quality superlative account on its cloud platform for the optimized performance. And we didn’t on our original designs.”",
+          "rating": 3,
+          "userImage": "/assets/imgs/user.png",
+          "userName": "Ali Tufan",
+          "userPost": "Product Manager"
+        },
+        {
+          "heading": "Awesome Design",
+          "review": "“Amazing design, easy to customize and a design quality superlative account on its cloud platform for the optimized performance. And we didn’t on our original designs.”",
+          "rating": 2,
+          "userImage": "/assets/imgs/user.png",
+          "userName": "Ali Tufan",
+          "userPost": "Product Manager"
+        },
+        {
+          "heading": "Awesome Design",
+          "review": "“Amazing design, easy to customize and a design quality superlative account on its cloud platform for the optimized performance. And we didn’t on our original designs.”",
+          "rating": 1,
+          "userImage": "/assets/imgs/user.png",
+          "userName": "Ali Tufan",
+          "userPost": "Product Manager"
+        },
+        {
+          "heading": "Awesome Design",
+          "review": "“Amazing design, easy to customize and a design quality superlative account on its cloud platform for the optimized performance. And we didn’t on our original designs.”",
+          "rating": 4,
+          "userImage": "/assets/imgs/user.png",
+          "userName": "Ali Tufan",
+          "userPost": "Product Manager"
+        }
+      ]
+    }
+  },
+  "footer": {
+    "logo": "/assets/imgs/Logo.png",
+    "phoneNumberLabel": "Total Free Customer Care",
+    "emailLabel": "Live Support?",
+    "social": {
+      "facebook": "",
+      "x": "",
+      "instagram": "",
+      "linkedin": ""
+    },
+    "quickLinks": [
+      {
+        "label": "Terms of Use",
+        "link": ""
+      },
+      {
+        "label": "Privacy Policy",
+        "link": ""
+      },
+      {
+        "label": "Our Services",
+        "link": ""
+      },
+      {
+        "label": "Contact",
+        "link": ""
+      },
+      {
+        "label": "Careers",
+        "link": ""
+      },
+      {
+        "label": "FAQs",
+        "link": ""
+      }
+    ],
+    "rights": "© Unitflix - All rights reserved",
+    "privacy": {
+      "label": "Privacy",
+      "link": ""
+    },
+    "terms": {
+      "label": "Terms",
+      "link": ""
+    }
+  },
+  "filters": {
+    "text": "Search",
+    "propertyType": "Looking for",
+    "developer": "Developer",
+    "location": "Location",
+    "price": "Price",
+    "searchButton": "Search",
+    "clearButton": "Clear Filters"
+  },
+  "managePage": {
+    "heading": "Manage Your Properties Effortlessly",
+    "subHeading": "Maximize Revenue, Minimize Stress: Elevate your property returns with effortless management",
+    "backgroundImage": "/assets/imgs/hero-section-img.jpg",
+    "section1": {
+      "heading": "Welcome to UNITFLIX Property Management",
+      "description": "At UNITFLIX, we offer top-notch property management services for all types of rental properties. Our expert team has years of experience in managing properties of all sizes, from single-family homes to large apartment complexes. We pride ourselves on providing exceptional customer service, ensuring that both landlords and tenants are satisfied with our services. Our goal is to make the rental process as seamless and efficient as possible for all parties involved.",
+      "points": [
+        "We manage everything from small apartments to large complexes.",
+        "We manage everything from small apartments to large complexes.",
+        "We manage everything from small apartments to large complexes.",
+        "We manage everything from small apartments to large complexes."
+      ],
+      "image": "/assets/imgs/property.jpg"
+    },
+    "section2": {
+      "heading": "Property Management Activities",
+      "items": [
+        {
+          "title": [
+            "Tenant Relations",
+            "Management"
+          ],
+          "description": "Effective management and communication with tenants to ensure a harmonious living environment.",
+          "image": "/assets/imgs/p3.jpg"
+        },
+        {
+          "title": [
+            "Tenant Relations",
+            "Management"
+          ],
+          "description": "Effective management and communication with tenants to ensure a harmonious living environment.",
+          "image": "/assets/imgs/p3.jpg"
+        },
+        {
+          "title": [
+            "Tenant Relations",
+            "Management"
+          ],
+          "description": "Effective management and communication with tenants to ensure a harmonious living environment.",
+          "image": "/assets/imgs/p3.jpg"
+        },
+        {
+          "title": [
+            "Tenant Relations",
+            "Management"
+          ],
+          "description": "Effective management and communication with tenants to ensure a harmonious living environment.",
+          "image": "/assets/imgs/p3.jpg"
+        },
+        {
+          "title": [
+            "Tenant Relations",
+            "Management"
+          ],
+          "description": "Effective management and communication with tenants to ensure a harmonious living environment.",
+          "image": "/assets/imgs/p3.jpg"
+        },
+        {
+          "title": [
+            "Tenant Relations",
+            "Management"
+          ],
+          "description": "Effective management and communication with tenants to ensure a harmonious living environment.",
+          "image": "/assets/imgs/p3.jpg"
+        }
+      ]
+    },
+    "section3": {
+      "heading": [
+        "What Our",
+        "Clients Say?"
+      ],
+      "reviews": [
+        {
+          "review": "Unitflix has been an absolute pleasure to work with. Their property management services are top-notch, and their team is incredibly professional and responsive. I highly recommend them anyone looking for a reliable and efficient property management company in UAE.",
+          "username": "Sohpia Patel"
+        },
+        {
+          "review": "Unitflix has been an absolute pleasure to work with. Their property management services are top-notch, and their team is incredibly professional and responsive. I highly recommend them anyone looking for a reliable and efficient property management company in UAE.",
+          "username": "Sohpia Patel"
+        },
+        {
+          "review": "Unitflix has been an absolute pleasure to work with. Their property management services are top-notch, and their team is incredibly professional and responsive. I highly recommend them anyone looking for a reliable and efficient property management company in UAE.",
+          "username": "Sohpia Patel"
+        },
+        {
+          "review": "Unitflix has been an absolute pleasure to work with. Their property management services are top-notch, and their team is incredibly professional and responsive. I highly recommend them anyone looking for a reliable and efficient property management company in UAE.",
+          "username": "Sohpia Patel"
+        },
+        {
+          "review": "Unitflix has been an absolute pleasure to work with. Their property management services are top-notch, and their team is incredibly professional and responsive. I highly recommend them anyone looking for a reliable and efficient property management company in UAE.",
+          "username": "Sohpia Patel"
+        },
+        {
+          "review": "Unitflix has been an absolute pleasure to work with. Their property management services are top-notch, and their team is incredibly professional and responsive. I highly recommend them anyone looking for a reliable and efficient property management company in UAE.",
+          "username": "Sohpia Patel"
+        }
+      ]
+    },
+    "section4": {
+      "heading": "Ready to Maximize Your Revenue",
+      "subHeading": "Manage Properties",
+      "backgroundImage": "/assets/imgs/cta.webp"
+    }
+  },
+  "aboutPage": {
+    "heading": [
+      "More than just Real Estate,",
+      "We Build Dreams"
+    ],
+    "subHeading": [
+      "We understand buying a home is more than just a transaction.",
+      "Its about building a future, creating memories and finding a place to belong"
+    ],
+    "backgroundImage": "/assets/imgs/hero-section-img.jpg",
+    "section1": {
+      "subTitle": "How it Started",
+      "title": "Our Dream is Making Real Estate Earn for You",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "image": "/assets/imgs/about.jpg"
+    },
+    "section2": {
+      "items": [
+        {
+          "subTitle": "Our Vision",
+          "title": "Making Real Estate Stress Free",
+          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it."
+        },
+        {
+          "subTitle": "Our Mission",
+          "title": "Making Real Estate Stress Free",
+          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it."
+        }
+      ]
+    },
+    "section3": {
+      "title": [
+        "Stress Free Steps to",
+        "Your Dream Home"
+      ],
+      "steps": [
+        {
+          "title": "Dream & Discover",
+          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it"
+        },
+        {
+          "title": "Dream & Discover",
+          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it"
+        },
+        {
+          "title": "Dream & Discover",
+          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it"
+        },
+        {
+          "title": "Dream & Discover",
+          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it"
+        },
+        {
+          "title": "Dream & Discover",
+          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it"
+        },
+        {
+          "title": "Dream & Discover",
+          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it"
+        }
+      ]
+    },
+    "section4": {
+      "heading": "Our Amazing Team",
+      "description": [
+        "Welcome to the team! We are a group of individuals working together to achieve",
+        "our goals Get to know the faces behind our success"
+      ],
+      "members": [
+        {
+          "image": "/assets/imgs/team.jpg",
+          "name": "John Doe",
+          "position": "External Contractor",
+          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it"
+        },
+        {
+          "image": "/assets/imgs/team.jpg",
+          "name": "John Doe",
+          "position": "External Contractor",
+          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it"
+        },
+        {
+          "image": "/assets/imgs/team.jpg",
+          "name": "John Doe",
+          "position": "External Contractor",
+          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it"
+        },
+        {
+          "image": "/assets/imgs/team.jpg",
+          "name": "John Doe",
+          "position": "External Contractor",
+          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it"
+        }
+      ]
+    },
+    "section5": {
+      "heading": "Frequently Asked Questions",
+      "description": [
+        "Welcome to our FAQs page! We have compiled a list of commonly asked questions to provide",
+        "you with quick and informative answers"
+      ],
+      "faqs": [
+        {
+          "title": "How do you guys handle the property management?",
+          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it."
+        },
+        {
+          "title": "How do you guys handle the property management?",
+          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it."
+        },
+        {
+          "title": "How do you guys handle the property management?",
+          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it."
+        },
+        {
+          "title": "How do you guys handle the property management?",
+          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it."
+        }
+      ]
+    }
+  },
+  "contactPage": {
+    "heading": "Contact Us",
+    "backgroundImage": "/assets/imgs/properties-hero.png",
+    "cta": "Say something to start a live chat"
+  }
+}

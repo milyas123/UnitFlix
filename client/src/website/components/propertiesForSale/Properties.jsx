@@ -38,6 +38,7 @@ const Properties = ({
     pages,
     currentPage,
     changePage,
+    results,
 }) => {
   const { locations, developers, propertyTypes, propertyStatuses } = useAppContext();
   const [isOpen, setIsOpen] = useState(false);
@@ -173,7 +174,7 @@ const Properties = ({
             <p className="text-[20px] font-semibold md:text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[20px]">
               Showing Property Results
               <span className="text-[16px] font-light text-slate md:text-[9px] lg:text-[11px] xl:text-[13px] 2xl:text-[16px]">
-                ({properties?.length || 0})
+                ({properties?.length || 0} of {results})
               </span>
             </p>
             <div className="flex items-center justify-end gap-x-[0.5em]">

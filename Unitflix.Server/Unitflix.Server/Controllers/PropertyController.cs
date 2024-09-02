@@ -85,9 +85,7 @@ namespace Unitflix.Server.Controllers
         [HttpGet("all")]
         public async Task<ActionResult> GetAllProperties()
         {
-            List<Property> properties = await _dbContext
-                .Properties
-                .Where(p => p.ApprovalStatus == PropertyApprovalStatus.Approved)
+            List<Property> properties = await _dataManager.GetProperties()
                 .Include(property => property.Files.Where(f => f.Purpose == FilePurpose.Cover))
                 .ToListAsync();
             return Response.Message(_dataManager.IncludeData(properties)); 
@@ -101,9 +99,8 @@ namespace Unitflix.Server.Controllers
         [HttpGet("{id:int}")]
         public async Task<ActionResult> GetProperty(int id)
         {
-            List<Property> properties = await _dbContext
-                .Properties
-                .Where(p => p.Id == id && p.ApprovalStatus == PropertyApprovalStatus.Approved)
+            List<Property> properties = await _dataManager.GetProperties()
+                .Where(property => property.Id == id)
                 .Include(property => property.Overview)
                 .Include(property => property.Files)
                 .Include(property => property.Features)
@@ -135,9 +132,8 @@ namespace Unitflix.Server.Controllers
             {
                 return Response.Error("Location not found", 404);
             }
-            List<Property> properties = await _dbContext
-                .Properties
-                .Where(p => p.location == locationId && p.ApprovalStatus == PropertyApprovalStatus.Approved)
+            List<Property> properties = await _dataManager.GetProperties()
+                .Where(property => property.location == locationId)
                 .Include(property => property.Files)
                 .ToListAsync();
 
@@ -157,9 +153,8 @@ namespace Unitflix.Server.Controllers
                 return Response.Error("Developer not found", 404);
             }
 
-            List<Property> properties = await _dbContext
-                .Properties
-                .Where(p => p.Developer.HasValue && p.Developer.Value == developerId && p.ApprovalStatus == PropertyApprovalStatus.Approved)
+            List<Property> properties = await _dataManager.GetProperties()
+                .Where(p => p.Developer.HasValue && p.Developer.Value == developerId)
                 .Include(property => property.Files)
                 .ToListAsync();
 
@@ -179,9 +174,8 @@ namespace Unitflix.Server.Controllers
                 return Response.Error("Property Type not found", 404);
             }
 
-            List<Property> properties = await _dbContext
-                .Properties
-                .Where(p => p.PropertyType == propertyType && p.ApprovalStatus == PropertyApprovalStatus.Approved)
+            List<Property> properties = await _dataManager.GetProperties()
+                .Where(p => p.PropertyType == propertyType)
                 .Include(property => property.Files.Where(f => f.Purpose == FilePurpose.Cover))
                 .ToListAsync();
 
@@ -203,9 +197,8 @@ namespace Unitflix.Server.Controllers
                 return Response.Error("Invalid Property Category");
             }
 
-            List<Property> properties = await _dbContext
-                .Properties
-                .Where(p => p.Category == category && p.ApprovalStatus == PropertyApprovalStatus.Approved)
+            List<Property> properties = await _dataManager.GetProperties()
+                .Where(p => p.Category == category)
                 .Include(property => property.Files.Where(f => f.Purpose == FilePurpose.Cover))
                 .ToListAsync();
 
@@ -219,9 +212,8 @@ namespace Unitflix.Server.Controllers
         [HttpGet("featured")]
         public async Task<ActionResult> GetFeaturedProjects()
         {
-            List<Property> properties = await _dbContext
-                .Properties
-                .Where(p => p.Category == PropertyCategory.Project && p.ApprovalStatus == PropertyApprovalStatus.Approved && p.Featured)
+            List<Property> properties = await _dataManager.GetProperties()
+                .Where(p => p.Category == PropertyCategory.Project && p.Featured)
                 .Include(property => property.Files.Where(f => f.Purpose == FilePurpose.Cover))
                 .ToListAsync();
 
@@ -251,9 +243,7 @@ namespace Unitflix.Server.Controllers
             const int RESULTS_PER_PAGE = 12;
             int totalPages = 0;
 
-            List<Property> properties = await _dbContext
-                .Properties
-                .Where(property => property.ApprovalStatus == PropertyApprovalStatus.Approved)
+            List<Property> properties = await _dataManager.GetProperties()
                 .Include(property => property.Files)
                 .ToListAsync();
 
@@ -370,7 +360,7 @@ namespace Unitflix.Server.Controllers
                 }
             }
 
-
+            int totalProperties = properties.Count;
             if (!string.IsNullOrEmpty(page))
             {
                 int pageNumber = 0;
@@ -388,7 +378,7 @@ namespace Unitflix.Server.Controllers
                 }
             }
 
-            return Response.Message(new { properties = _dataManager.IncludeData(properties), pages = totalPages });
+            return Response.Message(new { properties = _dataManager.IncludeData(properties), pages = totalPages, results = totalProperties });
         }
 
         /// <summary>
@@ -670,7 +660,7 @@ namespace Unitflix.Server.Controllers
             }
 
             //Getting the property
-            Property? property = await _dbContext.Properties.Where(p => p.Id == id).FirstOrDefaultAsync();
+            Property? property = await _dbContext.Properties.Where(p => p.Id == id && !p.IsDeleted).FirstOrDefaultAsync();
 
             if(property == null)
             {
@@ -828,7 +818,7 @@ namespace Unitflix.Server.Controllers
             }
 
             //Getting the property
-            Property? property = await _dbContext.Properties.Where(p => p.Id == id).FirstOrDefaultAsync();
+            Property? property = await _dbContext.Properties.Where(p => p.Id == id && !p.IsDeleted).FirstOrDefaultAsync();
 
             if (property == null)
             {
@@ -1059,41 +1049,18 @@ namespace Unitflix.Server.Controllers
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> DeleteProperty(int id)
         {
-            Property? property = await _dbContext.Properties.Where(p => p.Id == id).FirstOrDefaultAsync();
+            Property? property = await _dbContext.Properties
+                .Where(p => p.Id == id && !p.IsDeleted && p.IsVerified && p.ApprovalStatus == PropertyApprovalStatus.Approved).FirstOrDefaultAsync();
 
             if(property == null)
             {
                 return Response.Error("Property not found", 404);
             }
 
-            _dbContext.Properties.Remove(property);
-
-            List<Overview> overviews = await _dbContext.Overviews.Where(t => t.PropertyId == id).ToListAsync();
-            _dbContext.Overviews.RemoveRange(overviews);
-
-            List<Feature> features = await _dbContext.Features.Where(f => f.PropertyId == id).ToListAsync();
-            _dbContext.Features.RemoveRange(features);
-
-            List<KeyHighlight> keyHighlights = await _dbContext.KeyHighlights.Where(k => k.PropertyId == id).ToListAsync();
-            _dbContext.KeyHighlights.RemoveRange(keyHighlights);
-
-            if(property.Category == PropertyCategory.Project)
-            {
-                List<PropertyDetail> propertyDetails = await _dbContext.PropertyDetails.Where(d => d.PropertyId == id).ToListAsync();
-                _dbContext.PropertyDetails.RemoveRange(propertyDetails);
-
-                List<PaymentPlanItem> paymentPlanItems = await _dbContext.PaymentPlanItems.Where(p => p.PropertyId == id).ToListAsync();
-                _dbContext.PaymentPlanItems.RemoveRange(paymentPlanItems);
-            }
-
-            List<File> files = await _dbContext.Files.Where(f => f.PropertyId == id).ToListAsync();
-            files.ForEach(file =>
-            {
-                FileHelpers.DeleteFile(_webHostEnvironment, file.Filename);
-            });
-            _dbContext.Files.RemoveRange(files);
+            //Setting the delete value for the property. This will ensure that the property becomes invisible to the users but still exist in the database
+            property.IsDeleted = true;
+            _dbContext.Properties.Update(property);
             _dbContext.SaveChanges();
-            _logger.LogInformation("{type} with id {propertyId} has been deleted by the Admin", property.Category == PropertyCategory.Project ? "Project" : "Property", property.Id);
             return Response.Message($"{(property.Category == PropertyCategory.Project ? "Project" : "Property")} deleted successfully");
         }
 

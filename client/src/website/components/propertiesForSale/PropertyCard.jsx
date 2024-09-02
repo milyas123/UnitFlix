@@ -14,17 +14,13 @@ import { MdOutlineLocationOn } from "react-icons/md";
 
 import { formatCurrency } from "@/lib/utils";
 import { useAppContext } from "@/AppContext";
-import LazyLoad from "react-lazyload";
-import Tag from "@/website/components/common/Tag.jsx";
-import FeaturedIcon from "@/website/components/common/FeaturedIcon.jsx";
 import PropertyTags from "@/website/components/common/PropertyTags.jsx";
 
 const PropertyCard = ({ property }) => {
   const { locations } = useAppContext();
   return (
     <Link to={`/property-details/${property?.id}`} reloadDocument className="contents">
-      <div
-          className="w-full relative overflow-hidden rounded-lg border border-lightGrey md:w-[90%] md:min-w-[150px] md:max-w-[200px] lg:w-[95%] lg:min-w-[225px] lg:max-w-[270px] xl:w-[92%] xl:min-w-[290px] xl:max-w-[320px] 2xl:w-[95%] 2xl:min-w-[345px] 2xl:max-w-[400px] h-[505px] md:h-[239px] lg:h-[286px] xl:h-[348.5px] 2xl:h-[469.75px]">
+      <div className="group w-full relative overflow-hidden rounded-lg border border-lightGrey md:w-[90%] md:min-w-[150px] md:max-w-[200px] lg:w-[95%] lg:min-w-[225px] lg:max-w-[270px] xl:w-[92%] xl:min-w-[290px] xl:max-w-[320px] 2xl:w-[95%] 2xl:min-w-[345px] 2xl:max-w-[400px] h-[505px] md:h-[239px] lg:h-[286px] xl:h-[348.5px] 2xl:h-[469.75px]">
         <style jsx>{`
           .property-card .swiper-pagination-bullet {
             background-color: #ffffff;
@@ -52,14 +48,12 @@ const PropertyCard = ({ property }) => {
           >
             {property?.files.map((image) => (
                 <SwiperSlide key={image.id} className="relative">
-                  <LazyLoad className='size-full'>
                     <img
                         src={image.url}
                         alt={`${image?.url}`}
                         className="size-full object-cover"
                     />
-                  </LazyLoad>
-                  <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+                  <div className="absolute inset-0 bg-black bg-opacity-50 group-hover:bg-opacity-20 transition-all duration-300 ease-in-out"></div>
                 </SwiperSlide>
             ))}
           </Swiper>

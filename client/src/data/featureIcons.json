@@ -18,5 +18,33 @@
   {
     "id": "double",
     "name": "Double"
+  },
+  {
+    "id": "security",
+    "name": "Security"
+  },
+  {
+    "id": "cycling-trail",
+    "name": "Cycling Trails"
+  },
+  {
+    "id": "gymnasium",
+    "name": "Gymnasium"
+  },
+  {
+    "id": "jogging-trails",
+    "name": "Jogging Trails"
+  },
+  {
+    "id": "play-area",
+    "name": "Kids Play Area"
+  },
+  {
+    "id": "multi-purpose-lounge",
+    "name": "Multi Purpose Lounge"
+  },
+  {
+    "id": "sports-court",
+    "name": "Sports Court"
   }
 ]

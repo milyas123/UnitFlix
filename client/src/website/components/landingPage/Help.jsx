@@ -1,45 +1,13 @@
 import React, { useState } from "react";
 import { Button } from "../ui/button";
 import HelpInfoCard from "./cards/HelpInfoCard";
+import website from "@/data/website.json";
 
 const Help = () => {
   const [selectedOption, setSelectedOption] = useState("Buy");
-  const options = ["Buy", "Sell", "Rent", "Manage"];
+  const options = Object.keys(website.landingPage.howCanWeHelp.options);
 
-  const contentArray = [
-    {
-      option: "Buy",
-      title: "Find out how much you can afford",
-      description:
-        "We'll help you estimate your budget range. Save to your buyer profile to help in your search.",
-      linkText: "Try our affordability calculator",
-      imgSrc: "/assets/imgs/spot-badge.png",
-    },
-    {
-      option: "Sell",
-      title: "Maximize your home's value",
-      description:
-        "Learn how to get the best price for your home. We'll guide you through the selling process.",
-      linkText: "Get a free home valuation",
-      imgSrc: "/assets/imgs/spot-badge.png",
-    },
-    {
-      option: "Rent",
-      title: "Find the perfect rental",
-      description:
-        "Discover rental properties that fit your needs and budget. Save your favorite listings.",
-      linkText: "Browse rental listings",
-      imgSrc: "/assets/imgs/spot-badge.png",
-    },
-    {
-      option: "Manage",
-      title: "Efficient property management",
-      description:
-        "Get tips and tools for managing your property effectively. Ensure your investment is well-maintained.",
-      linkText: "Explore management services",
-      imgSrc: "/assets/imgs/spot-badge.png",
-    },
-  ];
+  const contentArray = website.landingPage.howCanWeHelp.options[selectedOption];
 
   const handleButtonClick = (option) => {
     setSelectedOption(option);
@@ -49,15 +17,11 @@ const Help = () => {
     selectedOption !== option &&
     "bg-white border border-mirage text-mirage hover:text-white";
 
-  const selectedContent = contentArray.find(
-    (content) => content.option === selectedOption,
-  );
-
   return (
     <div className="flex h-auto py-[4.5rem] sm:py-0 items-center justify-center bg-white md:h-[370px] lg:max-h-[520px] lg:h-[50vh] lg:min-h-[440px] xl:min-h-[610px] xl:h-[100vh] 2xl:min-h-[680px] 2xl:h-[80vh] 2xl:max-h-[760px]">
       <div className="mx-auto flex w-full flex-col gap-2.5 px-2.5 md:w-[65%] md:gap-2 md:px-0 lg:gap-2.5 xl:gap-3.5 2xl:gap-4">
         <h1 className="text-center text-[30px] font-semibold md:text-[14px] lg:text-[18px] xl:text-[24px] 2xl:text-[30px]">
-          How can We Help
+          {website.landingPage.howCanWeHelp.title}
         </h1>
 
         <div className="flex flex-col items-center justify-center gap-8 md:gap-3 lg:gap-5 xl:gap-7 2xl:gap-8">
@@ -74,10 +38,8 @@ const Help = () => {
           </div>
 
           <div className="flex flex-col gap-5 md:flex-row">
-            {Array(3)
-              .fill()
-              .map((_, index) => (
-                <HelpInfoCard key={index} content={selectedContent} />
+            {contentArray .map((content, index) => (
+                <HelpInfoCard key={index} content={content} />
               ))}
           </div>
         </div>

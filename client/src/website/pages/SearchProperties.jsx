@@ -36,6 +36,7 @@ const SearchProperties = () => {
   const [location, setLocation] = useState(-1);
   const [pages, setPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
+  const [results, setResults] = useState(0);
 
   // search properties based on user selected options
   const handleSearch = async () => {
@@ -88,6 +89,7 @@ const SearchProperties = () => {
       const filteredProperties = response.data?.data?.properties;
       setPages(response.data?.data?.pages);
       setProperties(filteredProperties);
+      setResults(response.data?.data?.results);
     } catch (error) {
       console.error("Error fetching properties:", error);
     }
@@ -181,6 +183,9 @@ const SearchProperties = () => {
     if (category >= 0) {
       searchParams.set("category", category);
       searchParams.set('page', 1);
+    } else {
+      searchParams.set("page", 1);
+      searchParams.delete('category');
     }
 
     navigate(`/search?${searchParams.toString()}`);
@@ -235,6 +240,7 @@ const SearchProperties = () => {
                   pages={pages}
                   currentPage={currentPage}
                   changePage={onChangePage}
+                  results={results}
               />
         }
       </div>

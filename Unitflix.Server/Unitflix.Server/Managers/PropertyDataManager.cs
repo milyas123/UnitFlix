@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
 
+using Microsoft.EntityFrameworkCore;
+
 using Unitflix.Server.Database;
 using Unitflix.Server.DTOs;
+using Unitflix.Server.Enums;
 using Unitflix.Server.Models;
 
 namespace Unitflix.Server.Managers
@@ -31,6 +34,17 @@ namespace Unitflix.Server.Managers
         #endregion
 
         #region Public Methods
+
+        /// <summary>
+        /// Returns the list of the properties
+        /// </summary>
+        /// <returns></returns>
+        public IQueryable<Property> GetProperties()
+        {
+            return _dbContext
+                .Properties
+                .Where(p => p.ApprovalStatus == PropertyApprovalStatus.Approved && !p.IsDeleted);
+        }
 
         /// <summary>
         /// Includes the required data to the properties

@@ -1,11 +1,12 @@
 import { useState } from "react";
 import InquiryModal from "./InquiryModal";
+import website from "@/data/website.json";
 
 const StickyIcons = ({ showIcons }) => {
   const [showInquiryModal, setShowInquiryModal] = useState(false);
 
   const handleWhatsappClick = () => {
-    window.location.href = "https://wa.me/123456789";
+    window.location.href = `https://wa.me/${website.contact.whatsappNumber}`;
   };
 
   return (

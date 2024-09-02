@@ -46,8 +46,6 @@ namespace Unitflix.Server.DTOs
 
         public DateTime DateAdded { get; set; }
 
-        public bool IsVerified { get; set; }
-
         public string? Tags { get; set; }
 
         public Overview Overview { get; set; }

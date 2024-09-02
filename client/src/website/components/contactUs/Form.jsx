@@ -1,8 +1,9 @@
 import { CgPhone } from "react-icons/cg";
 import { MdEmail } from "react-icons/md";
-import { FaLocationDot } from "react-icons/fa6";
+import {FaFacebookF, FaLinkedinIn, FaLocationDot} from "react-icons/fa6";
 import { FaInstagram, FaTwitter, FaDiscord } from "react-icons/fa";
 import InquiryForm from "../common/InquiryForm";
+import website from "@/data/website.json";
 
 const Form = () => {
   return (
@@ -20,36 +21,36 @@ const Form = () => {
                 Contact Information
               </h1>
               <p className="text-[18px] text-slate md:text-[9px] lg:text-[11px] xl:text-[13px] 2xl:text-[16px]">
-                Say something to start a live chat!
+                {website.contactPage.cta}
               </p>
             </div>
 
             <div className="flex flex-col gap-y-7 text-[16px] md:gap-y-4 md:text-[8px] lg:gap-y-5 lg:text-[10px] xl:gap-y-7 xl:text-[13px] 2xl:gap-y-9 2xl:text-[16px]">
-              <div className="flex items-center justify-start gap-x-2 md:gap-x-2 lg:gap-3 2xl:gap-x-4">
+              <a href={`tel:${website.contact.phoneNumber}`} className="flex items-center justify-start gap-x-2 md:gap-x-2 lg:gap-3 2xl:gap-x-4">
                 <div className="w-5">
                   <CgPhone size={18} />
                 </div>
-                <p>+1012 3456 789</p>
-              </div>
+                <p>{website.contact.phoneNumberDisplay}</p>
+              </a>
 
-              <div className="flex items-center justify-start gap-x-2 md:gap-x-2 lg:gap-3 2xl:gap-x-4">
+              <a href={`mailto:${website.contact.email}`} className="flex items-center justify-start gap-x-2 md:gap-x-2 lg:gap-3 2xl:gap-x-4">
                 <div className="w-5">
                   <MdEmail size={18} />
                 </div>
-                <p>demo@gmail.com</p>
-              </div>
+                <p>{website.contact.email}</p>
+              </a>
 
               <div className="flex items-start justify-start gap-x-2 md:items-center md:gap-x-2 lg:gap-3 2xl:gap-x-4">
                 <div className="w-5">
                   <FaLocationDot size={18} />
                 </div>
                 <p>
-                  132 Dartmouth Street Boston, Massachusetts 02156 United States
+                  {website.contact.address}
                 </p>
               </div>
 
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1561.1318089412869!2d-71.07746119977328!3d42.346650524330826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e37a0d715622b3%3A0x5b2af19970952585!2s132%20Dartmouth%20St%2C%20Boston%2C%20MA%2002116%2C%20USA!5e0!3m2!1sen!2s!4v1719933206277!5m2!1sen!2s"
+                src={website.contact.mapsLocation}
                 className="rounded-lg"
                 style={{ border: 0 }}
                 aria-hidden="false"
@@ -58,15 +59,22 @@ const Form = () => {
             </div>
 
             <div className="mt-auto flex items-center gap-x-5 md:gap-x-2 lg:gap-x-3 xl:gap-x-3.5 2xl:gap-x-4">
-              <div className="cursor-pointer rounded-full bg-mirageLight p-2 transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage">
-                <FaTwitter />
-              </div>
-              <div className="cursor-pointer rounded-full bg-mirageLight p-2 transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage">
-                <FaInstagram />
-              </div>
-              <div className="cursor-pointer rounded-full bg-mirageLight p-2 transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage">
-                <FaDiscord />
-              </div>
+              <a href={website.footer.social.facebook}
+                 className="cursor-pointer rounded-full bg-mirageLight transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage p-1 md:p-1 2xl:p-2">
+                <FaFacebookF className="size-3.5 cursor-pointer md:size-2 lg:size-3 xl:size-4"/>
+              </a>
+              <a href={website.footer.social.x}
+                 className="cursor-pointer rounded-full bg-mirageLight transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage p-1 md:p-1 2xl:p-2">
+                <FaTwitter className="size-3.5 cursor-pointer md:size-2 lg:size-3 xl:size-4"/>
+              </a>
+              <a href={website.footer.social.instagram}
+                 className="cursor-pointer rounded-full bg-mirageLight transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage p-1 md:p-1 2xl:p-2">
+                <FaInstagram className="size-3.5 cursor-pointer md:size-2 lg:size-3 xl:size-4"/>
+              </a>
+              <a href={website.footer.social.linkedin}
+                 className="cursor-pointer rounded-full bg-mirageLight transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage p-1 md:p-1 2xl:p-2">
+                <FaLinkedinIn className="size-3.5 cursor-pointer md:size-2 lg:size-3 xl:size-4"/>
+              </a>
             </div>
           </div>
         </div>
@@ -81,7 +89,7 @@ const Form = () => {
               </p>
             </div>
 
-            <InquiryForm />
+            <InquiryForm/>
           </div>
         </div>
       </div>
