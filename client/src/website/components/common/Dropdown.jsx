@@ -25,7 +25,7 @@ const Dropdown = ({ options, placeholder, onChange, currentOption, fullLength, m
         }
       }
     }
-  }, [currentOption]);
+  }, [currentOption, options]);
 
   const handleOptionClick = (option) => {
     if(multi) {

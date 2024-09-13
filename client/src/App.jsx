@@ -1,7 +1,7 @@
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 
-import { Suspense, lazy } from "react";
+import {Suspense, lazy, useEffect} from "react";
 import { AppProvider } from "./AppContext";
 import { ToastContainer, Slide } from "react-toastify";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -30,6 +30,7 @@ import AdminSubmittedRequests from "@/admin/pages/AdminSubmittedRequests";
 import AdminEmailConfiguration from "@/admin/pages/AdminEmailConfiguration";
 
 function App() {
+
   return (
     <div className="font-poppins">
       <BrowserRouter>

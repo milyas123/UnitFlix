@@ -83,7 +83,7 @@ const GeneralInformation = ({ formData, handleChange, handleSelectChange, handle
         </div>
         <div className="w-full space-y-2.5">
           <label className="text-[16px] font-semibold">Status</label>
-          <div className="flex items-center justify-start gap-5">
+          <div className="flex items-center justify-start flex-wrap gap-5">
             {propertyStatuses.filter(status => status.category === 'Property').map((status) => (
                 <div
                     key={status.id}

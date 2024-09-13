@@ -42,7 +42,7 @@ const Discover = ({ projects }) => {
               </div>
 
               <Link
-                  to="/properties-for-rent?param=1"
+                  to="/search?page=1"
                   className="hidden items-center gap-1.5 border-b-2 border-transparent transition duration-200 ease-in-out hover:border-mirage md:flex"
               >
                 <p className="font-semibold text-mirage md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]">

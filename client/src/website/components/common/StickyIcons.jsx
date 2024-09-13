@@ -2,7 +2,7 @@ import { useState } from "react";
 import InquiryModal from "./InquiryModal";
 import website from "@/data/website.json";
 
-const StickyIcons = ({ showIcons }) => {
+const StickyIcons = ({ showIcons, propertyId }) => {
   const [showInquiryModal, setShowInquiryModal] = useState(false);
 
   const handleWhatsappClick = () => {
@@ -12,7 +12,7 @@ const StickyIcons = ({ showIcons }) => {
   return (
     <>
       <div
-        className={`fixed right-5 top-1/2 z-[1000] hidden -translate-y-1/2 transform flex-col items-center space-y-2 md:flex ${
+        className={`fixed right-5 top-1/2 z-[500] hidden -translate-y-1/2 transform flex-col items-center space-y-2 md:flex ${
           showIcons ? "show-icons" : "hide-icons"
         }`}
       >
@@ -30,7 +30,7 @@ const StickyIcons = ({ showIcons }) => {
         />
       </div>
       {showInquiryModal && (
-        <InquiryModal onClose={() => setShowInquiryModal(false)} />
+        <InquiryModal propertyId={propertyId} onClose={() => setShowInquiryModal(false)} />
       )}
     </>
   );

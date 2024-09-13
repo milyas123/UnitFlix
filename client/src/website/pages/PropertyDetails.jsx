@@ -137,7 +137,7 @@ const PropertyDetails = () => {
                 </div>
               </>
         }
-        <StickyIcons showIcons={showTopButton} />
+        <StickyIcons showIcons={showTopButton} propertyId={property?.id} />
         {showTopButton && <ScrollToTop />}
       </Layout>
     </>

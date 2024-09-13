@@ -99,7 +99,7 @@ const VerifyOTPModal = ({ propertyData, onClose, onOtpVerify }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="relative flex w-[64rem] items-center justify-between gap-x-7 rounded-xl bg-white p-6">
+      <div className="relative flex w-[95%] md:w-[64rem] items-center justify-between gap-x-7 rounded-xl bg-white p-6">
         <SquareX
           size={30}
           className="absolute right-4 top-4 cursor-pointer text-2xl font-bold text-gray-600 hover:text-gray-800"
@@ -108,11 +108,11 @@ const VerifyOTPModal = ({ propertyData, onClose, onOtpVerify }) => {
 
         <img
           src="/assets/imgs/otp.png"
-          className="h-[470px] w-1/2 rounded-xl object-cover"
+          className="h-[470px] w-1/2 rounded-xl object-cover hidden md:block"
           alt="OTP Verification"
         />
 
-        <div className="flex w-1/2 items-center justify-center">
+        <div className="flex w-full md:w-1/2 items-center justify-center">
           <div className="flex w-full flex-col justify-center gap-4 text-center">
             <h1 className="text-[30px] font-semibold">OTP Verification</h1>
             <div className="flex items-center justify-between gap-x-1.5">
@@ -121,7 +121,7 @@ const VerifyOTPModal = ({ propertyData, onClose, onOtpVerify }) => {
                   key={index}
                   id={`otp-input-${index}`}
                   type="number"
-                  className="flex size-[64px] items-center justify-center rounded-lg border-2 p-1.5 text-center text-[48px] font-medium text-border"
+                  className="flex size-[48px] md:size-[64px] items-center justify-center rounded-lg border-2 p-1.5 text-center text-[18px] md:text-[48px] font-medium text-border"
                   maxLength={1}
                   value={digit}
                   onChange={(e) => handleChange(e.target.value, index)}

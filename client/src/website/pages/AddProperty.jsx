@@ -63,6 +63,10 @@ const AddProperty = () => {
 
   const serverURL = import.meta.env.VITE_SERVER_URL;
 
+  useEffect(() => {
+    window.scrollTo(0, 0, {behavior: "smooth"});
+  }, [location.pathname]);
+
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData((prevData) => ({

@@ -125,7 +125,7 @@ const Filters = ({
         ))}
       </div>
       <div className="filters flex flex-grow flex-col justify-between items-center gap-y-8 rounded-lg bg-white p-5 shadow md:flex-row md:gap-y-0 md:rounded-none md:rounded-b-md md:rounded-r-md md:px-3 md:py-2 lg:rounded-b-lg lg:rounded-r-lg lg:py-2.5 xl:py-3.5 2xl:rounded-b-xl 2xl:rounded-r-xl 2xl:p-4">
-        <div className="space-y-2 border-b-2 md:w-[85px] md:space-y-1.5 md:border-b-0 md:border-r md:border-r-[#F1F1F1] md:text-[7px] lg:w-[100px] lg:space-y-1.5 lg:ps-0 lg:text-[9px] xl:w-[120px] xl:space-y-2.5 xl:text-[11px] 2xl:w-[145px] 2xl:text-[14px]">
+        <div className="space-y-2 border-b-2 w-[100%] md:w-[85px] md:space-y-1.5 md:border-b-0 md:border-r md:border-r-[#F1F1F1] md:text-[7px] lg:w-[100px] lg:space-y-1.5 lg:ps-0 lg:text-[9px] xl:w-[120px] xl:space-y-2.5 xl:text-[11px] 2xl:w-[145px] 2xl:text-[14px]">
           <p className="font-semibold text-mirage">{website.filters.text}</p>
           <input
             type="text"
@@ -136,7 +136,7 @@ const Filters = ({
             className="w-full border-b-2 border-transparent focus:border-b-hitGrey focus:outline-none"
           />
         </div>
-        <div className="space-y-2 border-b-2 md:w-[90px] md:space-y-1.5 md:border-b-0 md:border-r md:border-r-[#F1F1F1] md:ps-3.5 md:text-[7px] lg:w-[100px] lg:space-y-1.5 lg:ps-0 lg:text-[9px] xl:w-[120px] xl:space-y-2.5 xl:text-[11px] 2xl:w-[145px] 2xl:text-[14px]">
+        <div className="space-y-2 border-b-2 w-[100%] md:w-[90px] md:space-y-1.5 md:border-b-0 md:border-r md:border-r-[#F1F1F1] md:ps-3.5 md:text-[7px] lg:w-[100px] lg:space-y-1.5 lg:ps-0 lg:text-[9px] xl:w-[120px] xl:space-y-2.5 xl:text-[11px] 2xl:w-[145px] 2xl:text-[14px]">
           <p className="font-semibold text-mirage">{website.filters.propertyType}</p>
           <Dropdown
             options={propertyTypes}
@@ -145,7 +145,7 @@ const Filters = ({
             onChange={setSelectedPropertyType}
           />
         </div>
-        <div className="space-y-2 border-b-2 md:w-[90px] md:space-y-1.5 md:border-b-0 md:border-r md:border-r-[#F1F1F1] md:ps-3.5 md:text-[7px] lg:w-[100px] lg:space-y-1.5 lg:ps-0 lg:text-[9px] xl:w-[120px] xl:space-y-2.5 xl:text-[11px] 2xl:w-[145px] 2xl:text-[14px]">
+        <div className="space-y-2 border-b-2 w-[100%] md:w-[90px] md:space-y-1.5 md:border-b-0 md:border-r md:border-r-[#F1F1F1] md:ps-3.5 md:text-[7px] lg:w-[100px] lg:space-y-1.5 lg:ps-0 lg:text-[9px] xl:w-[120px] xl:space-y-2.5 xl:text-[11px] 2xl:w-[145px] 2xl:text-[14px]">
           <p className="font-semibold text-mirage">{website.filters.location}</p>
           <Dropdown
             options={locations}
@@ -154,7 +154,7 @@ const Filters = ({
             onChange={setSelectedLocation}
           />
         </div>
-        <div className="space-y-2 border-b-2 md:w-[90px] md:space-y-1.5 md:border-b-0 md:border-r md:border-r-[#F1F1F1] md:ps-3.5 md:text-[7px] lg:w-[100px] lg:space-y-1.5 lg:ps-0 lg:text-[9px] xl:w-[120px] xl:space-y-2.5 xl:text-[11px] 2xl:w-[145px] 2xl:text-[14px]">
+        <div className="space-y-2 border-b-2 w-[100%] md:w-[90px] md:space-y-1.5 md:border-b-0 md:border-r md:border-r-[#F1F1F1] md:ps-3.5 md:text-[7px] lg:w-[100px] lg:space-y-1.5 lg:ps-0 lg:text-[9px] xl:w-[120px] xl:space-y-2.5 xl:text-[11px] 2xl:w-[145px] 2xl:text-[14px]">
           <p className="font-semibold text-mirage">{website.filters.developer}</p>
           <Dropdown
             options={developers}
@@ -164,7 +164,7 @@ const Filters = ({
           />
         </div>
 
-        <div className="space-y-3.5 md:space-y-2 md:border-r md:border-r-[#F1F1F1] md:px-3.5 md:text-[7px] lg:space-y-3 lg:pe-4 lg:text-[9px] xl:space-y-4 xl:pe-5 xl:text-[11px] 2xl:space-y-4 2xl:text-[14px]">
+        <div className="space-y-3.5 md:space-y-2 md:border-r md:border-r-[#F1F1F1] md:px-3.5 md:text-[7px] lg:space-y-3 lg:pe-4 lg:text-[9px] xl:space-y-4 xl:pe-5 xl:text-[11px] 2xl:space-y-4 2xl:text-[14px] w-[100%] md:w-[150px] lg:w-[180px] xl:w-[230px] 2xl:w-[300px]">
           <div className="flex items-center justify-between">
             <p className="font-semibold text-mirage">{website.filters.price}</p>
             <div className="flex items-center text-[12px] md:hidden">

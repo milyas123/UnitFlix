@@ -14,7 +14,7 @@ const PaymentPlan = ({ paymentPlanData }) => {
   }, []);
 
   return (
-    <div className="mt-5 md:mt-7 lg:mt-10 xl:mt-12 2xl:mt-14">
+    <div className="mt-5 md:mt-7 lg:mt-10 xl:mt-12 2xl:mt-14 max-w-[100vw] overflow-hidden md:overflow-visible">
       <h1 className="text-[24px] font-medium md:text-[12px] lg:text-[15px] xl:text-[18px] 2xl:text-[24px]">
         Payment Plan
       </h1>

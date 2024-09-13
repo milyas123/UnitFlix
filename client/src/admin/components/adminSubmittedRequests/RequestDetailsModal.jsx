@@ -64,9 +64,9 @@ const RequestDetailsModal = ({ request, onClose }) => {
             </div>
             <div className="space-y-2">
               <p className="text-[14px] text-davyGrey">Email</p>
-              <p className="text-[16px] font-medium">
+              <a href={`mailto:${request?.userDetail?.email}`} className="text-[16px] font-medium block mt-[0.25em]">
                 {request?.userDetail?.email}
-              </p>
+              </a>
             </div>
             <div className="space-y-2">
               <p className="text-[14px] text-davyGrey">Phone#</p>

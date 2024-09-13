@@ -8,14 +8,18 @@ const Layout = ({ children }) => {
     const location = useLocation();
 
     useEffect(() => {
-        window.scrollTo(0, 0, {behavior: "smooth"});
-    }, [location]);
+        setTimeout(() => {
+            window.scrollTo(0, 0, {behavior: "smooth"});
+        }, 100)
+    }, [location.pathname]);
 
   return (
     <>
       <Navbar />
       <main>{children}</main>
-      <Footer />
+      <div className='mt-[5rem]'>
+          <Footer />
+      </div>
     </>
   );
 };
