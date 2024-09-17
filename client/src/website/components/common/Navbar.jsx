@@ -53,7 +53,7 @@ const Navbar = () => {
               <Link to="/">
                 <img
                   src={website.navbar.logo}
-                  className="object-cover md:h-[40px] md:w-[42px] lg:h-[50px] lg:w-[52px] xl:h-[63px] xl:w-[65px] 2xl:h-[80px] 2xl:w-[82px]"
+                  className="object-cover md:h-[40px] md:w-[42px] lg:h-[50px] lg:w-[52px] xl:h-[63px] xl:w-[65px] 2xl:h-[85px] 2xl:w-[85px]"
                   alt="company-logo"
                 />
               </Link>

@@ -133,7 +133,7 @@ const Filters = ({
             placeholder="Enter Keywords"
             value={text}
             onChange={(e) => setText(e.target.value)}
-            className="w-full border-b-2 border-transparent focus:border-b-hitGrey focus:outline-none"
+            className="w-full border-b-2 border-transparent focus:border-b-hitGrey focus:outline-none pe-2"
           />
         </div>
         <div className="space-y-2 border-b-2 w-[100%] md:w-[90px] md:space-y-1.5 md:border-b-0 md:border-r md:border-r-[#F1F1F1] md:ps-3.5 md:text-[7px] lg:w-[100px] lg:space-y-1.5 lg:ps-0 lg:text-[9px] xl:w-[120px] xl:space-y-2.5 xl:text-[11px] 2xl:w-[145px] 2xl:text-[14px]">
