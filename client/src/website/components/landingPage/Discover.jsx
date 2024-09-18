@@ -97,8 +97,8 @@ const Discover = ({ projects }) => {
                     "--swiper-pagination-color": "#181a20",
                   }}
               >
-                {projects?.map((project) => (
-                    <SwiperSlide key={window.crypto.randomUUID()}>
+                {projects?.map((project, index) => (
+                    <SwiperSlide key={index}>
                       <ProjectCard project={project} isLimited={false} onRegisterInterest={(e) => registerInterest(e, project)} />
                     </SwiperSlide>
                 ))}

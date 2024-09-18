@@ -83,10 +83,7 @@ const Table = ({
         data && data.length > 0 ?
             <tbody className="flex flex-col gap-y-2.5">
             {data?.map((item, index) => (
-                <tr
-                    key={window.crypto.randomUUID()}
-                    className="flex items-center divide-x divide-platinum bg-white py-2 text-[14px]"
-                >
+                <tr key={index} className="flex items-center divide-x divide-platinum bg-white py-2 text-[14px]">
                   <td className="w-[3%] text-center">{index + 1}</td>
                   <td className="w-[25%] px-4 text-start">
                     <div className="flex items-center gap-x-4">

@@ -65,8 +65,8 @@ const SimilarProjects = ({ relatedProjects }) => {
                     modules={[Navigation]}
                     className="h-[450px] md:h-[220px] lg:h-[260px] xl:h-[330px] 2xl:h-[420px]"
                 >
-                    {relatedProjects?.map((project) => (
-                        <SwiperSlide key={window.crypto.randomUUID()}>
+                    {relatedProjects?.map((project, index) => (
+                        <SwiperSlide key={index}>
                             <ProjectCard project={project} onRegisterInterest={(e) => registerInterest(e, project)}  />
                         </SwiperSlide>
                     ))}
