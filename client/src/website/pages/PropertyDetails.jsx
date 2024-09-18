@@ -83,7 +83,7 @@ const PropertyDetails = () => {
                 <Spinner />
               </div> :
               <>
-                <Hero
+                <Hero purpose={property.purpose}
                     coverImage={property?.files.filter(file => file.purpose === 0).map(file => file.url)[0]}
                     title={property?.title}
                     location={property?.propertyLocation?.name}
