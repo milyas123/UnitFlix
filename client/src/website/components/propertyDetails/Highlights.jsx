@@ -9,7 +9,7 @@ const Highlights = ({ highlights }) => {
       <div className="flex flex-wrap justify-center gap-4 md:justify-start md:gap-2 lg:gap-2.5 xl:gap-3 2xl:gap-4">
         {highlights?.map((highlight) => (
           <HighlightCard
-            key={crypto.randomUUID()}
+            key={window.crypto.randomUUID()}
             title={highlight.title}
             description={highlight.description}
           />

@@ -40,7 +40,7 @@ const PropertyInformation = ({ formData, handleChange, handleSelectChange }) => 
           <div className="flex flex-wrap items-center gap-x-3 md:gap-y-1.5 lg:gap-y-2 xl:gap-y-3 2xl:gap-y-4">
             {propertyTypes.map((type) => (
               <div
-                key={crypto.randomUUID()}
+                key={window.crypto.randomUUID()}
                 className={`flex cursor-pointer items-center gap-x-1 rounded-md border-2 border-mirage border-opacity-0 px-1.5 py-1 transition-all duration-300 ease-in-out hover:border-opacity-100 md:gap-x-0.5 md:px-1 md:py-0.5 lg:gap-x-1 lg:px-1.5 lg:py-1 xl:gap-x-1.5 xl:px-2 xl:py-1.5 2xl:px-3 2xl:py-2 ${
                   formData?.propertyType === type?.id && "bg-mirage text-white"
                 }`}

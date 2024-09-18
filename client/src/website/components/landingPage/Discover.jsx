@@ -98,7 +98,7 @@ const Discover = ({ projects }) => {
                   }}
               >
                 {projects?.map((project) => (
-                    <SwiperSlide key={crypto.randomUUID()}>
+                    <SwiperSlide key={window.crypto.randomUUID()}>
                       <ProjectCard project={project} isLimited={false} onRegisterInterest={(e) => registerInterest(e, project)} />
                     </SwiperSlide>
                 ))}
