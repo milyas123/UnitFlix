@@ -26,6 +26,7 @@ string? connectionString = builder.Configuration.GetSection("ConnectionStrings")
 builder.Services.Configure<AdminOptions>(builder.Configuration.GetSection("Credentials").GetSection("admin"));
 builder.Services.Configure<JWTOptions>(builder.Configuration.GetSection("JWT"));
 builder.Services.Configure<EmailOptions>(builder.Configuration.GetSection("Email"));
+builder.Services.Configure<ImageOption>(builder.Configuration.GetSection("Image"));
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {

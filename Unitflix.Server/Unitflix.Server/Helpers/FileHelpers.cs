@@ -34,7 +34,7 @@ namespace Unitflix.Server.Helpers
         /// <param name="protocol">The protocol at which server is running</param>
         /// <param name="host">The hostname of the server to use in file url</param>
         /// <returns></returns>
-        public static async Task<FileSaveResult?> Save(this IFormFile file, IWebHostEnvironment webHost, string protocol, string host = "localhost:7001")
+        public static async Task<FileSaveResult?> Save(this IFormFile file, IWebHostEnvironment webHost, string baseUrl)
         {
             string directory = Path.Join(webHost.WebRootPath, DATA_FOLDER);
             EnsureDirectory(directory);
@@ -46,7 +46,7 @@ namespace Unitflix.Server.Helpers
                 {
                     await file.OpenReadStream().CopyToAsync(stream);
                 }
-                return new FileSaveResult(){ FileName = fileName, FilePath = path, Url = $"{protocol}://{host}/{DATA_FOLDER}/{fileName}", Type = Path.GetExtension(fileName) };
+                return new FileSaveResult(){ FileName = fileName, FilePath = path, Url = $"{baseUrl}/{DATA_FOLDER}/{fileName}", Type = Path.GetExtension(fileName) };
             } catch(Exception exc)
             {
                 Logger.ConsoleLog(exc.Message, MessageType.Error);

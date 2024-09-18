@@ -5,6 +5,7 @@ using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 using System.Globalization;
 using System.Text.RegularExpressions;
@@ -16,6 +17,7 @@ using Unitflix.Server.Enums;
 using Unitflix.Server.Helpers;
 using Unitflix.Server.Managers;
 using Unitflix.Server.Models;
+using Unitflix.Server.Options;
 using Unitflix.Server.Results;
 using Unitflix.Server.Validators;
 
@@ -42,6 +44,8 @@ namespace Unitflix.Server.Controllers
 
         private ILogger<RequestsController> _logger;
 
+        private ImageOption _imageOption;
+
         #endregion
 
         #region Constructor
@@ -55,6 +59,7 @@ namespace Unitflix.Server.Controllers
             IWebHostEnvironment webHostEnvironment,
             EmailManager emailManager,
             PropertyDataManager dataManager,
+            IOptions<ImageOption> imageOptions,
             ILogger<RequestsController> logger)
         {
             _dbContext = dbContext;
@@ -64,6 +69,7 @@ namespace Unitflix.Server.Controllers
             _emailManager = emailManager;
             _dataManager = dataManager;
             _logger = logger;
+            _imageOption = imageOptions.Value;
         }
 
         #endregion
@@ -117,7 +123,7 @@ namespace Unitflix.Server.Controllers
             userDetail.PropertyId = property.Id;
             _dbContext.UserDetails.Add(userDetail);
 
-            FileSaveResult? result = await writeDTO.CoverImage.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
+            FileSaveResult? result = await writeDTO.CoverImage.Save(_webHostEnvironment, _imageOption.Url);
 
             if (result != null)
             {
@@ -134,7 +140,7 @@ namespace Unitflix.Server.Controllers
 
             writeDTO.GalleryImages.ForEach(async galleryImage =>
             {
-                FileSaveResult? result = await galleryImage.Save(_webHostEnvironment, Request.Scheme, Request.Host.ToString());
+                FileSaveResult? result = await galleryImage.Save(_webHostEnvironment, _imageOption.Url);
                 if (result != null)
                 {
                     File file = new File()
