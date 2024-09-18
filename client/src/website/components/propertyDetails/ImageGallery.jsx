@@ -72,9 +72,9 @@ const ImageGallery = ({ imgFiles }) => {
         </div>
       </div>
 
-      <div className="mt-4 flex flex-col gap-5 md:mt-2 md:flex-row md:gap-0 lg:mt-3 xl:mt-5 2xl:mt-6">
+      <div className="mt-4 flex flex-col gap-5 md:mt-2 md:flex-row lg:mt-3 xl:mt-5 2xl:mt-6">
         <div className={`w-full space-y-5 md:space-y-2.5 lg:space-y-3 2xl:space-y-5 ${images && images[7] ? 'md:w-[69.5%]' : 'md:w-full'}`}>
-          <div className="flex flex-col justify-between gap-5 md:flex-row md:gap-0">
+          <div className="flex flex-col justify-between gap-5 md:flex-row">
             {
               images && images[0] ?
                   <div
@@ -93,7 +93,7 @@ const ImageGallery = ({ imgFiles }) => {
             {
               images && images[1] ?
                   <div
-                      className="h-[300px] overflow-hidden rounded-lg md:ms-auto md:h-[120px] md:w-[66%] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]"
+                      className="h-[300px] overflow-hidden rounded-lg md:h-[120px] md:w-[66%] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]"
                       onClick={() => openModal(1)}
                   >
                     <LazyLoad className='h-full w-full' placeholder={<SpinnerContainer />}>
@@ -106,7 +106,7 @@ const ImageGallery = ({ imgFiles }) => {
                   </div> : <></>
             }
           </div>
-          <div className="flex flex-col justify-between gap-5 md:flex-row md:gap-0">
+          <div className="flex flex-col justify-between gap-5 md:flex-row">
             {
               images && images[2] ?
                   <div
@@ -153,7 +153,7 @@ const ImageGallery = ({ imgFiles }) => {
                   </div> : <></>
             }
           </div>
-          <div className="flex flex-col justify-between gap-5 md:flex-row md:gap-0">
+          <div className="flex flex-col justify-between gap-5 md:flex-row">
             {
               images && images[5] ?
                   <div
@@ -172,7 +172,7 @@ const ImageGallery = ({ imgFiles }) => {
             {
               images && images[6] ?
                   <div
-                      className="h-[300px] w-full overflow-hidden rounded-lg md:ms-auto md:h-[120px] md:w-[32%] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]"
+                      className="h-[300px] w-full overflow-hidden rounded-lg md:h-[120px] md:w-[32%] md:rounded-sm lg:h-[160px] xl:h-[200px] xl:rounded-lg 2xl:h-[240px]"
                       onClick={() => openModal(6)}
                   >
                     <LazyLoad className='h-full w-full' placeholder={<SpinnerContainer />}>
@@ -189,7 +189,7 @@ const ImageGallery = ({ imgFiles }) => {
         {
           images && images[7] ?
               <div
-                  className="h-[300px] w-full overflow-hidden rounded-lg md:ms-auto md:h-auto md:w-[29%] md:rounded-sm xl:rounded-lg"
+                  className="h-[300px] w-full overflow-hidden rounded-lg md:h-auto md:w-[29%] md:rounded-sm xl:rounded-lg"
                   onClick={() => openModal(7)}
               >
                 <LazyLoad className='h-full w-full' placeholder={<SpinnerContainer />}>
