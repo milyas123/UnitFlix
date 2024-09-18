@@ -18,6 +18,7 @@ using Unitflix.Server.Validators;
 using Serilog;
 using Quartz;
 using Unitflix.Server.Services;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -147,7 +148,11 @@ seeders.ForEach(seeder =>
 });
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions()
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath, "public")),
+    RequestPath = "/public"
+});
 
 // Use CORS
 app.UseCors();

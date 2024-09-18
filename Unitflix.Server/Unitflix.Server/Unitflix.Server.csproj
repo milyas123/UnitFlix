@@ -7,6 +7,64 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="public\0771f519-b75d-46d6-b9f9-b59016a16126-p7.jpg" />
+    <Content Include="public\08249cde-3690-47c1-9a23-8380d22eaabf-p3.jpg" />
+    <Content Include="public\0a72c97a-b3cf-404d-ae22-6d410363cc3e-property.jpg" />
+    <Content Include="public\0f79d0bb-3066-4690-b095-9a891bcc8ab9-p8.jpg" />
+    <Content Include="public\10f90b83-b251-4d83-85bb-c8e563caafc3-p4.jpg" />
+    <Content Include="public\1c2cfce1-8b59-4dfe-823f-3a848f16188f-Offer+Creation+Checklist.pdf" />
+    <Content Include="public\1c84ad7a-5b61-48de-ab93-17b1f2ec5071-Offer+Creation+Checklist.pdf" />
+    <Content Include="public\2024-09-02-08-24-24-ground.jpeg" />
+    <Content Include="public\2024-09-02-08-24-24-Poweder.jpeg" />
+    <Content Include="public\2024-09-02-08-40-29-geometric-dark-background-with-gradient-shapes-composition-good-for-posters-design-illustration-vector.jpg" />
+    <Content Include="public\2024-09-02-08-40-29-ground.jpeg" />
+    <Content Include="public\2131c6de-158f-48a4-ac21-a8600915bd04-property.jpg" />
+    <Content Include="public\219a1d19-349d-40a2-93c8-01e66db7f000-p5.jpg" />
+    <Content Include="public\23ee4b85-7e2b-40d8-84a3-a15b5635642b-property.jpg" />
+    <Content Include="public\36f47f8b-5976-4df6-b298-cbf1da209ba9-p5.jpg" />
+    <Content Include="public\3ebb89e6-6f0a-4754-894d-0a6940580325-Poster Design Process.pdf" />
+    <Content Include="public\411a7929-1022-4132-acca-2598c97a0730-p3.jpg" />
+    <Content Include="public\42d2bab2-c404-4f68-b9d9-810c405469fa-p5.jpg" />
+    <Content Include="public\449e5667-e01f-4b47-b0b2-7d2deac94c20-p3.jpg" />
+    <Content Include="public\48361331-4dbc-4d6d-b54a-6ba6f975bdd0-p6.jpg" />
+    <Content Include="public\4bbac96b-2278-4e9b-9b85-2eebf8c547be-p8.jpg" />
+    <Content Include="public\4c1f5291-2c6f-4a6a-991d-24cf204e82d2-geometric-dark-background-with.jpg" />
+    <Content Include="public\5619a739-ddfb-495a-ae72-59d93ae8384e-property.jpg" />
+    <Content Include="public\5dcd0703-a7b5-4290-800d-2aafc10c64a6-geometric-dark-background-with.jpg" />
+    <Content Include="public\5df9e47c-f18f-4ada-87d2-272432f9d09b-p2.jpg" />
+    <Content Include="public\62b25d7e-e968-4de3-a00b-52d2ebe95d93-p5.jpg" />
+    <Content Include="public\63c0dfc2-9382-4568-a36a-29d1718de89c-p4.jpg" />
+    <Content Include="public\7210fa8d-3a0b-4ef1-bb1a-03dbd84fc685-p6.jpg" />
+    <Content Include="public\79f97978-8571-4195-9924-69f54272ed3c-p8.jpg" />
+    <Content Include="public\83f460fd-a14f-402a-97f9-5a6b6385bd7a-p5.jpg" />
+    <Content Include="public\84deb206-3e0b-43cb-89b5-1e8a76809c46-Bonus-Creation-Checklist.pdf" />
+    <Content Include="public\8c59da9c-8d7d-4a7f-8c50-c1becbf2d27f-p7.jpg" />
+    <Content Include="public\9a1d6f9f-30c9-42dd-8a98-75a14a510605-6 Paxs Sv Ticket.pdf" />
+    <Content Include="public\9ae268ee-2f1c-4ed8-b85a-234b059f87ac-p8.jpg" />
+    <Content Include="public\9df9dc3b-2c21-4c5b-964d-144024a5535e-Pricing-Value-Checklist.pdf" />
+    <Content Include="public\9fa5af83-3b40-40f3-a9fa-07d67b467e28-p4.jpg" />
+    <Content Include="public\9fb22d56-2f10-4ed2-9530-d55832c8adfe-p8.jpg" />
+    <Content Include="public\a4be3a98-7111-4231-b31e-3f2c938cdcdf-p7.jpg" />
+    <Content Include="public\a60d720c-79bf-4c47-aa2b-9cec40b07065-p9.jpg" />
+    <Content Include="public\a611c3bf-fb37-4499-822e-132350e39cc9-p5.jpg" />
+    <Content Include="public\b51e8f8b-885f-42ec-a513-7b40bce616eb-p6.jpg" />
+    <Content Include="public\ba3d1f57-7661-4668-a818-b9d2ecdc72c2-ground.jpeg" />
+    <Content Include="public\bb4abd7d-1cc1-4318-9024-6eef21abaa3d-p7.jpg" />
+    <Content Include="public\bbd0ac85-cc2e-4fc3-b158-4b695a5e4e3f-p6.jpg" />
+    <Content Include="public\c160b8b6-f4ea-4f3e-b142-3419ca302deb-p7.jpg" />
+    <Content Include="public\c5d08b68-4370-48dd-a618-dff814441f51-p7.jpg" />
+    <Content Include="public\cb427f23-5cb9-4a1b-a1aa-7610e4a381d0-p2.jpg" />
+    <Content Include="public\d00820b6-e7f9-452f-a2d0-eaf45d0d07bc-p8.jpg" />
+    <Content Include="public\d328ba48-484e-404e-ac8e-74535e92d875-p1.jpg" />
+    <Content Include="public\dfa13878-eb22-4a04-8108-79b1c69285fd-p3.jpg" />
+    <Content Include="public\e0aaab3d-c7f2-4388-b8e0-d1f121aec707-p3.jpg" />
+    <Content Include="public\e69b06e8-65d6-4ac8-9d60-c0f9dcc5be1d-p4.jpg" />
+    <Content Include="public\f412ad9d-5777-4dad-a6e5-e68ebfb10caf-p8.jpg" />
+    <Content Include="public\f9acba70-064a-4f41-91e8-0ac8dc4d9ac4-p6.jpg" />
+    <Content Include="public\fc3a1d1b-e3bb-43e6-9616-29cedf8044f2-p6.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
     <PackageReference Include="MailKit" Version="4.7.1.1" />
@@ -27,7 +85,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\" />
-    <Folder Include="wwwroot\public\" />
+    <Folder Include="public\" />
   </ItemGroup>
 
 </Project>
