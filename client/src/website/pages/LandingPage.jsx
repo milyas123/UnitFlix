@@ -135,7 +135,7 @@ const LandingPage = () => {
                 </div>
                 :
                 properties.length > 0 ?
-                    <Discover projects={properties}/> : <></>
+                    <Discover projects={properties}/> : <div className='h-[350px] md:h-[0]'></div>
           }
         </div>
         <motion.div variants={variants} initial={'initial'} whileInView={'inView'} viewport={{once: true}}>
