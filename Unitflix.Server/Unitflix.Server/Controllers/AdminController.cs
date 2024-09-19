@@ -222,6 +222,42 @@ namespace Unitflix.Server.Controllers
             return Response.Message(new { configuration = readDTO });
         }
 
+        /// <summary>
+        /// Changes the admin password
+        /// </summary>
+        /// <returns></returns>
+        [Authorize(Roles = "Admin")]
+        [HttpPost("password/change")]
+        public async Task<ActionResult> UpdatePassword([FromBody]PasswordChangeDTO dto)
+        {
+            if(dto == null || string.IsNullOrEmpty(dto.Password) || string.IsNullOrEmpty(dto.CurrentPassword))
+            {
+                return Response.Error("Invalid Data");
+            }
+
+            //Finding the admin user
+            User? user = await _dbContext
+                .Users
+                .Where(user => user.Email == "admin@gmail.com")
+                .FirstOrDefaultAsync();
+
+            if(user == null)
+            {
+                return Response.Error("No user exists");
+            }
+
+            IdentityResult result = await _userManager.ChangePasswordAsync(user, dto.CurrentPassword, dto.Password);
+
+            if(result.Succeeded)
+            {
+                return Response.Message("Password Changed Successfully");
+            }
+            else
+            {
+                return Response.Error(result.Errors.Select(error => error.Description).ToList());
+            }
+        }
+
         #endregion
     }
 }

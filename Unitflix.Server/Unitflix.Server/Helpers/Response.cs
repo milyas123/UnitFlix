@@ -37,6 +37,19 @@ namespace Unitflix.Server.Helpers
         }
 
         /// <summary>
+        /// Returns an error response
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public static ContentResult Error(this HttpResponse response, List<string> errors, int statusCode = 400)
+        {
+            ContentResult result = new ContentResult();
+            result.StatusCode = statusCode;
+            result.Content = JsonConvert.SerializeObject(new { errors = errors });
+            return result;
+        }
+
+        /// <summary>
         /// Returns a message response
         /// </summary>
         /// <param name="message"></param>
