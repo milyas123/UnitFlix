@@ -11,8 +11,8 @@ import axios from "axios";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Spinner from "@/website/components/common/Spinner.jsx";
 
-const sliderMinValue = 50000;
-const sliderMaxValue = 5000000;
+const sliderMinValue = 0;
+const sliderMaxValue = 500000000;
 const serverURL = import.meta.env.VITE_SERVER_URL;
 
 const SearchProperties = () => {

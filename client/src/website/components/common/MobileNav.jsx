@@ -40,12 +40,12 @@ const MobileNav = ({ onClose, isVisible }) => {
       <div
         className={`absolute z-[600] flex h-[90vh] w-[80%] flex-col rounded-e-md bg-black text-white ${animationClass}`}
       >
-        <div className="flex flex-col gap-y-8">
+        <div className="flex flex-col gap-y-8 mt-2">
           <div className="mx-auto flex w-[90%] items-center justify-between">
             <Link to="/">
               <img
                 src={website.navbar.logo}
-                className="h-[79px] w-[82px] object-cover"
+                className="h-[70px] w-[70px] object-contain"
                 alt="company-logo"
               />
             </Link>
@@ -60,7 +60,7 @@ const MobileNav = ({ onClose, isVisible }) => {
             {buttonItems.map((item, index) => (
               <Link to={item.link} key={index}>
                 <Button className="h-[3rem] w-full justify-start rounded-lg border-transparent bg-white bg-opacity-20 px-2 text-[14px] text-white hover:bg-white hover:text-mirage">
-                  <RxDash size={25} /> {item.name}
+                  {item.name}
                 </Button>
               </Link>
             ))}

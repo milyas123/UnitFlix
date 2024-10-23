@@ -23,10 +23,10 @@ const PropertyTags = ({property, details}) => {
             {
                 details ?
                     <Tag color={property.purpose === 0 ? '#1ECA8C' : '#1560bd'}>
-                        {property.purpose === 0 ? 'Buy' : 'Rent'}
+                        {property.purpose === 0 ? 'For Sale' : 'For Rent'}
                     </Tag> :
                     <Tag color={property.purpose === 0 ? '#1ECA8C' : '#1560bd'} textColor={'white'}>
-                        {property.purpose === 0 ? 'Buy' : 'Rent'}
+                        {property.purpose === 0 ? 'For Sale' : 'For Rent'}
                     </Tag>
             }
         </div>

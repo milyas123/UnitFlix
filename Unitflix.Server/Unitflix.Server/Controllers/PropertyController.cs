@@ -216,10 +216,10 @@ namespace Unitflix.Server.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("featured")]
-        public async Task<ActionResult> GetFeaturedProjects()
+        public async Task<ActionResult> GetFeaturedProperties()
         {
             List<Property> properties = await _dataManager.GetProperties()
-                .Where(p => p.Category == PropertyCategory.Project && p.Featured)
+                .Where(p => p.Featured)
                 .Include(property => property.Files.Where(f => f.Purpose == FilePurpose.Cover))
                 .ToListAsync();
 

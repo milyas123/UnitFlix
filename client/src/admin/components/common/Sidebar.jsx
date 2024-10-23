@@ -67,7 +67,7 @@ const Sidebar = () => {
         >
           <img
             src="/assets/imgs/Logo.png"
-            className={`size-[50px] cursor-pointer object-cover duration-500 ${
+            className={`size-[70px] cursor-pointer object-contain duration-500 ${
               isSideBarOpen && "rotate-[360deg]"
             }`}
             alt="company-logo"

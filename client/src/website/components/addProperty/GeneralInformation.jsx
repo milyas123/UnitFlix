@@ -8,6 +8,7 @@ import {useAppContext} from "@/AppContext.jsx";
 
 const GeneralInformation = ({ formData, handleChange, handleSelectChange, handleFileChange, handleRemoveCoverImage, handleStatusClick }) => {
   const {propertyStatuses} = useAppContext();
+
   return (
     <div className="user--addProperty-sectionPadding flex flex-col rounded-xl border border-lightGrey bg-white md:flex-row md:items-start">
       <h2 className="user--addProperty-headingTextSize whitespace-nowrap md:w-[23%]">
@@ -99,6 +100,35 @@ const GeneralInformation = ({ formData, handleChange, handleSelectChange, handle
                   <p className="text-[14px]">{status.name}</p>
                 </div>
             ))}
+          </div>
+        </div>
+        <div className="w-full space-y-2.5">
+          <label className="text-[16px] font-semibold">Featured</label>
+          <div className="flex items-center gap-x-6">
+            <div
+                className={`flex cursor-pointer items-center gap-x-1.5 rounded-md border-2 border-mirage border-opacity-0 px-3 py-2 transition-all duration-300 ease-in-out hover:border-opacity-100 ${
+                    formData.featured && "bg-mirage text-white"
+                }`}
+                onClick={() => handleSelectChange('featured', true)}
+            >
+              <Status
+                  className={`${formData.featured ? "text-white" : "text-black"}`}
+                  size={25}
+              />
+              <p className="text-[14px]">Yes</p>
+            </div>
+            <div
+                className={`flex cursor-pointer items-center gap-x-1.5 rounded-md border-2 border-mirage border-opacity-0 px-3 py-2 transition-all duration-300 ease-in-out hover:border-opacity-100 ${
+                    !formData.featured && "bg-mirage text-white"
+                }`}
+                onClick={() => handleSelectChange('featured', false)}
+            >
+              <Status
+                  className={`${!formData.featured ? "text-white" : "text-black"}`}
+                  size={25}
+              />
+              <p className="text-[14px]">No</p>
+            </div>
           </div>
         </div>
         <div className="w-full md:space-y-1 lg:space-y-1.5 xl:space-y-2 2xl:space-y-2.5">

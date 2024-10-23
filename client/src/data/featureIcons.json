@@ -1,50 +1,56 @@
 [
-  {
-    "id": "parking",
-    "name": "Parking"
-  },
-  {
-    "id": "swimming",
-    "name": "Swimming"
-  },
-  {
-    "id": "air",
-    "name": "Air"
-  },
-  {
-    "id": "heater",
-    "name": "Heater"
-  },
-  {
-    "id": "double",
-    "name": "Double"
-  },
-  {
-    "id": "security",
-    "name": "Security"
-  },
-  {
-    "id": "cycling-trail",
-    "name": "Cycling Trails"
-  },
-  {
-    "id": "gymnasium",
-    "name": "Gymnasium"
-  },
-  {
-    "id": "jogging-trails",
-    "name": "Jogging Trails"
-  },
-  {
-    "id": "play-area",
-    "name": "Kids Play Area"
-  },
-  {
-    "id": "multi-purpose-lounge",
-    "name": "Multi Purpose Lounge"
-  },
-  {
-    "id": "sports-court",
-    "name": "Sports Court"
-  }
+  { "id": "swimming-pool", "name": "Swimming Pool" },
+  { "id": "gym", "name": "Gym" },
+  { "id": "parking", "name": "Parking" },
+  { "id": "balcony", "name": "Balcony" },
+  { "id": "air-conditioning", "name": "Air Conditioning" },
+  { "id": "pet-friendly", "name": "Pet Friendly" },
+  { "id": "playground", "name": "Playground" },
+  { "id": "security", "name": "Security" },
+  { "id": "elevator", "name": "Elevator" },
+  { "id": "concierge-24-7", "name": "24/7 Concierge" },
+  { "id": "jacuzzi", "name": "Jacuzzi" },
+  { "id": "sauna", "name": "Sauna" },
+  { "id": "garden", "name": "Garden" },
+  { "id": "bbq-area", "name": "BBQ Area" },
+  { "id": "private-pool", "name": "Private Pool" },
+  { "id": "smart-home-tech", "name": "Smart Home Technology" },
+  { "id": "maids-room", "name": "Maid's Room" },
+  { "id": "laundry-room", "name": "Laundry Room" },
+  { "id": "cctv", "name": "CCTV" },
+  { "id": "childrens-play-area", "name": "Children's Play Area" },
+  { "id": "tennis-court", "name": "Tennis Court" },
+  { "id": "basketball-court", "name": "Basketball Court" },
+  { "id": "squash-court", "name": "Squash Court" },
+  { "id": "running-track", "name": "Running Track" },
+  { "id": "cycling-path", "name": "Cycling Path" },
+  { "id": "central-heating", "name": "Central Heating" },
+  { "id": "fireplace", "name": "Fireplace" },
+  { "id": "waterfront-view", "name": "Waterfront View" },
+  { "id": "city-view", "name": "City View" },
+  { "id": "rooftop-access", "name": "Rooftop Access" },
+  { "id": "golf-course-access", "name": "Golf Course Access" },
+  { "id": "beach-access", "name": "Beach Access" },
+  { "id": "conference-room", "name": "Conference Room" },
+  { "id": "library", "name": "Library" },
+  { "id": "restaurant-on-site", "name": "Restaurant on Site" },
+  { "id": "cafe-on-site", "name": "Cafe on Site" },
+  { "id": "shopping-mall-nearby", "name": "Shopping Mall Nearby" },
+  { "id": "supermarket-nearby", "name": "Supermarket Nearby" },
+  { "id": "school-nearby", "name": "School Nearby" },
+  { "id": "hospital-nearby", "name": "Hospital Nearby" },
+  { "id": "spa", "name": "Spa" },
+  { "id": "movie-theater", "name": "Movie Theater" },
+  { "id": "bus-stop-nearby", "name": "Bus Stop Nearby" },
+  { "id": "metro-station-nearby", "name": "Metro Station Nearby" },
+  { "id": "walking-distance-to-park", "name": "Walking Distance to Park" },
+  { "id": "jogging-track", "name": "Jogging Track" },
+  { "id": "guest-parking", "name": "Guest Parking" },
+  { "id": "shared-workspace", "name": "Shared Workspace" },
+  { "id": "chiller-free", "name": "Chiller Free" },
+  { "id": "high-speed-internet", "name": "High-Speed Internet" },
+  { "id": "dining-outlets", "name": "Dining Outlets" },
+  { "id": "health-care-centre", "name": "Health Care Centre" },
+  { "id": "multi-purpose-lounge", "name": "Multi Purpose Lounge" },
+  { "id": "fitness-centre", "name": "Fitness Centre" }
 ]

@@ -24,7 +24,7 @@ const initialFormData = {
   tags: "",
   overview: "",
   status: "",
-  featured: true,
+  featured: false,
   price: "",
   propertyType: 1,
   developer: 1,

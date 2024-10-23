@@ -53,7 +53,7 @@ const Navbar = () => {
               <Link to="/">
                 <img
                   src={website.navbar.logo}
-                  className="object-cover md:h-[40px] md:w-[42px] lg:h-[50px] lg:w-[52px] xl:h-[63px] xl:w-[65px] 2xl:h-[85px] 2xl:w-[85px]"
+                  className="object-contain md:h-[40px] md:w-[42px] lg:h-[50px] lg:w-[52px] xl:h-[63px] xl:w-[65px] 2xl:h-[80px] 2xl:w-[80px]"
                   alt="company-logo"
                 />
               </Link>
@@ -61,7 +61,7 @@ const Navbar = () => {
                 {buttonItems.map((item, index) => (
                   <Link reloadDocument to={item.link} key={index}>
                     <Button className="rounded-full border-transparent bg-white bg-opacity-10 text-white hover:bg-white hover:text-mirage md:h-7 md:px-2.5 md:text-[8px] lg:h-8 lg:px-3 lg:text-[10px] xl:h-9 xl:text-[13px] 2xl:h-10 2xl:px-4 2xl:text-[16px]">
-                      {item.name} <RxDash size={25} />
+                      {item.name}
                     </Button>
                   </Link>
                 ))}
@@ -92,7 +92,7 @@ const Navbar = () => {
           <Link to="/">
             <img
               src={website.navbar.logo}
-              className="h-[79px] w-[82px] object-cover"
+              className="h-[70px] w-[70px] object-contain"
               alt="company-logo"
             />
           </Link>

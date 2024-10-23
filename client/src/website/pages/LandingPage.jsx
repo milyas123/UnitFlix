@@ -21,8 +21,8 @@ import LazyLoad from "react-lazyload";
 import SpinnerContainer from "@/website/components/common/SpinnerContainer.jsx";
 import {motion} from "framer-motion";
 
-const sliderMinValue = 50000;
-const sliderMaxValue = 5000000;
+const sliderMinValue = 0;
+const sliderMaxValue = 500000000;
 const serverURL = import.meta.env.VITE_SERVER_URL;
 
 const LandingPage = () => {
@@ -74,8 +74,7 @@ const LandingPage = () => {
     try {
       setIsLoading(true);
       const response = await axios.get(`${serverURL}/property/featured`);
-      const filteredProperties = response.data?.data.filter(property => property.category === 1);
-      setProperties(filteredProperties);
+      setProperties(response.data?.data || []);
     } catch (error) {
       console.error("Error fetching projects:", error);
     }
@@ -135,7 +134,7 @@ const LandingPage = () => {
                 </div>
                 :
                 properties.length > 0 ?
-                    <Discover projects={properties}/> : <div className='h-[350px] md:h-[0]'></div>
+                    <Discover properties={properties}/> : <div className='h-[350px] md:h-[0]'></div>
           }
         </div>
         <motion.div variants={variants} initial={'initial'} whileInView={'inView'} viewport={{once: true}}>

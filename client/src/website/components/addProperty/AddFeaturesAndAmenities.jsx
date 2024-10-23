@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Button } from "../ui/button";
 import Edit from "../svgs/Edit";
 import Delete from "../svgs/Delete";
@@ -24,7 +23,7 @@ const AddFeaturesAndAmenities = ({ formData, showModal, handleEdit, handleDelete
             className="flex items-center justify-center rounded-md border bg-whiteLilac p-6 md:h-[90px] md:w-[130px] lg:h-[105px] lg:w-[160px] xl:h-[115px] xl:w-[200px] 2xl:h-[130px] 2xl:w-[230px]"
           >
             <div className="flex flex-col items-center space-y-3 text-center">
-              <div className={'text-[24px] md:text-[28px] lg:text-[32px] size-[24px] md:size-[28px] lg:size-[32px]'}>
+              <div className={'text-[24px] md:text-[28px] lg:text-[32px]'}>
                   {getIcon(feature?.icon)}
               </div>
               <p className="md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:text-[14px]">

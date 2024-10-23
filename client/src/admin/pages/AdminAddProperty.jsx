@@ -22,6 +22,7 @@ const initialFormData = {
   price: 0,
   coverImage: "",
   propertyType: 1,
+  featured: false,
   purpose: 0,
   area: "",
   beds: "",
@@ -62,6 +63,7 @@ const AdminAddProperty = () => {
         coverImage: coverImage,
         propertyType: property.propertyType,
         purpose: property.purpose,
+        featured: property.featured,
         area: property.area,
         beds: property.beds,
         baths: property.baths,
@@ -238,6 +240,7 @@ const AdminAddProperty = () => {
     form.append("overview", JSON.stringify(overview));
     form.append("status", formData.status);
     form.append("price", formData.price);
+    form.append('featured', formData.featured);
     form.append("propertyType", formData.propertyType);
     form.append("purpose", formData.purpose);
     form.append("area", formData.area);

@@ -1,14 +1,9 @@
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
-
-import {Suspense, lazy, useEffect} from "react";
 import { AppProvider } from "./AppContext";
 import { ToastContainer, Slide } from "react-toastify";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-import Lottie from "lottie-react";
 import ProtectedRoute from "./ProtectedRoute";
-import RealEstateAnimation from "@/lotties/RealEstateAnimation.json";
 
 // Website pages
 import LandingPage from "@/website/pages/LandingPage";
@@ -34,8 +29,7 @@ function App() {
   return (
     <div className="font-poppins">
       <BrowserRouter>
-        <Suspense>
-          <AppProvider>
+        <AppProvider>
             <Routes>
               <Route exact path="/" element={<LandingPage />} />
               <Route path="/search" element={<SearchProperties />} />
@@ -60,7 +54,6 @@ function App() {
               </Route>
             </Routes>
           </AppProvider>
-        </Suspense>
       </BrowserRouter>
       <ToastContainer position="top-center" autoClose={3000} transition={Slide} />
     </div>

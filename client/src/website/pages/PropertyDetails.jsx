@@ -99,39 +99,43 @@ const PropertyDetails = () => {
                         location={property?.propertyLocation?.name}
                         brochure={property?.files.find((file) => file.purpose === 2)?.url}
                         price={property?.price}
-                        propertyDetails={property?.category === 0 ? [{propertyType: property.type.name, unitType: `${property.beds} Bedroom`, size: `${property.area.toLocaleString()} Sqft`}] : property?.propertyDetails}
+                        propertyDetails={property?.category === 0 ? [{
+                          propertyType: property.type.name,
+                          unitType: `${property.beds} Bedroom`,
+                          size: `${property.area.toLocaleString()} Sqft`
+                        }] : property?.propertyDetails}
                         downPayment={property?.downPayment}
                         paymentPlan={property?.paymentPlan}
                         handOver={property?.handOver}
                         purpose={property?.purpose}
                     />
-                    <div id="highlights-section">
-                      <Highlights highlights={property?.keyHighlights} />
-                    </div>
                     <Overview
                         category={property?.category}
                         overviewText={property?.overview?.text}
                         floorPlan={property?.files.find((file) => file.purpose === 3)?.url}
                     />
-                    <FeaturesAndAmenities amenities={property?.features} />
+                    <div id="highlights-section">
+                      <Highlights highlights={property?.keyHighlights}/>
+                    </div>
+                    <FeaturesAndAmenities amenities={property?.features}/>
                     {property?.category === 1 && (
-                        <PaymentPlan paymentPlanData={property?.paymentPlanItems} />
+                        <PaymentPlan paymentPlanData={property?.paymentPlanItems}/>
                     )}
-                    <ImageGallery imgFiles={property?.files} />
+                    <ImageGallery imgFiles={property?.files}/>
                     {property?.category === 0 ? (
                         <SimilarProperties
                             relatedProperties={relatedProperties.byLocation}
                         />
                     ) : (
                         <>
-                          <SimilarProjects relatedProjects={relatedProperties.byDeveloper} />
-                          <SimilarProperties relatedProperties={relatedProperties.byLocation} />
+                          <SimilarProjects relatedProjects={relatedProperties.byDeveloper}/>
+                          <SimilarProperties relatedProperties={relatedProperties.byLocation}/>
                         </>
                     )}
                   </div>
                   <div className="ms-auto hidden w-[23.5%] md:block">
                     <div className="sticky top-24">
-                      <GetInTouch propertyId={property.id} />
+                    <GetInTouch propertyId={property.id} />
                     </div>
                   </div>
                 </div>

@@ -1,7 +1,7 @@
 import { CgPhone } from "react-icons/cg";
 import { MdEmail } from "react-icons/md";
-import {FaFacebookF, FaLinkedinIn, FaLocationDot} from "react-icons/fa6";
-import { FaInstagram, FaTwitter, FaDiscord } from "react-icons/fa";
+import {FaFacebookF, FaLinkedinIn, FaLocationDot, FaXTwitter} from "react-icons/fa6";
+import { FaInstagram } from "react-icons/fa";
 import InquiryForm from "../common/InquiryForm";
 import website from "@/data/website.json";
 
@@ -54,7 +54,6 @@ const Form = () => {
                 className="rounded-lg"
                 style={{ border: 0 }}
                 aria-hidden="false"
-                tabindex="0"
               />
             </div>
 
@@ -65,7 +64,7 @@ const Form = () => {
               </a>
               <a href={website.footer.social.x}
                  className="cursor-pointer rounded-full bg-mirageLight transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage p-1 md:p-1 2xl:p-2">
-                <FaTwitter className="size-3.5 cursor-pointer md:size-2 lg:size-3 xl:size-4"/>
+                <FaXTwitter className="size-3.5 cursor-pointer md:size-2 lg:size-3 xl:size-4"/>
               </a>
               <a href={website.footer.social.instagram}
                  className="cursor-pointer rounded-full bg-mirageLight transition-all duration-300 ease-in-out hover:bg-white hover:text-mirage p-1 md:p-1 2xl:p-2">

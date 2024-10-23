@@ -1,13 +1,48 @@
-import { useState } from "react";
+import {useEffect, useRef, useState} from "react";
 import InquiryModal from "./InquiryModal";
 import website from "@/data/website.json";
 
 const StickyIcons = ({ showIcons, propertyId }) => {
   const [showInquiryModal, setShowInquiryModal] = useState(false);
+  const hasIdleModalShown = useRef(false);
 
   const handleWhatsappClick = () => {
     window.location.href = `https://wa.me/${website.contact.whatsappNumber}`;
   };
+
+    const inactivityTime = function () {
+        let time;
+        window.onload = resetTimer;
+        document.onmousemove = resetTimer;
+        document.onkeydown = resetTimer;
+        document.onscroll = resetTimer;
+        document.onclick = resetTimer;
+
+        function showModal() {
+            setShowInquiryModal(true);
+            hasIdleModalShown.current = true;
+            document.onmousemove = null;
+            document.onkeydown = null;
+            document.onscroll = null;
+            document.onclick = null;
+            clearTimeout(time);
+        }
+
+        function resetTimer() {
+            clearTimeout(time);
+            if(!hasIdleModalShown.current) {
+                time = setTimeout(showModal, 10000)
+            }
+        }
+    };
+
+    useEffect(() => {
+
+        window.onload = function () {
+            inactivityTime();
+        }
+
+    }, []);
 
   return (
     <>

@@ -13,8 +13,9 @@ import ArrowRight from "../svgs/ArrowRight";
 import useSwiperNavigation from "@/hooks/useSwiperNavigation";
 import RegisterInterestModal from "@/website/components/common/RegisterInterestModal.jsx";
 import website from "@/data/website.json";
+import PropertyCard from "@/website/components/propertiesForSale/PropertyCard.jsx";
 
-const Discover = ({ projects }) => {
+const Discover = ({ properties }) => {
   const projectsRef = useRef(null);
   const { isBeginning, isEnd } = useSwiperNavigation(projectsRef);
   const [isRegisterInterestModalShown, setIsRegisterInterestModalShown] = useState(false);
@@ -70,7 +71,7 @@ const Discover = ({ projects }) => {
                 />
               </div>
               <Link
-                  to="/properties-for-sale"
+                  to="/search?page=1"
                   className="flex items-center gap-1.5 border-b-2 border-transparent transition duration-200 ease-in-out hover:border-mirage md:hidden"
               >
                 <p className="font-semibold text-mirage md:text-[8px] lg:text-[10px] xl:text-[13px] 2xl:text-[16px]">
@@ -97,9 +98,13 @@ const Discover = ({ projects }) => {
                     "--swiper-pagination-color": "#181a20",
                   }}
               >
-                {projects?.map((project, index) => (
+                {properties?.map((property, index) => (
                     <SwiperSlide key={index}>
-                      <ProjectCard project={project} isLimited={false} onRegisterInterest={(e) => registerInterest(e, project)} />
+                      {
+                        property.category === 0 ?
+                            <PropertyCard property={property} /> :
+                            <ProjectCard project={property} isLimited={false} onRegisterInterest={(e) => registerInterest(e, property)} />
+                      }
                     </SwiperSlide>
                 ))}
               </Swiper>
