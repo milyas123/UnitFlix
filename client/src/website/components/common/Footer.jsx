@@ -75,7 +75,7 @@ const Footer = () => {
                 <div className="flex items-center gap-1.5">
                   <img
                       src={website.footer.logo}
-                      className="size-[60px] object-cover md:size-[35px] lg:size-[42px] xl:size-[50px] 2xl:size-[60px]"
+                      className="size-[60px] object-contain md:size-[35px] lg:size-[42px] xl:size-[50px] 2xl:size-[70px]"
                       alt=""
                   />
                   <p className="whitespace-nowrap text-[30px] font-semibold md:text-[14px] lg:text-[18px] xl:text-[24px] 2xl:text-[30px]">
