@@ -65,7 +65,7 @@ const PropertyCard = ({ property }) => {
           <div className="flex flex-col gap-y-3.5 p-2 md:gap-y-0.5 md:px-2 md:py-1.5 lg:gap-y-1 lg:p-2.5 xl:gap-y-2.5 xl:p-3 2xl:p-[12px]">
               <div
                   className="flex flex-col flex-wrap font-semibold md:text-[6px] lg:text-[8px] xl:text-[11px] 2xl:text-[13.5px]">
-                  <span className='text-[16px] md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px]'>{property?.title}</span>
+                  <span className='text-[16px] md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] text-nowrap w-full overflow-hidden text-ellipsis'>{property?.title}</span>
                   <span className='text-nowrap w-full overflow-hidden text-ellipsis'>{property?.tags}</span>
               </div>
               <div
