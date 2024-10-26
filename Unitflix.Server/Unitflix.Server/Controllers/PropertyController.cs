@@ -265,8 +265,11 @@ namespace Unitflix.Server.Controllers
             if (!string.IsNullOrEmpty(searchWord))
             {
                 searchWord = searchWord.ToLower();
+
+                List<int> developers = await _dbContext.Developers.Where(dev => dev.Name.ToLower().Contains(searchWord)).Select(t => t.Id).ToListAsync();
+
                 properties = properties
-                    .Where(p => p.Title.ToLower().Contains(searchWord) || (!string.IsNullOrEmpty(p.Tags) && p.Tags.ToLower().Contains(searchWord)))
+                    .Where(p => p.Title.ToLower().Contains(searchWord) || (!string.IsNullOrEmpty(p.Tags) && p.Tags.ToLower().Contains(searchWord)) || (p.Developer.HasValue && developers.Contains(p.Developer.Value)))
                     .ToList();
             }
 

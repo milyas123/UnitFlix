@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import { BsArrowUpRight, BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { X } from "lucide-react";
 
@@ -222,7 +222,7 @@ const ImageGallery = ({ imgFiles }) => {
                       <LazyLoad className={'size-full'} placeholder={<SpinnerContainer />}>
                         <img
                             src={image}
-                            className="size-full transform rounded-sm object-cover lg:rounded-lg"
+                            className="size-full transform rounded-sm object-contain lg:rounded-lg"
                             alt=""
                         />
                       </LazyLoad>
