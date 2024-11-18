@@ -24,7 +24,10 @@
     },
     "trendingProjects": {
       "heading": "Discover Trending",
-      "description": "Aliquam lacinia diam quis lacus euismod"
+      "description": "View our trending projects which have been chosen based on user feedback"
+    },
+    "trendingProperties": {
+      "description": "View our trending properties which have been chosen based on user feedback"
     },
     "howCanWeHelp": {
       "title": "How Can We Help",

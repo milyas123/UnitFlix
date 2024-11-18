@@ -38,7 +38,7 @@ const Discover = ({ properties, type }) => {
                   {website.landingPage.trendingProjects.heading} {type === 0 ? "Properties" : 'Projects'}
                 </h1>
                 <p className="text-[14px] text-smokeyGrey md:text-[8px] lg:text-[10px] xl:text-[11px] 2xl:text-[13px]">
-                  {website.landingPage.trendingProjects.description}
+                  {type === 0 ? website.landingPage.trendingProperties.description : website.landingPage.trendingProjects.description}
                 </p>
               </div>
 
