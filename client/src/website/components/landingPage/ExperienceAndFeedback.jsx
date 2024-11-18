@@ -19,11 +19,11 @@ const ExperienceAndFeedback = () => {
             </p>
           </div>
 
-          <div className="flex items-center justify-between whitespace-nowrap md:gap-10 lg:gap-14 xl:gap-16 2xl:gap-24">
+          <div className="grid grid-cols-2 gap-2 md:flex items-center justify-between whitespace-nowrap md:gap-10 lg:gap-14 xl:gap-16 2xl:gap-24">
             {
-              website.landingPage.exp.stats.map(stat => {
+              website.landingPage.exp.stats.map((stat, index) => {
                 return (
-                  <div>
+                  <div key={index}>
                     <h4 className="text-[24px] font-semibold md:text-[16px] lg:text-[20px] xl:text-[26px] 2xl:text-[32px]">
                       {stat.value}
                     </h4>
