@@ -5,10 +5,7 @@ const ContactUs = () => {
   return (
     <div className="flex items-center justify-center bg-whiteLilac md:h-[370px] lg:max-h-[520px] lg:h-[50vh] lg:min-h-[440px] xl:min-h-[540px] xl:h-[100vh] 2xl:min-h-[600px] 2xl:h-[70vh] 2xl:max-h-[680px]">
       <div className="mx-auto my-[3rem] flex w-full flex-col gap-4 px-2.5 md:w-[55%] md:flex-row md:gap-1.5 md:px-0 md:py-0 lg:gap-2.5 xl:gap-3 2xl:gap-4">
-        <div className="flex flex-col gap-4 rounded-xl bg-mirage p-5 py-8 text-white md:w-[550px] md:gap-2 md:p-2.5 lg:gap-3.5 lg:p-3.5 xl:gap-5 xl:p-4 2xl:gap-6 2xl:p-5">
-          <p className="font-regular text-[14px] md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]">
-            {website.landingPage.contactUs.title}
-          </p>
+        <div className="flex flex-col gap-4 rounded-xl bg-mirage p-5 py-8 text-white md:w-[550px] md:gap-2 md:p-2.5 lg:gap-3.5 lg:p-3.5 xl:gap-5 xl:p-4 2xl:gap-6 2xl:p-5 justify-center">
           <h2 className="text-[24px] font-medium md:text-[16px] lg:text-[20px] xl:text-[26px] 2xl:text-[32px]">
             {website.landingPage.contactUs.heading}
           </h2>

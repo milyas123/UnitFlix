@@ -15,7 +15,7 @@ const FAQCard = ({title, description}) => {
   }, [isOpen]);
 
   return (
-    <div className="space-y-3.5 border-t px-2 py-3 md:space-y-1 md:py-0.5 lg:space-y-1.5 lg:py-1 xl:space-y-2 xl:py-1.5 2xl:space-y-2.5 2xl:py-2">
+    <div className="space-y-3.5 border-t px-2 py-3 md:space-y-1 md:py-0.5 lg:space-y-1.5 lg:py-1 xl:space-y-2 xl:py-1.5 2xl:space-y-2.5 2xl:py-2 w-full">
       <h1
         className="flex cursor-pointer items-center justify-between text-[16px] font-medium md:text-[12px] lg:text-[14px] xl:text-[17px] 2xl:text-[20px]"
         onClick={toggleOpen}

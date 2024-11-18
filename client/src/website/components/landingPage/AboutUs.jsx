@@ -30,7 +30,7 @@ const AboutUs = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-4 2xl:gap-x-12 2xl:px-6">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-4 2xl:gap-x-24 2xl:px-6">
           {cardsData.map((card, index) => (
             <motion.div variants={variants} key={index} initial={'initial'} whileInView={'inView'} viewport={{once: true}} custom={index}>
                 <AboutCard

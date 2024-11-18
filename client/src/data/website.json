@@ -8,17 +8,17 @@
     "contactUsButton": "Contact Us"
   },
   "contact": {
-    "phoneNumberDisplay": "+971 54 708 6341",
+    "phoneNumberDisplay": "+971 547086341",
     "phoneNumber": "+971547086341",
     "whatsappNumber": "+971547086341",
     "whatsappNumberDisplay": "+971 54 708 6341",
     "email": "connect@unitflix.com",
-    "address": "Office 313, P3 Floor, Tower 1, The Ony Towers, The Greens, Dubai, UAE",
+    "address": "Office 313, P3 Floor, Tower 1, The Onyx Towers, The Greens, Dubai, UAE",
     "mapsLocation": "https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=Office%20313%2C%20P3%20Floor%2C%20Tower%201%2C%20The%20Ony%20Towers%2C%20The%20Greens%2C%20Dubai%2C%20UAE&zoom=12&maptype=roadmap"
   },
   "landingPage": {
     "hero": {
-      "heading": "Find Your Perfect Place",
+      "heading": "From Unit to Flix, We Make Real Estate Click",
       "tagLine": "Discover, Invest, Live",
       "backgroundImage": "/assets/imgs/hero-section-img.jpg"
     },
@@ -31,93 +31,69 @@
       "options": {
         "Buy": [
           {
-            "title": "Find out how much you can afford",
-            "description": "We'll help you estimate your budget range. Save to your buyer profile to help in your search.",
-            "linkText": "Try our affordability calculator",
-            "link": "",
+            "title": "Find Your Dream Home",
+            "description": "Browse listings and secure the best deals with expert guidance and support.",
             "imgSrc": "/assets/imgs/spot-badge.png"
           },
           {
-            "title": "Find out how much you can afford",
-            "description": "We'll help you estimate your budget range. Save to your buyer profile to help in your search.",
-            "linkText": "Try our affordability calculator",
-            "link": "",
+            "title": "Invest Smart, Earn More",
+            "description": "Personalized advice to help you buy properties with high return potential.",
             "imgSrc": "/assets/imgs/spot-badge.png"
           },
           {
-            "title": "Find out how much you can afford",
-            "description": "We'll help you estimate your budget range. Save to your buyer profile to help in your search.",
-            "linkText": "Try our affordability calculator",
-            "link": "",
+            "title": "Easy Home Buying",
+            "description": "From property search to ownership, we simplify the entire process.",
             "imgSrc": "/assets/imgs/spot-badge.png"
           }
         ],
         "Sell": [
           {
-            "title": "How we sell quickly?",
-            "description": "We'll help you estimate your budget range. Save to your buyer profile to help in your search.",
-            "linkText": "Try our affordability calculator",
-            "link": "",
+            "title": "Quick & Profitable Sale",
+            "description": "Leverage our expertise to sell fast and at the best possible price.",
             "imgSrc": "/assets/imgs/spot-badge.png"
           },
           {
-            "title": "How much do we charge?",
-            "description": "We'll help you estimate your budget range. Save to your buyer profile to help in your search.",
-            "linkText": "Try our affordability calculator",
-            "link": "",
+            "title": "Maximize Property Value",
+            "description": "We offer strategies to boost your property’s appeal and market price.",
             "imgSrc": "/assets/imgs/spot-badge.png"
           },
           {
-            "title": "Find out how much you can afford",
-            "description": "We'll help you estimate your budget range. Save to your buyer profile to help in your search.",
-            "linkText": "Try our affordability calculator",
-            "link": "",
+            "title": "Hassle-Free Selling",
+            "description": "Let us handle the details for a smooth, stress-free selling process.",
             "imgSrc": "/assets/imgs/spot-badge.png"
           }
         ],
         "Rent": [
           {
-            "title": "How we verify tenant history?",
-            "description": "We'll help you estimate your budget range. Save to your buyer profile to help in your search.",
-            "linkText": "Try our affordability calculator",
-            "link": "",
+            "title": "Find the Perfect Rental",
+            "description": "Discover rentals that match your lifestyle with flexible lease options.",
             "imgSrc": "/assets/imgs/spot-badge.png"
           },
           {
-            "title": "Find out how much you can afford",
-            "description": "We'll help you estimate your budget range. Save to your buyer profile to help in your search.",
-            "linkText": "Try our affordability calculator",
-            "link": "",
+            "title": "Quick Tenant Match",
+            "description": "Rent out your property to qualified tenants quickly and efficiently.",
             "imgSrc": "/assets/imgs/spot-badge.png"
           },
           {
-            "title": "Find out how much you can afford",
-            "description": "We'll help you estimate your budget range. Save to your buyer profile to help in your search.",
-            "linkText": "Try our affordability calculator",
-            "link": "",
+            "title": "Exclusive Rentals",
+            "description": "Explore premium rental options designed for your modern living needs.",
             "imgSrc": "/assets/imgs/spot-badge.png"
           }
         ],
         "Manage": [
           {
-            "title": "Find out how much you can afford",
-            "description": "We'll help you estimate your budget range. Save to your buyer profile to help in your search.",
-            "linkText": "Try our affordability calculator",
-            "link": "",
+            "title": "Full Property Management",
+            "description": "From maintenance to tenant care, we manage all aspects for you.",
             "imgSrc": "/assets/imgs/spot-badge.png"
           },
           {
-            "title": "Find out how much you can afford",
-            "description": "We'll help you estimate your budget range. Save to your buyer profile to help in your search.",
-            "linkText": "Try our affordability calculator",
-            "link": "",
+            "title": "Maximize Rental Income",
+            "description": "Our expert management ensures your property generates top returns.",
             "imgSrc": "/assets/imgs/spot-badge.png"
           },
           {
-            "title": "Find out how much you can afford",
-            "description": "We'll help you estimate your budget range. Save to your buyer profile to help in your search.",
-            "linkText": "Try our affordability calculator",
-            "link": "",
+            "title": "Total Care Services",
+            "description": "We handle property upkeep, tenant services, and everything in between.",
             "imgSrc": "/assets/imgs/spot-badge.png"
           }
         ]
@@ -126,111 +102,102 @@
     "whoAreWe": {
       "backgroundImage": "/assets/imgs/about-bg.png",
       "title": "Who Are We & Why Choose Us?",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a efficitur sapien. In non urna consectetur, rhoncus nulla ut, vulputate neque. Praesent vel sollicitudin dolor. Donec pulvinar risus vitae condimentum vestibulum.",
+      "description": "At Unitflix, we’re more than just a real estate company—we’re your dedicated partner in navigating the property landscape. With a team of seasoned professionals and a client-first approach, we specialize in delivering exceptional services tailored to meet your unique needs. Our commitment to excellence, innovation, and transparency sets us apart in the industry",
       "items": [
         {
           "imgSrc": "/assets/imgs/key.png",
           "title": "Expertise",
-          "description": "Lorem ipsum dolor sit amet elit. Suspendisse varius enim in eros elementum tristique."
+          "description": "Decades of experience help you make informed property decisions."
         },
         {
           "imgSrc": "/assets/imgs/creditcard.png",
           "title": "Reliability",
-          "description": "Lorem ipsum dolor sit amet elit. Suspendisse varius enim in eros elementum tristique."
+          "description": "We ensure a smooth, hassle-free experience with consistent support."
         },
         {
           "imgSrc": "/assets/imgs/creditcard.png",
           "title": "Innovation",
-          "description": "Lorem ipsum dolor sit amet elit. Suspendisse varius enim in eros elementum tristique."
+          "description": "Cutting-edge tools and strategies keep you ahead in the market."
         },
         {
           "imgSrc": "/assets/imgs/creditcard.png",
           "title": "Client-Centric",
-          "description": "Lorem ipsum dolor sit amet elit. Suspendisse varius enim in eros elementum tristique."
+          "description": "We tailor our services to align with your unique vision and goals."
         }
       ]
     },
     "contactUs": {
-      "title": "CONTACT US",
-      "heading": "One Stop For All Your Real Estate Needs,",
-      "tagLine": "Leading Real Estate",
-      "description": "Aeon & Trisl trusted Real Estate Company in Dubai for buy, sale or rent properties within affordable price with different ranges of apartments, villas, studio rooms"
+      "heading": "Your One-Stop Destination for All Real Estate Needs",
+      "tagLine": "Your Trusted Partner in UAE",
+      "description": "At Unitflix, we provide a wide array of services for buying, selling, managing, and renting properties. As an established real estate company, we offer affordable options for purchasing or renting, including apartments, villas, and townhouses, catering to every budget for long-term, short-term, or holiday rentals.\n"
     },
     "cta": {
       "backgroundImage": "/assets/imgs/cta.webp",
       "tagLine": "BUY OR SELL",
       "title": [
-        "Looking to Buy a new property or sell an existing one?",
-        "Homez provides an awesome solution!"
+        "Looking to buy a new property, sell your current one, or need help with managing or renting?",
+        "Unitflix has the ideal solution for you!"
       ],
       "button1": "Submit Property",
       "button2": "Browse Properties"
     },
     "exp": {
-      "title": "More than 10 Years of Experience",
-      "description": "Lorem ipsum dolor sit amet, consectetur.",
+      "title": "Trusted Real Estate Expertise at UnitFlix",
+      "description": "Delivering exceptional services with dedication and professionalism.",
       "stats": [
         {
           "value": "85%",
-          "name": "Completed Projects"
+          "name": "Successful Deal Closures"
         },
         {
           "value": "94%",
-          "name": "Satisfied Customers"
+          "name": "Customer Satisfaction"
         },
         {
           "value": "95%",
-          "name": "Home Ownership"
+          "name": "Repeat Clients"
         }
       ],
       "reviews": [
         {
-          "heading": "Awesome Design",
-          "review": "“Amazing design, easy to customize and a design quality superlative account on its cloud platform for the optimized performance. And we didn’t on our original designs.”",
-          "rating": 4,
-          "userImage": "/assets/imgs/user.png",
-          "userName": "Ali Tufan",
-          "userPost": "Product Manager"
-        },
-        {
-          "heading": "Awesome Design",
-          "review": "“Amazing design, easy to customize and a design quality superlative account on its cloud platform for the optimized performance. And we didn’t on our original designs.”",
+          "heading": "Outstanding ROI and Support!",
+          "review": "“Unitflix has been instrumental in maximizing our real estate investments. Their expert team delivers results beyond expectations with exceptional support.”",
           "rating": 5,
           "userImage": "/assets/imgs/user.png",
-          "userName": "Ali Tufan",
-          "userPost": "Product Manager"
+          "userName": "Mohammed Ali",
+          "userPost": "Senior Investment Partner"
         },
         {
-          "heading": "Awesome Design",
-          "review": "“Amazing design, easy to customize and a design quality superlative account on its cloud platform for the optimized performance. And we didn’t on our original designs.”",
-          "rating": 3,
+          "heading": "Reliable and Results-Driven",
+          "review": "“Partnering with Unitflix was a game-changer for our portfolio. Their professionalism and commitment to growth make them our go-to real estate experts.”",
+          "rating": 5,
           "userImage": "/assets/imgs/user.png",
-          "userName": "Ali Tufan",
-          "userPost": "Product Manager"
+          "userName": "Sarah Collins",
+          "userPost": "Real Estate Investor"
         },
         {
-          "heading": "Awesome Design",
-          "review": "“Amazing design, easy to customize and a design quality superlative account on its cloud platform for the optimized performance. And we didn’t on our original designs.”",
-          "rating": 2,
+          "heading": "Exceeded Our Expectations!",
+          "review": "“From property selection to management, Unitflix ensured smooth operations and strong returns. We couldn’t ask for a more dedicated partner.”",
+          "rating": 5,
           "userImage": "/assets/imgs/user.png",
-          "userName": "Ali Tufan",
-          "userPost": "Product Manager"
+          "userName": "Doctor Aejaz",
+          "userPost": "-"
         },
         {
-          "heading": "Awesome Design",
-          "review": "“Amazing design, easy to customize and a design quality superlative account on its cloud platform for the optimized performance. And we didn’t on our original designs.”",
-          "rating": 1,
+          "heading": "Trustworthy and Highly Skilled Team",
+          "review": "“Unitflix consistently provides top-notch service with impressive ROI. Their insight and strategy make real estate investment seamless and rewarding.”",
+          "rating": 5,
           "userImage": "/assets/imgs/user.png",
-          "userName": "Ali Tufan",
-          "userPost": "Product Manager"
+          "userName": "Jessica Lee",
+          "userPost": "Investment Strategist"
         },
         {
-          "heading": "Awesome Design",
-          "review": "“Amazing design, easy to customize and a design quality superlative account on its cloud platform for the optimized performance. And we didn’t on our original designs.”",
-          "rating": 4,
+          "heading": "Impressive Expertise and Dedication",
+          "review": "“Unitflix’s commitment to client success is unmatched. Their knowledgeable team manages every detail, ensuring exceptional returns and stress-free investments.”",
+          "rating": 5,
           "userImage": "/assets/imgs/user.png",
-          "userName": "Ali Tufan",
-          "userPost": "Product Manager"
+          "userName": "Michael Chen",
+          "userPost": "Financial Advisor"
         }
       ]
     }
@@ -306,50 +273,47 @@
       "items": [
         {
           "title": [
-            "Tenant Relations",
-            "Management"
+            "Property Management"
           ],
-          "description": "Effective management and communication with tenants to ensure a harmonious living environment.",
+          "description": "Effective management and communication with property owners to ensure high returns on holiday rentals and leasing.",
           "image": "/assets/imgs/p3.jpg"
         },
         {
           "title": [
-            "Tenant Relations",
-            "Management"
+            "Property Listing",
+            "Optimization"
           ],
-          "description": "Effective management and communication with tenants to ensure a harmonious living environment.",
+          "description": "Create attractive listings on platforms like Airbnb and Booking.com, including professional photography and compelling descriptions to enhance visibility and appeal.",
           "image": "/assets/imgs/p3.jpg"
         },
         {
           "title": [
-            "Tenant Relations",
-            "Management"
+            "Dynamic Pricing",
+            "Strategies"
           ],
-          "description": "Effective management and communication with tenants to ensure a harmonious living environment.",
+          "description": "Implement dynamic pricing models based on market trends, seasonality, and local events to maximize rental income.",
           "image": "/assets/imgs/p3.jpg"
         },
         {
           "title": [
-            "Tenant Relations",
-            "Management"
+            "Regular Property",
+            "Maintenance"
           ],
-          "description": "Effective management and communication with tenants to ensure a harmonious living environment.",
+          "description": "Conduct routine inspections and maintenance to keep the property in excellent condition, ensuring guest satisfaction and reducing long-term repair costs.",
           "image": "/assets/imgs/p3.jpg"
         },
         {
           "title": [
-            "Tenant Relations",
-            "Management"
+            "Guest Screening and Management"
           ],
-          "description": "Effective management and communication with tenants to ensure a harmonious living environment.",
+          "description": "Carefully screen guests to ensure responsible renters, and provide exceptional service during their stay to encourage positive reviews and repeat business.",
           "image": "/assets/imgs/p3.jpg"
         },
         {
           "title": [
-            "Tenant Relations",
-            "Management"
+            "Marketing and Promotion"
           ],
-          "description": "Effective management and communication with tenants to ensure a harmonious living environment.",
+          "description": "Utilize social media, email marketing, and partnerships with local businesses to promote the property and attract a diverse clientele.",
           "image": "/assets/imgs/p3.jpg"
         }
       ]
@@ -361,28 +325,24 @@
       ],
       "reviews": [
         {
-          "review": "Unitflix has been an absolute pleasure to work with. Their property management services are top-notch, and their team is incredibly professional and responsive. I highly recommend them anyone looking for a reliable and efficient property management company in UAE.",
-          "username": "Sohpia Patel"
+          "review": "Unitflix has transformed my property investment into a profitable venture. Their expertise in marketing and management has significantly increased my rental income. I couldn't be happier with the results!",
+          "username": "Sarah T."
         },
         {
-          "review": "Unitflix has been an absolute pleasure to work with. Their property management services are top-notch, and their team is incredibly professional and responsive. I highly recommend them anyone looking for a reliable and efficient property management company in UAE.",
-          "username": "Sohpia Patel"
+          "review": "I've worked with several property management companies, but Unitflix stands out for their professionalism and attention to detail. They keep me informed every step of the way, and my returns have never been better!",
+          "username": "David M."
         },
         {
-          "review": "Unitflix has been an absolute pleasure to work with. Their property management services are top-notch, and their team is incredibly professional and responsive. I highly recommend them anyone looking for a reliable and efficient property management company in UAE.",
-          "username": "Sohpia Patel"
+          "review": "As a busy professional, I trust Unitflix to manage my holiday rental. They handle everything from guest communication to maintenance, allowing me to enjoy peace of mind while maximizing my investment.",
+          "username": "Lisa K."
         },
         {
-          "review": "Unitflix has been an absolute pleasure to work with. Their property management services are top-notch, and their team is incredibly professional and responsive. I highly recommend them anyone looking for a reliable and efficient property management company in UAE.",
-          "username": "Sohpia Patel"
+          "review": "The team at Unitflix is proactive and efficient. They not only manage my property but also ensure it’s always occupied, which has resulted in consistent returns. I highly recommend their services!",
+          "username": "Ahmed R."
         },
         {
-          "review": "Unitflix has been an absolute pleasure to work with. Their property management services are top-notch, and their team is incredibly professional and responsive. I highly recommend them anyone looking for a reliable and efficient property management company in UAE.",
-          "username": "Sohpia Patel"
-        },
-        {
-          "review": "Unitflix has been an absolute pleasure to work with. Their property management services are top-notch, and their team is incredibly professional and responsive. I highly recommend them anyone looking for a reliable and efficient property management company in UAE.",
-          "username": "Sohpia Patel"
+          "review": "Unitflix has taken the stress out of property management for me. Their marketing strategies have increased my bookings, and their communication is top-notch. I feel confident in my investment thanks to them!",
+          "username": "Emily J."
         }
       ]
     },
@@ -398,27 +358,34 @@
       "We Build Dreams"
     ],
     "subHeading": [
-      "We understand buying a home is more than just a transaction.",
-      "Its about building a future, creating memories and finding a place to belong"
+      "We understand that buying a home is more than just a transaction—it's an investment in your future, a way to build lasting memories, and a place where you truly belong.",
+      "With a focus on ROI and growth, we’re here to make that dream a reality."
     ],
     "backgroundImage": "/assets/imgs/hero-section-img.jpg",
     "section1": {
       "subTitle": "How it Started",
-      "title": "Our Dream is Making Real Estate Earn for You",
-      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "title": "Our Dream: Making Real Estate Work for You",
+      "description": [
+        "Our journey began with a simple vision: to transform real estate from just a property transaction into a powerful investment tool that generates returns and secures futures. We set out to build a company that empowers clients to make informed, profitable real estate decisions—whether it’s buying a dream home, investing in a rental property, or managing assets for maximum ROI. Founded with a passion for property and a deep understanding of the market, we’ve combined years of experience with innovative strategies that go beyond traditional buying and selling.",
+        "Every step we take is aimed at one goal: making real estate truly work for you, helping you build wealth, memories, and a place to belong."
+      ],
       "image": "/assets/imgs/about.jpg"
     },
     "section2": {
       "items": [
         {
           "subTitle": "Our Vision",
-          "title": "Making Real Estate Stress Free",
-          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it."
+          "title": "Creating a Real Estate Experience That’s Seamless and Rewarding",
+          "description": [
+            "We envision a world where real estate is not just about transactions but about peace of mind and long-term growth. Our goal is to simplify the entire real estate process, making it stress-free and empowering our clients to build their futures with confidence.\n"
+          ]
         },
         {
           "subTitle": "Our Mission",
-          "title": "Making Real Estate Stress Free",
-          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it."
+          "title": "To Maximize Value and Build Lasting Client Relationships",
+          "description": [
+            "We are dedicated to providing innovative, client-centered real estate solutions that maximize ROI and exceed expectations. Our mission is to serve as trusted advisors, guiding our clients through every step of their real estate journey with professionalism, transparency, and a commitment to their success."
+          ]
         }
       ]
     },
@@ -430,35 +397,34 @@
       "steps": [
         {
           "title": "Dream & Discover",
-          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it"
+          "description": "Imagine your ideal home and explore investment options. Whether it’s a personal residence or an asset to grow your wealth, we’re here to help you discover possibilities that align with your vision."
         },
         {
-          "title": "Dream & Discover",
-          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it"
+          "title": "Budget & Investment Planning",
+          "description": "Together, we’ll create a clear budget and investment plan, balancing your dream home goals with potential returns. Our team ensures a financially sound strategy that works toward long-term growth."
         },
         {
-          "title": "Dream & Discover",
-          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it"
+          "title": "Search & Evaluate Opportunities",
+          "description": "We identify properties that meet both your lifestyle needs and investment goals, providing market insights to help you make the most informed choice."
         },
         {
-          "title": "Dream & Discover",
-          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it"
+          "title": "Negotiate & Secure",
+          "description": "Our experts handle negotiations with a focus on maximizing value, securing terms that support both your homeownership and return on investment goals."
         },
         {
-          "title": "Dream & Discover",
-          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it"
+          "title": "Inspect & Assess ROI Potential",
+          "description": "During inspections and final assessments, we evaluate each property’s potential for future value appreciation and rental income, giving you confidence in your decision.\n"
         },
         {
-          "title": "Dream & Discover",
-          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it"
+          "title": "Move, Settle & Grow",
+          "description": "Welcome to your new home and investment! We’re here to help you settle in and provide ongoing support for managing and maximizing your property’s returns over time."
         }
       ]
     },
     "section4": {
       "heading": "Our Amazing Team",
       "description": [
-        "Welcome to the team! We are a group of individuals working together to achieve",
-        "our goals Get to know the faces behind our success"
+        "At Unitflix, our team is a blend of seasoned real estate professionals dedicated to making your property journey seamless and rewarding. With decades of combined experience, our experts bring deep market knowledge, strategic insights, and a commitment to client success. We pride ourselves on transparent communication, personalized service, and a focus on maximizing your investment returns. Whether buying, selling, or managing a property, our team is here to guide you every step of the way."
       ],
       "members": [
         {
@@ -495,20 +461,32 @@
       ],
       "faqs": [
         {
-          "title": "How do you guys handle the property management?",
-          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it."
+          "title": "What are the benefits of investing in real estate?",
+          "description": "Real estate provides stable returns, potential appreciation, and passive income. At Unitflix, we help you identify lucrative investment opportunities that align with your financial goals."
         },
         {
-          "title": "How do you guys handle the property management?",
-          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it."
+          "title": "How can Unitflix assist me in finding my dream home?",
+          "description": "Our experienced team guides you through the entire process, from defining your needs to searching and evaluating properties, ensuring you find the perfect fit."
         },
         {
-          "title": "How do you guys handle the property management?",
-          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it."
+          "title": "What should I consider when investing in a property?",
+          "description": "Location, market trends, and potential ROI are crucial factors. We provide detailed market analyses and insights to help you make informed decisions."
         },
         {
-          "title": "How do you guys handle the property management?",
-          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it."
+          "title": "How do I get pre-approved for a mortgage?",
+          "description": "We connect you with trusted lenders and guide you through the pre-approval process, ensuring a smooth path to securing financing for your new home."
+        },
+        {
+          "title": "What financing options does Unitflix recommend for investment properties?",
+          "description": "We offer personalized advice on various financing options, helping you choose the best mortgage type to maximize your investment returns."
+        },
+        {
+          "title": "How does Unitflix help with property management?",
+          "description": "Our property management team handles everything from tenant screening to maintenance, allowing you to focus on maximizing your investment's potential without stress."
+        },
+        {
+          "title": "What if I want to buy a home for both personal use and investment?",
+          "description": "We can help you find properties that serve as both your dream home and a sound investment, ensuring you benefit from both lifestyles."
         }
       ]
     }
@@ -516,6 +494,6 @@
   "contactPage": {
     "heading": "Contact Us",
     "backgroundImage": "/assets/imgs/properties-hero.png",
-    "cta": "Say something to start a live chat"
+    "cta": "Reach out for any inquiries , we will respond you back."
   }
 }

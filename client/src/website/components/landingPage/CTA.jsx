@@ -17,7 +17,7 @@ const CTA = () => {
         <p className="font-regular md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]">
           {website.landingPage.cta.tagLine}
         </p>
-        <h2 className="text-[24px] font-semibold md:text-[22px] lg:text-[26px] xl:text-[32px] 2xl:text-[36px]">
+        <h2 className="text-[18px] font-semibold md:text-[16px] lg:text-[22px] xl:text-[26px] 2xl:text-[28px]">
           {website.landingPage.cta.title.map(title => {
             return (
                 <>

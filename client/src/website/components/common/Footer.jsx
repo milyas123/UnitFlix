@@ -179,7 +179,7 @@ const Footer = () => {
                     <Input
                         type="number"
                         id="phone"
-                        placeholder="(+92) 311 7995274"
+                        placeholder="(+971) 512345678"
                         value={formData.phone}
                         onChange={handleChange}
                         className="border-transparent bg-white bg-opacity-10 ps-9 text-grey md:ps-5 lg:ps-[22px] xl:ps-8 2xl:ps-[38px]"

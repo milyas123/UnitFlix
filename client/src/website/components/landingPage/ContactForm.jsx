@@ -88,7 +88,7 @@ const ContactForm = () => {
           <Input
               type="number"
               id="phone"
-              placeholder="(+92) 311 7995274"
+              placeholder="(+971) 512345678"
               value={formData.phone}
               onChange={handleChange}
               className="ps-9 md:ps-5 lg:ps-[22px] xl:ps-8 2xl:ps-[38px]"
@@ -98,7 +98,7 @@ const ContactForm = () => {
         <div className="relative flex items-center">
           <Textarea
               id="message"
-              placeholder="I want to buy/rent..."
+              placeholder="I want to buy/sell/rent/manage..."
               value={formData.message}
               onChange={handleChange}
               className="ps-9 md:ps-5 lg:ps-[22px] xl:ps-8 2xl:ps-[38px]"
