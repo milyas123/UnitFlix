@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import {useRef, useState} from "react";
 
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
@@ -9,6 +9,7 @@ import { BsWhatsapp } from "react-icons/bs";
 import CountryCodeDropdown from "./CountryCodeDropdown";
 import MessageModal from "@/website/components/common/MessageModal.jsx";
 import website from "@/data/website.json";
+import ReCAPTCHA from "react-google-recaptcha"
 
 const serverURL = import.meta.env.VITE_SERVER_URL;
 
@@ -63,6 +64,7 @@ const GetInTouch = ({propertyId}) => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
   const [status, setStatus] = useState('');
+  const recaptcha = useRef(null);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -81,6 +83,13 @@ const GetInTouch = ({propertyId}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if(!recaptcha.current.getValue()) {
+      setMessage('Please submit the captcha before you can submit the request')
+      setStatus('error');
+      return;
+    }
+
     setLoading(true);
     setMessage(null);
 
@@ -101,6 +110,7 @@ const GetInTouch = ({propertyId}) => {
         contact: "",
         message: "",
       });
+      recaptcha.current.reset();
       setMessage('Your interest has been registered regarding this property. We will get back to you promptly')
       setStatus('success');
     } catch (error) {
@@ -171,6 +181,7 @@ const GetInTouch = ({propertyId}) => {
                   value={formData.message}
                   onChange={handleChange}
               />
+              <ReCAPTCHA sitekey={import.meta.env.VITE_SITE_KEY} ref={recaptcha}/>
               {message && status === 'error' && <div className="font-medium text-red-500">{message}</div>}
               <Button
                   type="submit"
@@ -182,7 +193,7 @@ const GetInTouch = ({propertyId}) => {
             </form>
           </div>
           <div className="flex justify-between gap-1.5 rounded border md:p-2 lg:p-3 xl:p-4 2xl:px-4 2xl:py-6">
-            <div className="flex flex-col items-center justify-center gap-3">
+          <div className="flex flex-col items-center justify-center gap-3">
               <FiPhone size={24}/>
               <a href={`tel:${website.contact.phoneNumber}`}>
                 <Button

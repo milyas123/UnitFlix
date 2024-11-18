@@ -17,12 +17,16 @@ import { useAppContext } from "@/AppContext";
 import PropertyTags from "@/website/components/common/PropertyTags.jsx";
 import LazyLoad from "react-lazyload";
 import SpinnerContainer from "@/website/components/common/SpinnerContainer.jsx";
+import {Button} from "@/website/components/ui/button.jsx";
 
-const PropertyCard = ({ property }) => {
-  const { locations } = useAppContext();
+const PropertyCard = ({ property, onRegisterInterest, canRegisterInterest }) => {
+
+    const { locations } = useAppContext();
+    const textSizes = "text-[16px] md:text-[7px] lg:text-[10px] xl:text-[12px] 2xl:text-[15px]";
+
   return (
     <Link to={`/property-details/${property?.id}`} reloadDocument className="contents">
-      <div className="group w-full relative overflow-hidden rounded-lg border border-lightGrey md:w-[90%] md:min-w-[150px] md:max-w-[200px] lg:w-[95%] lg:min-w-[225px] lg:max-w-[270px] xl:w-[92%] xl:min-w-[290px] xl:max-w-[320px] 2xl:w-[95%] 2xl:min-w-[345px] 2xl:max-w-[400px] h-[505px] md:h-[239px] lg:h-[286px] xl:h-[348.5px] 2xl:h-[469.75px]">
+      <div className={`group w-full relative overflow-hidden rounded-lg border border-lightGrey md:w-[90%] md:min-w-[150px] md:max-w-[200px] lg:w-[95%] lg:min-w-[225px] lg:max-w-[270px] xl:w-[92%] xl:min-w-[290px] xl:max-w-[320px] 2xl:w-[95%] 2xl:min-w-[345px] 2xl:max-w-[400px] ${canRegisterInterest ? 'h-[570px] md:h-[275px] lg:h-[330px] xl:h-[405.5px] 2xl:h-[533.75px]' : "h-[505px] md:h-[239px] lg:h-[286px] xl:h-[348.5px] 2xl:h-[469.75px]"}`}>
         <style jsx>{`
           .property-card .swiper-pagination-bullet {
             background-color: #ffffff;
@@ -95,6 +99,16 @@ const PropertyCard = ({ property }) => {
               <p className="text-[20px] font-bold md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[22px]">
                   {formatCurrency(property?.price)}
               </p>
+              {
+                  canRegisterInterest ?
+                      <div className="mt-2 flex justify-start">
+                          <Button
+                              className={`font-semibold hover:bg-white hover:text-mirage md:h-2 md:px-2 lg:h-6 lg:px-3 xl:h-7 xl:px-4 2xl:h-8 ${textSizes}`}
+                              onClick={onRegisterInterest}>
+                              Register Your Interest
+                          </Button>
+                      </div> : <></>
+              }
           </div>
           <div className='absolute top-2 left-2 flex items-center gap-2 z-[5] w-[92%]'>
               <PropertyTags property={property}/>

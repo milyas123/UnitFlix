@@ -32,7 +32,7 @@ const ProjectCard = ({ project, isLimited, onRegisterInterest }) => {
               <h2
                   className={`mb-1.5 ${isLimited ? 'text-left' : "text-center"} font-semibold md:mb-0.5 lg:mb-1 xl:mb-1.5 2xl:mb-2 ${textSizes}`}
               >
-                {project?.title}
+                {project?.title} at {project?.propertyLocation.name} by {project?.propertyDeveloper.name}
               </h2>
               <p className={`${isLimited ? 'text-left' : 'text-center'} ${textSizes}`}>
                 {

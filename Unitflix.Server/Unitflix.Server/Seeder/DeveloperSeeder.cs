@@ -21,16 +21,20 @@ namespace Unitflix.Server.Seeder
                 {
                     List<Developer> developers = new List<Developer>
                     {
-                        new Developer() { Name = "Alice" },
-                        new Developer() { Name = "Bob" },
-                        new Developer() { Name = "Charlie" },
-                        new Developer() { Name = "Diana" },
-                        new Developer() { Name = "Eve" },
-                        new Developer() { Name = "Frank" },
-                        new Developer() { Name = "Grace" },
-                        new Developer() { Name = "Hank" },
-                        new Developer() { Name = "Ivy" },
-                        new Developer() { Name = "Jack" }
+                        new Developer() { Name = "Emaar Properties" },
+                        new Developer() { Name = "Tiger Properties" },
+                        new Developer() { Name = "Aldar Properties" },
+                        new Developer() { Name = "Al Habtoor Group" },
+                        new Developer() { Name = "Omniyat" },
+                        new Developer() { Name = "Meydan Group" },
+                        new Developer() { Name = "Danube Properties" },
+                        new Developer() { Name = "Ellington Properties" },
+                        new Developer() { Name = "Deyaar" },
+                        new Developer() { Name = "Sobha Realty" },
+                        new Developer() { Name = "Meraas" },
+                        new Developer() { Name = "Nakheel" },
+                        new Developer() { Name = "Vincitore" },
+                        new Developer() { Name = "Damac Properties" }
                     };
                     dbContext.Developers.AddRange(developers);
                     dbContext.SaveChanges();

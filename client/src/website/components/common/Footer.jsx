@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useRef, useState} from "react";
 import axios from "axios";
 
 import { Input } from "../ui/input";
@@ -12,6 +12,7 @@ import website from "@/data/website.json";
 import {FaFacebookF, FaInstagram, FaLinkedinIn, FaXTwitter} from "react-icons/fa6";
 import { BsDot } from "react-icons/bs";
 import MessageModal from "@/website/components/common/MessageModal.jsx";
+import ReCAPTCHA from "react-google-recaptcha"
 
 const serverURL = import.meta.env.VITE_SERVER_URL;
 
@@ -26,6 +27,7 @@ const Footer = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
   const [status, setStatus] = useState('');
+  const recaptcha = useRef(null);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -37,6 +39,13 @@ const Footer = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if(!recaptcha.current.getValue()) {
+      setMessage('Please submit the captcha before you can submit the request')
+      setStatus('error');
+      return;
+    }
+
     setLoading(true);
     setMessage(null);
 
@@ -45,6 +54,7 @@ const Footer = () => {
       console.log("Form submitted successfully:", response.data);
       setMessage('Your message has been submitted successfully. We will get back to you promptly')
       setFormData({ name: "", email: "", phone: "", message: "" });
+      recaptcha.current.reset();
       setStatus('success');
     } catch (error) {
       console.error("Error submitting the form:", error.data);
@@ -198,6 +208,9 @@ const Footer = () => {
                     />
                     <BiMessageSquareDetail
                         className="absolute left-2 top-3 size-5 text-grey md:left-1.5 md:top-2 md:size-2.5 lg:top-2.5 lg:size-3 xl:left-[9px] xl:top-[12.5px] xl:size-4 2xl:left-3 2xl:top-3.5 2xl:size-5"/>
+                  </div>
+                  <div className="flex items-center">
+                    <ReCAPTCHA sitekey={import.meta.env.VITE_SITE_KEY} ref={recaptcha} theme={'dark'}/>
                   </div>
                   {message && status === 'error' && <div className="font-medium text-red-500">{message}</div>}
                   <Button

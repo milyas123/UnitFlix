@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useRef, useState} from "react";
 import axios from "axios";
 
 import Email from "../svgs/Email";
@@ -8,6 +8,7 @@ import { Textarea } from "../ui/textarea";
 import { UserRound, Phone } from "lucide-react";
 import { BiMessageSquareDetail } from "react-icons/bi";
 import MessageModal from "@/website/components/common/MessageModal.jsx";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const serverURL = import.meta.env.VITE_SERVER_URL;
 
@@ -22,6 +23,7 @@ const ContactForm = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
   const [status, setStatus] = useState('');
+  const recaptcha = useRef(null)
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -33,6 +35,13 @@ const ContactForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if(!recaptcha.current.getValue()) {
+      setMessage('Please submit the captcha before you can submit the request')
+      setStatus('error');
+      return;
+    }
+
     setLoading(true);
     setMessage(null);
 
@@ -40,6 +49,7 @@ const ContactForm = () => {
       const response = await axios.post(`${serverURL}/email/contact`, formData);
       console.log("Form submitted successfully:", response.data);
       setFormData({ name: "", email: "", phone: "", message: "" });
+      recaptcha.current.reset();
       setMessage('Your message has been submitted successfully. We will get back to you promptly')
       setStatus('success');
     } catch (error) {
@@ -104,6 +114,9 @@ const ContactForm = () => {
               className="ps-9 md:ps-5 lg:ps-[22px] xl:ps-8 2xl:ps-[38px]"
           />
           <BiMessageSquareDetail className="absolute left-2 top-3 size-5 text-grey md:left-1.5 md:top-2 md:size-2.5 lg:top-2.5 lg:size-3 xl:left-[9px] xl:top-[12.5px] xl:size-4 2xl:left-3 2xl:top-3.5 2xl:size-5" />
+        </div>
+        <div className="flex items-center">
+          <ReCAPTCHA sitekey={import.meta.env.VITE_SITE_KEY} ref={recaptcha} />
         </div>
         {message && status === 'error' && <div className="font-medium text-red-500">{message}</div>}
         <Button
