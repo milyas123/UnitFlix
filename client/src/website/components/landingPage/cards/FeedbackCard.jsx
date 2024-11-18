@@ -30,7 +30,7 @@ const FeedbackCard = ({title, review, rating, userName, userImage, userPost}) =>
         <div className="rounded-full">
           <img
             src={userImage}
-            className="rounded-full md:size-[25px] lg:size-[35px] xl:size-[50px] 2xl:size-[61px]"
+            className="rounded-full size-[50px] md:size-[25px] lg:size-[35px] xl:size-[50px] 2xl:size-[61px]"
             alt=""
           />
         </div>

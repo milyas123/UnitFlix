@@ -31,7 +31,7 @@ const Discover = ({ properties, type }) => {
   return (
       <>
         <div className="relative flex items-center justify-center bg-whiteLilac py-5">
-          <div className="mx-auto flex w-full flex-col px-2.5 py-[4.5rem] md:w-[65%] md:gap-3 md:px-0 md:py-0 lg:mt-0 lg:gap-12 2xl:-mt-2 2xl:gap-14">
+          <div className="mx-auto flex w-full flex-col px-2.5 py-[0rem] md:w-[65%] md:gap-3 md:px-0 md:py-0 lg:mt-0 lg:gap-12 2xl:-mt-2 2xl:gap-14">
             <div className="flex flex-col justify-between md:flex-row md:items-start">
               <div className="space-y-2 md:space-y-0.5 xl:space-y-1 2xl:space-y-1.5">
                 <h1 className="text-[22px] font-semibold md:text-[14px] lg:text-[18px] xl:text-[22px] 2xl:text-[28px]">
@@ -71,11 +71,11 @@ const Discover = ({ properties, type }) => {
                 />
               </div>
               <Link
-                  to="/search?page=1"
+                  to={`/search?page=1&category=${type}`}
                   className="flex items-center gap-1.5 border-b-2 border-transparent transition duration-200 ease-in-out hover:border-mirage md:hidden"
               >
                 <p className="font-semibold text-mirage md:text-[8px] lg:text-[10px] xl:text-[13px] 2xl:text-[16px]">
-                  See All Properties
+                  See All {type === 0 ? 'Properties' : 'Projects'}
                 </p>
                 <BsArrowUpRight className="md:text-sm 2xl:text-xl" />
               </Link>
