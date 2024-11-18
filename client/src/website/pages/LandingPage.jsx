@@ -29,6 +29,7 @@ const LandingPage = () => {
   const showButtons = useScrollProgress("discover-section");
   const navigate = useNavigate();
   const [properties, setProperties] = useState([]);
+  const [projects, setProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const [selectedTab, setSelectedTab] = useState("All");
@@ -74,7 +75,8 @@ const LandingPage = () => {
     try {
       setIsLoading(true);
       const response = await axios.get(`${serverURL}/property/featured`);
-      setProperties(response.data?.data || []);
+      setProperties(response.data?.data.filter(property => property.category === 0) || []);
+      setProjects(response.data?.data.filter(property => property.category === 1) || []);
     } catch (error) {
       console.error("Error fetching projects:", error);
     }
@@ -126,6 +128,18 @@ const LandingPage = () => {
             />
           </div>
         </div>
+        <div className="mt-[22rem] md:mt-[5rem]"></div>
+        <div id="discover-section">
+          {
+            isLoading ?
+                <div className='h-[300px] mt-[300px] md:mt-[0px] flex items-center justify-center pt-[10em]'>
+                  <Spinner/>
+                </div>
+                :
+                projects.length > 0 ?
+                    <Discover properties={projects} type={1}/> : <div className='h-[350px] md:h-[0]'></div>
+          }
+        </div>
         <div id="discover-section">
           {
             isLoading ?
@@ -134,7 +148,7 @@ const LandingPage = () => {
                 </div>
                 :
                 properties.length > 0 ?
-                    <Discover properties={properties}/> : <div className='h-[350px] md:h-[0]'></div>
+                    <Discover properties={properties} type={0}/> : <div className='h-[350px] md:h-[0]'></div>
           }
         </div>
         <motion.div variants={variants} initial={'initial'} whileInView={'inView'} viewport={{once: true}}>
@@ -162,11 +176,11 @@ const LandingPage = () => {
             <ExperienceAndFeedback/>
           </LazyLoad>
         </motion.div>
-          <StickyIcons showIcons={showButtons}/>
-          {showButtons && <ScrollToTop/>}
+        <StickyIcons showIcons={showButtons}/>
+        {showButtons && <ScrollToTop/>}
       </Layout>
     </>
-);
+  );
 };
 
 export default LandingPage;

@@ -36,7 +36,7 @@ namespace Unitflix.Server.Helpers
         /// <returns></returns>
         public static async Task<FileSaveResult?> Save(this IFormFile file, IWebHostEnvironment webHost, string baseUrl)
         {
-            string directory = Path.Join(webHost.WebRootPath, DATA_FOLDER);
+            string directory = Path.Join(webHost.ContentRootPath, DATA_FOLDER);
             EnsureDirectory(directory);
             string fileName = GenerateFileName(file.FileName);
             string path = Path.Join(directory, fileName);
@@ -62,7 +62,7 @@ namespace Unitflix.Server.Helpers
         /// <returns></returns>
         public static void DeleteFile(IWebHostEnvironment webHost, string fileName)
         {
-            string directory = Path.Join(webHost.WebRootPath, DATA_FOLDER);
+            string directory = Path.Join(webHost.ContentRootPath, DATA_FOLDER);
             string path = Path.Join(directory, fileName);
             try
             {

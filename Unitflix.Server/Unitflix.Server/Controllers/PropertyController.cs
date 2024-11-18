@@ -805,6 +805,7 @@ namespace Unitflix.Server.Controllers
                     FileHelpers.DeleteFile(_webHostEnvironment, image.Filename);
                 });
                 _dbContext.Files.RemoveRange(galleryImagesToRemove);
+                _dbContext.SaveChanges();
             }
 
             _logger.LogInformation("Property with id {propertyId} has been updated. Property Overview, Features ({featuresCount}), KeyHighlights ({keyHighlightsCount}) and Images ({galleryImagesCount}) has been uploaded for Property Id {propertyId} by Admin and Features ({featuresToRemoveCount}), KeyHighlights ({keyHighlightsToRemoveCount}) and Images ({galleryImagesToRemoveCount}) have been removed", property.Id, features.Count, keyHighlights.Count, updateDTO.GalleryImages.Count, property.Id, updateDTO.FeaturesToRemove.Count, updateDTO.KeyHighlightsToRemove.Count, updateDTO.GalleryImagesToRemove.Count);

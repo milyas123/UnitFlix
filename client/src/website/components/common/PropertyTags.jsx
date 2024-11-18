@@ -12,7 +12,7 @@ const PropertyTags = ({property, details}) => {
             {
                 property.featured && !details ?
                     <Tag textColor={'white'} color={'#EB6753'}>
-                        <FeaturedIcon className={'h-[20px] md:h-[16px] lg:h-[18px] xl:h-[19px] 2xl:h-[20px]'} /> FEATURED
+                        <FeaturedIcon className={'h-[20px] md:h-[12px] lg:h-[14px] xl:h-[18px] 2xl:h-[20px]'} /> FEATURED
                     </Tag>: <></>
             }
             {

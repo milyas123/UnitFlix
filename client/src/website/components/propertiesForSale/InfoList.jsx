@@ -1,14 +1,20 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { Button } from "../ui/button";
 
-const InfoList = ({ heading, count, items, handleItemClick }) => {
-  const [showAll, setShowAll] = useState(false);
+const InfoList = ({ heading, count, items, shallShowAll, handleItemClick }) => {
+    const [showAll, setShowAll] = useState(false);
 
-  const handleViewAll = () => {
-    setShowAll(!showAll);
-  };
+    const handleViewAll = () => {
+        setShowAll(!showAll);
+    };
 
-  const displayedItems = showAll ? items : items.slice(0, 3);
+    const displayedItems = showAll ? items : items.slice(0, 5);
+
+    useEffect(() => {
+        if(shallShowAll) {
+            setShowAll(true)
+        }
+    }, [shallShowAll]);
 
   return (
     <div className="rounded-lg border border-lightGrey p-1">
@@ -22,10 +28,10 @@ const InfoList = ({ heading, count, items, handleItemClick }) => {
             key={index}
             className="text-[16px] text-oceanBlue transition-all duration-300 ease-in-out md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]"
             style={{
-              opacity: showAll ? 1 : index < 3 ? 1 : 0,
+              opacity: showAll ? 1 : index < 5 ? 1 : 0,
               transform: showAll
                 ? "translateY(0)"
-                : index < 3
+                : index < 5
                   ? "translateY(0)"
                   : "translateY(-10px)",
             }}
@@ -37,7 +43,7 @@ const InfoList = ({ heading, count, items, handleItemClick }) => {
         ))}
       </div>
         {
-            count > 3 ?
+            count > 5 && !shallShowAll ?
                 <Button
                     onClick={handleViewAll}
                     className="w-full rounded-lg uppercase hover:bg-white hover:text-mirage md:text-[6px] lg:text-[8px] xl:text-[10px] 2xl:text-[12px]"

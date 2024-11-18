@@ -145,6 +145,7 @@ const Properties = ({
               count={filteredStatuses?.length}
               items={filteredStatuses}
               handleItemClick={(item) => handleItemClick("status", item.name)}
+              shallShowAll={true}
           />
 
           <InfoList
