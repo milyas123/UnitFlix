@@ -1044,7 +1044,7 @@ namespace Unitflix.Server.Controllers
                 _dbContext.Files.RemoveRange(galleryImagesToRemove);
             }
 
-            _dbContext.SaveChanges();
+            _dbContext.SaveChanges();   
             _logger.LogInformation("Project with id {propertyId} has been updated. Project Overview, Features ({featuresCount}), KeyHighlights ({keyHighlightsCount}), Payment Plan Items ({paymentPlanItemsCount}), Property Details ({propertyDetailsCount}) and Images ({galleryImagesCount}) has been uploaded for Project Id {propertyId} by Admin and Features ({featuresToRemoveCount}), KeyHighlights ({keyHighlightsToRemoveCount}), Payment Plan Items To Remove ({paymentPlanItemsToRemoveCount}), Property Details To Remove ({propertyDetailsToRemoveCount}) and Images ({galleryImagesToRemoveCount}) have been removed", property.Id, features.Count, keyHighlights.Count, paymentPlanItems.Count, propertyDetails.Count, updateDTO.GalleryImages.Count, property.Id, updateDTO.FeaturesToRemove.Count, updateDTO.KeyHighlightsToRemove.Count, updateDTO.PaymentPlanItemsToRemove.Count, updateDTO.PropertyDetails.Count, updateDTO.GalleryImagesToRemove.Count);
             return Response.Message("Project Updated Successfully");
 
