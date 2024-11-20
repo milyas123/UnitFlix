@@ -224,14 +224,8 @@ const Footer = () => {
               </div>
             </div>
 
-            <div
-                className="mx-auto flex flex-col items-center justify-between gap-y-5 border-t border-white border-opacity-10 py-5 text-[14px] text-slate md:w-[65%] md:flex-row md:gap-y-0 md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]">
+            <div className="mx-auto flex flex-col items-center justify-center gap-y-5 border-t border-white border-opacity-10 py-5 text-[14px] text-slate md:w-[65%] md:flex-row md:gap-y-0 md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]">
               <p>{website.footer.rights}</p>
-              <div className="flex items-center gap-x-3 md:gap-x-1 lg:gap-x-1.5 xl:gap-x-2 2xl:gap-x-2.5">
-                <a className='transition-all duration-200 ease-in-out hover:text-white' href={website.footer.privacy.link}>{website.footer.privacy.label}</a>
-                <BsDot/>
-                <a className='transition-all duration-200 ease-in-out hover:text-white' href={website.footer.terms.link}>{website.footer.terms.label}</a>
-              </div>
             </div>
           </div>
         </footer>

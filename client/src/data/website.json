@@ -141,7 +141,7 @@
         "Looking to buy a new property, sell your current one, or need help with managing or renting?",
         "Unitflix has the ideal solution for you!"
       ],
-      "button1": "Submit Property",
+      "button1": "List My Property",
       "button2": "Browse Properties"
     },
     "exp": {
@@ -184,7 +184,7 @@
           "rating": 5,
           "userImage": "/assets/imgs/person-2.jpeg",
           "userName": "Doctor Aejaz",
-          "userPost": "-"
+          "userPost": "Real Estate Investor"
         },
         {
           "heading": "Trustworthy and Highly Skilled Team",

@@ -29,15 +29,15 @@ const MissionVisionSection = () => {
             className="flex flex-col items-center gap-y-8 md:flex-row md:gap-x-3.5 md:gap-y-0 lg:gap-x-4 xl:gap-x-5 2xl:gap-x-6">
             {
                 website.aboutPage.section2.items.map((item, index) => {
-            return (
-                <div className="w-full md:w-1/2" key={index}>
-                  <ContentCard
-                      header={item.subTitle}
-                      title={item.title}
-                      description={item.description}
-                  />
-                </div>
-            )
+                    return (
+                        <div className="w-full md:w-1/2 h-full" key={index}>
+                          <ContentCard
+                              header={item.subTitle}
+                              title={item.title}
+                              description={item.description}
+                          />
+                        </div>
+                    )
           })
         }
       </div>

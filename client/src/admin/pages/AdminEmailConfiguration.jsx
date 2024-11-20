@@ -103,6 +103,7 @@ const AdminEmailConfiguration = () => {
       toast.success(response.data.message)
     } catch (err) {
       console.log(err);
+      toast.error(err.response.data.errors ? err.response.data.errors[0] : err.response.message ? err.response.message : err.message);
       if(err.response.data.error) {
         dispatch({type: 'errors', payload: [err.response.data.error]});
       }

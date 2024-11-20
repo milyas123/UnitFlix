@@ -3,7 +3,7 @@ import InquiryForm from "./InquiryForm";
 
 const RegisterInterestModal = ({ onClose, propertyId }) => {
   return (
-    <div className="fixed inset-0 z-[800] flex items-center justify-center bg-black bg-opacity-50">
+    <div className="fixed inset-0 z-[1000] flex items-center justify-center bg-black bg-opacity-50">
       <div className="relative flex w-[95%] items-center justify-between rounded-md bg-white md:h-[21.5rem] md:w-[35rem] md:gap-x-4 md:p-3 lg:h-auto lg:w-[40rem] lg:gap-x-5 lg:p-4 xl:w-[54rem] xl:gap-x-6 xl:p-5 2xl:w-[64rem] 2xl:gap-x-7 2xl:rounded-xl 2xl:p-6">
         <SquareX
           size={25}

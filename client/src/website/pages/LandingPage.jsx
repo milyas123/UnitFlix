@@ -1,4 +1,4 @@
-import { useState, useEffect, lazy } from "react";
+import {useState, useEffect, lazy, Suspense} from "react";
 
 import Layout from "@/website/Layout";
 import Hero from "@/website/components/landingPage/Hero";
@@ -152,29 +152,39 @@ const LandingPage = () => {
           }
         </div>
         <motion.div variants={variants} initial={'initial'} whileInView={'inView'} viewport={{once: true}}>
-          <LazyLoad className='w-full min-h-[200px]' placeholder={<SpinnerContainer/>}>
-            <Help/>
-          </LazyLoad>
+          <Suspense>
+            <LazyLoad className='w-full min-h-[200px]' placeholder={<SpinnerContainer/>}>
+              <Help/>
+            </LazyLoad>
+          </Suspense>
         </motion.div>
         <motion.div variants={variants} initial={'initial'} whileInView={'inView'} viewport={{once: true}}>
-          <LazyLoad className='w-full min-h-[200px]' placeholder={<SpinnerContainer/>}>
-            <AboutUs/>
-          </LazyLoad>
+          <Suspense>
+            <LazyLoad className='w-full min-h-[200px]' placeholder={<SpinnerContainer/>}>
+              <AboutUs/>
+            </LazyLoad>
+          </Suspense>
         </motion.div>
         <motion.div variants={variants} initial={'initial'} whileInView={'inView'} viewport={{once: true}}>
-          <LazyLoad className='w-full min-h-[200px]' placeholder={<SpinnerContainer/>}>
-            <ContactUs/>
-          </LazyLoad>
+          <Suspense>
+            <LazyLoad className='w-full min-h-[200px]' placeholder={<SpinnerContainer/>}>
+              <ContactUs/>
+            </LazyLoad>
+          </Suspense>
         </motion.div>
         <motion.div variants={variants} initial={'initial'} whileInView={'inView'} viewport={{once: true}}>
-          <LazyLoad className='w-full min-h-[200px]' placeholder={<SpinnerContainer/>}>
-            <CTA/>
-          </LazyLoad>
+          <Suspense>
+            <LazyLoad className='w-full min-h-[200px]' placeholder={<SpinnerContainer/>}>
+              <CTA/>
+            </LazyLoad>
+          </Suspense>
         </motion.div>
         <motion.div variants={variants} initial={'initial'} whileInView={'inView'} viewport={{once: true}}>
-          <LazyLoad className='w-full min-h-[200px]' placeholder={<SpinnerContainer/>}>
-            <ExperienceAndFeedback/>
-          </LazyLoad>
+          <Suspense>
+            <LazyLoad className='w-full min-h-[200px]' placeholder={<SpinnerContainer/>}>
+              <ExperienceAndFeedback/>
+            </LazyLoad>
+          </Suspense>
         </motion.div>
         <StickyIcons showIcons={showButtons}/>
         {showButtons && <ScrollToTop/>}

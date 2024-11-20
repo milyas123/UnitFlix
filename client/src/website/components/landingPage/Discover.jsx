@@ -52,15 +52,6 @@ const Discover = ({ properties, type }) => {
                   </p>
                   <BsArrowUpRight className="md:text-sm 2xl:text-xl" />
                 </Link>
-                {
-                  type === 0 ?
-                      <Link to={`/add-property`} className="hidden items-center gap-1.5 border-b-2 border-transparent transition duration-200 ease-in-out hover:border-mirage md:flex">
-                        <p className="font-semibold text-mirage md:text-[7px] lg:text-[9px] xl:text-[11px] 2xl:text-[14px]">
-                          Submit Property
-                        </p>
-                        <BsArrowRight className="md:text-sm 2xl:text-xl" />
-                      </Link> : <></>
-                }
               </div>
             </div>
 
@@ -75,10 +66,10 @@ const Discover = ({ properties, type }) => {
                 />
                 <ArrowRight
                     className={`cursor-pointer md:text-xs lg:text-lg ${
-                        isEnd && "cursor-default opacity-40"
+                        (isEnd || properties.length <= 3) && "cursor-default opacity-40"
                     }`}
                     onClick={() => projectsRef.current.swiper.slideNext()}
-                    disabled={isEnd}
+                    disabled={(isEnd || properties.length <= 3)}
                 />
               </div>
               <div className="flex items-center justify-end flex-wrap gap-2">
@@ -91,15 +82,6 @@ const Discover = ({ properties, type }) => {
                   </p>
                   <BsArrowUpRight className="md:text-sm 2xl:text-xl" />
                 </Link>
-                {
-                  type === 0 ?
-                      <Link to={`/add-property`} className="flex items-center gap-1.5 border-b-2 border-transparent transition duration-200 ease-in-out hover:border-mirage md:hidden">
-                        <p className="font-semibold text-mirage md:text-[8px] lg:text-[10px] xl:text-[13px] 2xl:text-[16px]">
-                          Submit Property
-                        </p>
-                        <BsArrowRight className="md:text-sm 2xl:text-xl" />
-                      </Link> : <></>
-                }
               </div>
             </div>
 
