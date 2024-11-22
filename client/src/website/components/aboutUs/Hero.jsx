@@ -19,7 +19,7 @@ const Hero = () => {
         <LazyLoad className="absolute size-full" placeholder={<SpinnerContainer />}>
           <img
               src={website.aboutPage.backgroundImage}
-              className="absolute size-full object-cover object-top"
+              className="absolute size-full object-cover object-bottom"
               alt=""
           />
         </LazyLoad>

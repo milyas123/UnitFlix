@@ -5,7 +5,7 @@ import SpinnerContainer from "@/website/components/common/SpinnerContainer.jsx";
 
 const PropertyIntro = () => {
   return (
-    <div className="my-6 flex items-center justify-center p-2 sm:my-0 sm:p-0 md:h-[340px] lg:h-[430px] xl:h-[590px] 2xl:h-[720px]">
+    <div className="my-6 flex items-center justify-center p-2 md:h-[340px] lg:h-[430px] xl:h-[590px] 2xl:h-[720px]">
       <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
         <div className="flex flex-col gap-y-7 md:w-[56%] md:gap-y-2.5 lg:w-[55%] lg:gap-y-5 xl:gap-y-6 2xl:gap-y-8">
           <h1 className="text-[23px] font-bold md:text-[17px] lg:text-[20px] xl:text-[27px] 2xl:text-[31.5px]">

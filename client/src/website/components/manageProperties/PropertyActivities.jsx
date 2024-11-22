@@ -4,7 +4,7 @@ import website from "@/data/website.json";
 const PropertyActivities = () => {
   return (
     <div className="mb-[2.5rem] md:mb-[4rem] lg:mb-[6rem] xl:mb-[7rem] 2xl:mb-[9rem]">
-      <div className="p-2 sm:p-0">
+      <div className="p-2">
         <h1 className="text-[24px] font-bold md:text-[17px] lg:text-[20px] xl:text-[28px] 2xl:text-[32px]">
           {website.managePage.section2.heading}
         </h1>

@@ -17,7 +17,7 @@ const Testimonials = () => {
   const { isBeginning, isEnd } = useSwiperNavigation(swiperRef);
 
   return (
-    <div className="relative mb-[2.5rem] rounded-md bg-mirage text-white md:mb-[4rem] lg:mb-[6rem] xl:mb-[7rem] 2xl:mb-[9rem]">
+    <div className="relative mb-[2.5rem] mx-2 md:mx-0 rounded-md bg-mirage text-white md:mb-[4rem] lg:mb-[6rem] xl:mb-[7rem] 2xl:mb-[9rem]">
       <div className="absolute z-[300] hidden items-center justify-center rounded-full bg-white shadow-2xl md:-top-4 md:left-[6rem] md:flex md:size-[30px] lg:-top-7 lg:left-[6.8rem] lg:size-[50px] xl:left-[9rem] xl:size-[70px] 2xl:-top-10 2xl:left-[11.5rem] 2xl:size-[80px]">
         <img
           src="/assets/imgs/quote-up.png"
@@ -32,7 +32,7 @@ const Testimonials = () => {
           </h1>
         </div>
 
-        <div className="md:ms-auto md:w-[70%]">
+        <div className="w-full md:w-[70%]">
           <style jsx>{`
             .property-card .swiper-pagination-bullet {
               background-color: #ffffff;
@@ -50,12 +50,12 @@ const Testimonials = () => {
               slidesPerView={1}
               spaceBetween={20}
               breakpoints={{
-                640: { slidesPerView: 2, spaceBetween: 5 },
+                640: { slidesPerView: 1, spaceBetween: 5 },
                 1024: { slidesPerView: 2, spaceBetween: 12 },
               }}
               modules={[Pagination, Navigation]}
               pagination={{ clickable: true }}
-              className="custom-swiper-pagination h-[320px] w-[345px] md:h-[135px] md:w-auto lg:h-[175px] xl:h-[195px] 2xl:h-[240px]"
+              className="custom-swiper-pagination h-[320px] w-full md:h-[135px] md:w-auto lg:h-[175px] xl:h-[195px] 2xl:h-[240px]"
               style={{
                 "--swiper-pagination-color": "#FFFFFF",
               }}

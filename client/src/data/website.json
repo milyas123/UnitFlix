@@ -20,7 +20,8 @@
     "hero": {
       "heading": "From Unit to Flix, We Make Real Estate Click",
       "tagLine": "Discover, Invest, Live",
-      "backgroundImage": "/assets/imgs/hero-section-img.jpg"
+      "backgroundImage": "/assets/imgs/hero-section-img.jpg",
+      "backgroundVideo": "/assets/videos/video.mp4"
     },
     "trendingProjects": {
       "heading": "Discover Trending",
@@ -256,10 +257,13 @@
     "searchButton": "Search",
     "clearButton": "Clear Filters"
   },
+  "searchPage": {
+    "backgroundImage": "/assets/imgs/bg-1.jpg"
+  },
   "managePage": {
     "heading": "Manage Your Properties Effortlessly",
     "subHeading": "Maximize Revenue, Minimize Stress: Elevate your property returns with effortless management",
-    "backgroundImage": "/assets/imgs/hero-section-img.jpg",
+    "backgroundImage": "/assets/imgs/bg-2.jpg",
     "section1": {
       "heading": "Welcome to UNITFLIX Property Management",
       "description": "At UNITFLIX, we offer top-notch property management services for all types of rental properties. Our expert team has years of experience in managing properties of all sizes, from single-family homes to large apartment complexes. We pride ourselves on providing exceptional customer service, ensuring that both landlords and tenants are satisfied with our services. Our goal is to make the rental process as seamless and efficient as possible for all parties involved.",
@@ -364,7 +368,7 @@
       "We understand that buying a home is more than just a transaction—it's an investment in your future, a way to build lasting memories, and a place where you truly belong.",
       "With a focus on ROI and growth, we’re here to make that dream a reality."
     ],
-    "backgroundImage": "/assets/imgs/hero-section-img.jpg",
+    "backgroundImage": "/assets/imgs/bg-3.jpg",
     "section1": {
       "subTitle": "How it Started",
       "title": "Our Dream: Making Real Estate Work for You",
