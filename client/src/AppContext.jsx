@@ -27,6 +27,7 @@ export const AppProvider = ({ children }) => {
           axios.get(`${serverURL}/data/property_statuses`)
         ]);
 
+        console.log(locationsRes.data.data, developersRes.data.data)
         setLocations(locationsRes.data.data);
         setDevelopers(developersRes.data.data);
         setPropertyTypes(propertyTypesRes.data.data);
