@@ -55,7 +55,20 @@ namespace Unitflix.Server.Controllers
         public JsonResult GetDevelopers()
         {
             List<Developer> developers = _dbContext.Developers.ToList();
-            return Response.Message(developers);
+            List<DeveloperReadDTO> developerDTOs = _mapper.Map<List<DeveloperReadDTO>>(developers);
+
+            //Finding Properties count for each developer
+            foreach(DeveloperReadDTO dev in developerDTOs)
+            {
+                dev.PropertyCount = _dbContext
+                    .Properties
+                    .Where(p => p.Developer.HasValue && p.Developer.Value == dev.Id)
+                    .Count();
+            }
+
+            developerDTOs = developerDTOs.OrderByDescending(dev => dev.PropertyCount).ToList();
+
+            return Response.Message(developerDTOs);
         }
 
         /// <summary>

@@ -157,8 +157,8 @@ const Properties = ({
 
           <InfoList
             heading="Developers"
-            count={developers.length}
-            items={developers}
+            count={developers.filter(d => d.propertyCount > 0).length}
+            items={developers.filter(d => d.propertyCount > 0)}
             handleItemClick={(item) => handleItemClick("developer", item.id)}
           />
 

@@ -37,7 +37,7 @@ const InfoList = ({ heading, count, items, shallShowAll, handleItemClick }) => {
             }}
           >
             <span className="cursor-pointer transition-all duration-300 ease-in-out hover:underline" onClick={() => handleItemClick(item)}>
-              {item.name}
+              {item.name} {item.propertyCount ? `(${item.propertyCount})` : ''}
             </span>
           </div>
         ))}
