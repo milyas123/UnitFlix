@@ -150,8 +150,8 @@ const Properties = ({
 
           <InfoList
             heading="Locations"
-            count={locations?.length}
-            items={locations}
+            count={locations?.filter(loc => loc.propertyCount > 0).length}
+            items={locations.filter(loc => loc.propertyCount > 0)}
             handleItemClick={(item) => handleItemClick("location", item.id)}
           />
 

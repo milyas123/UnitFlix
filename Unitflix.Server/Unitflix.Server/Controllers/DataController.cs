@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using Unitflix.Server.Database;
 using Unitflix.Server.DTOs;
+using Unitflix.Server.Enums;
 using Unitflix.Server.Helpers;
 using Unitflix.Server.Models;
 
@@ -44,7 +45,20 @@ namespace Unitflix.Server.Controllers
         public JsonResult GetLocations()
         {
             List<Location> locations = _dbContext.Locations.ToList();
-            return Response.Message(locations);
+            List<LocationReadDTO> locationDTOs = _mapper.Map<List<LocationReadDTO>>(locations);
+
+            //Finding Properties count for each developer
+            foreach (LocationReadDTO location in locationDTOs)
+            {
+                location.PropertyCount = _dbContext
+                    .Properties
+                    .Where(p => p.location == location.Id && p.ApprovalStatus == PropertyApprovalStatus.Approved && !p.IsDeleted && p.IsVerified)
+                    .Count();
+            }
+
+            locationDTOs = locationDTOs.OrderByDescending(location => location.PropertyCount).ToList();
+
+            return Response.Message(locationDTOs);
         }
 
         /// <summary>
@@ -62,7 +76,7 @@ namespace Unitflix.Server.Controllers
             {
                 dev.PropertyCount = _dbContext
                     .Properties
-                    .Where(p => p.Developer.HasValue && p.Developer.Value == dev.Id)
+                    .Where(p => p.Developer.HasValue && p.Developer.Value == dev.Id && p.ApprovalStatus == PropertyApprovalStatus.Approved && !p.IsDeleted && p.IsVerified)
                     .Count();
             }
 
