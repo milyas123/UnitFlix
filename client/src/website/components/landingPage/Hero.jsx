@@ -22,7 +22,7 @@ const Hero = () => {
                     />
             }
         </LazyLoad>
-        <div className="absolute inset-0 z-50 bg-black bg-opacity-50"></div>
+        <div className="absolute inset-0 z-50 bg-black bg-opacity-0"></div>
         <div className="absolute z-50 flex size-full items-center justify-center">
         <div className="space-y-4 text-center text-white md:space-y-2 lg:space-y-3.5 2xl:space-y-4">
                 <motion.div initial={{opacity: 0, y: 100}} whileInView={{y: [100, 0], opacity: [0, 1]}} viewport={{once: true}}

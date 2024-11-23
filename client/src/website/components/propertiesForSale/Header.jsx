@@ -13,7 +13,7 @@ const Header = ({purpose}) => {
                     alt=""
                 />
             </LazyLoad>
-            <div className='absolute z-2 size-full bg-black/50'></div>
+            <div className='absolute z-2 size-full bg-black/20'></div>
             <div className="absolute z-10 flex size-full items-center justify-center">
                 <div
                     className="space-y-4 text-center text-white md:space-y-1.5 lg:space-y-3.5 xl:space-y-5 2xl:space-y-6">

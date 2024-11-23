@@ -22,7 +22,7 @@ const Hero = () => {
               alt=""
           />
         </LazyLoad>
-        <div className="absolute inset-0 z-50 bg-black bg-opacity-50"></div>
+        <div className="absolute inset-0 z-50 bg-black bg-opacity-0"></div>
         <div className="absolute z-50 mx-auto flex size-full items-center justify-center">
           <div className="mx-auto px-2 space-y-3 text-center text-white md:w-[76%] md:space-y-2.5 md:text-left lg:space-y-3.5 xl:space-y-4 2xl:space-y-5">
             <h1 className="text-[24px] font-semibold md:w-[70%] md:text-[35px] lg:text-[40px] xl:text-[54px] 2xl:text-[66px]">

@@ -59,7 +59,7 @@ const InquiryForm = ({propertyId}) => {
       setFormData({ name: "", email: "", phone: "", message: "" });
     } catch (error) {
       console.error("Error submitting the form:", error.data);
-      setMessage(error.response?.data || "There was an issue submitting the form. Please try again.");
+      setMessage(error?.response?.data && typeof error?.response?.data === 'string' ? error?.response.data : "There was an issue submitting the form. Please try again later.");
       setStatus('error')
     } finally {
       setLoading(false);
