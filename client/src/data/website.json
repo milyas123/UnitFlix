@@ -20,7 +20,7 @@
     "hero": {
       "heading": "From Unit to Flix, We Make Real Estate Click",
       "tagLine": "Discover, Invest, Live",
-      "backgroundImage": "/assets/imgs/hero-section-img.jpg",
+      "backgroundImage": "/assets/imgs/hero-section-img.webp",
       "backgroundVideo": "/assets/videos/video.mp4"
     },
     "trendingProjects": {
@@ -37,94 +37,94 @@
           {
             "title": "Find Your Dream Home",
             "description": "Browse listings and secure the best deals with expert guidance and support.",
-            "imgSrc": "/assets/imgs/spot-badge.png"
+            "imgSrc": "/assets/imgs/spot-badge.webp"
           },
           {
             "title": "Invest Smart, Earn More",
             "description": "Personalized advice to help you buy properties with high return potential.",
-            "imgSrc": "/assets/imgs/spot-badge.png"
+            "imgSrc": "/assets/imgs/spot-badge.webp"
           },
           {
             "title": "Easy Home Buying",
             "description": "From property search to ownership, we simplify the entire process.",
-            "imgSrc": "/assets/imgs/spot-badge.png"
+            "imgSrc": "/assets/imgs/spot-badge.webp"
           }
         ],
         "Sell": [
           {
             "title": "Quick & Profitable Sale",
             "description": "Leverage our expertise to sell fast and at the best possible price.",
-            "imgSrc": "/assets/imgs/spot-badge.png"
+            "imgSrc": "/assets/imgs/spot-badge.webp"
           },
           {
             "title": "Maximize Property Value",
             "description": "We offer strategies to boost your property’s appeal and market price.",
-            "imgSrc": "/assets/imgs/spot-badge.png"
+            "imgSrc": "/assets/imgs/spot-badge.webp"
           },
           {
             "title": "Hassle-Free Selling",
             "description": "Let us handle the details for a smooth, stress-free selling process.",
-            "imgSrc": "/assets/imgs/spot-badge.png"
+            "imgSrc": "/assets/imgs/spot-badge.webp"
           }
         ],
         "Rent": [
           {
             "title": "Find the Perfect Rental",
             "description": "Discover rentals that match your lifestyle with flexible lease options.",
-            "imgSrc": "/assets/imgs/spot-badge.png"
+            "imgSrc": "/assets/imgs/spot-badge.webp"
           },
           {
             "title": "Quick Tenant Match",
             "description": "Rent out your property to qualified tenants quickly and efficiently.",
-            "imgSrc": "/assets/imgs/spot-badge.png"
+            "imgSrc": "/assets/imgs/spot-badge.webp"
           },
           {
             "title": "Exclusive Rentals",
             "description": "Explore premium rental options designed for your modern living needs.",
-            "imgSrc": "/assets/imgs/spot-badge.png"
+            "imgSrc": "/assets/imgs/spot-badge.webp"
           }
         ],
         "Manage": [
           {
             "title": "Full Property Management",
             "description": "From maintenance to tenant care, we manage all aspects for you.",
-            "imgSrc": "/assets/imgs/spot-badge.png"
+            "imgSrc": "/assets/imgs/spot-badge.webp"
           },
           {
             "title": "Maximize Rental Income",
             "description": "Our expert management ensures your property generates top returns.",
-            "imgSrc": "/assets/imgs/spot-badge.png"
+            "imgSrc": "/assets/imgs/spot-badge.webp"
           },
           {
             "title": "Total Care Services",
             "description": "We handle property upkeep, tenant services, and everything in between.",
-            "imgSrc": "/assets/imgs/spot-badge.png"
+            "imgSrc": "/assets/imgs/spot-badge.webp"
           }
         ]
       }
     },
     "whoAreWe": {
-      "backgroundImage": "/assets/imgs/about-bg.png",
+      "backgroundImage": "/assets/imgs/about-bg.webp",
       "title": "Who Are We & Why Choose Us?",
       "description": "At Unitflix, we’re more than just a real estate company—we’re your dedicated partner in navigating the property landscape. With a team of seasoned professionals and a client-first approach, we specialize in delivering exceptional services tailored to meet your unique needs. Our commitment to excellence, innovation, and transparency sets us apart in the industry",
       "items": [
         {
-          "imgSrc": "/assets/imgs/key.png",
+          "imgSrc": "/assets/imgs/key.webp",
           "title": "Expertise",
           "description": "Decades of experience help you make informed property decisions."
         },
         {
-          "imgSrc": "/assets/imgs/creditcard.png",
+          "imgSrc": "/assets/imgs/creditcard.webp",
           "title": "Reliability",
           "description": "We ensure a smooth, hassle-free experience with consistent support."
         },
         {
-          "imgSrc": "/assets/imgs/creditcard.png",
+          "imgSrc": "/assets/imgs/creditcard.webp",
           "title": "Innovation",
           "description": "Cutting-edge tools and strategies keep you ahead in the market."
         },
         {
-          "imgSrc": "/assets/imgs/creditcard.png",
+          "imgSrc": "/assets/imgs/creditcard.webp",
           "title": "Client-Centric",
           "description": "We tailor our services to align with your unique vision and goals."
         }
@@ -167,7 +167,7 @@
           "heading": "Outstanding ROI and Support!",
           "review": "“Unitflix has been instrumental in maximizing our real estate investments. Their expert team delivers results beyond expectations with exceptional support.”",
           "rating": 5,
-          "userImage": "/assets/imgs/person-1.jpeg",
+          "userImage": "/assets/imgs/person-1.webp",
           "userName": "Mohammed Ali",
           "userPost": "Senior Investment Partner"
         },
@@ -175,7 +175,7 @@
           "heading": "Reliable and Results-Driven",
           "review": "“Partnering with Unitflix was a game-changer for our portfolio. Their professionalism and commitment to growth make them our go-to real estate experts.”",
           "rating": 5,
-          "userImage": "/assets/imgs/person-3.jpeg",
+          "userImage": "/assets/imgs/person-3.webp",
           "userName": "Sarah Collins",
           "userPost": "Real Estate Investor"
         },
@@ -183,7 +183,7 @@
           "heading": "Exceeded Our Expectations!",
           "review": "“From property selection to management, Unitflix ensured smooth operations and strong returns. We couldn’t ask for a more dedicated partner.”",
           "rating": 5,
-          "userImage": "/assets/imgs/person-2.jpeg",
+          "userImage": "/assets/imgs/person-2.webp",
           "userName": "Doctor Aejaz",
           "userPost": "Real Estate Investor"
         },
@@ -191,7 +191,7 @@
           "heading": "Trustworthy and Highly Skilled Team",
           "review": "“Unitflix consistently provides top-notch service with impressive ROI. Their insight and strategy make real estate investment seamless and rewarding.”",
           "rating": 5,
-          "userImage": "/assets/imgs/person-5.jpeg",
+          "userImage": "/assets/imgs/person-5.webp",
           "userName": "Jessica Lee",
           "userPost": "Investment Strategist"
         },
@@ -199,7 +199,7 @@
           "heading": "Impressive Expertise and Dedication",
           "review": "“Unitflix’s commitment to client success is unmatched. Their knowledgeable team manages every detail, ensuring exceptional returns and stress-free investments.”",
           "rating": 5,
-          "userImage": "/assets/imgs/person-4.jpeg",
+          "userImage": "/assets/imgs/person-4.webp",
           "userName": "Michael Chen",
           "userPost": "Financial Advisor"
         }
@@ -258,12 +258,12 @@
     "clearButton": "Clear Filters"
   },
   "searchPage": {
-    "backgroundImage": "/assets/imgs/bg-1.jpg"
+    "backgroundImage": "/assets/imgs/bg-1.webp"
   },
   "managePage": {
     "heading": "Manage Your Properties Effortlessly",
     "subHeading": "Maximize Revenue, Minimize Stress: Elevate your property returns with effortless management",
-    "backgroundImage": "/assets/imgs/bg-2.jpg",
+    "backgroundImage": "/assets/imgs/bg-2.webp",
     "section1": {
       "heading": "Welcome to UNITFLIX Property Management",
       "description": "At UNITFLIX, we offer top-notch property management services for all types of rental properties. Our expert team has years of experience in managing properties of all sizes, from single-family homes to large apartment complexes. We pride ourselves on providing exceptional customer service, ensuring that both landlords and tenants are satisfied with our services. Our goal is to make the rental process as seamless and efficient as possible for all parties involved.",
@@ -273,7 +273,7 @@
         "We manage everything from small apartments to large complexes.",
         "We manage everything from small apartments to large complexes."
       ],
-      "image": "/assets/imgs/property.jpg"
+      "image": "/assets/imgs/property.webp"
     },
     "section2": {
       "heading": "Property Management Activities",
@@ -283,7 +283,7 @@
             "Property Management"
           ],
           "description": "Effective management and communication with property owners to ensure high returns on holiday rentals and leasing.",
-          "image": "/assets/imgs/p3.jpg"
+          "image": "/assets/imgs/p3.webp"
         },
         {
           "title": [
@@ -291,7 +291,7 @@
             "Optimization"
           ],
           "description": "Create attractive listings on platforms like Airbnb and Booking.com, including professional photography and compelling descriptions to enhance visibility and appeal.",
-          "image": "/assets/imgs/p3.jpg"
+          "image": "/assets/imgs/p3.webp"
         },
         {
           "title": [
@@ -299,7 +299,7 @@
             "Strategies"
           ],
           "description": "Implement dynamic pricing models based on market trends, seasonality, and local events to maximize rental income.",
-          "image": "/assets/imgs/p3.jpg"
+          "image": "/assets/imgs/p3.webp"
         },
         {
           "title": [
@@ -307,21 +307,21 @@
             "Maintenance"
           ],
           "description": "Conduct routine inspections and maintenance to keep the property in excellent condition, ensuring guest satisfaction and reducing long-term repair costs.",
-          "image": "/assets/imgs/p3.jpg"
+          "image": "/assets/imgs/p3.webp"
         },
         {
           "title": [
             "Guest Screening and Management"
           ],
           "description": "Carefully screen guests to ensure responsible renters, and provide exceptional service during their stay to encourage positive reviews and repeat business.",
-          "image": "/assets/imgs/p3.jpg"
+          "image": "/assets/imgs/p3.webp"
         },
         {
           "title": [
             "Marketing and Promotion"
           ],
           "description": "Utilize social media, email marketing, and partnerships with local businesses to promote the property and attract a diverse clientele.",
-          "image": "/assets/imgs/p3.jpg"
+          "image": "/assets/imgs/p3.webp"
         }
       ]
     },
@@ -368,7 +368,7 @@
       "We understand that buying a home is more than just a transaction—it's an investment in your future, a way to build lasting memories, and a place where you truly belong.",
       "With a focus on ROI and growth, we’re here to make that dream a reality."
     ],
-    "backgroundImage": "/assets/imgs/bg-3.jpg",
+    "backgroundImage": "/assets/imgs/bg-3.webp",
     "section1": {
       "subTitle": "How it Started",
       "title": "Our Dream: Making Real Estate Work for You",
@@ -376,7 +376,7 @@
         "Our journey began with a simple vision: to transform real estate from just a property transaction into a powerful investment tool that generates returns and secures futures. We set out to build a company that empowers clients to make informed, profitable real estate decisions—whether it’s buying a dream home, investing in a rental property, or managing assets for maximum ROI. Founded with a passion for property and a deep understanding of the market, we’ve combined years of experience with innovative strategies that go beyond traditional buying and selling.",
         "Every step we take is aimed at one goal: making real estate truly work for you, helping you build wealth, memories, and a place to belong."
       ],
-      "image": "/assets/imgs/about.jpg"
+      "image": "/assets/imgs/about.webp"
     },
     "section2": {
       "items": [
@@ -435,25 +435,25 @@
       ],
       "members": [
         {
-          "image": "/assets/imgs/team.jpg",
+          "image": "/assets/imgs/team.webp",
           "name": "John Doe",
           "position": "External Contractor",
           "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it"
         },
         {
-          "image": "/assets/imgs/team.jpg",
+          "image": "/assets/imgs/team.webp",
           "name": "John Doe",
           "position": "External Contractor",
           "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it"
         },
         {
-          "image": "/assets/imgs/team.jpg",
+          "image": "/assets/imgs/team.webp",
           "name": "John Doe",
           "position": "External Contractor",
           "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it"
         },
         {
-          "image": "/assets/imgs/team.jpg",
+          "image": "/assets/imgs/team.webp",
           "name": "John Doe",
           "position": "External Contractor",
           "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it"
@@ -500,7 +500,7 @@
   },
   "contactPage": {
     "heading": "Contact Us",
-    "backgroundImage": "/assets/imgs/properties-hero.png",
+    "backgroundImage": "/assets/imgs/properties-hero.webp",
     "cta": "Reach out for any inquiries , we will respond you back."
   }
 }

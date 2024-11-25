@@ -74,7 +74,7 @@ const Footer = () => {
       <div>
         <footer>
           <img
-              src="/assets/imgs/footer-vector.png"
+              src="/assets/imgs/footer-vector.webp"
               className="-mb-[1px] size-full object-cover"
               alt="footer-vector"
           />

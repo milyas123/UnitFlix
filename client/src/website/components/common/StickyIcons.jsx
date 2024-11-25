@@ -52,13 +52,13 @@ const StickyIcons = ({ showIcons, propertyId }) => {
         }`}
       >
         <img
-          src="/assets/imgs/call-vector.png"
+          src="/assets/imgs/call-vector.webp"
           className="animated-icon size-[55px] cursor-pointer"
           alt="callcenter-vector"
           onClick={() => setShowInquiryModal(true)}
         />
         <img
-          src="/assets/imgs/whatsapp-icon.png"
+          src="/assets/imgs/whatsapp-icon.webp"
           className="animated-icon size-[50px] cursor-pointer"
           alt="whatsapp-icon"
           onClick={handleWhatsappClick}
