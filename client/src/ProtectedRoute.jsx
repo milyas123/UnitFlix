@@ -1,5 +1,4 @@
 import { Navigate } from "react-router-dom";
-import AnimLazyLoader from "@/website/components/common/AnimLazyLoader.jsx";
 
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem("token");
@@ -8,11 +7,7 @@ const ProtectedRoute = ({ children }) => {
     return <Navigate to="/admin/login" replace />;
   }
 
-  return (
-      <AnimLazyLoader>
-        {children}
-      </AnimLazyLoader>
-  );
+  return children;
 };
 
 export default ProtectedRoute;

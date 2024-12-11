@@ -1,5 +1,7 @@
+import {lazy} from 'react';
 import { SquareX } from "lucide-react";
-import InquiryForm from "./InquiryForm";
+import AnimLazyLoader from "@/website/components/common/AnimLazyLoader.jsx";
+const InquiryForm = lazy(() => import("./InquiryForm"));
 
 const RegisterInterestModal = ({ onClose, propertyId }) => {
   return (
@@ -18,11 +20,13 @@ const RegisterInterestModal = ({ onClose, propertyId }) => {
             </h1>
           </div>
 
-          <InquiryForm propertyId={propertyId} />
+          <AnimLazyLoader>
+            <InquiryForm propertyId={propertyId} />
+          </AnimLazyLoader>
         </div>
 
         <img
-          src="/assets/imgs/otp.png"
+          src="/assets/imgs/otp.webp"
           className="hidden w-[48%] object-cover object-center md:flex md:h-[320px] md:rounded-md lg:h-[400px] xl:h-[510px] 2xl:h-[640px] 2xl:rounded-xl"
           alt="OTP Verification"
         />

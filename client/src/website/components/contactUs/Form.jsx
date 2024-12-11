@@ -1,9 +1,11 @@
+import {lazy} from "react";
 import { CgPhone } from "react-icons/cg";
 import { MdEmail } from "react-icons/md";
 import {FaFacebookF, FaLinkedinIn, FaLocationDot, FaXTwitter} from "react-icons/fa6";
 import { FaInstagram } from "react-icons/fa";
-import InquiryForm from "../common/InquiryForm";
+const InquiryForm = lazy(() => import("../common/InquiryForm"));
 import website from "@/data/website.json";
+import AnimLazyLoader from "@/website/components/common/AnimLazyLoader.jsx";
 
 const Form = () => {
   return (
@@ -88,7 +90,9 @@ const Form = () => {
               </p>
             </div>
 
-            <InquiryForm/>
+            <AnimLazyLoader>
+              <InquiryForm/>
+            </AnimLazyLoader>
           </div>
         </div>
       </div>

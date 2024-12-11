@@ -17,6 +17,7 @@ import AddProperty from "@/website/pages/AddProperty";
 
 // Admin panel
 import Layout from "@/admin/Layout";
+import AnimLazyLoader from "@/website/components/common/AnimLazyLoader.jsx";
 const AdminLogin = lazy(() => import("@/admin/pages/AdminLogin"));
 const AdminAddProject = lazy(() => import("@/admin/pages/AdminAddProject"));
 const AdminAddProperty = lazy(() => import("@/admin/pages/AdminAddProperty"));
@@ -44,14 +45,14 @@ function App() {
               <Route path="/admin/login" element={<AdminLogin />} />
 
               <Route path="/admin" element={<ProtectedRoute><Layout /></ProtectedRoute>} >
-                <Route path="add-property" element={<AdminAddProperty />} />
-                <Route path="edit-property/:id" element={<AdminAddProperty />} />
-                <Route path="add-project" element={<AdminAddProject />} />
-                <Route path="edit-project/:id" element={<AdminAddProject />} />
-                <Route path="manage-properties" element={<AdminManageProperties />} />
-                <Route path="submitted-requests" element={<AdminSubmittedRequests />} />
-                <Route path="property-details/:id" element={<AdminPreviewProperty />} />
-                <Route path="email-configuration" element={<AdminEmailConfiguration />} />
+                <Route path="add-property" element={<AnimLazyLoader><AdminAddProperty /></AnimLazyLoader>} />
+                <Route path="edit-property/:id" element={<AnimLazyLoader><AdminAddProperty /> </AnimLazyLoader>} />
+                <Route path="add-project" element={<AnimLazyLoader><AdminAddProject /> </AnimLazyLoader>} />
+                <Route path="edit-project/:id" element={<AnimLazyLoader><AdminAddProject /> </AnimLazyLoader>} />
+                <Route path="manage-properties" element={<AnimLazyLoader><AdminManageProperties /> </AnimLazyLoader>} />
+                <Route path="submitted-requests" element={<AnimLazyLoader><AdminSubmittedRequests /> </AnimLazyLoader>} />
+                <Route path="property-details/:id" element={<AnimLazyLoader><AdminPreviewProperty /> </AnimLazyLoader>} />
+                <Route path="email-configuration" element={<AnimLazyLoader><AdminEmailConfiguration /> </AnimLazyLoader>} />
               </Route>
             </Routes>
           </AppProvider>

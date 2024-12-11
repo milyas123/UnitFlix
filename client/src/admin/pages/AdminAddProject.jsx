@@ -1,8 +1,8 @@
-import {useEffect, useState} from "react";
+import {useEffect, useState, lazy} from "react";
 
 import Header from "../components/common/Header";
 import Button from "../components/common/Button";
-import ProjectGeneralInformation from "../components/adminAddProject/ProjectGeneralInformation";
+const ProjectGeneralInformation = lazy(() => import("../components/adminAddProject/ProjectGeneralInformation"));
 import ProjectKeyHighlights from "../components/adminAddProject/ProjectKeyHighlights";
 import ProjectFeaturesAndAmenities from "../components/adminAddProject/ProjectFeaturesAndAmenities";
 import ProjectGallery from "../components/adminAddProject/ProjectGallery";
@@ -17,6 +17,7 @@ import AddPaymentPlanModal from "../components/adminAddProject/modals/AddPayment
 import axios from "axios";
 import { toast } from "react-toastify";
 import {useNavigate, useParams} from "react-router-dom";
+import AnimLazyLoader from "@/website/components/common/AnimLazyLoader.jsx";
 
 const serverURL = import.meta.env.VITE_SERVER_URL;
 const initialFormData = {
@@ -404,12 +405,14 @@ const AdminAddProject = () => {
       <div className="mx-auto flex w-[80%] flex-col gap-7 pb-4">
         <Header title="Add Project" showBackButton={true} />
 
-        <ProjectGeneralInformation
-          formData={formData}
-          handleChange={handleChange}
-          handleSelect={handleSelectChange}
-          handleFileChange={handleFileChange}
-        />
+        <AnimLazyLoader>
+          <ProjectGeneralInformation
+              formData={formData}
+              handleChange={handleChange}
+              handleSelect={handleSelectChange}
+              handleFileChange={handleFileChange}
+          />
+        </AnimLazyLoader>
         <ProjectPropertyInformation
           formData={formData}
           handleChange={handleChange}

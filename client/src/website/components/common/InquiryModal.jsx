@@ -1,6 +1,8 @@
+import {lazy} from 'react';
 import { SquareX } from "lucide-react";
-import InquiryForm from "./InquiryForm";
+const InquiryForm = lazy(() => import("./InquiryForm"));
 import website from '../../../data/website.json';
+import AnimLazyLoader from "@/website/components/common/AnimLazyLoader.jsx";
 
 const InquiryModal = ({ onClose, propertyId }) => {
   return (
@@ -22,7 +24,9 @@ const InquiryModal = ({ onClose, propertyId }) => {
             </p>
           </div>
 
-          <InquiryForm propertyId={propertyId} />
+          <AnimLazyLoader>
+            <InquiryForm propertyId={propertyId} />
+          </AnimLazyLoader>
         </div>
 
         <div className='w-[48%] h-full relative md:rounded-md overflow-hidden hidden md:block'>

@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {lazy} from 'react';
 import Status from "../svgs/Status";
 import { Input } from "../ui/input";
 import Delete from '../svgs/Delete';
 import { ImageUp } from 'lucide-react';
-import TextEditor from '@/admin/components/common/TextEditor';
+const TextEditor = lazy(() => import('@/admin/components/common/TextEditor'));
 import {useAppContext} from "@/AppContext.jsx";
+import AnimLazyLoader from "@/website/components/common/AnimLazyLoader.jsx";
 
 const GeneralInformation = ({ formData, handleChange, handleSelectChange, handleFileChange, handleRemoveCoverImage, handleStatusClick }) => {
   const {propertyStatuses} = useAppContext();
@@ -42,10 +43,12 @@ const GeneralInformation = ({ formData, handleChange, handleSelectChange, handle
 
         <div className="w-full md:space-y-1 lg:space-y-1.5 xl:space-y-2 2xl:space-y-2.5">
           <label className="user--addProperty-labelTextSize">Overview</label>
-          <TextEditor
-              overview={formData.overview}
-              setOverview={(value) => handleSelectChange("overview", value)}
-          />
+          <AnimLazyLoader>
+            <TextEditor
+                overview={formData.overview}
+                setOverview={(value) => handleSelectChange("overview", value)}
+            />
+          </AnimLazyLoader>
         </div>
 
         <div className="w-full space-y-2.5">

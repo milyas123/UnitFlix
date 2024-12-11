@@ -1,12 +1,13 @@
-import { useState, useEffect } from "react";
+import {lazy} from "react";
 import { ImageUp } from "lucide-react";
 import { AiFillFilePdf } from "react-icons/ai";
 
-import TextEditor from "../common/TextEditor";
+const TextEditor = lazy(() => import("../common/TextEditor"));
 import { Input } from "@/website/components/ui/input";
 import Status from "@/website/components/svgs/Status";
 import Delete from "@/website/components/svgs/Delete";
 import {useAppContext} from "@/AppContext.jsx";
+import AnimLazyLoader from "@/website/components/common/AnimLazyLoader.jsx";
 
 
 const ProjectGeneralInformation = ({ formData, handleChange, handleSelect, handleFileChange }) => {
@@ -61,10 +62,12 @@ const ProjectGeneralInformation = ({ formData, handleChange, handleSelect, handl
 
         <div className="space-y-2.5">
           <label className="text-[16px] font-semibold">Overview</label>
-          <TextEditor
-              overview={formData.overview}
-              setOverview={(value) => handleSelect("overview", value)}
-          />
+          <AnimLazyLoader>
+            <TextEditor
+                overview={formData.overview}
+                setOverview={(value) => handleSelect("overview", value)}
+            />
+          </AnimLazyLoader>
         </div>
 
         <div className="w-full space-y-2.5">

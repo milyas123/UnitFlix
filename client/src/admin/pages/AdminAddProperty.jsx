@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy } from "react";
 import Header from "../components/common/Header";
 import Button from "../components/common/Button";
 import Gallery from "@/website/components/addProperty/Gallery";
 import AddKeyHighlights from "@/website/components/addProperty/AddKeyHighlights";
-import GeneralInformation from "@/website/components/addProperty/GeneralInformation";
+const GeneralInformation = lazy(() => import("@/website/components/addProperty/GeneralInformation"));
 import PropertyInformation from "@/website/components/addProperty/PropertyInformation";
 import AddFeaturesAndAmenities from "@/website/components/addProperty/AddFeaturesAndAmenities";
 
@@ -13,6 +13,7 @@ import AddKeyHighlightModal from "../components/adminAddProject/modals/AddKeyHig
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useParams, useNavigate } from "react-router-dom";
+import AnimLazyLoader from "@/website/components/common/AnimLazyLoader.jsx";
 
 const initialFormData = {
   title: "",
@@ -307,14 +308,16 @@ const AdminAddProperty = () => {
     <div className="mx-auto flex w-[80%] flex-col gap-7 pb-4">
       <Header title={isEditing ? "Edit Property" : "Add Property"} showBackButton={true} />
 
-      <GeneralInformation
-        formData={formData}
-        handleChange={handleChange}
-        handleSelectChange={handleSelectChange}
-        handleFileChange={handleFileChange}
-        handleRemoveCoverImage={handleRemoveCoverImage}
-        handleStatusClick={status => handleSelectChange('status', status)}
-      />
+      <AnimLazyLoader>
+        <GeneralInformation
+            formData={formData}
+            handleChange={handleChange}
+            handleSelectChange={handleSelectChange}
+            handleFileChange={handleFileChange}
+            handleRemoveCoverImage={handleRemoveCoverImage}
+            handleStatusClick={status => handleSelectChange('status', status)}
+        />
+      </AnimLazyLoader>
       <PropertyInformation
         formData={formData}
         handleChange={handleChange}
