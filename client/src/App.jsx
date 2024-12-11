@@ -1,5 +1,6 @@
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
+import {lazy} from 'react';
 import { AppProvider } from "./AppContext";
 import { ToastContainer, Slide } from "react-toastify";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -16,13 +17,13 @@ import AddProperty from "@/website/pages/AddProperty";
 
 // Admin panel
 import Layout from "@/admin/Layout";
-import AdminLogin from "@/admin/pages/AdminLogin";
-import AdminAddProject from "@/admin/pages/AdminAddProject";
-import AdminAddProperty from "@/admin/pages/AdminAddProperty";
-import AdminPreviewProperty from "@/admin/pages/AdminPreviewProperty";
-import AdminManageProperties from "@/admin/pages/AdminManageProperties";
-import AdminSubmittedRequests from "@/admin/pages/AdminSubmittedRequests";
-import AdminEmailConfiguration from "@/admin/pages/AdminEmailConfiguration";
+const AdminLogin = lazy(() => import("@/admin/pages/AdminLogin"));
+const AdminAddProject = lazy(() => import("@/admin/pages/AdminAddProject"));
+const AdminAddProperty = lazy(() => import("@/admin/pages/AdminAddProperty"));
+const AdminPreviewProperty = lazy(() => import("@/admin/pages/AdminPreviewProperty"));
+const AdminManageProperties = lazy(() => import("@/admin/pages/AdminManageProperties"));
+const AdminSubmittedRequests = lazy(() => import("@/admin/pages/AdminSubmittedRequests"));
+const AdminEmailConfiguration = lazy(() => import("@/admin/pages/AdminEmailConfiguration"));
 
 function App() {
 
@@ -42,7 +43,7 @@ function App() {
               {/* Admin panel */}
               <Route path="/admin/login" element={<AdminLogin />} />
 
-              <Route path="/admin" element={<ProtectedRoute> <Layout /> </ProtectedRoute>} >
+              <Route path="/admin" element={<ProtectedRoute><Layout /></ProtectedRoute>} >
                 <Route path="add-property" element={<AdminAddProperty />} />
                 <Route path="edit-property/:id" element={<AdminAddProperty />} />
                 <Route path="add-project" element={<AdminAddProject />} />

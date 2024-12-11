@@ -1,13 +1,15 @@
+import {lazy} from 'react';
 import Layout from "@/website/Layout";
-import DreamHomeSteps from "@/website/components/aboutUs/DreamHomeSteps";
-import FAQs from "@/website/components/aboutUs/FAQs";
+const DreamHomeSteps = lazy(() => import("@/website/components/aboutUs/DreamHomeSteps"));
+const FAQs = lazy(() => import("@/website/components/aboutUs/FAQs"));
 import Hero from "@/website/components/aboutUs/Hero";
-import MissionVisionSection from "@/website/components/aboutUs/MissionVisionSection";
-import Team from "@/website/components/aboutUs/Team";
+const MissionVisionSection = lazy(() => import("@/website/components/aboutUs/MissionVisionSection"));
+const Team = lazy(() => import("@/website/components/aboutUs/Team"));
 import ScrollToTop from "@/website/components/common/ScrollToTop";
 import StickyIcons from "@/website/components/common/StickyIcons";
 
 import useScrollProgress from "@/hooks/useScrollProgress";
+import AnimLazyLoader from "@/website/components/common/AnimLazyLoader.jsx";
 
 const AboutUs = () => {
   const showTopButton = useScrollProgress("mission-section");
@@ -16,14 +18,22 @@ const AboutUs = () => {
     <Layout>
       <Hero />
       <div className="p-2 md:mx-auto md:w-[80%]">
-        <div id="mission-section">
-          <MissionVisionSection />
-        </div>
-        <DreamHomeSteps />
-        <Team />
-        <FAQs />
+          <AnimLazyLoader>
+              <div id="mission-section">
+                  <MissionVisionSection/>
+              </div>
+          </AnimLazyLoader>
+          <AnimLazyLoader>
+              <DreamHomeSteps/>
+          </AnimLazyLoader>
+          <AnimLazyLoader>
+              <Team/>
+          </AnimLazyLoader>
+          <AnimLazyLoader>
+              <FAQs/>
+          </AnimLazyLoader>
       </div>
-      <StickyIcons showIcons={showTopButton} />
+        <StickyIcons showIcons={showTopButton} />
       {showTopButton && <ScrollToTop />}
     </Layout>
   );

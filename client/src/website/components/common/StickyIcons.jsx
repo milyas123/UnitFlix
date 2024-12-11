@@ -1,6 +1,7 @@
-import {useEffect, useRef, useState} from "react";
-import InquiryModal from "./InquiryModal";
+import {useEffect, useRef, useState, lazy} from "react";
+const InquiryModal = lazy(() => import("./InquiryModal"));
 import website from "@/data/website.json";
+import AnimLazyLoader from "@/website/components/common/AnimLazyLoader.jsx";
 
 const StickyIcons = ({ showIcons, propertyId }) => {
   const [showInquiryModal, setShowInquiryModal] = useState(false);
@@ -10,7 +11,7 @@ const StickyIcons = ({ showIcons, propertyId }) => {
     window.location.href = `https://wa.me/${website.contact.whatsappNumber}`;
   };
 
-    const inactivityTime = function () {
+  const inactivityTime = function () {
         let time;
         window.onload = resetTimer;
         document.onmousemove = resetTimer;
@@ -36,13 +37,13 @@ const StickyIcons = ({ showIcons, propertyId }) => {
         }
     };
 
-    useEffect(() => {
+  useEffect(() => {
 
         window.onload = function () {
             inactivityTime();
         }
 
-    }, []);
+}, []);
 
   return (
     <>
@@ -65,7 +66,9 @@ const StickyIcons = ({ showIcons, propertyId }) => {
         />
       </div>
       {showInquiryModal && (
-        <InquiryModal propertyId={propertyId} onClose={() => setShowInquiryModal(false)} />
+        <AnimLazyLoader className={'fixed inset-0 z-[1000]'}>
+            <InquiryModal propertyId={propertyId} onClose={() => setShowInquiryModal(false)} />
+        </AnimLazyLoader>
       )}
     </>
   );

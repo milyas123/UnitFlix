@@ -107,7 +107,7 @@ const VerifyOTPModal = ({ propertyData, onClose, onOtpVerify }) => {
         />
 
         <img
-          src="/assets/imgs/otp.png"
+          src="/assets/imgs/otp.webp"
           className="h-[470px] w-1/2 rounded-xl object-cover hidden md:block"
           alt="OTP Verification"
         />

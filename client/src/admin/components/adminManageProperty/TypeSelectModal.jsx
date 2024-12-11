@@ -32,7 +32,7 @@ const TypeSelectModal = ({isOpen, setIsOpen}) => {
                   onChange={() => setSelectedType("Project")}
                 />
                 <img
-                  src="/assets/imgs/Project.png"
+                  src="/assets/imgs/Project.webp"
                   className="size-[32px] object-cover"
                   alt="Project"
                 />
@@ -51,7 +51,7 @@ const TypeSelectModal = ({isOpen, setIsOpen}) => {
                   onChange={() => setSelectedType("Property")}
                 />
                 <img
-                  src="/assets/imgs/Property.png"
+                  src="/assets/imgs/property-icon.webp"
                   className="size-[32px] object-cover"
                   alt="Property"
                 />

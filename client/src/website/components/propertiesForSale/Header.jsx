@@ -1,18 +1,17 @@
 import BreadCrumb from "@/website/components/common/BreadCrumb.jsx";
-import LazyLoad from "react-lazyload";
-import SpinnerContainer from "@/website/components/common/SpinnerContainer.jsx";
 import website from '@/data/website.json';
+import AnimLazyLoader from "@/website/components/common/AnimLazyLoader.jsx";
 
 const Header = ({purpose}) => {
       return (
         <div className="relative h-[460px] md:h-[210px] lg:h-[45vh] lg:max-h-[280px] lg:min-h-[240px] xl:h-[100vh] xl:max-h-[340px] 2xl:h-[45vh] 2xl:max-h-[425px] 2xl:min-h-[385px]">
-            <LazyLoad className={"absolute size-full object-cover"} placeholder={<SpinnerContainer />}>
+            <AnimLazyLoader className={"absolute size-full"}>
                 <img
                     src={website.searchPage.backgroundImage}
-                    className="absolute size-full object-cover"
+                    className="size-full object-cover"
                     alt=""
                 />
-            </LazyLoad>
+            </AnimLazyLoader>
             <div className='absolute z-2 size-full bg-black/20'></div>
             <div className="absolute z-10 flex size-full items-center justify-center">
                 <div

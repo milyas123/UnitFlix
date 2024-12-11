@@ -1,7 +1,8 @@
 import Navbar from "./components/common/Navbar";
-import Footer from "./components/common/Footer";
-import {useEffect} from "react";
+import {lazy, useEffect} from "react";
+const Footer = lazy(() => import("./components/common/Footer"));
 import {useLocation} from "react-router-dom";
+import AnimLazyLoader from "@/website/components/common/AnimLazyLoader.jsx";
 
 const Layout = ({ children }) => {
 
@@ -18,7 +19,9 @@ const Layout = ({ children }) => {
       <Navbar />
       <main>{children}</main>
       <div className='mt-[5rem]'>
-          <Footer />
+          <AnimLazyLoader>
+              <Footer />
+          </AnimLazyLoader>
       </div>
     </>
   );

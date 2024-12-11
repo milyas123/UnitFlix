@@ -15,9 +15,8 @@ import { MdOutlineLocationOn } from "react-icons/md";
 import { formatCurrency } from "@/lib/utils";
 import { useAppContext } from "@/AppContext";
 import PropertyTags from "@/website/components/common/PropertyTags.jsx";
-import LazyLoad from "react-lazyload";
-import SpinnerContainer from "@/website/components/common/SpinnerContainer.jsx";
 import {Button} from "@/website/components/ui/button.jsx";
+import AnimLazyLoader from "@/website/components/common/AnimLazyLoader.jsx";
 
 const PropertyCard = ({ property, onRegisterInterest, canRegisterInterest }) => {
 
@@ -39,32 +38,33 @@ const PropertyCard = ({ property, onRegisterInterest, canRegisterInterest }) => 
           }
         `}</style>
         <div className="property-card">
-          <LazyLoad className="h-[320px] md:h-[160px] lg:h-[180px] xl:h-[200px] 2xl:h-[300px]" placeholder={<SpinnerContainer />}>
-              <Swiper
-                  slidesPerView={1}
-                  spaceBetween={30}
-                  modules={[Pagination, Navigation]}
-                  pagination={{clickable: true}}
-                  navigation={true}
-                  className="h-[320px] md:h-[160px] lg:h-[180px] xl:h-[200px] 2xl:h-[300px]"
-                  style={{
-                      "--swiper-navigation-size": "16px",
-                      "--swiper-navigation-color": "#FFFFFF",
-                      "--swiper-pagination-color": "#FFFFFF",
-                  }}
-              >
-                  {property?.files.map((image) => (
-                      <SwiperSlide key={image.id} className="relative">
+          <Swiper
+              slidesPerView={1}
+              spaceBetween={30}
+              modules={[Pagination, Navigation]}
+              pagination={{clickable: true}}
+              navigation={true}
+              className="h-[320px] md:h-[160px] lg:h-[180px] xl:h-[200px] 2xl:h-[300px]"
+              style={{
+                  "--swiper-navigation-size": "16px",
+                  "--swiper-navigation-color": "#FFFFFF",
+                  "--swiper-pagination-color": "#FFFFFF",
+              }}
+          >
+              {property?.files.map((image) => (
+                  <SwiperSlide key={image.id} className="relative">
+                      <AnimLazyLoader className='size-full'>
                           <img
                               src={image.url}
                               alt={`${image?.url}`}
                               className="size-full object-cover"
                           />
-                          <div className="absolute inset-0 bg-black bg-opacity-50 group-hover:bg-opacity-20 transition-all duration-300 ease-in-out"></div>
-                      </SwiperSlide>
-                  ))}
-              </Swiper>
-          </LazyLoad>
+                      </AnimLazyLoader>
+                      <div
+                          className="absolute inset-0 bg-black bg-opacity-50 group-hover:bg-opacity-20 transition-all duration-300 ease-in-out"></div>
+                  </SwiperSlide>
+              ))}
+          </Swiper>
         </div>
           <div className="flex flex-col gap-y-3.5 p-2 md:gap-y-0.5 md:px-2 md:py-1.5 lg:gap-y-1 lg:p-2.5 xl:gap-y-2.5 xl:p-3 2xl:p-[12px]">
               <div

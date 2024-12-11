@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy } from "react";
 import Layout from "@/website/Layout";
-import Description from "@/website/components/propertyDetails/Description";
-import FeaturesAndAmenities from "@/website/components/propertyDetails/FeaturesAndAmenities";
-import GetInTouch from "@/website/components/propertyDetails/GetInTouch";
+const Description = lazy(() => import("@/website/components/propertyDetails/Description"));
+const FeaturesAndAmenities = lazy(() => import("@/website/components/propertyDetails/FeaturesAndAmenities"));
+const GetInTouch = lazy(() => import("@/website/components/propertyDetails/GetInTouch"));
 import Hero from "@/website/components/propertyDetails/Hero";
-import Highlights from "@/website/components/propertyDetails/Highlights";
-import ImageGallery from "@/website/components/propertyDetails/ImageGallery";
-import Overview from "@/website/components/propertyDetails/Overview";
-import PaymentPlan from "@/website/components/propertyDetails/PaymentPlan";
-import SimilarProjects from "@/website/components/propertyDetails/SimilarProjects";
-import SimilarProperties from "@/website/components/propertyDetails/SimilarProperties";
+const Highlights = lazy(() => import("@/website/components/propertyDetails/Highlights"));
+const ImageGallery = lazy(() => import("@/website/components/propertyDetails/ImageGallery"));
+const Overview = lazy(() => import("@/website/components/propertyDetails/Overview"));
+const PaymentPlan = lazy(() => import("@/website/components/propertyDetails/PaymentPlan"));
+const SimilarProjects = lazy(() => import("@/website/components/propertyDetails/SimilarProjects"));
+const SimilarProperties = lazy(() => import("@/website/components/propertyDetails/SimilarProperties"));
 import ScrollToTop from "@/website/components/common/ScrollToTop";
 import StickyIcons from "@/website/components/common/StickyIcons";
 
@@ -17,6 +17,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import useScrollProgress from "@/hooks/useScrollProgress";
 import Spinner from "@/website/components/common/Spinner.jsx";
+import AnimLazyLoader from "@/website/components/common/AnimLazyLoader.jsx";
 
 const PropertyDetails = () => {
   const { id } = useParams();
@@ -90,52 +91,72 @@ const PropertyDetails = () => {
                 />
                 <div className="mx-auto mt-7 flex w-[95%] md:mt-7 md:w-[91%] lg:mt-9 xl:mt-12 2xl:mt-16">
                   <div className="w-full md:w-[74%]">
-                    <Description
-                        property={property}
-                        title={property?.title}
-                        category={property?.category}
-                        status={property?.status}
-                        developer={property?.propertyDeveloper?.name}
-                        location={property?.propertyLocation?.name}
-                        brochure={property?.files.find((file) => file.purpose === 2)?.url}
-                        price={property?.price}
-                        propertyDetails={property?.category === 0 ? [{
-                          propertyType: property.type.name,
-                          unitType: `${property.beds} Bedroom`,
-                          size: `${property.area.toLocaleString()} Sqft`
-                        }] : property?.propertyDetails}
-                        downPayment={property?.downPayment}
-                        paymentPlan={property?.paymentPlan}
-                        handOver={property?.handOver}
-                        purpose={property?.purpose}
-                    />
-                    <Overview
-                        category={property?.category}
-                        overviewText={property?.overview?.text}
-                        floorPlan={property?.files.find((file) => file.purpose === 3)?.url}
-                    />
+                    <AnimLazyLoader>
+                      <Description
+                          property={property}
+                          title={property?.title}
+                          category={property?.category}
+                          status={property?.status}
+                          developer={property?.propertyDeveloper?.name}
+                          location={property?.propertyLocation?.name}
+                          brochure={property?.files.find((file) => file.purpose === 2)?.url}
+                          price={property?.price}
+                          propertyDetails={property?.category === 0 ? [{
+                            propertyType: property.type.name,
+                            unitType: `${property.beds} Bedroom`,
+                            size: `${property.area.toLocaleString()} Sqft`
+                          }] : property?.propertyDetails}
+                          downPayment={property?.downPayment}
+                          paymentPlan={property?.paymentPlan}
+                          handOver={property?.handOver}
+                          purpose={property?.purpose}
+                      />
+                    </AnimLazyLoader>
+                    <AnimLazyLoader>
+                      <Overview
+                          category={property?.category}
+                          overviewText={property?.overview?.text}
+                          floorPlan={property?.files.find((file) => file.purpose === 3)?.url}
+                      />
+                    </AnimLazyLoader>
                     <div id="highlights-section">
-                      <Highlights highlights={property?.keyHighlights}/>
+                      <AnimLazyLoader>
+                        <Highlights highlights={property?.keyHighlights}/>
+                      </AnimLazyLoader>
                     </div>
-                    <FeaturesAndAmenities amenities={property?.features}/>
+                    <AnimLazyLoader>
+                      <FeaturesAndAmenities amenities={property?.features}/>
+                    </AnimLazyLoader>
                     {property?.category === 1 && (
-                        <PaymentPlan paymentPlanData={property?.paymentPlanItems}/>
+                        <AnimLazyLoader>
+                          <PaymentPlan paymentPlanData={property?.paymentPlanItems}/>
+                        </AnimLazyLoader>
                     )}
-                    <ImageGallery imgFiles={property?.files}/>
+                    <AnimLazyLoader>
+                      <ImageGallery imgFiles={property?.files}/>
+                    </AnimLazyLoader>
                     {property?.category === 0 ? (
-                        <SimilarProperties
-                            relatedProperties={relatedProperties.byLocation}
-                        />
+                        <AnimLazyLoader>
+                          <SimilarProperties
+                              relatedProperties={relatedProperties.byLocation}
+                          />
+                        </AnimLazyLoader>
                     ) : (
                         <>
-                          <SimilarProjects relatedProjects={relatedProperties.byDeveloper}/>
-                          <SimilarProperties relatedProperties={relatedProperties.byLocation}/>
+                          <AnimLazyLoader>
+                            <SimilarProjects relatedProjects={relatedProperties.byDeveloper}/>
+                          </AnimLazyLoader>
+                          <AnimLazyLoader>
+                            <SimilarProperties relatedProperties={relatedProperties.byLocation}/>
+                          </AnimLazyLoader>
                         </>
                     )}
                   </div>
                   <div className="ms-auto hidden w-[23.5%] md:block">
                     <div className="sticky top-24">
-                    <GetInTouch propertyId={property.id} />
+                      <AnimLazyLoader>
+                        <GetInTouch propertyId={property.id} />
+                      </AnimLazyLoader>
                     </div>
                   </div>
                 </div>

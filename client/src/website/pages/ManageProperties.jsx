@@ -1,13 +1,15 @@
 import Layout from "@/website/Layout";
-import CTA from "@/website/components/manageProperties/CTA";
+import {lazy} from "react";
+const CTA = lazy(() => import("@/website/components/manageProperties/CTA"));
 import Hero from "@/website/components/manageProperties/Hero";
-import PropertyActivities from "@/website/components/manageProperties/PropertyActivities";
-import PropertyIntro from "@/website/components/manageProperties/PropertyIntro";
-import Testimonials from "@/website/components/manageProperties/Testimonials";
+const PropertyActivities = lazy(() => import("@/website/components/manageProperties/PropertyActivities"));
+const PropertyIntro = lazy(() => import("@/website/components/manageProperties/PropertyIntro"));
+const Testimonials = lazy(() => import("@/website/components/manageProperties/Testimonials"));
 import ScrollToTop from "@/website/components/common/ScrollToTop";
 import StickyIcons from "@/website/components/common/StickyIcons";
 
 import useScrollProgress from "@/hooks/useScrollProgress";
+import AnimLazyLoader from "@/website/components/common/AnimLazyLoader.jsx";
 
 const ManageProperties = () => {
   const showTopButton = useScrollProgress("intro-section");
@@ -17,11 +19,19 @@ const ManageProperties = () => {
       <Hero />
       <div className="md:mx-auto md:w-[77%]">
         <div id="intro-section">
-          <PropertyIntro />
+          <AnimLazyLoader>
+              <PropertyIntro />
+          </AnimLazyLoader>
         </div>
-        <PropertyActivities />
-        <Testimonials />
-        <CTA />
+        <AnimLazyLoader>
+            <PropertyActivities />
+        </AnimLazyLoader>
+        <AnimLazyLoader>
+            <Testimonials />
+        </AnimLazyLoader>
+        <AnimLazyLoader>
+            <CTA />
+        </AnimLazyLoader>
       </div>
       <StickyIcons showIcons={showTopButton} />
       {showTopButton && <ScrollToTop />}

@@ -1,22 +1,23 @@
-import {useEffect, useState} from "react";
+import {useEffect, useState, lazy} from "react";
 import { Button } from "@/website/components/ui/button";
 
-import GeneralInformation from "@/website/components/addProperty/GeneralInformation";
-import UserInformation from "@/website/components/addProperty/UserInformation";
-import PropertyInformation from "@/website/components/addProperty/PropertyInformation";
-import AddKeyHighlights from "@/website/components/addProperty/AddKeyHighlights";
-import AddFeaturesAndAmenities from "@/website/components/addProperty/AddFeaturesAndAmenities";
-import Gallery from "@/website/components/addProperty/Gallery";
-import AddKeyHighlightModal from "@/admin/components/adminAddProject/modals/AddKeyHighlightModal";
-import AddAmenityModal from "@/admin/components/adminAddProject/modals/AddAmenityModal";
+const GeneralInformation = lazy(() => import("@/website/components/addProperty/GeneralInformation"));
+const UserInformation = lazy(() => import("@/website/components/addProperty/UserInformation"));
+const PropertyInformation = lazy(() => import("@/website/components/addProperty/PropertyInformation"));
+const AddKeyHighlights = lazy(() => import("@/website/components/addProperty/AddKeyHighlights"));
+const AddFeaturesAndAmenities = lazy(() => import("@/website/components/addProperty/AddFeaturesAndAmenities"));
+const Gallery = lazy(() => import("@/website/components/addProperty/Gallery"));
+const AddKeyHighlightModal = lazy(() => import("@/admin/components/adminAddProject/modals/AddKeyHighlightModal"));
+const AddAmenityModal = lazy(() => import("@/admin/components/adminAddProject/modals/AddAmenityModal"));
 
 import axios from "axios";
 import { FaChevronLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import InfoModal from "@/website/components/addProperty/InfoModal";
-import VerifyOTPModal from "../components/addProperty/VerifyOTPModal";
-import MessageModal from "@/website/components/common/MessageModal.jsx";
+const InfoModal = lazy(() => import("@/website/components/addProperty/InfoModal"));
+const VerifyOTPModal = lazy(() => import("../components/addProperty/VerifyOTPModal"));
+const MessageModal = lazy(() => import("@/website/components/common/MessageModal.jsx"));
 import { MdErrorOutline} from "react-icons/md";
+import AnimLazyLoader from "@/website/components/common/AnimLazyLoader.jsx";
 
 const initialFormData = {
   title: "",
@@ -272,40 +273,52 @@ const AddProperty = () => {
           Add Property
         </div>
 
-        <GeneralInformation
-          formData={formData}
-          handleChange={handleChange}
-          handleSelectChange={handleSelectChange}
-          handleFileChange={handleFileChange}
-          handleRemoveCoverImage={handleRemoveCoverImage}
-          handleStatusClick={handleStatusChange}
-        />
-        <UserInformation
-          formData={formData}
-          handleChange={handleUserDetailsChange}
-        />
-        <PropertyInformation
-          formData={formData}
-          handleChange={handleChange}
-          handleSelectChange={handleSelectChange}
-        />
-        <AddKeyHighlights
-          formData={formData}
-          showModal={setShowKeyHighlightModal}
-          handleEdit={handleEditHighlight}
-          handleDelete={handleDeleteHighlight}
-        />
-        <AddFeaturesAndAmenities
-          formData={formData}
-          showModal={setShowAmenityModal}
-          handleEdit={handleEditAmenity}
-          handleDelete={handleDeleteAmenity}
-        />
-        <Gallery
-          formData={formData}
-          handleAddGalleryImage={handleAddGalleryImage}
-          handleDeleteGalleryImage={handleDeleteGalleryImage}
-        />
+        <AnimLazyLoader minHeight={100}>
+          <GeneralInformation
+              formData={formData}
+              handleChange={handleChange}
+              handleSelectChange={handleSelectChange}
+              handleFileChange={handleFileChange}
+              handleRemoveCoverImage={handleRemoveCoverImage}
+              handleStatusClick={handleStatusChange}
+          />
+        </AnimLazyLoader>
+        <AnimLazyLoader minHeight={100}>
+          <UserInformation
+              formData={formData}
+              handleChange={handleUserDetailsChange}
+          />
+        </AnimLazyLoader>
+        <AnimLazyLoader minHeight={100}>
+          <PropertyInformation
+              formData={formData}
+              handleChange={handleChange}
+              handleSelectChange={handleSelectChange}
+          />
+        </AnimLazyLoader>
+        <AnimLazyLoader minHeight={100}>
+          <AddKeyHighlights
+              formData={formData}
+              showModal={setShowKeyHighlightModal}
+              handleEdit={handleEditHighlight}
+              handleDelete={handleDeleteHighlight}
+          />
+        </AnimLazyLoader>
+        <AnimLazyLoader minHeight={100}>
+          <AddFeaturesAndAmenities
+              formData={formData}
+              showModal={setShowAmenityModal}
+              handleEdit={handleEditAmenity}
+              handleDelete={handleDeleteAmenity}
+          />
+        </AnimLazyLoader>
+        <AnimLazyLoader minHeight={100}>
+          <Gallery
+              formData={formData}
+              handleAddGalleryImage={handleAddGalleryImage}
+              handleDeleteGalleryImage={handleDeleteGalleryImage}
+          />
+        </AnimLazyLoader>
         <div className="flex items-center justify-end gap-x-3">
           <Button className="rounded-md border-red-700 bg-red-700 hover:border-mirage">
             Cancel
@@ -321,77 +334,87 @@ const AddProperty = () => {
       </div>
 
       {showKeyHighlightModal && (
-        <AddKeyHighlightModal
-          onClose={() => setShowKeyHighlightModal(false)}
-          onSubmit={handleAddHighlight}
-          editData={
-            editKeyHighlightIndex !== null
-              ? formData.keyHighlights[editKeyHighlightIndex]
-              : null
-          }
-        />
+        <AnimLazyLoader className={'fixed inset-0'}>
+          <AddKeyHighlightModal
+              onClose={() => { setShowKeyHighlightModal(false); setEditKeyHighlightIndex(null); }}
+              onSubmit={handleAddHighlight}
+              editData={
+                editKeyHighlightIndex !== null
+                    ? formData.keyHighlights[editKeyHighlightIndex]
+                    : null
+              }
+          />
+        </AnimLazyLoader>
       )}
 
       {showAmenityModal && (
-        <AddAmenityModal
-          onClose={() => setShowAmenityModal(false)}
-          onSubmit={handleAddAmenity}
-          editData={
-            editAmenityIndex !== null
-              ? formData.features[editAmenityIndex]
-              : null
-          }
-        />
+        <AnimLazyLoader className={'fixed inset-0'}>
+          <AddAmenityModal
+              onClose={() => { setShowAmenityModal(false); setEditAmenityIndex(null); }}
+              onSubmit={handleAddAmenity}
+              editData={
+                editAmenityIndex !== null
+                    ? formData.features[editAmenityIndex]
+                    : null
+              }
+          />
+        </AnimLazyLoader>
       )}
 
       {isInfoModalVisible && (
-        <InfoModal
-          onClose={() => setIsInfoModalVisible(false)}
-          onNext={handleNext}
-        />
+        <AnimLazyLoader>
+          <InfoModal
+              onClose={() => setIsInfoModalVisible(false)}
+              onNext={handleNext}
+          />
+        </AnimLazyLoader>
       )}
 
       {isOTPModalVisible && (
-        <VerifyOTPModal
-          propertyData={propertyData}
-          onClose={() => setIsOTPModalVisible(false)}
-          onOtpVerify={onOtpVerify}
-        />
+          <AnimLazyLoader>
+            <VerifyOTPModal
+                propertyData={propertyData}
+                onClose={() => setIsOTPModalVisible(false)}
+                onOtpVerify={onOtpVerify}
+            />
+          </AnimLazyLoader>
       )}
 
       {
         isMessageModalVisible && (
-          <MessageModal title={errors && errors.length > 0 ? `Errors (${errors.length})` : 'Request Submitted Successfully'} onClose={onMessageModalClose}>
-            <div className='flex flex-col gap-y-1'>
-              {
-                errors.map((error, index) => {
-                  return (
-                      <div className='flex items-center gap-x-2' key={index}>
-                        <div className='text-red-500'>
-                          <MdErrorOutline />
+          <AnimLazyLoader>
+            <MessageModal title={errors && errors.length > 0 ? `Errors (${errors.length})` : 'Request Submitted Successfully'} onClose={onMessageModalClose}>
+              <div className='flex flex-col gap-y-1'>
+                {
+                  errors.map((error, index) => {
+                    return (
+                        <div className='flex items-center gap-x-2' key={index}>
+                          <div className='text-red-500'>
+                            <MdErrorOutline />
+                          </div>
+                          <p className='text-red-500'>
+                            {error}
+                          </p>
                         </div>
-                        <p className='text-red-500'>
-                          {error}
-                        </p>
-                      </div>
-                  )
-                })
-              }
-              {
-                errors.length > 0 ?
-                    <div className="text-smokeyGrey flex items-center gap-x-2">
-                      Please fix the above errors and try again
-                    </div> : <></>
-              }
-              {
-                errors.length === 0 ?
-                    <div className='flex gap-x-2 text-smokeyGrey'>
-                      Request has been captured. Please proceed forward to verify your email via an otp and complete the submission.
-                    </div> : <></>
-              }
-            </div>
-          </MessageModal>
-          )
+                    )
+                  })
+                }
+                {
+                  errors.length > 0 ?
+                      <div className="text-smokeyGrey flex items-center gap-x-2">
+                        Please fix the above errors and try again
+                      </div> : <></>
+                }
+                {
+                  errors.length === 0 ?
+                      <div className='flex gap-x-2 text-smokeyGrey'>
+                        Request has been captured. Please proceed forward to verify your email via an otp and complete the submission.
+                      </div> : <></>
+                }
+              </div>
+            </MessageModal>
+          </AnimLazyLoader>
+        )
       }
     </div>
   );

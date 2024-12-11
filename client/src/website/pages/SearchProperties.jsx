@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, lazy } from "react";
 import Layout from "@/website/Layout";
 import Header from "@/website/components/propertiesForSale/Header";
-import Properties from "@/website/components/propertiesForSale/Properties";
+const Properties = lazy(() => import("@/website/components/propertiesForSale/Properties"));
 import ScrollToTop from "@/website/components/common/ScrollToTop";
 import StickyIcons from "@/website/components/common/StickyIcons";
 import useScrollProgress from "@/hooks/useScrollProgress";
@@ -10,6 +10,7 @@ import Filters from "../components/landingPage/Filters";
 import axios from "axios";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Spinner from "@/website/components/common/Spinner.jsx";
+import AnimLazyLoader from "@/website/components/common/AnimLazyLoader.jsx";
 
 const sliderMinValue = 0;
 const sliderMaxValue = 500000000;
@@ -228,20 +229,22 @@ const SearchProperties = () => {
               <div className='flex items-center justify-center h-[300px] mt-[350px] md:mt-0'>
                 <Spinner />
               </div> :
-              <Properties
-                  location={location}
-                  purpose={purpose}
-                  properties={properties}
-                  handleItemClick={handleItemClick}
-                  onSortOptionChange={onSortOptionChange}
-                  sortOption={sortOption}
-                  categoryOption={categoryOption}
-                  onCategoryChange={onCategoryChange}
-                  pages={pages}
-                  currentPage={currentPage}
-                  changePage={onChangePage}
-                  results={results}
-              />
+              <AnimLazyLoader>
+                <Properties
+                    location={location}
+                    purpose={purpose}
+                    properties={properties}
+                    handleItemClick={handleItemClick}
+                    onSortOptionChange={onSortOptionChange}
+                    sortOption={sortOption}
+                    categoryOption={categoryOption}
+                    onCategoryChange={onCategoryChange}
+                    pages={pages}
+                    currentPage={currentPage}
+                    changePage={onChangePage}
+                    results={results}
+                />
+              </AnimLazyLoader>
         }
       </div>
 

@@ -1,10 +1,12 @@
+import {lazy} from "react";
 import Layout from "@/website/Layout";
-import Form from "@/website/components/contactUs/Form";
+const Form = lazy(() => import("@/website/components/contactUs/Form"));
 import Header from "@/website/components/contactUs/Header";
 import ScrollToTop from "@/website/components/common/ScrollToTop";
 import StickyIcons from "@/website/components/common/StickyIcons";
 
 import useScrollProgress from "@/hooks/useScrollProgress";
+import AnimLazyLoader from "@/website/components/common/AnimLazyLoader.jsx";
 
 const ContactUs = () => {
   const showTopButton = useScrollProgress("form-section");
@@ -13,7 +15,9 @@ const ContactUs = () => {
     <Layout>
       <Header />
       <div id="form-section">
-        <Form />
+        <AnimLazyLoader>
+            <Form />
+        </AnimLazyLoader>
       </div>
       <StickyIcons showIcons={showTopButton} />
       {showTopButton && <ScrollToTop />}

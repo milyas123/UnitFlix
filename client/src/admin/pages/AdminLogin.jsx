@@ -6,6 +6,7 @@ import InputField from "../components/common/InputField";
 
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import AnimLazyLoader from "@/website/components/common/AnimLazyLoader.jsx";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -39,11 +40,13 @@ const AdminLogin = () => {
 
   return (
     <div className="max-h-screen min-h-screen overflow-hidden">
-      <img
-        src="/assets/imgs/admin-login.png"
-        className="relative size-full h-screen"
-        alt=""
-      />
+      <AnimLazyLoader className={'size-full'}>
+        <img
+            src="/assets/imgs/admin-login.webp"
+            className="size-full h-screen"
+            alt=""
+        />
+      </AnimLazyLoader>
 
       <div className="absolute right-0 top-0 flex min-h-screen w-[36rem] items-center justify-center rounded-xl bg-white">
         <div className="mx-auto flex w-[75%] flex-col gap-y-8">

@@ -1,4 +1,4 @@
-import {useState, useEffect, lazy, Suspense} from "react";
+import {useState, useEffect, lazy} from "react";
 
 import Layout from "@/website/Layout";
 import Hero from "@/website/components/landingPage/Hero";
@@ -17,9 +17,7 @@ import useScrollProgress from "@/hooks/useScrollProgress";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import Spinner from "@/website/components/common/Spinner.jsx";
-import LazyLoad from "react-lazyload";
-import SpinnerContainer from "@/website/components/common/SpinnerContainer.jsx";
-import {motion} from "framer-motion";
+import AnimLazyLoader from "@/website/components/common/AnimLazyLoader.jsx";
 
 const sliderMinValue = 0;
 const sliderMaxValue = 500000000;
@@ -151,41 +149,21 @@ const LandingPage = () => {
                     <Discover properties={properties} type={0}/> : <div className='h-[350px] md:h-[0]'></div>
           }
         </div>
-        <motion.div variants={variants} initial={'initial'} whileInView={'inView'} viewport={{once: true}}>
-          <Suspense>
-            <LazyLoad className='w-full min-h-[200px]' placeholder={<SpinnerContainer/>}>
-              <Help/>
-            </LazyLoad>
-          </Suspense>
-        </motion.div>
-        <motion.div variants={variants} initial={'initial'} whileInView={'inView'} viewport={{once: true}}>
-          <Suspense>
-            <LazyLoad className='w-full min-h-[200px]' placeholder={<SpinnerContainer/>}>
-              <AboutUs/>
-            </LazyLoad>
-          </Suspense>
-        </motion.div>
-        <motion.div variants={variants} initial={'initial'} whileInView={'inView'} viewport={{once: true}}>
-          <Suspense>
-            <LazyLoad className='w-full min-h-[200px]' placeholder={<SpinnerContainer/>}>
-              <ContactUs/>
-            </LazyLoad>
-          </Suspense>
-        </motion.div>
-        <motion.div variants={variants} initial={'initial'} whileInView={'inView'} viewport={{once: true}}>
-          <Suspense>
-            <LazyLoad className='w-full min-h-[200px]' placeholder={<SpinnerContainer/>}>
-              <CTA/>
-            </LazyLoad>
-          </Suspense>
-        </motion.div>
-        <motion.div variants={variants} initial={'initial'} whileInView={'inView'} viewport={{once: true}}>
-          <Suspense>
-            <LazyLoad className='w-full min-h-[200px]' placeholder={<SpinnerContainer/>}>
-              <ExperienceAndFeedback/>
-            </LazyLoad>
-          </Suspense>
-        </motion.div>
+        <AnimLazyLoader variants={variants}>
+          <Help/>
+        </AnimLazyLoader>
+        <AnimLazyLoader variants={variants}>
+          <AboutUs/>
+        </AnimLazyLoader>
+        <AnimLazyLoader variants={variants}>
+          <ContactUs/>
+        </AnimLazyLoader>
+        <AnimLazyLoader variants={variants}>
+          <CTA/>
+        </AnimLazyLoader>
+        <AnimLazyLoader variants={variants}>
+          <ExperienceAndFeedback/>
+        </AnimLazyLoader>
         <StickyIcons showIcons={showButtons}/>
         {showButtons && <ScrollToTop/>}
       </Layout>
