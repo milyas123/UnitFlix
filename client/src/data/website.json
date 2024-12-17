@@ -1,6 +1,6 @@
 {
   "navbar": {
-    "logo": "/assets/imgs/Logo.png",
+    "logo": "/assets/imgs/Logo.webp",
     "buyButton": "For Sale",
     "rentButton": "For Rent",
     "manageButton": "Manage",
@@ -21,7 +21,7 @@
       "heading": "From Unit to Flix, We Make Real Estate Click",
       "tagLine": "Discover, Invest, Live",
       "backgroundImage": "/assets/imgs/hero-section-img.webp",
-      "backgroundVideo": "/assets/videos/video.mp4"
+      "backgroundVideo": "/assets/videos/video - compressed.webm"
     },
     "trendingProjects": {
       "heading": "Discover Trending",
@@ -207,7 +207,7 @@
     }
   },
   "footer": {
-    "logo": "/assets/imgs/Logo.png",
+    "logo": "/assets/imgs/Logo.webp",
     "phoneNumberLabel": "Call us on",
     "emailLabel": "Customer Support",
     "social": {

@@ -66,7 +66,7 @@ const Sidebar = () => {
           }`}
         >
           <img
-            src="/assets/imgs/Logo.png"
+            src="/assets/imgs/Logo.webp"
             className={`size-[70px] cursor-pointer object-contain duration-500 ${
               isSideBarOpen && "rotate-[360deg]"
             }`}
