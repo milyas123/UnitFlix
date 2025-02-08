@@ -57,7 +57,7 @@ function App() {
             </Routes>
           </AppProvider>
       </BrowserRouter>
-      <ToastContainer position="top-center" autoClose={3000} transition={Slide} />
+      <ToastContainer position="top-center" autoClose={3000} transition={Slide} closeOnClick={true} />
     </div>
   );
 }

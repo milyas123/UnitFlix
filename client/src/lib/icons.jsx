@@ -7,10 +7,11 @@ import {
 } from 'react-icons/fa';
 import { MdMeetingRoom, MdHelp, MdBalcony, MdSecurity, MdRoomService, MdSportsBasketball, MdLocalMall, MdHotTub } from 'react-icons/md';
 import {
-    GiGardeningShears, GiBarbecue, GiPoolDive, GiHouseKeys,
+    GiBarbecue, GiPoolDive, GiHouseKeys,
     GiBabyBottle, GiTennisRacket, GiRunningNinja, GiPathDistance, GiGolfTee
 } from "react-icons/gi";
 import {FaElevator, FaSteam} from "react-icons/fa6";
+import Park from "@/icons/Park"
 
 const getFeaturedIcons = () => {
     return featureIcons;
@@ -30,7 +31,7 @@ const getIcon = (value) => {
         "concierge-24-7": <MdRoomService />,
         "jacuzzi": <MdHotTub />,
         "sauna": <FaSteam />,
-        "garden": <GiGardeningShears />,
+        "garden": <Park />,
         "bbq-area": <GiBarbecue />,
         "private-pool": <GiPoolDive />,
         "smart-home-tech": <FaNetworkWired />,
