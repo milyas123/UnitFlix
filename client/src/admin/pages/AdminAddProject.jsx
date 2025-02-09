@@ -390,11 +390,16 @@ const AdminAddProject = () => {
       navigate("/admin/manage-properties");
     } catch (error) {
       console.log(error)
-      const errors = error.response.data.errors
-      for(let err of errors) {
-        toast.error(err);
+      const data = error.response.data;
+      const errors = data.errors
+      if(errors) {
+        for(let err of errors) {
+          toast.error(err);
+        }
       }
-      console.error("Error submitting form", error);
+      else {
+        toast(data)
+      }
     } finally {
       setLoading(false);
     }
