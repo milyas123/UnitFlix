@@ -136,3 +136,5 @@ Unitflix.Server/Unitflix.Server/wwwroot/public
 Unitflix.Server/Unitflix.Server/public
 Unitflix.Server/Unitflix.Server/appsettings.Development.json
 Unitflix.Server/Unitflix.Server/appsettings.Production.json
+Unitflix.Server/Unitflix.Server/publish
+Unitflix.Server/Unitflix.Server/start.sh
