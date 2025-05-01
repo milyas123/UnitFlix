@@ -1,0 +1,22 @@
+services:
+  frontend:
+    build:
+      context: ../..
+      dockerfile: deployment/frontend/Dockerfile
+      args:
+        VITE_SERVER_URL: "http://127.0.0.1:5074"
+        VITE_SITE_KEY: "6Le20oIqAAAAAAOa8E1_xxKPXyTc2NyGlVwZaXAV"
+    container_name: frontend
+    restart: always
+    ports:
+      - "5173:80"
+    networks:
+      - unitflix-network
+    deploy:
+      update_config:
+        order: start-first
+        failure_action: rollback
+
+networks:
+  unitflix-network:
+    external: true

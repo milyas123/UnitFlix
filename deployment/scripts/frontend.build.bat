@@ -1,0 +1,2 @@
+echo "Building the docker file"
+docker build -f deployment/frontend/Dockerfile --build-arg VITE_SERVER_URL="http://127.0.0.1:5074" --build-arg VITE_SITE_KEY="6Le20oIqAAAAAAOa8E1_xxKPXyTc2NyGlVwZaXAV" -t unitflix-frontend .

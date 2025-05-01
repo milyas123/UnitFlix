@@ -1,0 +1,46 @@
+services:  
+  backend-sql-server:
+    build:
+      context: ../..
+      dockerfile: deployment/db/Dockerfile
+    container_name: backend-sql-server
+    ports:
+      - "1434:1433"
+    restart: always
+    environment:
+      SA_PASSWORD: "As!mw@##00123"
+      ACCEPT_EULA: "Y"
+      ENV DEBIAN_FRONTEND: "noninteractive"
+      ENV MSSQL_CLI_ACCEPT_EULA: "Y"
+    networks:
+      - unitflix-network
+    volumes:
+      - backend-sql-data:/var/opt/mssql
+
+  backend:
+    build:
+      context: ../..
+      dockerfile: deployment/backend/Dockerfile
+    container_name: backend
+    ports:
+      - "5074:80"
+    restart: always
+    networks:
+      - unitflix-network
+    depends_on:
+      - backend-sql-server
+    volumes:
+      - backend-uploads:/app/public
+    deploy:
+      update_config:
+        order: start-first
+        failure_action: rollback
+
+volumes:
+  backend-sql-data:
+  backend-uploads:
+
+networks:
+  unitflix-network:
+    external: true
+

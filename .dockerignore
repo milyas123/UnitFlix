@@ -1,0 +1,15 @@
+**/.env
+**/.env.production
+**/uploads
+**/temp
+**/node_modules
+**/.gitignore
+**/temp.db
+**/.vscode
+**/dist
+**/certs
+**/.vs
+**/bin
+**/obj
+**/appsettings.Development.json
+**/appsettings.json
