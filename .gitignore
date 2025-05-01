@@ -138,3 +138,5 @@ Unitflix.Server/Unitflix.Server/appsettings.Development.json
 Unitflix.Server/Unitflix.Server/appsettings.Production.json
 Unitflix.Server/Unitflix.Server/publish
 Unitflix.Server/Unitflix.Server/start.sh
+
+**/*-secrets.yaml

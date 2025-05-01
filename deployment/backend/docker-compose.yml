@@ -10,8 +10,10 @@ services:
     environment:
       SA_PASSWORD: "As!mw@##00123"
       ACCEPT_EULA: "Y"
-      ENV DEBIAN_FRONTEND: "noninteractive"
-      ENV MSSQL_CLI_ACCEPT_EULA: "Y"
+      DEBIAN_FRONTEND: "noninteractive"
+      MSSQL_CLI_ACCEPT_EULA: "Y"
+      DB_USER: "unitflix_backend"
+      DB_USER_PASSWORD: "UnitflixBackend123"
     networks:
       - unitflix-network
     volumes:

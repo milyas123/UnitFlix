@@ -4,18 +4,18 @@ IF DB_ID('Unitflix') IS NULL
     END;
 GO
 
-IF NOT EXISTS (SELECT * FROM sys.server_principals WHERE name = 'unitflix_backend')
+IF NOT EXISTS (SELECT * FROM sys.server_principals WHERE name = '$(DB_USER)')
     BEGIN
-        CREATE LOGIN unitflix_backend WITH PASSWORD = 'UnitflixBackend123';
+        CREATE LOGIN $(DB_USER) WITH PASSWORD = '$(DB_USER_PASSWORD)';
     END;
 GO
 
 USE Unitflix;
 GO
 
-IF NOT EXISTS (SELECT * FROM sys.database_principals WHERE name = 'unitflix_backend')
+IF NOT EXISTS (SELECT * FROM sys.database_principals WHERE name = '$(DB_USER)')
     BEGIN
-        CREATE USER unitflix_backend FOR LOGIN unitflix_backend;
-        EXEC sp_addrolemember 'db_owner', 'unitflix_backend';
+        CREATE USER $(DB_USER) FOR LOGIN $(DB_USER);
+        EXEC sp_addrolemember 'db_owner', '$(DB_USER)';
     END;
 GO

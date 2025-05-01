@@ -147,6 +147,8 @@ seeders.ForEach(seeder =>
     seeder.Seed(app.Services);
 });
 
+app.UsePathBase("/backend");
+
 app.UseHttpsRedirection();
 app.UseStaticFiles(new StaticFileOptions()
 {

@@ -1,0 +1,50 @@
+# Backend Service
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: unitflix
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: asimwattoo/unitflix-backend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: backend-config
+            - secretRef:
+                name: backend-secrets
+          volumeMounts:
+            - name: backend-storage
+              mountPath: /app/public
+      volumes:
+        - name: backend-storage
+          persistentVolumeClaim:
+            claimName: backend-pvc
+
+---
+# Backend Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-srv
+  namespace: unitflix
+spec:
+  selector:
+    app: backend
+  ports:
+    - protocol: TCP
+      port: 5074
+      targetPort: 80
+  type: ClusterIP

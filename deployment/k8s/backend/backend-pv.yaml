@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: unitflix-backend-pv
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: unitflix-backend-sc
+  hostPath:
+    path: /mnt/data/backend
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: backend-pvc
+  namespace: unitflix
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: unitflix-backend-sc
+  resources:
+    requests:
+      storage: 2Gi
