@@ -4,6 +4,6 @@ metadata:
   name: backend-config
   namespace: unitflix
 data:
-  Image__url: "http://unitflix.localhost/backend"
-  JWT__ValidAudience: "http://unitflix.localhost/backend"
-  JWT__ValidIssuer: "http://unitflix.localhost/backend"
+  Image__url: "http://77.37.122.17:8080/backend"
+  JWT__ValidAudience: "http://77.37.122.17:8080/backend"
+  JWT__ValidIssuer: "http://77.37.122.17:8080/backend"
