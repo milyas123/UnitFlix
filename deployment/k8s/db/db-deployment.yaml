@@ -51,7 +51,7 @@ spec:
     app: db
   ports:
     - protocol: TCP
-      port: 1433
+      port: 1434
       targetPort: 1433
       nodePort: 30605
   type: LoadBalancer
