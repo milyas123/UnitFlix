@@ -13,3 +13,4 @@
 **/obj
 **/appsettings.Development.json
 **/appsettings.json
+Unitflix.Server/**/public
