@@ -53,4 +53,6 @@ spec:
     - protocol: TCP
       port: 1433
       targetPort: 1433
+      nodePort: 30605
   type: LoadBalancer
+  loadBalancerIP: 77.37.122.17
