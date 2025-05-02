@@ -152,7 +152,7 @@ const PropertyDetails = () => {
                         </>
                     )}
                   </div>
-                  <div className="ms-auto hidden w-[23.5%] md:block">
+                  <div className="ms-auto hidden w-[23.5%] md:block relative z-[601]">
                     <div className="sticky top-24">
                       <AnimLazyLoader>
                         <GetInTouch propertyId={property.id} />
