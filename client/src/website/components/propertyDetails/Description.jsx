@@ -41,7 +41,7 @@ const Description = ({
   return (
     <div className="flex flex-col gap-y-5">
       <div className="flex flex-col justify-between md:flex-row md:items-center">
-        <div>
+        <div className="flex flex-col items-start sm:gap-0 gap-2">
           <div className="items-center md:flex md:gap-x-1.5 2xl:gap-x-2.5">
             <h1 className="text-[24px] font-semibold md:text-[15px] lg:text-[18px] xl:text-[25px] 2xl:text-[30px]">
               {title}

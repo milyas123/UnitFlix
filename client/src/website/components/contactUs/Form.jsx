@@ -22,7 +22,7 @@ const Form = () => {
               <h1 className="text-[28px] font-semibold md:text-[14px] lg:text-[18px] xl:text-[22px] 2xl:text-[26px]">
                 Contact Information
               </h1>
-              <p className="text-[18px] text-slate md:text-[9px] lg:text-[11px] xl:text-[13px] 2xl:text-[16px]">
+              <p className="text-[18px] text-slate md:text-[9px] lg:text-[11px] xl:text-[13px] 2xl:text-[16px] text-wrap">
                 {website.contactPage.cta}
               </p>
             </div>
