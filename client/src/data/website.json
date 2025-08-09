@@ -20,8 +20,8 @@
     "hero": {
       "heading": "From Unit to Flix, We Make Real Estate Click",
       "tagLine": "Discover, Invest, Live",
-      "backgroundImage": "/assets/imgs/hero-section-img.webp",
-      "backgroundVideo": "/assets/videos/video - compressed.webm"
+      "backgroundImage": "/assets/imgs/hero-section-img.png",
+      "backgroundVideo": "/assets/videos/hero.webm"
     },
     "trendingProjects": {
       "heading": "Discover Trending",
