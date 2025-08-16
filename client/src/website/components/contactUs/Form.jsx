@@ -86,7 +86,7 @@ const Form = () => {
                 Real Estate Inquiry Form
               </h1>
               <p className="text-[15px] md:text-[8px] lg:text-[10px] xl:text-[13px] 2xl:text-[16px]">
-                As the complexity of buildings to increase
+                {website.contactPage.cta}
               </p>
             </div>
 
