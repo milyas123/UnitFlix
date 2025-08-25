@@ -163,7 +163,7 @@ const ImageGallery = ({ imgFiles }) => {
                     <LazyLoad className='h-full w-full' placeholder={<SpinnerContainer />}>
                       <img
                           src={images[5]}
-                          className="h-full w-full transform rounded-lg object-coverobject-center transition-transform duration-300 hover:scale-105"
+                          className="h-full w-full transform rounded-lg object-cover object-center transition-transform duration-300 hover:scale-105"
                           alt=""
                       />
                     </LazyLoad>
@@ -204,7 +204,7 @@ const ImageGallery = ({ imgFiles }) => {
       </div>
 
       {modalIsOpen && (
-          <div className="fixed inset-0 z-[600] flex size-full items-center justify-center bg-black bg-opacity-70">
+          <div className="fixed inset-0 z-[999] flex size-full items-center justify-center bg-black bg-opacity-70">
             <div
                 className="slider-container md:min-w-auto w-[85%] min-w-[330px] max-w-[370px] rounded-sm md:max-w-5xl xl:rounded-lg">
               <X

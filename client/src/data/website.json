@@ -106,7 +106,7 @@
     "whoAreWe": {
       "backgroundImage": "/assets/imgs/about-bg.webp",
       "title": "Who Are We & Why Choose Us?",
-      "description": "At Unitflix, we’re more than just a real estate company—we’re your dedicated partner in navigating the property landscape. With a team of seasoned professionals and a client-first approach, we specialize in delivering exceptional services tailored to meet your unique needs. Our commitment to excellence, innovation, and transparency sets us apart in the industry",
+      "description": "At UnitFlix, we’re more than just a real estate company—we’re your dedicated partner in navigating the property landscape. With a team of seasoned professionals and a client-first approach, we specialize in delivering exceptional services tailored to meet your unique needs. Our commitment to excellence, innovation, and transparency sets us apart in the industry",
       "items": [
         {
           "imgSrc": "/assets/imgs/key.webp",
@@ -133,14 +133,14 @@
     "contactUs": {
       "heading": "Your One-Stop Destination for All Real Estate Needs",
       "tagLine": "Your Trusted Partner in UAE",
-      "description": "At Unitflix, we provide a wide array of services for buying, selling, managing, and renting properties. As an established real estate company, we offer affordable options for purchasing or renting, including apartments, villas, and townhouses, catering to every budget for long-term, short-term, or holiday rentals.\n"
+      "description": "At UnitFlix, we provide a wide array of services for buying, selling, managing, and renting properties. As an established real estate company, we offer affordable options for purchasing or renting, including apartments, villas, and townhouses, catering to every budget for long-term, short-term, or holiday rentals.\n"
     },
     "cta": {
       "backgroundImage": "/assets/imgs/cta.webp",
       "tagLine": "BUY OR SELL",
       "title": [
         "Looking to buy a new property, sell your current one, or need help with managing or renting?",
-        "Unitflix has the ideal solution for you!"
+        "UnitFlix has the ideal solution for you!"
       ],
       "button1": "List My Property",
       "button2": "Browse Properties"
@@ -173,7 +173,7 @@
         },
         {
           "heading": "Reliable and Results-Driven",
-          "review": "“Partnering with Unitflix was a game-changer for our portfolio. Their professionalism and commitment to growth make them our go-to real estate experts.”",
+          "review": "“Partnering with UnitFlix was a game-changer for our portfolio. Their professionalism and commitment to growth make them our go-to real estate experts.”",
           "rating": 5,
           "userImage": "/assets/imgs/person-3.webp",
           "userName": "Sarah Collins",
@@ -181,7 +181,7 @@
         },
         {
           "heading": "Exceeded Our Expectations!",
-          "review": "“From property selection to management, Unitflix ensured smooth operations and strong returns. We couldn’t ask for a more dedicated partner.”",
+          "review": "“From property selection to management, UnitFlix ensured smooth operations and strong returns. We couldn’t ask for a more dedicated partner.”",
           "rating": 5,
           "userImage": "/assets/imgs/person-2.webp",
           "userName": "Doctor Aejaz",
@@ -332,23 +332,23 @@
       ],
       "reviews": [
         {
-          "review": "Unitflix has transformed my property investment into a profitable venture. Their expertise in marketing and management has significantly increased my rental income. I couldn't be happier with the results!",
+          "review": "UnitFlix has transformed my property investment into a profitable venture. Their expertise in marketing and management has significantly increased my rental income. I couldn't be happier with the results!",
           "username": "Sarah T."
         },
         {
-          "review": "I've worked with several property management companies, but Unitflix stands out for their professionalism and attention to detail. They keep me informed every step of the way, and my returns have never been better!",
+          "review": "I've worked with several property management companies, but UnitFlix stands out for their professionalism and attention to detail. They keep me informed every step of the way, and my returns have never been better!",
           "username": "David M."
         },
         {
-          "review": "As a busy professional, I trust Unitflix to manage my holiday rental. They handle everything from guest communication to maintenance, allowing me to enjoy peace of mind while maximizing my investment.",
+          "review": "As a busy professional, I trust UnitFlix to manage my holiday rental. They handle everything from guest communication to maintenance, allowing me to enjoy peace of mind while maximizing my investment.",
           "username": "Lisa K."
         },
         {
-          "review": "The team at Unitflix is proactive and efficient. They not only manage my property but also ensure it’s always occupied, which has resulted in consistent returns. I highly recommend their services!",
+          "review": "The team at UnitFlix is proactive and efficient. They not only manage my property but also ensure it’s always occupied, which has resulted in consistent returns. I highly recommend their services!",
           "username": "Ahmed R."
         },
         {
-          "review": "Unitflix has taken the stress out of property management for me. Their marketing strategies have increased my bookings, and their communication is top-notch. I feel confident in my investment thanks to them!",
+          "review": "UnitFlix has taken the stress out of property management for me. Their marketing strategies have increased my bookings, and their communication is top-notch. I feel confident in my investment thanks to them!",
           "username": "Emily J."
         }
       ]
@@ -431,7 +431,7 @@
     "section4": {
       "heading": "Our Amazing Team",
       "description": [
-        "At Unitflix, our team is a blend of seasoned real estate professionals dedicated to making your property journey seamless and rewarding. With decades of combined experience, our experts bring deep market knowledge, strategic insights, and a commitment to client success. We pride ourselves on transparent communication, personalized service, and a focus on maximizing your investment returns. Whether buying, selling, or managing a property, our team is here to guide you every step of the way."
+        "At UnitFlix, our team is a blend of seasoned real estate professionals dedicated to making your property journey seamless and rewarding. With decades of combined experience, our experts bring deep market knowledge, strategic insights, and a commitment to client success. We pride ourselves on transparent communication, personalized service, and a focus on maximizing your investment returns. Whether buying, selling, or managing a property, our team is here to guide you every step of the way."
       ],
       "members": [
         {
@@ -469,10 +469,10 @@
       "faqs": [
         {
           "title": "What are the benefits of investing in real estate?",
-          "description": "Real estate provides stable returns, potential appreciation, and passive income. At Unitflix, we help you identify lucrative investment opportunities that align with your financial goals."
+          "description": "Real estate provides stable returns, potential appreciation, and passive income. At UnitFlix, we help you identify lucrative investment opportunities that align with your financial goals."
         },
         {
-          "title": "How can Unitflix assist me in finding my dream home?",
+          "title": "How can UnitFlix assist me in finding my dream home?",
           "description": "Our experienced team guides you through the entire process, from defining your needs to searching and evaluating properties, ensuring you find the perfect fit."
         },
         {
@@ -484,11 +484,11 @@
           "description": "We connect you with trusted lenders and guide you through the pre-approval process, ensuring a smooth path to securing financing for your new home."
         },
         {
-          "title": "What financing options does Unitflix recommend for investment properties?",
+          "title": "What financing options does UnitFlix recommend for investment properties?",
           "description": "We offer personalized advice on various financing options, helping you choose the best mortgage type to maximize your investment returns."
         },
         {
-          "title": "How does Unitflix help with property management?",
+          "title": "How does UnitFlix help with property management?",
           "description": "Our property management team handles everything from tenant screening to maintenance, allowing you to focus on maximizing your investment's potential without stress."
         },
         {

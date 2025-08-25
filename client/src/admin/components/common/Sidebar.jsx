@@ -78,7 +78,7 @@ const Sidebar = () => {
                 !isSideBarOpen && "scale-0"
               }`}
             >
-              Unitflix
+              UnitFlix
             </h1>
           )}
         </div>
