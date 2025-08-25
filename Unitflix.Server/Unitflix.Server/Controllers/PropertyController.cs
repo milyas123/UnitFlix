@@ -539,7 +539,7 @@ namespace Unitflix.Server.Controllers
                 _logger.LogError(exc, "Exception Occurred when saving a project: {message}", exc.Message);
                 return Response.Error($"Error when saving the Project: {exc.Message}");
             }
-            _logger.LogInformation("A Project has been Added by Admin With Id {propertyId}", property.Id);
+            _logger.LogInformation("A Project has been Added by Admin With Id {propertyId} and developer {developerId}", property.Id, property.Developer);
 
             Overview overview = _mapper.Map<Overview>(writeDTO.Overview);
             overview.PropertyId = property.Id;
@@ -650,7 +650,7 @@ namespace Unitflix.Server.Controllers
                 return Response.Error($"Error saving the Project: {exc.Message}");
             }
 
-            _logger.LogInformation("Property Overview, Features ({featuresCount}), KeyHighlights ({keyHighlightsCount}), Payment Plan Items ({paymentPlanItemsCount}), Property Item Details ({propertyDetailsCount}) and Images ({galleryImagesCount}) has been uploaded for Project Id {propertyId} by Admin", features.Count, keyHighlights.Count, paymentPlanItems.Count, propertyDetails.Count, writeDTO.GalleryImages.Count, property.Id);
+            _logger.LogWarning("Property Overview, Developer ({developerId}), Features ({featuresCount}), KeyHighlights ({keyHighlightsCount}), Payment Plan Items ({paymentPlanItemsCount}), Property Item Details ({propertyDetailsCount}) and Images ({galleryImagesCount}) has been uploaded for Project Id {propertyId} by Admin", property.Developer, features.Count, keyHighlights.Count, paymentPlanItems.Count, propertyDetails.Count, writeDTO.GalleryImages.Count, property.Id);
             return Response.Message("Project Added Successfully");
         }
 
@@ -1045,7 +1045,7 @@ namespace Unitflix.Server.Controllers
             }
 
             _dbContext.SaveChanges();   
-            _logger.LogInformation("Project with id {propertyId} has been updated. Project Overview, Features ({featuresCount}), KeyHighlights ({keyHighlightsCount}), Payment Plan Items ({paymentPlanItemsCount}), Property Details ({propertyDetailsCount}) and Images ({galleryImagesCount}) has been uploaded for Project Id {propertyId} by Admin and Features ({featuresToRemoveCount}), KeyHighlights ({keyHighlightsToRemoveCount}), Payment Plan Items To Remove ({paymentPlanItemsToRemoveCount}), Property Details To Remove ({propertyDetailsToRemoveCount}) and Images ({galleryImagesToRemoveCount}) have been removed", property.Id, features.Count, keyHighlights.Count, paymentPlanItems.Count, propertyDetails.Count, updateDTO.GalleryImages.Count, property.Id, updateDTO.FeaturesToRemove.Count, updateDTO.KeyHighlightsToRemove.Count, updateDTO.PaymentPlanItemsToRemove.Count, updateDTO.PropertyDetails.Count, updateDTO.GalleryImagesToRemove.Count);
+            _logger.LogWarning("Project with id {propertyId} has been updated. Project Overview, Developer ({developerId}), Features ({featuresCount}), KeyHighlights ({keyHighlightsCount}), Payment Plan Items ({paymentPlanItemsCount}), Property Details ({propertyDetailsCount}) and Images ({galleryImagesCount}) has been uploaded for Project Id {propertyId} by Admin and Features ({featuresToRemoveCount}), KeyHighlights ({keyHighlightsToRemoveCount}), Payment Plan Items To Remove ({paymentPlanItemsToRemoveCount}), Property Details To Remove ({propertyDetailsToRemoveCount}) and Images ({galleryImagesToRemoveCount}) have been removed", property.Id, property.Developer, features.Count, keyHighlights.Count, paymentPlanItems.Count, propertyDetails.Count, updateDTO.GalleryImages.Count, property.Id, updateDTO.FeaturesToRemove.Count, updateDTO.KeyHighlightsToRemove.Count, updateDTO.PaymentPlanItemsToRemove.Count, updateDTO.PropertyDetails.Count, updateDTO.GalleryImagesToRemove.Count);
             return Response.Message("Project Updated Successfully");
 
         }

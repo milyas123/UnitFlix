@@ -91,6 +91,7 @@ namespace Unitflix.Server.Controllers
                 return Response.Error("Invalid Password");
             }
 
+
             //Finding an admin by username
             User? admin = await _userManager.FindByNameAsync(data.Username);
 

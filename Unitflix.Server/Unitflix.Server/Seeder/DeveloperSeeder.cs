@@ -38,7 +38,7 @@ namespace Unitflix.Server.Seeder
                     };
                     dbContext.Developers.AddRange(developers);
                     dbContext.SaveChanges();
-                    logger.LogInformation("Default Developers have been inserted into the database");
+                    logger.LogWarning("Default Developers have been inserted into the database");
                 }
             }
         }
