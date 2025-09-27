@@ -3,10 +3,11 @@ import PaymentPlanItemFrame from "@/website/components/propertyDetails/PaymentPl
 import PaymentPlanLine from "@/website/components/propertyDetails/PaymentPlanLine.jsx";
 
 const PaymentPlan = ({ paymentPlanData }) => {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
+  const MOBILE_BREAKPOINT_WIDTH=768
+  const [isMobile, setIsMobile] = useState(window.innerWidth < MOBILE_BREAKPOINT_WIDTH);
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 640);
+      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT_WIDTH);
     };
 
     window.addEventListener("resize", handleResize);
