@@ -37,7 +37,7 @@ const InquiryModal = ({ onClose, propertyId }) => {
           />
           <div className='absolute top-0 left-0 w-full h-full bg-black/50'></div>
           <img src={website.navbar.logo}
-               className="absolute z-[2] top-0 left-1 2xl:h-[100px] 2xl:w-[80px] xl:h-[90px] xl:w-[70px] lg:h-[80px] lg:w-[60px] md:h-[60px] md:w-[40px]"
+               className="absolute z-[2] top-0 left-1 2xl:h-[100px] 2xl:w-[100px] xl:h-[90px] xl:w-[90px] lg:h-[80px] lg:w-[80px] md:h-[60px] md:w-[60px]"
                alt="Logo"
           />
           <SquareX
