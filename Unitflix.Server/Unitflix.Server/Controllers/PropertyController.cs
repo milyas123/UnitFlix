@@ -221,6 +221,7 @@ namespace Unitflix.Server.Controllers
             List<Property> properties = await _dataManager.GetProperties()
                 .Where(p => p.Featured)
                 .Include(property => property.Files.Where(f => f.Purpose == FilePurpose.Cover))
+                .OrderByDescending(p => p.DateAdded)
                 .ToListAsync();
 
             return Response.Message(_dataManager.IncludeData(properties));
