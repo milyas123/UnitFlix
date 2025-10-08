@@ -347,9 +347,14 @@ namespace Unitflix.Server.Controllers
                 }
             }
 
+            string[] availableOptions = ["PriceASC", "PriceDESC", "DateASC", "DateDESC"];
+            if(string.IsNullOrEmpty(orderBy) || !availableOptions.Contains(orderBy))
+            {
+                orderBy = "DateDESC";
+            }
+
             if (!string.IsNullOrEmpty(orderBy))
             {
-                string[] availableOptions = ["PriceASC", "PriceDESC", "DateASC", "DateDESC"];
                 if (availableOptions.Contains(orderBy))
                 {
                     switch (orderBy)

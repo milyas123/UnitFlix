@@ -11,9 +11,7 @@ import Pagination from "./Pagination";
 
 import { useAppContext } from "@/AppContext";
 import ProjectCard from "@/website/components/landingPage/cards/ProjectCard.jsx";
-import LazyLoad from "react-lazyload";
 
-const propertiesPerPage = 12;
 const sortOptions = [
   { label: "Price ↑", value: "PriceASC" },
   { label: "Price ↓", value: "PriceDESC" },

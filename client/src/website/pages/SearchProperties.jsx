@@ -1,4 +1,4 @@
-import React, { useEffect, useState, lazy } from "react";
+import { useEffect, useState, lazy } from "react";
 import Layout from "@/website/Layout";
 import Header from "@/website/components/propertiesForSale/Header";
 const Properties = lazy(() => import("@/website/components/propertiesForSale/Properties"));
@@ -31,7 +31,7 @@ const SearchProperties = () => {
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedDeveloper, setSelectedDeveloper] = useState(null);
   const [selectedPropertyType, setSelectedPropertyType] = useState(null);
-  const [sortOption, setSortOption] = useState("");
+  const [sortOption, setSortOption] = useState("DateDESC");
   const [categoryOption, setCategoryOption] = useState(-1);
   const [purpose, setPurpose] = useState(-1);
   const [location, setLocation] = useState(-1);
