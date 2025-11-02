@@ -114,7 +114,7 @@ const Discover = ({ properties, type }) => {
                   }}
                   modules={[Pagination]}
                   pagination={{ clickable: true }}
-                  wrapperClass="pb-12 md:pb-6"
+                  wrapperClass={"pb-12"}
                   style={{
                     "--swiper-pagination-color": "#181a20",
                   }}
