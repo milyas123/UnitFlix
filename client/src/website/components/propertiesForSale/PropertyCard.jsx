@@ -15,13 +15,13 @@ import { MdOutlineLocationOn } from "react-icons/md";
 import { formatCurrency } from "@/lib/utils";
 import { useAppContext } from "@/AppContext";
 import PropertyTags from "@/website/components/common/PropertyTags.jsx";
-import {Button} from "@/website/components/ui/button.jsx";
+import { Button } from "@/website/components/ui/button.jsx";
 import AnimLazyLoader from "@/website/components/common/AnimLazyLoader.jsx";
 
 const PropertyCard = ({ property, onRegisterInterest, canRegisterInterest }) => {
 
-    const { locations } = useAppContext();
-    const textSizes = "text-[16px] md:text-[7px] lg:text-[10px] xl:text-[12px] 2xl:text-[15px]";
+  const { locations } = useAppContext();
+  const textSizes = "text-[16px] md:text-[7px] lg:text-[10px] xl:text-[12px] 2xl:text-[15px]";
 
   return (
     <Link to={`/property-details/${property?.id}`} reloadDocument className="contents">
@@ -39,80 +39,80 @@ const PropertyCard = ({ property, onRegisterInterest, canRegisterInterest }) => 
         `}</style>
         <div className="property-card">
           <Swiper
-              slidesPerView={1}
-              spaceBetween={30}
-              modules={[Pagination, Navigation]}
-              pagination={{clickable: true}}
-              navigation={true}
-              className="h-[320px] md:h-[160px] lg:h-[180px] xl:h-[200px] 2xl:h-[300px]"
-              style={{
-                  "--swiper-navigation-size": "16px",
-                  "--swiper-navigation-color": "#FFFFFF",
-                  "--swiper-pagination-color": "#FFFFFF",
-              }}
+            slidesPerView={1}
+            spaceBetween={30}
+            modules={[Pagination, Navigation]}
+            pagination={{ clickable: true }}
+            navigation={true}
+            className="h-[320px] md:h-[160px] lg:h-[180px] xl:h-[200px] 2xl:h-[300px]"
+            style={{
+              "--swiper-navigation-size": "16px",
+              "--swiper-navigation-color": "#FFFFFF",
+              "--swiper-pagination-color": "#FFFFFF",
+            }}
           >
-              {property?.files.map((image) => (
-                  <SwiperSlide key={image.id} className="relative">
-                      <AnimLazyLoader className='size-full'>
-                          <img
-                              src={image.url}
-                              alt={`${image?.url}`}
-                              className="size-full object-cover"
-                          />
-                      </AnimLazyLoader>
-                      <div
-                          className="absolute inset-0 bg-black bg-opacity-50 group-hover:bg-opacity-20 transition-all duration-300 ease-in-out"></div>
-                  </SwiperSlide>
-              ))}
+            {property?.files.map((image) => (
+              <SwiperSlide key={image.id} className="relative">
+                <AnimLazyLoader className='size-full'>
+                  <img
+                    src={image.url}
+                    alt={`${image?.url}`}
+                    className="size-full object-cover"
+                  />
+                </AnimLazyLoader>
+                <div
+                  className="absolute inset-0 bg-black bg-opacity-50 group-hover:bg-opacity-20 transition-all duration-300 ease-in-out"></div>
+              </SwiperSlide>
+            ))}
           </Swiper>
         </div>
-          <div className="flex flex-col gap-y-3.5 p-2 md:gap-y-0.5 md:px-2 md:py-1.5 lg:gap-y-1 lg:p-2.5 xl:gap-y-2.5 xl:p-3 2xl:p-[12px]">
-              <div
-                  className="flex flex-col flex-wrap font-semibold md:text-[6px] lg:text-[8px] xl:text-[11px] 2xl:text-[13.5px]">
-                  <span className='text-[16px] md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] text-nowrap w-full overflow-hidden text-ellipsis'>{property?.title}</span>
-                  <span className='text-nowrap w-full overflow-hidden text-ellipsis'>{property?.tags}</span>
-              </div>
-              <div
-                  className="flex items-center justify-start gap-x-0.5 text-[14px] md:text-[6px] lg:text-[8px] xl:text-[11px] 2xl:text-[13.5px]">
-                  <MdOutlineLocationOn
-                      size={17}
-                      className="-ms-0.5 size-5 md:size-2 lg:size-3 xl:size-4 2xl:size-5"
-                  />
-                  {locations.find((loc) => loc.id === property?.location)?.name}
-              </div>
+        <div className="flex flex-col gap-y-3.5 p-2 md:gap-y-0.5 md:px-2 md:py-1.5 lg:gap-y-1 lg:p-2.5 xl:gap-y-2.5 xl:p-3 2xl:p-[12px]">
+          <div
+            className="flex flex-col flex-wrap font-semibold md:text-[6px] lg:text-[8px] xl:text-[11px] 2xl:text-[13.5px]">
+            <span className='text-[16px] md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] text-nowrap w-full overflow-hidden text-ellipsis'>{property?.title}</span>
+            <span className='text-nowrap w-full overflow-hidden text-ellipsis'>{property?.tags}</span>
+          </div>
+          <div
+            className="flex items-center justify-start gap-x-0.5 text-[14px] md:text-[6px] lg:text-[8px] xl:text-[11px] 2xl:text-[13.5px]">
+            <MdOutlineLocationOn
+              size={17}
+              className="-ms-0.5 size-5 md:size-2 lg:size-3 xl:size-4 2xl:size-5"
+            />
+            {locations.find((loc) => loc.id === property?.location)?.name}
+          </div>
 
-              {property?.category === 0 && (
-                  <div
-                      className="flex flex-row whitespace-nowrap text-[12px] font-semibold md:text-[5px] lg:text-[7.5px] xl:gap-x-1 xl:text-[9px] 2xl:gap-x-2 2xl:text-[11.5px]">
+          {property?.category === 0 && (
+            <div
+              className="flex flex-row whitespace-nowrap text-[12px] font-semibold md:text-[5px] lg:text-[7.5px] xl:gap-x-1 xl:text-[9px] 2xl:gap-x-2 2xl:text-[11.5px]">
               <span className="flex items-center gap-x-1 border-r border-lightGrey px-1 md:px-0.5 lg:px-1">
-                <Bed/> {property?.beds} Beds
+                <Bed /> {property?.beds} Beds
               </span>
-                      <span className="flex items-center gap-x-1 border-r border-lightGrey px-1 md:px-0.5 lg:px-1">
-                <Shower/> {property?.baths} Baths
+              <span className="flex items-center gap-x-1 border-r border-lightGrey px-1 md:px-0.5 lg:px-1">
+                <Shower /> {property?.baths} Baths
               </span>
-                      <span className="flex items-center gap-x-1 ps-1 md:ps-0.5 lg:ps-1">
-                <Area/> {property?.area.toLocaleString()} sqft
+              <span className="flex items-center gap-x-1 ps-1 md:ps-0.5 lg:ps-1">
+                <Area /> {property?.area.toLocaleString()} sqft
               </span>
-                  </div>
-              )}
+            </div>
+          )}
 
-              <p className="text-[20px] font-bold md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[22px]">
-                  {formatCurrency(property?.price)}
-              </p>
-              {
-                  canRegisterInterest ?
-                      <div className="mt-2 flex justify-start">
-                          <Button
-                              className={`font-semibold hover:bg-white hover:text-mirage md:h-2 md:px-2 lg:h-6 lg:px-3 xl:h-7 xl:px-4 2xl:h-8 ${textSizes}`}
-                              onClick={onRegisterInterest}>
-                              Register Your Interest
-                          </Button>
-                      </div> : <></>
-              }
-          </div>
-          <div className='absolute top-2 left-2 flex items-center gap-2 z-[5] w-[92%]'>
-              <PropertyTags property={property}/>
-          </div>
+          <p className="text-[20px] font-bold md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[22px]">
+            {formatCurrency(property?.price)}
+          </p>
+          {
+            canRegisterInterest ?
+              <div className="mt-2 flex justify-start">
+                <Button
+                  className={`font-semibold hover:bg-white hover:text-mirage md:h-2 md:px-2 lg:h-6 lg:px-3 xl:h-7 xl:px-4 2xl:h-8 ${textSizes}`}
+                  onClick={onRegisterInterest}>
+                  Register Your Interest
+                </Button>
+              </div> : <></>
+          }
+        </div>
+        <div className='absolute top-2 left-2 flex items-center gap-2 z-[5] w-[92%]'>
+          <PropertyTags property={property} />
+        </div>
       </div>
     </Link>
   );

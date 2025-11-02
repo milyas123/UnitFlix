@@ -124,7 +124,7 @@ const Discover = ({ properties, type }) => {
                       {
                         property.category === 0 ?
                             <PropertyCard property={property} canRegisterInterest={true} onRegisterInterest={(e) => registerInterest(e, property)} /> :
-                            <ProjectCard project={property} isLimited={false} onRegisterInterest={(e) => registerInterest(e, property)} />
+                            <ProjectCard project={property} isLimited={false} showRegisterInterest={true} onRegisterInterest={(e) => registerInterest(e, property)} />
                       }
                     </SwiperSlide>
                 ))}
