@@ -25,7 +25,7 @@ const ProjectCard = ({ project, isLimited, onRegisterInterest, showRegisterInter
               modules={[Pagination, Navigation]}
               pagination={{ clickable: true }}
               navigation={true}
-              className={`rounded-t-lg ${isLimited ? 'rounded-t-xl  2xl:rounded-t-xl md:rounded-t-md lg:rounded-t-lg shadow-lg shadow-pastelGrey h-[320px] md:h-[160px] lg:h-[180px] xl:h-[200px] 2xl:h-[300px]' : 'h-[300px] md:h-[140px] lg:h-[160px] xl:h-[180px] 2xl:h-[280px]'}`}
+              className={`rounded-t-lg ${isLimited ? 'rounded-t-xl  2xl:rounded-t-xl md:rounded-t-md lg:rounded-t-lg shadow-lg shadow-pastelGrey h-[320px] md:h-[160px] lg:h-[180px] xl:h-[200px] 2xl:h-[280px]' : 'h-[300px] md:h-[140px] lg:h-[160px] xl:h-[180px] 2xl:h-[300px]'}`}
               style={{
                 "--swiper-navigation-size": "16px",
                 "--swiper-navigation-color": "#FFFFFF",
@@ -42,7 +42,7 @@ const ProjectCard = ({ project, isLimited, onRegisterInterest, showRegisterInter
                     />
                   </AnimLazyLoader>
                   <div
-                    className={`absolute inset-0 bg-black bg-opacity-50 group-hover:bg-opacity-20 transition-all duration-300 ease-in-out z-10 ${isLimited ? "rounded-lg" : "rounded-xl  2xl:rounded-xl md:rounded-md lg:rounded-lg"}`}></div>
+                    className={`absolute inset-0 bg-black bg-opacity-50 group-hover:bg-opacity-20 transition-all duration-300 ease-in-out z-10 ${isLimited ? "rounded-t-lg" : "rounded-t-xl  2xl:rounded-t-xl md:rounded-t-md lg:rounded-t-lg"}`}></div>
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -51,7 +51,7 @@ const ProjectCard = ({ project, isLimited, onRegisterInterest, showRegisterInter
             <PropertyTags property={project} />
           </div>
           <div
-            className={`z-[300] bg-white px-3 py-4 md:p-2 lg:p-3 2xl:p-3.5 relative border border-lightGrey bottom-0 left-0 right-0 rounded-b-lg`}>
+            className={`z-[300] bg-white px-3 py-4 md:p-2 lg:p-3 2xl:p-3.5 relative border border-lightGrey rounded-b-lg`}>
             <h2
               className={`mb-1.5 text-left font-semibold md:mb-0.5 lg:mb-1 xl:mb-1.5 2xl:mb-2 ${textSizes}`}
             >

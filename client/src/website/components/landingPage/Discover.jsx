@@ -75,10 +75,10 @@ const Discover = ({ properties, type }) => {
                 />
                 <ArrowRight
                     className={`cursor-pointer md:text-xs lg:text-lg ${
-                        (isEnd || properties.length <= 3) && "cursor-default opacity-40"
+                        (isEnd || properties.length <= (window.innerWidth < 768 ? 1 : 3)) && "cursor-default opacity-40"
                     }`}
                     onClick={() => projectsRef.current.swiper.slideNext()}
-                    disabled={(isEnd || properties.length <= 3)}
+                    disabled={(isEnd || properties.length <= (window.innerWidth < 768 ? 1 : 3))}
                 />
               </div>
               <div className="flex items-center justify-end flex-wrap gap-2">
@@ -114,7 +114,7 @@ const Discover = ({ properties, type }) => {
                   }}
                   modules={[Pagination]}
                   pagination={{ clickable: true }}
-                  className={`${type === 0 ? "h-[650px] md:h-[290px] lg:h-[350px] xl:h-[420px] 2xl:h-[590px]" : "h-[450px] md:h-[255px] lg:h-[310px] xl:h-[390px] 2xl:h-[500px]"}`}
+                  wrapperClass="pb-12 md:pb-6"
                   style={{
                     "--swiper-pagination-color": "#181a20",
                   }}
