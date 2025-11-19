@@ -38,7 +38,11 @@ namespace Unitflix.Server.Validators
                 })
                 .Custom((file, context) =>
                 {
-                    if (file.Size() > 10)
+                    // Increaseing the size limit for pdf
+                    if(fileType == FileType.Pdf && file.Size() > 50) {
+                        context.AddFailure($"{file.FileName} size must be less than 50 Mb");
+                    }
+                    else if (fileType == FileType.Image && file.Size() > 10)
                     {
                         context.AddFailure($"{file.FileName} size must be less than 10 Mb");
                     }

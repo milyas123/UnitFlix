@@ -389,9 +389,8 @@ const AdminAddProject = () => {
       setFormData(initialFormData);
       navigate("/admin/manage-properties");
     } catch (error) {
-      console.log(error)
-      const data = error.response.data;
-      const errors = data.errors
+      const data = error.response?.data ?? error.message;
+      const errors = data?.errors
       if(errors) {
         for(let err of errors) {
           toast.error(err);
