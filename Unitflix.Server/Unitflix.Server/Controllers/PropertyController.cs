@@ -24,8 +24,9 @@ using File = Unitflix.Server.Models.File;
 
 namespace Unitflix.Server.Controllers
 {
+    // Allowing 1GB max body size
     [Route("property")]
-    [RequestSizeLimit(1024 * 1024 * 300)]
+    [RequestSizeLimit(1024 * 1024 * 1024)]
     public class PropertyController : Controller
     {
 

@@ -42,9 +42,9 @@ namespace Unitflix.Server.Validators
                     if(fileType == FileType.Pdf && file.Size() > 50) {
                         context.AddFailure($"{file.FileName} size must be less than 50 Mb");
                     }
-                    else if (fileType == FileType.Image && file.Size() > 10)
+                    else if (fileType == FileType.Image && file.Size() > 50)
                     {
-                        context.AddFailure($"{file.FileName} size must be less than 10 Mb");
+                        context.AddFailure($"{file.FileName} size must be less than 50 Mb");
                     }
                 });
         }
