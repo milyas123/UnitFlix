@@ -25,7 +25,7 @@ using File = Unitflix.Server.Models.File;
 namespace Unitflix.Server.Controllers
 {
     [Route("property")]
-    [RequestSizeLimit(1024 * 1024 * 100)]
+    [RequestSizeLimit(1024 * 1024 * 300)]
     public class PropertyController : Controller
     {
 
